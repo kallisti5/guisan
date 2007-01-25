@@ -59,6 +59,7 @@
 
 #include <string>
 
+#include "guichan/focuslistener.hpp"
 #include "guichan/keylistener.hpp"
 #include "guichan/mouseevent.hpp"
 #include "guichan/mouselistener.hpp"
@@ -77,7 +78,8 @@ namespace gcn
      */
     class GCN_CORE_DECLSPEC Button : public Widget,
                                      public MouseListener,
-                                     public KeyListener
+                                     public KeyListener,
+                                     public FocusListener
     {
     public:
         /**
@@ -139,6 +141,9 @@ namespace gcn
         virtual void draw(Graphics* graphics);
 
         virtual void drawBorder(Graphics* graphics);
+
+
+        // Inherited from FocusListener
 
         virtual void focusLost();
 

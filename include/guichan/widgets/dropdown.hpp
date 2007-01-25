@@ -61,6 +61,7 @@
 #include "guichan/basiccontainer.hpp"
 #include "guichan/deathlistener.hpp"
 #include "guichan/focushandler.hpp"
+#include "guichan/focuslistener.hpp"
 #include "guichan/keylistener.hpp"
 #include "guichan/listmodel.hpp"
 #include "guichan/mouselistener.hpp"
@@ -83,7 +84,8 @@ namespace gcn
         public ActionListener,
         public BasicContainer,
         public KeyListener,
-        public MouseListener
+        public MouseListener,
+        public FocusListener
     {
     public:
         /**
@@ -143,8 +145,6 @@ namespace gcn
 
         virtual void drawBorder(Graphics* graphics);
 
-        virtual void focusLost();
-
         virtual void setBaseColor(const Color& color);
 
         virtual void setBackgroundColor(const Color& color);
@@ -161,6 +161,11 @@ namespace gcn
         virtual Rectangle getChildrenArea();
 
 
+        // Inherited from FocusListener
+
+        virtual void focusLost();
+
+
         // Inherited from ActionListener
 
         virtual void action(const ActionEvent& actionEvent);
@@ -169,6 +174,7 @@ namespace gcn
         // Inherited from DeathListener
 
         virtual void death(const Event& event);
+
 
         // Inherited from KeyListener
 
