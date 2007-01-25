@@ -182,14 +182,12 @@ namespace gcn
 
             Event focusEvent(mFocusedWidget);
             distributeFocusGainedEvent(focusEvent);
-            //mWidgets.at(focusedWidget)->focusGained();
         }
 
         if (focused >= 0)
         {
             Event focusEvent(mWidgets.at(focused));
             distributeFocusLostEvent(focusEvent);
-           // mWidgets.at(focused)->focusLost();
         }
     }
 
@@ -244,14 +242,12 @@ namespace gcn
             mFocusedWidget = mWidgets.at(focusedWidget);
             Event focusEvent(mFocusedWidget);
             distributeFocusGainedEvent(focusEvent);
-            //mWidgets.at(focusedWidget)->focusGained();
         }
 
         if (focused >= 0)
         {
             Event focusEvent(mWidgets.at(focused));
             distributeFocusLostEvent(focusEvent);
-            //mWidgets.at(focused)->focusLost();
         }
     }
 
@@ -300,7 +296,6 @@ namespace gcn
 
             Event focusEvent(focused);
             distributeFocusLostEvent(focusEvent);
-            //focused->focusLost();
         }
 
         mToBeFocused = NULL;
@@ -374,14 +369,12 @@ namespace gcn
             mFocusedWidget = mWidgets.at(focusedWidget);
             Event focusEvent(mFocusedWidget);
             distributeFocusGainedEvent(focusEvent);
-            //mWidgets.at(focusedWidget)->focusGained();
         }
 
         if (focused >= 0)
         {
             Event focusEvent(mWidgets.at(focused));
             distributeFocusLostEvent(focusEvent);
-            //mWidgets.at(focused)->focusLost();
         }
     }
 
@@ -453,14 +446,12 @@ namespace gcn
             mFocusedWidget = mWidgets.at(focusedWidget);
             Event focusEvent(mFocusedWidget);
             distributeFocusGainedEvent(focusEvent);
-            //mWidgets.at(focusedWidget)->focusGained();
         }
 
         if (focused >= 0)
         {
             Event focusEvent(mWidgets.at(focused));
             distributeFocusLostEvent(focusEvent);
-            //mWidgets.at(focused)->focusLost();
         }
     }
 
@@ -499,12 +490,10 @@ namespace gcn
                 {
                     Event focusEvent(oldFocused);
                     distributeFocusLostEvent(focusEvent);
-                    //oldFocused->focusLost();
                 }
 
                 Event focusEvent(mWidgets.at(toBeFocusedIndex));
                 distributeFocusGainedEvent(focusEvent);
-                //mWidgets.at(toBeFocusedIndex)->focusGained();
             }
 
             mToBeFocused = NULL;
