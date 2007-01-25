@@ -60,6 +60,7 @@
 
 #include "guichan/focushandler.hpp"
 
+#include "guichan/focuslistener.hpp"
 #include "guichan/exception.hpp"
 #include "guichan/widget.hpp"
 
@@ -178,12 +179,17 @@ namespace gcn
         if (focusedWidget >= 0)
         {
             mFocusedWidget = mWidgets.at(focusedWidget);
-            mWidgets.at(focusedWidget)->focusGained();
+
+            Event focusEvent(mFocusedWidget);
+            distributeFocusGainedEvent(focusEvent);
+            //mWidgets.at(focusedWidget)->focusGained();
         }
 
         if (focused >= 0)
         {
-            mWidgets.at(focused)->focusLost();
+            Event focusEvent(mWidgets.at(focused));
+            distributeFocusLostEvent(focusEvent);
+           // mWidgets.at(focused)->focusLost();
         }
     }
 
@@ -236,12 +242,16 @@ namespace gcn
         if (focusedWidget >= 0)
         {
             mFocusedWidget = mWidgets.at(focusedWidget);
-            mWidgets.at(focusedWidget)->focusGained();
+            Event focusEvent(mFocusedWidget);
+            distributeFocusGainedEvent(focusEvent);
+            //mWidgets.at(focusedWidget)->focusGained();
         }
 
         if (focused >= 0)
         {
-            mWidgets.at(focused)->focusLost();
+            Event focusEvent(mWidgets.at(focused));
+            distributeFocusLostEvent(focusEvent);
+            //mWidgets.at(focused)->focusLost();
         }
     }
 
@@ -287,7 +297,10 @@ namespace gcn
         {
             Widget* focused = mFocusedWidget;
             mFocusedWidget = NULL;
-            focused->focusLost();
+
+            Event focusEvent(focused);
+            distributeFocusLostEvent(focusEvent);
+            //focused->focusLost();
         }
 
         mToBeFocused = NULL;
@@ -359,12 +372,16 @@ namespace gcn
         if (focusedWidget >= 0)
         {
             mFocusedWidget = mWidgets.at(focusedWidget);
-            mWidgets.at(focusedWidget)->focusGained();
+            Event focusEvent(mFocusedWidget);
+            distributeFocusGainedEvent(focusEvent);
+            //mWidgets.at(focusedWidget)->focusGained();
         }
 
         if (focused >= 0)
         {
-            mWidgets.at(focused)->focusLost();
+            Event focusEvent(mWidgets.at(focused));
+            distributeFocusLostEvent(focusEvent);
+            //mWidgets.at(focused)->focusLost();
         }
     }
 
@@ -434,12 +451,16 @@ namespace gcn
         if (focusedWidget >= 0)
         {
             mFocusedWidget = mWidgets.at(focusedWidget);
-            mWidgets.at(focusedWidget)->focusGained();
+            Event focusEvent(mFocusedWidget);
+            distributeFocusGainedEvent(focusEvent);
+            //mWidgets.at(focusedWidget)->focusGained();
         }
 
         if (focused >= 0)
         {
-            mWidgets.at(focused)->focusLost();
+            Event focusEvent(mWidgets.at(focused));
+            distributeFocusLostEvent(focusEvent);
+            //mWidgets.at(focused)->focusLost();
         }
     }
 
@@ -476,13 +497,48 @@ namespace gcn
 
                 if (oldFocused != NULL)
                 {
-                    oldFocused->focusLost();
+                    Event focusEvent(oldFocused);
+                    distributeFocusLostEvent(focusEvent);
+                    //oldFocused->focusLost();
                 }
 
-                mWidgets.at(toBeFocusedIndex)->focusGained();
+                Event focusEvent(mWidgets.at(toBeFocusedIndex));
+                distributeFocusGainedEvent(focusEvent);
+                //mWidgets.at(toBeFocusedIndex)->focusGained();
             }
 
             mToBeFocused = NULL;
+        }
+    }
+
+       
+    void FocusHandler::distributeFocusLostEvent(const Event& focusEvent)
+    {
+        Widget* sourceWidget = focusEvent.getSource();
+
+        std::list<FocusListener*> focusListeners = sourceWidget->_getFocusListeners();
+
+        // Send the event to all focus listeners of the widget.
+        for (std::list<FocusListener*>::iterator it = focusListeners.begin();
+             it != focusListeners.end();
+             ++it)
+        {
+            (*it)->focusLost(focusEvent);
+        }
+    }
+
+    void FocusHandler::distributeFocusGainedEvent(const Event& focusEvent)
+    {
+        Widget* sourceWidget = focusEvent.getSource();
+
+        std::list<FocusListener*> focusListeners = sourceWidget->_getFocusListeners();
+
+        // Send the event to all focus listeners of the widget.
+        for (std::list<FocusListener*>::iterator it = focusListeners.begin();
+             it != focusListeners.end();
+             ++it)
+        {
+            (*it)->focusGained(focusEvent);
         }
     }
 }
