@@ -115,6 +115,8 @@ namespace gcn
 
         addMouseListener(this);
         addKeyListener(this);
+        addFocusListener(this);
+
         adjustHeight();
         setBorderSize(1);
 

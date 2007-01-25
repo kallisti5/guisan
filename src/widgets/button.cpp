@@ -81,6 +81,7 @@ namespace gcn
 
         addMouseListener(this);
         addKeyListener(this);
+        addFocusListener(this);
     }
 
     Button::Button(const std::string& caption)
@@ -96,6 +97,7 @@ namespace gcn
 
         addMouseListener(this);
         addKeyListener(this);
+        addFocusListener(this);
     }
 
     void Button::setCaption(const std::string& caption)
