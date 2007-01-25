@@ -284,16 +284,6 @@ namespace gcn
         virtual bool isEnabled() const;
 
         /**
-         * Called if the Widget looses focus.
-         */
-        virtual void focusLost() { };
-
-        /**
-         * Called if the Widget recieves focus.
-         */
-        virtual void focusGained() { };
-
-        /**
          * Sets the Widget to be visible.
          *
          * @param visible true if the Widget should be visiable.
