@@ -59,6 +59,7 @@
 
 #include <vector>
 
+#include "guichan/event.hpp"
 #include "guichan/platform.hpp"
 
 namespace gcn
@@ -219,6 +220,24 @@ namespace gcn
         virtual void applyChanges();
 
     protected:
+        /**
+         * Distributes a focus lost event.
+         *
+         * @param focusEvent the event to distribute.
+         * @author Olof Naessén
+         * @since 0.7.0
+         */
+        virtual void distributeFocusLostEvent(const Event& focusEvent);
+
+        /**
+         * Distributes a focus gained event.
+         *
+         * @param focusEvent the event to distribute.
+         * @author Olof Naessén
+         * @since 0.7.0
+         */
+        virtual void distributeFocusGainedEvent(const Event& focusEvent);
+
         typedef std::vector<Widget*> WidgetVector;
         typedef WidgetVector::iterator WidgetIterator;
         WidgetVector mWidgets;
