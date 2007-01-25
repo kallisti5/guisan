@@ -70,6 +70,7 @@ namespace gcn
     class DeathListener;
     class DefaultFont;
     class FocusHandler;
+    class FocusListener;
     class Font;
     class Graphics;
     class KeyInput;
@@ -448,6 +449,25 @@ namespace gcn
          */
         virtual void removeKeyListener(KeyListener* keyListener);
 
+         /**
+         * Adds a FocusListener to the Widget. When a focus event is recieved,
+         * it will be sent to the Widget's FocusListeners.
+         *
+         * @param focusListener the FocusListener to add.
+         * @author Olof Naessén
+         * @since 0.7.0
+         */
+        virtual void addFocusListener(FocusListener* focusListener);
+
+        /**
+         * Removes an added FocusListener from the Widget.
+         *
+         * @param focusListener the FocusListener to remove.
+         * @author Olof Naessén
+         * @since 0.7.0
+         */
+        virtual void removeFocusListener(FocusListener* FocusListener);
+
         /**
          * Sets the action event identifier of the Widget. The identifier is
          * used to be able to identify which action has occured.
@@ -643,6 +663,14 @@ namespace gcn
         virtual const std::list<KeyListener*>& _getKeyListeners();
 
         /**
+         * Gets the focus listeners of the widget.
+         *
+         * @return the focus listeners of the widget.
+         * @since 0.7.0
+         */
+        virtual const std::list<FocusListener*>& _getFocusListeners();
+
+        /**
          * Gets the subarea of the widget that the children occupy.
          *
          * @return the subarea as a Rectangle.
@@ -723,6 +751,10 @@ namespace gcn
         typedef std::list<DeathListener*> DeathListenerList;
         DeathListenerList mDeathListeners;
         typedef DeathListenerList::iterator DeathListenerIterator;
+
+        typedef std::list<FocusListener*> FocusListenerList;
+        FocusListenerList mFocusListeners;
+        typedef FocusListenerList::iterator FocusListenerIterator;
 
         Color mForegroundColor;
         Color mBackgroundColor;

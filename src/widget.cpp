@@ -354,6 +354,16 @@ namespace gcn
         mKeyListeners.remove(keyListener);
     }
 
+    void Widget::addFocusListener(FocusListener* focusListener)
+    {
+        mFocusListeners.push_back(focusListener);
+    }
+
+    void Widget::removeFocusListener(FocusListener* focusListener)
+    {
+        mFocusListeners.remove(focusListener);
+    }
+
     void Widget::addMouseListener(MouseListener* mouseListener)
     {
         mMouseListeners.push_back(mouseListener);
@@ -562,6 +572,11 @@ namespace gcn
     const std::list<KeyListener*>& Widget::_getKeyListeners()
     {
         return mKeyListeners;
+    }
+
+    const std::list<FocusListener*>& Widget::_getFocusListeners()
+    {
+        return mFocusListeners;
     }
 
     Rectangle Widget::getChildrenArea()
