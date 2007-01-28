@@ -301,7 +301,7 @@ namespace gcn
         }
     }
 
-    void Button::focusLost()
+    void Button::focusLost(const Event& event)
     {
         mMousePressed = false;
         mKeyPressed = false;
