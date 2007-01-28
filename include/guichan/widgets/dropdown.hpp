@@ -151,8 +151,6 @@ namespace gcn
 
         virtual void setForegroundColor(const Color& color);
 
-        virtual void logic();
-
 		virtual void setFont(Font *font);
 
 

@@ -563,12 +563,6 @@ namespace gcn
         Widget::setForegroundColor(color);
     }
 
-    void DropDown::logic()
-    {
-        mInternalFocusHandler.applyChanges();
-        BasicContainer::logic();
-    }
-
 	void DropDown::setFont(Font *font)
 	{
 		if (mInternalScrollArea)

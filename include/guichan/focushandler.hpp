@@ -76,8 +76,7 @@ namespace gcn
      * @see Widget::requestFocus
      * @see Widget::setFocusable
      * @see Widget::isFocusable
-     * @see Widget::gotFocus
-     * @see Widget::lostFocus
+     * @see FocusListener
      */
     class GCN_CORE_DECLSPEC FocusHandler
     {
@@ -214,11 +213,6 @@ namespace gcn
          */
         virtual void tabPrevious();
 
-        /**
-         * Applies the changes.
-         */
-        virtual void applyChanges();
-
     protected:
         /**
          * Distributes a focus lost event.
@@ -243,7 +237,6 @@ namespace gcn
         WidgetVector mWidgets;
 
         Widget* mFocusedWidget;
-        Widget* mToBeFocused;
         Widget* mModalFocusedWidget;
         Widget* mModalMouseInputFocusedWidget;
     };

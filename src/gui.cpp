@@ -152,8 +152,6 @@ namespace gcn
             throw GCN_EXCEPTION("No top widget set");
         }
 
-        mFocusHandler->applyChanges();
-
         // Release of modal focus or modal mouse input focus might make it
         // necessary to distribute mouse events.
         handleModalFocusRelease();
@@ -165,11 +163,7 @@ namespace gcn
 
             handleKeyInput();
             handleMouseInput();
-
-            // Apply changes even if no input has been processed.
-            // A widget might has asked for focus.
-            mFocusHandler->applyChanges();
-
+ 
         } // end if
 
         mTop->logic();
@@ -347,9 +341,7 @@ namespace gcn
                 {
                     mFocusHandler->tabNext();
                 }
-            }
-                            
-            mFocusHandler->applyChanges();
+            }                           
                 
         } // end while
     }

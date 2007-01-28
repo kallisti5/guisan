@@ -69,14 +69,50 @@ namespace gcn
     FocusHandler::FocusHandler()
     {
         mFocusedWidget = NULL;
-        mToBeFocused = NULL;
+//        mToBeFocused = NULL;
         mModalFocusedWidget = NULL;
         mModalMouseInputFocusedWidget = NULL;
     }
 
     void FocusHandler::requestFocus(Widget* widget)
     {
-        mToBeFocused = widget;
+        if (widget == NULL
+            || widget == mFocusedWidget)
+        {
+            return;
+        }
+        
+        unsigned int i = 0;
+        int toBeFocusedIndex = -1;
+        for (i = 0; i < mWidgets.size(); ++i)
+        {
+            if (mWidgets[i] == widget)
+            {
+                toBeFocusedIndex = i;
+                break;
+            }
+        }
+        
+        if (toBeFocusedIndex < 0)
+        {
+            throw GCN_EXCEPTION("Trying to focus a none existing widget.");
+        }
+        
+        Widget *oldFocused = mFocusedWidget;
+        
+        if (oldFocused != widget)
+        {
+            mFocusedWidget = mWidgets.at(toBeFocusedIndex);
+            
+            if (oldFocused != NULL)
+            {
+                Event focusEvent(oldFocused);
+                distributeFocusLostEvent(focusEvent);
+            }
+            
+            Event focusEvent(mWidgets.at(toBeFocusedIndex));
+            distributeFocusGainedEvent(focusEvent);
+        }        
     }
 
     void FocusHandler::requestModalFocus(Widget* widget)
@@ -263,15 +299,9 @@ namespace gcn
 
     void FocusHandler::remove(Widget* widget)
     {
-        if (widget == mToBeFocused)
-        {
-            mToBeFocused = NULL;
-        }
-
         if (isFocused(widget))
         {
             mFocusedWidget = NULL;
-            mToBeFocused = NULL;
         }
 
         WidgetIterator iter;
@@ -288,7 +318,6 @@ namespace gcn
 
     void FocusHandler::focusNone()
     {
-
         if (mFocusedWidget != NULL)
         {
             Widget* focused = mFocusedWidget;
@@ -297,8 +326,6 @@ namespace gcn
             Event focusEvent(focused);
             distributeFocusLostEvent(focusEvent);
         }
-
-        mToBeFocused = NULL;
     }
 
     void FocusHandler::tabNext()
@@ -455,50 +482,51 @@ namespace gcn
         }
     }
 
-    void FocusHandler::applyChanges()
-    {
-        if (mToBeFocused == mFocusedWidget)
-        {
-            return;
-        }
+//     void FocusHandler::applyChanges()
+//     {
+//         if (mToBeFocused == mFocusedWidget)
+//         {
+//             return;
+//         }
 
-        if (mToBeFocused != NULL)
-        {
-            unsigned int i = 0;
-            int toBeFocusedIndex = -1;
-            for (i = 0; i < mWidgets.size(); ++i)
-            {
-                if (mWidgets[i] == mToBeFocused)
-                {
-                    toBeFocusedIndex = i;
-                    break;
-                }
-            }
+//         if (mToBeFocused != NULL)
+//         {
+//             unsigned int i = 0;
+//             int toBeFocusedIndex = -1;
+//             for (i = 0; i < mWidgets.size(); ++i)
+//             {
+//                 if (mWidgets[i] == mToBeFocused)
+//                 {
+//                     toBeFocusedIndex = i;
+//                     break;
+//                 }
+//             }
 
-            if (toBeFocusedIndex < 0)
-            {
-                throw GCN_EXCEPTION("Trying to focus a none existing widget.");
-            }
+//             if (toBeFocusedIndex < 0)
+//             {
+//                 throw GCN_EXCEPTION("Trying to focus a none existing widget.");
+//             }
 
-            Widget *oldFocused = mFocusedWidget;
+//             Widget *oldFocused = mFocusedWidget;
 
-            if (oldFocused != mToBeFocused)
-            {
-                mFocusedWidget = mWidgets.at(toBeFocusedIndex);
+//             if (oldFocused != mToBeFocused)
+//             {
+//                 mFocusedWidget = mWidgets.at(toBeFocusedIndex);
 
-                if (oldFocused != NULL)
-                {
-                    Event focusEvent(oldFocused);
-                    distributeFocusLostEvent(focusEvent);
-                }
+//                 if (oldFocused != NULL)
+//                 {
+//                     Event focusEvent(oldFocused);
+//                     distributeFocusLostEvent(focusEvent);
+//                 }
 
-                Event focusEvent(mWidgets.at(toBeFocusedIndex));
-                distributeFocusGainedEvent(focusEvent);
-            }
+//                 Event focusEvent(mWidgets.at(toBeFocusedIndex));
+//                 distributeFocusGainedEvent(focusEvent);
+//             }
 
-            mToBeFocused = NULL;
-        }
-    }
+//             mToBeFocused = NULL;
+//         }
+
+//     }
 
        
     void FocusHandler::distributeFocusLostEvent(const Event& focusEvent)
