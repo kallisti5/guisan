@@ -93,8 +93,9 @@ namespace gcn
         virtual ~FocusHandler() { };
 
         /**
-         * Sets focus to a widget. Widget::lostFocus and
-         * Widget::gotFocus will be called.
+         * Sets focus to a widget. When a widget receives focus will
+         * the focus listener's of the widget be notified with a
+         * a focus event.
          *
          * @param widget the widget to focus.
          */
@@ -197,7 +198,9 @@ namespace gcn
         virtual void remove(Widget* widget);
 
         /**
-         * Focuses nothing.
+         * Focuses nothing. When a widget loses focus will
+         * the focus listener's of the widget be notified with a
+         * a focus event.
          */
         virtual void focusNone();
 
