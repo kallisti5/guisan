@@ -63,11 +63,18 @@
 namespace gcn
 {
     Exception::Exception()
+        : mFunction("?"),
+          mMessage(""),
+          mFilename("?"),
+          mLine(0)
     {
-        mLine = 0;
     }
 
     Exception::Exception(const std::string& message)
+        : mFunction("?"),
+          mMessage(message),
+          mFilename("?"),
+          mLine(0)
     {
         mMessage = message;
     }
@@ -76,11 +83,12 @@ namespace gcn
                          const std::string& function,
                          const std::string& filename,
                          int line)
+                         : mFunction(function),
+                           mMessage(message),
+                           mFilename(filename),
+                           mLine(line)
     {
-        mFunction = function;
-        mMessage = message;
-        mFilename = filename;
-        mLine = line;
+
     }
 
     const std::string& Exception::getFunction() const
