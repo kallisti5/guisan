@@ -68,6 +68,7 @@ namespace gcn
           mFilename("?"),
           mLine(0)
     {
+
     }
 
     Exception::Exception(const std::string& message)
@@ -76,7 +77,7 @@ namespace gcn
           mFilename("?"),
           mLine(0)
     {
-        mMessage = message;
+
     }
 
     Exception::Exception(const std::string& message,
