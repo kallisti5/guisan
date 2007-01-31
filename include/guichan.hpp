@@ -65,6 +65,7 @@
 #include <guichan/event.hpp>
 #include <guichan/exception.hpp>
 #include <guichan/focushandler.hpp>
+#include <guichan/focuslistener.hpp>
 #include <guichan/font.hpp>
 #include <guichan/gui.hpp>
 #include <guichan/image.hpp>
