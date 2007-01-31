@@ -85,7 +85,6 @@ namespace gcn
         if (mInternalScrollArea)
         {
             mScrollArea = new ScrollArea();
-            mScrollArea->setVerticalScrollPolicy(ScrollArea::SHOW_ALWAYS);
         }
         else
         {
