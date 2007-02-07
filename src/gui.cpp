@@ -91,7 +91,8 @@ namespace gcn
              mLastMousePressTimeStamp(0),
              mLastMouseX(0),
              mLastMouseY(0),
-             mClickCount(0)
+             mClickCount(0),
+             mLastMouseDragButton(0)
     {
         mFocusHandler = new FocusHandler();
     }
@@ -432,7 +433,7 @@ namespace gcn
                                   mAltPressed,
                                   mMetaPressed,
                                   MouseEvent::DRAGGED,
-                                  mouseInput.getButton(),
+                                  mLastMouseDragButton,
                                   mouseInput.getX() - draggedWidgetX,
                                   mouseInput.getY() - draggedWidgetY,
                                   mClickCount);
@@ -491,6 +492,7 @@ namespace gcn
         }
 
         mDraggedWidget = sourceWidget;
+        mLastMouseDragButton = mouseInput.getButton();
 
         if (mLastMousePressTimeStamp < 300
             && mLastMousePressButton == mouseInput.getButton())

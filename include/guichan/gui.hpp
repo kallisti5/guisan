@@ -360,7 +360,8 @@ namespace gcn
         int mLastMousePressTimeStamp;
         int mLastMouseX;
         int mLastMouseY;
-        int mClickCount;       
+        int mClickCount;
+        int mLastMouseDragButton;
     };
 }
 
