@@ -342,12 +342,6 @@ namespace gcn
         typedef KeyListenerList::iterator KeyListenerListIterator;
 
         KeyListenerList mKeyListeners;
-
-        Widget* mDraggedWidget;
-        Widget* mLastWidgetWithMouse;
-        Widget* mLastWidgetWithModalFocus;
-        Widget* mLastWidgetWithModalMouseInputFocus;
-        Widget* mLastWidgetPressed;
         
         // Current input state
         bool mShiftPressed;

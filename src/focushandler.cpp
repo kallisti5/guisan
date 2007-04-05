@@ -67,10 +67,16 @@
 namespace gcn
 {
     FocusHandler::FocusHandler()
+        :mFocusedWidget(NULL),
+         mModalFocusedWidget(NULL),
+         mModalMouseInputFocusedWidget(NULL),
+         mDraggedWidget(NULL),
+         mLastWidgetWithMouse(NULL),
+         mLastWidgetWithModalFocus(NULL),
+         mLastWidgetWithModalMouseInputFocus(NULL),
+         mLastWidgetPressed(NULL)
     {
-        mFocusedWidget = NULL;
-        mModalFocusedWidget = NULL;
-        mModalMouseInputFocusedWidget = NULL;
+
     }
 
     void FocusHandler::requestFocus(Widget* widget)
@@ -310,8 +316,38 @@ namespace gcn
             if ((*iter) == widget)
             {
                 mWidgets.erase(iter);
-                return;
+                break;
             }
+        }
+
+        if (mDraggedWidget == widget)
+        {
+            mDraggedWidget = NULL;
+            return;
+        }   
+        
+        if (mLastWidgetWithMouse == widget)
+        {
+            mLastWidgetWithMouse = NULL;
+            return;
+        }
+
+        if (mLastWidgetWithModalFocus == widget)
+        {
+            mLastWidgetWithModalFocus = NULL;
+            return;
+        }
+
+        if (mLastWidgetWithModalMouseInputFocus == widget)
+        {
+            mLastWidgetWithModalMouseInputFocus = NULL;
+            return;
+        }
+
+        if (mLastWidgetPressed == widget)
+        {
+            mLastWidgetPressed = NULL;
+            return;
         }
     }
 
@@ -509,5 +545,55 @@ namespace gcn
         {
             (*it)->focusGained(focusEvent);
         }
+    }
+
+    Widget* FocusHandler::getDraggedWidget()
+    {
+        return mDraggedWidget;
+    }
+
+    void FocusHandler::setDraggedWidget(Widget* draggedWidget)
+    {
+        mDraggedWidget = draggedWidget;
+    }
+
+    Widget* FocusHandler::getLastWidgetWithMouse()
+    {
+        return mLastWidgetWithMouse;
+    }
+
+    void FocusHandler::setLastWidgetWithMouse(Widget* lastWidgetWithMouse)
+    {
+        mLastWidgetWithMouse = lastWidgetWithMouse;
+    }
+
+    Widget* FocusHandler::getLastWidgetWithModalFocus()
+    {
+        return mLastWidgetWithModalFocus;
+    }
+
+    void FocusHandler::setLastWidgetWithModalFocus(Widget* lastWidgetWithModalFocus)
+    {
+        mLastWidgetWithModalFocus = lastWidgetWithModalFocus;
+    }
+
+    Widget* FocusHandler::getLastWidgetWithModalMouseInputFocus()
+    {
+        return mLastWidgetWithModalMouseInputFocus;
+    }
+
+    void FocusHandler::setLastWidgetWithModalMouseInputFocus(Widget* lastWidgetWithModalMouseInputFocus)
+    {
+        mLastWidgetWithModalMouseInputFocus = lastWidgetWithModalMouseInputFocus;
+    }
+
+    Widget* FocusHandler::getLastWidgetPressed()
+    {
+        return mLastWidgetPressed;
+    }
+
+    void FocusHandler::setLastWidgetPressed(Widget* lastWidgetPressed)
+    {
+        mLastWidgetPressed = lastWidgetPressed;
     }
 }

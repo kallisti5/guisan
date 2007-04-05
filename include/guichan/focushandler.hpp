@@ -214,6 +214,76 @@ namespace gcn
          */
         virtual void tabPrevious();
 
+        /**
+         * Gets the widget being dragged.
+         * 
+         * @return the widget being dragged.
+         */
+        virtual Widget* getDraggedWidget();
+
+        /**
+         * Sets the widget being dragged.
+         * 
+         * @param draggedWidget the widget being dragged.
+         */
+        virtual void setDraggedWidget(Widget* draggedWidget);
+
+        /**
+         * Gets the last widget with the mouse.
+         * 
+         * @return the last widget with the mouse.
+         */ 
+        virtual Widget* getLastWidgetWithMouse();
+
+        /**
+         * Sets the last widget with the mouse.
+         *
+         * @param lastWidgetWithMouse the last widget with the mouse.
+         */
+        virtual void setLastWidgetWithMouse(Widget* lastWidgetWithMouse);
+
+        /**
+         * Gets the last widget with modal focus.
+         * 
+         * @return the last widget with modal focus.
+         */
+        virtual Widget* getLastWidgetWithModalFocus();
+
+        /**
+         * Sets the last widget with modal focus.
+         * 
+         * @param lastWidgetWithModalFocus the last widget with modal focus.
+         */
+        virtual void setLastWidgetWithModalFocus(Widget* lastWidgetWithModalFocus);
+
+        /**
+         * Gets the last widget with modal mouse input focus.
+         *
+         * @return the last widget with modal mouse input focus.
+         */
+        virtual Widget* getLastWidgetWithModalMouseInputFocus();
+
+        /**
+         * Sets the last widget with modal mouse input focus.
+         *
+         * @param lastMouseWithModalMouseInputFocus  the last widget with modal mouse input focus.
+         */
+        virtual void setLastWidgetWithModalMouseInputFocus(Widget* lastWidgetWithModalMouseInputFocus);
+
+        /**
+         * Gets the last widget pressed.
+         *
+         * @return the last widget pressed. 
+         */
+        virtual Widget* getLastWidgetPressed();
+
+        /**
+         * Sets the last widget pressed.
+         *
+         * @param lastWidgetPressed the last widget pressed.
+         */
+        virtual void setLastWidgetPressed(Widget* lastWidgetPressed);
+
     protected:
         /**
          * Distributes a focus lost event.
@@ -240,6 +310,12 @@ namespace gcn
         Widget* mFocusedWidget;
         Widget* mModalFocusedWidget;
         Widget* mModalMouseInputFocusedWidget;
+
+        Widget* mDraggedWidget;
+        Widget* mLastWidgetWithMouse;
+        Widget* mLastWidgetWithModalFocus;
+        Widget* mLastWidgetWithModalMouseInputFocus;
+        Widget* mLastWidgetPressed;
     };
 }
 
