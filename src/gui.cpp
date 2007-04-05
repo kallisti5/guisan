@@ -86,7 +86,7 @@ namespace gcn
              mLastMousePressTimeStamp(0),
              mLastMouseX(0),
              mLastMouseY(0),
-             mClickCount(0),
+             mClickCount(1),
              mLastMouseDragButton(0)
     {
         mFocusHandler = new FocusHandler();
@@ -392,7 +392,7 @@ namespace gcn
                                       mClickCount);
                 distributeMouseEvent(mouseEvent, true, true);
 
-                mClickCount = 0;
+                mClickCount = 1;
                 mLastMousePressTimeStamp = 0;
             }
 
@@ -493,7 +493,7 @@ namespace gcn
         }
         else
         {
-            mClickCount = 0;
+            mClickCount = 1;
         }
 
         mLastMousePressButton = mouseInput.getButton();
