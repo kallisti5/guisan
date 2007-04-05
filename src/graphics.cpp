@@ -93,6 +93,27 @@ namespace gcn
         carea.x += top.xOffset;
         carea.y += top.yOffset;
 
+        // Clamp the pushed clip rectangle.
+        if (carea.x < top.x)
+        {
+            carea.x = top.x; 
+        }
+        
+        if (carea.y < top.y)
+        {
+            carea.y = top.y;            
+        }
+                
+        if (carea.width > top.width)
+        {
+            carea.width = top.width;                
+        }
+        
+        if (carea.height > top.height)
+        {
+            carea.height = top.height;             
+        }
+
         bool result = carea.intersect(top);
 
         mClipStack.push(carea);
