@@ -54,67 +54,115 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef GCN_GUICHAN_HPP
-#define GCN_GUICHAN_HPP
+#ifndef GCN_GENERICINPUT_HPP
+#define GCN_GENERICINPUT_HPP
 
-#include <guichan/actionevent.hpp>
-#include <guichan/actionlistener.hpp>
-#include <guichan/graphics.hpp>
-#include <guichan/color.hpp>
-#include <guichan/deathlistener.hpp>
-#include <guichan/event.hpp>
-#include <guichan/exception.hpp>
-#include <guichan/focushandler.hpp>
-#include <guichan/focuslistener.hpp>
-#include <guichan/font.hpp>
-#include <guichan/genericinput.hpp>
-#include <guichan/gui.hpp>
-#include <guichan/image.hpp>
-#include <guichan/imagefont.hpp>
-#include <guichan/imageloader.hpp>
-#include <guichan/input.hpp>
-#include <guichan/inputevent.hpp>
-#include <guichan/key.hpp>
-#include <guichan/keyevent.hpp>
-#include <guichan/keyinput.hpp>
-#include <guichan/keylistener.hpp>
-#include <guichan/listmodel.hpp>
-#include <guichan/mouseevent.hpp>
-#include <guichan/mouseinput.hpp>
-#include <guichan/mouselistener.hpp>
-#include <guichan/rectangle.hpp>
-#include <guichan/cliprectangle.hpp>
+#include <queue>
 
-#include <guichan/widget.hpp>
-
-#include <guichan/widgets/button.hpp>
-#include <guichan/widgets/checkbox.hpp>
-#include <guichan/widgets/container.hpp>
-#include <guichan/widgets/dropdown.hpp>
-#include <guichan/widgets/icon.hpp>
-#include <guichan/widgets/label.hpp>
-#include <guichan/widgets/listbox.hpp>
-#include <guichan/widgets/scrollarea.hpp>
-#include <guichan/widgets/slider.hpp>
-#include <guichan/widgets/radiobutton.hpp>
-#include <guichan/widgets/textbox.hpp>
-#include <guichan/widgets/textfield.hpp>
-#include <guichan/widgets/window.hpp>
-
+#include "guichan/input.hpp"
+#include "guichan/keyinput.hpp"
+#include "guichan/mouseinput.hpp"
 #include "guichan/platform.hpp"
 
-class Widget;
-
-extern "C"
+namespace gcn
 {
+    class Key;
+    
     /**
-     * Gets the the version of Guisan. As it is a C function
-     * it can be used to check for Guichan with autotools.
-     *
-     * @return the version of Guisan.
+     * Generic input which can be used with any backend.
      */
-    GCN_CORE_DECLSPEC extern const char* gcnGuisanVersion();
-    GCN_CORE_DECLSPEC extern const char* gcnGuichanVersion() { return gcnGuisanVersion(); }
+    class GCN_CORE_DECLSPEC GenericInput: public Input
+    {
+    public:
+
+        /**
+         * Constructor.
+         */
+        GenericInput();
+
+        /**
+         * Pushes a key pressed event.
+         *
+         * NOTE: If a special key is pressed, like the F1 key,
+         *       the corresponding Guichan key value found
+         *       in the enum in Key should be pushed as the
+         *       unicode value.
+         *
+         * @param unicode the unicode value of the key. 
+         */
+        void pushKeyPressed(int unicode);
+
+        /**
+         * Pushes a key released event.
+         *
+         * NOTE: If a special key is pressed, like the F1 key,
+         *       the corresponding Guichan key value found
+         *       in the enum in Key should be pushed as the
+         *       unicode value.
+         *
+         * @param unicode the unicode value of the key. 
+         */
+        void pushKeyReleased(int unicode);
+        
+        /**
+         * Pushes a mouse button pressed event.
+         *
+         * @param x the x coordinate of the mouse event.
+         * @param y the y coordinate of the mouse event.
+         * @param button the button of the mouse event.
+         */
+        void pushMouseButtonPressed(int x, int y, int button);
+
+        /**
+         * Pushes a mouse button released event.
+         *
+         * @param x the x coordinate of the mouse event.
+         * @param y the y coordinate of the mouse event.
+         * @param button the button of the mouse event.
+         */
+        void pushMouseButtonReleased(int x, int y, int button);
+        
+        /**
+         * Pushes a mouse wheel moved up event.
+         *
+         * @param x the x coordinate of the mouse event.
+         * @param y the y coordinate of the mouse event.
+         */
+        void pushMouseWheelMovedUp(int x, int y);
+        
+        /**
+         * Pushes a mouse wheel moved down event.
+         *
+         * @param x the x coordinate of the mouse event.
+         * @param y the y coordinate of the mouse event.
+         */
+        void pushMouseWheelMovedDown(int x, int y);
+
+        /**
+         * Pushes a mouse moved event.
+         *
+         * @param x the x coordinate of the mouse event.
+         * @param y the y coordinate of the mouse event.
+         */
+        void pushMouseMoved(int x, int y);
+
+        
+        // Inherited from Input
+
+        virtual bool isKeyQueueEmpty();
+
+        virtual KeyInput dequeueKeyInput();
+
+        virtual bool isMouseQueueEmpty();
+
+        virtual MouseInput dequeueMouseInput();
+
+        virtual void _pollInput();
+
+    protected:
+        std::queue<KeyInput> mKeyInputQueue;
+        std::queue<MouseInput> mMouseInputQueue;
+    };
 }
 
-#endif // end GCN_GUICHAN_HPP
+#endif // end GCN_INPUT_HPP
