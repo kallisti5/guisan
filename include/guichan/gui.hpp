@@ -277,7 +277,10 @@ namespace gcn
         /**
          * Distributes a mouse event.
          *
-         * @param mouseEvent the mouse event to distribute.
+         * @param type The type of the event to distribute,
+         * @param button The button of the event (if any used) to distribute.
+         * @param x The x coordinate of the event.
+         * @param y The y coordinate of the event.
          * @param fource indicates whether the distribution should be forced or not.
          *               A forced distribution distributes the event even if a widget
          *               is not enabled or not visible. Default value is false.
@@ -287,7 +290,13 @@ namespace gcn
          *
          * @since 0.6.0
          */
-        virtual void distributeMouseEvent(MouseEvent& mouseEvent, bool force = false, bool toSourceOnly = false);
+        virtual void distributeMouseEvent(Widget* source,
+                                          int type,
+                                          int button,
+                                          int x,
+                                          int y,
+                                          bool force = false,
+                                          bool toSourceOnly = false);
 
         /**
          * Distributes a key event.
