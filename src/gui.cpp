@@ -767,43 +767,67 @@ namespace gcn
 
     void Gui::distributeKeyEvent(KeyEvent& keyEvent)
     {
-        Widget* sourceWidget = keyEvent.getSource();
+        Widget* parent = keyEvent.getSource();
+        Widget* widget = keyEvent.getSource();
 
         if (mFocusHandler->getModalFocused() != NULL
-            && !sourceWidget->hasModalFocus())
+            && !widget->hasModalFocus())
         {
             return;
         }
 
-        // If the widget has been removed due to input
-        // cancel the distribution.
-        if (!Widget::widgetExists(sourceWidget))
+        if (mFocusHandler->getModalMouseInputFocused() != NULL
+            && !widget->hasModalMouseInputFocus())
         {
             return;
-        }       
-        
-        if (sourceWidget->isEnabled())
+        }
+
+        while (parent != NULL)
         {
-            std::list<KeyListener*> keyListeners = sourceWidget->_getKeyListeners();
-            
-            // Send the event to all key listeners of the source widget.
-            for (std::list<KeyListener*>::iterator it = keyListeners.begin();
-                 it != keyListeners.end();
-                 ++it)
+            // If the widget has been removed due to input
+            // cancel the distribution.
+            if (!Widget::widgetExists(widget))
             {
-                switch (keyEvent.getType())
-                {
-                  case KeyEvent::PRESSED:
-                      (*it)->keyPressed(keyEvent);
-                      break;
-                  case KeyEvent::RELEASED:
-                      (*it)->keyReleased(keyEvent);
-                      break;
-                  default:
-                      throw GCN_EXCEPTION("Unknown key event type.");
-                }                
+                break;
             }
-        }        
+
+            parent = (Widget*)widget->getParent();
+
+            if (widget->isEnabled())
+            {
+                std::list<KeyListener*> keyListeners = widget->_getKeyListeners();
+            
+                // Send the event to all key listeners of the source widget.
+                for (std::list<KeyListener*>::iterator it = keyListeners.begin();
+                     it != keyListeners.end();
+                     ++it)
+                {
+                    switch (keyEvent.getType())
+                    {
+                      case KeyEvent::PRESSED:
+                          (*it)->keyPressed(keyEvent);
+                          break;
+                      case KeyEvent::RELEASED:
+                          (*it)->keyReleased(keyEvent);
+                          break;
+                      default:
+                          throw GCN_EXCEPTION("Unknown key event type.");
+                    }                
+                }
+            }
+
+            Widget* swap = widget;
+            widget = parent;
+            parent = (Widget*)swap->getParent();
+
+            // If a non modal focused widget has been reach
+            // and we have modal focus cancel the distribution.
+            if (mFocusHandler->getModalFocused() != NULL
+                && !widget->hasModalFocus())
+            {
+                break;
+            }
+        }
     }
 
     void Gui::distributeKeyEventToGlobalKeyListeners(KeyEvent& keyEvent)
