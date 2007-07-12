@@ -73,7 +73,8 @@ namespace gcn
         : mHasMouse(false),
           mKeyPressed(false),
           mMousePressed(false),
-          mAlignment(Graphics::CENTER)
+          mAlignment(Graphics::CENTER),
+          mSpacing(4)
     {
         setFocusable(true);
         adjustSize();
@@ -89,7 +90,8 @@ namespace gcn
               mHasMouse(false),
               mKeyPressed(false),
               mMousePressed(false),
-              mAlignment(Graphics::CENTER)
+              mAlignment(Graphics::CENTER),
+              mSpacing(4)
     {
         setFocusable(true);
         adjustSize();
@@ -118,6 +120,16 @@ namespace gcn
     unsigned int Button::getAlignment() const
     {
         return mAlignment;
+    }
+
+    void Button::setSpacing(unsigned int spacing)
+    {
+        mSpacing = spacing;
+    }
+
+    unsigned int Button::getSpacing() const
+    {
+      return mSpacing;
     }
 
     void Button::draw(Graphics* graphics)
@@ -162,13 +174,13 @@ namespace gcn
         switch (getAlignment())
         {
           case Graphics::LEFT:
-              textX = 4;
+              textX = mSpacing;
               break;
           case Graphics::CENTER:
               textX = getWidth() / 2;
               break;
           case Graphics::RIGHT:
-              textX = getWidth() - 4;
+              textX = getWidth() - mSpacing;
               break;
           default:
               throw GCN_EXCEPTION("Unknown alignment.");
@@ -218,8 +230,8 @@ namespace gcn
 
     void Button::adjustSize()
     {
-        setWidth(getFont()->getWidth(mCaption) + 8);
-        setHeight(getFont()->getHeight() + 8);
+        setWidth(getFont()->getWidth(mCaption) + 2*mSpacing);
+        setHeight(getFont()->getHeight() + 2*mSpacing);
     }
 
     bool Button::isPressed() const
