@@ -124,6 +124,21 @@ namespace gcn
         virtual unsigned int getAlignment() const;
 
         /**
+         * Sets the spacing between the border of this button and its caption.
+         *
+         * @param spacing is a number between 0 and 255. The default value for 
+                          spacing is 4 and can be changed using this method.
+         */
+        virtual void setSpacing(unsigned int spacing);
+
+        /**
+         * Gets the spacing between the border of this button and its caption.
+         *
+         * @return spacing.
+         */
+        virtual unsigned int getSpacing() const;
+
+        /**
          * Adjusts the buttons size to fit the content.
          */
         virtual void adjustSize();
@@ -173,6 +188,7 @@ namespace gcn
         bool mKeyPressed;
         bool mMousePressed;
         unsigned int mAlignment;
+        unsigned int mSpacing;
     };
 }
 
