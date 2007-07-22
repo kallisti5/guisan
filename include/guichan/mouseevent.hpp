@@ -62,6 +62,7 @@
 
 namespace gcn
 {
+    class Gui;
     class Widget;
 
     /**
@@ -170,6 +171,7 @@ namespace gcn
         int mY;
         int mClickCount;
 
+        friend class Gui;
     };
 }
 

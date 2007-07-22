@@ -668,6 +668,17 @@ namespace gcn
             return;
         }
 
+        MouseEvent mouseEvent(source,
+                              mShiftPressed,
+                              mControlPressed,
+                              mAltPressed,
+                              mMetaPressed,
+                              type,
+                              button,
+                              x,
+                              y,
+                              mClickCount);
+
         while (parent != NULL)
         {
             // If the widget has been removed due to input
@@ -684,16 +695,8 @@ namespace gcn
                 int widgetX, widgetY;
                 widget->getAbsolutePosition(widgetX, widgetY);
 
-                MouseEvent mouseEvent(source,
-                                      mShiftPressed,
-                                      mControlPressed,
-                                      mAltPressed,
-                                      mMetaPressed,
-                                      type,
-                                      button,
-                                      x - widgetX,
-                                      y - widgetY,
-                                      mClickCount);
+                mouseEvent.mX = x - widgetX;
+                mouseEvent.mY = y - widgetY;
                                       
                 std::list<MouseListener*> mouseListeners = widget->_getMouseListeners();
 
