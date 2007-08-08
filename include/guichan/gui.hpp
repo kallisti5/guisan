@@ -58,6 +58,7 @@
 #define GCN_GUI_HPP
 
 #include <list>
+#include <deque>
 
 #include "guichan/keyevent.hpp"
 #include "guichan/mouseevent.hpp"
@@ -365,6 +366,9 @@ namespace gcn
         int mLastMouseY;
         int mClickCount;
         int mLastMouseDragButton;
+
+        // Widget with mouse stack
+        std::deque<Widget*> mWidgetWithMouseStack;
     };
 }
 
