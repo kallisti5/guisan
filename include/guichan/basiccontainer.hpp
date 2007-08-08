@@ -113,7 +113,7 @@ namespace gcn
          *
          * @param widget the widget to add.
          */
-        virtual void add(Widget* widget);
+        void add(Widget* widget);
 
         /**
          * Removes a widget from the basic container.
