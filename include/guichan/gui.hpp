@@ -368,7 +368,7 @@ namespace gcn
         int mLastMouseDragButton;
 
         // Widget with mouse stack
-        std::deque<Widget*> mWidgetWithMouseStack;
+        std::deque<Widget*> mWidgetWithMouseQueue;
     };
 }
 

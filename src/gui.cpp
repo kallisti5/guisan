@@ -345,16 +345,16 @@ namespace gcn
     void Gui::handleMouseMoved(const MouseInput& mouseInput)
     {
         // Check if the mouse leaves the application window.
-        if (!mWidgetWithMouseStack.empty()
+        if (!mWidgetWithMouseQueue.empty()
             && (mouseInput.getX() < 0
                 || mouseInput.getY() < 0
                 || !mTop->getDimension().isPointInRect(mouseInput.getX(), mouseInput.getY()))
             )
         {
-            // Distribute an event to all widgets in the widget mouse stack.
-            while (!mWidgetWithMouseStack.empty())
+            // Distribute an event to all widgets in the "widget with mouse" queue.
+            while (!mWidgetWithMouseQueue.empty())
             {
-                Widget* widget = mWidgetWithMouseStack.front();
+                Widget* widget = mWidgetWithMouseQueue.front();
 
                 if (Widget::widgetExists(widget))
                 {
@@ -367,74 +367,81 @@ namespace gcn
                                          true);
                 }
 
-                mWidgetWithMouseStack.pop_front();
+                mWidgetWithMouseQueue.pop_front();
             }
 
             return;
         }
 
-        
-        // Check if there is a need to send mouse exited events by traversing
-        // the widget with mouse stack.
-        bool widgetWithMouseStackCheckDone = mWidgetWithMouseStack.empty();
-        while (!widgetWithMouseStackCheckDone)
+        // Check if there is a need to send mouse exited events by
+        // traversing the "widget with mouse" queue.
+        bool widgetWithMouseQueueCheckDone = mWidgetWithMouseQueue.empty();
+        while (!widgetWithMouseQueueCheckDone)
         {
-            Widget* widget = mWidgetWithMouseStack.front();
-            int x, y;
-            widget->getAbsolutePosition(x, y);
-            
-            if (x > mouseInput.getX()
-                || y > mouseInput.getY()
-                || x + widget->getWidth() < mouseInput.getX()
-                || y + widget->getHeight() < mouseInput.getY())
+            unsigned int iterations = 0;
+            std::deque<Widget*>::iterator iter;
+            for (iter = mWidgetWithMouseQueue.begin();
+                 iter != mWidgetWithMouseQueue.end();
+                 iter++)
             {
-                if (Widget::widgetExists(widget))
-                {
-                    distributeMouseEvent(widget,
-                                         MouseEvent::EXITED,
-                                         mouseInput.getButton(),
-                                         mouseInput.getX(),
-                                         mouseInput.getX(),
-                                         true,
-                                         true);
-                }
-                
-                mWidgetWithMouseStack.pop_front();
+                Widget* widget = *iter;
+                int x, y;
+                widget->getAbsolutePosition(x, y);
 
-                mClickCount = 1;
-                mLastMousePressTimeStamp = 0;                
+                if (x > mouseInput.getX()
+                    || y > mouseInput.getY()
+                    || x + widget->getWidth() <= mouseInput.getX()
+                    || y + widget->getHeight() <= mouseInput.getY())
+                {
+                    if (Widget::widgetExists(widget))
+                    {
+                        distributeMouseEvent(widget,
+                                             MouseEvent::EXITED,
+                                             mouseInput.getButton(),
+                                             mouseInput.getX(),
+                                             mouseInput.getX(),
+                                             true,
+                                             true);
+                    }                                        
+                    mClickCount = 1;
+                    mLastMousePressTimeStamp = 0;
+                    mWidgetWithMouseQueue.erase(iter);
+                    break;
+                }
+
+                iterations++;
             }
-            else
-            {
-                widgetWithMouseStackCheckDone = true;
-            }            
+
+            widgetWithMouseQueueCheckDone = iterations == mWidgetWithMouseQueue.size();
         }
 
         // Check all widgets below the mouse to see if they are
-        // present in the mouse stack. If a widget is not then
-        // it should be added and an entered event should be
-        // sent to it.
+        // present in the "widget with mouse" queue. If a widget
+        // is not then it should be added and an entered event should
+        // be sent to it.
         Widget* parent = getMouseEventSource(mouseInput.getX(), mouseInput.getY());
         Widget* widget = parent;
         while (parent != NULL)
         {
             parent = (Widget*)widget->getParent();
 
-            // Check if the widget is present in the widget with mouse stack.
-            bool widgetIsPresentInStack = false;
+            // Check if the widget is present in the "widget with mouse" queue.
+            bool widgetIsPresentInQueue = false;
             std::deque<Widget*>::iterator iter;
-            for (iter = mWidgetWithMouseStack.begin(); iter != mWidgetWithMouseStack.end(); iter++)
+            for (iter = mWidgetWithMouseQueue.begin();
+                 iter != mWidgetWithMouseQueue.end();
+                 iter++)
             {
                 if (*iter == widget)
                 {
-                    widgetIsPresentInStack = true;
+                    widgetIsPresentInQueue = true;
                     break;
                 }
             }
 
-            // Widget is not present, send an entered event and add            
-            // it to the stack.
-            if (!widgetIsPresentInStack
+            // Widget is not present, send an entered event and add
+            // it to the "widget with mouse" queue.
+            if (!widgetIsPresentInQueue
                 && Widget::widgetExists(widget))
             {
                 distributeMouseEvent(widget,
@@ -444,14 +451,14 @@ namespace gcn
                                      mouseInput.getY(),
                                      true,
                                      true);
-                mWidgetWithMouseStack.push_front(widget);
+                mWidgetWithMouseQueue.push_front(widget);
             }
 
             Widget* swap = widget;
             widget = parent;
             parent = (Widget*)swap->getParent();
         }
-        
+
         if (mFocusHandler->getDraggedWidget() != NULL)
         {
             distributeMouseEvent(mFocusHandler->getDraggedWidget(),
@@ -462,7 +469,8 @@ namespace gcn
         }
         else
         {
-            distributeMouseEvent(widget,
+            Widget* sourceWidget = getMouseEventSource(mouseInput.getX(), mouseInput.getY());
+            distributeMouseEvent(sourceWidget,
                                  MouseEvent::MOVED,
                                  mouseInput.getButton(),
                                  mouseInput.getX(),
