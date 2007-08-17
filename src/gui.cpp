@@ -385,15 +385,23 @@ namespace gcn
                  iter++)
             {
                 Widget* widget = *iter;
-                int x, y;
-                widget->getAbsolutePosition(x, y);
-
-                if (x > mouseInput.getX()
-                    || y > mouseInput.getY()
-                    || x + widget->getWidth() <= mouseInput.getX()
-                    || y + widget->getHeight() <= mouseInput.getY())
+                            
+                // If a widget in the "widget with mouse queue" doesn't
+                // exists anymore it should be removed from the queue.
+                if (!Widget::widgetExists(widget))
                 {
-                    if (Widget::widgetExists(widget))
+                    mWidgetWithMouseQueue.erase(iter);
+                    break;
+                }
+                else
+                {
+                    int x, y;
+                    widget->getAbsolutePosition(x, y);
+
+                    if (x > mouseInput.getX()
+                        || y > mouseInput.getY()
+                        || x + widget->getWidth() <= mouseInput.getX()
+                        || y + widget->getHeight() <= mouseInput.getY())
                     {
                         distributeMouseEvent(widget,
                                              MouseEvent::EXITED,
@@ -401,12 +409,12 @@ namespace gcn
                                              mouseInput.getX(),
                                              mouseInput.getX(),
                                              true,
-                                             true);
-                    }                                        
-                    mClickCount = 1;
-                    mLastMousePressTimeStamp = 0;
-                    mWidgetWithMouseQueue.erase(iter);
-                    break;
+                                             true);                                       
+                        mClickCount = 1;
+                        mLastMousePressTimeStamp = 0;
+                        mWidgetWithMouseQueue.erase(iter);
+                        break;
+                    }
                 }
 
                 iterations++;
