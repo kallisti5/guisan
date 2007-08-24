@@ -275,6 +275,11 @@ namespace gcn
         mIsMoving = mouseEvent.getY() <= (int)mTitleBarHeight;
     }
 
+    void Window::mouseReleased(MouseEvent& mouseEvent)
+    {
+        mIsMoving = false;
+    }
+
     void Window::mouseDragged(MouseEvent& mouseEvent)
     {
         if (mouseEvent.isConsumed() || mouseEvent.getSource() != this)

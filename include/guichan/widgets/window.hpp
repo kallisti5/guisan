@@ -199,6 +199,8 @@ namespace gcn
 
         virtual void mouseDragged(MouseEvent& mouseEvent);
 
+        virtual void mouseReleased(MouseEvent& mouseEvent);
+
     protected:
         std::string mCaption;
         unsigned int mAlignment;
