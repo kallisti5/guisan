@@ -75,13 +75,14 @@ namespace gcn
         mImage = Image::load(filename, false);
 
         Color separator = mImage->getPixel(0, 0);
-
+                
         int i = 0;
-        for (i=0; separator == mImage->getPixel(i, 0)
-                 && i < mImage->getWidth(); ++i)
+        for (i = 0;
+             i < mImage->getWidth() && separator == mImage->getPixel(i, 0);
+             ++i)
         {
         }
-
+        
         if (i >= mImage->getWidth())
         {
             throw GCN_EXCEPTION("Corrupt image.");
