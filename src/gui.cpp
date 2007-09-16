@@ -401,7 +401,8 @@ namespace gcn
                     if (x > mouseInput.getX()
                         || y > mouseInput.getY()
                         || x + widget->getWidth() <= mouseInput.getX()
-                        || y + widget->getHeight() <= mouseInput.getY())
+                        || y + widget->getHeight() <= mouseInput.getY()
+                        || !widget->isVisible())
                     {
                         distributeMouseEvent(widget,
                                              MouseEvent::EXITED,
