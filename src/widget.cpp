@@ -604,4 +604,14 @@ namespace gcn
     {
         mInternalFocusHandler = focusHandler;
     }
+
+    void Widget::setId(const std::string& id)
+    {
+        mId = id;
+    }
+
+    const std::string& Widget::getId()
+    {
+        return mId;
+    }
 }

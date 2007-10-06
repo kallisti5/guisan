@@ -143,6 +143,15 @@ namespace gcn
          */
         virtual void clear();
 
+        /**
+         * Finds a widget given an id.
+         *
+         * @param id the id to find a widget by.
+         * @return a widget with a corrosponding id,
+                   NULL if no widget is found.
+         */
+        virtual Widget* findWidgetById(const std::string &id);
+
 
         // Inherited from Widget
 

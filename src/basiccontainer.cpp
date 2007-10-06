@@ -373,4 +373,18 @@ namespace gcn
             }
         }
     }
+
+    Widget* BasicContainer::findWidgetById(const std::string& id)
+    {
+        WidgetListIterator iter;
+        for (iter = mWidgets.begin(); iter != mWidgets.end(); iter++)
+        {
+            if ((*iter)->getId() == id)
+            {
+                return (*iter);
+            }
+        }
+
+        return NULL;
+    }
 }

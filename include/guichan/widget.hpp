@@ -733,6 +733,28 @@ namespace gcn
          */
         virtual void showWidgetPart(Widget* widget, Rectangle area) { };
 
+        /**
+         * Sets an id of a widget. An id can be useful if a widget needs to be
+         * identified in a container. For example, if widgets are created by an
+         * XML document, a certain widget can be retrieved given that the widget
+         * has an id.
+         *
+         * @param id the id to set to the widget.
+         * @see BasicContainer::findWidgetById
+         */
+        void setId(const std::string& id);
+
+        /**
+         * Gets the id of a widget. An id can be useful if a widget needs to be
+         * identified in a container. For example, if widgets are created by an
+         * XML document, a certain widget can be retrieved given that the widget
+         * has an id.
+         *
+         * @param id the id to set to the widget.
+         * @see BasicContainer::findWidgetById
+         */
+        const std::string& getId();
+
     protected:
         /**
          * Generates an action to the widget's ActionListeners.
@@ -775,6 +797,7 @@ namespace gcn
         bool mTabIn;
         bool mTabOut;
         bool mEnabled;
+        std::string mId;
 
         Font* mCurrentFont;
         static DefaultFont mDefaultFont;

@@ -141,4 +141,9 @@ namespace gcn
     {
         BasicContainer::clear();
     }
+
+    Widget* Container::findWidgetById(const std::string &id)
+    {
+        return BasicContainer::findWidgetById(id);
+    }
 }

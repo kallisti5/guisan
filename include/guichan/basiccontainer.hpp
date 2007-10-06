@@ -139,6 +139,15 @@ namespace gcn
          */
         virtual void logicChildren();
 
+        /**
+         * Finds a widget given an id.
+         *
+         * @param id the id to find a widget by.
+         * @return the widget with the corrosponding id, 
+                   NULL of no widget is found.
+         */
+        virtual Widget* findWidgetById(const std::string& id);
+
         typedef std::list<Widget *> WidgetList;
         typedef WidgetList::iterator WidgetListIterator;
         typedef WidgetList::reverse_iterator WidgetListReverseIterator;
