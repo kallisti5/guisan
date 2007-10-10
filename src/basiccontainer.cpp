@@ -383,6 +383,18 @@ namespace gcn
             {
                 return (*iter);
             }
+            
+            BasicContainer *basicContainer = dynamic_cast<BasicContainer*>((*iter));
+            
+            if (basicContainer != NULL)
+            {
+                Widget *widget = basicContainer->findWidgetById(id);
+                
+                if (widget != NULL)
+                {
+                    return widget;
+                }
+            }
         }
 
         return NULL;
