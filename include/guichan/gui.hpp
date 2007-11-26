@@ -260,20 +260,38 @@ namespace gcn
         virtual void handleMouseReleased(const MouseInput& mouseInput);
 
         /**
-         * Handles modal mouse input focus releases. When a release occurs appropriate
-         * mouse events should be distributed (such as mouse entered and mouse exited).
+         * Handles modal focus. Modal focus needs to be checked at 
+         * each logic iteration as it might be necessary to distribute
+         * mouse entered or mouse exited events.
          *
-         * @since 0.6.0
+         * @since 0.8.0
          */
-        virtual void handleModalMouseInputFocusRelease();
+        virtual void handleModalFocus();
 
         /**
-         * Handles modal focus releases. When a release occurs appropriate mouse events
-         * should be distributed (such as mouse entered and mouse exited).
+         * Handles modal mouse input focus. Modal mouse input focus needs 
+         * to be checked at each logic iteration as it might be necessary to 
+         * distribute mouse entered or mouse exited events.
          *
-         * @since 0.6.0
+         * @since 0.8.0
          */
-        virtual void handleModalFocusRelease();
+        virtual void handleModalMouseInputFocus();
+
+        /**
+         * Handles modal focus gained. If modal focus has been gaind it might 
+         * be necessary to distribute mouse entered or mouse exited events.
+         *
+         * @since 0.8.0
+         */
+        virtual void handleModalFocusGained();
+
+        /**
+         * Handles modal mouse input focus gained. If modal focus has been gaind 
+         * it might be necessary to distribute mouse entered or mouse exited events.
+         *
+         * @since 0.8.0
+         */
+        virtual void handleModalFocusReleased();
 
         /**
          * Distributes a mouse event.
@@ -284,7 +302,9 @@ namespace gcn
          * @param y The y coordinate of the event.
          * @param fource indicates whether the distribution should be forced or not.
          *               A forced distribution distributes the event even if a widget
-         *               is not enabled or not visible. Default value is false.
+         *               is not enabled, not visible, another widget has modal
+         *               focus or another widget has modal mouse input focus. 
+         *               Default value is false.
          * @param toSourceOnly indicates whether the distribution should be to the
          *                     source widget only or to it's parent's mouse listeners
          *                     as well.
