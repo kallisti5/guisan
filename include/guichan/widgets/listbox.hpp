@@ -57,6 +57,8 @@
 #ifndef GCN_LISTBOX_HPP
 #define GCN_LISTBOX_HPP
 
+#include <list>
+
 #include "guichan/keylistener.hpp"
 #include "guichan/listmodel.hpp"
 #include "guichan/mouselistener.hpp"
@@ -65,6 +67,8 @@
 
 namespace gcn
 {
+    class SelectionListener;
+
     /**
      * A ListBox displaying a list in which elemets can be selected. Only one
      * element can be selected at time. ListBox uses a ListModel to handle the
@@ -148,6 +152,25 @@ namespace gcn
          */
         void setWrappingKeyboardSelection(bool wrapping);
 
+        /**
+         * Adds a selection listener to the list box. When the selection
+         * changes an event will be sent to all selection listeners of the
+         * list box.
+         *
+         * @param selectionListener the selection listener to add.
+         * @since 0.8.0
+         */
+        void addSelectionListener(SelectionListener* selectionListener);
+
+        /**
+         * Removes a selection listener from the list box.
+         *
+         * @param selectionListener the selection listener to remove.
+         * @since 0.8.0
+         */
+        void removeSelectionListener(SelectionListener* selectionListener);
+
+
         // Inherited from Widget
 
         virtual void draw(Graphics* graphics);
@@ -174,9 +197,20 @@ namespace gcn
 
         
     protected:
+        /**
+         * Distributes a value changed event to all selection listeners
+         * of the list box.
+         * 
+         * @since 0.8.0
+         */
+        void distributeValueChangedEvent();
+
         ListModel *mListModel;
         int mSelected;
         bool mWrappingKeyboardSelection;
+        typedef std::list<SelectionListener*> SelectionListenerList;
+        SelectionListenerList mSelectionListeners;
+        typedef SelectionListenerList::iterator SelectionListenerIterator;
     };
 }
 

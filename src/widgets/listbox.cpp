@@ -66,6 +66,7 @@
 #include "guichan/key.hpp"
 #include "guichan/listmodel.hpp"
 #include "guichan/mouseinput.hpp"
+#include "guichan/selectionlistener.hpp"
 
 namespace gcn
 {
@@ -204,6 +205,8 @@ namespace gcn
             scroll.height = getFont()->getHeight();
             par->showWidgetPart(this, scroll);
         }
+
+        distributeValueChangedEvent();
     }
 
     void ListBox::keyPressed(KeyEvent& keyEvent)
@@ -314,5 +317,26 @@ namespace gcn
     void ListBox::setWrappingKeyboardSelection(bool wrapping)
     {
         mWrappingKeyboardSelection = wrapping;
+    }
+        
+    void ListBox::addSelectionListener(SelectionListener* selectionListener)
+    {
+        mSelectionListeners.push_back(selectionListener);
+    }
+   
+    void ListBox::removeSelectionListener(SelectionListener* selectionListener)
+    {
+        mSelectionListeners.remove(selectionListener);
+    }
+
+    void ListBox::distributeValueChangedEvent()
+    {
+        SelectionListenerIterator iter;
+
+        for (iter = mSelectionListeners.begin(); iter != mSelectionListeners.end(); ++iter)
+        {
+            Event event(this);
+            (*iter)->valueChanged(event);
+        }
     }
 }
