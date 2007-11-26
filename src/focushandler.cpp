@@ -124,7 +124,7 @@ namespace gcn
     {
         if (mModalFocusedWidget != NULL && mModalFocusedWidget != widget)
         {
-            throw GCN_EXCEPTION("Another widget allready has modal focus.");
+            throw GCN_EXCEPTION("Another widget already has modal focus.");
         }
 
         mModalFocusedWidget = widget;
@@ -140,7 +140,7 @@ namespace gcn
         if (mModalMouseInputFocusedWidget != NULL
             && mModalMouseInputFocusedWidget != widget)
         {
-            throw GCN_EXCEPTION("Another widget allready has modal input focus.");
+            throw GCN_EXCEPTION("Another widget already has modal input focus.");
         }
 
         mModalMouseInputFocusedWidget = widget;
