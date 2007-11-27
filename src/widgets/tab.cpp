@@ -54,71 +54,118 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef GCN_GUICHAN_HPP
-#define GCN_GUICHAN_HPP
+/*
+ * For comments regarding functions please see the header file.
+ */
 
-#include <guichan/actionevent.hpp>
-#include <guichan/actionlistener.hpp>
-#include <guichan/cliprectangle.hpp>
-#include <guichan/color.hpp>
-#include <guichan/deathlistener.hpp>
-#include <guichan/event.hpp>
-#include <guichan/exception.hpp>
-#include <guichan/focushandler.hpp>
-#include <guichan/focuslistener.hpp>
-#include <guichan/font.hpp>
-#include <guichan/genericinput.hpp>
-#include <guichan/graphics.hpp>
-#include <guichan/gui.hpp>
-#include <guichan/image.hpp>
-#include <guichan/imagefont.hpp>
-#include <guichan/imageloader.hpp>
-#include <guichan/input.hpp>
-#include <guichan/inputevent.hpp>
-#include <guichan/key.hpp>
-#include <guichan/keyevent.hpp>
-#include <guichan/keyinput.hpp>
-#include <guichan/keylistener.hpp>
-#include <guichan/listmodel.hpp>
-#include <guichan/mouseevent.hpp>
-#include <guichan/mouseinput.hpp>
-#include <guichan/mouselistener.hpp>
-#include <guichan/rectangle.hpp>
-#include <guichan/selectionevent.hpp>
-#include <guichan/selectionlistener.hpp>
+#include "guichan/widgets/tab.hpp"
 
-#include <guichan/widget.hpp>
+#include "guichan/font.hpp"
+#include "guichan/graphics.hpp"
+#include "guichan/widgets/button.hpp"
+#include "guichan/widgets/label.hpp"
+#include "guichan/widgets/tabbedarea.hpp"
 
-#include <guichan/widgets/button.hpp>
-#include <guichan/widgets/checkbox.hpp>
-#include <guichan/widgets/container.hpp>
-#include <guichan/widgets/dropdown.hpp>
-#include <guichan/widgets/icon.hpp>
-#include <guichan/widgets/label.hpp>
-#include <guichan/widgets/listbox.hpp>
-#include <guichan/widgets/scrollarea.hpp>
-#include <guichan/widgets/slider.hpp>
-#include <guichan/widgets/radiobutton.hpp>
-#include <guichan/widgets/tab.hpp>
-#include <guichan/widgets/tabbedarea.hpp>
-#include <guichan/widgets/textbox.hpp>
-#include <guichan/widgets/textfield.hpp>
-#include <guichan/widgets/window.hpp>
-
-#include "guichan/platform.hpp"
-
-class Widget;
-
-extern "C"
+namespace gcn
 {
-    /**
-     * Gets the the version of Guisan. As it is a C function
-     * it can be used to check for Guichan with autotools.
-     *
-     * @return the version of Guisan.
-     */
-    GCN_CORE_DECLSPEC extern const char* gcnGuisanVersion();
-    GCN_CORE_DECLSPEC extern const char* gcnGuichanVersion() { return gcnGuisanVersion(); }
+    Tab::Tab()
+            :mHasMouse(false)
+    {
+        mLabel = new Label();
+        mLabel->setPosition(4, 4);
+        add(mLabel);
+        setBorderSize(1);
+
+        addMouseListener(this);
+    }
+    
+    Tab::~Tab()
+    {
+        delete mLabel;
+    }
+    
+    void Tab::adjustSize()
+    {
+        setHeight(mLabel->getHeight() + 8);
+    }
+
+    void Tab::setTabbedArea(TabbedArea* tabbedArea)
+    {
+        mTabbedArea = tabbedArea;
+    }
+
+    TabbedArea* Tab::getTabbedArea()
+    {
+        return mTabbedArea;
+    }
+
+    void Tab::setCaption(const std::string& caption)
+    {
+        mCaption = caption;
+        mLabel->setCaption(caption);
+        mLabel->adjustSize();
+    }
+    
+    const std::string& Tab::getCaption() const
+    {
+        return mCaption;
+    }
+        
+    void Tab::draw(Graphics *graphics)
+    {
+        if (mTabbedArea->isTabSelected(this) || mHasMouse)
+        {
+            graphics->setColor(getBaseColor());
+        }
+        else
+        {            
+            graphics->setColor(getBaseColor() - 0x151515);
+        }
+
+        graphics->fillRectangle(Rectangle(0, 0, getWidth(), getHeight()));
+        
+        drawChildren(graphics);
+
+        if (mTabbedArea->isFocused()
+            && mTabbedArea->isTabSelected(this))
+        {
+            graphics->setColor(Color(0x000000));
+            graphics->drawRectangle(Rectangle(2, 2, getWidth() - 4, getHeight() - 4));
+        }
+    }
+    
+    void Tab::drawBorder(Graphics* graphics)
+    {
+        Color faceColor = getBaseColor();
+        Color highlightColor, shadowColor;
+        int alpha = getBaseColor().a;
+        int width = getWidth() + getBorderSize() * 2 - 1;
+        int height = getHeight() + getBorderSize() * 2 - 1;
+        highlightColor = faceColor + 0x303030;
+        highlightColor.a = alpha;
+        shadowColor = faceColor - 0x303030;
+        shadowColor.a = alpha;
+
+        unsigned int i;
+        for (i = 0; i < getBorderSize(); ++i)
+        {
+            graphics->setColor(highlightColor);
+            graphics->drawLine(i,i, width - i, i);
+            graphics->drawLine(i,i + 1, i, height - i - 1);
+            graphics->setColor(shadowColor);
+            graphics->drawLine(width - i,i + 1, width - i, height - i);
+            graphics->drawLine(i,height - i, width - i - 1, height - i);
+        }
+    }
+    
+    void Tab::mouseEntered(MouseEvent& mouseEvent)
+    {
+        mHasMouse = true;
+    }
+
+    void Tab::mouseExited(MouseEvent& mouseEvent)
+    {
+        mHasMouse = false;
+    }
 }
 
-#endif // end GCN_GUICHAN_HPP

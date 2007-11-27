@@ -54,71 +54,93 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef GCN_GUICHAN_HPP
-#define GCN_GUICHAN_HPP
+#ifndef GCN_TAB_HPP
+#define GCN_TAB_HPP
 
-#include <guichan/actionevent.hpp>
-#include <guichan/actionlistener.hpp>
-#include <guichan/cliprectangle.hpp>
-#include <guichan/color.hpp>
-#include <guichan/deathlistener.hpp>
-#include <guichan/event.hpp>
-#include <guichan/exception.hpp>
-#include <guichan/focushandler.hpp>
-#include <guichan/focuslistener.hpp>
-#include <guichan/font.hpp>
-#include <guichan/genericinput.hpp>
-#include <guichan/graphics.hpp>
-#include <guichan/gui.hpp>
-#include <guichan/image.hpp>
-#include <guichan/imagefont.hpp>
-#include <guichan/imageloader.hpp>
-#include <guichan/input.hpp>
-#include <guichan/inputevent.hpp>
-#include <guichan/key.hpp>
-#include <guichan/keyevent.hpp>
-#include <guichan/keyinput.hpp>
-#include <guichan/keylistener.hpp>
-#include <guichan/listmodel.hpp>
-#include <guichan/mouseevent.hpp>
-#include <guichan/mouseinput.hpp>
-#include <guichan/mouselistener.hpp>
-#include <guichan/rectangle.hpp>
-#include <guichan/selectionevent.hpp>
-#include <guichan/selectionlistener.hpp>
+#include <map>
+#include <string>
 
-#include <guichan/widget.hpp>
-
-#include <guichan/widgets/button.hpp>
-#include <guichan/widgets/checkbox.hpp>
-#include <guichan/widgets/container.hpp>
-#include <guichan/widgets/dropdown.hpp>
-#include <guichan/widgets/icon.hpp>
-#include <guichan/widgets/label.hpp>
-#include <guichan/widgets/listbox.hpp>
-#include <guichan/widgets/scrollarea.hpp>
-#include <guichan/widgets/slider.hpp>
-#include <guichan/widgets/radiobutton.hpp>
-#include <guichan/widgets/tab.hpp>
-#include <guichan/widgets/tabbedarea.hpp>
-#include <guichan/widgets/textbox.hpp>
-#include <guichan/widgets/textfield.hpp>
-#include <guichan/widgets/window.hpp>
-
+#include "guichan/basiccontainer.hpp"
+#include "guichan/mouselistener.hpp"
 #include "guichan/platform.hpp"
 
-class Widget;
-
-extern "C"
+namespace gcn
 {
+    class Label;
+    class TabbedArea;
+    
     /**
-     * Gets the the version of Guisan. As it is a C function
-     * it can be used to check for Guichan with autotools.
-     *
-     * @return the version of Guisan.
+     * A simple tab widget used as the default tab in the TabbedArea widget.
      */
-    GCN_CORE_DECLSPEC extern const char* gcnGuisanVersion();
-    GCN_CORE_DECLSPEC extern const char* gcnGuichanVersion() { return gcnGuisanVersion(); }
+    class GCN_CORE_DECLSPEC Tab:
+        public BasicContainer,
+        public MouseListener
+    {
+    public:
+
+        /**
+         * Constructor.
+         */
+        Tab();
+
+        /**
+         * Destructor.
+         */
+        virtual ~Tab();
+
+        /**
+         * Adjusts the tab size to fit the label.
+         */
+        void adjustSize();
+
+        /**
+         * Sets the tabbed area the tab should be a part of.
+         *
+         * @param tabbedArea The tabbed area the tab should be a part of.
+         */
+        void setTabbedArea(TabbedArea* tabbedArea);
+
+        /**
+         * Gets the tabbed are the tab is a part of.
+         *
+         * @return The tabbed are the tab is a part of.
+         */
+        TabbedArea* getTabbedArea();
+
+        /**
+         * Sets the caption of the tab.
+         *
+         * @param caption The caption of the tab.         
+         */
+        void setCaption(const std::string& caption);
+
+        /**
+         * Gets the caption of the tab.
+         *
+         * @return The caption of the tab.
+         */
+        const std::string& getCaption() const;
+
+                
+        // Inherited from Widget
+
+        virtual void draw(Graphics *graphics);
+
+        virtual void drawBorder(Graphics* graphics);
+                
+
+        // Inherited from MouseListener
+
+        virtual void mouseEntered(MouseEvent& mouseEvent);
+
+        virtual void mouseExited(MouseEvent& mouseEvent);
+        
+    protected:
+        Label* mLabel;
+        TabbedArea* mTabbedArea;
+        std::string mCaption;
+        bool mHasMouse;
+    };
 }
 
-#endif // end GCN_GUICHAN_HPP
+#endif // end GCN_TABBEDAREA_HPP
