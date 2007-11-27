@@ -59,7 +59,7 @@
 
 #include <string>
 
-#include "guichan/actionevent.hpp"
+#include "guichan/selectionevent.hpp"
 #include "guichan/platform.hpp"
 
 namespace gcn
@@ -89,7 +89,7 @@ namespace gcn
          * @param event the event of the value change.
          * @since 0.8.0
          */
-        virtual void valueChanged(const Event& event) = 0;
+        virtual void valueChanged(const SelectionEvent& event) = 0;
 
     };
 }
