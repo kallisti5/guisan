@@ -335,7 +335,7 @@ namespace gcn
 
         for (iter = mSelectionListeners.begin(); iter != mSelectionListeners.end(); ++iter)
         {
-            Event event(this);
+            SelectionEvent event(this);
             (*iter)->valueChanged(event);
         }
     }
