@@ -72,6 +72,7 @@
 #include "guichan/keylistener.hpp"
 #include "guichan/mouseinput.hpp"
 #include "guichan/mouselistener.hpp"
+#include "guichan/widgetlistener.hpp"
 
 namespace gcn
 {
@@ -125,7 +126,10 @@ namespace gcn
 
     void Widget::setWidth(int width)
     {
-        mDimension.width = width;
+        Rectangle newDimension = mDimension;
+        newDimension.width = width;
+
+        setDimension(newDimension);
     }
 
     int Widget::getWidth() const
@@ -135,7 +139,10 @@ namespace gcn
 
     void Widget::setHeight(int height)
     {
-        mDimension.height = height;
+        Rectangle newDimension = mDimension;
+        newDimension.height = height;
+
+        setDimension(newDimension);
     }
 
     int Widget::getHeight() const
@@ -145,7 +152,10 @@ namespace gcn
 
     void Widget::setX(int x)
     {
-        mDimension.x = x;
+        Rectangle newDimension = mDimension;
+        newDimension.x = x;
+
+        setDimension(newDimension);
     }
 
     int Widget::getX() const
@@ -155,7 +165,10 @@ namespace gcn
 
     void Widget::setY(int y)
     {
-        mDimension.y = y;
+        Rectangle newDimension = mDimension;
+        newDimension.y = y;
+
+        setDimension(newDimension);
     }
 
     int Widget::getY() const
@@ -165,13 +178,29 @@ namespace gcn
 
     void Widget::setPosition(int x, int y)
     {
-        mDimension.x = x;
-        mDimension.y = y;
+        Rectangle newDimension = mDimension;
+        newDimension.x = x;
+        newDimension.y = y;
+        
+        setDimension(newDimension);
     }
 
     void Widget::setDimension(const Rectangle& dimension)
-    {
+    { 
+        Rectangle oldDimension = mDimension;
         mDimension = dimension;
+
+        if (mDimension.width != oldDimension.width
+            || mDimension.height != oldDimension.height)
+        {
+            distributeResizedEvent();
+        }
+
+        if (mDimension.x != oldDimension.x
+            || mDimension.y != oldDimension.y)
+        {
+            distributeMovedEvent();
+        }
     }
 
     void Widget::setBorderSize(unsigned int borderSize)
@@ -259,6 +288,16 @@ namespace gcn
         {
             mFocusHandler->focusNone();
         }
+        
+        if (visible)
+        {
+            distributeShownEvent();
+        }
+        else if(!visible)
+        {
+            distributeHiddenEvent();
+        }
+
         mVisible = visible;
     }
 
@@ -385,6 +424,16 @@ namespace gcn
         mMouseListeners.remove(mouseListener);
     }
 
+    void Widget::addWidgetListener(WidgetListener* widgetListener)
+    {
+        mWidgetListeners.push_back(widgetListener);
+    }
+
+    void Widget::removeWidgetListener(WidgetListener* widgetListener)
+    {
+        mWidgetListeners.remove(widgetListener);
+    }
+
     void Widget::getAbsolutePosition(int& x, int& y) const
     {
         if (getParent() == NULL)
@@ -486,8 +535,11 @@ namespace gcn
 
     void Widget::setSize(int width, int height)
     {
-        setWidth(width);
-        setHeight(height);
+        Rectangle newDimension = mDimension;
+        newDimension.width = width;
+        newDimension.height = height;
+
+        setDimension(newDimension);
     }
 
     void Widget::setEnabled(bool enabled)
@@ -613,5 +665,49 @@ namespace gcn
     const std::string& Widget::getId()
     {
         return mId;
+    }
+
+    void Widget::distributeResizedEvent()
+    {
+        WidgetListenerIterator iter;
+
+        for (iter = mWidgetListeners.begin(); iter != mWidgetListeners.end(); ++iter)
+        {
+            Event event(this);
+            (*iter)->widgetResized(event);
+        }
+    }
+
+    void Widget::distributeMovedEvent()
+    {
+        WidgetListenerIterator iter;
+
+        for (iter = mWidgetListeners.begin(); iter != mWidgetListeners.end(); ++iter)
+        {
+            Event event(this);
+            (*iter)->widgetMoved(event);
+        }
+    }
+
+    void Widget::distributeHiddenEvent()
+    {
+        WidgetListenerIterator iter;
+
+        for (iter = mWidgetListeners.begin(); iter != mWidgetListeners.end(); ++iter)
+        {
+            Event event(this);
+            (*iter)->widgetHidden(event);
+        }
+    }
+
+    void Widget::distributeShownEvent()
+    {
+        WidgetListenerIterator iter;
+
+        for (iter = mWidgetListeners.begin(); iter != mWidgetListeners.end(); ++iter)
+        {
+            Event event(this);
+            (*iter)->widgetShown(event);
+        }
     }
 }

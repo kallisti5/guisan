@@ -77,6 +77,7 @@ namespace gcn
     class KeyListener;
     class MouseInput;
     class MouseListener;
+    class WidgetListener;
 
     /**
      * Widget base class. Contains basic widget functions every widget should
@@ -470,7 +471,25 @@ namespace gcn
          * @author Olof Naessén
          * @since 0.7.0
          */
-        void removeFocusListener(FocusListener* FocusListener);
+        void removeFocusListener(FocusListener* focusListener);
+
+        /**
+         * Adds a WidgetListener to the widget.
+         *
+         * @param widgetListener the WidgetListener to add.
+         * @author Olof Naessén
+         * @since 0.8.0
+         */
+        void addWidgetListener(WidgetListener* widgetListener);
+
+        /**
+         * Removes an added WidgetListener from the widget.
+         *
+         * @param widgetListener the WidgetListener to remove.
+         * @author Olof Naessén
+         * @since 0.8.0
+         */
+        void removeWidgetListener(WidgetListener* widgetListener);
 
         /**
          * Sets the action event identifier of the widget. The identifier is
@@ -761,10 +780,41 @@ namespace gcn
          */
         void generateAction();
 
+        /**
+         * Distributes resized events to all of the widget's listeners.
+         *
+         * @since 0.8.0
+         * @author Olof Naessén
+         */
+        void distributeResizedEvent();
+
+        /**
+         * Distributes moved events to all of the widget's listeners.
+         *
+         * @since 0.8.0
+         * @author Olof Naessén
+         */
+        void distributeMovedEvent();
+
+        /**
+         * Distributes hidden events to all of the widget's listeners.
+         *
+         * @since 0.8.0
+         * @author Olof Naessén
+         */
+        void distributeHiddenEvent();
+
+        /**
+         * Distributes shown events to all of the widget's listeners.
+         *
+         * @since 0.8.0
+         * @author Olof Naessén
+         */
+        void distributeShownEvent();
+
         typedef std::list<MouseListener*> MouseListenerList;
         typedef MouseListenerList::iterator MouseListenerIterator;
         MouseListenerList mMouseListeners;
-
 
         typedef std::list<KeyListener*> KeyListenerList;
         KeyListenerList mKeyListeners;
@@ -781,6 +831,10 @@ namespace gcn
         typedef std::list<FocusListener*> FocusListenerList;
         FocusListenerList mFocusListeners;
         typedef FocusListenerList::iterator FocusListenerIterator;
+
+        typedef std::list<WidgetListener*> WidgetListenerList;
+        WidgetListenerList mWidgetListeners;
+        typedef WidgetListenerList::iterator WidgetListenerIterator;
 
         Color mForegroundColor;
         Color mBackgroundColor;

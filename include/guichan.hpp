@@ -86,8 +86,8 @@
 #include <guichan/rectangle.hpp>
 #include <guichan/selectionevent.hpp>
 #include <guichan/selectionlistener.hpp>
-
 #include <guichan/widget.hpp>
+#include <guichan/widgetlistener.hpp>
 
 #include <guichan/widgets/button.hpp>
 #include <guichan/widgets/checkbox.hpp>
