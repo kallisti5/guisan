@@ -100,7 +100,7 @@ namespace gcn
         virtual void widgetMoved(const Event& event) { }
 
         /**
-         * Invoked when a widget is hidden, i.e its set to be
+         * Invoked when a widget is hidden, i.e it's set to be
          * not visible.
          *
          * @param event Describes the event.
@@ -109,7 +109,7 @@ namespace gcn
         virtual void widgetHidden(const Event& event) { }
 
         /**
-         * Invoked when a widget is shown, i.e its set to be
+         * Invoked when a widget is shown, i.e it's set to be
          * visible.
          *
          * @param event Describes the event.
