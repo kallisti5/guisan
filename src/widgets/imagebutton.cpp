@@ -54,72 +54,107 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef GCN_GUICHAN_HPP
-#define GCN_GUICHAN_HPP
+/*
+ * For comments regarding functions please see the header file.
+ */
 
-#include <guichan/actionevent.hpp>
-#include <guichan/actionlistener.hpp>
-#include <guichan/cliprectangle.hpp>
-#include <guichan/color.hpp>
-#include <guichan/deathlistener.hpp>
-#include <guichan/event.hpp>
-#include <guichan/exception.hpp>
-#include <guichan/focushandler.hpp>
-#include <guichan/focuslistener.hpp>
-#include <guichan/font.hpp>
-#include <guichan/genericinput.hpp>
-#include <guichan/graphics.hpp>
-#include <guichan/gui.hpp>
-#include <guichan/image.hpp>
-#include <guichan/imagefont.hpp>
-#include <guichan/imageloader.hpp>
-#include <guichan/input.hpp>
-#include <guichan/inputevent.hpp>
-#include <guichan/key.hpp>
-#include <guichan/keyevent.hpp>
-#include <guichan/keyinput.hpp>
-#include <guichan/keylistener.hpp>
-#include <guichan/listmodel.hpp>
-#include <guichan/mouseevent.hpp>
-#include <guichan/mouseinput.hpp>
-#include <guichan/mouselistener.hpp>
-#include <guichan/rectangle.hpp>
-#include <guichan/selectionevent.hpp>
-#include <guichan/selectionlistener.hpp>
-#include <guichan/widget.hpp>
-#include <guichan/widgetlistener.hpp>
+#include "guichan/widgets/imagebutton.hpp"
 
-#include <guichan/widgets/button.hpp>
-#include <guichan/widgets/checkbox.hpp>
-#include <guichan/widgets/container.hpp>
-#include <guichan/widgets/dropdown.hpp>
-#include <guichan/widgets/icon.hpp>
-#include <guichan/widgets/imagebutton.hpp>
-#include <guichan/widgets/label.hpp>
-#include <guichan/widgets/listbox.hpp>
-#include <guichan/widgets/scrollarea.hpp>
-#include <guichan/widgets/slider.hpp>
-#include <guichan/widgets/radiobutton.hpp>
-#include <guichan/widgets/tab.hpp>
-#include <guichan/widgets/tabbedarea.hpp>
-#include <guichan/widgets/textbox.hpp>
-#include <guichan/widgets/textfield.hpp>
-#include <guichan/widgets/window.hpp>
+#include "guichan/graphics.hpp"
+#include "guichan/image.hpp"
 
-#include "guichan/platform.hpp"
-
-class Widget;
-
-extern "C"
+namespace gcn
 {
-    /**
-     * Gets the the version of Guisan. As it is a C function
-     * it can be used to check for Guichan with autotools.
-     *
-     * @return the version of Guisan.
-     */
-    GCN_CORE_DECLSPEC extern const char* gcnGuisanVersion();
-    GCN_CORE_DECLSPEC extern const char* gcnGuichanVersion() { return gcnGuisanVersion(); }
-}
+    ImageButton::ImageButton(const std::string& filename)
+    {
+        mImage = gcn::Image::load(filename);
+        adjustSize();
+    }
 
-#endif // end GCN_GUICHAN_HPP
+    ImageButton::ImageButton(Image* image)
+    {
+        mImage = image;
+        adjustSize();
+    }
+
+    ImageButton::~ImageButton()
+    {
+       
+    }
+
+    void ImageButton::adjustSize()
+    {
+        if (mImage != NULL)
+        {
+            setWidth(mImage->getWidth() + mImage->getWidth() / 2);
+            setHeight(mImage->getHeight() + mImage->getHeight() / 2);
+        }
+    }
+
+    void ImageButton::setImage(Image* image)
+    {
+        mImage = image;
+    }
+
+    Image* ImageButton::getImage()
+    {
+        return mImage;
+    }
+
+    void ImageButton::draw(Graphics* graphics)
+    {
+        gcn::Color faceColor = getBaseColor();
+        gcn::Color highlightColor, shadowColor;
+        int alpha = getBaseColor().a;
+
+        if (isPressed())
+        {
+            faceColor = faceColor - 0x303030;
+            faceColor.a = alpha;
+            highlightColor = faceColor - 0x303030;
+            highlightColor.a = alpha;
+            shadowColor = faceColor + 0x303030;
+            shadowColor.a = alpha;
+        }
+        else
+        {
+            highlightColor = faceColor + 0x303030;
+            highlightColor.a = alpha;
+            shadowColor = faceColor - 0x303030;
+            shadowColor.a = alpha;
+        }
+
+        graphics->setColor(faceColor);
+        graphics->fillRectangle(Rectangle(1, 1, getDimension().width-1, getHeight() - 1));
+
+        graphics->setColor(highlightColor);
+        graphics->drawLine(0, 0, getWidth() - 1, 0);
+        graphics->drawLine(0, 1, 0, getHeight() - 1);
+
+        graphics->setColor(shadowColor);
+        graphics->drawLine(getWidth() - 1, 1, getWidth() - 1, getHeight() - 1);
+        graphics->drawLine(1, getHeight() - 1, getWidth() - 1, getHeight() - 1);
+
+        graphics->setColor(getForegroundColor());
+
+        int textX = getWidth() / 2 - mImage->getWidth() / 2;
+        int textY = getHeight() / 2 - mImage->getHeight() / 2;
+
+        if (isPressed())
+        {
+            graphics->drawImage(mImage, textX + 1, textY + 1);
+        }
+        else
+        {
+            graphics->drawImage(mImage, textX, textY);
+           
+            if (isFocused())
+            {
+                graphics->drawRectangle(Rectangle(2, 
+                                                  2, 
+                                                  getWidth() - 4,
+                                                  getHeight() - 4));
+            }
+        }
+    }
+}
