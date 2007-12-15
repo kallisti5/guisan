@@ -130,7 +130,7 @@ namespace gcn
          * @param index The index of the tab to check.
          * @return True if the tab is selected, false otherwise.
          */
-        virtual bool isTabSelected(unsigned int index);
+        virtual bool isTabSelected(unsigned int index) const;
         
         /**
          * Checks whether a tab is selected or not.
@@ -160,7 +160,7 @@ namespace gcn
          * @return The undex of the selected tab.
          *         If no tab is selected -1 will be returned.
          */
-        virtual int getSelectedTabIndex();
+        virtual int getSelectedTabIndex() const;
         
         /**
          * Gets the selected tab.

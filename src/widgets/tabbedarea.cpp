@@ -201,7 +201,7 @@ namespace gcn
         adjustTabPositions();
     }
 
-    bool TabbedArea::isTabSelected(unsigned int index)
+    bool TabbedArea::isTabSelected(unsigned int index) const
     {
         if (index >= mTabs.size())
         {
@@ -247,7 +247,7 @@ namespace gcn
         }
     }
 
-    int TabbedArea::getSelectedTabIndex()
+    int TabbedArea::getSelectedTabIndex() const
     {
         unsigned int i;
         for (i = 0; i < mTabs.size(); i++)
