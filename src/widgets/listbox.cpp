@@ -159,7 +159,7 @@ namespace gcn
         adjustSize();
     }
 
-    int ListBox::getSelected()
+    int ListBox::getSelected() const
     {
         return mSelected;
     }
@@ -309,7 +309,7 @@ namespace gcn
         }
     }
 
-    bool ListBox::isWrappingKeyboardSelection()
+    bool ListBox::isWrappingKeyboardSelection() const
     {
         return mWrappingKeyboardSelection;
     }

@@ -95,7 +95,7 @@ namespace gcn
         mAlignment = alignment;
     }
 
-    unsigned int Label::getAlignment()
+    unsigned int Label::getAlignment() const
     {
         return mAlignment;
     }

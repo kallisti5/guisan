@@ -167,7 +167,7 @@ namespace gcn
         checkPolicies();
     }
 
-    unsigned int ScrollArea::getHorizontalScrollPolicy()
+    unsigned int ScrollArea::getHorizontalScrollPolicy() const
     {
         return mHPolicy;
     }
@@ -178,7 +178,7 @@ namespace gcn
         checkPolicies();
     }
 
-    unsigned int ScrollArea::getVerticalScrollPolicy()
+    unsigned int ScrollArea::getVerticalScrollPolicy() const
     {
         return mVPolicy;
     }
@@ -207,7 +207,7 @@ namespace gcn
         }
     }
 
-    int ScrollArea::getVerticalScrollAmount()
+    int ScrollArea::getVerticalScrollAmount() const
     {
         return mVScroll;
     }
@@ -228,7 +228,7 @@ namespace gcn
         }
     }
 
-    int ScrollArea::getHorizontalScrollAmount()
+    int ScrollArea::getHorizontalScrollAmount() const
     {
         return mHScroll;
     }
@@ -293,7 +293,7 @@ namespace gcn
         }
     }
 
-    int ScrollArea::getScrollbarWidth()
+    int ScrollArea::getScrollbarWidth() const
     {
         return mScrollbarWidth;
     }
@@ -1246,22 +1246,22 @@ namespace gcn
         mDownButtonScrollAmount = amount;
     }
 
-    int ScrollArea::getLeftButtonScrollAmount()
+    int ScrollArea::getLeftButtonScrollAmount() const
     {
         return mLeftButtonScrollAmount;
     }
 
-    int ScrollArea::getRightButtonScrollAmount()
+    int ScrollArea::getRightButtonScrollAmount() const
     {
         return mRightButtonScrollAmount;
     }
 
-    int ScrollArea::getUpButtonScrollAmount()
+    int ScrollArea::getUpButtonScrollAmount() const
     {
         return mUpButtonScrollAmount;
     }
 
-    int ScrollArea::getDownButtonScrollAmount()
+    int ScrollArea::getDownButtonScrollAmount() const
     {
         return mDownButtonScrollAmount;
     }

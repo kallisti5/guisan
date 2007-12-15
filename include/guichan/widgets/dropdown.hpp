@@ -110,7 +110,7 @@ namespace gcn
          *
          * @return the selected element.
          */
-        int getSelected();
+        int getSelected() const;
 
         /**
          * Sets the ListModel index of the selected element.

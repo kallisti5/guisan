@@ -103,7 +103,7 @@ namespace gcn
          *
          * @return the ListModel index of the selected element.
          */
-        int getSelected();
+        int getSelected() const;
 
         /**
          * Sets the ListModel index of the selected element.
@@ -140,7 +140,7 @@ namespace gcn
          *
          * @return true if wrapping, fasle otherwise.
          */
-        bool isWrappingKeyboardSelection();
+        bool isWrappingKeyboardSelection() const;
 
         /**
          * Sets the ListBox to wrap or not when selecting items with keyboard.

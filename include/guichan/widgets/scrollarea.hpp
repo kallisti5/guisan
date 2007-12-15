@@ -136,7 +136,7 @@ namespace gcn
          * @return the policy for the horizontal scrollbar policy. See enum with
          *         policies.
          */
-        unsigned int getHorizontalScrollPolicy();
+        unsigned int getHorizontalScrollPolicy() const;
 
         /**
          * Sets the vertical scrollbar policy. See enum with policies.
@@ -152,7 +152,7 @@ namespace gcn
          * @return the policy for the vertical scrollbar. See enum with
          *         policies.
          */
-        unsigned int getVerticalScrollPolicy();
+        unsigned int getVerticalScrollPolicy() const;
 
         /**
          * Sets the horizontal and vertical scrollbar policy. See enum with policies.
@@ -175,7 +175,7 @@ namespace gcn
          * Gets the amount that is scrolled vertically.
          * @return the scroll amount on vertical scroll.
          */
-        int getVerticalScrollAmount();
+        int getVerticalScrollAmount() const;
 
         /**
          * Sets the amount to scroll horizontally.
@@ -189,7 +189,7 @@ namespace gcn
          *
          * @return the scroll amount on horizontal scroll.
          */
-        int getHorizontalScrollAmount();
+        int getHorizontalScrollAmount() const;
 
         /**
          * Sets the amount to scroll horizontally and vertically.
@@ -225,7 +225,7 @@ namespace gcn
 
          * @return the width of the ScrollBar.
          */
-        int getScrollbarWidth();
+        int getScrollbarWidth() const;
 
         /**
          * Sets the amount to scroll in pixels when the left scroll button is
@@ -257,7 +257,7 @@ namespace gcn
          *
          * @return the amount to scroll when the left scroll button is pushed.
          */
-        int getLeftButtonScrollAmount();
+        int getLeftButtonScrollAmount() const;
 
         /**
          * Gets the amount to scroll in pixels when the right scroll button is
@@ -265,7 +265,7 @@ namespace gcn
          *
          * @return the amount to scroll when the right scroll button is pushed.
          */
-        int getRightButtonScrollAmount();
+        int getRightButtonScrollAmount() const;
 
         /**
          * Gets the amount to scroll in pixels when the up scroll button is
@@ -273,7 +273,7 @@ namespace gcn
          *
          * @return the amount to scroll when the up scroll button is pushed.
          */
-        int getUpButtonScrollAmount();
+        int getUpButtonScrollAmount() const;
 
         /**
          * Gets the amount to scroll in pixels when the down scroll button is
@@ -281,7 +281,7 @@ namespace gcn
          *
          * @return the amount to scroll when the down scroll button is pushed.
          */
-        int getDownButtonScrollAmount();
+        int getDownButtonScrollAmount() const;
 
 
         // Inherited from BasicContainer

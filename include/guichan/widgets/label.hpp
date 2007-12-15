@@ -109,7 +109,7 @@ namespace gcn
          *
          * @return alignment of caption.
          */
-        unsigned int getAlignment();
+        unsigned int getAlignment() const;
 
         /**
          * Adjusts the Label size to fit the font size.

@@ -278,7 +278,7 @@ namespace gcn
         }
     }
 
-    int DropDown::getSelected()
+    int DropDown::getSelected() const
     {
         return mListBox->getSelected();
     }
