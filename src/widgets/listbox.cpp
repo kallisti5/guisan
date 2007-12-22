@@ -250,6 +250,16 @@ namespace gcn
             
             keyEvent.consume();
         }
+        else if (key.getValue() == Key::HOME)
+        {
+            setSelected(0);
+            keyEvent.consume();
+        }
+        else if (key.getValue() == Key::END)
+        {
+            setSelected(getListModel()->getNumberOfElements() - 1);
+            keyEvent.consume();
+        }
     }
 
     void ListBox::mousePressed(MouseEvent& mouseEvent)
