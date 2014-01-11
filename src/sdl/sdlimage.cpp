@@ -135,6 +135,8 @@ namespace gcn
         bool hasPink = false;
         bool hasAlpha = false;
 
+        unsigned int surfaceMask = SDL_PIXELFORMAT_RGBX8888;
+
         for (i = 0; i < mSurface->w * mSurface->h; ++i)
         {
             if (((unsigned int*)mSurface->pixels)[i] == SDL_MapRGB(mSurface->format,255,0,255))
@@ -153,35 +155,23 @@ namespace gcn
 
             if (a != 255)
             {
-                hasAlpha = true;
+                surfaceMask = SDL_PIXELFORMAT_RGBA8888;
                 break;
             }
         }
 
-        SDL_Surface *tmp;
-
-        if (hasAlpha)
-        {
-            tmp = SDL_DisplayFormatAlpha(mSurface);
-            SDL_FreeSurface(mSurface);
-            mSurface = NULL;
-        }
-        else
-        {
-            tmp = SDL_DisplayFormat(mSurface);
-            SDL_FreeSurface(mSurface);
-            mSurface = NULL;
-        }
+        SDL_Surface* tmp = SDL_ConvertSurfaceFormat(mSurface, surfaceMask, 0);
+        SDL_FreeSurface(mSurface);
+        mSurface = NULL;
 
         if (hasPink)
         {
-            SDL_SetColorKey(tmp, SDL_SRCCOLORKEY,
+            SDL_SetColorKey(tmp, SDL_TRUE,
                             SDL_MapRGB(tmp->format,255,0,255));
         }
-        if (hasAlpha)
-        {
-            SDL_SetAlpha(tmp, SDL_SRCALPHA, 255);
-        }
+
+        if (surfaceMask == SDL_PIXELFORMAT_RGBA8888)
+            SDL_SetSurfaceAlphaMod(tmp, 255);
 
         mSurface = tmp;
     }

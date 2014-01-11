@@ -30,7 +30,7 @@ if not conf.CheckPKG('sdl2'):
 env = conf.Finish()
 
 env.Append(CPPPATH = ['#include/'])
-env.Append(LIBS = ['-lSDL2_ttf', '-lGL', '-lGLU'])
+env.Append(LIBS = ['-lSDL2_ttf', '-lSDL2_image', '-lGL', '-lGLU'])
 env.Append(CFLAGS = ['-g'])
 env.Append(LINKFLAGS = ['-g'])
 

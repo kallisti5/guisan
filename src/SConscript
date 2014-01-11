@@ -44,5 +44,5 @@ program_sources = [
 
 guikun = env.Clone()
 guikun.ParseConfig('pkg-config --cflags --libs sdl2')
-guikun.ParseConfig('pkg-config --cflags --libs SDL2_mixer')
+guikun.ParseConfig('pkg-config --cflags --libs SDL2_image')
 guikun.Library(target = 'guikun', source = program_sources)
