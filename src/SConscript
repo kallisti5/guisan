@@ -1,0 +1,48 @@
+import os
+import sys
+import platform
+
+Import("env")
+
+main_sources = [
+	'actionevent.cpp',
+	'basiccontainer.cpp',
+	'cliprectangle.cpp',
+	'color.cpp',
+	'defaultfont.cpp',
+	'event.cpp',
+	'exception.cpp',
+	'focushandler.cpp',
+	'font.cpp',
+	'graphics.cpp',
+	'gui.cpp',
+	'guichan.cpp',
+	'image.cpp',
+	'imagefont.cpp',
+	'inputevent.cpp',
+	'key.cpp',
+	'keyevent.cpp',
+	'keyinput.cpp',
+	'mouseevent.cpp',
+	'mouseinput.cpp',
+	'rectangle.cpp',
+	'widget.cpp'
+]
+
+sdl_sources = [
+	'sdl/sdl.cpp',
+	'sdl/sdlgraphics.cpp',
+	'sdl/sdlimage.cpp',
+	'sdl/sdlimageloader.cpp',
+	'sdl/sdlinput.cpp'
+]
+
+program_sources = [
+	main_sources +
+	sdl_sources
+]
+
+guikun = env.Clone()
+guikun.ParseConfig('pkg-config --cflags --libs sdl2')
+guikun.ParseConfig('pkg-config --cflags --libs SDL2_mixer')
+guikun.Library(target = 'guikun', source = program_sources)
