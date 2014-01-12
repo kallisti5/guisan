@@ -123,8 +123,8 @@ namespace gcn
               keyInput.setShiftPressed(event.key.keysym.mod & KMOD_SHIFT);
               keyInput.setControlPressed(event.key.keysym.mod & KMOD_CTRL);
               keyInput.setAltPressed(event.key.keysym.mod & KMOD_ALT);
-              keyInput.setMetaPressed(event.key.keysym.mod & KMOD_META);
-              keyInput.setNumericPad(event.key.keysym.sym >= SDLK_KP0
+              keyInput.setMetaPressed(event.key.keysym.mod & KMOD_GUI);
+              keyInput.setNumericPad(event.key.keysym.sym >= SDLK_KP_0
                                      && event.key.keysym.sym <= SDLK_KP_EQUALS);
 
               mKeyInputQueue.push(keyInput);
@@ -136,8 +136,8 @@ namespace gcn
               keyInput.setShiftPressed(event.key.keysym.mod & KMOD_SHIFT);
               keyInput.setControlPressed(event.key.keysym.mod & KMOD_CTRL);
               keyInput.setAltPressed(event.key.keysym.mod & KMOD_ALT);
-              keyInput.setMetaPressed(event.key.keysym.mod & KMOD_META);
-              keyInput.setNumericPad(event.key.keysym.sym >= SDLK_KP0
+              keyInput.setMetaPressed(event.key.keysym.mod & KMOD_GUI);
+              keyInput.setNumericPad(event.key.keysym.sym >= SDLK_KP_0
                                      && event.key.keysym.sym <= SDLK_KP_EQUALS);
 
               mKeyInputQueue.push(keyInput);
@@ -235,15 +235,9 @@ namespace gcn
 
     int SDLInput::convertKeyCharacter(SDL_Event event)
     {
-        SDL_keysym keysym = event.key.keysym;
+        SDL_Keysym keysym = event.key.keysym;
         
         int value = 0;
-
-        if (keysym.unicode < 255)
-        {
-            value = (int)keysym.unicode;
-        }
-
         switch (keysym.sym)
         {
           case SDLK_TAB:
@@ -274,11 +268,7 @@ namespace gcn
               value = Key::PAUSE;
               break;
           case SDLK_SPACE:
-              // Special characters like ~ (tilde) ends up
-              // with the keysym.sym SDLK_SPACE which
-              // without this check would be lost. The check
-              // is only valid on key down events in SDL.
-              if (event.type == SDL_KEYUP || keysym.unicode == ' ')
+              if (event.type == SDL_KEYUP)
               {
                   value = Key::SPACE;
               }
@@ -301,7 +291,7 @@ namespace gcn
           case SDLK_PAGEUP:
               value = Key::PAGE_UP;
               break;
-          case SDLK_PRINT:
+          case SDLK_PRINTSCREEN:
               value = Key::PRINT_SCREEN;
               break;
           case SDLK_PAGEDOWN:
@@ -352,26 +342,20 @@ namespace gcn
           case SDLK_F15:
               value = Key::F15;
               break;
-          case SDLK_NUMLOCK:
+          case SDLK_NUMLOCKCLEAR:
               value = Key::NUM_LOCK;
               break;
           case SDLK_CAPSLOCK:
               value = Key::CAPS_LOCK;
               break;
-          case SDLK_SCROLLOCK:
+          case SDLK_SCROLLLOCK:
               value = Key::SCROLL_LOCK;
               break;
-          case SDLK_RMETA:
+          case SDLK_RGUI:
               value = Key::RIGHT_META;
               break;
-          case SDLK_LMETA:
+          case SDLK_LGUI:
               value = Key::LEFT_META;
-              break;
-          case SDLK_LSUPER:
-              value = Key::LEFT_SUPER;
-              break;
-          case SDLK_RSUPER:
-              value = Key::RIGHT_SUPER;
               break;
           case SDLK_MODE:
               value = Key::ALT_GR;
@@ -403,34 +387,34 @@ namespace gcn
         {
             switch (keysym.sym)
             {
-              case SDLK_KP0:
+              case SDLK_KP_0:
                   value = Key::INSERT;
                   break;
-              case SDLK_KP1:
+              case SDLK_KP_1:
                   value = Key::END;
                   break;
-              case SDLK_KP2:
+              case SDLK_KP_2:
                   value = Key::DOWN;
                   break;
-              case SDLK_KP3:
+              case SDLK_KP_3:
                   value = Key::PAGE_DOWN;
                   break;
-              case SDLK_KP4:
+              case SDLK_KP_4:
                   value = Key::LEFT;
                   break;
-              case SDLK_KP5:
+              case SDLK_KP_5:
                   value = 0;
                   break;
-              case SDLK_KP6:
+              case SDLK_KP_6:
                   value = Key::RIGHT;
                   break;
-              case SDLK_KP7:
+              case SDLK_KP_7:
                   value = Key::HOME;
                   break;
-              case SDLK_KP8:
+              case SDLK_KP_8:
                   value = Key::UP;
                   break;
-              case SDLK_KP9:
+              case SDLK_KP_9:
                   value = Key::PAGE_UP;
                   break;
               default:
