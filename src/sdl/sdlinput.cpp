@@ -148,19 +148,7 @@ namespace gcn
               mouseInput.setX(event.button.x);
               mouseInput.setY(event.button.y);
               mouseInput.setButton(convertMouseButton(event.button.button));
-
-              if (event.button.button == SDL_BUTTON_WHEELDOWN)
-              {
-                  mouseInput.setType(MouseInput::WHEEL_MOVED_DOWN);
-              }
-              else if (event.button.button == SDL_BUTTON_WHEELUP)
-              {
-                  mouseInput.setType(MouseInput::WHEEL_MOVED_UP);
-              }
-              else
-              {
-                  mouseInput.setType(MouseInput::PRESSED);
-              }
+              mouseInput.setType(MouseInput::PRESSED);
               mouseInput.setTimeStamp(SDL_GetTicks());
               mMouseInputQueue.push(mouseInput);
               break;
@@ -184,13 +172,19 @@ namespace gcn
               mMouseInputQueue.push(mouseInput);
               break;
 
-          case SDL_ACTIVEEVENT:
+          case SDL_MOUSEWHEEL:
+              if (event.wheel.y > 0)
+                  mouseInput.setType(MouseInput::WHEEL_MOVED_UP);
+              else
+                  mouseInput.setType(MouseInput::WHEEL_MOVED_DOWN);
+              break;
+
+          case SDL_WINDOWEVENT:
               /*
                * This occurs when the mouse leaves the window and the Gui-chan
                * application loses its mousefocus.
                */
-              if ((event.active.state & SDL_APPMOUSEFOCUS)
-                  && !event.active.gain)
+              if (event.window.event & SDL_WINDOWEVENT_LEAVE)
               {
                   mMouseInWindow = false;
 
@@ -204,8 +198,7 @@ namespace gcn
                   }
               }
 
-              if ((event.active.state & SDL_APPMOUSEFOCUS)
-                  && event.active.gain)
+              if (event.window.event & SDL_WINDOWEVENT_ENTER)
               {
                   mMouseInWindow = true;
               }
