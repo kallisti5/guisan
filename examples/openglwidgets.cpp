@@ -72,8 +72,8 @@ gcn::RadioButton* radioButton3;
 gcn::Slider* slider;                 // A slider
 gcn::Image *image;                   // An image for the icon
 gcn::Window *window;
-gcn::Image *darkbitsImage;
-gcn::Icon* darkbitsIcon;
+gcn::Image *guisanLogoImage;
+gcn::Icon* guisanLogoImage;
 gcn::ScrollArea* nestedScrollArea;
 gcn::Container* nestedContainer;
 gcn::Slider* nestedSlider;
@@ -148,11 +148,11 @@ void initWidgets()
 	slider->setSize(100, 10);
 
     window = new gcn::Window("I am a window  Drag me");
-    window->setBaseColor(gcn::Color(255, 150, 200, 190));
+    window->setBaseColor(gcn::Color(212, 255, 150, 190));
 
-    darkbitsImage = gcn::Image::load("darkbitslogo_by_haiko.bmp");
-    darkbitsIcon = new gcn::Icon(darkbitsImage);
-    window->add(darkbitsIcon);
+    guisanLogoImage = gcn::Image::load("guisan-logo.png");
+    guisanLogoImage = new gcn::Icon(guisanLogoImage);
+    window->add(guisanLogoImage);
     window->resizeToContent();
 
     nestedSlider = new gcn::Slider(0, 10);
@@ -273,8 +273,8 @@ void halt()
 	delete radioButton3;
 	delete slider;
     delete window;
-    delete darkbitsIcon;
-	delete darkbitsImage;
+    delete guisanLogoImage;
+	delete guisanLogoImage;
     delete nestedScrollArea;
     delete nestedContainer;
     delete nestedSlider;
