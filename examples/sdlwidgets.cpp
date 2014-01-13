@@ -176,7 +176,7 @@ void init()
 	 * Here we initialize SDL as we would do with any SDL application.
 	 */
 	SDL_Init(SDL_INIT_VIDEO);
-	sdlWindow = SDL_CreateWindow("guikun sdl2 hello world",
+	sdlWindow = SDL_CreateWindow("guisan SDL2 widget example",
 		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480, 0);
 
 	sdlScreen = SDL_GetWindowSurface(sdlWindow);
