@@ -16,6 +16,7 @@ bool running = true;
 /*
  * SDL Stuff we need
  */
+SDL_Window* window;
 SDL_Surface* screen;
 SDL_Event event;
 
@@ -43,11 +44,14 @@ void init()
 	 * Here we initialize SDL as we would do with any SDL application.
 	 */
 	SDL_Init(SDL_INIT_VIDEO);
-	screen = SDL_SetVideoMode(640, 480, 32, SDL_HWSURFACE);
-	// We want unicode
-	SDL_EnableUNICODE(1);
+	window = SDL_CreateWindow("guikun sdl2 hello world",
+		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480,
+		0);
+
+	screen = SDL_GetWindowSurface(window);
+
 	// We want to enable key repeat
-	SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
+	//SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 
 	/*
 	 * Now it's time for Guichan SDL stuff
@@ -113,6 +117,7 @@ void halt()
 	/*
 	 * Destroy SDL stuff
 	 */
+	SDL_DestroyWindow(window);
 	SDL_Quit();
 }
 
@@ -136,8 +141,7 @@ void checkInput()
 			{
 				if (event.key.keysym.mod & KMOD_CTRL)
 				{
-					// Works with X11 only
-					SDL_WM_ToggleFullScreen(screen);
+					printf("TODO: Toggle full screen!\n");
 				}
 			}
 		}
@@ -171,7 +175,7 @@ void run()
 		// Draw the gui
 		gui->draw();
 		// Update the screen
-		SDL_Flip(screen);
+		SDL_UpdateWindowSurface(window);
 	}
 }
 

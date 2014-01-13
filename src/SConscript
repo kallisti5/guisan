@@ -29,6 +29,22 @@ main_sources = [
 	'widget.cpp'
 ]
 
+widget_sources = [
+	'widgets/button.cpp',
+	'widgets/checkbox.cpp',
+	'widgets/container.cpp',
+	'widgets/dropdown.cpp',
+	'widgets/icon.cpp',
+	'widgets/label.cpp',
+	'widgets/listbox.cpp',
+	'widgets/radiobutton.cpp',
+	'widgets/scrollarea.cpp',
+	'widgets/slider.cpp',
+	'widgets/textbox.cpp',
+	'widgets/textfield.cpp',
+	'widgets/window.cpp',
+]
+
 sdl_sources = [
 	'sdl/sdl.cpp',
 	'sdl/sdlgraphics.cpp',
@@ -37,12 +53,17 @@ sdl_sources = [
 	'sdl/sdlinput.cpp'
 ]
 
+
 program_sources = [
 	main_sources +
+	widget_sources +
 	sdl_sources
 ]
 
 guikun = env.Clone()
 guikun.ParseConfig('pkg-config --cflags --libs sdl2')
 guikun.ParseConfig('pkg-config --cflags --libs SDL2_image')
-guikun.Library(target = 'guikun', source = program_sources)
+#TODO : if GL, guikun.Append(LIBS = ['-lGL', '-lGLU'])
+guikun.StaticLibrary(target = 'guikun', source = program_sources)
+
+Export('guikun')

@@ -1,0 +1,10 @@
+Import('*')
+
+sdlhelloworld = env.Clone()
+sdlhelloworld.ParseConfig('pkg-config --cflags --libs sdl2')
+sdlhelloworld.ParseConfig('pkg-config --cflags --libs SDL2_image')
+sdlhelloworld.Append(LIBS = 'guikun')
+sdlhelloworld.Program(
+	target = 'sdlhelloworld',
+	source = ['sdlhelloworld.cpp']
+)
