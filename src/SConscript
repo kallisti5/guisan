@@ -60,10 +60,10 @@ program_sources = [
 	sdl_sources
 ]
 
-guikun = env.Clone()
-guikun.ParseConfig('pkg-config --cflags --libs sdl2')
-guikun.ParseConfig('pkg-config --cflags --libs SDL2_image')
-#TODO : if GL, guikun.Append(LIBS = ['-lGL', '-lGLU'])
-guikun.StaticLibrary(target = 'guikun', source = program_sources)
+guisan = env.Clone()
+guisan.ParseConfig('pkg-config --cflags --libs sdl2')
+guisan.ParseConfig('pkg-config --cflags --libs SDL2_image')
+#TODO : if GL, guisan.Append(LIBS = ['-lGL', '-lGLU'])
+guisan.StaticLibrary(target = 'guisan', source = program_sources)
 
-Export('guikun')
+Export('guisan')
