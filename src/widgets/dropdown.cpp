@@ -123,6 +123,8 @@ namespace gcn
 
     DropDown::~DropDown()
     {
+		// TODO: This triggers static analysis for use after free
+		// however reversing the logic results in crashes on exit
         if (mInternalScrollArea)
         {
             delete mScrollArea;
