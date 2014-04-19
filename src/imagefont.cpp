@@ -106,8 +106,8 @@ namespace gcn
             addGlyph(k, x, y, separator);
         }
 
-        int w = mImage->getWidth();
-        int h = mImage->getHeight();
+        //int w = mImage->getWidth();
+        //int h = mImage->getHeight();
         mImage->convertToDisplayFormat();
 
         mRowSpacing = 0;
@@ -151,8 +151,8 @@ namespace gcn
             addGlyph(i, x, y, separator);
         }
 
-        int w = mImage->getWidth();
-        int h = mImage->getHeight();
+        //int w = mImage->getWidth();
+        //int h = mImage->getHeight();
         mImage->convertToDisplayFormat();
 
         mRowSpacing = 0;
