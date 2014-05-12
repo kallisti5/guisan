@@ -35,6 +35,7 @@ bool running = true;
  * SDL Stuff we need
  */
 SDL_Window* window;
+SDL_GLContext context;
 SDL_Event event;
 
 /*
@@ -64,6 +65,9 @@ void init()
 	window = SDL_CreateWindow("guisan OpenGL hello world",
 		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480,
 		SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+
+	// Attach GL context to our window
+	context = SDL_GL_CreateContext(window);
 
 	// Setup OpenGL
 	glViewport(0, 0, 640, 480);
@@ -135,6 +139,7 @@ void halt()
 	/*
 	 * Destroy SDL stuff
 	 */
+	SDL_GL_DeleteContext(context);
 	SDL_Quit();
 }
 

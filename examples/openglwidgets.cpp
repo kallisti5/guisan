@@ -36,6 +36,7 @@ bool running = true;
  */
 SDL_Window* window;
 SDL_Surface* screen;
+SDL_GLContext context;
 SDL_Event event;
 
 /*
@@ -201,6 +202,9 @@ void init()
 
 	screen = SDL_GetWindowSurface(window);
 
+	// Attach GL context to our window
+	context = SDL_GL_CreateContext(window);
+
 	// Setup OpenGL
 	glViewport(0, 0, 640, 480);
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -289,6 +293,7 @@ void halt()
 	/*
 	 * Destroy SDL stuff
 	 */
+	SDL_GL_DeleteContext(context);
 	SDL_Quit();
 }
 
