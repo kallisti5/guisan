@@ -53,11 +53,18 @@ sdl_sources = [
 	'sdl/sdlinput.cpp'
 ]
 
+opengl_sources = [
+	'opengl/opengl.cpp',
+	'opengl/openglgraphics.cpp',
+	'opengl/openglimage.cpp'
+]
+
 
 program_sources = [
 	main_sources +
 	widget_sources +
-	sdl_sources
+	sdl_sources +
+	opengl_sources
 ]
 
 guisan = env.Clone()

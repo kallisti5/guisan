@@ -36,44 +36,45 @@ bool running = true;
 /*
  * SDL Stuff we need
  */
+SDL_Window* window;
 SDL_Surface* screen;
 SDL_Event event;
 
 /*
  * Guichan OpenGL/SDL stuff we need
  */
-gcn::SDLInput* input;                    // Input driver
-gcn::OpenGLGraphics* graphics;           // Graphics driver
+gcn::SDLInput* input;					// Input driver
+gcn::OpenGLGraphics* graphics;		   // Graphics driver
 gcn::OpenGLSDLImageLoader* imageLoader;  // For loading images
 
 /*
  * Guichan stuff we need
  */
-gcn::Gui* gui;            // A Gui object - binds it all together
-gcn::ImageFont* font;     // A font
+gcn::Gui* gui;			// A Gui object - binds it all together
+gcn::ImageFont* font;	 // A font
 
 /*
  * All of the default widgets
  */
-gcn::Container* top;                 // A top container
-gcn::Label* label;                   // A label
-gcn::Icon* icon;                     // An icon (image)
-gcn::Button* button;                 // A button
-gcn::TextField* textField;           // One-line text field
-gcn::TextBox* textBox;               // Multi-line text box
+gcn::Container* top;				 // A top container
+gcn::Label* label;				   // A label
+gcn::Icon* icon;					 // An icon (image)
+gcn::Button* button;				 // A button
+gcn::TextField* textField;		   // One-line text field
+gcn::TextBox* textBox;			   // Multi-line text box
 gcn::ScrollArea* textBoxScrollArea;  // Scroll area for the text box
-gcn::ListBox* listBox;               // A list box
-gcn::DropDown* dropDown;             // Drop down
-gcn::CheckBox* checkBox1;            // Two checkboxes
+gcn::ListBox* listBox;			   // A list box
+gcn::DropDown* dropDown;			 // Drop down
+gcn::CheckBox* checkBox1;			// Two checkboxes
 gcn::CheckBox* checkBox2;
-gcn::RadioButton* radioButton1;      // Three radio buttons
+gcn::RadioButton* radioButton1;	  // Three radio buttons
 gcn::RadioButton* radioButton2;
 gcn::RadioButton* radioButton3;
-gcn::Slider* slider;                 // A slider
-gcn::Image *image;                   // An image for the icon
-gcn::Window *window;
+gcn::Slider* slider;				 // A slider
+gcn::Image *image;				   // An image for the icon
+gcn::Window *guisanWindow;
 gcn::Image *guisanLogoImage;
-gcn::Icon* guisanLogoImage;
+gcn::Icon* guisanLogoIcon;
 gcn::ScrollArea* nestedScrollArea;
 gcn::Container* nestedContainer;
 gcn::Slider* nestedSlider;
@@ -94,18 +95,18 @@ public:
 	{
 		switch(i)
 		{
-            case 0:
-                return std::string("zero");
-            case 1:
-                return std::string("one");
-            case 2:
-                return std::string("two");
-            case 3:
-                return std::string("three");
-            case 4:
-                return std::string("four");
-            default: // Just to keep warnings away
-                return std::string("");
+			case 0:
+				return std::string("zero");
+			case 1:
+				return std::string("one");
+			case 2:
+				return std::string("two");
+			case 3:
+				return std::string("three");
+			case 4:
+				return std::string("four");
+			default: // Just to keep warnings away
+				return std::string("");
 		}
 	}
 };
@@ -147,43 +148,43 @@ void initWidgets()
 	slider = new gcn::Slider(0, 10);
 	slider->setSize(100, 10);
 
-    window = new gcn::Window("I am a window  Drag me");
-    window->setBaseColor(gcn::Color(212, 255, 150, 190));
+	guisanWindow = new gcn::Window("I am a window  Drag me");
+	guisanWindow->setBaseColor(gcn::Color(212, 255, 150, 190));
 
-    guisanLogoImage = gcn::Image::load("guisan-logo.png");
-    guisanLogoImage = new gcn::Icon(guisanLogoImage);
-    window->add(guisanLogoImage);
-    window->resizeToContent();
+	guisanLogoImage = gcn::Image::load("guisan-logo.png");
+	guisanLogoIcon = new gcn::Icon(guisanLogoImage);
+	guisanWindow->add(guisanLogoIcon);
+	guisanWindow->resizeToContent();
 
-    nestedSlider = new gcn::Slider(0, 10);
-    nestedSlider->setSize(100, 10);
-    
-    nestedContainer = new gcn::Container();
-    nestedContainer->setSize(400, 200);
-    nestedContainer->add(nestedSlider, 50, 70);
+	nestedSlider = new gcn::Slider(0, 10);
+	nestedSlider->setSize(100, 10);
+	
+	nestedContainer = new gcn::Container();
+	nestedContainer->setSize(400, 200);
+	nestedContainer->add(nestedSlider, 50, 70);
 
-    nestedScrollArea = new gcn::ScrollArea(nestedContainer);
-    nestedScrollArea->setSize(180, 90);
-    nestedScrollArea->setBorderSize(1);
+	nestedScrollArea = new gcn::ScrollArea(nestedContainer);
+	nestedScrollArea->setSize(180, 90);
+	nestedScrollArea->setBorderSize(1);
 
-    /*
+	/*
 	 * Add them to the top container
 	 */
-    top->add(label, 10, 10);
-    top->add(icon, 10, 30);
-    top->add(button, 200, 10);
-    top->add(textField, 250, 10);
-    top->add(textBoxScrollArea, 200, 50);
-    top->add(listBox, 200, 200);
-    top->add(dropDown, 500, 10);
-    top->add(checkBox1, 500, 130);
+	top->add(label, 10, 10);
+	top->add(icon, 10, 30);
+	top->add(button, 200, 10);
+	top->add(textField, 250, 10);
+	top->add(textBoxScrollArea, 200, 50);
+	top->add(listBox, 200, 200);
+	top->add(dropDown, 500, 10);
+	top->add(checkBox1, 500, 130);
 	top->add(checkBox2, 500, 150);
 	top->add(radioButton1, 500, 200);
 	top->add(radioButton2, 500, 220);
 	top->add(radioButton3, 500, 240);
 	top->add(slider, 500, 300);
-    top->add(window, 100, 350);
-    top->add(nestedScrollArea, 440, 350);
+	top->add(guisanWindow, 100, 350);
+	top->add(nestedScrollArea, 440, 350);
 }
 
 /**
@@ -196,17 +197,18 @@ void init()
 	 */
 	SDL_Init(SDL_INIT_VIDEO);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	window = SDL_CreateWindow("guisan OpenGL hello world",
+		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480,
+		SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 
-	screen = SDL_SetVideoMode(640, 480, 32, SDL_HWSURFACE | SDL_OPENGL | SDL_HWACCEL);
+	screen = SDL_GetWindowSurface(window);
 
 	// Setup OpenGL
 	glViewport(0, 0, 640, 480);
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-	// We want unicode
-	SDL_EnableUNICODE(1);
 	// We want to enable key repeat
-	SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
+	//SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 
 	/*
 	 * Now it's time for Guichan OpenGL/SDL stuff
@@ -272,12 +274,12 @@ void halt()
 	delete radioButton2;
 	delete radioButton3;
 	delete slider;
-    delete window;
-    delete guisanLogoImage;
+	delete guisanWindow;
 	delete guisanLogoImage;
-    delete nestedScrollArea;
-    delete nestedContainer;
-    delete nestedSlider;
+	delete guisanLogoIcon;
+	delete nestedScrollArea;
+	delete nestedContainer;
+	delete nestedSlider;
 
 	/*
 	 * Destroy Guichan SDL stuff
@@ -312,8 +314,7 @@ void checkInput()
 			{
 				if (event.key.keysym.mod & KMOD_CTRL)
 				{
-					// Works with X11 only
-					SDL_WM_ToggleFullScreen(screen);
+					printf("TODO: Toggle full screen!\n");
 				}
 			}
 		}
@@ -345,7 +346,7 @@ void run()
 		// Draw the gui
 		gui->draw();
 		// Update the screen
-		SDL_GL_SwapBuffers();
+		SDL_GL_SwapWindow(window);
 	}
 }
 

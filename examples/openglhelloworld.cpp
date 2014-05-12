@@ -36,23 +36,23 @@ bool running = true;
 /*
  * SDL Stuff we need
  */
-SDL_Surface* screen;
+SDL_Window* window;
 SDL_Event event;
 
 /*
  * Guichan OpenGL/SDL stuff we need
  */
-gcn::SDLInput* input;                    // Input driver
-gcn::OpenGLGraphics* graphics;           // Graphics driver
+gcn::SDLInput* input;					// Input driver
+gcn::OpenGLGraphics* graphics;		   // Graphics driver
 gcn::OpenGLSDLImageLoader* imageLoader;  // For loading images
 
 /*
  * Guichan stuff we need
  */
-gcn::Gui* gui;            // A Gui object - binds it all together
-gcn::Container* top;      // A top container
-gcn::ImageFont* font;     // A font
-gcn::Label* label;        // And a label for the Hello World text
+gcn::Gui* gui;			// A Gui object - binds it all together
+gcn::Container* top;	  // A top container
+gcn::ImageFont* font;	 // A font
+gcn::Label* label;		// And a label for the Hello World text
 
 /**
  * Initializes the Hello World
@@ -63,18 +63,16 @@ void init()
 	 * Here we initialize SDL as we would do with any SDL application.
 	 */
 	SDL_Init(SDL_INIT_VIDEO);
-	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-
-	screen = SDL_SetVideoMode(640, 480, 32, SDL_HWSURFACE | SDL_OPENGL | SDL_HWACCEL);
+	window = SDL_CreateWindow("guisan OpenGL hello world",
+		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480,
+		SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 
 	// Setup OpenGL
 	glViewport(0, 0, 640, 480);
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-	// We want unicode
-	SDL_EnableUNICODE(1);
 	// We want to enable key repeat
-	SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
+	//SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 
 	/*
 	 * Now it's time for Guichan OpenGL/SDL stuff
@@ -162,8 +160,6 @@ void checkInput()
 			{
 				if (event.key.keysym.mod & KMOD_CTRL)
 				{
-					// Works with X11 only
-					SDL_WM_ToggleFullScreen(screen);
 				}
 			}
 		}
@@ -197,7 +193,7 @@ void run()
 		// Draw the gui
 		gui->draw();
 		// Update the screen
-		SDL_GL_SwapBuffers();
+		SDL_GL_SwapWindow(window);
 	}
 }
 

@@ -18,3 +18,21 @@ sdlwidgets.Program(
 	target = 'sdlwidgets',
 	source = ['sdlwidgets.cpp']
 )
+
+openglhelloworld= env.Clone()
+openglhelloworld.ParseConfig('pkg-config --cflags --libs sdl2')
+openglhelloworld.ParseConfig('pkg-config --cflags --libs SDL2_image')
+openglhelloworld.Append(LIBS = ['guisan', 'GL'])
+openglhelloworld.Program(
+	target = 'openglhelloworld',
+	source = ['openglhelloworld.cpp']
+)
+
+openglwidgets= env.Clone()
+openglwidgets.ParseConfig('pkg-config --cflags --libs sdl2')
+openglwidgets.ParseConfig('pkg-config --cflags --libs SDL2_image')
+openglwidgets.Append(LIBS = ['guisan', 'GL'])
+openglwidgets.Program(
+	target = 'openglwidgets',
+	source = ['openglwidgets.cpp']
+)
