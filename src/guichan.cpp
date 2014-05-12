@@ -7,6 +7,7 @@
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
  * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
+ * Copyright (c) 2013, 2014 Alexander von Gluck IV
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
@@ -60,8 +61,8 @@
 
 extern "C"
 {
-    const char* gcnGuichanVersion()
+    const char* gcnGuisanVersion()
     {
-        return "0.6.1";
+        return "0.9.0";
     }
 }

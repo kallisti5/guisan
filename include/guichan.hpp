@@ -106,12 +106,13 @@ class Widget;
 extern "C"
 {
     /**
-     * Gets the the version of Guichan. As it is a C function
+     * Gets the the version of Guisan. As it is a C function
      * it can be used to check for Guichan with autotools.
      *
-     * @return the version of Guichan.
+     * @return the version of Guisan.
      */
-    GCN_CORE_DECLSPEC extern const char* gcnGuichanVersion();
+    GCN_CORE_DECLSPEC extern const char* gcnGuisanVersion();
+    GCN_CORE_DECLSPEC extern const char* gcnGuichanVersion() { return gcnGuisanVersion(); }
 }
 
 #endif // end GCN_GUICHAN_HPP
