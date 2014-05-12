@@ -82,7 +82,7 @@ namespace gcn
     Widget::Widget()
             : mForegroundColor(0x000000),
               mBackgroundColor(0xffffff),
-              mBaseColor(0x808090),
+              mBaseColor(0xDDDDE3),
               mFocusHandler(NULL),
               mInternalFocusHandler(NULL),
               mParent(NULL),
