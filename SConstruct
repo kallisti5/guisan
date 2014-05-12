@@ -35,11 +35,6 @@ if env['HAVE_SDL2']:
 		print 'SDL2_ttf not found. Disabling SDL2 support.'
 		env['HAVE_SDL2'] = 0
 
-if env['HAVE_OPENGL']:
-	if not conf.CheckPKG('glfw3'):
-		print 'GLFW3 not found. Disabling native OpenGL support.'
-		env['HAVE_OPENGL'] = 0
-
 env = conf.Finish()
 
 env.Append(CPPPATH = ['#include/'])
