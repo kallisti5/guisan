@@ -23,15 +23,22 @@ conf = Configure(env, custom_tests = { 'CheckPKGConfig' : CheckPKGConfig,
 if not conf.CheckPKGConfig('0.15.0'):
 	print 'pkg-config >= 0.15.0 not found.'
 	Exit(1)
-if not conf.CheckPKG('sdl2'):
-	print 'sdl 2.x not found.'
-	Exit(1)
+
+env['HAVE_OPENGL'] = conf.CheckPKG('gl')
+env['HAVE_SDL2'] = conf.CheckPKG('sdl2')
+
+if env['HAVE_SDL2']:
+	if not conf.CheckPKG('SDL2_image'):
+		print 'SDL2_image not found. Disabling SDL2 support.'
+		env['HAVE_SDL2'] = 0
+	if not conf.CheckPKG('SDL2_ttf'):
+		print 'SDL2_ttf not found. Disabling SDL2 support.'
+		env['HAVE_SDL2'] = 0
 
 env = conf.Finish()
 
 env.Append(CPPPATH = ['#include/'])
 env.Append(LIBPATH = ['#src/'])
-env.Append(LIBS = ['-lSDL2_ttf', '-lSDL2_image'])
 env.Append(CFLAGS = ['-g'])
 env.Append(CPPFLAGS = ['-g'])
 

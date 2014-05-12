@@ -45,19 +45,26 @@ widget_sources = [
 	'widgets/window.cpp',
 ]
 
-sdl_sources = [
-	'sdl/sdl.cpp',
-	'sdl/sdlgraphics.cpp',
-	'sdl/sdlimage.cpp',
-	'sdl/sdlimageloader.cpp',
-	'sdl/sdlinput.cpp'
-]
 
-opengl_sources = [
-	'opengl/opengl.cpp',
-	'opengl/openglgraphics.cpp',
-	'opengl/openglimage.cpp'
-]
+if env['HAVE_SDL2']:
+	sdl_sources = [
+		'sdl/sdl.cpp',
+		'sdl/sdlgraphics.cpp',
+		'sdl/sdlimage.cpp',
+		'sdl/sdlimageloader.cpp',
+		'sdl/sdlinput.cpp'
+	]
+else:
+	sdl_sources = []
+
+if env['HAVE_OPENGL']:
+	opengl_sources = [
+		'opengl/opengl.cpp',
+		'opengl/openglgraphics.cpp',
+		'opengl/openglimage.cpp'
+	]
+else:
+	opengl_sources = []
 
 
 program_sources = [
@@ -68,9 +75,23 @@ program_sources = [
 ]
 
 guisan = env.Clone()
-guisan.ParseConfig('pkg-config --cflags --libs sdl2')
-guisan.ParseConfig('pkg-config --cflags --libs SDL2_image')
-#TODO : if GL, guisan.Append(LIBS = ['-lGL', '-lGLU'])
+
+if env['HAVE_SDL2']:
+	guisan.ParseConfig('pkg-config --cflags --libs sdl2')
+	guisan.ParseConfig('pkg-config --cflags --libs SDL2_image')
+	guisan.ParseConfig('pkg-config --cflags --libs SDL2_ttf')
+
+if env['HAVE_OPENGL']:
+	guisan.Append(LIBS = ['-lGL', '-lGLU'])
+
+print "========================================="
+print " Guisan build"
+print ""
+print " SDL 2.0 support.............. " + str(env['HAVE_SDL2'])
+print " OpenGL support............... " + str(env['HAVE_OPENGL'])
+print ""
+print "========================================="
+
 guisan.StaticLibrary(target = 'guisan', source = program_sources)
 
 Export('guisan')

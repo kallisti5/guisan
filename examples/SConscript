@@ -1,38 +1,41 @@
 Import('*')
 
 ### SDL 2D Examples
-sdlhelloworld = env.Clone()
-sdlhelloworld.ParseConfig('pkg-config --cflags --libs sdl2')
-sdlhelloworld.ParseConfig('pkg-config --cflags --libs SDL2_image')
-sdlhelloworld.Append(LIBS = 'guisan')
-sdlhelloworld.Program(
-	target = 'sdlhelloworld',
-	source = ['sdlhelloworld.cpp']
-)
-
-sdlwidgets = env.Clone()
-sdlwidgets.ParseConfig('pkg-config --cflags --libs sdl2')
-sdlwidgets.ParseConfig('pkg-config --cflags --libs SDL2_image')
-sdlwidgets.Append(LIBS = 'guisan')
-sdlwidgets.Program(
-	target = 'sdlwidgets',
-	source = ['sdlwidgets.cpp']
-)
-
-openglhelloworld= env.Clone()
-openglhelloworld.ParseConfig('pkg-config --cflags --libs sdl2')
-openglhelloworld.ParseConfig('pkg-config --cflags --libs SDL2_image')
-openglhelloworld.Append(LIBS = ['guisan', 'GL'])
-openglhelloworld.Program(
-	target = 'openglhelloworld',
-	source = ['openglhelloworld.cpp']
-)
-
-openglwidgets= env.Clone()
-openglwidgets.ParseConfig('pkg-config --cflags --libs sdl2')
-openglwidgets.ParseConfig('pkg-config --cflags --libs SDL2_image')
-openglwidgets.Append(LIBS = ['guisan', 'GL'])
-openglwidgets.Program(
-	target = 'openglwidgets',
-	source = ['openglwidgets.cpp']
-)
+if env['HAVE_SDL2']:
+	sdlhelloworld = env.Clone()
+	sdlhelloworld.ParseConfig('pkg-config --cflags --libs sdl2')
+	sdlhelloworld.ParseConfig('pkg-config --cflags --libs SDL2_image')
+	sdlhelloworld.Append(LIBS = 'guisan')
+	sdlhelloworld.Program(
+		target = 'sdlhelloworld',
+		source = ['sdlhelloworld.cpp']
+	)
+	
+	sdlwidgets = env.Clone()
+	sdlwidgets.ParseConfig('pkg-config --cflags --libs sdl2')
+	sdlwidgets.ParseConfig('pkg-config --cflags --libs SDL2_image')
+	sdlwidgets.Append(LIBS = 'guisan')
+	sdlwidgets.Program(
+		target = 'sdlwidgets',
+		source = ['sdlwidgets.cpp']
+	)
+	
+	### SDL 3D Examples
+	# TODO: Someday our GL examples shouldn't rely on SDL2 for the GL context
+	openglhelloworld= env.Clone()
+	openglhelloworld.ParseConfig('pkg-config --cflags --libs sdl2')
+	openglhelloworld.ParseConfig('pkg-config --cflags --libs SDL2_image')
+	openglhelloworld.Append(LIBS = ['guisan', 'GL'])
+	openglhelloworld.Program(
+		target = 'openglhelloworld',
+		source = ['openglhelloworld.cpp']
+	)
+	
+	openglwidgets= env.Clone()
+	openglwidgets.ParseConfig('pkg-config --cflags --libs sdl2')
+	openglwidgets.ParseConfig('pkg-config --cflags --libs SDL2_image')
+	openglwidgets.Append(LIBS = ['guisan', 'GL'])
+	openglwidgets.Program(
+		target = 'openglwidgets',
+		source = ['openglwidgets.cpp']
+	)
