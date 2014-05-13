@@ -31,9 +31,6 @@ if env['HAVE_SDL2']:
 	if not conf.CheckPKG('SDL2_image'):
 		print 'SDL2_image not found. Disabling SDL2 support.'
 		env['HAVE_SDL2'] = 0
-	if not conf.CheckPKG('SDL2_ttf'):
-		print 'SDL2_ttf not found. Disabling SDL2 support.'
-		env['HAVE_SDL2'] = 0
 
 env = conf.Finish()
 

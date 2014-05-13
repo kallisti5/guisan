@@ -79,7 +79,6 @@ guisan = env.Clone()
 if env['HAVE_SDL2']:
 	guisan.ParseConfig('pkg-config --cflags --libs sdl2')
 	guisan.ParseConfig('pkg-config --cflags --libs SDL2_image')
-	guisan.ParseConfig('pkg-config --cflags --libs SDL2_ttf')
 
 if env['HAVE_OPENGL']:
 	guisan.Append(LIBS = ['-lGL', '-lGLU'])

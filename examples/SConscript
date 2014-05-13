@@ -5,7 +5,6 @@ if env['HAVE_SDL2']:
 	sdlhelloworld = env.Clone()
 	sdlhelloworld.ParseConfig('pkg-config --cflags --libs sdl2')
 	sdlhelloworld.ParseConfig('pkg-config --cflags --libs SDL2_image')
-	sdlhelloworld.ParseConfig('pkg-config --cflags --libs SDL2_ttf')
 	sdlhelloworld.Append(LIBS = 'guisan')
 	sdlhelloworld.Program(
 		target = 'sdlhelloworld',
@@ -15,7 +14,6 @@ if env['HAVE_SDL2']:
 	sdlwidgets = env.Clone()
 	sdlwidgets.ParseConfig('pkg-config --cflags --libs sdl2')
 	sdlwidgets.ParseConfig('pkg-config --cflags --libs SDL2_image')
-	sdlwidgets.ParseConfig('pkg-config --cflags --libs SDL2_ttf')
 	sdlwidgets.Append(LIBS = 'guisan')
 	sdlwidgets.Program(
 		target = 'sdlwidgets',
@@ -29,7 +27,6 @@ if env['HAVE_OPENGL'] and env['HAVE_SDL2']:
 	openglhelloworld.ParseConfig('pkg-config --cflags --libs gl')
 	openglhelloworld.ParseConfig('pkg-config --cflags --libs sdl2')
 	openglhelloworld.ParseConfig('pkg-config --cflags --libs SDL2_image')
-	openglhelloworld.ParseConfig('pkg-config --cflags --libs SDL2_ttf')
 	openglhelloworld.Append(LIBS = 'guisan')
 	openglhelloworld.Program(
 		target = 'openglhelloworld',
@@ -40,7 +37,6 @@ if env['HAVE_OPENGL'] and env['HAVE_SDL2']:
 	openglwidgets.ParseConfig('pkg-config --cflags --libs gl')
 	openglwidgets.ParseConfig('pkg-config --cflags --libs sdl2')
 	openglwidgets.ParseConfig('pkg-config --cflags --libs SDL2_image')
-	openglwidgets.ParseConfig('pkg-config --cflags --libs SDL2_ttf')
 	openglwidgets.Append(LIBS = 'guisan')
 	openglwidgets.Program(
 		target = 'openglwidgets',
