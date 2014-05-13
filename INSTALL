@@ -1,9 +1,0 @@
-Gnu/Linux:
----------
-For OpenGL support you need the following libraries installed:
-* OpenGL	check with your graphics card vendor
-
-For SDL you need the following libraries installed:
-* SDL2			http://www.libsdl.org
-* SDL2_image	http://www.libsdl.org
-* SDL2_ttf		http://www.libsdl.org
