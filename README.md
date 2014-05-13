@@ -16,7 +16,11 @@ Features:
 * Statically links to your applications to reduce runtime requirements
 * Small, but effective
 
-Requires:
+Build requirements:
+
+* scons
+
+Runtime requirements:
 
 * SDL 2.0+
 * SDL2_image
