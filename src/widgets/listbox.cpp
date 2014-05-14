@@ -118,7 +118,9 @@ namespace gcn
         {
             if (i == mSelected)
             {
-                graphics->drawRectangle(Rectangle(0, y, getWidth(), fontHeight));
+                graphics->setColor(getSelectionColor());
+                graphics->fillRectangle(Rectangle(0, y, getWidth(), fontHeight));
+                graphics->setColor(getForegroundColor());
             }
 
             graphics->drawText(mListModel->getElementAt(i), 1, y);

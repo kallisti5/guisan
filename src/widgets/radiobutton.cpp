@@ -101,19 +101,41 @@ namespace gcn
 
     void RadioButton::draw(Graphics* graphics)
     {
+        graphics->pushClipArea(Rectangle(1,
+                                         1,
+                                         getWidth() - 1,
+                                         getHeight() - 1));
         drawBox(graphics);
+        graphics->popClipArea();
 
+        
         graphics->setFont(getFont());
         graphics->setColor(getForegroundColor());
 
+        if (isFocused())
+        {
+            int fh;
+            
+            if (getHeight()%2 == 0)
+            {
+                fh = getHeight() - 4;
+            }
+            else
+            {
+                fh = getHeight() - 3;
+            }
+
+            int hh = (fh + 1) / 2;
+        
+            graphics->drawLine(0, hh + 1, hh + 1, 0);
+            graphics->drawLine(hh + 2, 1, fh + 2, hh + 1);
+            graphics->drawLine(fh + 1, hh + 2, hh + 1, fh + 2);
+            graphics->drawLine(hh + 1, fh + 2, 1, hh + 2);            
+        }
+        
         int h = getHeight() + getHeight() / 2;
 
         graphics->drawText(getCaption(), h - 2, 0);
-
-        if (isFocused())
-        {
-            graphics->drawRectangle(Rectangle(h - 4, 0, getWidth() - h + 3, getHeight()));
-        }
     }
 
     void RadioButton::drawBorder(Graphics* graphics)
@@ -146,11 +168,11 @@ namespace gcn
 
         if (getHeight()%2 == 0)
         {
-            h = getHeight() - 2;
+            h = getHeight() - 4;
         }
         else
         {
-            h = getHeight() - 1;
+            h = getHeight() - 3;
         }
 
         int alpha = getBaseColor().a;

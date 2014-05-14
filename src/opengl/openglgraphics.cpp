@@ -264,7 +264,7 @@ namespace gcn
         y += top.yOffset;
 
         glBegin(GL_POINTS);
-        glVertex3i(x, y, 0);
+        glVertex2i(x, y);
         glEnd();
     }
 
@@ -282,9 +282,17 @@ namespace gcn
         y2 += top.yOffset;
 
         glBegin(GL_LINES);
-	glVertex2f(x1 + 0.375, y1 + 0.375);
+	glVertex2f(x1 + 0.375f, y1 + 0.375f);
 	glVertex2f(x2 + 1.0f - 0.375f, y2 + 1.0f - 0.375f);
         glEnd();
+
+	glBegin(GL_POINTS);
+	glVertex2f(x2 + 1.0f - 0.375f, y2 + 1.0f - 0.375f);
+	glEnd();
+	
+	glBegin(GL_POINTS);
+	glVertex2f(x1 + 0.375f, y1 + 0.375f);
+	glEnd();
     }
 
     void OpenGLGraphics::drawRectangle(const Rectangle& rectangle)

@@ -175,14 +175,16 @@ namespace gcn
         graphics->setColor(getForegroundColor());
         graphics->setFont(getFont());
 
+        if (isFocused())
+        {
+            graphics->setColor(getSelectionColor());
+            graphics->fillRectangle(Rectangle(0, 0, getWidth() - h, h));
+            graphics->setColor(getForegroundColor());
+        }
+
         if (mListBox->getListModel() && mListBox->getSelected() >= 0)
         {
             graphics->drawText(mListBox->getListModel()->getElementAt(mListBox->getSelected()), 1, 0);
-        }
-
-        if (isFocused())
-        {
-            graphics->drawRectangle(Rectangle(0, 0, getWidth() - h, h));
         }
 
         drawButton(graphics);

@@ -83,6 +83,7 @@ namespace gcn
             : mForegroundColor(0x000000),
               mBackgroundColor(0xffffff),
               mBaseColor(0xDDDDE3),
+              mSelectionColor(0xc3d9ff),
               mFocusHandler(NULL),
               mInternalFocusHandler(NULL),
               mParent(NULL),
@@ -303,6 +304,16 @@ namespace gcn
         return mBackgroundColor;
     }
 
+    void Widget::setSelectionColor(const Color& color)
+    {
+        mSelectionColor = color;
+    }
+
+    const Color& Widget::getSelectionColor() const
+    {
+        return mSelectionColor;
+    }    
+    
     void Widget::_setFocusHandler(FocusHandler* focusHandler)
     {
         if (mFocusHandler)

@@ -94,7 +94,7 @@ namespace gcn
     public:
         /**
          * Constructor. Resets member variables. Noteable, a widget is not
-         * focusable as default, therefore, Widgets that are supposed to be
+         * focusable as default, therefore, widgets that are supposed to be
          * focusable should overide this default in their own constructor.
          */
         Widget();
@@ -105,19 +105,19 @@ namespace gcn
         virtual ~Widget();
 
         /**
-         * Draws the Widget. It is called by the parent widget when it is time
-         * for the Widget to draw itself. The graphics object is set up so
-         * that all drawing is relative to the Widget, i.e coordinate (0,0) is
-         * the top-left corner of the Widget. It is not possible to draw
-         * outside of a Widgets dimension.
+         * Draws the widget. It is called by the parent widget when it is time
+         * for the widget to draw itself. The graphics object is set up so
+         * that all drawing is relative to the widget, i.e coordinate (0,0) is
+         * the top-left corner of the widget. It is not possible to draw
+         * outside of a widgets dimension.
          *
          * @param graphics a Graphics object to draw with.
          */
         virtual void draw(Graphics* graphics) = 0;
 
         /**
-         * Draws the Widget border. A border is drawn around a Widget.
-         * The width and height of the border is therefore the Widgets
+         * Draws the widget border. A border is drawn around a widget.
+         * The width and height of the border is therefore the widgets
          * height+2*bordersize. Think of a painting that has a certain size,
          * the border surrounds the painting.
          *
@@ -126,7 +126,7 @@ namespace gcn
         virtual void drawBorder(Graphics* graphics) { }
 
         /**
-         * Called for all Widgets in the gui each time Gui::logic is called.
+         * Called for all widgets in the gui each time Gui::logic is called.
          * You can do logic stuff here like playing an animation.
          *
          * @see Gui
@@ -134,43 +134,43 @@ namespace gcn
         virtual void logic() { }
 
         /**
-         * Gets the Widget parent container.
+         * Gets the widget parent container.
          *
-         * @return the Widget parent container. Returns NULL if the Widget
+         * @return the widget parent container. Returns NULL if the widget
          *         has no parent.
          */
         virtual Widget* getParent() const;
 
         /**
-         * Sets the width of the Widget in pixels.
+         * Sets the width of the widget in pixels.
          *
-         * @param width the Widget width in pixels.
+         * @param width the widget width in pixels.
          */
         virtual void setWidth(int width);
 
         /**
-         * Gets the width of the Widget in pixels.
+         * Gets the width of the widget in pixels.
          *
-         * @return the Widget with in pixels.
+         * @return the widget with in pixels.
          */
         virtual int getWidth() const;
 
         /**
-         * Sets the height of the Widget in pixels.
+         * Sets the height of the widget in pixels.
          *
-         * @param height the Widget height in pixels.
+         * @param height the widget height in pixels.
          */
         virtual void setHeight(int height);
 
         /**
-         * Gets the height of the Widget in pixels.
+         * Gets the height of the widget in pixels.
          *
-         * @return the Widget height in pixels.
+         * @return the widget height in pixels.
          */
         virtual int getHeight() const;
 
         /**
-         * Sets the size of the Widget.
+         * Sets the size of the widget.
          *
          * @param width the width.
          * @param height the height.
@@ -178,51 +178,51 @@ namespace gcn
         virtual void setSize(int width, int height);
 
         /**
-         * Set the Widget x coordinate. It is relateive to it's parent.
+         * Set the widget x coordinate. It is relateive to it's parent.
          *
-         * @param x the Widget x coordinate.
+         * @param x the widget x coordinate.
          */
         virtual void setX(int x);
 
         /**
-         * Gets the Widget x coordinate. It is relative to it's parent.
+         * Gets the widget x coordinate. It is relative to it's parent.
          *
-         * @return the Widget x coordinate.
+         * @return the widget x coordinate.
          */
         virtual int getX() const;
 
         /**
-         * Set the Widget y coordinate. It is relative to it's parent.
+         * Set the widget y coordinate. It is relative to it's parent.
          *
-         * @param y the Widget y coordinate.
+         * @param y the widget y coordinate.
          */
         virtual void setY(int y);
 
         /**
-         * Gets the Widget y coordinate. It is relative to it's parent.
+         * Gets the widget y coordinate. It is relative to it's parent.
          *
-         * @return the Widget y coordinate.
+         * @return the widget y coordinate.
          */
         virtual int getY() const;
 
         /**
-         * Sets the Widget position. It is relative to it's parent.
+         * Sets the widget position. It is relative to it's parent.
          *
-         * @param x the Widget x coordinate.
-         * @param y the Widgets y coordinate.
+         * @param x the widget x coordinate.
+         * @param y the widgets y coordinate.
          */
         virtual void setPosition(int x, int y);
 
         /**
-         * Sets the dimension of the Widget. It is relative to it's parent.
+         * Sets the dimension of the widget. It is relative to it's parent.
          *
-         * @param dimension the Widget dimension.
+         * @param dimension the widget dimension.
          */
         virtual void setDimension(const Rectangle& dimension);
 
         /**
          * Sets the size of the border, or the width if you so like. The size
-         * is the number of pixels that the border extends outside the Widget.
+         * is the number of pixels that the border extends outside the widget.
          * Border size = 0 means no border.
          *
          * @param borderSize the size of the border.
@@ -232,7 +232,7 @@ namespace gcn
 
         /**
          * Gets the size of the border, or the width if you so like. The size
-         * is the number of pixels that the border extends outside the Widget.
+         * is the number of pixels that the border extends outside the widget.
          * Border size = 0 means no border.
          *
          * @return the size of the border.
@@ -241,88 +241,88 @@ namespace gcn
         virtual unsigned int getBorderSize() const;
 
         /**
-         * Gets the dimension of the Widget. It is relative to it's parent.
+         * Gets the dimension of the widget. It is relative to it's parent.
          *
          * @return the widget dimension.
          */
         virtual const Rectangle& getDimension() const;
 
         /**
-         * Sets a Widgets focusability.
+         * Sets a widgets focusability.
          *
-         * @param focusable true if the Widget should be focusable.
+         * @param focusable true if the widget should be focusable.
          */
         virtual void setFocusable(bool focusable);
 
         /**
-         * Checks whether the Widget is focusable.
+         * Checks whether the widget is focusable.
          *
          * @return true if the widget is focusable.
          */
         virtual bool isFocusable() const;
 
         /**
-         * Checks if the Widget is focused.
+         * Checks if the widget is focused.
          *
          * @return true if the widget currently has focus.
          */
         virtual bool isFocused() const;
 
         /**
-         * Sets the Widget to be disabled or enabled. A disabled
-         * Widget will never recieve mouse or key input.
+         * Sets the widget to be disabled or enabled. A disabled
+         * widget will never recieve mouse or key input.
          *
-         * @param enabled true if Widget is enabled.
+         * @param enabled true if widget is enabled.
          */
         virtual void setEnabled(bool enabled);
 
         /**
-         * Checks if a Widget is disabled or not.
+         * Checks if a widget is disabled or not.
          *
-         * @return true if the Widget should be enabled.
+         * @return true if the widget should be enabled.
          */
         virtual bool isEnabled() const;
 
         /**
-         * Sets the Widget to be visible.
+         * Sets the widget to be visible.
          *
-         * @param visible true if the Widget should be visiable.
+         * @param visible true if the widget should be visiable.
          */
         virtual void setVisible(bool visible);
 
         /**
-         * Checks if the Widget is visible.
+         * Checks if the widget is visible.
          *
-         * @return true if the Widget is visible.
+         * @return true if the widget is visible.
          */
         virtual bool isVisible() const;
 
         /**
          * Sets the base color. The base color is the background
-         * color for many Widgets like the Button and Contianer Widgets.
+         * color for many widgets like the Button and Contianer widgets.
          *
-         * @param color the baseground Color.
+         * @param color the baseground color.
          */
         virtual void setBaseColor(const Color& color);
 
         /**
          * Gets the base color.
          *
-         * @return the foreground Color.
+         * @return the foreground color.
          */
         virtual const Color& getBaseColor() const;
 
         /**
          * Sets the foreground color.
          *
-         * @param color the foreground Color.
+         * @param color the foreground color.
          */
         virtual void setForegroundColor(const Color& color);
 
         /**
          * Gets the foreground color.
          *
-         * @return the foreground Color.
+         * @return the foreground color.
          */
         virtual const Color& getForegroundColor() const;
 
@@ -336,23 +336,37 @@ namespace gcn
         /**
          * Gets the background color.
          *
-         * @return the background Color.
+         * @return the background color.
          */
         virtual const Color& getBackgroundColor() const;
 
         /**
-         * Requests focus for the Widget. A Widget will only recieve focus
+         * Sets the selection color.
+         *
+         * @param color the selection color.
+         */
+        virtual void setSelectionColor(const Color& color);
+
+        /**
+         * Gets the selection color.
+         *
+         * @return the selection color.
+         */
+        virtual const Color& getSelectionColor() const;
+        
+        /**
+         * Requests focus for the widget. A widget will only recieve focus
          * if it is focusable.
          */
         virtual void requestFocus();
 
         /**
-         * Requests a move to the top in the parent Widget.
+         * Requests a move to the top in the parent widget.
          */
         virtual void requestMoveToTop();
 
         /**
-         * Requests a move to the bottom in the parent Widget.
+         * Requests a move to the bottom in the parent widget.
          */
         virtual void requestMoveToBottom();
 
@@ -379,8 +393,8 @@ namespace gcn
         virtual FocusHandler* _getFocusHandler();
 
         /**
-         * Adds an ActionListener to the Widget. When an action is triggered
-         * by the Widget, the action function in all the Widget's
+         * Adds an ActionListener to the widget. When an action is triggered
+         * by the widget, the action function in all the widget's
          * ActionListeners will be called.
          *
          * @param actionListener the ActionListener to add.
@@ -388,60 +402,60 @@ namespace gcn
         virtual void addActionListener(ActionListener* actionListener);
 
         /**
-         * Removes an added ActionListener from the Widget.
+         * Removes an added ActionListener from the widget.
          *
          * @param actionListener the ActionListener to remove.
          */
         virtual void removeActionListener(ActionListener* actionListener);
 
         /**
-         * Adds a DeathListener to the Widget. When the widget dies
-         * the death function in all the Widget's DeathListeners will be called.
+         * Adds a DeathListener to the widget. When the widget dies
+         * the death function in all the widget's DeathListeners will be called.
          *
          * @param actionListener the DeathListener to add.
          */
         virtual void addDeathListener(DeathListener* deathListener);
 
         /**
-         * Removes an added DeathListener from the Widget.
+         * Removes an added DeathListener from the widget.
          *
          * @param deathListener the DeathListener to remove.
          */
         virtual void removeDeathListener(DeathListener* deathListener);
 
         /**
-         * Adds a MouseListener to the Widget. When a mouse message is
-         * recieved, it will be sent to the Widget's MouseListeners.
+         * Adds a MouseListener to the widget. When a mouse message is
+         * recieved, it will be sent to the widget's MouseListeners.
          *
          * @param mouseListener the MouseListener to add.
          */
         virtual void addMouseListener(MouseListener* mouseListener);
 
         /**
-         * Removes an added MouseListener from the Widget.
+         * Removes an added MouseListener from the widget.
          *
          * @param mouseListener the MouseListener to remove.
          */
         virtual void removeMouseListener(MouseListener* mouseListener);
 
         /**
-         * Adds a KeyListener to the Widget. When a key message is recieved,
-         * it will be sent to the Widget's KeyListeners.
+         * Adds a KeyListener to the widget. When a key message is recieved,
+         * it will be sent to the widget's KeyListeners.
          *
          * @param keyListener the KeyListener to add.
          */
         virtual void addKeyListener(KeyListener* keyListener);
 
         /**
-         * Removes an added KeyListener from the Widget.
+         * Removes an added KeyListener from the widget.
          *
          * @param keyListener the KeyListener to remove.
          */
         virtual void removeKeyListener(KeyListener* keyListener);
 
          /**
-         * Adds a FocusListener to the Widget. When a focus event is recieved,
-         * it will be sent to the Widget's FocusListeners.
+         * Adds a FocusListener to the widget. When a focus event is recieved,
+         * it will be sent to the widget's FocusListeners.
          *
          * @param focusListener the FocusListener to add.
          * @author Olof Naessén
@@ -450,7 +464,7 @@ namespace gcn
         virtual void addFocusListener(FocusListener* focusListener);
 
         /**
-         * Removes an added FocusListener from the Widget.
+         * Removes an added FocusListener from the widget.
          *
          * @param focusListener the FocusListener to remove.
          * @author Olof Naessén
@@ -459,12 +473,12 @@ namespace gcn
         virtual void removeFocusListener(FocusListener* FocusListener);
 
         /**
-         * Sets the action event identifier of the Widget. The identifier is
+         * Sets the action event identifier of the widget. The identifier is
          * used to be able to identify which action has occured.
          *
          * NOTE: An action event identifier should not be used to identify a
-         *       certain Widget but rather a certain event in your application.
-         *       Several Widgets can have the same action event identifer.
+         *       certain widget but rather a certain event in your application.
+         *       Several widgets can have the same action event identifer.
          *
          * @param actionEventId the action event identifier.
          * @since 0.6.0
@@ -479,7 +493,7 @@ namespace gcn
         virtual const std::string& getActionEventId() const;
 
         /**
-         * Gets the absolute position on the screen for the Widget.
+         * Gets the absolute position on the screen for the widget.
          *
          * @param x absolute x coordinate will be stored in this parameter.
          * @param y absolute y coordinate will be stored in this parameter.
@@ -487,7 +501,7 @@ namespace gcn
         virtual void getAbsolutePosition(int& x, int& y) const;
 
         /**
-         * Sets the parent of the Widget. A parent must be a BasicContainer.
+         * Sets the parent of the widget. A parent must be a BasicContainer.
          *
          * WARNING: This function is used internally and should not
          *          be called or overloaded unless you know what you
@@ -508,7 +522,7 @@ namespace gcn
         Font *getFont() const;
 
         /**
-         * Sets the global font to be used by default for all Widgets.
+         * Sets the global font to be used by default for all widgets.
          *
          * @param font the global Font.
          */
@@ -523,22 +537,22 @@ namespace gcn
 
         /**
          * Called when the font has changed. If the change is global,
-         * this function will only be called if the Widget don't have a
+         * this function will only be called if the widget don't have a
          * font already set.
          */
         virtual void fontChanged() { }
 
         /**
-         * Checks whether a Widget exists or not, that is if it still exists
+         * Checks whether a widget exists or not, that is if it still exists
          * an instance of the object.
          *
-         * @param widget the Widget to check.
+         * @param widget the widget to check.
          */
         static bool widgetExists(const Widget* widget);
 
         /**
          * Check if tab in is enabled. Tab in means that you can set focus
-         * to this Widget by pressing the tab button. If tab in is disabled
+         * to this widget by pressing the tab button. If tab in is disabled
          * then the FocusHandler will skip this widget and focus the next
          * in its focus order.
          *
@@ -548,7 +562,7 @@ namespace gcn
 
         /**
          * Sets tab in enabled. Tab in means that you can set focus
-         * to this Widget by pressing the tab button. If tab in is disabled
+         * to this widget by pressing the tab button. If tab in is disabled
          * then the FocusHandler will skip this widget and focus the next
          * in its focus order.
          *
@@ -558,9 +572,9 @@ namespace gcn
 
         /**
          * Checks if tab out is enabled. Tab out means that you can lose
-         * focus to this Widget by pressing the tab button. If tab out is
+         * focus to this widget by pressing the tab button. If tab out is
          * disabled then the FocusHandler ignores tabbing and focus will
-         * stay with this Widget.
+         * stay with this widget.
          *
          * @return true if tab out is enabled.
          */
@@ -568,9 +582,9 @@ namespace gcn
 
         /**
          * Sets tab out enabled. Tab out means that you can lose
-         * focus to this Widget by pressing the tab button. If tab out is
+         * focus to this widget by pressing the tab button. If tab out is
          * disabled then the FocusHandler ignores tabbing and focus will
-         * stay with this Widget.
+         * stay with this widget.
          *
          * @param enabled true if tab out should be enabled.
          */
@@ -684,11 +698,11 @@ namespace gcn
          */
         virtual void setInternalFocusHandler(FocusHandler* focusHandler);
 
-                /**
-         * Moves a Widget to the top of this widget. The moved widget will be
+        /**
+         * Moves a widget to the top of this widget. The moved widget will be
          * drawn above all other widgets in this widget.
          *
-         * @param widget the Widget to move.
+         * @param widget the widget to move.
          */
         virtual void moveToTop(Widget* widget) { };
 
@@ -696,32 +710,32 @@ namespace gcn
          * Moves a widget in this widget to the bottom of this widget.
          * The moved widget will be drawn below all other widgets in this widget.
          *
-         * @param widget the Widget to move.
+         * @param widget the widget to move.
          */
         virtual void moveToBottom(Widget* widget) { };
 
         /**
-         * Focuses the next Widget in the widget.
+         * Focuses the next widget in the widget.
          */
         virtual void focusNext() { };
 
         /**
-         * Focuses the previous Widget in the widget.
+         * Focuses the previous widget in the widget.
          */
         virtual void focusPrevious() { };
 
         /**
-         * Tries to show a specific part of a Widget by moving it. Used if the
+         * Tries to show a specific part of a widget by moving it. Used if the
          * widget should act as a container.
          *
-         * @param widget the target Widget.
+         * @param widget the target widget.
          * @param area the area to show.
          */
         virtual void showWidgetPart(Widget* widget, Rectangle area) { };
 
     protected:
         /**
-         * Generates an action to the Widget's ActionListeners.
+         * Generates an action to the widget's ActionListeners.
          */
         void generateAction();
 
@@ -749,6 +763,7 @@ namespace gcn
         Color mForegroundColor;
         Color mBackgroundColor;
         Color mBaseColor;
+        Color mSelectionColor;
         FocusHandler* mFocusHandler;
         FocusHandler* mInternalFocusHandler;
         Widget* mParent;

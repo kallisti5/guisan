@@ -99,11 +99,6 @@ namespace gcn
         int h = getHeight() + getHeight() / 2;
 
         graphics->drawText(getCaption(), h - 2, 0);
-
-        if (isFocused())
-        {
-            graphics->drawRectangle(Rectangle(h - 4, 0, getWidth() - h + 3, getHeight()));
-        }
     }
 
     void CheckBox::drawBorder(Graphics* graphics)
@@ -132,7 +127,7 @@ namespace gcn
 
     void CheckBox::drawBox(Graphics *graphics)
     {
-        int h = getHeight() - 1;
+        int h = getHeight() - 2;
 
         int alpha = getBaseColor().a;
         Color faceColor = getBaseColor();
@@ -143,25 +138,30 @@ namespace gcn
         shadowColor.a = alpha;
 
         graphics->setColor(shadowColor);
-        graphics->drawLine(0, 0, h, 0);
-        graphics->drawLine(0, 1, 0, h);
+        graphics->drawLine(1, 1, h, 1);
+        graphics->drawLine(1, 1, 1, h);
 
         graphics->setColor(highlightColor);
         graphics->drawLine(h, 1, h, h);
         graphics->drawLine(1, h, h - 1, h);
 
         graphics->setColor(getBackgroundColor());
-        graphics->fillRectangle(Rectangle(1, 1, h - 1, h - 1));
+        graphics->fillRectangle(Rectangle(2, 2, h - 2, h - 2));
 
         graphics->setColor(getForegroundColor());
 
+        if (isFocused())
+        {
+            graphics->drawRectangle(Rectangle(0, 0, h + 2, h + 2));
+        }        
+               
         if (mMarked)
         {
-            graphics->drawLine(3, 5, 3, h - 3);
-            graphics->drawLine(4, 5, 4, h - 3);
+            graphics->drawLine(3, 5, 3, h - 2);
+            graphics->drawLine(4, 5, 4, h - 2);
 
-             graphics->drawLine(5, h - 4, h - 2, 3);
-             graphics->drawLine(5, h - 5, h - 4, 4);
+            graphics->drawLine(5, h - 3, h - 2, 4);
+            graphics->drawLine(5, h - 4, h - 4, 5);
         }
     }
 
