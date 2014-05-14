@@ -73,28 +73,29 @@ public:
 
 	std::string getElementAt(int i)
 	{
-		switch(i)
-		{
-            case 0:
-                return std::string("zero");
-            case 1:
-                return std::string("one");
-            case 2:
-                return std::string("two");
-            case 3:
-                return std::string("three");
-            case 4:
-                return std::string("four");
-            default: // Just to keep warnings away
-                return std::string("");
+		switch(i) {
+			case 0:
+				return std::string("zero");
+			case 1:
+				return std::string("one");
+			case 2:
+				return std::string("two");
+			case 3:
+				return std::string("three");
+			case 4:
+				return std::string("four");
+			default: // Just to keep warnings away
+				return std::string("");
 		}
 	}
 };
 
 DemoListModel demoListModel;
 
-void initWidgets()
+void
+initWidgets()
 {
+
 	/*
 	 * Create all the widgets
 	 */
@@ -128,24 +129,24 @@ void initWidgets()
 	slider = new gcn::Slider(0, 10);
 	slider->setSize(100, 10);
 
-    window = new gcn::Window("I am a window  Drag me");
-    window->setBaseColor(gcn::Color(212, 255, 150, 190));
-
-    guisanLogoImage = gcn::Image::load("guisan-logo.png");
-    guisanLogoIcon = new gcn::Icon(guisanLogoImage);
-    window->add(guisanLogoIcon);
-    window->resizeToContent();
-
-    nestedSlider = new gcn::Slider(0, 10);
-    nestedSlider->setSize(100, 10);
-    
-    nestedContainer = new gcn::Container();
-    nestedContainer->setSize(400, 200);
-    nestedContainer->add(nestedSlider, 50, 70);
-
-    nestedScrollArea = new gcn::ScrollArea(nestedContainer);
-    nestedScrollArea->setSize(180, 90);
-    nestedScrollArea->setBorderSize(1);
+	window = new gcn::Window("I am a window  Drag me");
+	window->setBaseColor(gcn::Color(212, 255, 150, 190));
+	
+	guisanLogoImage = gcn::Image::load("guisan-logo.png");
+	guisanLogoIcon = new gcn::Icon(guisanLogoImage);
+	window->add(guisanLogoIcon);
+	window->resizeToContent();
+	
+	nestedSlider = new gcn::Slider(0, 10);
+	nestedSlider->setSize(100, 10);
+	
+	nestedContainer = new gcn::Container();
+	nestedContainer->setSize(400, 200);
+	nestedContainer->add(nestedSlider, 50, 70);
+	
+	nestedScrollArea = new gcn::ScrollArea(nestedContainer);
+	nestedScrollArea->setSize(180, 90);
+	nestedScrollArea->setBorderSize(1);
 
 	/*
 	 * Add them to the top container
@@ -163,14 +164,15 @@ void initWidgets()
 	top->add(radioButton2, 500, 220);
 	top->add(radioButton3, 500, 240);
 	top->add(slider, 500, 300);
-    top->add(window, 100, 350);
-    top->add(nestedScrollArea, 440, 350);
+	top->add(window, 100, 350);
+	top->add(nestedScrollArea, 440, 350);
 }
 
 /**
  * Initializes the application
  */
-void init()
+void
+init()
 {
 	/*
 	 * Here we initialize SDL as we would do with any SDL application.
@@ -213,7 +215,8 @@ void init()
 	// Set the top container
 	gui->setTop(top);
 	// Load the image font.
-	font = new gcn::ImageFont("fixedfont.bmp", " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
+	font = new gcn::ImageFont("fixedfont.bmp",
+		" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
 	// The global font is static and must be set.
 	gcn::Widget::setGlobalFont(font);
 
@@ -223,7 +226,8 @@ void init()
 /**
  * Halts the application
  */
-void halt()
+void
+halt()
 {
 	/*
 	 * Destroy Guichan stuff
@@ -249,12 +253,12 @@ void halt()
 	delete radioButton2;
 	delete radioButton3;
 	delete slider;
-    delete window;
-    delete guisanLogoIcon;
+	delete window;
+	delete guisanLogoIcon;
 	delete guisanLogoImage;
-    delete nestedScrollArea;
-    delete nestedContainer;
-    delete nestedSlider;
+	delete nestedScrollArea;
+	delete nestedContainer;
+	delete nestedSlider;
     
 	/*
 	 * Destroy Guichan SDL stuff
@@ -272,29 +276,23 @@ void halt()
 /**
  * Checks input. On escape halt the application.
  */
-void checkInput()
+void
+checkInput()
 {
 	/*
 	 * Poll SDL events
 	 */
-	while(SDL_PollEvent(&event))
-	{
-		if (event.type == SDL_KEYDOWN)
-		{
+	while(SDL_PollEvent(&event)) {
+		if (event.type == SDL_KEYDOWN) {
 			if (event.key.keysym.sym == SDLK_ESCAPE)
-			{
 				running = false;
-			}
-			if (event.key.keysym.sym == SDLK_f)
-			{
-				if (event.key.keysym.mod & KMOD_CTRL)
-				{
+
+			if (event.key.keysym.sym == SDLK_f) {
+				if (event.key.keysym.mod & KMOD_CTRL) {
 					// TODO: Toggle full screen
 				}
 			}
-		}
-		else if(event.type == SDL_QUIT)
-		{
+		} else if(event.type == SDL_QUIT) {
 			running = false;
 		}
 
@@ -310,10 +308,10 @@ void checkInput()
 /**
  * Runs the application
  */
-void run()
+void
+run()
 {
-	while(running)
-	{
+	while(running) {
 		// Poll input
 		checkInput();
 		// Let the gui perform it's logic (like handle input)
@@ -325,10 +323,11 @@ void run()
 	}
 }
 
-int main(int argc, char **argv)
+int
+main(int argc, char **argv)
 {
-	try
-	{
+
+	try {
  		init();
 		run();
 		halt();
@@ -336,24 +335,21 @@ int main(int argc, char **argv)
 	/*
 	 * Catch all Guichan exceptions
 	 */
-	catch (gcn::Exception e)
-	{
+	catch (gcn::Exception e) {
 		std::cerr << e.getMessage() << std::endl;
 		return 1;
 	}
 	/*
 	 * Catch all Std exceptions
 	 */
-	catch (std::exception e)
-	{
+	catch (std::exception e) {
 		std::cerr << "Std exception: " << e.what() << std::endl;
 		return 1;
 	}
 	/*
 	 * Catch all Unknown exceptions
 	 */
-	catch (...)
-	{
+	catch (...) {
 		std::cerr << "Unknown exception" << std::endl;
 		return 1;
 	}
