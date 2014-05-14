@@ -130,6 +130,8 @@ namespace gcn
 
 	if (mInternalListBox)
 		delete mListBox;
+
+	setInternalFocusHandler(NULL);
     }
 
     void DropDown::draw(Graphics* graphics)
