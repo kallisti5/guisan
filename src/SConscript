@@ -42,6 +42,8 @@ widget_sources = [
 	'widgets/radiobutton.cpp',
 	'widgets/scrollarea.cpp',
 	'widgets/slider.cpp',
+	'widgets/tab.cpp',
+	'widgets/tabbedarea.cpp',
 	'widgets/textbox.cpp',
 	'widgets/textfield.cpp',
 	'widgets/window.cpp',

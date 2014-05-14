@@ -167,7 +167,7 @@ namespace gcn
          *
          * @return The selected tab.
          */
-        Tab* TabbedArea::getSelectedTab();
+        Tab* getSelectedTab();
 
 
         // Inherited from Widget
