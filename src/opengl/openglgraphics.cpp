@@ -282,13 +282,8 @@ namespace gcn
         y2 += top.yOffset;
 
         glBegin(GL_LINES);
-	
-        glVertex3f(x1 + 0.5f, y1 + 0.5f, 0);
-        glVertex3f(x2 + 0.5f, y2 + 0.5f, 0);
-        glEnd();
-
-        glBegin(GL_POINTS);
-        glVertex3f(x2 + 0.5f, y2 + 0.5f, 0);
+	glVertex2f(x1 + 0.375, y1 + 0.375);
+	glVertex2f(x2 + 1.0f - 0.375f, y2 + 1.0f - 0.375f);
         glEnd();
     }
 
@@ -301,14 +296,13 @@ namespace gcn
         const ClipRectangle& top = mClipStack.top();
 
         glBegin(GL_LINE_LOOP);
-        glVertex3f(rectangle.x + top.xOffset + 0.5f,
-                   rectangle.y + top.yOffset + 0.5f, 0);
-        glVertex3f(rectangle.x + rectangle.width - 0.5f + top.xOffset,
-                   rectangle.y + top.yOffset + 0.5f, 0);
-        glVertex3f(rectangle.x + rectangle.width - 0.5f + top.xOffset,
-                   rectangle.y + rectangle.height + top.yOffset - 0.5f, 0);
-        glVertex3f(rectangle.x + top.xOffset + 0.5f,
-                   rectangle.y + rectangle.height + top.yOffset - 0.5f, 0);
+	glVertex2f(rectangle.x + top.xOffset, rectangle.y + top.yOffset);
+	glVertex2f(rectangle.x + rectangle.width + top.xOffset - 1.0f,
+		rectangle.y + top.yOffset + 0.375f);
+	glVertex2f(rectangle.x + rectangle.width + top.xOffset - 1.0f,
+		rectangle.y + rectangle.height + top.yOffset);
+	glVertex2f(rectangle.x + top.xOffset,
+		rectangle.y + rectangle.height + top.yOffset);
         glEnd();
     }
 
@@ -321,14 +315,13 @@ namespace gcn
         const ClipRectangle& top = mClipStack.top();
 
         glBegin(GL_QUADS);
-        glVertex3i(rectangle.x + top.xOffset,
-                   rectangle.y + top.yOffset, 0);
-        glVertex3i(rectangle.x + rectangle.width + top.xOffset,
-                   rectangle.y + top.yOffset, 0);
-        glVertex3i(rectangle.x + rectangle.width + top.xOffset,
-                   rectangle.y + rectangle.height + top.yOffset, 0);
-        glVertex3i(rectangle.x + top.xOffset,
-                   rectangle.y + rectangle.height + top.yOffset, 0);
+	glVertex2i(rectangle.x + top.xOffset, rectangle.y + top.yOffset);
+	glVertex2i(rectangle.x + rectangle.width + top.xOffset,
+		rectangle.y + top.yOffset);
+	glVertex2i(rectangle.x + rectangle.width + top.xOffset,
+		rectangle.y + rectangle.height + top.yOffset);
+	glVertex2i(rectangle.x + top.xOffset,
+		rectangle.y + rectangle.height + top.yOffset);
         glEnd();
     }
 
