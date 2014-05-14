@@ -1,3 +1,4 @@
+* Continue cherry-picking from guichan 998253b5bbbc432746decc2e056891ec7ba2254e
 * Add a focus listener interface.
 * Make focus apply synchronously.
 * Graphics and input objects for DirectX.
