@@ -17,7 +17,8 @@ bool running = true;
 /*
  * SDL Stuff we need
  */
-SDL_Surface* screen;
+SDL_Surface* sdlScreen;
+SDL_Window* sdlWindow;
 SDL_Event event;
 
 /*
@@ -92,12 +93,14 @@ void init()
 	/*
 	 * Here we initialize SDL as we would do with any SDL application.
 	 */
-	SDL_Init(SDL_INIT_VIDEO);
-	screen = SDL_SetVideoMode(640, 480, 32, SDL_HWSURFACE);
-	// We want unicode
-	SDL_EnableUNICODE(1);
+        SDL_Init(SDL_INIT_VIDEO);
+        sdlWindow = SDL_CreateWindow("guisan SDL2 widget example",
+                SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480, 0);
+
+        sdlScreen = SDL_GetWindowSurface(sdlWindow);
+
 	// We want to enable key repeat
-	SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
+	//SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 
 	/*
 	 * Now it's time for Guichan SDL stuff
@@ -110,7 +113,7 @@ void init()
 	// Set the target for the graphics object to be the screen.
 	// In other words, we will draw to the screen.
 	// Note, any surface will do, it doesn't have to be the screen.
-	graphics->setTarget(screen);
+	graphics->setTarget(sdlScreen);
 	input = new gcn::SDLInput();
 
 	/*
@@ -219,8 +222,7 @@ void checkInput()
 			{
 				if (event.key.keysym.mod & KMOD_CTRL)
 				{
-					// Works with X11 only
-					SDL_WM_ToggleFullScreen(screen);
+					printf("TODO: fullscreen!");
 				}
 			}
 		}
@@ -254,7 +256,7 @@ void run()
 		// Draw the gui
 		gui->draw();
 		// Update the screen
-		SDL_Flip(screen);
+		SDL_UpdateWindowSurface(sdlWindow);
 	}
 }
 

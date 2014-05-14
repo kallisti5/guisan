@@ -19,6 +19,15 @@ if env['HAVE_SDL2']:
 		target = 'sdlwidgets',
 		source = ['sdlwidgets.cpp']
 	)
+
+	sdlaction = env.Clone()
+	sdlaction.ParseConfig('pkg-config --cflags --libs sdl2')
+	sdlaction.ParseConfig('pkg-config --cflags --libs SDL2_image')
+	sdlaction.Append(LIBS = 'guisan')
+	sdlaction.Program(
+		target = 'sdlaction',
+		source = ['sdlaction.cpp']
+	)
 	
 ### SDL 3D Examples
 if env['HAVE_OPENGL'] and env['HAVE_SDL2']:
