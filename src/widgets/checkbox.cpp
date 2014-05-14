@@ -70,17 +70,17 @@ namespace gcn
 
     CheckBox::CheckBox()
     {
-        setMarked(false);
+        setSelected(false);
 
         setFocusable(true);
         addMouseListener(this);
         addKeyListener(this);
     }
 
-    CheckBox::CheckBox(const std::string &caption, bool marked)
+    CheckBox::CheckBox(const std::string &caption, bool selected)
     {
         setCaption(caption);
-        setMarked(marked);
+        setSelected(selected);
 
         setFocusable(true);
         addMouseListener(this);
@@ -155,7 +155,7 @@ namespace gcn
             graphics->drawRectangle(Rectangle(0, 0, h + 2, h + 2));
         }        
                
-        if (mMarked)
+        if (mSelected)
         {
             graphics->drawLine(3, 5, 3, h - 2);
             graphics->drawLine(4, 5, 4, h - 2);
@@ -165,14 +165,14 @@ namespace gcn
         }
     }
 
-    bool CheckBox::isMarked() const
+    bool CheckBox::isSelected() const
     {
-        return mMarked;
+        return mSelected;
     }
 
-    void CheckBox::setMarked(bool marked)
+    void CheckBox::setSelected(bool selected)
     {
-        mMarked = marked;
+        mSelected = selected;
     }
 
     const std::string &CheckBox::getCaption() const
@@ -192,7 +192,7 @@ namespace gcn
         if (key.getValue() == Key::ENTER ||
             key.getValue() == Key::SPACE)
         {
-            toggle();
+            toggleSelected();
             keyEvent.consume();
         }
     }
@@ -201,7 +201,7 @@ namespace gcn
     {
         if (mouseEvent.getButton() == MouseEvent::LEFT)
         {
-            toggle();
+            toggleSelected();
         }
     }
 
@@ -218,9 +218,9 @@ namespace gcn
         setWidth(getFont()->getWidth(mCaption) + height + height / 2);
     }
 
-    void CheckBox::toggle()
+    void CheckBox::toggleSelected()
     {
-        mMarked = !mMarked;
+        mSelected = !mSelected;
         generateAction();
     }
 }

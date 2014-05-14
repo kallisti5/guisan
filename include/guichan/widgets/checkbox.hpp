@@ -67,7 +67,12 @@
 namespace gcn
 {
     /**
-     * A regular CheckBox. It can be checked and unchecked.
+     * An implementation of a check box where a user can select or deselect
+     * the check box and where the status of the check box is displayed to the user.
+     * A check box is capable of displaying a caption. 
+     * 
+     * If a check box's state changes an action event will be sent to all action 
+     * listeners of the check box.
      */
     class GCN_CORE_DECLSPEC CheckBox :
         public Widget,
@@ -82,12 +87,13 @@ namespace gcn
         CheckBox();
 
         /**
-         * Constructor.
+         * Constructor. The check box will be automatically resized
+         * to fit it's caption.
          *
-         * @param caption the CheckBox caption.
-         * @param marked true if the CheckBox should be marked.
+         * @param caption The caption of the check box.
+         * @param marked True if the check box is selected, false otherwise.
          */
-        CheckBox(const std::string &caption, bool marked=false);
+        CheckBox(const std::string &caption, bool selected = false);
 
         /**
          * Destructor.
@@ -95,42 +101,41 @@ namespace gcn
         virtual ~CheckBox() { }
 
         /**
-         * Draws the box i.a not the caption.
+         * Checks if the check box is selected.
          *
-         * @param graphics a Graphics object to draw with.
+         * @return True if the check box is selected, false otherwise.
+         * @see setSelected
          */
-        virtual void drawBox(Graphics *graphics);
+        bool isSelected() const;
 
         /**
-         * Checks if the CheckBox is marked.
+         * Sets the check box to be selected.
          *
-         * @return true if the CheckBox is marked.
+         * @param selected True if the check box should be set as selected.
+         * @see isSelected
          */
-        bool isMarked() const;
+        void setSelected(bool selected);
 
         /**
-         * Sets the CheckBox to be marked.
+         * Gets the caption of the check box.
          *
-         * @param marked true if the CheckBox should be marked.
-         */
-        void setMarked(bool marked);
-
-        /**
-         * Gets the CheckBox caption.
-         *
-         * @return the CheckBox caption.
+         * @return The caption of the check box.
+         * @see setCaption
          */
         const std::string &getCaption() const;
 
         /**
-         * Sets the CheckBox caption.
+         * Sets the caption of the check box. It's advisable to call
+         * adjustSize after setting of the caption to adjust the
+         * check box's size to fit the caption.
          *
-         * @param caption the CheckBox caption.
+         * @param caption The caption of the check box.
+         * @see getCaption, adjustSize
          */
         void setCaption(const std::string& caption);
 
         /**
-         * Adjusts the CheckBox size to fit the font size.
+         * Adjusts the check box's size to fit the caption.
          */
         void adjustSize();
 
@@ -156,11 +161,26 @@ namespace gcn
 
     protected:
         /**
-         * Toggles between marked and unmarked.
+         * Draws the box of the check box. 
+         *
+         * @param graphics A Graphics object to draw with.
          */
-        virtual void toggle();
+        virtual void drawBox(Graphics *graphics);
 
-        bool mMarked;
+        /**
+         * Toggles the check box between being selected and
+         * not being selected.
+         */
+        virtual void toggleSelected();
+
+        /**
+         * True if the check box is selected, false otherwise.
+         */
+        bool mSelected;
+
+        /**
+         * Holds the caption of the check box.
+         */
         std::string mCaption;
     };
 }

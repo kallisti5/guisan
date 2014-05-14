@@ -66,18 +66,20 @@
 namespace gcn
 {
     /**
-     * A container able to contain other Widgets. It is in other words a
-     * Widget that holds other Widgets. A Widget's position in the container is
-     * always relativ to the Container itself, not the screen. Using a
-     * Container as the top Widget in Gui is the only way to use more then one
-     * Widget in your Gui.
+     * An implementation of a container able to contain other widgets. A widget's 
+     * position in the container is relative to the container itself and not the screen. 
+     * A container is the most common widget to use as the Gui's top widget as makes the Gui
+     * able to contain more than one widget.
+     *
+     * @see Gui::setTop
      */
     class GCN_CORE_DECLSPEC Container: public BasicContainer
     {
     public:
 
         /**
-         * Constructor. A container is opauqe as default.
+         * Constructor. A container is opauqe as default, if you want a
+         * none opaque container call setQpaque(false).
          *
          * @see setOpaque, isOpaque
          */
@@ -89,55 +91,59 @@ namespace gcn
         virtual ~Container();
 
         /**
-         * Sets whether the background should be drawn or not. If the
-         * Container is not opaque it will be completely transparent.
+         * Sets the container to be opaque or not. If the container
+         * is opaque it's background will be drawn, if it's not opaque 
+         * it's background will not be drawn, and thus making the container
+         * completely transparent.
          *
-         * NOTE: This is not the same as to set visibility. A nonvisible
-         *       Container will not draw it's content.
+         * NOTE: This is not the same as to set visibility. A non visible
+         *       container will not itself nor will it draw it's content.
          *
-         * @param opaque true if the Container should be opaque.
+         * @param opaque True if the container should be opaque, false otherwise.
          * @see isOpaque
          */
         void setOpaque(bool opaque);
 
         /**
-         * Checks if the Container is opaque.
+         * Checks if the container is opaque or not.
          *
-         * @return true if the Container is opaque.
+         * @return true if the container is opaque, false otherwise.
          * @see setOpaque
          */
         bool isOpaque() const;
 
         /**
-         * Adds a Widget to the Container.
+         * Adds a widget to the container.
          *
-         * @param widget the Widget to add.
-         * @see remove
+         * @param widget The widget to add.
+         * @see remove, clear
          */
         virtual void add(Widget* widget);
 
         /**
-         * Adds a Widget to the container and also specifices it's postion
+         * Adds a widget to the container and also specifices the widget's
+         * postion in the container. The position is relative to the container
+         * and not relative to the screen.
          *
-         * @param widget the Widget to add.
-         * @param x the x coordinat for the Widget in the Container.
-         * @param y the y coordinat for the Widget in the Container.
-         * @see remove
+         * @param widget The widget to add.
+         * @param x The x coordinat for the widget.
+         * @param y The y coordinat for the widget.
+         * @see remove, clear
          */
         virtual void add(Widget* widget, int x, int y);
 
         /**
-         * Removes a Widget from the Container.
+         * Removes a widget from the Container.
          *
-         * @param widget the Widget to remove.
-         * @throws Exception when the Widget has not been added to the
-         *                   Container.
+         * @param widget The widget to remove.
+         * @throws Exception when the widget has not been added to the
+         *                   container.
          * @see add, clear
          */
         virtual void remove(Widget* widget);
 
         /**
-         * Clears the Container of all widgets.
+         * Clears the container of all widgets.
          *
          * @see add, remove
          */
@@ -146,9 +152,10 @@ namespace gcn
         /**
          * Finds a widget given an id.
          *
-         * @param id the id to find a widget by.
-         * @return a widget with a corrosponding id,
-                   NULL if no widget is found.
+         * @param id The id to find a widget by.
+         * @return A widget with a corrosponding id, NULL if no widget 
+         *         is found.
+         * @see Widget::setId
          */
         virtual Widget* findWidgetById(const std::string &id);
 
@@ -160,6 +167,9 @@ namespace gcn
         virtual void drawBorder(Graphics* graphics);
 
     protected:
+        /**
+         * True if the container is opaque, false otherwise.
+         */
         bool mOpaque;
     };
 }

@@ -71,7 +71,7 @@ namespace gcn
 
     RadioButton::RadioButton()
     {
-        setMarked(false);
+        setSelected(false);
 
         setFocusable(true);
         addMouseListener(this);
@@ -80,11 +80,11 @@ namespace gcn
 
     RadioButton::RadioButton(const std::string &caption,
                              const std::string &group,
-                             bool marked)
+                             bool selected)
     {
         setCaption(caption);
         setGroup(group);
-        setMarked(marked);
+        setSelected(selected);
 
         setFocusable(true);
         addMouseListener(this);
@@ -215,7 +215,7 @@ namespace gcn
         graphics->setColor(getForegroundColor());
 
         int hhh = hh - 3;
-        if (isMarked())
+        if (mSelected)
         {
             for (i = 0; i < hhh; ++i)
             {
@@ -229,14 +229,14 @@ namespace gcn
         }
     }
 
-    bool RadioButton::isMarked() const
+    bool RadioButton::isSelected() const
     {
-        return mMarked;
+        return mSelected;
     }
 
-    void RadioButton::setMarked(bool marked)
+    void RadioButton::setSelected(bool selected)
     {
-        if (marked && mGroup != "")
+        if (selected && mGroup != "")
         {
             GroupIterator iter, iterEnd;
             iterEnd = mGroupMap.upper_bound(mGroup);
@@ -245,14 +245,14 @@ namespace gcn
                  iter != iterEnd;
                  iter++)
             {
-                if (iter->second->isMarked())
+                if (iter->second->isSelected())
                 {
-                    iter->second->setMarked(false);
+                    iter->second->setSelected(false);
                 }
             }
         }
 
-        mMarked = marked;
+        mSelected = selected;
     }
 
     const std::string &RadioButton::getCaption() const
@@ -272,7 +272,7 @@ namespace gcn
         if (key.getValue() == Key::ENTER ||
             key.getValue() == Key::SPACE)
         {
-            setMarked(true);
+            setSelected(true);
             generateAction();
             keyEvent.consume();
         }
@@ -282,7 +282,7 @@ namespace gcn
     {
         if (mouseEvent.getButton() == MouseEvent::LEFT)
         {
-            setMarked(true);
+            setSelected(true);
             generateAction();
         }
     }

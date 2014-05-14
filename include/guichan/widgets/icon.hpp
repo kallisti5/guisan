@@ -64,7 +64,7 @@
 namespace gcn
 {
     /**
-     * An Icon for displaying images.
+     * Implements an icon capable of displaying an image.
      */
     class GCN_CORE_DECLSPEC Icon: public Widget
     {
@@ -72,9 +72,21 @@ namespace gcn
         /**
          * Constructor.
          *
-         * @param image an Image to display.
+         * @param filename The filename of the image to display.
+         */
+        Icon(const std::string& filename);
+
+        /**
+         * Constructor.
+         *
+         * @param image The image to display.
          */
         Icon(Image* image);
+
+        /**
+         * Descructor.
+         */
+        virtual ~Icon();
 
 
         // Inherited from Widget
@@ -84,7 +96,17 @@ namespace gcn
         virtual void drawBorder(Graphics* graphics);
 
     protected:
+        /**
+         * The image to display.
+         */
         Image* mImage;
+
+        /**
+         * True if the image has been loaded internally, false otherwise.
+         * An image not loaded internally should not be deleted in the
+         * destructor.
+         */
+        bool mInternalImage;
     };
 }
 

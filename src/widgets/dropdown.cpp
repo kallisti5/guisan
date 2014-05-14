@@ -104,6 +104,7 @@ namespace gcn
         add(mScrollArea);
 
         mListBox->addActionListener(this);
+        mListBox->addSelectionListener(this);
 
         setListModel(listModel);
 
@@ -123,7 +124,7 @@ namespace gcn
     DropDown::~DropDown()
     {
 	if (widgetExists(mListBox))
-		mListBox->removeActionListener(this);
+		mListBox->removeSelectionListener(this);
 
 	if (mInternalScrollArea)
 		delete mScrollArea;
@@ -140,7 +141,7 @@ namespace gcn
 
         if (mDroppedDown)
         {
-            h = mOldH;
+            h = mFoldedUpHeight;
         }
         else
         {
@@ -243,7 +244,7 @@ namespace gcn
         int h;
         if (mDroppedDown)
         {
-            h = mOldH;
+            h = mFoldedUpHeight;
         }
         else
         {
@@ -253,23 +254,37 @@ namespace gcn
         int y = 0;
 
         graphics->setColor(faceColor);
-        graphics->fillRectangle(Rectangle(x+1, y+1, h-2, h-2));
+        graphics->fillRectangle(Rectangle(x + 1, 
+                                          y + 1, 
+                                          h - 2, 
+                                          h - 2));
 
         graphics->setColor(highlightColor);
-        graphics->drawLine(x, y, x+h-1, y);
-        graphics->drawLine(x, y+1, x, y+h-1);
+        graphics->drawLine(x, 
+                           y, 
+                           x + h - 1, 
+                           y);
+        graphics->drawLine(x, 
+                           y + 1, 
+                           x, 
+                           y + h - 1);
 
         graphics->setColor(shadowColor);
-        graphics->drawLine(x+h-1, y+1, x+h-1, y+h-1);
-        graphics->drawLine(x+1, y+h-1, x+h-2, y+h-1);
-
+        graphics->drawLine(x + h - 1, 
+                           y + 1, 
+                           x + h - 1, 
+                           y + h - 1);
+        graphics->drawLine(x + 1, 
+                           y + h - 1, 
+                           x + h - 2, 
+                           y + h - 1);
         graphics->setColor(getForegroundColor());
 
         int i;
         int hh = h / 3;
         int hx = x + h / 2;
         int hy = y + (h * 2) / 3;
-        for (i=0; i<hh; i++)
+        for (i = 0; i < hh; i++)
         {
             graphics->drawLine(hx - i + offset,
                                hy - i + offset,
@@ -330,7 +345,7 @@ namespace gcn
         }
         // Fold up the listbox if the upper part is clicked after fold down
         else if (0 <= mouseEvent.getY()
-                 && mouseEvent.getY() < mOldH
+                 && mouseEvent.getY() < mFoldedUpHeight
                  && mouseEvent.getX() >= 0
                  && mouseEvent.getX() < getWidth()
                  && mouseEvent.getButton() == MouseEvent::LEFT
@@ -449,7 +464,7 @@ namespace gcn
         if (!mDroppedDown)
         {
             mDroppedDown = true;
-            mOldH = getHeight();
+            mFoldedUpHeight = getHeight();
             adjustHeight();
 
             if (getParent())
@@ -498,7 +513,10 @@ namespace gcn
     {
         if (mDroppedDown)
         {
-            return Rectangle(0, mOldH + 2, getWidth(), getHeight() - mOldH);
+            return Rectangle(0, 
+                             mFoldedUpHeight + 2, 
+                             getWidth(), 
+                             getHeight() - mFoldedUpHeight);
         }
 
         return Rectangle();
@@ -595,6 +613,32 @@ namespace gcn
         {
             mListBox->setSelectionColor(color);
         }       
+    }
+
+    void DropDown::valueChanged(const SelectionEvent& event)
+    {
+        distributeValueChangedEvent();
+    }
+
+    void DropDown::addSelectionListener(SelectionListener* selectionListener)
+    {
+        mSelectionListeners.push_back(selectionListener);
+    }
+   
+    void DropDown::removeSelectionListener(SelectionListener* selectionListener)
+    {
+        mSelectionListeners.remove(selectionListener);
+    }
+
+    void DropDown::distributeValueChangedEvent()
+    {
+        SelectionListenerIterator iter;
+
+        for (iter = mSelectionListeners.begin(); iter != mSelectionListeners.end(); ++iter)
+        {
+            SelectionEvent event(this);
+            (*iter)->valueChanged(event);
+        }
     }
 }
 

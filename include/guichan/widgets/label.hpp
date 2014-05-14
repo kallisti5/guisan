@@ -65,7 +65,7 @@
 namespace gcn
 {
     /**
-     * A label for displaying text.
+     * Implementation of a label capable of displaying a caption.
      */
     class GCN_CORE_DECLSPEC Label: public Widget
     {
@@ -78,41 +78,48 @@ namespace gcn
         /**
          * Constructor.
          *
-         * @param caption the Label caption.
+         * @param caption The caption of the label.
          */
         Label(const std::string& caption);
 
         /**
-         * Gets the Label caption.
+         * Gets the caption of the label.
          *
-         * @return the Label caption.
+         * @return The caption of the label.
+         * @see setCaption
          */
         const std::string &getCaption() const;
 
         /**
-         * Sets the Label caption.
+         * Sets the caption of the label. It's advisable to call
+         * adjustSize after setting of the caption to adjust the
+         * label's size to fit the caption.
          *
-         * @param caption the Label caption.
+         * @param caption The caption of the label.
+         * @see getCaption, adjustSize
          */
         void setCaption(const std::string& caption);
 
         /**
-         * Sets the alignment for the caption.
+         * Sets the alignment for the caption. The alignment is relative
+         * to the center of the label.
          *
          * @param alignemnt Graphics::LEFT, Graphics::CENTER or Graphics::RIGHT.
-         * @see Graphics
+         * @see getAlignment, Graphics
          */
         void setAlignment(unsigned int alignment);
 
         /**
-         * Gets the alignment for the caption.
+         * Gets the alignment for the caption. The alignment is relative to
+         * the center of the label.
          *
-         * @return alignment of caption.
+         * @return alignment of caption. Graphics::LEFT, Graphics::CENTER or Graphics::RIGHT.
+         * @see setAlignmentm Graphics
          */
         unsigned int getAlignment() const;
 
         /**
-         * Adjusts the Label size to fit the font size.
+         * Adjusts the label's size to fit the caption size.
          */
         void adjustSize();
 
@@ -124,7 +131,14 @@ namespace gcn
         virtual void drawBorder(Graphics* graphics);
 
     protected:
+        /**
+         * Holds the caption of the label.
+         */
         std::string mCaption;
+
+        /**
+         * Holds the alignment of the caption.
+         */
         unsigned int mAlignment;
     };
 }

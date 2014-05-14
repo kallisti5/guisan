@@ -115,6 +115,13 @@ namespace gcn
 
     protected:
         gcn::Image* mImage;
+
+        /**
+         * True if the image has been loaded internally, false otherwise.
+         * An image not loaded internally should not be deleted in the
+         * destructor.
+         */
+        bool mInternalImage;
     };
 }
 #endif

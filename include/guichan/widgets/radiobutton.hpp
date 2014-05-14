@@ -68,8 +68,14 @@
 namespace gcn
 {
     /**
-     * A RadioButton which can be grouped into RadioButtons groups. In a
-     * RadioButton group, only one of the RadioButtons can be selected.
+     * Implementation of a radio button where a user can select or deselect
+     * the radio button and where the status of the radio button is displayed to the user.
+     * A radio button can belong to a group and when a radio button belongs to a
+     * group only one radio button can be selected in the group. A radio button is
+     * capable of displaying a caption.
+     * 
+     * If a radio button's state changes an action event will be sent to all action 
+     * listeners of the check box.
      */
     class GCN_CORE_DECLSPEC RadioButton :
         public Widget,
@@ -86,13 +92,13 @@ namespace gcn
         /**
          * Constructor.
          *
-         * @param caption the Radiobutton caption.
-         * @param group the group the RadioButton belongs to.
-         * @param marked true if the RadioButton should be marked.
+         * @param caption The caption of the radio button.
+         * @param group The group the radio button should belong to.
+         * @param selected True if the radio button should be selected.
          */
         RadioButton(const std::string &caption,
                     const std::string &group,
-                    bool marked=false);
+                    bool selected = false);
 
         /**
          * Destructor.
@@ -100,56 +106,60 @@ namespace gcn
         virtual ~RadioButton();
 
         /**
-         * Draws the box i.a not the caption.
+         * Checks if the radio button is selected.
          *
-         * @param graphics a Graphics object to draw with.
+         * @return True if the radio button is selecte, false otherwise.
+         * @see setSelected
          */
-        virtual void drawBox(Graphics *graphics);
+        bool isSelected() const;
 
         /**
-         * Checks if the RadioButton is marked.
+         * Sets the radio button to selected or not.
          *
-         * @return true if the RadioButton is marked.
+         * @param selected True if the radio button should be selected,
+         *                 false otherwise.
+         * @see isSelected
          */
-        bool isMarked() const;
+        void setSelected(bool selected);
 
         /**
-         * Sets the RadioButton to be marked.
+         * Gets the caption of the radio button.
          *
-         * @param marked true if the RadioButton should be marked.
-         */
-        void setMarked(bool marked);
-
-        /**
-         * Gets the RadioButton caption.
-         *
-         * @return the RadioButton caption.
+         * @return The caption of the radio button.
+         * @see setCaption
          */
         const std::string &getCaption() const;
 
         /**
-         * Sets the RadioButton caption.
+         * Sets the caption of the radio button. It's advisable to call
+         * adjustSize after setting of the caption to adjust the
+         * radio button's size to fit the caption.
          *
-         * @param caption the RadioButton caption.
+         * @param caption The caption of the radio button.
+         * @see getCaption, adjustSize
          */
         void setCaption(const std::string caption);
 
         /**
-         * Sets the group the RadioButton should belong to.
+         * Sets the group the radio button should belong to. Note that
+         * a radio button group is unique per application, not per Gui object
+         * as the group is stored in a static map.
          *
-         * @param group the name of the group.
+         * @param group The name of the group.
+         * @see getGroup
          */
         void setGroup(const std::string &group);
 
         /**
-         * Gets the group the RadioButton belongs to.
+         * Gets the group the radio button belongs to.
          *
-         * @return the group the RadioButton belongs to.
+         * @return The group the radio button belongs to.
+         * @see setGroup
          */
         const std::string &getGroup() const;
 
         /**
-         * Adjusts the RadioButtons size to fit the font size.
+         * Adjusts the radio button's size to fit the caption.
          */
         void adjustSize();
 
@@ -173,13 +183,41 @@ namespace gcn
         virtual void mouseDragged(MouseEvent& mouseEvent);
 
     protected:
-        bool mMarked;
+        /**
+         * Draws the box.
+         *
+         * @param graphics a Graphics object to draw with.
+         */
+        virtual void drawBox(Graphics *graphics);
+
+        /**
+         * True if the radio button is selected, false otherwise.
+         */
+        bool mSelected;
+
+        /**
+         * Holds the caption of the radio button.
+         */ 
         std::string mCaption;
+
+        /**
+         * Holds the group of the radio button.
+         */
         std::string mGroup;
 
+        /**
+         * Typdef.
+         */
         typedef std::multimap<std::string, RadioButton *> GroupMap;
+
+        /**
+         * Typdef.
+         */
         typedef GroupMap::iterator GroupIterator;
 
+        /**
+         * Holds all available radio button groups.
+         */
         static GroupMap mGroupMap;
     };
 }

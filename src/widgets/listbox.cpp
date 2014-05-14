@@ -74,7 +74,7 @@ namespace gcn
     {
         mSelected = -1;
         mListModel = NULL;
-        mWrappingKeyboardSelection = false;
+        mWrappingEnabled = false;
         setWidth(100);
         setFocusable(true);
 
@@ -85,7 +85,7 @@ namespace gcn
     ListBox::ListBox(ListModel *listModel)
     {
         mSelected = -1;
-        mWrappingKeyboardSelection = false;
+        mWrappingEnabled = false;
         setWidth(100);
         setListModel(listModel);
         setFocusable(true);
@@ -224,7 +224,7 @@ namespace gcn
 
             if (mSelected == -1)
             {
-                if (isWrappingKeyboardSelection())
+                if (mWrappingEnabled)
                 {
                     setSelected(getListModel()->getNumberOfElements() - 1);
                 }
@@ -238,7 +238,7 @@ namespace gcn
         }
         else if (key.getValue() == Key::DOWN)
         {
-            if (isWrappingKeyboardSelection()
+            if (mWrappingEnabled
                 && getSelected() == getListModel()->getNumberOfElements() - 1)
             {
                 setSelected(0);
@@ -309,14 +309,14 @@ namespace gcn
         }
     }
 
-    bool ListBox::isWrappingKeyboardSelection() const
+    bool ListBox::isWrappingEnabled() const
     {
-        return mWrappingKeyboardSelection;
+        return mWrappingEnabled;
     }
 
-    void ListBox::setWrappingKeyboardSelection(bool wrapping)
+    void ListBox::setWrappingEnabled(bool wrappingEnabled)
     {
-        mWrappingKeyboardSelection = wrapping;
+        mWrappingEnabled = wrappingEnabled;
     }
         
     void ListBox::addSelectionListener(SelectionListener* selectionListener)

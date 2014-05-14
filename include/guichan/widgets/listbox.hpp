@@ -70,10 +70,15 @@ namespace gcn
     class SelectionListener;
 
     /**
-     * A ListBox displaying a list in which elemets can be selected. Only one
-     * element can be selected at time. ListBox uses a ListModel to handle the
-     * list. To be able to use ListBox you must give ListBox an implemented
-     * ListModel which represents your list.
+     * An implementation of a list box where an item can be selected.
+     *
+     * To be able display a list the list box uses a user provided list model. 
+     * A list model can be any class that implements the ListModel interface.
+     *     
+     * If an item is selected in the list box a select event will be sent to all selection 
+     * listeners of the list box. If an item is selected by using a mouse click or by using 
+     * the enter or space key an action event will be sent to all action listeners of the 
+     * list box.
      */
     class GCN_CORE_DECLSPEC ListBox :
         public Widget,
@@ -89,7 +94,7 @@ namespace gcn
         /**
          * Constructor.
          *
-         * @param listModel the ListModel to use.
+         * @param listModel the list model to use.
          */
         ListBox(ListModel *listModel);
 
@@ -99,65 +104,74 @@ namespace gcn
         virtual ~ListBox() { }
 
         /**
-         * Gets the ListModel index of the selected element.
+         * Gets the selected item as an index in the list model.
          *
-         * @return the ListModel index of the selected element.
+         * @return the selected item as an index in the list model.
+         * @see setSelected
          */
         int getSelected() const;
 
-        /**
-         * Sets the ListModel index of the selected element.
+         /**
+         * Sets the selected item. The selected item is represented by
+         * an index from the list model.
          *
-         * @param selected the ListModel index of the selected element.
+         * @param selected the selected item as an index from the list model.
+         * @see getSelected
          */
         void setSelected(int selected);
 
         /**
-         * Sets the ListModel to use.
+         * Sets the list model to use.
          *
-         * @param listModel the ListModel to use.
+         * @param listModel the list model to use.
+         * @see getListModel
          */
         void setListModel(ListModel *listModel);
 
         /**
-         * Gets the ListModel used.
+         * Gets the list model used.
          *
-         * @return the ListModel used.
+         * @return the list model used.
+         * @see setListModel
          */
         ListModel *getListModel();
 
         /**
-         * Adjusts the size of the ListBox to fit the font used.
+         * Adjusts the size of the list box to fit it's list model.
          */
         void adjustSize();
 
         /**
-         * Checks whether the ListBox wraps when selecting items with keyboard.
+         * Checks whether the list box wraps when selecting items with a keyboard.
          *
-         * Wrapping means that if up is pressed and the first item is selected, the last
-         * item will get selected. If down is pressed and the last item is selected, the
-         * first item will get selected.
+         * Wrapping means that the selection of items will be wrapped. That is, if 
+         * the first item is selected and up is pressed, the last item will get 
+         * selected. If the last item is selected and down is pressed, the first item 
+         * will get selected.
          *
-         * @return true if wrapping, fasle otherwise.
+         * @return true if wrapping is enabled, fasle otherwise.
+         * @see setWrappingEnabled
          */
-        bool isWrappingKeyboardSelection() const;
+        bool isWrappingEnabled() const;
 
         /**
-         * Sets the ListBox to wrap or not when selecting items with keyboard.
+         * Sets the list box to wrap or not when selecting items with a keyboard.
          *
-         * Wrapping means that if up is pressed and the first item is selected, the last
-         * item will get selected. If down is pressed and the last item is selected, the
-         * first item will get selected.
-         *
+         * Wrapping means that the selection of items will be wrapped. That is, if 
+         * the first item is selected and up is pressed, the last item will get 
+         * selected. If the last item is selected and down is pressed, the first item 
+         * will get selected.
+         * 
+         * @see isWrappingEnabled
          */
-        void setWrappingKeyboardSelection(bool wrapping);
+        void setWrappingEnabled(bool wrappingEnabled);
 
         /**
          * Adds a selection listener to the list box. When the selection
          * changes an event will be sent to all selection listeners of the
          * list box.
          *
-         * @param selectionListener the selection listener to add.
+         * @param selectionListener The selection listener to add.
          * @since 0.8.0
          */
         void addSelectionListener(SelectionListener* selectionListener);
@@ -165,7 +179,7 @@ namespace gcn
         /**
          * Removes a selection listener from the list box.
          *
-         * @param selectionListener the selection listener to remove.
+         * @param selectionListener The selection listener to remove.
          * @since 0.8.0
          */
         void removeSelectionListener(SelectionListener* selectionListener);
@@ -205,11 +219,34 @@ namespace gcn
          */
         void distributeValueChangedEvent();
 
+        /**
+         * The list model to use.
+         */
         ListModel *mListModel;
+
+        /**
+         * The selected item as an index in the list model.
+         */
         int mSelected;
-        bool mWrappingKeyboardSelection;
+
+        /**
+         * True if wrapping is enabled, false otherwise.
+         */
+        bool mWrappingEnabled;
+
+        /**
+         * Typdef.
+         */ 
         typedef std::list<SelectionListener*> SelectionListenerList;
+        
+        /**
+         * The selection listeners of the list box.
+         */
         SelectionListenerList mSelectionListeners;
+
+        /**
+         * Typedef.
+         */
         typedef SelectionListenerList::iterator SelectionListenerIterator;
     };
 }
