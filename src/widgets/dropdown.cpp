@@ -586,5 +586,15 @@ namespace gcn
             mListBox->setSelected(mListBox->getSelected() + 1);
         }
     }
+
+    void DropDown::setSelectionColor(const Color& color)
+    {
+        Widget::setSelectionColor(color);
+        
+        if (mInternalListBox)
+        {
+            mListBox->setSelectionColor(color);
+        }       
+    }
 }
 

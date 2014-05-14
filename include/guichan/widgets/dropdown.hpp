@@ -190,6 +190,11 @@ namespace gcn
         virtual void mouseWheelMovedDown(MouseEvent& mouseEvent);
 
         virtual void mouseDragged(MouseEvent& mouseEvent);
+
+
+	// Inherited by Widget
+
+	void setSelectionColor(const Color& color);
         
     protected:
         /**
