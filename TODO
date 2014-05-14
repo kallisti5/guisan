@@ -1,4 +1,4 @@
-* Continue cherry-picking from guichan 998253b5bbbc432746decc2e056891ec7ba2254e
+* Continue rebasing from 8565f3e8ce86c771551dadc2d91cf883d7f9d917
 * Add a focus listener interface.
 * Make focus apply synchronously.
 * Graphics and input objects for DirectX.
