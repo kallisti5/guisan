@@ -126,9 +126,17 @@ void initWidgets()
 
 	textField = new gcn::TextField("Text field");
 
-	textBox = new gcn::TextBox("Multiline\nText box");
+	textBox = new gcn::TextBox("Lorem ipsum dolor sit amet consectetur\n"
+		"adipiscing elit Integer vitae ultrices\n"
+		"eros Curabitur malesuada dolor imperdieat\n"
+		"ante facilisis ut convallis sem rutrum\n"
+		"Praesent consequat urna convallis leo\n"
+		"aliquam pellentesque Integer laoreet enim\n"
+		"vehicula libero blandit at pellentesque\n"
+		"ipsum vehicula Mauris id turpis hendrerit\n"
+		"tempor velit nec hendrerit nulla");
 	textBoxScrollArea = new gcn::ScrollArea(textBox);
-	textBoxScrollArea->setWidth(200);
+	textBoxScrollArea->setWidth(270);
 	textBoxScrollArea->setHeight(100);
 	textBoxScrollArea->setBorderSize(1);
 
