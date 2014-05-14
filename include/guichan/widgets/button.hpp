@@ -99,14 +99,14 @@ namespace gcn
          *
          * @param caption the Button caption.
          */
-        virtual void setCaption(const std::string& caption);
+        void setCaption(const std::string& caption);
 
         /**
          * Gets the Button caption.
          *
          * @return the Button caption.
          */
-        virtual const std::string& getCaption() const;
+        const std::string& getCaption() const;
 
         /**
          * Sets the alignment for the caption.
@@ -114,14 +114,14 @@ namespace gcn
          * @param alignment Graphics::LEFT, Graphics::CENTER or Graphics::RIGHT
          * @see Graphics
          */
-        virtual void setAlignment(unsigned int alignment);
+        void setAlignment(unsigned int alignment);
 
         /**
          * Gets the alignment for the caption.
          *
          * @return alignment of caption.
          */
-        virtual unsigned int getAlignment() const;
+        unsigned int getAlignment() const;
 
         /**
          * Sets the spacing between the border of this button and its caption.
@@ -129,26 +129,26 @@ namespace gcn
          * @param spacing is a number between 0 and 255. The default value for 
                           spacing is 4 and can be changed using this method.
          */
-        virtual void setSpacing(unsigned int spacing);
+        void setSpacing(unsigned int spacing);
 
         /**
          * Gets the spacing between the border of this button and its caption.
          *
          * @return spacing.
          */
-        virtual unsigned int getSpacing() const;
+        unsigned int getSpacing() const;
 
         /**
          * Adjusts the buttons size to fit the content.
          */
-        virtual void adjustSize();
+        void adjustSize();
 
         /**
          * Checks if the button is pressed down. Useful when drawing.
          *
          * @return true if the button is pressed down.
          */
-        virtual bool isPressed() const;
+        bool isPressed() const;
 
 
         //Inherited from Widget

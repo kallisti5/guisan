@@ -94,28 +94,28 @@ namespace gcn
          *
          * @param caption the Window caption.
          */
-        virtual void setCaption(const std::string& caption);
+        void setCaption(const std::string& caption);
 
         /**
          * Gets the Window caption.
          *
          * @return the Window caption.
          */
-        virtual const std::string& getCaption() const;
+        const std::string& getCaption() const;
 
         /**
          * Sets the alignment for the caption.
          *
          * @param alignment Graphics::LEFT, Graphics::CENTER or Graphics::RIGHT.
          */
-        virtual void setAlignment(unsigned int alignment);
+        void setAlignment(unsigned int alignment);
 
         /**
          * Gets the alignment for the caption.
          *
          * @return alignment of caption.
          */
-        virtual unsigned int getAlignment() const;
+        unsigned int getAlignment() const;
 
         /**
          * Sets the padding of the window which is the distance between the
@@ -123,42 +123,42 @@ namespace gcn
          *
          * @param padding the padding value.
          */
-        virtual void setPadding(unsigned int padding);
+        void setPadding(unsigned int padding);
 
         /**
          * Gets the padding.
          *
          * @return the padding value.
          */
-        virtual unsigned int getPadding() const;
+        unsigned int getPadding() const;
 
         /**
          * Sets the title bar height.
          *
          * @param height the title height value.
          */
-        virtual void setTitleBarHeight(unsigned int height);
+        void setTitleBarHeight(unsigned int height);
 
         /**
          * Gets the title bar height.
          *
          * @return the title bar height.
          */
-        virtual unsigned int getTitleBarHeight();
+        unsigned int getTitleBarHeight();
 
         /**
          * Sets the Window to be moveble.
          *
          * @param movable true or false.
          */
-        virtual void setMovable(bool movable);
+        void setMovable(bool movable);
 
         /**
          * Check if the window is movable.
          *
          * @return true or false.
          */
-        virtual bool isMovable() const;
+        bool isMovable() const;
 
         /**
          * Sets the Window to be opaque. If it's not opaque, the content area
@@ -166,14 +166,14 @@ namespace gcn
          *
          * @param opaque true or false.
          */
-        virtual void setOpaque(bool opaque);
+        void setOpaque(bool opaque);
 
         /**
          * Checks if the Window is opaque.
          *
          * @return true or false.
          */
-        virtual bool isOpaque();
+        bool isOpaque();
 
         /**
          * Resizes the container to fit the content exactly.

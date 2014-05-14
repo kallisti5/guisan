@@ -104,7 +104,7 @@ namespace gcn
          *
          * @return the button of the mouse event.
          */
-        virtual unsigned int getButton() const;
+        unsigned int getButton() const;
 
         /**
          * Gets the x coordinate of the mouse event. The coordinate is relative to
@@ -112,7 +112,7 @@ namespace gcn
          *
          * @return the x coordinate of the mouse event.
          */
-        virtual int getX() const;
+        int getX() const;
 
         /**
          * Gets the y coordinate of the mouse event. The coordinate is relative to
@@ -120,21 +120,21 @@ namespace gcn
          *
          * @return the y coordinate of the mouse event.
          */
-        virtual int getY() const;
+        int getY() const;
 
         /**
          * Gets the click count.
          *
          * @return the click count of the mouse event.
          */
-        virtual int getClickCount() const;
+        int getClickCount() const;
 
         /**
          * Gets the type of the event.
          *
          * @return the type of the event.
          */
-        virtual unsigned int getType() const;
+        unsigned int getType() const;
 
         /**
          * Mouse event types.

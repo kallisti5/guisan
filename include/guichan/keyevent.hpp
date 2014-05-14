@@ -104,7 +104,7 @@ namespace gcn
          *
          * @return the type of the event.
          */
-        virtual unsigned int getType() const;
+        unsigned int getType() const;
 
         /**
          * Checks whether the key event occured on the numeric pad.

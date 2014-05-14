@@ -96,7 +96,7 @@ namespace gcn
 
         virtual void _setFocusHandler(FocusHandler* focusHandler);
 
-        virtual void setInternalFocusHandler(FocusHandler* focusHandler);
+        void setInternalFocusHandler(FocusHandler* focusHandler);
 
         virtual void showWidgetPart(Widget* widget, Rectangle area);
 

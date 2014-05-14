@@ -65,8 +65,11 @@ namespace gcn
     class MouseInput;
 
     /**
-     * Input events base class. Input classes should inherit from this class
-     * and implements it's functions.
+     * Used for grabbing user input and heavily used internally by Guichan. 
+     * We include implemented Input classes for some common platforms like
+     * the Allegro library, the OpenGL library and the SDL library. To make
+     * Guichan usable under another platform, an Input class must be
+     * implemented.
      *
      * @see SDLInput, AllegroInput
      */

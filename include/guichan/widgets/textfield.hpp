@@ -92,14 +92,14 @@ namespace gcn
          *
          * @param text the new text in the TextField.
          */
-        virtual void setText(const std::string& text);
+        void setText(const std::string& text);
 
         /**
          * Gets the text.
          *
          * @return the text of the TextField.
          */
-        virtual const std::string& getText() const;
+        const std::string& getText() const;
 
         /**
          * Draws the caret (the little marker in the text that shows where the
@@ -116,28 +116,28 @@ namespace gcn
          * constructor taking a string uses this function to initialize the
          * size of the TextField.
          */
-        virtual void adjustSize();
+        void adjustSize();
 
         /**
          * Adjusts the height of the text field to fit the font size. The
          * height of the TextField is initialized with this function by the
          * constructors.
          */
-        virtual void adjustHeight();
+        void adjustHeight();
 
         /**
          * Sets the caret position.
          *
          * @param position the caret position.
          */
-        virtual void setCaretPosition(unsigned int position);
+        void setCaretPosition(unsigned int position);
 
         /**
          * Gets the caret position.
          *
          * @return the caret position.
          */
-        virtual unsigned int getCaretPosition() const;
+        unsigned int getCaretPosition() const;
 
 
         // Inherited from Widget

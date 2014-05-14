@@ -110,33 +110,33 @@ namespace gcn
          *
          * @return the selected element.
          */
-        virtual int getSelected();
+        int getSelected();
 
         /**
          * Sets the ListModel index of the selected element.
          *
          * @param selected the ListModel index of the selected element.
          */
-        virtual void setSelected(int selected);
+        void setSelected(int selected);
 
         /**
          * Sets the ListModel to use.
          *
          * @param listModel the ListModel to use.
          */
-        virtual void setListModel(ListModel *listModel);
+        void setListModel(ListModel *listModel);
 
         /**
          * Gets the ListModel used.
          *
          * @return the ListModel used.
          */
-        virtual ListModel *getListModel();
+        ListModel *getListModel();
 
         /**
          * Adjusts the height of the DropDown fitting it's parents height.
          */
-        virtual void adjustHeight();
+        void adjustHeight();
 
 
         // Inherited from Widget
@@ -145,13 +145,13 @@ namespace gcn
 
         virtual void drawBorder(Graphics* graphics);
 
-        virtual void setBaseColor(const Color& color);
+        void setBaseColor(const Color& color);
 
-        virtual void setBackgroundColor(const Color& color);
+        void setBackgroundColor(const Color& color);
 
-        virtual void setForegroundColor(const Color& color);
+        void setForegroundColor(const Color& color);
 
-		virtual void setFont(Font *font);
+		void setFont(Font *font);
 
 
         // Inherited from BasicContainer

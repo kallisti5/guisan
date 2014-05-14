@@ -97,20 +97,20 @@ namespace gcn
          *
          * @param text the text of the TextBox.
          */
-        virtual void setText(const std::string& text);
+        void setText(const std::string& text);
 
         /**
          * Gets the text.
          * @return the text of the TextBox.
          */
-        virtual std::string getText() const;
+        std::string getText() const;
 
         /**
          * Gets the row of a text.
          *
          * @return the text of a certain row in the TextBox.
          */
-        virtual const std::string& getTextRow(int row) const;
+        const std::string& getTextRow(int row) const;
 
         /**
          * Sets the text of a certain row in a TextBox.
@@ -118,56 +118,56 @@ namespace gcn
          * @param row the row number.
          * @param text the text of a certain row in the TextBox.
          */
-        virtual void setTextRow(int row, const std::string& text);
+        void setTextRow(int row, const std::string& text);
 
         /**
          * Gets the number of rows in the text.
          *
          * @return the number of rows in the text.
          */
-        virtual unsigned int getNumberOfRows() const;
+        unsigned int getNumberOfRows() const;
 
         /**
          * Gets the caret position in the text.
          *
          * @return the caret position in the text.
          */
-        virtual unsigned int getCaretPosition() const;
+        unsigned int getCaretPosition() const;
 
         /**
          * Sets the position of the caret in the text.
          *
          * @param position the positon of the caret.
          */
-        virtual void setCaretPosition(unsigned int position);
+        void setCaretPosition(unsigned int position);
 
         /**
          * Gets the row the caret is in in the text.
          *
          * @return the row the caret is in in the text.
          */
-        virtual unsigned int getCaretRow() const;
+        unsigned int getCaretRow() const;
 
         /**
          * Sets the row the caret should be in in the text.
          *
          * @param row the row number.
          */
-        virtual void setCaretRow(int row);
+        void setCaretRow(int row);
 
         /**
          * Gets the column the caret is in in the text.
          *
          * @return the column the caret is in in the text.
          */
-        virtual unsigned int getCaretColumn() const;
+        unsigned int getCaretColumn() const;
 
         /**
          * Sets the column the caret should be in in the text.
          *
          * @param column the column number.
          */
-        virtual void setCaretColumn(int column);
+        void setCaretColumn(int column);
 
         /**
          * Sets the row and the column the caret should be in in the text.
@@ -175,7 +175,7 @@ namespace gcn
          * @param row the row number.
          * @param column the column number.
          */
-        virtual void setCaretRowColumn(int row, int column);
+        void setCaretRowColumn(int row, int column);
 
         /**
          * Scrolls the text to the caret if the TextBox is in a ScrollArea.
@@ -187,14 +187,14 @@ namespace gcn
          *
          * @return true it the TextBox is editable.
          */
-        virtual bool isEditable() const;
+        bool isEditable() const;
 
         /**
          * Sets if the TextBox should be editable or not.
          *
          * @param editable true if the TextBox should be editable.
          */
-        virtual void setEditable(bool editable);
+        void setEditable(bool editable);
 
         /**
          * Adds a text row to the text.
@@ -208,14 +208,14 @@ namespace gcn
          *
          * @return true if the TextBox is opaque
          */
-        virtual bool isOpaque();
+        bool isOpaque();
 
         /**
          * Sets the TextBox to be opaque.
          *
          * @param opaque true if the TextBox should be opaque.
          */
-        virtual void setOpaque(bool opaque);
+        void setOpaque(bool opaque);
 
 
         // Inherited from Widget

@@ -106,33 +106,33 @@ namespace gcn
          *
          * @return true if the CheckBox is marked.
          */
-        virtual bool isMarked() const;
+        bool isMarked() const;
 
         /**
          * Sets the CheckBox to be marked.
          *
          * @param marked true if the CheckBox should be marked.
          */
-        virtual void setMarked(bool marked);
+        void setMarked(bool marked);
 
         /**
          * Gets the CheckBox caption.
          *
          * @return the CheckBox caption.
          */
-        virtual const std::string &getCaption() const;
+        const std::string &getCaption() const;
 
         /**
          * Sets the CheckBox caption.
          *
          * @param caption the CheckBox caption.
          */
-        virtual void setCaption(const std::string& caption);
+        void setCaption(const std::string& caption);
 
         /**
          * Adjusts the CheckBox size to fit the font size.
          */
-        virtual void adjustSize();
+        void adjustSize();
 
 
         // Inherited from Widget

@@ -102,49 +102,49 @@ namespace gcn
          * @param scaleStart the start of the scale.
          * @param scaleEnd the end of the scale.
          */
-        virtual void setScale(double scaleStart, double scaleEnd);
+        void setScale(double scaleStart, double scaleEnd);
 
         /**
          * Gets the scale start.
          *
          * @return the scale start.
          */
-        virtual double getScaleStart() const;
+        double getScaleStart() const;
 
         /**
          * Sets the scale start.
          *
          * @param scaleStart the start of the scale.
          */
-        virtual void setScaleStart(double scaleStart);
+        void setScaleStart(double scaleStart);
 
         /**
          * Gets the scale end.
          *
          * @return the scale end.
          */
-        virtual double getScaleEnd() const;
+        double getScaleEnd() const;
 
         /**
          * Sets the scale end.
          *
          * @param scaleEnd the end of the scale.
          */
-        virtual void setScaleEnd(double scaleEnd);
+        void setScaleEnd(double scaleEnd);
 
         /**
          * Gets the current value.
          *
          * @return the current value.
          */
-        virtual double getValue() const;
+        double getValue() const;
 
         /**
          * Sets the current value.
          *
          * @param value a scale value.
          */
-        virtual void setValue(double value);
+        void setValue(double value);
 
         /**
          * Draws the marker.
@@ -158,14 +158,14 @@ namespace gcn
          *
          * @param length new length for the marker.
          */
-        virtual void setMarkerLength(int length);
+        void setMarkerLength(int length);
 
         /**
          * Gets the length of the marker.
          *
          * @return the length of the marker.
          */
-        virtual int getMarkerLength() const;
+        int getMarkerLength() const;
 
         /**
          * Sets the orientation of the slider. A slider can be drawn verticaly
@@ -173,14 +173,14 @@ namespace gcn
          *
          * @param orientation the orientation.
          */
-        virtual void setOrientation(unsigned int orientation);
+        void setOrientation(unsigned int orientation);
 
         /**
          * Gets the orientation of the slider. Se the enum in this class.
          *
          * @return the orientation of the slider.
          */
-        virtual unsigned int getOrientation() const;
+        unsigned int getOrientation() const;
 
         /**
          * Sets the step length. Step length is used when the keys left and
@@ -188,14 +188,14 @@ namespace gcn
          *
          * @param length the step length.
          */
-        virtual void setStepLength(double length);
+        void setStepLength(double length);
 
         /**
          * Gets the step length.
          *
          * @return the step length.
          */
-        virtual double getStepLength() const;
+        double getStepLength() const;
 
 
         // Inherited from Widget

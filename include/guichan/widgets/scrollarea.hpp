@@ -113,14 +113,14 @@ namespace gcn
          *
          * @param widget the content of the ScrollArea.
          */
-        virtual void setContent(Widget* widget);
+        void setContent(Widget* widget);
 
         /**
          * Gets the content.
          *
          * @return the content of the ScrollArea.
          */
-        virtual Widget* getContent();
+        Widget* getContent();
 
         /**
          * Sets the horizontal scrollbar policy. See enum with policies.
@@ -128,7 +128,7 @@ namespace gcn
          * @param hPolicy the policy for the horizontal scrollbar. See enum with
          *                policies.
          */
-        virtual void setHorizontalScrollPolicy(unsigned int hPolicy);
+        void setHorizontalScrollPolicy(unsigned int hPolicy);
 
         /**
          * Gets the horizontal scrollbar policy. See enum with policies.
@@ -136,7 +136,7 @@ namespace gcn
          * @return the policy for the horizontal scrollbar policy. See enum with
          *         policies.
          */
-        virtual unsigned int getHorizontalScrollPolicy();
+        unsigned int getHorizontalScrollPolicy();
 
         /**
          * Sets the vertical scrollbar policy. See enum with policies.
@@ -144,7 +144,7 @@ namespace gcn
          * @param vPolicy the policy for the vertical scrollbar. See enum with
          *                policies.
          */
-        virtual void setVerticalScrollPolicy(unsigned int vPolicy);
+        void setVerticalScrollPolicy(unsigned int vPolicy);
 
         /**
          * Gets the vertical scrollbar policy. See enum with policies.
@@ -152,7 +152,7 @@ namespace gcn
          * @return the policy for the vertical scrollbar. See enum with
          *         policies.
          */
-        virtual unsigned int getVerticalScrollPolicy();
+        unsigned int getVerticalScrollPolicy();
 
         /**
          * Sets the horizontal and vertical scrollbar policy. See enum with policies.
@@ -162,34 +162,34 @@ namespace gcn
          * @param vPolicy the policy for the vertical scrollbar. See enum with
          *                policies.
          */
-        virtual void setScrollPolicy(unsigned int hPolicy, unsigned int vPolicy);
+        void setScrollPolicy(unsigned int hPolicy, unsigned int vPolicy);
 
         /**
          * Sets the amount to scroll vertically.
          *
          * @param vScroll the amount to scroll.
          */
-        virtual void setVerticalScrollAmount(int vScroll);
+        void setVerticalScrollAmount(int vScroll);
 
         /**
          * Gets the amount that is scrolled vertically.
          * @return the scroll amount on vertical scroll.
          */
-        virtual int getVerticalScrollAmount();
+        int getVerticalScrollAmount();
 
         /**
          * Sets the amount to scroll horizontally.
          *
          * @param hScroll the amount to scroll.
          */
-        virtual void setHorizontalScrollAmount(int hScroll);
+        void setHorizontalScrollAmount(int hScroll);
 
         /**
          * Gets the amount that is scrolled horizontally.
          *
          * @return the scroll amount on horizontal scroll.
          */
-        virtual int getHorizontalScrollAmount();
+        int getHorizontalScrollAmount();
 
         /**
          * Sets the amount to scroll horizontally and vertically.
@@ -197,59 +197,59 @@ namespace gcn
          * @param hScroll the amount to scroll on horizontal scroll.
          * @param vScroll the amount to scroll on vertical scroll.
          */
-        virtual void setScrollAmount(int hScroll, int vScroll);
+        void setScrollAmount(int hScroll, int vScroll);
 
         /**
          * Gets the maximum amount of horizontal scroll.
          *
          * @return the horizontal max scroll.
          */
-        virtual int getHorizontalMaxScroll();
+        int getHorizontalMaxScroll();
 
         /**
          * Gets the maximum amount of vertical scroll.
          *
          * @return the vertical max scroll.
          */
-        virtual int getVerticalMaxScroll();
+        int getVerticalMaxScroll();
 
         /**
          * Sets the width.
          *
          * @param width the width of the ScrollBar.
          */
-        virtual void setScrollbarWidth(int width);
+        void setScrollbarWidth(int width);
 
         /**
          * Gets the width.
 
          * @return the width of the ScrollBar.
          */
-        virtual int getScrollbarWidth();
+        int getScrollbarWidth();
 
         /**
          * Sets the amount to scroll in pixels when the left scroll button is
          * pushed.
          */
-        virtual void setLeftButtonScrollAmount(int amount);
+        void setLeftButtonScrollAmount(int amount);
 
         /**
          * Sets the amount to scroll in pixels when the right scroll button is
          * pushed.
          */
-        virtual void setRightButtonScrollAmount(int amount);
+        void setRightButtonScrollAmount(int amount);
 
         /**
          * Sets the amount to scroll in pixels when the up scroll button is
          * pushed.
          */
-        virtual void setUpButtonScrollAmount(int amount);
+        void setUpButtonScrollAmount(int amount);
 
         /**
          * Sets the amount to scroll in pixels when the down scroll button is
          * pushed.
          */
-        virtual void setDownButtonScrollAmount(int amount);
+        void setDownButtonScrollAmount(int amount);
 
         /**
          * Gets the amount to scroll in pixels when the left scroll button is
@@ -257,7 +257,7 @@ namespace gcn
          *
          * @return the amount to scroll when the left scroll button is pushed.
          */
-        virtual int getLeftButtonScrollAmount();
+        int getLeftButtonScrollAmount();
 
         /**
          * Gets the amount to scroll in pixels when the right scroll button is
@@ -265,7 +265,7 @@ namespace gcn
          *
          * @return the amount to scroll when the right scroll button is pushed.
          */
-        virtual int getRightButtonScrollAmount();
+        int getRightButtonScrollAmount();
 
         /**
          * Gets the amount to scroll in pixels when the up scroll button is
@@ -273,7 +273,7 @@ namespace gcn
          *
          * @return the amount to scroll when the up scroll button is pushed.
          */
-        virtual int getUpButtonScrollAmount();
+        int getUpButtonScrollAmount();
 
         /**
          * Gets the amount to scroll in pixels when the down scroll button is
@@ -281,7 +281,7 @@ namespace gcn
          *
          * @return the amount to scroll when the down scroll button is pushed.
          */
-        virtual int getDownButtonScrollAmount();
+        int getDownButtonScrollAmount();
 
 
         // Inherited from BasicContainer
@@ -301,11 +301,11 @@ namespace gcn
 
         virtual void logic();
 
-        virtual void setWidth(int width);
+        void setWidth(int width);
 
-        virtual void setHeight(int height);
+        void setHeight(int height);
 
-        virtual void setDimension(const Rectangle& dimension);
+        void setDimension(const Rectangle& dimension);
 
 
         // Inherited from MouseListener
@@ -412,56 +412,56 @@ namespace gcn
          *
          * @return the dimension of the up button.
          */
-        virtual Rectangle getUpButtonDimension();
+        Rectangle getUpButtonDimension();
 
         /**
          * Gets the down button dimension.
          *
          * @return the dimension of the down button.
          */
-        virtual Rectangle getDownButtonDimension();
+        Rectangle getDownButtonDimension();
 
         /**
          * Gets the left button dimension.
          *
          * @return the dimension of the left button.
          */
-        virtual Rectangle getLeftButtonDimension();
+        Rectangle getLeftButtonDimension();
 
         /**
          * Gets the right button dimension.
          *
          * @return the dimension of the right button.
          */
-        virtual Rectangle getRightButtonDimension();
+        Rectangle getRightButtonDimension();
 
         /**
          * Gets the vertical scrollbar dimension.
          *
          * @return the dimension of the vertical scrollbar.
          */
-        virtual Rectangle getVerticalBarDimension();
+        Rectangle getVerticalBarDimension();
 
         /**
          * Gets the horizontal scrollbar dimension.
          *
          * @return the dimension of the horizontal scrollbar.
          */
-        virtual Rectangle getHorizontalBarDimension();
+        Rectangle getHorizontalBarDimension();
 
         /**
          * Gets the vertical marker dimension.
          *
          * @return the dimension of the vertical marker.
          */
-        virtual Rectangle getVerticalMarkerDimension();
+        Rectangle getVerticalMarkerDimension();
 
         /**
          * Gets the horizontal marker dimension.
          *
          * @return the dimension of the horizontal marker.
          */
-        virtual Rectangle getHorizontalMarkerDimension();
+        Rectangle getHorizontalMarkerDimension();
 
         int mVScroll;
         int mHScroll;

@@ -99,33 +99,33 @@ namespace gcn
          *
          * @return the ListModel index of the selected element.
          */
-        virtual int getSelected();
+        int getSelected();
 
         /**
          * Sets the ListModel index of the selected element.
          *
          * @param selected the ListModel index of the selected element.
          */
-        virtual void setSelected(int selected);
+        void setSelected(int selected);
 
         /**
          * Sets the ListModel to use.
          *
          * @param listModel the ListModel to use.
          */
-        virtual void setListModel(ListModel *listModel);
+        void setListModel(ListModel *listModel);
 
         /**
          * Gets the ListModel used.
          *
          * @return the ListModel used.
          */
-        virtual ListModel *getListModel();
+        ListModel *getListModel();
 
         /**
          * Adjusts the size of the ListBox to fit the font used.
          */
-        virtual void adjustSize();
+        void adjustSize();
 
         /**
          * Checks whether the ListBox wraps when selecting items with keyboard.
@@ -136,7 +136,7 @@ namespace gcn
          *
          * @return true if wrapping, fasle otherwise.
          */
-        virtual bool isWrappingKeyboardSelection();
+        bool isWrappingKeyboardSelection();
 
         /**
          * Sets the ListBox to wrap or not when selecting items with keyboard.
@@ -146,7 +146,7 @@ namespace gcn
          * first item will get selected.
          *
          */
-         virtual void setWrappingKeyboardSelection(bool wrapping);
+        void setWrappingKeyboardSelection(bool wrapping);
 
         // Inherited from Widget
 

@@ -98,7 +98,7 @@ namespace gcn
          * @param opaque true if the Container should be opaque.
          * @see isOpaque
          */
-        virtual void setOpaque(bool opaque);
+        void setOpaque(bool opaque);
 
         /**
          * Checks if the Container is opaque.
@@ -106,7 +106,7 @@ namespace gcn
          * @return true if the Container is opaque.
          * @see setOpaque
          */
-        virtual bool isOpaque() const;
+        bool isOpaque() const;
 
         /**
          * Adds a Widget to the Container.

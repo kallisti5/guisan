@@ -111,47 +111,47 @@ namespace gcn
          *
          * @return true if the RadioButton is marked.
          */
-        virtual bool isMarked() const;
+        bool isMarked() const;
 
         /**
          * Sets the RadioButton to be marked.
          *
          * @param marked true if the RadioButton should be marked.
          */
-        virtual void setMarked(bool marked);
+        void setMarked(bool marked);
 
         /**
          * Gets the RadioButton caption.
          *
          * @return the RadioButton caption.
          */
-        virtual const std::string &getCaption() const;
+        const std::string &getCaption() const;
 
         /**
          * Sets the RadioButton caption.
          *
          * @param caption the RadioButton caption.
          */
-        virtual void setCaption(const std::string caption);
+        void setCaption(const std::string caption);
 
         /**
          * Sets the group the RadioButton should belong to.
          *
          * @param group the name of the group.
          */
-        virtual void setGroup(const std::string &group);
+        void setGroup(const std::string &group);
 
         /**
          * Gets the group the RadioButton belongs to.
          *
          * @return the group the RadioButton belongs to.
          */
-        virtual const std::string &getGroup() const;
+        const std::string &getGroup() const;
 
         /**
          * Adjusts the RadioButtons size to fit the font size.
          */
-        virtual void adjustSize();
+        void adjustSize();
 
 
         // Inherited from Widget
