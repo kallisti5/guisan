@@ -263,12 +263,13 @@ namespace gcn
         y2 += mClipStack.top().yOffset;
 
         glBegin(GL_LINES);
-        glVertex3f(x1+0.5f, y1+0.5f, 0);
-        glVertex3f(x2+0.5f, y2+0.5f, 0);
+	
+        glVertex3f(x1 + 0.5f, y1 + 0.5f, 0);
+        glVertex3f(x2 + 0.5f, y2 + 0.5f, 0);
         glEnd();
 
         glBegin(GL_POINTS);
-        glVertex3f(x2+0.5f, y2+0.5f, 0);
+        glVertex3f(x2 + 0.5f, y2 + 0.5f, 0);
         glEnd();
     }
 
