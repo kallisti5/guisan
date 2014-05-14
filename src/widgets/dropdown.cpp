@@ -118,33 +118,18 @@ namespace gcn
 
         adjustHeight();
         setBorderSize(1);
-
-        mScrollArea->addDeathListener(this);
     }
 
     DropDown::~DropDown()
     {
-		// TODO: This triggers static analysis for use after free
-		// however reversing the logic results in crashes on exit
-        if (mInternalScrollArea)
-        {
-            delete mScrollArea;
-        }
+	if (widgetExists(mListBox))
+		mListBox->removeActionListener(this);
 
-        if (mInternalListBox)
-        {
-            delete mListBox;
-        }
+	if (mInternalScrollArea)
+		delete mScrollArea;
 
-        if (widgetExists(mListBox))
-        {
-            mListBox->removeActionListener(this);
-        }
-
-        if (mScrollArea != NULL)
-        {
-            mScrollArea->removeDeathListener(this);
-        }
+	if (mInternalListBox)
+		delete mListBox;
     }
 
     void DropDown::draw(Graphics* graphics)
@@ -422,9 +407,10 @@ namespace gcn
     void DropDown::adjustHeight()
     {
         if (mScrollArea == NULL)
-        {
-            throw GCN_EXCEPTION("ScrollArea has been deleted.");
-        }
+            throw GCN_EXCEPTION("Scroll Area has been deleted.");
+
+	if (mListBox == NULL)
+		throw GCN_EXCEPTION("List box has been deleted.");
 
         int listBoxHeight = mListBox->getHeight();
         int h2 = getFont()->getHeight();
@@ -496,10 +482,7 @@ namespace gcn
         {
             mScrollArea = NULL;
         }
-        else
-        {
-            BasicContainer::death(event);
-        }
+        BasicContainer::death(event);
     }
 
     void DropDown::action(const ActionEvent& actionEvent)
