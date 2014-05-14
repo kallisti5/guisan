@@ -144,7 +144,6 @@ namespace gcn
 
         mHeight = j;
         int x = 0, y = 0;
-        unsigned char k;
 
         for (i=glyphsFrom; i<glyphsTo+1; i++)
         {
