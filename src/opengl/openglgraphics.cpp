@@ -196,15 +196,22 @@ namespace gcn
                                    int dstX, int dstY, int width,
                                    int height)
     {
-		const OpenGLImage* srcImage = dynamic_cast<const OpenGLImage*>(image);
+	const OpenGLImage* srcImage = dynamic_cast<const OpenGLImage*>(image);
 
         if (srcImage == NULL)
         {
             throw GCN_EXCEPTION("Trying to draw an image of unknown format, must be an OpenGLImage.");
         }
 
-        dstX += mClipStack.top().xOffset;
-        dstY += mClipStack.top().yOffset;
+        if (mClipStack.empty()) {
+                throw GCN_EXCEPTION("Clip stack is empty, perhaps you"
+                        "called a draw funtion outside of _beginDraw() and _endDraw()?");
+        }
+
+        const ClipRectangle& top = mClipStack.top();
+
+        dstX += top.xOffset;
+        dstY += top.yOffset;
 
         // Find OpenGL texture coordinates
         float texX1 = srcX / (float)srcImage->getTextureWidth();
@@ -247,8 +254,14 @@ namespace gcn
 
     void OpenGLGraphics::drawPoint(int x, int y)
     {
-        x += mClipStack.top().xOffset;
-        y += mClipStack.top().yOffset;
+	if (mClipStack.empty()) {
+		throw GCN_EXCEPTION("Clip stack is empty, perhaps you"
+			"called a draw funtion outside of _beginDraw() and _endDraw()?");
+        }
+        const ClipRectangle& top = mClipStack.top();
+
+        x += top.xOffset;
+        y += top.yOffset;
 
         glBegin(GL_POINTS);
         glVertex3i(x, y, 0);
@@ -257,10 +270,16 @@ namespace gcn
 
     void OpenGLGraphics::drawLine(int x1, int y1, int x2, int y2)
     {
-        x1 += mClipStack.top().xOffset;
-        y1 += mClipStack.top().yOffset;
-        x2 += mClipStack.top().xOffset;
-        y2 += mClipStack.top().yOffset;
+	if (mClipStack.empty()) {
+		throw GCN_EXCEPTION("Clip stack is empty, perhaps you"
+			"called a draw funtion outside of _beginDraw() and _endDraw()?");
+        }
+        const ClipRectangle& top = mClipStack.top();
+
+        x1 += top.xOffset;
+        y1 += top.yOffset;
+        x2 += top.xOffset;
+        y2 += top.yOffset;
 
         glBegin(GL_LINES);
 	
@@ -275,29 +294,41 @@ namespace gcn
 
     void OpenGLGraphics::drawRectangle(const Rectangle& rectangle)
     {
+	if (mClipStack.empty()) {
+		throw GCN_EXCEPTION("Clip stack is empty, perhaps you"
+			"called a draw funtion outside of _beginDraw() and _endDraw()?");
+        }
+        const ClipRectangle& top = mClipStack.top();
+
         glBegin(GL_LINE_LOOP);
-        glVertex3f(rectangle.x + mClipStack.top().xOffset + 0.5f,
-                   rectangle.y + mClipStack.top().yOffset + 0.5f, 0);
-        glVertex3f(rectangle.x + rectangle.width - 0.5f + mClipStack.top().xOffset,
-                   rectangle.y + mClipStack.top().yOffset + 0.5f, 0);
-        glVertex3f(rectangle.x + rectangle.width - 0.5f + mClipStack.top().xOffset,
-                   rectangle.y + rectangle.height + mClipStack.top().yOffset - 0.5f, 0);
-        glVertex3f(rectangle.x + mClipStack.top().xOffset + 0.5f,
-                   rectangle.y + rectangle.height + mClipStack.top().yOffset - 0.5f, 0);
+        glVertex3f(rectangle.x + top.xOffset + 0.5f,
+                   rectangle.y + top.yOffset + 0.5f, 0);
+        glVertex3f(rectangle.x + rectangle.width - 0.5f + top.xOffset,
+                   rectangle.y + top.yOffset + 0.5f, 0);
+        glVertex3f(rectangle.x + rectangle.width - 0.5f + top.xOffset,
+                   rectangle.y + rectangle.height + top.yOffset - 0.5f, 0);
+        glVertex3f(rectangle.x + top.xOffset + 0.5f,
+                   rectangle.y + rectangle.height + top.yOffset - 0.5f, 0);
         glEnd();
     }
 
     void OpenGLGraphics::fillRectangle(const Rectangle& rectangle)
     {
+	if (mClipStack.empty()) {
+		throw GCN_EXCEPTION("Clip stack is empty, perhaps you"
+			"called a draw funtion outside of _beginDraw() and _endDraw()?");
+        }
+        const ClipRectangle& top = mClipStack.top();
+
         glBegin(GL_QUADS);
-        glVertex3i(rectangle.x + mClipStack.top().xOffset,
-                   rectangle.y + mClipStack.top().yOffset, 0);
-        glVertex3i(rectangle.x + rectangle.width + mClipStack.top().xOffset,
-                   rectangle.y + mClipStack.top().yOffset, 0);
-        glVertex3i(rectangle.x + rectangle.width + mClipStack.top().xOffset,
-                   rectangle.y + rectangle.height + mClipStack.top().yOffset, 0);
-        glVertex3i(rectangle.x + mClipStack.top().xOffset,
-                   rectangle.y + rectangle.height + mClipStack.top().yOffset, 0);
+        glVertex3i(rectangle.x + top.xOffset,
+                   rectangle.y + top.yOffset, 0);
+        glVertex3i(rectangle.x + rectangle.width + top.xOffset,
+                   rectangle.y + top.yOffset, 0);
+        glVertex3i(rectangle.x + rectangle.width + top.xOffset,
+                   rectangle.y + rectangle.height + top.yOffset, 0);
+        glVertex3i(rectangle.x + top.xOffset,
+                   rectangle.y + rectangle.height + top.yOffset, 0);
         glEnd();
     }
 
