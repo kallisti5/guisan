@@ -130,9 +130,9 @@ initWidgets()
 	checkBox1 = new gcn::CheckBox("Checkbox 1");
 	checkBox2 = new gcn::CheckBox("Checkbox 2");
 
-	radioButton1 = new gcn::RadioButton("RadioButton 1", "radiogroup", true);
-	radioButton2 = new gcn::RadioButton("RadioButton 2", "radiogroup");
-	radioButton3 = new gcn::RadioButton("RadioButton 3", "radiogroup");
+	radioButton1 = new gcn::RadioButton("Radio Button 1", "radiogroup", true);
+	radioButton2 = new gcn::RadioButton("Radio Button 2", "radiogroup");
+	radioButton3 = new gcn::RadioButton("Radio Button 3", "radiogroup");
 
 	slider = new gcn::Slider(0, 10);
 	slider->setSize(100, 10);
