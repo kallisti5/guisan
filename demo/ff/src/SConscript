@@ -1,0 +1,21 @@
+import os
+import sys
+import platform
+
+Import("env")
+
+main_sources = [
+	'ffcharacterchooser.cpp',
+	'ffcontainer.cpp',
+	'ffdemo.cpp',
+	'fflistbox.cpp',
+	'ffscrollarea.cpp',
+	'guichanffdemo.cpp'
+]
+
+ff_demo = env.Clone()
+
+ff_demo.ParseConfig('pkg-config --cflags --libs sdl2')
+ff_demo.ParseConfig('pkg-config --cflags --libs SDL2_image')
+
+ff_demo.Program(target = 'ff_demo', source = main_sources)
