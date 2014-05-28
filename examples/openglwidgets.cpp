@@ -118,11 +118,10 @@ void initWidgets()
 	 * Create all the widgets
 	 */
 	label = new gcn::Label("Label");
-
-	image = gcn::Image::load("gui-chan.bmp");
+	image = gcn::Image::load("guisan.png");
 	icon = new gcn::Icon(image);
 
-	button = new gcn::Button("Button");
+	button = new gcn::Button("Label");
 
 	textField = new gcn::TextField("Text field");
 
@@ -135,6 +134,7 @@ void initWidgets()
 		"vehicula libero blandit at pellentesque\n"
 		"ipsum vehicula Mauris id turpis hendrerit\n"
 		"tempor velit nec hendrerit nulla");
+
 	textBoxScrollArea = new gcn::ScrollArea(textBox);
 	textBoxScrollArea->setWidth(270);
 	textBoxScrollArea->setHeight(100);
@@ -177,19 +177,19 @@ void initWidgets()
 	/*
 	 * Add them to the top container
 	 */
-	top->add(label, 10, 10);
-	top->add(icon, 10, 30);
-	top->add(button, 200, 10);
-	top->add(textField, 250, 10);
-	top->add(textBoxScrollArea, 200, 50);
-	top->add(listBox, 200, 200);
-	top->add(dropDown, 500, 10);
-	top->add(checkBox1, 500, 130);
-	top->add(checkBox2, 500, 150);
-	top->add(radioButton1, 500, 200);
-	top->add(radioButton2, 500, 220);
-	top->add(radioButton3, 500, 240);
-	top->add(slider, 500, 300);
+	top->add(label, 290, 10);
+	top->add(icon, 10, 10);
+	top->add(button, 325, 10);
+	top->add(textField, 375, 10);
+	top->add(textBoxScrollArea, 290, 50);
+	top->add(listBox, 290, 200);
+	top->add(dropDown, 580, 10);
+	top->add(checkBox1, 580, 50);
+	top->add(checkBox2, 580, 70);
+	top->add(radioButton1, 580, 120);
+	top->add(radioButton2, 580, 140);
+	top->add(radioButton3, 580, 160);
+	top->add(slider, 580, 200);
 	top->add(guisanWindow, 100, 350);
 	top->add(nestedScrollArea, 440, 350);
 }
@@ -205,7 +205,7 @@ void init()
 	SDL_Init(SDL_INIT_VIDEO);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	window = SDL_CreateWindow("guisan OpenGL hello world",
-		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480,
+		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 700, 480,
 		SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 
 	screen = SDL_GetWindowSurface(window);
@@ -214,7 +214,7 @@ void init()
 	context = SDL_GL_CreateContext(window);
 
 	// Setup OpenGL
-	glViewport(0, 0, 640, 480);
+	glViewport(0, 0, 700, 480);
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
 	// We want to enable key repeat
@@ -230,7 +230,7 @@ void init()
 	gcn::Image::setImageLoader(imageLoader);
 	graphics = new gcn::OpenGLGraphics();
 	// We need to tell OpenGL graphics how big the screen is.
-	graphics->setTargetPlane(640, 480);
+	graphics->setTargetPlane(700, 480);
 	input = new gcn::SDLInput();
 
 	/*
@@ -239,7 +239,7 @@ void init()
 	 */
 	top = new gcn::Container();
 	// Set the dimension of the top container to match the screen.
-	top->setDimension(gcn::Rectangle(0, 0, 640, 480));
+	top->setDimension(gcn::Rectangle(0, 0, 700, 480));
 	gui = new gcn::Gui();
 	// Set gui to use the SDLGraphics object.
 	gui->setGraphics(graphics);
