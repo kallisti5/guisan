@@ -248,7 +248,7 @@ namespace gcn
 
     void Button::mousePressed(MouseEvent& mouseEvent)
     {
-        if (mouseEvent.getButton() == MouseEvent::LEFT)
+        if (mouseEvent.getButton() == MouseEvent::Left)
         {
             mMousePressed = true;
             mouseEvent.consume();
@@ -267,7 +267,7 @@ namespace gcn
 
     void Button::mouseReleased(MouseEvent& mouseEvent)
     {
-        if (mouseEvent.getButton() == MouseEvent::LEFT
+        if (mouseEvent.getButton() == MouseEvent::Left
             && mMousePressed
             && mHasMouse)
         {
@@ -275,7 +275,7 @@ namespace gcn
             generateAction();
             mouseEvent.consume();
         }
-        else if (mouseEvent.getButton() == MouseEvent::LEFT)
+        else if (mouseEvent.getButton() == MouseEvent::Left)
         {
             mMousePressed = false;
             mouseEvent.consume();
@@ -291,8 +291,8 @@ namespace gcn
     {
         Key key = keyEvent.getKey();
 
-        if (key.getValue() == Key::ENTER
-            || key.getValue() == Key::SPACE)
+        if (key.getValue() == Key::Enter
+            || key.getValue() == Key::Space)
         {
             mKeyPressed = true;
             keyEvent.consume();
@@ -303,8 +303,8 @@ namespace gcn
     {
         Key key = keyEvent.getKey();
 
-        if ((key.getValue() == Key::ENTER
-             || key.getValue() == Key::SPACE)
+        if ((key.getValue() == Key::Enter
+             || key.getValue() == Key::Space)
             && mKeyPressed)
         {
             mKeyPressed = false;

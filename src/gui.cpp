@@ -324,7 +324,7 @@ namespace gcn
             // change focus.
             if (!keyEventConsumed
                 && mTabbing
-                && keyInput.getKey().getValue() == Key::TAB
+                && keyInput.getKey().getValue() == Key::Tab
                 && keyInput.getType() == KeyInput::PRESSED)
             {
                 if (keyInput.isShiftPressed())

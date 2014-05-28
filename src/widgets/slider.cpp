@@ -215,7 +215,7 @@ namespace gcn
 
     void Slider::mousePressed(MouseEvent& mouseEvent)
     {
-        if (mouseEvent.getButton() == gcn::MouseEvent::LEFT
+        if (mouseEvent.getButton() == gcn::MouseEvent::Left
             && mouseEvent.getX() >= 0
             && mouseEvent.getX() <= getWidth()
             && mouseEvent.getY() >= 0
@@ -288,13 +288,13 @@ namespace gcn
 
         if (getOrientation() == HORIZONTAL)
         {
-            if (key.getValue() == Key::RIGHT)
+            if (key.getValue() == Key::Right)
             {
                 setValue(getValue() + getStepLength());
                 generateAction();
                 keyEvent.consume();
             }
-            else if (key.getValue() == Key::LEFT)
+            else if (key.getValue() == Key::Left)
             {
                 setValue(getValue() - getStepLength());
                 generateAction();
@@ -303,13 +303,13 @@ namespace gcn
         }
         else
         {
-            if (key.getValue() == Key::UP)
+            if (key.getValue() == Key::Up)
             {
                 setValue(getValue() + getStepLength());
                 generateAction();
                 keyEvent.consume();
             }
-            else if (key.getValue() == Key::DOWN)
+            else if (key.getValue() == Key::Down)
             {
                 setValue(getValue() - getStepLength());
                 generateAction();

@@ -417,7 +417,7 @@ namespace gcn
             return;
         }
         
-        if (keyEvent.getKey().getValue() == Key::LEFT)
+        if (keyEvent.getKey().getValue() == Key::Left)
         {
             int index = getSelectedTabIndex();
             index--;
@@ -433,7 +433,7 @@ namespace gcn
             
             keyEvent.consume();
         }
-        else if (keyEvent.getKey().getValue() == Key::RIGHT)
+        else if (keyEvent.getKey().getValue() == Key::Right)
         {
             int index = getSelectedTabIndex();
             index++;
@@ -460,7 +460,7 @@ namespace gcn
             return;
         }
         
-        if (mouseEvent.getButton() == MouseEvent::LEFT)
+        if (mouseEvent.getButton() == MouseEvent::Left)
         {
             Widget* widget = mTabContainer->getWidgetAt(mouseEvent.getX(), mouseEvent.getY());
             Tab* tab = dynamic_cast<Tab*>(widget);
