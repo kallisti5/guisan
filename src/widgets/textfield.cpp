@@ -153,7 +153,7 @@ namespace gcn
 
     void TextField::mousePressed(MouseEvent& mouseEvent)
     {
-        if (mouseEvent.getButton() == MouseEvent::Left)
+        if (mouseEvent.getButton() == MouseEvent::LEFT)
         {
             mCaretPosition = getFont()->getStringIndexAt(mText, mouseEvent.getX() + mXScroll);
             fixScroll();
@@ -169,50 +169,50 @@ namespace gcn
     {
         Key key = keyEvent.getKey();
 
-        if (key.getValue() == Key::Left && mCaretPosition > 0)
+        if (key.getValue() == Key::LEFT && mCaretPosition > 0)
         {
             --mCaretPosition;
         }
 
-        else if (key.getValue() == Key::Right && mCaretPosition < mText.size())
+        else if (key.getValue() == Key::RIGHT && mCaretPosition < mText.size())
         {
             ++mCaretPosition;
         }
 
-        else if (key.getValue() == Key::Delete && mCaretPosition < mText.size())
+        else if (key.getValue() == Key::DELETE && mCaretPosition < mText.size())
         {
             mText.erase(mCaretPosition, 1);
         }
 
-        else if (key.getValue() == Key::Backspace && mCaretPosition > 0)
+        else if (key.getValue() == Key::BACKSPACE && mCaretPosition > 0)
         {
             mText.erase(mCaretPosition - 1, 1);
             --mCaretPosition;
         }
 
-        else if (key.getValue() == Key::Enter)
+        else if (key.getValue() == Key::ENTER)
         {
             generateAction();
         }
 
-        else if (key.getValue() == Key::Home)
+        else if (key.getValue() == Key::HOME)
         {
             mCaretPosition = 0;
         }
 
-        else if (key.getValue() == Key::End)
+        else if (key.getValue() == Key::END)
         {
             mCaretPosition = mText.size();
         }
 
         else if (key.isCharacter()
-                 && key.getValue() != Key::Tab)
+                 && key.getValue() != Key::TAB)
         {
             mText.insert(mCaretPosition, std::string(1,(char)key.getValue()));
             ++mCaretPosition;
         }
 
-        if (key.getValue() != Key::Tab)
+        if (key.getValue() != Key::TAB)
         {
             keyEvent.consume();
         }

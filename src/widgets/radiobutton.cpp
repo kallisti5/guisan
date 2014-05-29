@@ -269,8 +269,8 @@ namespace gcn
     {
         Key key = keyEvent.getKey();
 
-        if (key.getValue() == Key::Enter ||
-            key.getValue() == Key::Space)
+        if (key.getValue() == Key::ENTER ||
+            key.getValue() == Key::SPACE)
         {
             setSelected(true);
             generateAction();
@@ -280,7 +280,7 @@ namespace gcn
 
     void RadioButton::mouseClicked(MouseEvent& mouseEvent)
     {
-        if (mouseEvent.getButton() == MouseEvent::Left)
+        if (mouseEvent.getButton() == MouseEvent::LEFT)
         {
             setSelected(true);
             generateAction();

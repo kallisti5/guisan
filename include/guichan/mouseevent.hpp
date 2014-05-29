@@ -158,10 +158,10 @@ namespace gcn
          */
         enum
         {
-            Empty = 0,
-            Left,
-            Right,
-            Middle
+            EMPTY = 0,
+            LEFT,
+            RIGHT,
+            MIDDLE
         };
 
     protected:

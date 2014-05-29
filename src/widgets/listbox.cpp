@@ -213,12 +213,12 @@ namespace gcn
     {
         Key key = keyEvent.getKey();
 
-        if (key.getValue() == Key::Enter || key.getValue() == Key::Space)
+        if (key.getValue() == Key::ENTER || key.getValue() == Key::SPACE)
         {
             generateAction();
             keyEvent.consume();
         }
-        else if (key.getValue() == Key::Up)
+        else if (key.getValue() == Key::UP)
         {
             setSelected(mSelected - 1);
 
@@ -236,7 +236,7 @@ namespace gcn
             
             keyEvent.consume();
         }
-        else if (key.getValue() == Key::Down)
+        else if (key.getValue() == Key::DOWN)
         {
             if (mWrappingEnabled
                 && getSelected() == getListModel()->getNumberOfElements() - 1)
@@ -250,12 +250,12 @@ namespace gcn
             
             keyEvent.consume();
         }
-        else if (key.getValue() == Key::Home)
+        else if (key.getValue() == Key::HOME)
         {
             setSelected(0);
             keyEvent.consume();
         }
-        else if (key.getValue() == Key::End)
+        else if (key.getValue() == Key::END)
         {
             setSelected(getListModel()->getNumberOfElements() - 1);
             keyEvent.consume();
@@ -264,7 +264,7 @@ namespace gcn
 
     void ListBox::mousePressed(MouseEvent& mouseEvent)
     {
-        if (mouseEvent.getButton() == MouseEvent::Left)
+        if (mouseEvent.getButton() == MouseEvent::LEFT)
         {
             setSelected(mouseEvent.getY() / getFont()->getHeight());
             generateAction();
