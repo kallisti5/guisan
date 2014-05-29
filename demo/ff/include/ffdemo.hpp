@@ -44,8 +44,8 @@
 #ifndef __FFDEMO_HPP
 #define __FFDEMO_HPP
 
-#include <SDL/SDL.h>
-#include <SDL/SDL_mixer.h>
+#include <SDL.h>
+#include <SDL_mixer.h>
 #include <guichan.hpp>
 #include <guichan/sdl.hpp>
 
@@ -80,7 +80,10 @@ private:
     bool mRunning;
 
     SDL_Surface* mScreen;
+    SDL_Window* mWindow;
+    SDL_Renderer* mRenderer;
     SDL_Event mEvent;
+
     Mix_Chunk* mChooseSound;
     Mix_Chunk* mEscapeSound;
 

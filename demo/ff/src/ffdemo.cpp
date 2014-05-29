@@ -49,12 +49,18 @@
 FFDemo::FFDemo()
 {
     mRunning = true;
+
+    /*
+     * Here we initialize SDL as we would do with any SDL application.
+     */
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
-    mScreen = SDL_SetVideoMode(320, 240, 32, SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_HWACCEL);
-    SDL_EnableUNICODE(1);
-    SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
+    mWindow = SDL_CreateWindow("Guisan SDL2 FF demo",
+        SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 320, 240, 0);
+
+    mScreen = SDL_GetWindowSurface(mWindow);
+
+    //SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
     SDL_ShowCursor(0);
-    SDL_WM_SetCaption("Gui-chan FF demo", NULL);
     Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 1024);
 
     mChooseSound = Mix_LoadWAV("sound/sound1.wav");
@@ -646,7 +652,7 @@ void FFDemo::run()
             mGui->draw();
         }
 
-        SDL_Flip(mScreen);
+	SDL_UpdateWindowSurface(mWindow);
         SDL_Delay(10);
     }		
 }
@@ -807,8 +813,9 @@ void FFDemo::input()
             }
             else if (mEvent.key.keysym.sym == SDLK_f)
             {
+                #warning TODO: Fullscreen
                 // Works with X11 only
-                SDL_WM_ToggleFullScreen(mScreen);
+                //SDL_WM_ToggleFullScreen(mScreen);
             }
             mSDLInput->pushInput(mEvent);			
         }

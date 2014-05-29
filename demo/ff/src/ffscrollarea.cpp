@@ -47,11 +47,10 @@
 
 FFScrollArea::FFScrollArea()
 {
-    setScrollPolicy(ShowNever,
-                    ShowNever);
+    setScrollPolicy(SHOW_NEVER, SHOW_NEVER);
     addKeyListener(this);
     setFocusable(false);
-    setFrameSize(0);
+    setBorderSize(0);
 }
 
 void FFScrollArea::draw(gcn::Graphics *graphics)
@@ -66,12 +65,12 @@ void FFScrollArea::draw(gcn::Graphics *graphics)
             getVerticalMaxScroll();
 
         graphics->setColor(0x000000);
-        graphics->drawRectangle(getWidth()-11, y, 8, 32);
-        graphics->drawRectangle(getWidth()-10, y+1, 8, 32);
+        graphics->drawRectangle(gcn::Rectangle(getWidth() - 11, y, 8, 32));
+        graphics->drawRectangle(gcn::Rectangle(getWidth() - 10, y + 1, 8, 32));
 
         graphics->setColor(0xffffff);
 
-        graphics->fillRectangle(getWidth()-10, y+1, 6, 30);
+        graphics->fillRectangle(gcn::Rectangle(getWidth() - 10, y + 1, 6, 30));
     }
 }
 
@@ -82,11 +81,11 @@ void FFScrollArea::keyPressed(gcn::KeyEvent &keyEvent)
         return;
     }
     
-    if (keyEvent.getKey().getValue() == gcn::Key::Down)
+    if (keyEvent.getKey().getValue() == gcn::Key::DOWN)
     {
         setVerticalScrollAmount(getVerticalScrollAmount() + 16);
     }
-    else if (keyEvent.getKey().getValue() == gcn::Key::Up)
+    else if (keyEvent.getKey().getValue() == gcn::Key::UP)
     {
         setVerticalScrollAmount(getVerticalScrollAmount() - 16);
     }

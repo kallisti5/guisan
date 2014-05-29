@@ -105,7 +105,8 @@ void FFContainer::draw(gcn::Graphics* graphics)
         for (i = 0; i<16; ++i)
         {
             graphics->setColor(c * (1.0 - i / 18.0));
-            graphics->fillRectangle(4, (int)(i*height+4), getWidth()-8, (int)((i*height)+height));
+            graphics->fillRectangle(gcn::Rectangle(4, (i * height + 4),
+		getWidth()-8, (i * height ) + height));
         }
     }
 

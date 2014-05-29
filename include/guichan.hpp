@@ -54,8 +54,8 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef GCN_GUICHAN_HPP
-#define GCN_GUICHAN_HPP
+#ifndef GCN_GUISAN_HPP
+#define GCN_GUISAN_HPP
 
 #include <guichan/actionevent.hpp>
 #include <guichan/actionlistener.hpp>
@@ -119,7 +119,6 @@ extern "C"
      * @return the version of Guisan.
      */
     GCN_CORE_DECLSPEC extern const char* gcnGuisanVersion();
-    GCN_CORE_DECLSPEC extern const char* gcnGuichanVersion() { return gcnGuisanVersion(); }
 }
 
-#endif // end GCN_GUICHAN_HPP
+#endif // end GCN_GUISAN_HPP
