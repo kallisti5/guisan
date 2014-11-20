@@ -86,16 +86,38 @@ if env['HAVE_SDL2']:
 	guisan.ParseConfig('pkg-config --cflags --libs SDL2_image')
 
 if env['HAVE_OPENGL']:
-	guisan.Append(LIBS = ['-lGL', '-lGLU'])
+	guisan.Append(LIBS = ['GL', 'GLU'])
 
 print "========================================="
 print " Guisan build"
 print ""
 print " SDL 2.0 support.............. " + str(env['HAVE_SDL2'])
 print " OpenGL support............... " + str(env['HAVE_OPENGL'])
+print "-----------------------------------------"
+print " Installation target"
+print ""
+print " Prefix....................... " + str(env['PREFIX_PATH'])
+print " Includes..................... " + str(env['INCLUDE_PATH'])
+print " Libraries.................... " + str(env['LIB_PATH'])
 print ""
 print "========================================="
 
 guisan.StaticLibrary(target = 'guisan', source = program_sources)
+
+pkgconfig = file(str("guisan.pc"), "w")
+pkgconfig.write("prefix=%s\n" % env["PREFIX_PATH"])
+pkgconfig.write("includedir=%s\n" % env["INCLUDE_PATH"])
+pkgconfig.write("libdir=%s\n" % env["LIB_PATH"])
+pkgconfig.write("Name: guisan\n")
+pkgconfig.write("Description: SDL2 Windowing Library\n")
+pkgconfig.write("Version: %s\n" % env["LIBVER"])
+pkgconfig.write("Cflags: -I${includedir}/guisan\n")
+
+pkglibs = "-lguisan"
+for lib in guisan["LIBS"]:
+	pkglibs += " -l%s" % lib
+
+pkgconfig.write("Libs: -L${libdir} %s\n" % pkglibs)
+pkgconfig.close()
 
 Export('guisan')
