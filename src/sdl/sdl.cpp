@@ -58,7 +58,7 @@
  * For comments regarding functions please see the header file.
  */
 
-#include "guichan/sdl.hpp"
+#include "guisan/sdl.hpp"
 
 extern "C"
 {

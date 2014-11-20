@@ -58,12 +58,12 @@
  * For comments regarding functions please see the header file.
  */
 
-#include "guichan/defaultfont.hpp"
+#include "guisan/defaultfont.hpp"
 
 #include <string>
 
-#include "guichan/graphics.hpp"
-#include "guichan/rectangle.hpp"
+#include "guisan/graphics.hpp"
+#include "guisan/rectangle.hpp"
 
 namespace gcn
 {

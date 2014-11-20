@@ -58,7 +58,7 @@
  * For comments regarding functions please see the header file.
  */
 
-#include "guichan/color.hpp"
+#include "guisan/color.hpp"
 
 namespace gcn
 {

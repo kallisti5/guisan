@@ -58,14 +58,14 @@
  * For comments regarding functions please see the header file.
  */
 
-#include "guichan/widgets/button.hpp"
+#include "guisan/widgets/button.hpp"
 
-#include "guichan/exception.hpp"
-#include "guichan/font.hpp"
-#include "guichan/graphics.hpp"
-#include "guichan/key.hpp"
-#include "guichan/mouseevent.hpp"
-#include "guichan/mouseinput.hpp"
+#include "guisan/exception.hpp"
+#include "guisan/font.hpp"
+#include "guisan/graphics.hpp"
+#include "guisan/key.hpp"
+#include "guisan/mouseevent.hpp"
+#include "guisan/mouseinput.hpp"
 
 namespace gcn
 {

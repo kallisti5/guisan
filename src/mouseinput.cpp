@@ -58,7 +58,7 @@
  * For comments regarding functions please see the header file.
  */
 
-#include "guichan/mouseinput.hpp"
+#include "guisan/mouseinput.hpp"
 
 namespace gcn
 {

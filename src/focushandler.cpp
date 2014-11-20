@@ -58,11 +58,11 @@
  * For comments regarding functions please see the header file.
  */
 
-#include "guichan/focushandler.hpp"
+#include "guisan/focushandler.hpp"
 
-#include "guichan/focuslistener.hpp"
-#include "guichan/exception.hpp"
-#include "guichan/widget.hpp"
+#include "guisan/focuslistener.hpp"
+#include "guisan/exception.hpp"
+#include "guisan/widget.hpp"
 
 namespace gcn
 {

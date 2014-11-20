@@ -58,9 +58,9 @@
  * For comments regarding functions please see the header file.
  */
 
-#include "guichan/opengl/openglimage.hpp"
+#include "guisan/opengl/openglimage.hpp"
 
-#include "guichan/exception.hpp"
+#include "guisan/exception.hpp"
 
 namespace gcn
 {

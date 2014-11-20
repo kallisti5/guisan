@@ -58,15 +58,15 @@
  * For comments regarding functions please see the header file.
  */
 
-#include "guichan/widgets/listbox.hpp"
+#include "guisan/widgets/listbox.hpp"
 
-#include "guichan/basiccontainer.hpp"
-#include "guichan/font.hpp"
-#include "guichan/graphics.hpp"
-#include "guichan/key.hpp"
-#include "guichan/listmodel.hpp"
-#include "guichan/mouseinput.hpp"
-#include "guichan/selectionlistener.hpp"
+#include "guisan/basiccontainer.hpp"
+#include "guisan/font.hpp"
+#include "guisan/graphics.hpp"
+#include "guisan/key.hpp"
+#include "guisan/listmodel.hpp"
+#include "guisan/mouseinput.hpp"
+#include "guisan/selectionlistener.hpp"
 
 namespace gcn
 {

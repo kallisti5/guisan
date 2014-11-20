@@ -58,7 +58,7 @@
  * For comments regarding functions please see the header file.
  */
 
-#include "guichan/font.hpp"
+#include "guisan/font.hpp"
 
 #include <string>
 

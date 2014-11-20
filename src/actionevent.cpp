@@ -58,7 +58,7 @@
  * For comments regarding functions please see the header file.
  */
 
-#include "guichan/actionevent.hpp"
+#include "guisan/actionevent.hpp"
 
 namespace gcn
 {

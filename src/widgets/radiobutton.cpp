@@ -58,12 +58,12 @@
  * For comments regarding functions please see the header file.
  */
 
-#include "guichan/widgets/radiobutton.hpp"
+#include "guisan/widgets/radiobutton.hpp"
 
-#include "guichan/font.hpp"
-#include "guichan/graphics.hpp"
-#include "guichan/key.hpp"
-#include "guichan/mouseinput.hpp"
+#include "guisan/font.hpp"
+#include "guisan/graphics.hpp"
+#include "guisan/key.hpp"
+#include "guisan/mouseinput.hpp"
 
 namespace gcn
 {

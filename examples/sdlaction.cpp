@@ -5,8 +5,8 @@
 // Include all necessary headers.
 #include <iostream>
 #include <sstream>         // Used for int to string conversion
-#include <guichan.hpp>
-#include <guichan/sdl.hpp>
+#include <guisan.hpp>
+#include <guisan/sdl.hpp>
 #include "SDL.h"
 
 /*

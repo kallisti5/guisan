@@ -58,7 +58,7 @@
  * For comments regarding functions please see the header file.
  */
 
-#include "guichan/opengl/openglgraphics.hpp"
+#include "guisan/opengl/openglgraphics.hpp"
 
 #if defined (_WIN32)
 #define WIN32_LEAN_AND_MEAN
@@ -71,9 +71,9 @@
 #include <GL/gl.h>
 #endif
 
-#include "guichan/exception.hpp"
-#include "guichan/image.hpp"
-#include "guichan/opengl/openglimage.hpp"
+#include "guisan/exception.hpp"
+#include "guisan/image.hpp"
+#include "guisan/opengl/openglimage.hpp"
 
 namespace gcn
 {

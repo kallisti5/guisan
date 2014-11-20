@@ -58,10 +58,10 @@
  * For comments regarding functions please see the header file.
  */
 
-#include "guichan/widgets/scrollarea.hpp"
+#include "guisan/widgets/scrollarea.hpp"
 
-#include "guichan/exception.hpp"
-#include "guichan/graphics.hpp"
+#include "guisan/exception.hpp"
+#include "guisan/graphics.hpp"
 
 namespace gcn
 {

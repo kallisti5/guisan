@@ -4,11 +4,11 @@
 
 // Include all necessary headers.
 #include <iostream>
-#include <guichan.hpp>
-#include <guichan/sdl.hpp>
-#include <guichan/opengl.hpp>
+#include <guisan.hpp>
+#include <guisan/sdl.hpp>
+#include <guisan/opengl.hpp>
 // A class used to load images for OpenGL using SDL
-#include <guichan/opengl/openglsdlimageloader.hpp>
+#include <guisan/opengl/openglsdlimageloader.hpp>
 #include "SDL.h"
 
 #if defined (_WIN32)

@@ -58,18 +58,18 @@
  * For comments regarding functions please see the header file.
  */
 
-#include "guichan/gui.hpp"
+#include "guisan/gui.hpp"
 
-#include "guichan/basiccontainer.hpp"
-#include "guichan/exception.hpp"
-#include "guichan/focushandler.hpp"
-#include "guichan/graphics.hpp"
-#include "guichan/input.hpp"
-#include "guichan/keyinput.hpp"
-#include "guichan/keylistener.hpp"
-#include "guichan/mouseinput.hpp"
-#include "guichan/mouselistener.hpp"
-#include "guichan/widget.hpp"
+#include "guisan/basiccontainer.hpp"
+#include "guisan/exception.hpp"
+#include "guisan/focushandler.hpp"
+#include "guisan/graphics.hpp"
+#include "guisan/input.hpp"
+#include "guisan/keyinput.hpp"
+#include "guisan/keylistener.hpp"
+#include "guisan/mouseinput.hpp"
+#include "guisan/mouselistener.hpp"
+#include "guisan/widget.hpp"
 
 namespace gcn
 {

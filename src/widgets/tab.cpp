@@ -58,13 +58,13 @@
  * For comments regarding functions please see the header file.
  */
 
-#include "guichan/widgets/tab.hpp"
+#include "guisan/widgets/tab.hpp"
 
-#include "guichan/font.hpp"
-#include "guichan/graphics.hpp"
-#include "guichan/widgets/button.hpp"
-#include "guichan/widgets/label.hpp"
-#include "guichan/widgets/tabbedarea.hpp"
+#include "guisan/font.hpp"
+#include "guisan/graphics.hpp"
+#include "guisan/widgets/button.hpp"
+#include "guisan/widgets/label.hpp"
+#include "guisan/widgets/tabbedarea.hpp"
 
 namespace gcn
 {

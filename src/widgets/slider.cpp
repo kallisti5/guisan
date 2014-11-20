@@ -58,11 +58,11 @@
  * For comments regarding functions please see the header file.
  */
 
-#include "guichan/widgets/slider.hpp"
+#include "guisan/widgets/slider.hpp"
 
-#include "guichan/graphics.hpp"
-#include "guichan/key.hpp"
-#include "guichan/mouseinput.hpp"
+#include "guisan/graphics.hpp"
+#include "guisan/key.hpp"
+#include "guisan/mouseinput.hpp"
 
 namespace gcn
 {

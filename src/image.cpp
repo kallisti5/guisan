@@ -58,10 +58,10 @@
  * For comments regarding functions please see the header file.
  */
 
-#include "guichan/image.hpp"
+#include "guisan/image.hpp"
 
-#include "guichan/exception.hpp"
-#include "guichan/imageloader.hpp"
+#include "guisan/exception.hpp"
+#include "guisan/imageloader.hpp"
 
 namespace gcn
 {

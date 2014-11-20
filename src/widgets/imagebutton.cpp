@@ -58,10 +58,10 @@
  * For comments regarding functions please see the header file.
  */
 
-#include "guichan/widgets/imagebutton.hpp"
+#include "guisan/widgets/imagebutton.hpp"
 
-#include "guichan/graphics.hpp"
-#include "guichan/image.hpp"
+#include "guisan/graphics.hpp"
+#include "guisan/image.hpp"
 
 namespace gcn
 {

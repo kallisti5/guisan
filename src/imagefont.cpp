@@ -58,14 +58,14 @@
  * For comments regarding functions please see the header file.
  */
 
-#include "guichan/imagefont.hpp"
+#include "guisan/imagefont.hpp"
 
 #include <sstream>
 
-#include "guichan/color.hpp"
-#include "guichan/exception.hpp"
-#include "guichan/graphics.hpp"
-#include "guichan/image.hpp"
+#include "guisan/color.hpp"
+#include "guisan/exception.hpp"
+#include "guisan/graphics.hpp"
+#include "guisan/image.hpp"
 
 namespace gcn
 {

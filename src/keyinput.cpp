@@ -58,7 +58,7 @@
  * For comments regarding functions please see the header file.
  */
 
-#include "guichan/keyinput.hpp"
+#include "guisan/keyinput.hpp"
 
 namespace gcn
 {

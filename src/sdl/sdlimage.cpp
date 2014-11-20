@@ -58,10 +58,10 @@
  * For comments regarding functions please see the header file.
  */
 
-#include "guichan/sdl/sdlimage.hpp"
+#include "guisan/sdl/sdlimage.hpp"
 
-#include "guichan/exception.hpp"
-#include "guichan/sdl/sdlpixel.hpp"
+#include "guisan/exception.hpp"
+#include "guisan/sdl/sdlpixel.hpp"
 
 namespace gcn
 {

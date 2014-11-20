@@ -58,12 +58,12 @@
  * For comments regarding functions please see the header file.
  */
 
-#include "guichan/widgets/window.hpp"
+#include "guisan/widgets/window.hpp"
 
-#include "guichan/exception.hpp"
-#include "guichan/font.hpp"
-#include "guichan/graphics.hpp"
-#include "guichan/mouseinput.hpp"
+#include "guisan/exception.hpp"
+#include "guisan/font.hpp"
+#include "guisan/graphics.hpp"
+#include "guisan/mouseinput.hpp"
 
 namespace gcn
 {

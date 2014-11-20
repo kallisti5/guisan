@@ -17,7 +17,7 @@ main_sources = [
 	'genericinput.cpp',
 	'graphics.cpp',
 	'gui.cpp',
-	'guichan.cpp',
+	'guisan.cpp',
 	'image.cpp',
 	'imagefont.cpp',
 	'inputevent.cpp',

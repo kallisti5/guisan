@@ -58,7 +58,7 @@
  * For comments regarding functions please see the header file.
  */
 
-#include "guichan/mouseevent.hpp"
+#include "guisan/mouseevent.hpp"
 
 namespace gcn
 {

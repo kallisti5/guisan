@@ -58,11 +58,11 @@
  * For comments regarding functions please see the header file.
  */
 
-#include "guichan/widgets/label.hpp"
+#include "guisan/widgets/label.hpp"
 
-#include "guichan/exception.hpp"
-#include "guichan/font.hpp"
-#include "guichan/graphics.hpp"
+#include "guisan/exception.hpp"
+#include "guisan/font.hpp"
+#include "guisan/graphics.hpp"
 
 namespace gcn
 {

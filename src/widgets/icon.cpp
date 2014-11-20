@@ -58,11 +58,11 @@
  * For comments regarding functions please see the header file.
  */
 
-#include "guichan/widgets/icon.hpp"
+#include "guisan/widgets/icon.hpp"
 
-#include "guichan/graphics.hpp"
-#include "guichan/image.hpp"
-#include "guichan/rectangle.hpp"
+#include "guisan/graphics.hpp"
+#include "guisan/image.hpp"
+#include "guisan/rectangle.hpp"
 
 namespace gcn
 {

@@ -58,21 +58,21 @@
  * For comments regarding functions please see the header file.
  */
 
-#include "guichan/widget.hpp"
+#include "guisan/widget.hpp"
 
-#include "guichan/actionevent.hpp"
-#include "guichan/actionlistener.hpp"
-#include "guichan/basiccontainer.hpp"
-#include "guichan/deathlistener.hpp"
-#include "guichan/defaultfont.hpp"
-#include "guichan/event.hpp"
-#include "guichan/exception.hpp"
-#include "guichan/focushandler.hpp"
-#include "guichan/keyinput.hpp"
-#include "guichan/keylistener.hpp"
-#include "guichan/mouseinput.hpp"
-#include "guichan/mouselistener.hpp"
-#include "guichan/widgetlistener.hpp"
+#include "guisan/actionevent.hpp"
+#include "guisan/actionlistener.hpp"
+#include "guisan/basiccontainer.hpp"
+#include "guisan/deathlistener.hpp"
+#include "guisan/defaultfont.hpp"
+#include "guisan/event.hpp"
+#include "guisan/exception.hpp"
+#include "guisan/focushandler.hpp"
+#include "guisan/keyinput.hpp"
+#include "guisan/keylistener.hpp"
+#include "guisan/mouseinput.hpp"
+#include "guisan/mouselistener.hpp"
+#include "guisan/widgetlistener.hpp"
 
 namespace gcn
 {
