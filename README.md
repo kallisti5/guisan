@@ -24,3 +24,4 @@ Runtime requirements:
 
 * SDL 2.0+
 * SDL2_image
+* SDL2_ttf
