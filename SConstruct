@@ -55,3 +55,5 @@ SConscript('src/SConscript')
 
 # Example code
 SConscript('examples/SConscript')
+
+# TODO: install
