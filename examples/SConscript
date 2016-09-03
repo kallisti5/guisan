@@ -5,7 +5,8 @@ if env['HAVE_SDL2']:
 	sdlhelloworld = env.Clone()
 	sdlhelloworld.ParseConfig('pkg-config --cflags --libs sdl2')
 	sdlhelloworld.ParseConfig('pkg-config --cflags --libs SDL2_image')
-	sdlhelloworld.Append(LIBS = 'guisan')
+	sdlhelloworld.ParseConfig('pkg-config --cflags --libs SDL2_ttf')
+	sdlhelloworld.Prepend(LIBS = 'guisan')
 	sdlhelloworld.Program(
 		target = 'sdlhelloworld',
 		source = ['sdlhelloworld.cpp']
@@ -14,7 +15,8 @@ if env['HAVE_SDL2']:
 	sdlwidgets = env.Clone()
 	sdlwidgets.ParseConfig('pkg-config --cflags --libs sdl2')
 	sdlwidgets.ParseConfig('pkg-config --cflags --libs SDL2_image')
-	sdlwidgets.Append(LIBS = 'guisan')
+	sdlwidgets.ParseConfig('pkg-config --cflags --libs SDL2_ttf')
+	sdlwidgets.Prepend(LIBS = 'guisan')
 	sdlwidgets.Program(
 		target = 'sdlwidgets',
 		source = ['sdlwidgets.cpp']
@@ -23,7 +25,8 @@ if env['HAVE_SDL2']:
 	sdlaction = env.Clone()
 	sdlaction.ParseConfig('pkg-config --cflags --libs sdl2')
 	sdlaction.ParseConfig('pkg-config --cflags --libs SDL2_image')
-	sdlaction.Append(LIBS = 'guisan')
+	sdlaction.ParseConfig('pkg-config --cflags --libs SDL2_ttf')
+	sdlaction.Prepend(LIBS = 'guisan')
 	sdlaction.Program(
 		target = 'sdlaction',
 		source = ['sdlaction.cpp']
@@ -36,7 +39,8 @@ if env['HAVE_OPENGL'] and env['HAVE_SDL2']:
 	openglhelloworld.ParseConfig('pkg-config --cflags --libs gl')
 	openglhelloworld.ParseConfig('pkg-config --cflags --libs sdl2')
 	openglhelloworld.ParseConfig('pkg-config --cflags --libs SDL2_image')
-	openglhelloworld.Append(LIBS = 'guisan')
+	openglhelloworld.ParseConfig('pkg-config --cflags --libs SDL2_ttf')
+	openglhelloworld.Prepend(LIBS = 'guisan')
 	openglhelloworld.Program(
 		target = 'openglhelloworld',
 		source = ['openglhelloworld.cpp']
@@ -46,7 +50,8 @@ if env['HAVE_OPENGL'] and env['HAVE_SDL2']:
 	openglwidgets.ParseConfig('pkg-config --cflags --libs gl')
 	openglwidgets.ParseConfig('pkg-config --cflags --libs sdl2')
 	openglwidgets.ParseConfig('pkg-config --cflags --libs SDL2_image')
-	openglwidgets.Append(LIBS = 'guisan')
+	openglwidgets.ParseConfig('pkg-config --cflags --libs SDL2_ttf')
+	openglwidgets.Prepend(LIBS = 'guisan')
 	openglwidgets.Program(
 		target = 'openglwidgets',
 		source = ['openglwidgets.cpp']

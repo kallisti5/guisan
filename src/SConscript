@@ -57,7 +57,8 @@ if env['HAVE_SDL2']:
 		'sdl/sdlgraphics.cpp',
 		'sdl/sdlimage.cpp',
 		'sdl/sdlimageloader.cpp',
-		'sdl/sdlinput.cpp'
+		'sdl/sdlinput.cpp',
+		'sdl/sdltruetypefont.cpp'
 	]
 else:
 	sdl_sources = []
@@ -84,6 +85,7 @@ guisan = env.Clone()
 if env['HAVE_SDL2']:
 	guisan.ParseConfig('pkg-config --cflags --libs sdl2')
 	guisan.ParseConfig('pkg-config --cflags --libs SDL2_image')
+	guisan.ParseConfig('pkg-config --cflags --libs SDL2_ttf')
 
 if env['HAVE_OPENGL']:
 	guisan.Append(LIBS = ['GL', 'GLU'])
