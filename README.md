@@ -1,14 +1,8 @@
-![logo](examples/guisan.png "GUISAN")
-```
-   ________  ___________ ___    _   __
-  / ____/ / / /  _/ ___//   |  / | / /
- / / __/ / / // / \__ \/ /| | /  |/ /
-/ /_/ / /_/ // / ___/ / ___ |/ /|  /
-\____/\____/___//____/_/  |_/_/ |_/
-```
+# GUISAN
 
-  An SDL2 GUI construction toolkit
-======================================
+![logo](examples/guisan.png "GUISAN")
+
+## An SDL2 GUI construction toolkit
 
 [![Build Status](https://travis-ci.org/gbaudic/guisan.svg?branch=master)](https://travis-ci.org/gbaudic/guisan)
 
