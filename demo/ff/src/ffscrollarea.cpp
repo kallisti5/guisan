@@ -41,7 +41,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <guichan.hpp>
+#include <guisan.hpp>
 
 #include "ffscrollarea.hpp"
 

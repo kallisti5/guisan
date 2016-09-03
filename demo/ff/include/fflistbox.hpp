@@ -44,7 +44,7 @@
 #ifndef __FFLISTBOX_HPP
 #define __FFLISTBOX_HPP
 
-#include <guichan.hpp>
+#include <guisan.hpp>
 
 class FFListBox : public gcn::ListBox
 {

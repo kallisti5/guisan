@@ -44,7 +44,7 @@
 #ifndef __FFCHARACTERCHOOSER_HPP
 #define __FFCHARACTERCHOOSER_HPP
 
-#include <guichan.hpp>
+#include <guisan.hpp>
 
 class FFCharacterChooser : public gcn::Widget, gcn::KeyListener
 {
