@@ -57,3 +57,25 @@ SConscript('src/SConscript')
 SConscript('examples/SConscript')
 
 # TODO: install
+common_headers = []
+widgets_headers = []
+sdl2_headers = [
+	'include/guisan/sdl/sdlgraphics.hpp',
+	'include/guisan/sdl/sdlimage.hpp',
+	'include/guisan/sdl/sdlimageloader.hpp',
+	'include/guisan/sdl/sdlinput.hpp',
+	'include/guisan/sdl/sdlpixel.hpp',
+	'include/guisan/sdl/sdltruetypefont.hpp'
+]
+opengl_headers = []
+
+env.Install(env["LIB_PATH"], 'src/libguisan.a')
+env.Install(env["LIB_PATH"] + "/pkgconfig", 'src/guisan.pc')
+env.Install(env["INCLUDE_PATH"], 'include/guisan.hpp')
+# install common headers + widgets
+
+if env['HAVE_SDL2']:
+	env.Install(env["INCLUDE_PATH"] + '/guisan/sdl', sdl2_headers)
+if env['HAVE_OPENGL']:
+	#install gl headers
+env.Alias('install', env["PREFIX_PATH"])
