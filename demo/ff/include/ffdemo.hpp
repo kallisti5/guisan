@@ -46,8 +46,8 @@
 
 #include <SDL.h>
 #include <SDL_mixer.h>
-#include <guichan.hpp>
-#include <guichan/sdl.hpp>
+#include <guisan.hpp>
+#include <guisan/sdl.hpp>
 
 #include "ffcharacterchooser.hpp"
 #include "ffcontainer.hpp"

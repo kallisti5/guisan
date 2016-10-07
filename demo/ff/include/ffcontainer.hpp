@@ -44,7 +44,7 @@
 #ifndef __FFCONTAINER_HPP
 #define __FFCONTAINER_HPP
 
-#include <guichan.hpp>
+#include <guisan.hpp>
 
 class FFContainer : public gcn::Container
 {

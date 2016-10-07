@@ -44,7 +44,7 @@
 #ifndef __FFSCROLLAREA_HPP
 #define __FFSCROLLAREA_HPP
 
-#include <guichan.hpp>
+#include <guisan.hpp>
 
 class FFScrollArea : public gcn::ScrollArea, public gcn::KeyListener
 {

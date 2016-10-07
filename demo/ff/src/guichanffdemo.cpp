@@ -42,7 +42,7 @@
  */
 
 #include <iostream>
-#include <guichan.hpp>
+#include <guisan.hpp>
 #include "ffdemo.hpp"
 
 int main(int argc, char** argv)

@@ -44,7 +44,7 @@
 #ifndef __STRINGLISTMODEL_HPP
 #define __STRINGLISTMODEL_HPP
 
-#include <guichan.hpp>
+#include <guisan.hpp>
 #include <vector>
 
 class StringListModel : public gcn::ListModel

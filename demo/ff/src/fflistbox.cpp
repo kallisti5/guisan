@@ -41,8 +41,8 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <guichan.hpp>
-#include <SDL/SDL.h>
+#include <guisan.hpp>
+#include <SDL2/SDL.h>
 
 #include "fflistbox.hpp"
 
