@@ -54,72 +54,76 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef GCN_GUISAN_HPP
-#define GCN_GUISAN_HPP
-
-#include <guisan/actionevent.hpp>
-#include <guisan/actionlistener.hpp>
-#include <guisan/cliprectangle.hpp>
-#include <guisan/color.hpp>
-#include <guisan/deathlistener.hpp>
-#include <guisan/event.hpp>
-#include <guisan/exception.hpp>
-#include <guisan/focushandler.hpp>
-#include <guisan/focuslistener.hpp>
-#include <guisan/font.hpp>
-#include <guisan/genericinput.hpp>
-#include <guisan/graphics.hpp>
-#include <guisan/gui.hpp>
-#include <guisan/image.hpp>
-#include <guisan/imagefont.hpp>
-#include <guisan/imageloader.hpp>
-#include <guisan/input.hpp>
-#include <guisan/inputevent.hpp>
-#include <guisan/key.hpp>
-#include <guisan/keyevent.hpp>
-#include <guisan/keyinput.hpp>
-#include <guisan/keylistener.hpp>
-#include <guisan/listmodel.hpp>
-#include <guisan/mouseevent.hpp>
-#include <guisan/mouseinput.hpp>
-#include <guisan/mouselistener.hpp>
-#include <guisan/rectangle.hpp>
-#include <guisan/selectionevent.hpp>
-#include <guisan/selectionlistener.hpp>
-#include <guisan/widget.hpp>
-#include <guisan/widgetlistener.hpp>
-
-#include <guisan/widgets/button.hpp>
-#include <guisan/widgets/checkbox.hpp>
-#include <guisan/widgets/container.hpp>
-#include <guisan/widgets/dropdown.hpp>
-#include <guisan/widgets/icon.hpp>
-#include <guisan/widgets/imagebutton.hpp>
-#include <guisan/widgets/imagetextbutton.hpp>
-#include <guisan/widgets/label.hpp>
-#include <guisan/widgets/listbox.hpp>
-#include <guisan/widgets/scrollarea.hpp>
-#include <guisan/widgets/slider.hpp>
-#include <guisan/widgets/radiobutton.hpp>
-#include <guisan/widgets/tab.hpp>
-#include <guisan/widgets/tabbedarea.hpp>
-#include <guisan/widgets/textbox.hpp>
-#include <guisan/widgets/textfield.hpp>
-#include <guisan/widgets/window.hpp>
+#ifndef GCN_IMAGEBUTTON_HPP
+#define GCN_IMAGEBUTTON_HPP
 
 #include "guisan/platform.hpp"
+#include "guisan/widgets/imagebutton.hpp"
 
-class Widget;
-
-extern "C"
+namespace gcn
 {
-    /**
-     * Gets the the version of Guisan. As it is a C function
-     * it can be used to check for Guichan with autotools.
-     *
-     * @return the version of Guisan.
-     */
-    GCN_CORE_DECLSPEC extern const char* gcnGuisanVersion();
-}
+    class Image;
 
-#endif // end GCN_GUISAN_HPP
+    /**
+     * A simple button that displays an image and a caption.
+     */
+    class GCN_CORE_DECLSPEC ImageTextButton : public gcn::ImageButton
+    {
+    public:
+        /**
+         * Constructor.
+         *
+         * @param filename The filename of the image to display.
+         * @param caption The text to display. 
+         */
+        ImageTextButton(const std::string& filename, std::string& caption);
+
+        /**
+         * Constructor.
+         *
+         * @param image The image to display.
+         * @param caption The text to display.
+         */
+        ImageTextButton(Image* image, std::string& caption);
+
+        /**
+         * Destructor.
+         */
+        virtual ~ImageTextButton();
+
+        /**
+         * Adjusts the size of the image button to fit the image.
+         */
+        void adjustSize();
+
+        /**
+         * Sets the image to display.
+         *
+         * @param image The image to display.
+         */
+        void setImage(Image* image);
+
+        /**
+         * Gets the image of the image button.
+         *
+         * @return The image of the image button.
+         */
+        Image* getImage();
+
+
+        // Inherited from Widget
+
+        void draw(gcn::Graphics* graphics);
+
+    protected:
+        gcn::Image* mImage;
+
+        /**
+         * True if the image has been loaded internally, false otherwise.
+         * An image not loaded internally should not be deleted in the
+         * destructor.
+         */
+        bool mInternalImage;
+    };
+}
+#endif

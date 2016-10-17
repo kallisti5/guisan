@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof NaessÃ©n and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof NaessÃ©n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -54,72 +54,116 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef GCN_GUISAN_HPP
-#define GCN_GUISAN_HPP
+/*
+ * For comments regarding functions please see the header file.
+ */
 
-#include <guisan/actionevent.hpp>
-#include <guisan/actionlistener.hpp>
-#include <guisan/cliprectangle.hpp>
-#include <guisan/color.hpp>
-#include <guisan/deathlistener.hpp>
-#include <guisan/event.hpp>
-#include <guisan/exception.hpp>
-#include <guisan/focushandler.hpp>
-#include <guisan/focuslistener.hpp>
-#include <guisan/font.hpp>
-#include <guisan/genericinput.hpp>
-#include <guisan/graphics.hpp>
-#include <guisan/gui.hpp>
-#include <guisan/image.hpp>
-#include <guisan/imagefont.hpp>
-#include <guisan/imageloader.hpp>
-#include <guisan/input.hpp>
-#include <guisan/inputevent.hpp>
-#include <guisan/key.hpp>
-#include <guisan/keyevent.hpp>
-#include <guisan/keyinput.hpp>
-#include <guisan/keylistener.hpp>
-#include <guisan/listmodel.hpp>
-#include <guisan/mouseevent.hpp>
-#include <guisan/mouseinput.hpp>
-#include <guisan/mouselistener.hpp>
-#include <guisan/rectangle.hpp>
-#include <guisan/selectionevent.hpp>
-#include <guisan/selectionlistener.hpp>
-#include <guisan/widget.hpp>
-#include <guisan/widgetlistener.hpp>
+#include "guisan/widgets/imagetextbutton.hpp"
 
-#include <guisan/widgets/button.hpp>
-#include <guisan/widgets/checkbox.hpp>
-#include <guisan/widgets/container.hpp>
-#include <guisan/widgets/dropdown.hpp>
-#include <guisan/widgets/icon.hpp>
-#include <guisan/widgets/imagebutton.hpp>
-#include <guisan/widgets/imagetextbutton.hpp>
-#include <guisan/widgets/label.hpp>
-#include <guisan/widgets/listbox.hpp>
-#include <guisan/widgets/scrollarea.hpp>
-#include <guisan/widgets/slider.hpp>
-#include <guisan/widgets/radiobutton.hpp>
-#include <guisan/widgets/tab.hpp>
-#include <guisan/widgets/tabbedarea.hpp>
-#include <guisan/widgets/textbox.hpp>
-#include <guisan/widgets/textfield.hpp>
-#include <guisan/widgets/window.hpp>
+#include "guisan/graphics.hpp"
+#include "guisan/image.hpp"
 
-#include "guisan/platform.hpp"
-
-class Widget;
-
-extern "C"
+namespace gcn
 {
-    /**
-     * Gets the the version of Guisan. As it is a C function
-     * it can be used to check for Guichan with autotools.
-     *
-     * @return the version of Guisan.
-     */
-    GCN_CORE_DECLSPEC extern const char* gcnGuisanVersion();
-}
+    ImageTextButton::ImageTextButton(const std::string& filename, std::string& caption)
+    {
+        mImage = Image::load(filename);
+        mInternalImage = true;
+        setCaption(caption);
+        setWidth(mImage->getWidth() + mImage->getWidth() / 2);
+        setHeight(mImage->getHeight() + mImage->getHeight() / 2);
+    }
 
-#endif // end GCN_GUISAN_HPP
+    ImageTextButton::ImageTextButton(Image* image, std::string& caption)
+    {
+        mImage = image;
+        mInternalImage = false;
+        setCaption(caption);
+        setWidth(mImage->getWidth() + mImage->getWidth() / 2);
+        setHeight(mImage->getHeight() + mImage->getHeight() / 2);
+    }
+
+    ImageTextButton::~ImageTextButton()
+    {
+	    if (mInternalImage)
+            delete mImage;
+    }
+	
+	void ImageTextButton::adjustSize()
+	{
+	    //TODO: change me!!!
+		setWidth(mImage->getWidth());
+        setHeight(mImage->getHeight());
+	}
+
+	void ImageTextButton::setImage(Image* image)
+	{
+        if (mInternalImage)
+            delete mImage;
+		mImage = image;
+        mInternalImage = false;
+	}
+
+	Image* ImageTextButton::getImage()
+	{
+		return mImage;
+	}
+
+    void ImageTextButton::draw(Graphics* graphics)
+    {
+        //TODO: change me!!!
+        gcn::Color faceColor = getBaseColor();
+        gcn::Color highlightColor, shadowColor;
+        int alpha = getBaseColor().a;
+
+        if (isPressed())
+        {
+            faceColor = faceColor - 0x303030;
+            faceColor.a = alpha;
+            highlightColor = faceColor - 0x303030;
+            highlightColor.a = alpha;
+            shadowColor = faceColor + 0x303030;
+            shadowColor.a = alpha;
+        }
+        else
+        {
+            highlightColor = faceColor + 0x303030;
+            highlightColor.a = alpha;
+            shadowColor = faceColor - 0x303030;
+            shadowColor.a = alpha;
+        }
+
+        graphics->setColor(faceColor);
+        graphics->fillRectangle(Rectangle(1, 1, getDimension().width-1, getHeight() - 1));
+
+        graphics->setColor(highlightColor);
+        graphics->drawLine(0, 0, getWidth() - 1, 0);
+        graphics->drawLine(0, 1, 0, getHeight() - 1);
+
+        graphics->setColor(shadowColor);
+        graphics->drawLine(getWidth() - 1, 1, getWidth() - 1, getHeight() - 1);
+        graphics->drawLine(1, getHeight() - 1, getWidth() - 1, getHeight() - 1);
+
+        graphics->setColor(getForegroundColor());
+
+        int textX = getWidth() / 2 - mImage->getWidth() / 2;
+        int textY = getHeight() / 2 - mImage->getHeight() / 2;
+
+        if (isPressed())
+        {
+            graphics->drawImage(mImage, textX + 1, textY + 1);
+        }
+        else
+        {
+            graphics->drawImage(mImage, textX, textY);
+           
+            if (isFocused())
+            {
+                graphics->drawRectangle(Rectangle(2, 
+                                                  2, 
+                                                  getWidth() - 4,
+                                                  getHeight() - 4));
+            }
+        }
+    }
+}
