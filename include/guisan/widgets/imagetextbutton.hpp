@@ -57,6 +57,8 @@
 #ifndef GCN_IMAGEBUTTON_HPP
 #define GCN_IMAGEBUTTON_HPP
 
+#include <string>
+
 #include "guisan/platform.hpp"
 #include "guisan/widgets/imagebutton.hpp"
 

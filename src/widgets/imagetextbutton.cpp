@@ -60,6 +60,8 @@
 
 #include "guisan/widgets/imagetextbutton.hpp"
 
+#include "guisan/exception.hpp"
+#include "guisan/font.hpp"
 #include "guisan/graphics.hpp"
 #include "guisan/image.hpp"
 
@@ -93,9 +95,28 @@ namespace gcn
 	
 	void ImageTextButton::adjustSize()
 	{
-	    //TODO: change me!!!
-		setWidth(mImage->getWidth());
-        setHeight(mImage->getHeight());
+		switch(getAlignment())
+		{
+			case LEFT: //fallthrough
+			case RIGHT:
+			  setWidth(mImage->getWidth() + getFont()->getWidth(mCaption) + 2*mSpacing);
+			  setHeight(mImage->getHeight() + 2*mSpacing);
+			  break;
+			case TOP: //fallthrough
+			case BOTTOM:
+			  if(mImage->getWidth() > getFont()->getWidth(mCaption))
+			  {
+				  setWidth(mImage->getWidth() + 2*mSpacing);
+			  }
+			  else
+			  {
+				  setWidth(getFont()->getWidth(mCaption) + 2*mSpacing);
+			  }
+			  setHeight(mImage->getHeight() + getFont()->getHeight() + 2*mSpacing);
+			  break;
+			default:
+              throw GCN_EXCEPTION("Unknown alignment.");
+		}
 	}
 
 	void ImageTextButton::setImage(Image* image)
@@ -150,7 +171,7 @@ namespace gcn
         //TODO: change me!!!
         int imageX = getWidth() / 2 - mImage->getWidth() / 2;
         int imageY = getHeight() / 2 - mImage->getHeight() / 2;
-        int textX, testY;
+        int textX, textY;
 
         if (isPressed())
         {
