@@ -72,6 +72,7 @@ namespace gcn
         setCaption(caption);
         setWidth(mImage->getWidth() + mImage->getWidth() / 2);
         setHeight(mImage->getHeight() + mImage->getHeight() / 2);
+        mAlignment = ImageTextButton::BOTTOM;
     }
 
     ImageTextButton::ImageTextButton(Image* image, std::string& caption)
@@ -81,6 +82,7 @@ namespace gcn
         setCaption(caption);
         setWidth(mImage->getWidth() + mImage->getWidth() / 2);
         setHeight(mImage->getHeight() + mImage->getHeight() / 2);
+        mAlignment = ImageTextButton::BOTTOM;
     }
 
     ImageTextButton::~ImageTextButton()
@@ -111,7 +113,6 @@ namespace gcn
 
     void ImageTextButton::draw(Graphics* graphics)
     {
-        //TODO: change me!!!
         gcn::Color faceColor = getBaseColor();
         gcn::Color highlightColor, shadowColor;
         int alpha = getBaseColor().a;
@@ -146,16 +147,18 @@ namespace gcn
 
         graphics->setColor(getForegroundColor());
 
-        int textX = getWidth() / 2 - mImage->getWidth() / 2;
-        int textY = getHeight() / 2 - mImage->getHeight() / 2;
+        //TODO: change me!!!
+        int imageX = getWidth() / 2 - mImage->getWidth() / 2;
+        int imageY = getHeight() / 2 - mImage->getHeight() / 2;
+        int textX, testY;
 
         if (isPressed())
         {
-            graphics->drawImage(mImage, textX + 1, textY + 1);
+            graphics->drawImage(mImage, imageX + 1, imageY + 1);
         }
         else
         {
-            graphics->drawImage(mImage, textX, textY);
+            graphics->drawImage(mImage, imageX, imageY);
            
             if (isFocused())
             {
@@ -165,5 +168,15 @@ namespace gcn
                                                   getHeight() - 4));
             }
         }
+    }
+    
+    void ImageTextButton::setAlignment(unsigned int alignment)
+    {
+        mAlignment = alignment;
+    }
+
+    unsigned int ImageTextButton::getAlignment() const
+    {
+        return mAlignment;
     }
 }

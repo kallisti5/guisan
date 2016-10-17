@@ -114,7 +114,7 @@ namespace gcn
          * the center of the label.
          *
          * @return alignment of caption. Graphics::LEFT, Graphics::CENTER or Graphics::RIGHT.
-         * @see setAlignmentm Graphics
+         * @see setAlignment, Graphics
          */
         unsigned int getAlignment() const;
 

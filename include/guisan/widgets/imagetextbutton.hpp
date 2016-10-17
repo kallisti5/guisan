@@ -114,6 +114,30 @@ namespace gcn
         // Inherited from Widget
 
         void draw(gcn::Graphics* graphics);
+        
+        /**
+         * Sets the alignment for the caption. The alignment is relative
+         * to the center of the button.
+         *
+         * @param alignment ImageTextButton::TOP, ImageTextButton::RIGHT, ImageTextButton::BOTTOM or ImageTextButton::LEFT.
+         */
+        void setAlignment(unsigned int alignment);
+
+        /**
+         * Gets the alignment for the caption. The alignment is relative to
+         * the center of the button.
+         *
+         * @return alignment of caption. ImageTextButton::TOP, ImageTextButton::RIGHT, ImageTextButton::BOTTOM or ImageTextButton::LEFT.
+         */
+        unsigned int getAlignment() const;
+        
+        enum
+        {
+            TOP,
+            RIGHT,
+            BOTTOM,
+            LEFT
+        };
 
     protected:
         gcn::Image* mImage;
@@ -124,6 +148,7 @@ namespace gcn
          * destructor.
          */
         bool mInternalImage;
+        unsigned int mAlignment;
     };
 }
 #endif
