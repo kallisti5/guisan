@@ -67,20 +67,16 @@
 
 namespace gcn
 {
-    ImageTextButton::ImageTextButton(const std::string& filename, std::string& caption)
+    ImageTextButton::ImageTextButton(const std::string& filename, std::string& caption) : ImageButton(filename)
     {
-        mImage = Image::load(filename);
-        mInternalImage = true;
         setCaption(caption);
         setWidth(mImage->getWidth() + mImage->getWidth() / 2);
         setHeight(mImage->getHeight() + mImage->getHeight() / 2);
         mAlignment = ImageTextButton::BOTTOM;
     }
 
-    ImageTextButton::ImageTextButton(Image* image, std::string& caption)
+    ImageTextButton::ImageTextButton(Image* image, std::string& caption) : ImageButton(image)
     {
-        mImage = image;
-        mInternalImage = false;
         setCaption(caption);
         setWidth(mImage->getWidth() + mImage->getWidth() / 2);
         setHeight(mImage->getHeight() + mImage->getHeight() / 2);
@@ -168,18 +164,48 @@ namespace gcn
 
         graphics->setColor(getForegroundColor());
 
-        //TODO: change me!!!
-        int imageX = getWidth() / 2 - mImage->getWidth() / 2;
-        int imageY = getHeight() / 2 - mImage->getHeight() / 2;
+        int imageX, imageY;
         int textX, textY;
+        
+        switch(getAlignment())
+        {
+            case LEFT: 
+              imageX = mSpacing + getFont()->getWidth(mCaption);
+              textX = mSpacing;
+              imageY = mSpacing;
+              textY = getHeight() / 2 - getFont()->getHeight() / 2;
+              break;
+			case RIGHT:
+			  imageX = mSpacing;
+              textX = mSpacing + mImage->getWidth();
+              imageY = mSpacing;
+              textY = getHeight() / 2 - getFont()->getHeight() / 2;
+			  break;
+			case TOP:
+			  imageY = mSpacing + getFont()->getHeight();
+			  textY = mSpacing;
+			  imageX = getWidth() / 2 - mImage->getWidth() / 2;
+			  textX = getWidth() / 2 - getFont()->getWidth(mCaption) / 2; 
+			  break;
+			case BOTTOM:
+			  imageY = mSpacing;
+			  textY = mSpacing + mImage->getHeight();
+			  imageX = getWidth() / 2 - mImage->getWidth() / 2;
+			  textX = getWidth() / 2 - getFont()->getWidth(mCaption) / 2; 
+			  break;
+			default:
+              throw GCN_EXCEPTION("Unknown alignment.");
+        }
 
         if (isPressed())
         {
             graphics->drawImage(mImage, imageX + 1, imageY + 1);
+            graphics->drawText(mCaption, textX + 1, textY + 1, Graphics::LEFT);
         }
         else
         {
             graphics->drawImage(mImage, imageX, imageY);
+            graphics->drawText(mCaption, textX, textY, Graphics::LEFT);
            
             if (isFocused())
             {
