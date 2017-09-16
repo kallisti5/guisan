@@ -412,9 +412,9 @@ namespace gcn
                   break;
             }
         }
-		else
-		{
-			switch (keysym.sym)
+        else
+        {
+            switch (keysym.sym)
             {
               case SDLK_KP_0:
                   value = SDLK_0;
@@ -449,7 +449,7 @@ namespace gcn
               default:
                   break;
             }
-		}
+        }
 
         return value;
     }
