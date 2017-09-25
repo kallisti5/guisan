@@ -358,7 +358,7 @@ namespace gcn
             }
             else
             {
-                mTextRows[mCaretRow].insert(mCaretColumn,std::string(1,(char)key.getValue()));
+                mTextRows[mCaretRow].insert(mCaretColumn,std::string(1,key.getChar()));
             }
             ++mCaretColumn;
         }
