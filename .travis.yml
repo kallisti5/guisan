@@ -8,6 +8,6 @@ before_install:
   - pushd SDL2-2.0.6 && ./configure && make && sudo make install && popd
   - wget https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.1.tar.gz && tar -xzf SDL2_image-2.0.1.tar.gz
   - pushd SDL2_image-2.0.1 && ./configure && make && sudo make install && popd
-  - wget https://www.libsdl.org/projects/SDL_image/release/SDL2_ttf-2.0.14.tar.gz && tar -xzf SDL2_ttf-2.0.14.tar.gz
+  - wget https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.14.tar.gz && tar -xzf SDL2_ttf-2.0.14.tar.gz
   - pushd SDL2_ttf-2.0.14 && ./configure && make && sudo make install && popd 
 script: rm -rf .scon* && scons -c && scons
