@@ -71,8 +71,7 @@ namespace gcn
     /**
      * A non-movable window to display a message with some buttons.
      */
-    class GCN_CORE_DECLSPEC MessageBox : public Window,
-                                     public MouseListener
+    class GCN_CORE_DECLSPEC MessageBox : public Window
     {
     public:
         /**
