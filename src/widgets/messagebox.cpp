@@ -83,7 +83,7 @@ namespace gcn
         resizeToContent();
         
         mNbButtons = 1;
-        mButtons = new Button[1];
+        mButtons = new Button*[1];
         mButtons[0] = new Button("OK");
         mButtons[0]->setAlignment(Graphics::CENTER);
         
@@ -102,7 +102,7 @@ namespace gcn
         //TODO: create buttons and label
         if(size > 0) {
             mNbButtons = size;
-            mButtons = new Button[size];
+            mButtons = new Button*[size];
             
             for(int i = 0 ; i < size ; i++){
                 mButtons[i] = new Button(*(buttons+i));

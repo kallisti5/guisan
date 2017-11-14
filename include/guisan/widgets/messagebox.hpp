@@ -207,7 +207,7 @@ namespace gcn
         std::string mMessage;
         int mNbButtons;
         
-        Button *mButtons;
+        Button **mButtons;
         Label *mLabel;
     };
 }
