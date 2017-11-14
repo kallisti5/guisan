@@ -67,49 +67,57 @@
 
 namespace gcn
 {
-    MessageBox::MessageBox()
-            :mIsMoving(false)
-    {
-        setBorderSize(1);
-        setPadding(2);
-        setTitleBarHeight(16);
-        setAlignment(Graphics::CENTER);
-        addMouseListener(this);
-        setMovable(false);
-        setOpaque(true);
-    }
 
     MessageBox::MessageBox(const std::string& caption, const std::string& message)
-            :mMessage(message),mIsMoving(false)
+            :Window(caption),mMessage(message)
     {
         setCaption(caption);
-        setBorderSize(1);
-        setPadding(2);
-        setTitleBarHeight(16);
-        setAlignment(Graphics::CENTER);
         addMouseListener(this);
         setMovable(false);
-        setOpaque(true);
+        
+        mLabel = new Label(message);
+        mLabel->setAlignment(Graphics::LEFT);
+        mLabel->adjustSize();
+        this->add(mLabel, 10, 20);
+        
+        resizeToContent();
+        
+        mNbButtons = 1;
+        mButtons = new Button[1];
+        mButtons[0] = new Button("OK");
+        mButtons[0]->setAlignment(Graphics::CENTER);
+        
+        setHeight(getHeight() + 4 + mButtons[0]->getHeight());
+        this->add(mButtons[0], (getWidth() - mButtons[0]->getWidth())/2, getHeight() - 2 - mButtons[0]->getHeight());
     }
     
     MessageBox::MessageBox(const std::string& caption, const std::string& message,
-            const std::string buttons[], int size)
-            :mMessage(message),mIsMoving(false)
+            const std::string *buttons, int size)
+            :Window(caption),mMessage(message)
     {
         setCaption(caption);
-        setBorderSize(1);
-        setPadding(2);
-        setTitleBarHeight(16);
-        setAlignment(Graphics::CENTER);
         addMouseListener(this);
         setMovable(false);
-        setOpaque(true);
         
         //TODO: create buttons and label
+        if(size > 0) {
+            mNbButtons = size;
+            mButtons = new Button[size];
+            
+            for(int i = 0 ; i < size ; i++){
+                mButtons[i] = new Button(*(buttons+i));
+                mButtons[i]->setAlignment(Graphics::CENTER);
+            }
+        }
     }
 
     MessageBox::~MessageBox()
     {
+        delete mLabel;
+        for(int i = 0 ; i < mNbButtons ; i++){
+            delete mButtons[i];
+        }
+        delete mButtons;
     }
 
     void MessageBox::setPadding(unsigned int padding)

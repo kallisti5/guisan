@@ -74,10 +74,6 @@ namespace gcn
     class GCN_CORE_DECLSPEC MessageBox : public Window
     {
     public:
-        /**
-         * Constructor.
-         */
-        MessageBox();
 
         /**
          * Constructor.
@@ -95,7 +91,7 @@ namespace gcn
          * @param buttons strings to display as button captions
          * @param size length of the buttons array
          */
-        MessageBox(const std::string& caption, const std::string& message, const std::string buttons[], int size);
+        MessageBox(const std::string& caption, const std::string& message, const std::string *buttons, int size);
 
         /**
          * Destructor.
@@ -208,19 +204,10 @@ namespace gcn
         virtual void mouseReleased(MouseEvent& mouseEvent);
 
     protected:
-        std::string mCaption;
         std::string mMessage;
-        unsigned int mAlignment;
-        unsigned int mPadding;
-        unsigned int mTitleBarHeight;
-        bool mMovable;
-        bool mOpaque;
-        int mDragOffsetX;
-        int mDragOffsetY;
-        bool mIsMoving;
+        int mNbButtons;
         
-        Button *mButton1;
-        Button *mButton2;
+        Button *mButtons;
         Label *mLabel;
     };
 }
