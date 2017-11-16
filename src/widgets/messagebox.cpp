@@ -88,6 +88,11 @@ namespace gcn
         mButtons[0]->setAlignment(Graphics::CENTER);
         
         setHeight(getHeight() + 4 + mButtons[0]->getHeight());
+        if(mButtons[0]->getWidth() + 4 > getWidth()) 
+        {
+            setWidth(mButtons[0]->getWidth() + 4);
+        }
+        
         this->add(mButtons[0], (getWidth() - mButtons[0]->getWidth())/2, getHeight() - 2 - mButtons[0]->getHeight());
     }
     
@@ -99,14 +104,41 @@ namespace gcn
         addMouseListener(this);
         setMovable(false);
         
-        //TODO: create buttons and label
-        if(size > 0) {
+        mLabel = new Label(message);
+        mLabel->setAlignment(Graphics::LEFT);
+        mLabel->adjustSize();
+        this->add(mLabel, 10, 20);
+        
+        resizeToContent();
+        
+        //Create buttons and label
+        if(size > 0) 
+        {
             mNbButtons = size;
             mButtons = new Button*[size];
+            int maxBtnWidth = 0;
             
-            for(int i = 0 ; i < size ; i++){
+            for(int i = 0 ; i < size ; i++)
+            {
                 mButtons[i] = new Button(*(buttons+i));
                 mButtons[i]->setAlignment(Graphics::CENTER);
+                maxBtnWidth = maxBtnWidth > mButtons[i]->getWidth() ? maxBtnWidth : mButtons[i]->getWidth();
+            }
+            //Find the widest button, apply same width to all
+            for(int i = 0 ; i < size ; i++)
+            {
+                mButtons[i]->setWidth(maxBtnWidth);
+            }
+            
+            //Make sure everything fits into the window
+            if(mButtons[0]->getWidth()*size + 4 + 2*(size-1) > getWidth()) 
+            {
+                setWidth(mButtons[0]->getWidth()*size + 4 + 2*(size-1));
+            }
+            
+            for(int i = 0 ; i < size ; i++)
+            {
+                add(mButtons[i], 2 + (maxBtnWidth + 2)*i, getHeight() - 2 - mButtons[0]->getHeight());
             }
         }
     }
@@ -114,7 +146,8 @@ namespace gcn
     MessageBox::~MessageBox()
     {
         delete mLabel;
-        for(int i = 0 ; i < mNbButtons ; i++){
+        for(int i = 0 ; i < mNbButtons ; i++)
+        {
             delete mButtons[i];
         }
         delete mButtons;
