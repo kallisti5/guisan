@@ -213,17 +213,17 @@ namespace gcn
                   // Nothing to do
                   break;
               case Graphics::CENTER:
-                  leftPadding += (getWidth() - (mButtons[0]->getWidth()*size + 2*mPadding + mPadding*(size-1)))/2;
+                  leftPadding += (getWidth() - (mButtons[0]->getWidth()*mNbButtons + 2*mPadding + mPadding*(mNbButtons-1)))/2;
                   break;
               case Graphics::RIGHT:
-                  leftPadding += (getWidth() - (mButtons[0]->getWidth()*size + 2*mPadding + mPadding*(size-1)));
+                  leftPadding += (getWidth() - (mButtons[0]->getWidth()*mNbButtons + 2*mPadding + mPadding*(mNbButtons-1)));
                   break;
               default:
                   throw GCN_EXCEPTION("Unknown alignment.");
             }
             for(int i = 0 ; i < mNbButtons ; i++)
             {
-                mButtons[i]->setX(leftPadding + (maxBtnWidth + mPadding)*i);
+                mButtons[i]->setX(leftPadding + (mButtons[0]->getWidth() + mPadding)*i);
             }
         }
     }
