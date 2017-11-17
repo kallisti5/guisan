@@ -86,14 +86,15 @@ namespace gcn
         mButtons = new Button*[1];
         mButtons[0] = new Button("OK");
         mButtons[0]->setAlignment(Graphics::CENTER);
+        mButtons[0]->addMouseListener(this);
         
-        setHeight(getHeight() + 4 + mButtons[0]->getHeight());
-        if(mButtons[0]->getWidth() + 4 > getWidth()) 
+        setHeight(getHeight() + 2*mPadding + mButtons[0]->getHeight());
+        if(mButtons[0]->getWidth() + 2*mPadding > getWidth()) 
         {
-            setWidth(mButtons[0]->getWidth() + 4);
+            setWidth(mButtons[0]->getWidth() + 2*mPadding);
         }
         
-        this->add(mButtons[0], (getWidth() - mButtons[0]->getWidth())/2, getHeight() - 2 - mButtons[0]->getHeight());
+        this->add(mButtons[0], (getWidth() - mButtons[0]->getWidth())/2, getHeight() - mPadding - mButtons[0]->getHeight());
     }
     
     MessageBox::MessageBox(const std::string& caption, const std::string& message,
@@ -107,7 +108,7 @@ namespace gcn
         mLabel = new Label(message);
         mLabel->setAlignment(Graphics::LEFT);
         mLabel->adjustSize();
-        this->add(mLabel, 10, 20);
+        this->add(mLabel, mPadding, mPadding + (int)getTitleBarHeight());
         
         resizeToContent();
         
@@ -122,6 +123,7 @@ namespace gcn
             {
                 mButtons[i] = new Button(*(buttons+i));
                 mButtons[i]->setAlignment(Graphics::CENTER);
+                mButtons[i]->addMouseListener(this);
                 maxBtnWidth = maxBtnWidth > mButtons[i]->getWidth() ? maxBtnWidth : mButtons[i]->getWidth();
             }
             //Find the widest button, apply same width to all
@@ -131,14 +133,19 @@ namespace gcn
             }
             
             //Make sure everything fits into the window
-            if(mButtons[0]->getWidth()*size + 4 + 2*(size-1) > getWidth()) 
+            int padding = mPadding;
+            if(mButtons[0]->getWidth()*size + 2*mPadding + mPadding*(size-1) > getWidth()) 
             {
-                setWidth(mButtons[0]->getWidth()*size + 4 + 2*(size-1));
+                setWidth(mButtons[0]->getWidth()*size + 2*mPadding + mPadding*(size-1));
+            } 
+            else 
+            {
+                padding += (getWidth() - (mButtons[0]->getWidth()*size + 2*mPadding + mPadding*(size-1)))/2;
             }
             
             for(int i = 0 ; i < size ; i++)
             {
-                add(mButtons[i], 2 + (maxBtnWidth + 2)*i, getHeight() - 2 - mButtons[0]->getHeight());
+                add(mButtons[i], padding + (maxBtnWidth + mPadding)*i, getHeight() - mPadding - mButtons[0]->getHeight());
             }
         }
     }
@@ -191,6 +198,39 @@ namespace gcn
     unsigned int MessageBox::getAlignment() const
     {
         return mAlignment;
+    }
+    
+    void MessageBox::setButtonAlignment(unsigned int alignment)
+    {
+        mButtonAlignment = alignment;
+        
+        int leftPadding = mPadding;
+        if(mNbButtons > 0)
+        {
+            switch (alignment)
+            {
+              case Graphics::LEFT:
+                  // Nothing to do
+                  break;
+              case Graphics::CENTER:
+                  leftPadding += (getWidth() - (mButtons[0]->getWidth()*size + 2*mPadding + mPadding*(size-1)))/2;
+                  break;
+              case Graphics::RIGHT:
+                  leftPadding += (getWidth() - (mButtons[0]->getWidth()*size + 2*mPadding + mPadding*(size-1)));
+                  break;
+              default:
+                  throw GCN_EXCEPTION("Unknown alignment.");
+            }
+            for(int i = 0 ; i < mNbButtons ; i++)
+            {
+                mButtons[i]->setX(leftPadding + (maxBtnWidth + mPadding)*i);
+            }
+        }
+    }
+    
+    unsigned int MessageBox::getButtonAlignment() const
+    {
+        return mButtonAlignment;
     }
 
     void MessageBox::draw(Graphics* graphics)
@@ -318,6 +358,7 @@ namespace gcn
     {
         if (mouseEvent.getSource() != this)
         {
+            // TODO: manage button clicks
             return;
         }
         

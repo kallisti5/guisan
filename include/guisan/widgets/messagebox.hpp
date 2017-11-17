@@ -125,6 +125,20 @@ namespace gcn
          * @return alignment of caption.
          */
         unsigned int getAlignment() const;
+        
+        /**
+         * Sets the position for the button(s) in the MessageBox.
+         *
+         * @param alignment Graphics::LEFT, Graphics::CENTER or Graphics::RIGHT.
+         */
+        void setButtonAlignment(unsigned int alignment);
+
+        /**
+         * Gets the position for the button(s) in the MessageBox.
+         *
+         * @return alignment of buttons.
+         */
+        unsigned int getButtonAlignment() const;
 
         /**
          * Sets the padding of the window which is the distance between the
@@ -206,6 +220,7 @@ namespace gcn
     protected:
         std::string mMessage;
         int mNbButtons;
+        unsigned int mButtonAlignment;
         
         Button **mButtons;
         Label *mLabel;
