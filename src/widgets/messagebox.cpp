@@ -69,7 +69,7 @@ namespace gcn
 {
 
     MessageBox::MessageBox(const std::string& caption, const std::string& message)
-            :Window(caption),mMessage(message)
+            :Window(caption),mMessage(message),mClickedButton(-1)
     {
         setCaption(caption);
         addMouseListener(this);
@@ -99,7 +99,7 @@ namespace gcn
     
     MessageBox::MessageBox(const std::string& caption, const std::string& message,
             const std::string *buttons, int size)
-            :Window(caption),mMessage(message)
+            :Window(caption),mMessage(message),mClickedButton(-1)
     {
         setCaption(caption);
         addMouseListener(this);
@@ -358,7 +358,6 @@ namespace gcn
     {
         if (mouseEvent.getSource() != this)
         {
-            // TODO: manage button clicks
             return;
         }
         
@@ -375,7 +374,22 @@ namespace gcn
 
     void MessageBox::mouseReleased(MouseEvent& mouseEvent)
     {
-        mIsMoving = false;
+        if (mouseEvent.getSource() != this)
+        {
+            for(int i = 0 ; i < mNbButtons ; i++)
+            {
+                if(mouseEvent.getSource() == mButtons[i])
+                {
+                    mClickedButton = i;
+                    generateAction();
+                    break;
+                }
+            }
+        }
+        else
+        {
+            mIsMoving = false;
+        }
     }
 
     void MessageBox::mouseDragged(MouseEvent& mouseEvent)
@@ -436,5 +450,10 @@ namespace gcn
         }
 
         setSize(w + 2* getPadding(), h + getPadding() + getTitleBarHeight());
+    }
+    
+    int MessageBox::getClickedButton() const
+    {
+        return mClickedButton;
     }
 }

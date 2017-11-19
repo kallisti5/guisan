@@ -97,6 +97,13 @@ namespace gcn
          * Destructor.
          */
         virtual ~MessageBox();
+        
+        /**
+         * Gets the index of the clicked button
+         * 
+         * @return index of clicked button, starting at 0.
+         */
+        int getClickedButton() const;
 
         /**
          * Sets the MessageBox caption.
@@ -221,6 +228,7 @@ namespace gcn
         std::string mMessage;
         int mNbButtons;
         unsigned int mButtonAlignment;
+        int mClickedButton;
         
         Button **mButtons;
         Label *mLabel;
