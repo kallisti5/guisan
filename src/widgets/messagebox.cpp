@@ -95,6 +95,15 @@ namespace gcn
         }
         
         this->add(mButtons[0], (getWidth() - mButtons[0]->getWidth())/2, getHeight() - mPadding - mButtons[0]->getHeight());
+        
+        try
+        {
+        	requestModalFocus();
+        } 
+        catch () 
+        {
+        	// Not having modal focus is not critical
+        }
     }
     
     MessageBox::MessageBox(const std::string& caption, const std::string& message,
@@ -148,10 +157,21 @@ namespace gcn
                 add(mButtons[i], padding + (maxBtnWidth + mPadding)*i, getHeight() - mPadding - mButtons[0]->getHeight());
             }
         }
+        
+        try
+        {
+        	requestModalFocus();
+        } 
+        catch () 
+        {
+        	// Not having modal focus is not critical
+        }
     }
 
     MessageBox::~MessageBox()
     {
+    	releaseModalFocus();
+    	
         delete mLabel;
         for(int i = 0 ; i < mNbButtons ; i++)
         {
