@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{3F89CFFD-556A-404C-8E6E-9F7BF5C5525C}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>C:\Users\Gwilherm\betas\guisan\include;C:\Users\Gwilherm\SDL\SDL2_ttf-2.0.14\include;C:\Users\Gwilherm\SDL\SDL2_image-2.0.3\include;C:\Users\Gwilherm\SDL\SDL2-2.0.8\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Lib>
+      <AdditionalLibraryDirectories>C:\Users\Gwilherm\SDL\SDL2_image-2.0.3\lib\x86;C:\Users\Gwilherm\SDL\SDL2_ttf-2.0.14\lib\x86;C:\Users\Gwilherm\SDL\SDL2-2.0.8\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\actionevent.cpp" />
+    <ClCompile Include="src\basiccontainer.cpp" />
+    <ClCompile Include="src\cliprectangle.cpp" />
+    <ClCompile Include="src\color.cpp" />
+    <ClCompile Include="src\defaultfont.cpp" />
+    <ClCompile Include="src\event.cpp" />
+    <ClCompile Include="src\exception.cpp" />
+    <ClCompile Include="src\focushandler.cpp" />
+    <ClCompile Include="src\font.cpp" />
+    <ClCompile Include="src\genericinput.cpp" />
+    <ClCompile Include="src\graphics.cpp" />
+    <ClCompile Include="src\gui.cpp" />
+    <ClCompile Include="src\guisan.cpp" />
+    <ClCompile Include="src\image.cpp" />
+    <ClCompile Include="src\imagefont.cpp" />
+    <ClCompile Include="src\inputevent.cpp" />
+    <ClCompile Include="src\key.cpp" />
+    <ClCompile Include="src\keyevent.cpp" />
+    <ClCompile Include="src\keyinput.cpp" />
+    <ClCompile Include="src\mouseevent.cpp" />
+    <ClCompile Include="src\mouseinput.cpp" />
+    <ClCompile Include="src\opengl\opengl.cpp" />
+    <ClCompile Include="src\opengl\openglgraphics.cpp" />
+    <ClCompile Include="src\opengl\openglimage.cpp" />
+    <ClCompile Include="src\rectangle.cpp" />
+    <ClCompile Include="src\sdl\sdl.cpp" />
+    <ClCompile Include="src\sdl\sdlgraphics.cpp" />
+    <ClCompile Include="src\sdl\sdlimage.cpp" />
+    <ClCompile Include="src\sdl\sdlimageloader.cpp" />
+    <ClCompile Include="src\sdl\sdlinput.cpp" />
+    <ClCompile Include="src\sdl\sdltruetypefont.cpp" />
+    <ClCompile Include="src\selectionevent.cpp" />
+    <ClCompile Include="src\widget.cpp" />
+    <ClCompile Include="src\widgets\button.cpp" />
+    <ClCompile Include="src\widgets\checkbox.cpp" />
+    <ClCompile Include="src\widgets\container.cpp" />
+    <ClCompile Include="src\widgets\dropdown.cpp" />
+    <ClCompile Include="src\widgets\icon.cpp" />
+    <ClCompile Include="src\widgets\imagebutton.cpp" />
+    <ClCompile Include="src\widgets\imagetextbutton.cpp" />
+    <ClCompile Include="src\widgets\label.cpp" />
+    <ClCompile Include="src\widgets\listbox.cpp" />
+    <ClCompile Include="src\widgets\radiobutton.cpp" />
+    <ClCompile Include="src\widgets\scrollarea.cpp" />
+    <ClCompile Include="src\widgets\slider.cpp" />
+    <ClCompile Include="src\widgets\tab.cpp" />
+    <ClCompile Include="src\widgets\tabbedarea.cpp" />
+    <ClCompile Include="src\widgets\textbox.cpp" />
+    <ClCompile Include="src\widgets\textfield.cpp" />
+    <ClCompile Include="src\widgets\window.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\guisan.hpp" />
+    <ClInclude Include="include\guisan\actionevent.hpp" />
+    <ClInclude Include="include\guisan\actionlistener.hpp" />
+    <ClInclude Include="include\guisan\basiccontainer.hpp" />
+    <ClInclude Include="include\guisan\cliprectangle.hpp" />
+    <ClInclude Include="include\guisan\color.hpp" />
+    <ClInclude Include="include\guisan\deathlistener.hpp" />
+    <ClInclude Include="include\guisan\defaultfont.hpp" />
+    <ClInclude Include="include\guisan\event.hpp" />
+    <ClInclude Include="include\guisan\exception.hpp" />
+    <ClInclude Include="include\guisan\focushandler.hpp" />
+    <ClInclude Include="include\guisan\focuslistener.hpp" />
+    <ClInclude Include="include\guisan\font.hpp" />
+    <ClInclude Include="include\guisan\genericinput.hpp" />
+    <ClInclude Include="include\guisan\glut.hpp" />
+    <ClInclude Include="include\guisan\graphics.hpp" />
+    <ClInclude Include="include\guisan\gui.hpp" />
+    <ClInclude Include="include\guisan\image.hpp" />
+    <ClInclude Include="include\guisan\imagefont.hpp" />
+    <ClInclude Include="include\guisan\imageloader.hpp" />
+    <ClInclude Include="include\guisan\input.hpp" />
+    <ClInclude Include="include\guisan\inputevent.hpp" />
+    <ClInclude Include="include\guisan\key.hpp" />
+    <ClInclude Include="include\guisan\keyevent.hpp" />
+    <ClInclude Include="include\guisan\keyinput.hpp" />
+    <ClInclude Include="include\guisan\keylistener.hpp" />
+    <ClInclude Include="include\guisan\listmodel.hpp" />
+    <ClInclude Include="include\guisan\mouseevent.hpp" />
+    <ClInclude Include="include\guisan\mouseinput.hpp" />
+    <ClInclude Include="include\guisan\mouselistener.hpp" />
+    <ClInclude Include="include\guisan\opengl.hpp" />
+    <ClInclude Include="include\guisan\opengl\openglgraphics.hpp" />
+    <ClInclude Include="include\guisan\opengl\openglimage.hpp" />
+    <ClInclude Include="include\guisan\opengl\openglsdlimageloader.hpp" />
+    <ClInclude Include="include\guisan\platform.hpp" />
+    <ClInclude Include="include\guisan\rectangle.hpp" />
+    <ClInclude Include="include\guisan\sdl.hpp" />
+    <ClInclude Include="include\guisan\sdl\sdlgraphics.hpp" />
+    <ClInclude Include="include\guisan\sdl\sdlimage.hpp" />
+    <ClInclude Include="include\guisan\sdl\sdlimageloader.hpp" />
+    <ClInclude Include="include\guisan\sdl\sdlinput.hpp" />
+    <ClInclude Include="include\guisan\sdl\sdlpixel.hpp" />
+    <ClInclude Include="include\guisan\sdl\sdltruetypefont.hpp" />
+    <ClInclude Include="include\guisan\selectionevent.hpp" />
+    <ClInclude Include="include\guisan\selectionlistener.hpp" />
+    <ClInclude Include="include\guisan\widget.hpp" />
+    <ClInclude Include="include\guisan\widgetlistener.hpp" />
+    <ClInclude Include="include\guisan\widgets\button.hpp" />
+    <ClInclude Include="include\guisan\widgets\checkbox.hpp" />
+    <ClInclude Include="include\guisan\widgets\container.hpp" />
+    <ClInclude Include="include\guisan\widgets\dropdown.hpp" />
+    <ClInclude Include="include\guisan\widgets\icon.hpp" />
+    <ClInclude Include="include\guisan\widgets\imagebutton.hpp" />
+    <ClInclude Include="include\guisan\widgets\imagetextbutton.hpp" />
+    <ClInclude Include="include\guisan\widgets\label.hpp" />
+    <ClInclude Include="include\guisan\widgets\listbox.hpp" />
+    <ClInclude Include="include\guisan\widgets\radiobutton.hpp" />
+    <ClInclude Include="include\guisan\widgets\scrollarea.hpp" />
+    <ClInclude Include="include\guisan\widgets\slider.hpp" />
+    <ClInclude Include="include\guisan\widgets\tab.hpp" />
+    <ClInclude Include="include\guisan\widgets\tabbedarea.hpp" />
+    <ClInclude Include="include\guisan\widgets\textbox.hpp" />
+    <ClInclude Include="include\guisan\widgets\textfield.hpp" />
+    <ClInclude Include="include\guisan\widgets\window.hpp" />
+    <ClInclude Include="include\guisan\x.hpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

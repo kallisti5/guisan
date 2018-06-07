@@ -47,7 +47,11 @@
 #include <map>
 #include <string>
 
+#ifndef _WIN32
 #include <SDL2/SDL_ttf.h>
+#else
+#include <SDL_ttf.h>
+#endif
 
 #include "guisan/font.hpp"
 #include "guisan/platform.hpp"
