@@ -43,7 +43,11 @@
 
 #include "ffcontainer.hpp"
 #include <cmath>
+#ifndef _MSC_VER
 #include <SDL2/SDL.h>
+#else
+#include <SDL.h>
+#endif // !_MSC_
 
 int FFContainer::mInstances = 0;
 gcn::Image *FFContainer::mCornerUL = 0;
