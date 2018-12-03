@@ -78,9 +78,7 @@ namespace gcn
         mLabel = new Label(message);
         mLabel->setAlignment(Graphics::LEFT);
         mLabel->adjustSize();
-        this->add(mLabel, 10, 20);
-        
-        resizeToContent();
+        this->add(mLabel, mPadding, mPadding);
         
         mNbButtons = 1;
         mButtons = new Button*[1];
@@ -88,13 +86,14 @@ namespace gcn
         mButtons[0]->setAlignment(Graphics::CENTER);
         mButtons[0]->addMouseListener(this);
         
-        setHeight(getHeight() + 2*mPadding + mButtons[0]->getHeight());
-        if(mButtons[0]->getWidth() + 2*mPadding > getWidth()) 
+        setHeight((int)getTitleBarHeight() + mLabel->getHeight() + 4*mPadding + mButtons[0]->getHeight());
+		setWidth(mLabel->getWidth() + 4*mPadding);
+        if(mButtons[0]->getWidth() + 4*mPadding > getWidth()) 
         {
-            setWidth(mButtons[0]->getWidth() + 2*mPadding);
+            setWidth(mButtons[0]->getWidth() + 4*mPadding);
         }
         
-        this->add(mButtons[0], (getWidth() - mButtons[0]->getWidth())/2, getHeight() - mPadding - mButtons[0]->getHeight());
+        this->add(mButtons[0], (getWidth() - mButtons[0]->getWidth())/2, getHeight() - (int)getTitleBarHeight() - mPadding - mButtons[0]->getHeight());
         
         try
         {
@@ -117,9 +116,8 @@ namespace gcn
         mLabel = new Label(message);
         mLabel->setAlignment(Graphics::LEFT);
         mLabel->adjustSize();
-        this->add(mLabel, mPadding, mPadding + (int)getTitleBarHeight());
-        
-        resizeToContent();
+        this->add(mLabel, mPadding, mPadding);
+		setWidth(mLabel->getWidth() + 4*mPadding);
         
         //Create buttons and label
         if(size > 0) 
@@ -143,19 +141,20 @@ namespace gcn
             
             //Make sure everything fits into the window
             int padding = mPadding;
-            if(mButtons[0]->getWidth()*size + 2*mPadding + mPadding*(size-1) > getWidth()) 
+            if(mButtons[0]->getWidth()*size + 4*mPadding + mPadding*(size-1) > getWidth()) 
             {
-                setWidth(mButtons[0]->getWidth()*size + 2*mPadding + mPadding*(size-1));
+                setWidth(mButtons[0]->getWidth()*size + 4*mPadding + mPadding*(size-1));
             } 
             else 
             {
-                padding += (getWidth() - (mButtons[0]->getWidth()*size + 2*mPadding + mPadding*(size-1)))/2;
+                padding += (getWidth() - (mButtons[0]->getWidth()*size + 4*mPadding + mPadding*(size-1)))/2;
             }
             
+			setHeight((int)getTitleBarHeight() + mLabel->getHeight() + 4*mPadding + mButtons[0]->getHeight());
             for(int i = 0 ; i < size ; i++)
             {
-                add(mButtons[i], padding + (maxBtnWidth + mPadding)*i, getHeight() - mPadding - mButtons[0]->getHeight());
-            }
+                add(mButtons[i], padding + (maxBtnWidth + mPadding)*i, getHeight() - - (int)getTitleBarHeight() - mPadding - mButtons[0]->getHeight());
+            }			
         }
         
         try
