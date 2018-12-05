@@ -77,6 +77,7 @@ namespace gcn
 
         /**
          * Constructor.
+		 * This version only has a single button labeled "OK". 
          *
          * @param caption the MessageBox caption.
          * @param message the message to display in the MessageBox
@@ -101,7 +102,7 @@ namespace gcn
         /**
          * Gets the index of the clicked button
          * 
-         * @return index of clicked button, starting at 0.
+         * @return index of clicked button, starting at 0. -1 if not set (i.e., no button clicked yet)
          */
         int getClickedButton() const;
 
@@ -197,6 +198,14 @@ namespace gcn
          * @return true or false.
          */
         bool isOpaque();
+		
+		/**
+		 * Add this MessageBox to a parent container, centered both horizontally and vertically
+		 * If instead, you want to place it somewhere else, use Container::add(). 
+		 *
+		 * @param container parent container
+		 */
+		void addToContainer(Container* container);
 
         /**
          * Resizes the container to fit the content exactly.

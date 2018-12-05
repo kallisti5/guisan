@@ -475,4 +475,11 @@ namespace gcn
     {
         return mClickedButton;
     }
+	
+	void MessageBox::addToContainer(Container* container)
+	{
+		int x = container->getWidth() - getWidth();
+		int y = container->getHeight() - getHeight();
+		container->add(this, x/2, y/2);
+	}
 }
