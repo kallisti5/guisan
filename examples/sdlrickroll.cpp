@@ -60,9 +60,15 @@ public:
 			label1->setCaption("You have been rick rolled");
 			// Adjust the label to fit the new caption
 			label1->adjustSize();
+			top->remove(msgBox);
 		} 
 		else if (actionEvent.getSource() == button1) 
 		{
+			if(msgBox)
+			{
+				delete msgBox;
+				msgBox = NULL;
+			}
 			msgBox = new gcn::MessageBox("Rick Astley", "Never gonna give you up");
 			msgBox->setVisible(true);
 			msgBox->addActionListener(this);
