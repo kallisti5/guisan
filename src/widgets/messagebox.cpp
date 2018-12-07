@@ -78,7 +78,6 @@ namespace gcn
         mLabel = new Label(message);
         mLabel->setAlignment(Graphics::LEFT);
         mLabel->adjustSize();
-        this->add(mLabel, mPadding, mPadding);
         
         mNbButtons = 1;
         mButtons = new Button*[1];
@@ -93,6 +92,7 @@ namespace gcn
             setWidth(mButtons[0]->getWidth() + 4*mPadding);
         }
         
+		this->add(mLabel, (getWidth() - mLabel->getWidth())/2 - mPadding, mPadding);
         this->add(mButtons[0], (getWidth() - mButtons[0]->getWidth())/2, getHeight() - (int)getTitleBarHeight() - mPadding - mButtons[0]->getHeight());
         
         try
@@ -116,7 +116,6 @@ namespace gcn
         mLabel = new Label(message);
         mLabel->setAlignment(Graphics::LEFT);
         mLabel->adjustSize();
-        this->add(mLabel, mPadding, mPadding);
 		setWidth(mLabel->getWidth() + 4*mPadding);
         
         //Create buttons and label
@@ -149,11 +148,12 @@ namespace gcn
             {
                 padding += (getWidth() - (mButtons[0]->getWidth()*size + 4*mPadding + mPadding*(size-1)))/2;
             }
+			add(mLabel, (getWidth() - mLabel->getWidth())/2 - mPadding, mPadding);
             
 			setHeight((int)getTitleBarHeight() + mLabel->getHeight() + 4*mPadding + mButtons[0]->getHeight());
             for(int i = 0 ; i < size ; i++)
             {
-                add(mButtons[i], padding + (maxBtnWidth + mPadding)*i, getHeight() - - (int)getTitleBarHeight() - mPadding - mButtons[0]->getHeight());
+                add(mButtons[i], padding + (maxBtnWidth + mPadding)*i, getHeight() - (int)getTitleBarHeight() - mPadding - mButtons[0]->getHeight());
             }			
         }
         
