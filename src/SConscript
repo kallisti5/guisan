@@ -38,6 +38,7 @@ widget_sources = [
 	'widgets/dropdown.cpp',
 	'widgets/icon.cpp',
 	'widgets/imagebutton.cpp',
+	'widgets/imagetextbutton.cpp',
 	'widgets/label.cpp',
 	'widgets/listbox.cpp',
 	'widgets/messagebox.cpp',

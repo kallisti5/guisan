@@ -103,7 +103,7 @@ void FFCharacterChooser::keyPressed(gcn::KeyEvent& keyEvent)
     }
     else if (keyEvent.getKey().getValue() == gcn::Key::ENTER)
     {
-	#warning TODO: fix this
+		// TODO: fix this
         //distributeActionEvent();
     }
 }
