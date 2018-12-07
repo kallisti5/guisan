@@ -41,6 +41,7 @@ widget_sources = [
 	'widgets/label.cpp',
 	'widgets/listbox.cpp',
 	'widgets/messagebox.cpp',
+	'widgets/progressbar.cpp',
 	'widgets/radiobutton.cpp',
 	'widgets/scrollarea.cpp',
 	'widgets/slider.cpp',
@@ -91,23 +92,23 @@ if env['HAVE_SDL2']:
 if env['HAVE_OPENGL']:
 	guisan.Append(LIBS = ['GL', 'GLU'])
 
-print "========================================="
-print " Guisan build"
-print ""
-print " SDL 2.0 support.............. " + str(env['HAVE_SDL2'])
-print " OpenGL support............... " + str(env['HAVE_OPENGL'])
-print "-----------------------------------------"
-print " Installation target"
-print ""
-print " Prefix....................... " + str(env['PREFIX_PATH'])
-print " Includes..................... " + str(env['INCLUDE_PATH'])
-print " Libraries.................... " + str(env['LIB_PATH'])
-print ""
-print "========================================="
+print("=========================================")
+print(" Guisan build")
+print("")
+print(" SDL 2.0 support.............. " + str(env['HAVE_SDL2']))
+print(" OpenGL support............... " + str(env['HAVE_OPENGL']))
+print("-----------------------------------------")
+print(" Installation target")
+print("")
+print(" Prefix....................... " + str(env['PREFIX_PATH']))
+print(" Includes..................... " + str(env['INCLUDE_PATH']))
+print(" Libraries.................... " + str(env['LIB_PATH']))
+print("")
+print("=========================================")
 
 guisan.StaticLibrary(target = 'guisan', source = program_sources)
 
-pkgconfig = file(str("guisan.pc"), "w")
+pkgconfig = open(str("guisan.pc"), "w")
 pkgconfig.write("prefix=%s\n" % env["PREFIX_PATH"])
 pkgconfig.write("includedir=%s\n" % env["INCLUDE_PATH"])
 pkgconfig.write("libdir=%s\n" % env["LIB_PATH"])
