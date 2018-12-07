@@ -105,6 +105,13 @@ namespace gcn
         int getValue() const;
 
         /**
+         *  Gets the char value of the key if available.
+         *  
+         *  @return the char value of the key, the null character otherwise
+         */
+        char getChar() const;
+
+        /**
          * An enum with key values.
          */
         enum

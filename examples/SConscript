@@ -32,6 +32,16 @@ if env['HAVE_SDL2']:
 		source = ['sdlaction.cpp']
 	)
 	
+	sdlrickroll = env.Clone()
+	sdlrickroll.ParseConfig('pkg-config --cflags --libs sdl2')
+	sdlrickroll.ParseConfig('pkg-config --cflags --libs SDL2_image')
+	sdlrickroll.ParseConfig('pkg-config --cflags --libs SDL2_ttf')
+	sdlrickroll.Prepend(LIBS = 'guisan')
+	sdlrickroll.Program(
+		target = 'sdlrickroll',
+		source = ['sdlrickroll.cpp']
+	)
+	
 ### SDL 3D Examples
 if env['HAVE_OPENGL'] and env['HAVE_SDL2']:
 
