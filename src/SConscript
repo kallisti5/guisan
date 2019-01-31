@@ -58,6 +58,7 @@ if env['HAVE_SDL2']:
 	sdl_sources = [
 		'sdl/sdl.cpp',
 		'sdl/sdlgraphics.cpp',
+		'sdl/sdl2graphics.cpp',
 		'sdl/sdlimage.cpp',
 		'sdl/sdlimageloader.cpp',
 		'sdl/sdlinput.cpp',

@@ -7,7 +7,7 @@
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
  * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
- *
+ * Copyright (c) 2016, 2018, 2019 Gwilherm Baudic
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
  * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
@@ -54,85 +54,139 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef GCN_SDLINPUT_HPP
-#define GCN_SDLINPUT_HPP
-
-#include <queue>
+#ifndef GCN_SDL2GRAPHICS_HPP
+#define GCN_SDL2GRAPHICS_HPP
 
 #include "SDL.h"
 
-#include "guisan/input.hpp"
-#include "guisan/keyinput.hpp"
-#include "guisan/mouseinput.hpp"
+#include "guisan/color.hpp"
+#include "guisan/graphics.hpp"
 #include "guisan/platform.hpp"
 
 namespace gcn
 {
-    class Key;
+    class Image;
+    class Rectangle;
 
     /**
-     * SDL implementation of Input.
+     * SDL implementation of the Graphics.
      */
-    class GCN_EXTENSION_DECLSPEC SDLInput : public Input
+    class GCN_EXTENSION_DECLSPEC SDL2Graphics : public Graphics
     {
     public:
+
+        // Needed so that drawImage(gcn::Image *, int, int) is visible.
+        using Graphics::drawImage;
 
         /**
          * Constructor.
          */
-        SDLInput();
-
+        SDL2Graphics();
+        
         /**
-         * Pushes an SDL event. It should be called at least once per frame to
-         * update input with user input.
+         * Destructor.
+         */
+        ~SDL2Graphics();
+        
+        /**
+         *  Sets the target SDL_Renderer to use for drawing. Preferably done only once. 
+         *  
+         *  @param renderer the SDL_Renderer to use for drawing.
+         *  @param width screen width
+         *  @param height screen height
+         */
+        virtual void setTarget(SDL_Renderer* renderer, int width, int height);
+        
+        /**
+         * Gets the target SDL_Renderer.
          *
-         * @param event an event from SDL.
+         * @return the target SDL_Renderer.
          */
-        virtual void pushInput(SDL_Event event);
+        virtual SDL_Renderer* getTarget() const;
 
         /**
-         * Polls all input. It exists for input driver compatibility. If you
-         * only use SDL and plan sticking with SDL you can safely ignore this
-         * function as it in the SDL case does nothing.
+         * Draws an SDL_Surface on the target surface. Normally you'll
+         * use drawImage, but if you want to write SDL specific code
+         * this function might come in handy.
+         *
+         * NOTE: The clip areas will be taken into account.
          */
-        virtual void _pollInput() { }
+        virtual void drawSDLSurface(SDL_Surface* surface, SDL_Rect source,
+                                    SDL_Rect destination);
 
+        /**
+         * Draws an SDL_Texture on the target surface. Normally you'll
+         * use drawImage, but if you want to write SDL specific code
+         * this function might come in handy.
+         *
+         * NOTE: The clip areas will be taken into account.
+         */
+        virtual void drawSDLTexture(SDL_Texture* texture, SDL_Rect source,
+                                    SDL_Rect destination);
 
-        // Inherited from Input
+        // Inherited from Graphics
 
-        virtual bool isKeyQueueEmpty();
+        virtual void _beginDraw();
 
-        virtual KeyInput dequeueKeyInput();
+        virtual void _endDraw();
 
-        virtual bool isMouseQueueEmpty();
+        virtual bool pushClipArea(Rectangle area);
 
-        virtual MouseInput dequeueMouseInput();
+        virtual void popClipArea();
+
+        virtual void drawImage(const Image* image, int srcX, int srcY,
+                               int dstX, int dstY, int width,
+                               int height);
+
+        virtual void drawPoint(int x, int y);
+
+        virtual void drawLine(int x1, int y1, int x2, int y2);
+
+        virtual void drawRectangle(const Rectangle& rectangle);
+
+        virtual void fillRectangle(const Rectangle& rectangle);
+
+        virtual void setColor(const Color& color);
+
+        virtual const Color& getColor();
 
     protected:
         /**
-         * Converts a mouse button from SDL to a Guisan mouse button
-         * representation.
+         * Draws a horizontal line.
          *
-         * @param button an SDL mouse button.
-         * @return a Guisan mouse button.
+         * @param x1 the start coordinate of the line.
+         * @param y the y coordinate of the line.
+         * @param x2 the end coordinate of the line.
          */
-        int convertMouseButton(int button);
+        virtual void drawHLine(int x1, int y, int x2);
 
         /**
-         * Converts an SDL event key to a key value.
+         * Draws a vertical line.
          *
-         * @param event an SDL event with a key to convert.
-         * @return a key value.
-         * @see Key
+         * @param x the x coordinate of the line.
+         * @param y1 the start coordinate of the line.
+         * @param y2 the end coordinate of the line.
          */
-        int convertKeyCharacter(SDL_Event event);
+        virtual void drawVLine(int x, int y1, int y2);
+        
+        /**
+         *  Save the current rendering color before drawing.
+         *  Does not affect the mColor attribute. 
+         */
+        virtual void saveRenderColor();
+        
+        /**
+         *  Restore the rendering color after drawing
+         */
+        virtual void restoreRenderColor();
 
-        std::queue<KeyInput> mKeyInputQueue;
-        std::queue<MouseInput> mMouseInputQueue;
-
-        bool mMouseDown;
-        bool mMouseInWindow;
+        SDL_Surface* mTarget;
+        SDL_Renderer* mRenderTarget;
+        SDL_Texture* mTexture;
+        Color mColor;
+        Uint8 r, g, b, a; //! to store previous color from renderer
+        bool mAlpha;
     };
 }
 
-#endif // end GCN_SDLINPUT_HPP
+#endif // end GCN_SDL2GRAPHICS_HPP

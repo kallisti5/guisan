@@ -120,6 +120,7 @@ widget_headers = [
 ]
 sdl2_headers = [
     'include/guisan/sdl/sdlgraphics.hpp',
+    'include/guisan/sdl/sdl2graphics.hpp',
     'include/guisan/sdl/sdlimage.hpp',
     'include/guisan/sdl/sdlimageloader.hpp',
     'include/guisan/sdl/sdlinput.hpp',

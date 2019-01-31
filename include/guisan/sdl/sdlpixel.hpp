@@ -64,7 +64,7 @@ namespace gcn
 {
 
     /**
-     * Checks a pixels color of an SDL_Surface.
+     * Checks a pixel color of an SDL_Surface.
      *
      * @param surface an SDL_Surface where to check for a pixel color.
      * @param x the x coordinate on the surface.
