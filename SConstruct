@@ -105,6 +105,7 @@ widget_headers = [
     'include/guisan/widgets/icon.hpp',
     'include/guisan/widgets/imagebutton.hpp',
     'include/guisan/widgets/imagetextbutton.hpp',
+    'include/guisan/widgets/inputbox.hpp',
     'include/guisan/widgets/label.hpp',
     'include/guisan/widgets/listbox.hpp',
     'include/guisan/widgets/messagebox.hpp',

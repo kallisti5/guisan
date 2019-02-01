@@ -39,6 +39,7 @@ widget_sources = [
 	'widgets/icon.cpp',
 	'widgets/imagebutton.cpp',
 	'widgets/imagetextbutton.cpp',
+	'widgets/inputbox.cpp',
 	'widgets/label.cpp',
 	'widgets/listbox.cpp',
 	'widgets/messagebox.cpp',

@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof NaessÃ©n and Per Larsson
- *
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
+ * Copyright (c) 2017, 2018, 2019 Gwilherm Baudic
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof NaessÃ©n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -54,75 +54,91 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef GCN_GUISAN_HPP
-#define GCN_GUISAN_HPP
+#ifndef GCN_INPUTBOX_HPP
+#define GCN_INPUTBOX_HPP
 
-#include <guisan/actionevent.hpp>
-#include <guisan/actionlistener.hpp>
-#include <guisan/cliprectangle.hpp>
-#include <guisan/color.hpp>
-#include <guisan/deathlistener.hpp>
-#include <guisan/event.hpp>
-#include <guisan/exception.hpp>
-#include <guisan/focushandler.hpp>
-#include <guisan/focuslistener.hpp>
-#include <guisan/font.hpp>
-#include <guisan/genericinput.hpp>
-#include <guisan/graphics.hpp>
-#include <guisan/gui.hpp>
-#include <guisan/image.hpp>
-#include <guisan/imagefont.hpp>
-#include <guisan/imageloader.hpp>
-#include <guisan/input.hpp>
-#include <guisan/inputevent.hpp>
-#include <guisan/key.hpp>
-#include <guisan/keyevent.hpp>
-#include <guisan/keyinput.hpp>
-#include <guisan/keylistener.hpp>
-#include <guisan/listmodel.hpp>
-#include <guisan/mouseevent.hpp>
-#include <guisan/mouseinput.hpp>
-#include <guisan/mouselistener.hpp>
-#include <guisan/rectangle.hpp>
-#include <guisan/selectionevent.hpp>
-#include <guisan/selectionlistener.hpp>
-#include <guisan/widget.hpp>
-#include <guisan/widgetlistener.hpp>
+#include <string>
 
-#include <guisan/widgets/button.hpp>
-#include <guisan/widgets/checkbox.hpp>
-#include <guisan/widgets/container.hpp>
-#include <guisan/widgets/dropdown.hpp>
-#include <guisan/widgets/icon.hpp>
-#include <guisan/widgets/imagebutton.hpp>
-#include <guisan/widgets/imagetextbutton.hpp>
-#include <guisan/widgets/inputbox.hpp>
-#include <guisan/widgets/label.hpp>
-#include <guisan/widgets/listbox.hpp>
-#include <guisan/widgets/messagebox.hpp>
-#include <guisan/widgets/progressbar.hpp>
-#include <guisan/widgets/scrollarea.hpp>
-#include <guisan/widgets/slider.hpp>
-#include <guisan/widgets/radiobutton.hpp>
-#include <guisan/widgets/tab.hpp>
-#include <guisan/widgets/tabbedarea.hpp>
-#include <guisan/widgets/textbox.hpp>
-#include <guisan/widgets/textfield.hpp>
-#include <guisan/widgets/window.hpp>
-
+#include "guisan/mouselistener.hpp"
+#include "guisan/actionlistener.hpp"
 #include "guisan/platform.hpp"
+#include "guisan/widgets/window.hpp"
+#include "guisan/widgets/button.hpp"
+#include "guisan/widgets/label.hpp"
+#include "guisan/widgets/textfield.hpp"
+#include "guisan/widgets/icon.hpp"
 
-class Widget;
-
-extern "C"
+namespace gcn
 {
     /**
-     * Gets the the version of Guisan. As it is a C function
-     * it can be used to check for Guichan with autotools.
-     *
-     * @return the version of Guisan.
+     * A non-movable window to get a short string from the user.
      */
-    GCN_CORE_DECLSPEC extern const char* gcnGuisanVersion();
+    class GCN_CORE_DECLSPEC InputBox : public Window
+    {
+    public:
+
+        /**
+         * Constructor. 
+         *
+         * @param caption the InputBox caption.
+         * @param message the message to display in the InputBox
+         * @param ok the string corresponding to the "OK" button
+         * @param cancel the string corresponding to the "Cancel" button
+         */
+        InputBox(const std::string& caption, const std::string& message, const std::string &ok = "OK", const std::string &cancel = "Cancel");
+
+        /**
+         * Destructor.
+         */
+        virtual ~InputBox();
+        
+        /**
+         * Add this InputBox to a parent container, centered both horizontally and vertically
+         * If instead, you want to place it somewhere else, use Container::add(). 
+         *
+         * @param container parent container
+         */
+        void addToContainer(Container* container);
+        
+        /**
+         * Get the text that was input by the user
+         * Use in conjunction with getClickedButton() to tell an empty string from a cancel operation.
+         * 
+         * @return the text which was typed by the user
+         */
+        std::string getText() const;
+        
+        /**
+         * Get the number of the button that was clicked
+         * @return 0 for OK, 1 for Cancel
+         */
+        int getClickedButton() const;
+
+
+        // Inherited from Widget
+
+        virtual void draw(Graphics* graphics);
+
+        virtual void drawBorder(Graphics* graphics);
+
+
+        // Inherited from MouseListener
+
+        virtual void mousePressed(MouseEvent& mouseEvent);
+
+        virtual void mouseDragged(MouseEvent& mouseEvent);
+
+        virtual void mouseReleased(MouseEvent& mouseEvent);
+
+    protected:
+        std::string mMessage;
+        int mClickedButton;
+        
+        Button *mButtonOK;
+        Button *mButtonCancel;
+        Label *mLabel;
+        TextField *mText;
+    };
 }
 
-#endif // end GCN_GUISAN_HPP
+#endif // end GCN_INPUTBOX_HPP
