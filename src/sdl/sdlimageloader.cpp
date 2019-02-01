@@ -87,7 +87,7 @@ namespace gcn
                     std::string("Not enough memory to load: ") + filename);
         }
 
-        Image *image = new SDLImage(surface, true);
+        Image *image = new SDLImage(surface, true, mRenderer);
 
         if (convertToDisplayFormat)
         {
@@ -96,10 +96,20 @@ namespace gcn
 
         return image;
     }
+    
+    void SDLImageLoader::setRenderer(SDL_Renderer* renderer)
+    {
+		mRenderer = renderer;
+	}
 
     SDL_Surface* SDLImageLoader::loadSDLSurface(const std::string& filename)
     {
         return IMG_Load(filename.c_str());
+    }
+    
+    SDL_Texture* SDLImageLoader::loadSDLTexture(const std::string& filename)
+    {
+        return IMG_LoadTexture(mRenderer, filename.c_str());
     }
 
     SDL_Surface* SDLImageLoader::convertToStandardFormat(SDL_Surface* surface)
