@@ -21,6 +21,16 @@ if env['HAVE_SDL2']:
 		target = 'sdlwidgets',
 		source = ['sdlwidgets.cpp']
 	)
+	
+	sdl2widgets = env.Clone()
+	sdl2widgets.ParseConfig('pkg-config --cflags --libs sdl2')
+	sdl2widgets.ParseConfig('pkg-config --cflags --libs SDL2_image')
+	sdl2widgets.ParseConfig('pkg-config --cflags --libs SDL2_ttf')
+	sdl2widgets.Prepend(LIBS = 'guisan')
+	sdl2widgets.Program(
+		target = 'sdl2widgets',
+		source = ['sdl2widgets.cpp']
+	)
 
 	sdlaction = env.Clone()
 	sdlaction.ParseConfig('pkg-config --cflags --libs sdl2')

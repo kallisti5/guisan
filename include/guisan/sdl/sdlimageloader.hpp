@@ -73,13 +73,16 @@ namespace gcn
     {
     public:
 
+		void setRenderer(SDL_Renderer* renderer); 
         // Inherited from ImageLoader
 
         virtual Image* load(const std::string& filename, bool convertToDisplayFormat = true);
 
     protected:
         virtual SDL_Surface* loadSDLSurface(const std::string& filename);
+        virtual SDL_Texture* loadSDLTexture(const std::string& filename);
         virtual SDL_Surface* convertToStandardFormat(SDL_Surface* surface);
+        SDL_Renderer* mRenderer;
     };
 }
 

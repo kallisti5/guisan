@@ -65,10 +65,16 @@
 
 namespace gcn
 {
-    SDLImage::SDLImage(SDL_Surface* surface, bool autoFree)
+    SDLImage::SDLImage(SDL_Surface* surface, bool autoFree, SDL_Renderer* renderer)
     {
         mAutoFree = autoFree;
         mSurface = surface;
+		mRenderer = renderer;
+		if (renderer)
+		{
+			mTexture = SDL_CreateTextureFromSurface(renderer, surface);
+			SDL_SetTextureBlendMode(mTexture, SDL_BLENDMODE_BLEND);
+		}       
     }
 
     SDLImage::~SDLImage()
@@ -83,6 +89,11 @@ namespace gcn
     {
         return mSurface;
     }
+    
+    SDL_Texture* SDLImage::getTexture() const
+    {
+		return mTexture;
+	}
 
     int SDLImage::getWidth() const
     {
@@ -174,10 +185,20 @@ namespace gcn
             SDL_SetSurfaceAlphaMod(tmp, 255);
 
         mSurface = tmp;
+
+		if (mRenderer)
+		{
+			SDL_Texture *tmpTexture = SDL_CreateTextureFromSurface(mRenderer, tmp);
+			SDL_SetTextureBlendMode(tmpTexture, SDL_BLENDMODE_BLEND);
+			SDL_DestroyTexture(mTexture);
+			mTexture = tmpTexture;
+		}
+		
     }
 
     void SDLImage::free()
     {
         SDL_FreeSurface(mSurface);
+        SDL_DestroyTexture(mTexture);
     }
 }

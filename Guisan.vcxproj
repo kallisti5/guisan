@@ -162,6 +162,7 @@
     <ClCompile Include="src\opengl\openglimage.cpp" />
     <ClCompile Include="src\rectangle.cpp" />
     <ClCompile Include="src\sdl\sdl.cpp" />
+    <ClCompile Include="src\sdl\sdl2graphics.cpp" />
     <ClCompile Include="src\sdl\sdlgraphics.cpp" />
     <ClCompile Include="src\sdl\sdlimage.cpp" />
     <ClCompile Include="src\sdl\sdlimageloader.cpp" />
