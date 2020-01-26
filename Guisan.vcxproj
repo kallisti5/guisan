@@ -162,6 +162,7 @@
     <ClCompile Include="src\widgets\tabbedarea.cpp" />
     <ClCompile Include="src\widgets\textbox.cpp" />
     <ClCompile Include="src\widgets\textfield.cpp" />
+	<ClCompile Include="src\widgets\togglebutton.cpp" />
     <ClCompile Include="src\widgets\window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -228,6 +229,7 @@
     <ClInclude Include="include\guisan\widgets\tabbedarea.hpp" />
     <ClInclude Include="include\guisan\widgets\textbox.hpp" />
     <ClInclude Include="include\guisan\widgets\textfield.hpp" />
+	<ClInclude Include="include\guisan\widgets\togglebutton.hpp" />
     <ClInclude Include="include\guisan\widgets\window.hpp" />
     <ClInclude Include="include\guisan\x.hpp" />
   </ItemGroup>
