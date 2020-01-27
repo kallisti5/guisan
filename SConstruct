@@ -117,6 +117,7 @@ widget_headers = [
     'include/guisan/widgets/tab.hpp',
     'include/guisan/widgets/textbox.hpp',
     'include/guisan/widgets/textfield.hpp',
+    'include/guisan/widgets/togglebutton.hpp',
     'include/guisan/widgets/window.hpp'
 ]
 sdl2_headers = [
