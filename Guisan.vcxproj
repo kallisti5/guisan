@@ -180,6 +180,7 @@
     <ClCompile Include="src\widgets\inputbox.cpp" />
     <ClCompile Include="src\widgets\label.cpp" />
     <ClCompile Include="src\widgets\listbox.cpp" />
+    <ClCompile Include="src\widgets\progressbar.cpp" />
     <ClCompile Include="src\widgets\radiobutton.cpp" />
     <ClCompile Include="src\widgets\scrollarea.cpp" />
     <ClCompile Include="src\widgets\slider.cpp" />
@@ -248,6 +249,7 @@
     <ClInclude Include="include\guisan\widgets\inputbox.hpp" />
     <ClInclude Include="include\guisan\widgets\label.hpp" />
     <ClInclude Include="include\guisan\widgets\listbox.hpp" />
+	<ClInclude Include="include\guisan\widgets\progressbar.hpp" />
     <ClInclude Include="include\guisan\widgets\radiobutton.hpp" />
     <ClInclude Include="include\guisan\widgets\scrollarea.hpp" />
     <ClInclude Include="include\guisan\widgets\slider.hpp" />
