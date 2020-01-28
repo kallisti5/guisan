@@ -188,7 +188,7 @@
     <ClCompile Include="src\widgets\tabbedarea.cpp" />
     <ClCompile Include="src\widgets\textbox.cpp" />
     <ClCompile Include="src\widgets\textfield.cpp" />
-	<ClCompile Include="src\widgets\togglebutton.cpp" />
+    <ClCompile Include="src\widgets\togglebutton.cpp" />
     <ClCompile Include="src\widgets\window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -249,7 +249,7 @@
     <ClInclude Include="include\guisan\widgets\inputbox.hpp" />
     <ClInclude Include="include\guisan\widgets\label.hpp" />
     <ClInclude Include="include\guisan\widgets\listbox.hpp" />
-	<ClInclude Include="include\guisan\widgets\progressbar.hpp" />
+    <ClInclude Include="include\guisan\widgets\progressbar.hpp" />
     <ClInclude Include="include\guisan\widgets\radiobutton.hpp" />
     <ClInclude Include="include\guisan\widgets\scrollarea.hpp" />
     <ClInclude Include="include\guisan\widgets\slider.hpp" />
@@ -257,7 +257,7 @@
     <ClInclude Include="include\guisan\widgets\tabbedarea.hpp" />
     <ClInclude Include="include\guisan\widgets\textbox.hpp" />
     <ClInclude Include="include\guisan\widgets\textfield.hpp" />
-	<ClInclude Include="include\guisan\widgets\togglebutton.hpp" />
+    <ClInclude Include="include\guisan\widgets\togglebutton.hpp" />
     <ClInclude Include="include\guisan\widgets\window.hpp" />
     <ClInclude Include="include\guisan\x.hpp" />
   </ItemGroup>
