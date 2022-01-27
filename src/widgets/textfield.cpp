@@ -116,9 +116,13 @@ namespace gcn
             drawCaret(graphics, getFont()->getWidth(mText.substr(0, mCaretPosition)) - mXScroll);
         }
 
+		if (isEnabled())
         graphics->setColor(getForegroundColor());
+		else
+			graphics->setColor(Color(128, 128, 128));
+		
         graphics->setFont(getFont());
-        graphics->drawText(mText, 1 - mXScroll, 1);
+		graphics->drawText(mText, 1 - mXScroll, 2);
     }
 
     void TextField::drawBorder(Graphics* graphics)

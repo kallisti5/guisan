@@ -131,11 +131,17 @@ namespace gcn
 
     void Slider::draw(gcn::Graphics* graphics)
     {
-        Color shadowColor = getBaseColor() - 0x101010;
-        int alpha = getBaseColor().a;
-         shadowColor.a = alpha;
+		const auto alpha = getBaseColor().a;
+		auto faceColor = getBaseColor();
+		faceColor.a = alpha;
 
-        graphics->setColor(shadowColor);
+		auto backCol = getBackgroundColor();
+		if (isEnabled())
+			backCol = backCol - 0x303030;
+		else
+			backCol = faceColor - 0x101010;
+
+        graphics->setColor(backCol);
         graphics->fillRectangle(gcn::Rectangle(0,0,getWidth(),getHeight()));
 
         drawMarker(graphics);
@@ -170,9 +176,17 @@ namespace gcn
         gcn::Color faceColor = getBaseColor();
         Color highlightColor, shadowColor;
         int alpha = getBaseColor().a;
-        highlightColor = faceColor + 0x303030;
-        highlightColor.a = alpha;
-        shadowColor = faceColor - 0x303030;
+        if (isEnabled())
+		{
+			highlightColor = faceColor + 0x303030;
+			shadowColor = faceColor - 0x303030;
+		}
+		else
+		{
+			highlightColor = faceColor + 0x151515;
+			shadowColor = faceColor - 0x151515;
+		}
+		highlightColor.a = alpha;
         shadowColor.a = alpha;
 
         graphics->setColor(faceColor);

@@ -114,23 +114,7 @@ namespace gcn
 
         if (isFocused())
         {
-            int fh;
-            
-            if (getHeight()%2 == 0)
-            {
-                fh = getHeight() - 4;
-            }
-            else
-            {
-                fh = getHeight() - 3;
-            }
-
-            int hh = (fh + 1) / 2;
-        
-            graphics->drawLine(0, hh + 1, hh + 1, 0);
-            graphics->drawLine(hh + 2, 1, fh + 2, hh + 1);
-            graphics->drawLine(fh + 1, hh + 2, hh + 1, fh + 2);
-            graphics->drawLine(hh + 1, fh + 2, 1, hh + 2);            
+			graphics->drawRectangle(Rectangle(0,0, getWidth(), getHeight()));
         }
         
         int h = getHeight() + getHeight() / 2;
@@ -183,7 +167,10 @@ namespace gcn
         Color shadowColor = faceColor - 0x303030;
         shadowColor.a = alpha;
 
-        graphics->setColor(getBackgroundColor());
+		Color backCol = getBackgroundColor();
+		if (!isEnabled())
+			backCol = backCol - 0x303030;
+		graphics->setColor(backCol);
 
         int i;
         int hh = (h + 1) / 2;

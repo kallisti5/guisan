@@ -166,7 +166,10 @@ namespace gcn
         graphics->drawLine(getWidth() - 1, 1, getWidth() - 1, getHeight() - 1);
         graphics->drawLine(1, getHeight() - 1, getWidth() - 1, getHeight() - 1);
 
+		if (isEnabled())
         graphics->setColor(getForegroundColor());
+		else
+			graphics->setColor(Color(128, 128, 128));
 
         int textX;
         int textY = getHeight() / 2 - getFont()->getHeight() / 2;
@@ -238,13 +241,10 @@ namespace gcn
     {
         if (mMousePressed)
         {
-            return mHasMouse;
+			return true;
         }
-        else
-        {
             return mKeyPressed;
         }
-    }
 
     void Button::mousePressed(MouseEvent& mouseEvent)
     {
@@ -268,8 +268,7 @@ namespace gcn
     void Button::mouseReleased(MouseEvent& mouseEvent)
     {
         if (mouseEvent.getButton() == MouseEvent::LEFT
-            && mMousePressed
-            && mHasMouse)
+			&& mMousePressed)
         {
             mMousePressed = false;
             generateAction();

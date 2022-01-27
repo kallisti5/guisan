@@ -121,7 +121,10 @@ namespace gcn
         }
 
         graphics->setFont(getFont());
-        graphics->setColor(getForegroundColor());
+        Color color = getForegroundColor();
+		if (!isEnabled())
+			color = Color(128, 128, 128);
+        graphics->setColor(color);
         graphics->drawText(getCaption(), textX, textY, getAlignment());
     }
 

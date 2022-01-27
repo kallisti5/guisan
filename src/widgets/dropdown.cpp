@@ -156,11 +156,17 @@ namespace gcn
         Color shadowColor = faceColor - 0x303030;
         shadowColor.a = alpha;
 
-
-        graphics->setColor(getBackgroundColor());
+		Color backCol = getBackgroundColor();
+		if (!isEnabled())
+			backCol = backCol - 0x303030;
+		graphics->setColor(backCol);
         graphics->fillRectangle(Rectangle(0, 0, getWidth(), h));
 
+		if (isEnabled())
         graphics->setColor(getForegroundColor());
+		else 
+			graphics->setColor(Color(128, 128, 128));
+		
         graphics->setFont(getFont());
 
         if (isFocused())
@@ -171,9 +177,7 @@ namespace gcn
         }
 
         if (mListBox->getListModel() && mListBox->getSelected() >= 0)
-        {
-            graphics->drawText(mListBox->getListModel()->getElementAt(mListBox->getSelected()), 1, 0);
-        }
+			graphics->drawText(mListBox->getListModel()->getElementAt(mListBox->getSelected()), 2, 1);
 
         drawButton(graphics);
 
