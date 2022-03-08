@@ -54,9 +54,9 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
- * For comments regarding functions please see the header file.
- */
+ /*
+  * For comments regarding functions please see the header file.
+  */
 
 #include "guisan/widgets/window.hpp"
 
@@ -68,7 +68,7 @@
 namespace gcn
 {
     Window::Window()
-            :mIsMoving(false)
+        :mIsMoving(false)
     {
         setBorderSize(1);
         setPadding(2);
@@ -80,7 +80,7 @@ namespace gcn
     }
 
     Window::Window(const std::string& caption)
-            :mIsMoving(false)
+        :mIsMoving(false)
     {
         setCaption(caption);
         setBorderSize(1);
@@ -153,19 +153,19 @@ namespace gcn
         // Fill the background around the content
         graphics->setColor(faceColor);
         // Fill top
-        graphics->fillRectangle(Rectangle(0,0,getWidth(),d.y - 1));
+        graphics->fillRectangle(Rectangle(0, 0, getWidth(), d.y - 1));
         // Fill left
-        graphics->fillRectangle(Rectangle(0,d.y - 1, d.x - 1, getHeight() - d.y + 1));
+        graphics->fillRectangle(Rectangle(0, d.y - 1, d.x - 1, getHeight() - d.y + 1));
         // Fill right
         graphics->fillRectangle(Rectangle(d.x + d.width + 1,
-                                          d.y - 1,
-                                          getWidth() - d.x - d.width - 1,
-                                          getHeight() - d.y + 1));
+            d.y - 1,
+            getWidth() - d.x - d.width - 1,
+            getHeight() - d.y + 1));
         // Fill bottom
         graphics->fillRectangle(Rectangle(d.x - 1,
-                                          d.y + d.height + 1,
-                                          d.width + 2,
-                                          getHeight() - d.height - d.y - 1));
+            d.y + d.height + 1,
+            d.width + 2,
+            getHeight() - d.height - d.y - 1));
 
         if (isOpaque())
         {
@@ -182,27 +182,27 @@ namespace gcn
         graphics->setColor(shadowColor);
         // Top line
         graphics->drawLine(d.x,
-                           d.y,
-                           d.x + d.width - 2,
-                           d.y);
+            d.y,
+            d.x + d.width - 2,
+            d.y);
 
         // Left line
         graphics->drawLine(d.x,
-                           d.y + 1,
-                           d.x,
-                           d.y + d.height - 1);
+            d.y + 1,
+            d.x,
+            d.y + d.height - 1);
 
         graphics->setColor(highlightColor);
         // Right line
         graphics->drawLine(d.x + d.width - 1,
-                           d.y,
-                           d.x + d.width - 1,
-                           d.y + d.height - 2);
+            d.y,
+            d.x + d.width - 1,
+            d.y + d.height - 2);
         // Bottom line
         graphics->drawLine(d.x + 1,
-                           d.y + d.height - 1,
-                           d.x + d.width - 1,
-                           d.y + d.height - 1);
+            d.y + d.height - 1,
+            d.x + d.width - 1,
+            d.y + d.height - 1);
 
         drawChildren(graphics);
 
@@ -213,17 +213,17 @@ namespace gcn
 
         switch (getAlignment())
         {
-          case Graphics::LEFT:
-              textX = 4;
-              break;
-          case Graphics::CENTER:
-              textX = getWidth() / 2;
-              break;
-          case Graphics::RIGHT:
-              textX = getWidth() - 4;
-              break;
-          default:
-              throw GCN_EXCEPTION("Unknown alignment.");
+        case Graphics::LEFT:
+            textX = 4;
+            break;
+        case Graphics::CENTER:
+            textX = getWidth() / 2;
+            break;
+        case Graphics::RIGHT:
+            textX = getWidth() - 4;
+            break;
+        default:
+            throw GCN_EXCEPTION("Unknown alignment.");
         }
 
         graphics->setColor(getForegroundColor());
@@ -249,11 +249,11 @@ namespace gcn
         for (i = 0; i < getBorderSize(); ++i)
         {
             graphics->setColor(highlightColor);
-            graphics->drawLine(i,i, width - i, i);
-            graphics->drawLine(i,i + 1, i, height - i - 1);
+            graphics->drawLine(i, i, width - i, i);
+            graphics->drawLine(i, i + 1, i, height - i - 1);
             graphics->setColor(shadowColor);
-            graphics->drawLine(width - i,i + 1, width - i, height - i);
-            graphics->drawLine(i,height - i, width - i - 1, height - i);
+            graphics->drawLine(width - i, i + 1, width - i, height - i);
+            graphics->drawLine(i, height - i, width - i - 1, height - i);
         }
     }
 
@@ -263,7 +263,7 @@ namespace gcn
         {
             return;
         }
-        
+
         if (getParent() != NULL)
         {
             getParent()->moveToTop(this);
@@ -271,7 +271,7 @@ namespace gcn
 
         mDragOffsetX = mouseEvent.getX();
         mDragOffsetY = mouseEvent.getY();
-        
+
         mIsMoving = mouseEvent.getY() <= (int)mTitleBarHeight;
     }
 
@@ -286,11 +286,11 @@ namespace gcn
         {
             return;
         }
-        
+
         if (isMovable() && mIsMoving)
         {
             setPosition(mouseEvent.getX() - mDragOffsetX + getX(),
-                        mouseEvent.getY() - mDragOffsetY + getY());
+                mouseEvent.getY() - mDragOffsetY + getY());
         }
 
         mouseEvent.consume();
@@ -299,9 +299,9 @@ namespace gcn
     Rectangle Window::getChildrenArea()
     {
         return Rectangle(getPadding(),
-                         getTitleBarHeight(),
-                         getWidth() - getPadding() * 2,
-                         getHeight() - getPadding() - getTitleBarHeight());
+            getTitleBarHeight(),
+            getWidth() - getPadding() * 2,
+            getHeight() - getPadding() - getTitleBarHeight());
     }
 
     void Window::setMovable(bool movable)
@@ -342,6 +342,6 @@ namespace gcn
             }
         }
 
-        setSize(w + 2* getPadding(), h + getPadding() + getTitleBarHeight());
+        setSize(w + 2 * getPadding(), h + getPadding() + getTitleBarHeight());
     }
 }
