@@ -123,16 +123,16 @@ namespace gcn
 
     DropDown::~DropDown()
     {
-	if (widgetExists(mListBox))
-		mListBox->removeSelectionListener(this);
+        if (widgetExists(mListBox))
+            mListBox->removeSelectionListener(this);
 
-	if (mInternalScrollArea)
-		delete mScrollArea;
+        if (mInternalScrollArea)
+            delete mScrollArea;
 
-	if (mInternalListBox)
-		delete mListBox;
+        if (mInternalListBox)
+            delete mListBox;
 
-	setInternalFocusHandler(NULL);
+        setInternalFocusHandler(NULL);
     }
 
     void DropDown::draw(Graphics* graphics)
@@ -156,11 +156,17 @@ namespace gcn
         Color shadowColor = faceColor - 0x303030;
         shadowColor.a = alpha;
 
-
-        graphics->setColor(getBackgroundColor());
+        Color backCol = getBackgroundColor();
+        if (!isEnabled())
+            backCol = backCol - 0x303030;
+        graphics->setColor(backCol);
         graphics->fillRectangle(Rectangle(0, 0, getWidth(), h));
 
-        graphics->setColor(getForegroundColor());
+        if (isEnabled())
+            graphics->setColor(getForegroundColor());
+        else
+            graphics->setColor(Color(128, 128, 128));
+
         graphics->setFont(getFont());
 
         if (isFocused())
@@ -171,23 +177,21 @@ namespace gcn
         }
 
         if (mListBox->getListModel() && mListBox->getSelected() >= 0)
-        {
-            graphics->drawText(mListBox->getListModel()->getElementAt(mListBox->getSelected()), 1, 0);
-        }
+            graphics->drawText(mListBox->getListModel()->getElementAt(mListBox->getSelected()), 2, 1);
 
         drawButton(graphics);
 
-         if (mDroppedDown)
-         {
-             drawChildren(graphics);
+        if (mDroppedDown)
+        {
+            drawChildren(graphics);
 
             // Draw two lines separating the ListBox with se selected
             // element view.
             graphics->setColor(highlightColor);
             graphics->drawLine(0, h, getWidth(), h);
             graphics->setColor(shadowColor);
-            graphics->drawLine(0, h + 1,getWidth(),h + 1);
-         }
+            graphics->drawLine(0, h + 1, getWidth(), h + 1);
+        }
     }
 
     void DropDown::drawBorder(Graphics* graphics)
@@ -287,9 +291,9 @@ namespace gcn
         for (i = 0; i < hh; i++)
         {
             graphics->drawLine(hx - i + offset,
-                               hy - i + offset,
-                               hx + i + offset,
-                               hy - i + offset);
+                hy - i + offset,
+                hx + i + offset,
+                hy - i + offset);
         }
     }
 
@@ -329,7 +333,7 @@ namespace gcn
     }
 
     void DropDown::mousePressed(MouseEvent& mouseEvent)
-    {        
+    {
         // If we have a mouse press on the widget.
         if (0 <= mouseEvent.getY()
             && mouseEvent.getY() < getHeight()
@@ -345,12 +349,12 @@ namespace gcn
         }
         // Fold up the listbox if the upper part is clicked after fold down
         else if (0 <= mouseEvent.getY()
-                 && mouseEvent.getY() < mFoldedUpHeight
-                 && mouseEvent.getX() >= 0
-                 && mouseEvent.getX() < getWidth()
-                 && mouseEvent.getButton() == MouseEvent::LEFT
-                 && mDroppedDown
-                 && mouseEvent.getSource() == this)
+            && mouseEvent.getY() < mFoldedUpHeight
+            && mouseEvent.getX() >= 0
+            && mouseEvent.getX() < getWidth()
+            && mouseEvent.getButton() == MouseEvent::LEFT
+            && mDroppedDown
+            && mouseEvent.getSource() == this)
         {
             mPushed = false;
             foldUp();
@@ -358,9 +362,9 @@ namespace gcn
         }
         // If we have a mouse press outside the widget
         else if (0 > mouseEvent.getY()
-                 || mouseEvent.getY() >= getHeight()
-                 || mouseEvent.getX() < 0
-                 || mouseEvent.getX() >= getWidth())
+            || mouseEvent.getY() >= getHeight()
+            || mouseEvent.getX() < 0
+            || mouseEvent.getX() >= getWidth())
         {
             mPushed = false;
             foldUp();
@@ -426,8 +430,8 @@ namespace gcn
         if (mScrollArea == NULL)
             throw GCN_EXCEPTION("Scroll Area has been deleted.");
 
-	if (mListBox == NULL)
-		throw GCN_EXCEPTION("List box has been deleted.");
+    if (mListBox == NULL)
+        throw GCN_EXCEPTION("List box has been deleted.");
 
         int listBoxHeight = mListBox->getHeight();
         int h2 = getFont()->getHeight();
@@ -567,9 +571,9 @@ namespace gcn
         Widget::setForegroundColor(color);
     }
 
-	void DropDown::setFont(Font *font)
-	{
-		if (mInternalScrollArea)
+    void DropDown::setFont(Font *font)
+    {
+        if (mInternalScrollArea)
         {
             mScrollArea->setFont(font);
         }
@@ -580,10 +584,10 @@ namespace gcn
         }
 
         Widget::setFont(font);
-	}
+    }
 
-	void DropDown::mouseWheelMovedUp(MouseEvent& mouseEvent)
-	{
+    void DropDown::mouseWheelMovedUp(MouseEvent& mouseEvent)
+    {
         if (isFocused() && mouseEvent.getSource() == this)
         {                   
             mouseEvent.consume();

@@ -94,7 +94,10 @@ namespace gcn
         drawBox(graphics);
 
         graphics->setFont(getFont());
-        graphics->setColor(getForegroundColor());
+        if (isEnabled())
+            graphics->setColor(getForegroundColor());
+        else
+            graphics->setColor(Color(128, 128, 128));
 
         int h = getHeight() + getHeight() / 2;
 
@@ -125,7 +128,7 @@ namespace gcn
         }
     }
 
-    void CheckBox::drawBox(Graphics *graphics)
+    void CheckBox::drawBox(Graphics* graphics)
     {
         int h = getHeight() - 2;
 
@@ -145,16 +148,19 @@ namespace gcn
         graphics->drawLine(h, 1, h, h);
         graphics->drawLine(1, h, h - 1, h);
 
-        graphics->setColor(getBackgroundColor());
+        Color backCol = getBackgroundColor();
+        if (!isEnabled())
+            backCol = backCol - 0x303030;
+        graphics->setColor(backCol);
         graphics->fillRectangle(Rectangle(2, 2, h - 2, h - 2));
 
         graphics->setColor(getForegroundColor());
 
         if (isFocused())
         {
-            graphics->drawRectangle(Rectangle(0, 0, h + 2, h + 2));
-        }        
-               
+            graphics->drawRectangle(Rectangle(0, 0, getWidth(), getHeight()));
+        }
+
         if (mSelected)
         {
             graphics->drawLine(3, 5, 3, h - 2);

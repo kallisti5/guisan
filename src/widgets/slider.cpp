@@ -54,9 +54,9 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
- * For comments regarding functions please see the header file.
- */
+ /*
+  * For comments regarding functions please see the header file.
+  */
 
 #include "guisan/widgets/slider.hpp"
 
@@ -96,7 +96,7 @@ namespace gcn
         setBorderSize(1);
         setOrientation(HORIZONTAL);
         setValue(scaleStart);
-        setStepLength((scaleEnd  - scaleStart)/ 10);
+        setStepLength((scaleEnd - scaleStart) / 10);
         setMarkerLength(10);
 
         addMouseListener(this);
@@ -131,12 +131,18 @@ namespace gcn
 
     void Slider::draw(gcn::Graphics* graphics)
     {
-        Color shadowColor = getBaseColor() - 0x101010;
-        int alpha = getBaseColor().a;
-         shadowColor.a = alpha;
+        const auto alpha = getBaseColor().a;
+        auto faceColor = getBaseColor();
+        faceColor.a = alpha;
 
-        graphics->setColor(shadowColor);
-        graphics->fillRectangle(gcn::Rectangle(0,0,getWidth(),getHeight()));
+        auto backCol = getBackgroundColor();
+        if (isEnabled())
+            backCol = backCol - 0x303030;
+        else
+            backCol = faceColor - 0x101010;
+
+        graphics->setColor(backCol);
+        graphics->fillRectangle(gcn::Rectangle(0, 0, getWidth(), getHeight()));
 
         drawMarker(graphics);
     }
@@ -157,11 +163,11 @@ namespace gcn
         for (i = 0; i < getBorderSize(); ++i)
         {
             graphics->setColor(shadowColor);
-            graphics->drawLine(i,i, width - i, i);
-            graphics->drawLine(i,i + 1, i, height - i - 1);
+            graphics->drawLine(i, i, width - i, i);
+            graphics->drawLine(i, i + 1, i, height - i - 1);
             graphics->setColor(highlightColor);
-            graphics->drawLine(width - i,i + 1, width - i, height - i);
-            graphics->drawLine(i,height - i, width - i - 1, height - i);
+            graphics->drawLine(width - i, i + 1, width - i, height - i);
+            graphics->drawLine(i, height - i, width - i - 1, height - i);
         }
     }
 
@@ -170,9 +176,17 @@ namespace gcn
         gcn::Color faceColor = getBaseColor();
         Color highlightColor, shadowColor;
         int alpha = getBaseColor().a;
-        highlightColor = faceColor + 0x303030;
+        if (isEnabled())
+        {
+            highlightColor = faceColor + 0x303030;
+            shadowColor = faceColor - 0x303030;
+        }
+        else
+        {
+            highlightColor = faceColor + 0x151515;
+            shadowColor = faceColor - 0x151515;
+        }
         highlightColor.a = alpha;
-        shadowColor = faceColor - 0x303030;
         shadowColor.a = alpha;
 
         graphics->setColor(faceColor);
@@ -182,7 +196,7 @@ namespace gcn
             int v = getMarkerPosition();
             graphics->fillRectangle(gcn::Rectangle(v + 1, 1, getMarkerLength() - 2, getHeight() - 2));
             graphics->setColor(highlightColor);
-            graphics->drawLine(v, 0, v + getMarkerLength() - 1,0);
+            graphics->drawLine(v, 0, v + getMarkerLength() - 1, 0);
             graphics->drawLine(v, 0, v, getHeight() - 1);
             graphics->setColor(shadowColor);
             graphics->drawLine(v + getMarkerLength() - 1, 1, v + getMarkerLength() - 1, getHeight() - 1);
@@ -299,7 +313,7 @@ namespace gcn
                 setValue(getValue() - getStepLength());
                 generateAction();
                 keyEvent.consume();
-            }            
+            }
         }
         else
         {
@@ -357,9 +371,9 @@ namespace gcn
             v = getHeight();
         }
 
-        int w =  (int)((v - getMarkerLength())
-                       * (value  - getScaleStart())
-                       / (getScaleEnd() - getScaleStart()));
+        int w = (int)((v - getMarkerLength())
+            * (value - getScaleStart())
+            / (getScaleEnd() - getScaleStart()));
 
         if (w < 0)
         {

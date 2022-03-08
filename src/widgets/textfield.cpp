@@ -54,9 +54,9 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
- * For comments regarding functions please see the header file.
- */
+ /*
+  * For comments regarding functions please see the header file.
+  */
 
 #include "guisan/widgets/textfield.hpp"
 
@@ -97,7 +97,7 @@ namespace gcn
 
     void TextField::setText(const std::string& text)
     {
-        if(text.size() < mCaretPosition )
+        if (text.size() < mCaretPosition)
         {
             mCaretPosition = text.size();
         }
@@ -116,9 +116,13 @@ namespace gcn
             drawCaret(graphics, getFont()->getWidth(mText.substr(0, mCaretPosition)) - mXScroll);
         }
 
-        graphics->setColor(getForegroundColor());
+        if (isEnabled())
+            graphics->setColor(getForegroundColor());
+        else
+            graphics->setColor(Color(128, 128, 128));
+
         graphics->setFont(getFont());
-        graphics->drawText(mText, 1 - mXScroll, 1);
+        graphics->drawText(mText, 1 - mXScroll, 2);
     }
 
     void TextField::drawBorder(Graphics* graphics)
@@ -137,11 +141,11 @@ namespace gcn
         for (i = 0; i < getBorderSize(); ++i)
         {
             graphics->setColor(shadowColor);
-            graphics->drawLine(i,i, width - i, i);
-            graphics->drawLine(i,i + 1, i, height - i - 1);
+            graphics->drawLine(i, i, width - i, i);
+            graphics->drawLine(i, i + 1, i, height - i - 1);
             graphics->setColor(highlightColor);
-            graphics->drawLine(width - i,i + 1, width - i, height - i);
-            graphics->drawLine(i,height - i, width - i - 1, height - i);
+            graphics->drawLine(width - i, i + 1, width - i, height - i);
+            graphics->drawLine(i, height - i, width - i - 1, height - i);
         }
     }
 
@@ -164,7 +168,7 @@ namespace gcn
     {
         mouseEvent.consume();
     }
-    
+
     void TextField::keyPressed(KeyEvent& keyEvent)
     {
         Key key = keyEvent.getKey();
@@ -206,15 +210,15 @@ namespace gcn
         }
 
         else if (key.isCharacter()
-                 && key.getValue() != Key::TAB)
+            && key.getValue() != Key::TAB)
         {
-            if(keyEvent.isShiftPressed() && key.isLetter())
+            if (keyEvent.isShiftPressed() && key.isLetter())
             {
-                mText.insert(mCaretPosition, std::string(1,(char)(key.getValue() - 32)));
+                mText.insert(mCaretPosition, std::string(1, (char)(key.getValue() - 32)));
             }
             else
             {
-                mText.insert(mCaretPosition, std::string(1,(char)key.getValue()));
+                mText.insert(mCaretPosition, std::string(1, (char)key.getValue()));
             }
             ++mCaretPosition;
         }
@@ -223,7 +227,7 @@ namespace gcn
         {
             keyEvent.consume();
         }
-        
+
         fixScroll();
     }
 
