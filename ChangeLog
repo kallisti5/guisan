@@ -1,3 +1,11 @@
+Version 1.0.0
+=============
+* Large number of fixes to widgets/drawing/sdl2 support
+* New widget InputBox
+* Memory leak fixes in MessageBox example
+* Python 3 fixes
+* Stability fixes
+
 Version 0.9.0
 =============
 * Guisan forked from Guisan
