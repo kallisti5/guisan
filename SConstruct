@@ -6,7 +6,7 @@ env["CC"] = os.getenv("CC") or env["CC"]
 env["CXX"] = os.getenv("CXX") or env["CXX"]
 env["ENV"].update(x for x in os.environ.items() if x[0].startswith("CCC_"))
 
-env["LIBVER"] = "0.9.0"
+env["LIBVER"] = "1.0.0"
 
 env["PREFIX_PATH"] = ARGUMENTS.get('prefix', "/usr/local")
 env["INCLUDE_PATH"] = ARGUMENTS.get('include', env['PREFIX_PATH'] + "/include")
