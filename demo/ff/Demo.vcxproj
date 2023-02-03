@@ -108,11 +108,12 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\include;.\include;C:\Users\Gwilherm\SDL\SDL2_ttf-2.0.14\include;C:\Users\Gwilherm\SDL\SDL2_image-2.0.3\include;C:\Users\Gwilherm\SDL\SDL2-2.0.8\include;C:\Users\Gwilherm\SDL\SDL2_mixer-2.0.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;.\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>Guisan.lib;SDL2.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\$(Configuration);C:\Users\Gwilherm\SDL\SDL2-2.0.8\lib\$(PlatformShortName);C:\Users\Gwilherm\SDL\SDL2_ttf-2.0.14\lib\$(PlatformShortName);C:\Users\Gwilherm\SDL\SDL2_image-2.0.3\lib\$(PlatformShortName);C:\Users\Gwilherm\SDL\SDL2_mixer-2.0.2\lib\$(PlatformShortName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Guisan.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\$(Platform)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

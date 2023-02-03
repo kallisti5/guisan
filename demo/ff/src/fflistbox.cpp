@@ -45,7 +45,7 @@
 #ifndef _MSC_VER
 #include <SDL2/SDL.h>
 #else
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #endif
 
 #include "fflistbox.hpp"

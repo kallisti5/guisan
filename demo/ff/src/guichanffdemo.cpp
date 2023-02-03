@@ -45,6 +45,7 @@
 #include <guisan.hpp>
 #include "ffdemo.hpp"
 
+#undef main
 int main(int argc, char** argv)
 {
     try

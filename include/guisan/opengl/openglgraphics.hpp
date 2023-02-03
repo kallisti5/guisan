@@ -63,79 +63,93 @@
 
 namespace gcn
 {
-    /**
-     * OpenGL implementation of the Graphics.
-     */
-    class GCN_EXTENSION_DECLSPEC OpenGLGraphics: public Graphics
-    {
-    public:
+	/**
+	 * OpenGL implementation of the Graphics.
+	 */
+	class GCN_EXTENSION_DECLSPEC OpenGLGraphics: public Graphics
+	{
+	public:
 
-        // Needed so that drawImage(gcn::Image *, int, int) is visible.
-        using Graphics::drawImage;
+		// Needed so that drawImage(gcn::Image *, int, int) is visible.
+		using Graphics::drawImage;
 
-        /**
-         * Constructor.
-         */
-        OpenGLGraphics();
+		/**
+		 * Constructor.
+		 */
+		OpenGLGraphics();
 
-        /**
-         * Constructor.
+		/**
+		 * Constructor.
 		 *
 		 * @param width the width of the logical drawing surface. Should be the
-         *              same as the screen resolution.
+		 *              same as the screen resolution.
 		 *
 		 * @param height the height ot the logical drawing surface. Should be
 		 *               the same as the screen resolution.
 		 */
-        OpenGLGraphics(int width, int height);
+		OpenGLGraphics(int width, int height);
 
 		/**
 		 * Destructor.
 		 */
-        virtual ~OpenGLGraphics();
+		virtual ~OpenGLGraphics();
 
-        /**
-         * Sets the target plane on where to draw.
+		/**
+		 * Sets the target plane on where to draw.
 		 *
 		 * @param width the width of the logical drawing surface. Should be the
 		 *              same as the screen resolution.
 		 * @param height the height ot the logical drawing surface. Should be
 		 *               the same as the screen resolution.
-         */
-        virtual void setTargetPlane(int width, int height);
+		 */
+		virtual void setTargetPlane(int width, int height);
+
+		/**
+		* Gets the target plane width.
+		*
+		* @return The target plane width.
+		*/
+		virtual int getTargetPlaneWidth() const;
+
+		/**
+		 * Gets the target plane height.
+		 *
+		 * @return The target plane height.
+		 */
+		virtual int getTargetPlaneHeight() const;
 
 
 		// Inherited from Graphics
 
-        virtual void _beginDraw();
+		virtual void _beginDraw();
 
-        virtual void _endDraw();
+		virtual void _endDraw();
 
-        virtual bool pushClipArea(Rectangle area);
+		virtual bool pushClipArea(Rectangle area);
 
-        virtual void popClipArea();
+		virtual void popClipArea();
 
-        virtual void drawImage(const Image* image, int srcX, int srcY,
-                               int dstX, int dstY, int width,
-                               int height);
+		virtual void drawImage(const Image* image, int srcX, int srcY,
+							   int dstX, int dstY, int width,
+							   int height);
 
-        virtual void drawPoint(int x, int y);
+		virtual void drawPoint(int x, int y);
 
-        virtual void drawLine(int x1, int y1, int x2, int y2);
+		virtual void drawLine(int x1, int y1, int x2, int y2);
 
-        virtual void drawRectangle(const Rectangle& rectangle);
+		virtual void drawRectangle(const Rectangle& rectangle);
 
-        virtual void fillRectangle(const Rectangle& rectangle);
+		virtual void fillRectangle(const Rectangle& rectangle);
 
-        virtual void setColor(const Color& color);
+		virtual void setColor(const Color& color);
 
 		virtual const Color& getColor();
 
-    protected:
-        int mWidth, mHeight;
+	protected:
+		int mWidth, mHeight;
 		bool mAlpha;
-        Color mColor;
-    };
+		Color mColor;
+	};
 }
 
 #endif // end GCN_OPENGLGRAPHICS_HPP
