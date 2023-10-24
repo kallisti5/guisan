@@ -4,7 +4,7 @@
 
 ## An SDL2 GUI construction toolkit
 
-[![Build Status](https://travis-ci.org/gbaudic/guisan.svg?branch=master)](https://travis-ci.org/gbaudic/guisan)
+[![Build Status](https://github.com/kallisti5/guisan/actions/workflows/build.yaml/badge.svg)](https://github.com/kallisti5/guisan/actions)
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Q5Q2QF1PE)
 
 Guisan was forked from Guichan to create a simple GUI construction toolkit that is compatible with SDL 2.0.0+
