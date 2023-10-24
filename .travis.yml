@@ -1,9 +1,0 @@
-language: cpp
-dist: xenial
-compiler:
-  - gcc
-sudo: required
-before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install libsdl2-ttf-dev libsdl2-image-dev libsdl2-dev scons
-script: rm -rf .scon* && scons -c && scons
