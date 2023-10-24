@@ -25,6 +25,10 @@ Guisan was forked from Guichan to create a simple GUI construction toolkit that 
 * SDL2_ttf
 * SDL2_mixer
 
+## Example
+
+![openglwidget](examples/opengldemo.png)
+
 ## License:
 
 Released under the BSD license. See COPYING for more details
