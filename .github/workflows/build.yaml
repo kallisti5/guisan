@@ -1,0 +1,16 @@
+name: Build
+run-name: Test code buildability 🚀
+on: [push]
+jobs:
+  Build-GuiSan:
+    runs-on: ubuntu-latest
+    steps:
+      - run: apt install build-essential libsdl2-dev libsdl2-ttf-dev libsdl2-image-dev libsdl2-mixer-dev scons
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - name: List files in the repository
+        run: |
+          cd ${{ github.workspace }}
+          scons
+      - run: echo "🍏 This job's status is ${{ job.status }}."
