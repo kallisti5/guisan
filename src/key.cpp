@@ -87,6 +87,11 @@ namespace gcn
                 && (mValue != 215) && (mValue != 247));
     }
 
+    bool Key::isPrintable() const
+    {
+        return 0 < mValue && mValue < 1000;
+    }
+
     int Key::getValue() const
     {
         return mValue;

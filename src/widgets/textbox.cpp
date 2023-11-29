@@ -349,8 +349,8 @@ namespace gcn
             mCaretColumn += 4;
         }
 
-        else if (key.isCharacter()
-                 && mEditable)
+        else if (key.isCharacter() && mEditable && !keyEvent.isAltPressed()
+                 && !keyEvent.isControlPressed())
         {
             if(keyEvent.isShiftPressed() && key.isLetter())
             {
@@ -358,7 +358,7 @@ namespace gcn
             }
             else
             {
-                mTextRows[mCaretRow].insert(mCaretColumn,std::string(1,key.getChar()));
+                mTextRows[mCaretRow].insert(mCaretColumn,std::string(1,(char)key.getValue()));
             }
             ++mCaretColumn;
         }

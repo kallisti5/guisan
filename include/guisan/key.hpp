@@ -97,6 +97,13 @@ namespace gcn
         bool isLetter() const;
 
         /**
+         * Checks whether a key is printable.
+         *
+         * @return true if the key is a printable.
+         */
+        bool isPrintable() const;
+
+        /**
          * Gets the value of the key. If an ascii value exists it will be
          * returned. Otherwise an enum value will be returned.
          *
