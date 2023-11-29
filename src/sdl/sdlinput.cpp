@@ -64,6 +64,43 @@
 
 namespace gcn
 {
+    //--------------------------------------------------------------------------
+    static std::uint32_t utf8ToUnicode(const char* text)
+    {
+        const std::uint32_t c0 = static_cast<unsigned char>(text[0]);
+        if ((c0 & 0xF8) == 0xF0) {
+            if (((text[1] & 0xC0) != 0x80) && ((text[2] & 0xC0) != 0x80)
+                && ((text[3] & 0xC0) != 0x80)) {
+                throw GCN_EXCEPTION("invalid utf8");
+            }
+            const unsigned char c1 = text[1] & 0x3F;
+            const unsigned char c2 = text[2] & 0x3F;
+            const unsigned char c3 = text[3] & 0x3F;
+
+            return ((c0 & 0x07) << 18) | (c1 << 12) | (c2 << 6) | c3;
+        } else if ((c0 & 0xF0) == 0xE0) {
+            if (((text[1] & 0xC0) != 0x80) && ((text[2] & 0xC0) != 0x80)) {
+                throw GCN_EXCEPTION("invalid utf8");
+            }
+            const unsigned char c1 = text[1] & 0x3F;
+            const unsigned char c2 = text[2] & 0x3F;
+
+            return ((c0 & 0x0F) << 12) | (c1 << 6) | c2;
+        } else if ((c0 & 0xE0) == 0xC0) {
+            if (((text[1] & 0xC0) != 0x80)) {
+                throw GCN_EXCEPTION("invalid utf8");
+            }
+            const unsigned char c1 = text[1] & 0x3F;
+
+            return ((c0 & 0x1F) << 6) | c1;
+        } else {
+            if ((c0 & 0x80) != 0) {
+                throw GCN_EXCEPTION("invalid utf8");
+            }
+            return (c0 & 0x7F);
+        }
+    }
+
     SDLInput::SDLInput()
     {
         mMouseInWindow = true;
@@ -117,6 +154,17 @@ namespace gcn
 
         switch (event.type)
         {
+          case SDL_TEXTINPUT:
+              keyInput.setKey(utf8ToUnicode(event.text.text));
+              keyInput.setType(KeyInput::PRESSED);
+              keyInput.setShiftPressed(false);
+              keyInput.setControlPressed(false);
+              keyInput.setAltPressed(false);
+              keyInput.setMetaPressed(false);
+              keyInput.setNumericPad(false);
+
+              mKeyInputQueue.push(keyInput);
+              break;
           case SDL_KEYDOWN:
               keyInput.setKey(Key(convertKeyCharacter(event)));
               keyInput.setType(KeyInput::PRESSED);
@@ -127,7 +175,11 @@ namespace gcn
               keyInput.setNumericPad(event.key.keysym.sym >= SDLK_KP_0
                                      && event.key.keysym.sym <= SDLK_KP_EQUALS);
 
-              mKeyInputQueue.push(keyInput);
+              if (!keyInput.getKey().isPrintable() || keyInput.isAltPressed()
+                  || keyInput.isControlPressed())
+              {
+                  mKeyInputQueue.push(keyInput);
+              }
               break;
 
           case SDL_KEYUP:

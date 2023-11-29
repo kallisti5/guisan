@@ -209,8 +209,8 @@ namespace gcn
             mCaretPosition = mText.size();
         }
 
-        else if (key.isCharacter()
-            && key.getValue() != Key::TAB)
+        else if (key.isCharacter() && key.getValue() != Key::TAB && !keyEvent.isAltPressed()
+                 && !keyEvent.isControlPressed())
         {
             if (keyEvent.isShiftPressed() && key.isLetter())
             {
