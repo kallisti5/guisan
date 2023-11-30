@@ -1,6 +1,6 @@
 name: Build
 run-name: Test code buildability 🚀
-on: [push]
+on: [push, pull_request]
 jobs:
   Build-GuiSan:
     runs-on: ubuntu-latest
