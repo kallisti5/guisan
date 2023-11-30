@@ -65,9 +65,9 @@
 namespace gcn
 {
     //--------------------------------------------------------------------------
-    static std::uint32_t utf8ToUnicode(const char* text)
+    static Uint32 utf8ToUnicode(const char* text)
     {
-        const std::uint32_t c0 = static_cast<unsigned char>(text[0]);
+        const Uint32 c0 = static_cast<unsigned char>(text[0]);
         if ((c0 & 0xF8) == 0xF0) {
             if (((text[1] & 0xC0) != 0x80) && ((text[2] & 0xC0) != 0x80)
                 && ((text[3] & 0xC0) != 0x80)) {
