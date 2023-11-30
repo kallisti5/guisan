@@ -144,7 +144,6 @@ namespace gcn
 
         int i;
         bool hasPink = false;
-        bool hasAlpha = false;
 
         unsigned int surfaceMask = SDL_PIXELFORMAT_RGBX8888;
 

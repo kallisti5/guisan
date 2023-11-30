@@ -227,7 +227,6 @@ namespace gcn
             int y1 = area.y > top.y ? area.y : top.y;
             int x2 = area.x + area.width < top.x + top.width ? area.x + area.width : top.x + top.width;
             int y2 = area.y + area.height < top.y + top.height ? area.y + area.height : top.y + top.height;
-            int x, y;
             SDL_Rect rect;
             rect.x = x1;
             rect.y = y1;
@@ -248,7 +247,6 @@ namespace gcn
             rect.w = area.width;
             rect.h = area.height;
 
-            Uint32 color = SDL_MapRGBA(mTarget->format, mColor.r, mColor.g, mColor.b, mColor.a);
             saveRenderColor();
             SDL_SetRenderDrawColor(mRenderTarget, mColor.r, mColor.g, mColor.b, mColor.a);
             SDL_RenderFillRect(mRenderTarget, &rect);
