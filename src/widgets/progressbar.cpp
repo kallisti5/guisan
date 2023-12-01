@@ -125,12 +125,12 @@ namespace gcn
         mCaption = caption;
     }
 
-    void ProgressBar::setAlignment(unsigned int alignment)
+    void ProgressBar::setAlignment(Graphics::Alignment alignment)
     {
         mAlignment = alignment;
     }
 
-    unsigned int ProgressBar::getAlignment() const
+    Graphics::Alignment ProgressBar::getAlignment() const
     {
         return mAlignment;
     }

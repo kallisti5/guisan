@@ -150,7 +150,7 @@ namespace gcn
         /**
          * Adjusts the height of the drop down to fit the height of the
          * drop down's parent's height. It's used to not make the drop down
-         * draw itself outside of it's parent if folded down.
+         * draw itself outside of its parent if folded down.
          */
         void adjustHeight();
 

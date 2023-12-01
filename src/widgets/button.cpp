@@ -112,12 +112,12 @@ namespace gcn
         return mCaption;
     }
 
-    void Button::setAlignment(unsigned int alignment)
+    void Button::setAlignment(Graphics::Alignment alignment)
     {
         mAlignment = alignment;
     }
 
-    unsigned int Button::getAlignment() const
+    Graphics::Alignment Button::getAlignment() const
     {
         return mAlignment;
     }

@@ -270,8 +270,8 @@ namespace gcn
 
         mDragOffsetX = mouseEvent.getX();
         mDragOffsetY = mouseEvent.getY();
-        
-        mIsMoving = mouseEvent.getY() <= (int)mTitleBarHeight;
+
+        mMoved = mouseEvent.getY() <= (int)mTitleBarHeight;
     }
 
     void InputBox::mouseReleased(MouseEvent& mouseEvent)
@@ -293,7 +293,7 @@ namespace gcn
         }
         else
         {
-            mIsMoving = false;
+            mMoved = false;
         }
     }
 
@@ -304,7 +304,7 @@ namespace gcn
             return;
         }
         
-        if (isMovable() && mIsMoving)
+        if (isMovable() && mMoved)
         {
             setPosition(mouseEvent.getX() - mDragOffsetX + getX(),
                         mouseEvent.getY() - mDragOffsetY + getY());

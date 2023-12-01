@@ -81,7 +81,7 @@ namespace gcn
 
     /**
      * Widget base class. Contains basic widget functions every widget should
-     * have. Widgets should inherit from this class and implements it's
+     * have. Widgets should inherit from this class and implements its
      * functions.
      *
      * NOTE: Functions begining with underscore "_" should not
@@ -179,35 +179,35 @@ namespace gcn
         void setSize(int width, int height);
 
         /**
-         * Set the widget x coordinate. It is relateive to it's parent.
+         * Set the widget x coordinate. It is relateive to its parent.
          *
          * @param x the widget x coordinate.
          */
         void setX(int x);
 
         /**
-         * Gets the widget x coordinate. It is relative to it's parent.
+         * Gets the widget x coordinate. It is relative to its parent.
          *
          * @return the widget x coordinate.
          */
         int getX() const;
 
         /**
-         * Set the widget y coordinate. It is relative to it's parent.
+         * Set the widget y coordinate. It is relative to its parent.
          *
          * @param y the widget y coordinate.
          */
         void setY(int y);
 
         /**
-         * Gets the widget y coordinate. It is relative to it's parent.
+         * Gets the widget y coordinate. It is relative to its parent.
          *
          * @return the widget y coordinate.
          */
         int getY() const;
 
         /**
-         * Sets the widget position. It is relative to it's parent.
+         * Sets the widget position. It is relative to its parent.
          *
          * @param x the widget x coordinate.
          * @param y the widgets y coordinate.
@@ -215,7 +215,7 @@ namespace gcn
         void setPosition(int x, int y);
 
         /**
-         * Sets the dimension of the widget. It is relative to it's parent.
+         * Sets the dimension of the widget. It is relative to its parent.
          *
          * @param dimension the widget dimension.
          */
@@ -242,7 +242,7 @@ namespace gcn
         unsigned int getBorderSize() const;
 
         /**
-         * Gets the dimension of the widget. It is relative to it's parent.
+         * Gets the dimension of the widget. It is relative to its parent.
          *
          * @return the widget dimension.
          */
@@ -611,7 +611,7 @@ namespace gcn
 
         /**
          * Requests modal focus. When a widget has modal focus, only that
-         * widget and it's children may recieve input.
+         * widget and its children may recieve input.
          *
          * @throws Exception if another widget already has modal focus.
          */
@@ -642,12 +642,12 @@ namespace gcn
         virtual void releaseModalMouseInputFocus();
 
         /**
-         * Checks if the widget or it's parent has modal focus.
+         * Checks if the widget or its parent has modal focus.
          */
         virtual bool hasModalFocus() const;
 
         /**
-         * Checks if the widget or it's parent has modal mouse input focus.
+         * Checks if the widget or its parent has modal mouse input focus.
          *
          * @since 0.6.0
          */

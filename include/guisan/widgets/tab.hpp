@@ -68,9 +68,11 @@ namespace gcn
 {
     class Label;
     class TabbedArea;
-    
+
     /**
-     * A simple tab widget used as the default tab in the TabbedArea widget.
+     * An implementation of a simple tab to be used in a tabbed area.
+     *
+     * @see TabbedArea
      */
     class GCN_CORE_DECLSPEC Tab:
         public BasicContainer,
@@ -89,7 +91,7 @@ namespace gcn
         virtual ~Tab();
 
         /**
-         * Adjusts the tab size to fit the label.
+         * Adjusts the size of the tab fit the caption.
          */
         void adjustSize();
 
@@ -97,6 +99,7 @@ namespace gcn
          * Sets the tabbed area the tab should be a part of.
          *
          * @param tabbedArea The tabbed area the tab should be a part of.
+         * @see getTabbedArea
          */
         void setTabbedArea(TabbedArea* tabbedArea);
 
@@ -104,13 +107,17 @@ namespace gcn
          * Gets the tabbed are the tab is a part of.
          *
          * @return The tabbed are the tab is a part of.
+         * @see setTabbedArea
          */
         TabbedArea* getTabbedArea();
 
         /**
-         * Sets the caption of the tab.
+         * Sets the caption of the tab. It's advisable to call
+         * adjustSize after setting the caption to make the tab
+         * fit the caption.
          *
-         * @param caption The caption of the tab.         
+         * @param caption The caption of the tab.
+         * @see getCaption, adjustSize
          */
         void setCaption(const std::string& caption);
 
@@ -118,6 +125,7 @@ namespace gcn
          * Gets the caption of the tab.
          *
          * @return The caption of the tab.
+         * @see setCaption
          */
         const std::string& getCaption() const;
 
@@ -136,9 +144,24 @@ namespace gcn
         virtual void mouseExited(MouseEvent& mouseEvent);
         
     protected:
+        /**
+         * Holds the label of the tab.
+         */
         Label* mLabel;
+
+        /**
+         * Holds the tabbed area the tab is a part of.
+         */
         TabbedArea* mTabbedArea;
+
+        /**
+         * Holds the caption of the tab.
+         */
         std::string mCaption;
+
+        /**
+         * True if the tab has the mouse, false otherwise.
+         */
         bool mHasMouse;
     };
 }

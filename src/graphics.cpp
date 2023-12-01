@@ -153,7 +153,7 @@ namespace gcn
     }
 
     void Graphics::drawText(const std::string& text, int x, int y,
-                            unsigned int alignment)
+                            Alignment alignment)
     {
         if (mFont == NULL)
         {
