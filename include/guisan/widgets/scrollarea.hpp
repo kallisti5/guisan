@@ -79,6 +79,21 @@ namespace gcn
         public MouseListener
     {
     public:
+        /**
+         * Scrollpolicies for the horizontal and vertical scrollbar.
+         * The policies are:
+         *
+         * SHOW_ALWAYS - Always show the scrollbars no matter what.
+         * SHOW_NEVER  - Never show the scrollbars no matter waht.
+         * SHOW_AUTO   - Show the scrollbars only when needed. That is if the
+         *               content grows larger then the ScrollArea.
+         */
+        enum ScrollPolicy
+        {
+            SHOW_ALWAYS = 0,
+            SHOW_NEVER,
+            SHOW_AUTO
+        };
 
         /**
          * Constructor.
@@ -101,7 +116,7 @@ namespace gcn
          * @param vPolicy the policy for the vertical scrollbar. See enum with
          *                policies.
          */
-        ScrollArea(Widget *content, unsigned int hPolicy, unsigned int vPolicy);
+        ScrollArea(Widget *content, ScrollPolicy hPolicy, ScrollPolicy vPolicy);
 
         /**
          * Destructor.
@@ -123,46 +138,40 @@ namespace gcn
         Widget* getContent();
 
         /**
-         * Sets the horizontal scrollbar policy. See enum with policies.
+         * Sets the horizontal scrollbar policy.
          *
-         * @param hPolicy the policy for the horizontal scrollbar. See enum with
-         *                policies.
+         * @param hPolicy the policy for the horizontal scrollbar.
          */
-        void setHorizontalScrollPolicy(unsigned int hPolicy);
+        void setHorizontalScrollPolicy(ScrollPolicy hPolicy);
 
         /**
-         * Gets the horizontal scrollbar policy. See enum with policies.
+         * Gets the horizontal scrollbar policy.
          *
-         * @return the policy for the horizontal scrollbar policy. See enum with
-         *         policies.
+         * @return the policy for the horizontal scrollbar policy.
          */
-        unsigned int getHorizontalScrollPolicy() const;
+        ScrollPolicy getHorizontalScrollPolicy() const;
 
         /**
-         * Sets the vertical scrollbar policy. See enum with policies.
+         * Sets the vertical scrollbar policy.
          *
-         * @param vPolicy the policy for the vertical scrollbar. See enum with
-         *                policies.
+         * @param vPolicy the policy for the vertical scrollbar.
          */
-        void setVerticalScrollPolicy(unsigned int vPolicy);
+        void setVerticalScrollPolicy(ScrollPolicy vPolicy);
 
         /**
-         * Gets the vertical scrollbar policy. See enum with policies.
+         * Gets the vertical scrollbar policy.
          *
-         * @return the policy for the vertical scrollbar. See enum with
-         *         policies.
+         * @return the policy for the vertical scrollbar.
          */
-        unsigned int getVerticalScrollPolicy() const;
+        ScrollPolicy getVerticalScrollPolicy() const;
 
         /**
-         * Sets the horizontal and vertical scrollbar policy. See enum with policies.
+         * Sets the horizontal and vertical scrollbar policy.
          *
-         * @param hPolicy the policy for the horizontal scrollbar. See enum with
-         *                policies.
-         * @param vPolicy the policy for the vertical scrollbar. See enum with
-         *                policies.
+         * @param hPolicy the policy for the horizontal scrollbar.
+         * @param vPolicy the policy for the vertical scrollbar.
          */
-        void setScrollPolicy(unsigned int hPolicy, unsigned int vPolicy);
+        void setScrollPolicy(ScrollPolicy hPolicy, ScrollPolicy vPolicy);
 
         /**
          * Sets the amount to scroll vertically.
@@ -321,22 +330,6 @@ namespace gcn
         virtual void mouseWheelMovedDown(MouseEvent& mouseEvent);
 
 
-        /**
-         * Scrollpolicies for the horizontal and vertical scrollbar.
-         * The policies are:
-         *
-         * SHOW_ALWAYS - Always show the scrollbars no matter what.
-         * SHOW_NEVER  - Never show the scrollbars no matter waht.
-         * SHOW_AUTO   - Show the scrollbars only when needed. That is if the
-         *               content grows larger then the ScrollArea.
-         */
-        enum
-        {
-            SHOW_ALWAYS,
-            SHOW_NEVER,
-            SHOW_AUTO
-        };
-
     protected:
         /**
          * Draws the background of the ScrollArea
@@ -463,24 +456,99 @@ namespace gcn
          */
         Rectangle getHorizontalMarkerDimension();
 
+        /**
+         * Holds the vertical scroll amount.
+         */
         int mVScroll;
+
+        /**
+         * Holds the horizontal scroll amount.
+         */
         int mHScroll;
+
+        /**
+         * Holds the width of the scroll bars.
+         */
         int mScrollbarWidth;
-        unsigned int mHPolicy;
-        unsigned int mVPolicy;
+
+        /**
+         * Holds the horizontal scroll bar policy.
+         */
+        ScrollPolicy mHPolicy;
+
+        /**
+         * Holds the vertical scroll bar policy.
+         */
+        ScrollPolicy mVPolicy;
+
+        /**
+         * True if the vertical scroll bar is visible, false otherwise.
+         */
         bool mVBarVisible;
+
+        /**
+         * True if the horizontal scroll bar is visible, false otherwise.
+         */
         bool mHBarVisible;
+
+        /**
+         * True if the up button is pressed, false otherwise.
+         */
         bool mUpButtonPressed;
+
+        /**
+         * True if the down button is pressed, false otherwise.
+         */
         bool mDownButtonPressed;
+
+        /**
+         * True if the left button is pressed, false otherwise.
+         */
         bool mLeftButtonPressed;
+
+        /**
+         * True if the right button is pressed, false otherwise.
+         */
         bool mRightButtonPressed;
+
+        /**
+         * Holds the up button scroll amount.
+         */
         int mUpButtonScrollAmount;
+
+        /**
+         * Holds the down button scroll amount.
+         */
         int mDownButtonScrollAmount;
+
+        /**
+         * Holds the left button scroll amount.
+         */
         int mLeftButtonScrollAmount;
+
+        /**
+         * Holds the right button scroll amount.
+         */
         int mRightButtonScrollAmount;
+
+        /**
+         * True if the vertical marked is dragged.
+         */
         bool mIsVerticalMarkerDragged;
+
+        /**
+         * True if the horizontal marked is dragged.
+         */
         bool mIsHorizontalMarkerDragged;
+
+        /**
+         * Holds the horizontal markers drag offset.
+         */
         int mHorizontalMarkerDragOffset;
+
+        /**
+         * Holds the vertical markers drag offset.
+         */
         int mVerticalMarkerDragOffset;
     };
 }

@@ -97,9 +97,9 @@ namespace gcn
         delete mWidgetContainer;
 
         unsigned int i;
-        for (i = 0; i < mTabsToCleanUp.size(); i++)
+        for (i = 0; i < mTabsToDelete.size(); i++)
         {
-            delete mTabsToCleanUp[i];
+            delete mTabsToDelete[i];
         }
     }
 
@@ -108,8 +108,8 @@ namespace gcn
         Tab* tab = new Tab();
         tab->setSize(70, 20);
         tab->setCaption(caption);
-        mTabsToCleanUp.push_back(tab);
-        
+        mTabsToDelete.push_back(tab);
+
         addTab(tab, widget);
     }
 
@@ -177,11 +177,11 @@ namespace gcn
         }
                 
         std::vector<Tab*>::iterator iter2;
-        for (iter2 = mTabsToCleanUp.begin(); iter2 != mTabsToCleanUp.end(); iter2++)
+        for (iter2 = mTabsToDelete.begin(); iter2 != mTabsToDelete.end(); iter2++)
         {
             if (*iter2 == tab)
             {
-                mTabsToCleanUp.erase(iter2);
+                mTabsToDelete.erase(iter2);
                 delete tab;
                 break;
             }
@@ -194,7 +194,7 @@ namespace gcn
         }
         else
         {
-            setSelectedTabWithIndex(tabIndexToBeSelected);
+            setSelectedTab(tabIndexToBeSelected);
         }
         
         adjustSize();
@@ -216,7 +216,7 @@ namespace gcn
         return mSelectedTab == tab;
     }
 
-    void TabbedArea::setSelectedTabWithIndex(unsigned int index)
+    void TabbedArea::setSelectedTab(unsigned int index)
     {
         if (index >= mTabs.size())
         {

@@ -108,7 +108,7 @@ namespace gcn
         addMouseListener(this);
     }
 
-    ScrollArea::ScrollArea(Widget *content, unsigned int hPolicy, unsigned int vPolicy)
+    ScrollArea::ScrollArea(Widget *content, ScrollPolicy hPolicy, ScrollPolicy vPolicy)
     {
         mVScroll = 0;
         mHScroll = 0;
@@ -161,29 +161,29 @@ namespace gcn
         return NULL;
     }
 
-    void ScrollArea::setHorizontalScrollPolicy(unsigned int hPolicy)
+    void ScrollArea::setHorizontalScrollPolicy(ScrollPolicy hPolicy)
     {
         mHPolicy = hPolicy;
         checkPolicies();
     }
 
-    unsigned int ScrollArea::getHorizontalScrollPolicy() const
+    ScrollArea::ScrollPolicy ScrollArea::getHorizontalScrollPolicy() const
     {
         return mHPolicy;
     }
 
-    void ScrollArea::setVerticalScrollPolicy(unsigned int vPolicy)
+    void ScrollArea::setVerticalScrollPolicy(ScrollPolicy vPolicy)
     {
         mVPolicy = vPolicy;
         checkPolicies();
     }
 
-    unsigned int ScrollArea::getVerticalScrollPolicy() const
+    ScrollArea::ScrollPolicy ScrollArea::getVerticalScrollPolicy() const
     {
         return mVPolicy;
     }
 
-    void ScrollArea::setScrollPolicy(unsigned int hPolicy, unsigned int vPolicy)
+    void ScrollArea::setScrollPolicy(ScrollPolicy hPolicy, ScrollPolicy vPolicy)
     {
         mHPolicy = hPolicy;
         mVPolicy = vPolicy;

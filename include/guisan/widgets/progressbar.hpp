@@ -59,6 +59,7 @@
 
 #include <string>
 
+#include "guisan/graphics.hpp"
 #include "guisan/platform.hpp"
 #include "guisan/widget.hpp"
 #include "guisan/widgets/label.hpp"
@@ -117,20 +118,20 @@ namespace gcn
          * Sets the alignment for the caption. The alignment is relative
          * to the center of the label.
          *
-         * @param alignemnt Graphics::LEFT, Graphics::CENTER or Graphics::RIGHT.
+         * @param alignemnt The alignment of the caption.
          * @see getAlignment, Graphics
          */
-        void setAlignment(unsigned int alignment);
+        void setAlignment(Graphics::Alignment alignment);
 
         /**
          * Gets the alignment for the caption. The alignment is relative to
          * the center of the label.
          *
-         * @return alignment of caption. Graphics::LEFT, Graphics::CENTER or Graphics::RIGHT.
+         * @return The alignment of the caption.
          * @see setAlignment, Graphics
          */
-        unsigned int getAlignment() const;
-        
+        Graphics::Alignment getAlignment() const;
+
         /**
          * Sets the minimum value.
          *
@@ -200,7 +201,7 @@ namespace gcn
         /**
          * Holds the alignment of the caption.
          */
-        unsigned int mAlignment;
+        Graphics::Alignment mAlignment;
         
         unsigned int mStart; //! minimum value of the progressbar
         unsigned int mEnd;   //! maximum value of the progressbar

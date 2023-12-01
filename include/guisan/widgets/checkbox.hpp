@@ -88,7 +88,7 @@ namespace gcn
 
         /**
          * Constructor. The check box will be automatically resized
-         * to fit it's caption.
+         * to fit the caption.
          *
          * @param caption The caption of the check box.
          * @param marked True if the check box is selected, false otherwise.
@@ -109,7 +109,7 @@ namespace gcn
         bool isSelected() const;
 
         /**
-         * Sets the check box to be selected.
+         * Sets the check box to be selected or not.
          *
          * @param selected True if the check box should be set as selected.
          * @see isSelected

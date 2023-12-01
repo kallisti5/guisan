@@ -90,12 +90,12 @@ namespace gcn
         mCaption = caption;
     }
 
-    void Label::setAlignment(unsigned int alignment)
+    void Label::setAlignment(Graphics::Alignment alignment)
     {
         mAlignment = alignment;
     }
 
-    unsigned int Label::getAlignment() const
+    Graphics::Alignment Label::getAlignment() const
     {
         return mAlignment;
     }

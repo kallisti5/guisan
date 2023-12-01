@@ -137,7 +137,7 @@ namespace gcn
         ListModel *getListModel();
 
         /**
-         * Adjusts the size of the list box to fit it's list model.
+         * Adjusts the size of the list box to fit its list model.
          */
         void adjustSize();
 

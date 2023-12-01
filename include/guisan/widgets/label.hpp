@@ -59,6 +59,7 @@
 
 #include <string>
 
+#include "guisan/graphics.hpp"
 #include "guisan/platform.hpp"
 #include "guisan/widget.hpp"
 
@@ -76,7 +77,8 @@ namespace gcn
         Label();
 
         /**
-         * Constructor.
+         * Constructor. The label will be automatically resized
+         * to fit the caption.
          *
          * @param caption The caption of the label.
          */
@@ -101,25 +103,25 @@ namespace gcn
         void setCaption(const std::string& caption);
 
         /**
-         * Sets the alignment for the caption. The alignment is relative
+         * Sets the alignment of the caption. The alignment is relative
          * to the center of the label.
          *
-         * @param alignemnt Graphics::LEFT, Graphics::CENTER or Graphics::RIGHT.
+         * @param alignemnt The alignment of the caption of the label.
          * @see getAlignment, Graphics
          */
-        void setAlignment(unsigned int alignment);
+        void setAlignment(Graphics::Alignment alignment);
 
         /**
-         * Gets the alignment for the caption. The alignment is relative to
+         * Gets the alignment of the caption. The alignment is relative to
          * the center of the label.
          *
-         * @return alignment of caption. Graphics::LEFT, Graphics::CENTER or Graphics::RIGHT.
+         * @return The alignment of caption of the label.
          * @see setAlignment, Graphics
          */
-        unsigned int getAlignment() const;
+        Graphics::Alignment getAlignment() const;
 
         /**
-         * Adjusts the label's size to fit the caption size.
+         * Adjusts the label's size to fit the caption.
          */
         void adjustSize();
 
@@ -139,7 +141,7 @@ namespace gcn
         /**
          * Holds the alignment of the caption.
          */
-        unsigned int mAlignment;
+        Graphics::Alignment mAlignment;
     };
 }
 

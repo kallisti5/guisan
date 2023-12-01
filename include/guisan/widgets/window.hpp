@@ -66,7 +66,7 @@
 namespace gcn
 {
     /**
-     * A movable window which can contain another Widgets.
+     * An implementation of a movable window that can contain other widgets.
      */
     class GCN_CORE_DECLSPEC Window : public Container,
                                      public MouseListener
@@ -78,9 +78,10 @@ namespace gcn
         Window();
 
         /**
-         * Constructor.
+         * Constructor. The window will be automatically resized in height
+         * to fit the caption.
          *
-         * @param caption the Window caption.
+         * @param caption the caption of the window.
          */
         Window(const std::string& caption);
 
@@ -90,93 +91,106 @@ namespace gcn
         virtual ~Window();
 
         /**
-         * Sets the Window caption.
+         * Sets the caption of the window.
          *
-         * @param caption the Window caption.
+         * @param caption The caption of the window.
+         * @see getCaption
          */
         void setCaption(const std::string& caption);
 
         /**
-         * Gets the Window caption.
+         * Gets the caption of the window.
          *
-         * @return the Window caption.
+         * @return the caption of the window.
+         * @see setCaption
          */
         const std::string& getCaption() const;
 
         /**
-         * Sets the alignment for the caption.
+         * Sets the alignment of the caption.
          *
-         * @param alignment Graphics::LEFT, Graphics::CENTER or Graphics::RIGHT.
+         * @param alignment The alignment of the caption.
+         * @see getAlignment, Graphics
          */
-        void setAlignment(unsigned int alignment);
+        void setAlignment(Graphics::Alignment alignment);
 
         /**
-         * Gets the alignment for the caption.
+         * Gets the alignment of the caption.
          *
-         * @return alignment of caption.
+         * @return The alignment of caption.
+         * @see setAlignment, Graphics
          */
-        unsigned int getAlignment() const;
+        Graphics::Alignment getAlignment() const;
 
         /**
-         * Sets the padding of the window which is the distance between the
+         * Sets the padding of the window. The padding is the distance between the
          * window border and the content.
          *
-         * @param padding the padding value.
+         * @param padding The padding of the window.
+         * @see getPadding
          */
         void setPadding(unsigned int padding);
 
         /**
-         * Gets the padding.
+         * Gets the padding of the window. The padding is the distance between the
+         * window border and the content.
          *
-         * @return the padding value.
+         * @return The padding of the window.
+         * @see setPadding
          */
         unsigned int getPadding() const;
 
         /**
          * Sets the title bar height.
          *
-         * @param height the title height value.
+         * @param height The title height value.
+         * @see getTitleBarHeight
          */
         void setTitleBarHeight(unsigned int height);
 
         /**
          * Gets the title bar height.
          *
-         * @return the title bar height.
+         * @return The title bar height.
+         * @see setTitleBarHeight
          */
         unsigned int getTitleBarHeight();
 
         /**
-         * Sets the Window to be moveble.
+         * Sets the window to be moveble or not.
          *
-         * @param movable true or false.
+         * @param movable True if the window should be movable, false otherwise.
+         * @see isMovable
          */
         void setMovable(bool movable);
 
         /**
-         * Check if the window is movable.
+         * Checks if the window is movable.
          *
-         * @return true or false.
+         * @return True if the window is movable, false otherwise.
+         * @see setMovable
          */
         bool isMovable() const;
 
         /**
-         * Sets the Window to be opaque. If it's not opaque, the content area
-         * will not be filled with a color.
+         * Sets the window to be opaque or not. An opaque window will draw its background
+         * and its content. A non opaque window will only draw its content.
          *
-         * @param opaque true or false.
+         * @param opaque True if the window should be opaque, false otherwise.
+         * @see isOpaque
          */
         void setOpaque(bool opaque);
 
         /**
-         * Checks if the Window is opaque.
+         * Checks if the window is opaque.
          *
-         * @return true or false.
+         * @return True if the window is opaque, false otherwise.
+         * @see setOpaque
          */
         bool isOpaque();
 
         /**
-         * Resizes the container to fit the content exactly.
+         * Resizes the window to fit the content.
          */
         virtual void resizeToContent();
 
@@ -202,15 +216,54 @@ namespace gcn
         virtual void mouseReleased(MouseEvent& mouseEvent);
 
     protected:
+        /**
+         * Holds the caption of the window.
+         */
         std::string mCaption;
-        unsigned int mAlignment;
+
+        /**
+         * Holds the alignment of the caption.
+         */
+        Graphics::Alignment mAlignment;
+
+        /**
+         * Holds the padding of the window.
+         */
         unsigned int mPadding;
+
+        /**
+         * Holds the title bar height of the window.
+         */
         unsigned int mTitleBarHeight;
+
+        /**
+         * True if the window is movable, false otherwise.
+         */
         bool mMovable;
+
+        /**
+         * True if the window is opaque, false otherwise.
+         */
         bool mOpaque;
+
+        /**
+         * Holds a drag offset as an x coordinate where the drag of the window
+         * started if the window is being dragged. It's used to move the window 
+         * correctly when dragged.
+         */
         int mDragOffsetX;
+
+        /**
+         * Holds a drag offset as an y coordinate where the drag of the window
+         * started if the window is being dragged. It's used to move the window 
+         * correctly when dragged.
+         */
         int mDragOffsetY;
-        bool mIsMoving;
+
+        /**
+         * True if the window is being moved, false otherwise.
+         */
+        bool mMoved;
     };
 }
 

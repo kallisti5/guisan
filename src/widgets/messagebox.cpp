@@ -209,17 +209,7 @@ namespace gcn
         return mCaption;
     }
 
-    void MessageBox::setAlignment(unsigned int alignment)
-    {
-        mAlignment = alignment;
-    }
-
-    unsigned int MessageBox::getAlignment() const
-    {
-        return mAlignment;
-    }
-    
-    void MessageBox::setButtonAlignment(unsigned int alignment)
+    void MessageBox::setButtonAlignment(Graphics::Alignment alignment)
     {
         mButtonAlignment = alignment;
         
@@ -246,8 +236,8 @@ namespace gcn
             }
         }
     }
-    
-    unsigned int MessageBox::getButtonAlignment() const
+
+    Graphics::Alignment MessageBox::getButtonAlignment() const
     {
         return mButtonAlignment;
     }
@@ -387,8 +377,8 @@ namespace gcn
 
         mDragOffsetX = mouseEvent.getX();
         mDragOffsetY = mouseEvent.getY();
-        
-        mIsMoving = mouseEvent.getY() <= (int)mTitleBarHeight;
+
+        mMoved = mouseEvent.getY() <= (int)mTitleBarHeight;
     }
 
     void MessageBox::mouseReleased(MouseEvent& mouseEvent)
@@ -407,7 +397,7 @@ namespace gcn
         }
         else
         {
-            mIsMoving = false;
+            mMoved = false;
         }
     }
 
@@ -418,7 +408,7 @@ namespace gcn
             return;
         }
         
-        if (isMovable() && mIsMoving)
+        if (isMovable() && mMoved)
         {
             setPosition(mouseEvent.getX() - mDragOffsetX + getX(),
                         mouseEvent.getY() - mDragOffsetY + getY());

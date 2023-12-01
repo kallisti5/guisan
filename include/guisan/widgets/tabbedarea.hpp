@@ -73,8 +73,8 @@ namespace gcn
     class Tab;
     
     /**
-     * With the tabbed area widget several widgets can share the same
-     * space. The widget to view is selected by the user by using tabs.
+     * An implementation of a tabbed area where a user can display a widget by
+     * selecting a tab.
      */
     class GCN_CORE_DECLSPEC TabbedArea:
         public ActionListener,
@@ -97,8 +97,9 @@ namespace gcn
         /**
          * Adds a tab to the tabbed area.
          *
-         * @param caption The caption of the tab.
-         * @param widget The widget to view when the tab is selected.         
+         * @param caption The caption of the tab to add.
+         * @param widget The widget to view when the tab is selected.
+         * @see removeTab, removeTabWithIndex
          */
         virtual void addTab(const std::string& caption, Widget* widget);
 
@@ -106,7 +107,8 @@ namespace gcn
          * Adds a tab to the tabbed area.
          *
          * @param tab The tab widget for the tab.
-         * @param widget The widget to view when the tab is selected.         
+         * @param widget The widget to view when the tab is selected.  
+         * @see removeTab, removeTabWithIndex
          */
         virtual void addTab(Tab* tab, Widget* widget);
 
@@ -114,6 +116,7 @@ namespace gcn
          * Removes a tab from the tabbed area.
          *
          * @param index The index of the tab to remove.
+         * @see addTab
          */
         virtual void removeTabWithIndex(unsigned int index);
         
@@ -121,22 +124,25 @@ namespace gcn
          * Removes a tab from the tabbed area.
          *
          * @param index The tab to remove.
+         * @see addTab
          */
         virtual void removeTab(Tab* tab);
 
         /**
-         * Checks whether a tab given an index is selected.
+         * Checks if a tab given an index is selected or not.
          *
          * @param index The index of the tab to check.
          * @return True if the tab is selected, false otherwise.
+         * @see setSelectedTab
          */
         virtual bool isTabSelected(unsigned int index) const;
         
         /**
-         * Checks whether a tab is selected or not.
+         * Checks if a tab is selected or not.
          *
          * @param index The tab to check.
          * @return True if the tab is selected, false otherwise.
+         * @see setSelectedTab
          */
         virtual bool isTabSelected(Tab* tab);
 
@@ -144,13 +150,15 @@ namespace gcn
          * Sets a tab given an index to be selected.
          *
          * @param index The index of the tab to be selected.
+         * @see isTabSelected, getSelectedTab
          */
-        virtual void setSelectedTabWithIndex(unsigned int index);
+        virtual void setSelectedTab(unsigned int index);
 
         /**
          * Sets a tab to be selected or not.
          *
          * @param index The tab to be selected.
+         * @see isTabSelected, getSelectedTab
          */
         virtual void setSelectedTab(Tab* tab);
 
@@ -159,13 +167,15 @@ namespace gcn
          *
          * @return The undex of the selected tab.
          *         If no tab is selected -1 will be returned.
+         * @see isTabSelected, setSelectedTab
          */
         virtual int getSelectedTabIndex() const;
-        
+
         /**
          * Gets the selected tab.
          *
          * @return The selected tab.
+         * @see isTabSelected, setSelectedTab
          */
         Tab* getSelectedTab();
 
@@ -212,14 +222,39 @@ namespace gcn
          * Adjusts the size of the tabbed area.
          */
         void adjustSize();
+
+        /**
+         * Adjusts the positions ot the tabs.
+         */
         void adjustTabPositions();
-        
+
+        /**
+         * Holds the selected tab.
+         */
         Tab* mSelectedTab;
+
+        /**
+         * Holds the container for the tabs.
+         */
         Container* mTabContainer;
+
+        /**
+         * Holds the container for the widgets.
+         */
         Container* mWidgetContainer;
-        std::vector<Tab*> mTabsToCleanUp;
+
+        /**
+         * Holds a vector of tabs to delete in the destructor.
+         * A tab that is to be deleted is a tab that has been
+         * internally created by the tabbed area.
+         */
+        std::vector<Tab*> mTabsToDelete;
+
+        /**
+         * A map between a tab and a widget to display when the
+         * tab is selected.
+         */
         std::vector<std::pair<Tab*, Widget*> > mTabs;
-        
     };
 }
 

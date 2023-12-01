@@ -65,9 +65,11 @@
 namespace gcn
 {
     /**
-     * A slider able to slide between different values. You can set the scale
-     * of the slider yourself so that it ranges between, for example, -1.0 and
-     * 2.0.
+     * An implementation of a slider where a user can select different values by
+     * sliding between a start value and an end value of a scale.
+     *
+     * If the selected value is changed an action event will be sent to all
+     * action listeners of the slider.
      */
     class GCN_CORE_DECLSPEC Slider :
         public Widget,
@@ -75,19 +77,28 @@ namespace gcn
         public KeyListener
     {
     public:
+        /**
+         * Draw orientations for the slider. A slider can be drawn vertically or
+         * horizontally.
+         */
+        enum Orientation
+        {
+            HORIZONTAL = 0,
+            VERTICAL
+        };
 
         /**
-         * Constructor. Scale start is 0.
+         * Constructor. The default start value of the slider scale is zero.
          *
-         * @param scaleEnd the end of the slider scale.
+         * @param scaleEnd The end value of the slider scale.
          */
         Slider(double scaleEnd = 1.0);
 
         /**
          * Constructor.
          *
-         * @param scaleStart the start of the scale.
-         * @param scaleEnd the end of the scale.
+         * @param scaleStart The start value of the slider scale.
+         * @param scaleEnd The end value of the slider scale.
          */
         Slider(double scaleStart, double scaleEnd);
 
@@ -97,112 +108,120 @@ namespace gcn
         virtual ~Slider() { }
 
         /**
-         * Sets the scale.
+         * Sets the scale of the slider.
          *
-         * @param scaleStart the start of the scale.
-         * @param scaleEnd the end of the scale.
+         * @param scaleStart The start value of the scale.
+         * @param scaleEnd tThe end of value the scale.
+         * @see getScaleStart, getScaleEnd
          */
         void setScale(double scaleStart, double scaleEnd);
 
         /**
-         * Gets the scale start.
+         * Gets the start value of the scale.
          *
-         * @return the scale start.
+         * @return The start value of the scale.
+         * @see setScaleStart, setScale
          */
         double getScaleStart() const;
 
         /**
-         * Sets the scale start.
+         * Sets the start value of the scale.
          *
-         * @param scaleStart the start of the scale.
+         * @param scaleStart The start value of the scale.
+         * @see getScaleStart
          */
         void setScaleStart(double scaleStart);
 
         /**
-         * Gets the scale end.
+         * Gets the end value of the scale.
          *
-         * @return the scale end.
+         * @return The end value of the scale.
+         * @see setScaleEnd, setScale
          */
         double getScaleEnd() const;
 
         /**
-         * Sets the scale end.
+         * Sets the end value of the scale.
          *
-         * @param scaleEnd the end of the scale.
+         * @param scaleEnd The end value of the scale.
+         * @see getScaleEnd
          */
         void setScaleEnd(double scaleEnd);
 
         /**
-         * Gets the current value.
+         * Gets the current selected value.
          *
-         * @return the current value.
+         * @return The current selected value.
+         * @see setValue
          */
         double getValue() const;
 
         /**
-         * Sets the current value.
+         * Sets the current selected value.
          *
-         * @param value a scale value.
+         * @param value The current selected value.
+         * @see getValue
          */
         void setValue(double value);
 
         /**
-         * Draws the marker.
-         *
-         * @param graphics a graphics object to draw with.
-         */
-        virtual void drawMarker(gcn::Graphics* graphics);
-
-        /**
          * Sets the length of the marker.
          *
-         * @param length new length for the marker.
+         * @param length The length for the marker.
+         * @see getMarkerLength
          */
         void setMarkerLength(int length);
 
         /**
          * Gets the length of the marker.
          *
-         * @return the length of the marker.
+         * @return The length of the marker.
+         * @see setMarkerLength
          */
         int getMarkerLength() const;
 
         /**
-         * Sets the orientation of the slider. A slider can be drawn verticaly
-         * or horizontaly. For orientation, see the enum in this class.
+         * Sets the orientation of the slider. A slider can be drawn vertically
+         * or horizontally.
          *
-         * @param orientation the orientation.
+         * @param orientation The orientation of the slider.
+         * @see getOrientation
          */
-        void setOrientation(unsigned int orientation);
+        void setOrientation(Orientation orientation);
 
         /**
-         * Gets the orientation of the slider. Se the enum in this class.
+         * Gets the orientation of the slider. A slider can be drawn vertically
+         * or horizontally.
          *
-         * @return the orientation of the slider.
+         * @return The orientation of the slider.
+         * @see setOrientation
          */
-        unsigned int getOrientation() const;
+        Orientation getOrientation() const;
 
         /**
-         * Sets the step length. Step length is used when the keys left and
-         * right are pressed.
+         * Sets the step length. The step length is used when the keys LEFT 
+         * and RIGHT are pressed to step in the scale.
          *
-         * @param length the step length.
+         * @param length The step length.
+         * @see getStepLength
          */
         void setStepLength(double length);
 
         /**
-         * Gets the step length.
+         * Gets the step length. The step length is used when the keys LEFT 
+         * and RIGHT are pressed to step in the scale.
          *
          * @return the step length.
+         * @see setStepLength
          */
         double getStepLength() const;
 
 
         // Inherited from Widget
 
-        virtual void draw(gcn::Graphics* graphics);
+        virtual void draw(Graphics* graphics);
 
-        virtual void drawBorder(gcn::Graphics* graphics);
+        virtual void drawBorder(Graphics* graphics);
 
 
         // Inherited from MouseListener.
@@ -220,47 +239,75 @@ namespace gcn
 
         virtual void keyPressed(KeyEvent& keyEvent);
 
-        /**
-         * Draw orientations for the slider. It can be drawn verticaly or
-         * horizontaly.
-         */
-        enum
-        {
-            HORIZONTAL = 0,
-            VERTICAL
-        };
-
     protected:
         /**
-         * Converts a marker position to a value.
+         * Draws the marker.
          *
-         * @param v the position to convert.
-         * @return the value corresponding to the position.
+         * @param graphics A graphics object to draw with.
          */
-        virtual double markerPositionToValue(int v) const;
+        virtual void drawMarker(Graphics* graphics);
+
+        /**
+         * Converts a marker position to a value in the scale.
+         *
+         * @param position The position to convert.
+         * @return A scale value corresponding to the position.
+         * @see valueToMarkerPosition
+         */
+        virtual double markerPositionToValue(int position) const;
 
         /**
          * Converts a value to a marker position.
          *
-         * @param value the value to convert.
-         * @return the position corresponding to the value.
+         * @param value The value to convert.
+         * @return A marker position corresponding to the value.
+         * @see markerPositionToValue
          */
         virtual int valueToMarkerPosition(double value) const;
 
         /**
-         * Gets the marker position for the current value.
+         * Gets the marker position of the current selected value.
          *
-         * @return the marker position for the current value.
+         * @return The marker position of the current selected value.
          */
         virtual int getMarkerPosition() const;
 
-        bool mMouseDrag;
+        /**
+         * True if the slider is dragged, false otherwise.
+         */
+        bool mDragged;
+
+        /**
+         * Holds the current selected value.
+         */
         double mValue;
+
+        /**
+         * Holds the step length. The step length is used when the keys LEFT 
+         * and RIGHT are pressed to step in the scale.
+         */
         double mStepLength;
+
+        /**
+         * Holds the length of the marker.
+         */
         int mMarkerLength;
+
+        /**
+         * Holds the start value of the scale.
+         */
         double mScaleStart;
+
+        /**
+         * Holds the end value of the scale.
+         */
         double mScaleEnd;
-        unsigned int mOrientation;
+
+        /**
+         * Holds the orientation of the slider. A slider can be drawn 
+         * vertically or horizontally.
+         */
+        Orientation mOrientation;
     };
 }
 

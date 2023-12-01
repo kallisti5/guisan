@@ -68,7 +68,7 @@
 namespace gcn
 {
     Window::Window()
-        :mIsMoving(false)
+        :mMoved(false)
     {
         setBorderSize(1);
         setPadding(2);
@@ -80,7 +80,7 @@ namespace gcn
     }
 
     Window::Window(const std::string& caption)
-        :mIsMoving(false)
+        :mMoved(false)
     {
         setCaption(caption);
         setBorderSize(1);
@@ -126,12 +126,12 @@ namespace gcn
         return mCaption;
     }
 
-    void Window::setAlignment(unsigned int alignment)
+    void Window::setAlignment(Graphics::Alignment alignment)
     {
         mAlignment = alignment;
     }
 
-    unsigned int Window::getAlignment() const
+    Graphics::Alignment Window::getAlignment() const
     {
         return mAlignment;
     }
@@ -272,12 +272,12 @@ namespace gcn
         mDragOffsetX = mouseEvent.getX();
         mDragOffsetY = mouseEvent.getY();
 
-        mIsMoving = mouseEvent.getY() <= (int)mTitleBarHeight;
+        mMoved = mouseEvent.getY() <= (int)mTitleBarHeight;
     }
 
     void Window::mouseReleased(MouseEvent& mouseEvent)
     {
-        mIsMoving = false;
+        mMoved = false;
     }
 
     void Window::mouseDragged(MouseEvent& mouseEvent)
@@ -287,7 +287,7 @@ namespace gcn
             return;
         }
 
-        if (isMovable() && mIsMoving)
+        if (isMovable() && mMoved)
         {
             setPosition(mouseEvent.getX() - mDragOffsetX + getX(),
                 mouseEvent.getY() - mDragOffsetY + getY());
