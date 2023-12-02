@@ -136,7 +136,7 @@ namespace gcn
          * @param graphics a graphics object to draw with.
          * @see setFrameSize, getFrameSize
          */
-        virtual void drawFrame(Graphics* graphics) { }
+        virtual void drawFrame(Graphics* graphics);
 
         /**
          * Sets the size of the widget's frame. The frame is not considered a part of

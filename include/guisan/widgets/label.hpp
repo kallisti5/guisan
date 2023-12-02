@@ -130,7 +130,6 @@ namespace gcn
 
         virtual void draw(Graphics* graphics);
 
-        virtual void drawFrame(Graphics* graphics);
 
     protected:
         /**

@@ -133,6 +133,22 @@ namespace gcn
 
     void TextBox::draw(Graphics* graphics)
     {
+        /*
+        int width = getWidth() + getFrameSize() * 2 - 1;
+        int height = getHeight() + getFrameSize() * 2 - 1;
+
+        graphics->setColor(getBackgroundColor());
+
+        unsigned int i;
+        for (i = 0; i < getFrameSize(); ++i)
+        {
+            graphics->drawLine(i,i, width - i, i);
+            graphics->drawLine(i,i + 1, i, height - i - 1);
+            graphics->drawLine(width - i,i + 1, width - i, height - i);
+            graphics->drawLine(i,height - i, width - i - 1, height - i);
+        }
+        */
+
         unsigned int i;
 
         if (mOpaque)
@@ -153,23 +169,6 @@ namespace gcn
         {
             // Move the text one pixel so we can have a caret before a letter.
             graphics->drawText(mTextRows[i], 1, i * getFont()->getHeight());
-        }
-    }
-
-    void TextBox::drawFrame(Graphics* graphics)
-    {
-        int width = getWidth() + getFrameSize() * 2 - 1;
-        int height = getHeight() + getFrameSize() * 2 - 1;
-
-        graphics->setColor(getBackgroundColor());
-
-        unsigned int i;
-        for (i = 0; i < getFrameSize(); ++i)
-        {
-            graphics->drawLine(i,i, width - i, i);
-            graphics->drawLine(i,i + 1, i, height - i - 1);
-            graphics->drawLine(width - i,i + 1, width - i, height - i);
-            graphics->drawLine(i,height - i, width - i - 1, height - i);
         }
     }
 

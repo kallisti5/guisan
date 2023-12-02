@@ -184,8 +184,6 @@ namespace gcn
 
         virtual void draw(Graphics *graphics);
 
-        virtual void drawFrame(Graphics* graphics);
-
         virtual void logic();
 
         void setWidth(int width);

@@ -118,7 +118,6 @@ namespace gcn
         addFocusListener(this);
 
         adjustHeight();
-        setFrameSize(1);
     }
 
     DropDown::~DropDown()
@@ -156,11 +155,34 @@ namespace gcn
         Color shadowColor = faceColor - 0x303030;
         shadowColor.a = alpha;
 
-        Color backCol = getBackgroundColor();
+        // Draw a border.
+        graphics->setColor(shadowColor);
+        graphics->drawLine(0, 0, getWidth() - 1, 0);
+        graphics->drawLine(0, 1, 0, h - 2);
+        graphics->setColor(highlightColor);
+        graphics->drawLine(getWidth() - 1, 1, getWidth() - 1, h - 1);
+        graphics->drawLine(0, h - 1, getWidth() - 1, h - 1);
+
+        // Push a clip area so the other drawings don't need to worry
+        // about the border.
+        graphics->pushClipArea(Rectangle(1, 1, getWidth() - 2, h - 2));
+        const Rectangle currentClipArea = graphics->getCurrentClipArea();
+
+        Color backgroundColor = getBackgroundColor();
         if (!isEnabled())
-            backCol = backCol - 0x303030;
-        graphics->setColor(backCol);
-        graphics->fillRectangle(Rectangle(0, 0, getWidth(), h));
+        {
+            backgroundColor = backgroundColor - 0x303030;
+        }
+        graphics->setColor(backgroundColor);
+        graphics->fillRectangle(Rectangle(0, 0, currentClipArea.width, currentClipArea.height));
+
+        if (isFocused())
+        {
+            graphics->setColor(getSelectionColor());
+            graphics->fillRectangle(Rectangle(
+                0, 0, currentClipArea.width - currentClipArea.height, currentClipArea.height));
+            graphics->setColor(getForegroundColor());
+        }
 
         if (isEnabled())
             graphics->setColor(getForegroundColor());
@@ -169,52 +191,27 @@ namespace gcn
 
         graphics->setFont(getFont());
 
-        if (isFocused())
-        {
-            graphics->setColor(getSelectionColor());
-            graphics->fillRectangle(Rectangle(0, 0, getWidth() - h, h));
-            graphics->setColor(getForegroundColor());
-        }
-
         if (mListBox->getListModel() && mListBox->getSelected() >= 0)
-            graphics->drawText(mListBox->getListModel()->getElementAt(mListBox->getSelected()), 2, 1);
+            graphics->drawText(mListBox->getListModel()->getElementAt(mListBox->getSelected()), 1, 0);
+
+        // Push a clip area before drawing the button.
+        graphics->pushClipArea(Rectangle(currentClipArea.width - currentClipArea.height,
+                                         0,
+                                         currentClipArea.height,
+                                         currentClipArea.height));
 
         drawButton(graphics);
+        graphics->popClipArea();
+        graphics->popClipArea();
 
         if (mDroppedDown)
         {
+            // Draw a border around the children.
+            graphics->setColor(shadowColor);
+            graphics->drawRectangle(
+                Rectangle(0, mFoldedUpHeight, getWidth(), getHeight() - mFoldedUpHeight));
+
             drawChildren(graphics);
-
-            // Draw two lines separating the ListBox with se selected
-            // element view.
-            graphics->setColor(highlightColor);
-            graphics->drawLine(0, h, getWidth(), h);
-            graphics->setColor(shadowColor);
-            graphics->drawLine(0, h + 1, getWidth(), h + 1);
-        }
-    }
-
-    void DropDown::drawFrame(Graphics* graphics)
-    {
-        Color faceColor = getBaseColor();
-        Color highlightColor, shadowColor;
-        int alpha = getBaseColor().a;
-        int width = getWidth() + getFrameSize() * 2 - 1;
-        int height = getHeight() + getFrameSize() * 2 - 1;
-        highlightColor = faceColor + 0x303030;
-        highlightColor.a = alpha;
-        shadowColor = faceColor - 0x303030;
-        shadowColor.a = alpha;
-
-        unsigned int i;
-        for (i = 0; i < getFrameSize(); ++i)
-        {
-            graphics->setColor(shadowColor);
-            graphics->drawLine(i,i, width - i, i);
-            graphics->drawLine(i,i + 1, i, height - i - 1);
-            graphics->setColor(highlightColor);
-            graphics->drawLine(width - i,i + 1, width - i, height - i);
-            graphics->drawLine(i,height - i, width - i - 1, height - i);
         }
     }
 
@@ -245,55 +242,29 @@ namespace gcn
             offset = 0;
         }
 
-        int h;
-        if (mDroppedDown)
-        {
-            h = mFoldedUpHeight;
-        }
-        else
-        {
-            h = getHeight();
-        }
-        int x = getWidth() - h;
-        int y = 0;
+        const Rectangle currentClipArea = graphics->getCurrentClipArea();
+        graphics->setColor(highlightColor);
+        graphics->drawLine(0, 0, currentClipArea.width - 1, 0);
+        graphics->drawLine(0, 1, 0, currentClipArea.height - 1);
+        graphics->setColor(shadowColor);
+        graphics->drawLine(
+            currentClipArea.width - 1, 1, currentClipArea.width - 1, currentClipArea.height - 1);
+        graphics->drawLine(
+            1, currentClipArea.height - 1, currentClipArea.width - 2, currentClipArea.height - 1);
 
         graphics->setColor(faceColor);
-        graphics->fillRectangle(Rectangle(x + 1, 
-                                          y + 1, 
-                                          h - 2, 
-                                          h - 2));
+        graphics->fillRectangle(
+            Rectangle(1, 1, currentClipArea.width - 2, currentClipArea.height - 2));
 
-        graphics->setColor(highlightColor);
-        graphics->drawLine(x, 
-                           y, 
-                           x + h - 1, 
-                           y);
-        graphics->drawLine(x, 
-                           y + 1, 
-                           x, 
-                           y + h - 1);
-
-        graphics->setColor(shadowColor);
-        graphics->drawLine(x + h - 1, 
-                           y + 1, 
-                           x + h - 1, 
-                           y + h - 1);
-        graphics->drawLine(x + 1, 
-                           y + h - 1, 
-                           x + h - 2, 
-                           y + h - 1);
         graphics->setColor(getForegroundColor());
 
         int i;
-        int hh = h / 3;
-        int hx = x + h / 2;
-        int hy = y + (h * 2) / 3;
-        for (i = 0; i < hh; i++)
+        int n = currentClipArea.height / 3;
+        int dx = currentClipArea.height / 2;
+        int dy = (currentClipArea.height * 2) / 3;
+        for (i = 0; i < n; i++)
         {
-            graphics->drawLine(hx - i + offset,
-                hy - i + offset,
-                hx + i + offset,
-                hy - i + offset);
+            graphics->drawLine(dx - i + offset, dy - i + offset, dx + i + offset, dy - i + offset);
         }
     }
 
@@ -312,6 +283,10 @@ namespace gcn
 
     void DropDown::keyPressed(KeyEvent& keyEvent)
     {
+        if (keyEvent.isConsumed())
+        {
+            return;
+        }
         Key key = keyEvent.getKey();
 
         if ((key.getValue() == Key::ENTER || key.getValue() == Key::SPACE)
@@ -434,7 +409,8 @@ namespace gcn
         throw GCN_EXCEPTION("List box has been deleted.");
 
         int listBoxHeight = mListBox->getHeight();
-        int h2 = getFont()->getHeight();
+        // We add 2 for the border
+        int h2 = getFont()->getHeight() + 2;
 
         setHeight(h2);
 
@@ -517,10 +493,9 @@ namespace gcn
     {
         if (mDroppedDown)
         {
-            return Rectangle(0, 
-                             mFoldedUpHeight + 2, 
-                             getWidth(), 
-                             getHeight() - mFoldedUpHeight);
+            // Calculate the children area (with the one pixel border in mind)
+            return Rectangle(
+                1, mFoldedUpHeight + 1, getWidth() - 2, getHeight() - mFoldedUpHeight - 2);
         }
 
         return Rectangle();

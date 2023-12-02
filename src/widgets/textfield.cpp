@@ -77,7 +77,6 @@ namespace gcn
         addMouseListener(this);
         addKeyListener(this);
         adjustHeight();
-        setFrameSize(1);
     }
 
     TextField::TextField(const std::string& text)
@@ -87,7 +86,6 @@ namespace gcn
 
         mText = text;
         adjustSize();
-        setFrameSize(1);
 
         setFocusable(true);
 
@@ -107,8 +105,27 @@ namespace gcn
 
     void TextField::draw(Graphics* graphics)
     {
-        Color faceColor = getBackgroundColor();
-        graphics->setColor(faceColor);
+        Color faceColor = getBaseColor();
+        Color highlightColor, shadowColor;
+        int alpha = getBaseColor().a;
+        highlightColor = faceColor + 0x303030;
+        highlightColor.a = alpha;
+        shadowColor = faceColor - 0x303030;
+        shadowColor.a = alpha;
+
+        // Draw a border.
+        graphics->setColor(shadowColor);
+        graphics->drawLine(0, 0, getWidth() - 1, 0);
+        graphics->drawLine(0, 1, 0, getHeight() - 2);
+        graphics->setColor(highlightColor);
+        graphics->drawLine(getWidth() - 1, 1, getWidth() - 1, getHeight() - 1);
+        graphics->drawLine(0, getHeight() - 1, getWidth() - 1, getHeight() - 1);
+
+        // Push a clip area so the other drawings don't need to worry
+        // about the border.
+        graphics->pushClipArea(Rectangle(1, 1, getWidth() - 2, getHeight() - 2));
+
+        graphics->setColor(Color(0xffffff));
         graphics->fillRectangle(Rectangle(0, 0, getWidth(), getHeight()));
 
         if (isFocused())
@@ -122,37 +139,20 @@ namespace gcn
             graphics->setColor(Color(128, 128, 128));
 
         graphics->setFont(getFont());
-        graphics->drawText(mText, 1 - mXScroll, 2);
-    }
-
-    void TextField::drawFrame(Graphics* graphics)
-    {
-        Color faceColor = getBaseColor();
-        Color highlightColor, shadowColor;
-        int alpha = getBaseColor().a;
-        int width = getWidth() + getFrameSize() * 2 - 1;
-        int height = getHeight() + getFrameSize() * 2 - 1;
-        highlightColor = faceColor + 0x303030;
-        highlightColor.a = alpha;
-        shadowColor = faceColor - 0x303030;
-        shadowColor.a = alpha;
-
-        unsigned int i;
-        for (i = 0; i < getFrameSize(); ++i)
-        {
-            graphics->setColor(shadowColor);
-            graphics->drawLine(i, i, width - i, i);
-            graphics->drawLine(i, i + 1, i, height - i - 1);
-            graphics->setColor(highlightColor);
-            graphics->drawLine(width - i, i + 1, width - i, height - i);
-            graphics->drawLine(i, height - i, width - i - 1, height - i);
-        }
+        graphics->drawText(mText, 1 - mXScroll, 1);
+        graphics->popClipArea();
     }
 
     void TextField::drawCaret(Graphics* graphics, int x)
     {
+        // Check the current clip area as a clip area with a different
+        // size than the widget might have been pushed (which is the
+        // case in the draw method when we push a clip area after we have
+        // drawn a border).
+        const Rectangle clipArea = graphics->getCurrentClipArea();
+
         graphics->setColor(getForegroundColor());
-        graphics->drawLine(x, getHeight() - 2, x, 1);
+        graphics->drawLine(x, clipArea.height - 2, x, 1);
     }
 
     void TextField::mousePressed(MouseEvent& mouseEvent)
