@@ -203,12 +203,12 @@ namespace gcn
         }
     }
 
-    void Widget::setBorderSize(unsigned int borderSize)
+    void Widget::setFrameSize(unsigned int borderSize)
     {
         mBorderSize = borderSize;
     }
 
-    unsigned int Widget::getBorderSize() const
+    unsigned int Widget::getFrameSize() const
     {
         return mBorderSize;
     }

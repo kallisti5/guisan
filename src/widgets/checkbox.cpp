@@ -104,20 +104,20 @@ namespace gcn
         graphics->drawText(getCaption(), h - 2, 0);
     }
 
-    void CheckBox::drawBorder(Graphics* graphics)
+    void CheckBox::drawFrame(Graphics* graphics)
     {
         Color faceColor = getBaseColor();
         Color highlightColor, shadowColor;
         int alpha = getBaseColor().a;
-        int width = getWidth() + getBorderSize() * 2 - 1;
-        int height = getHeight() + getBorderSize() * 2 - 1;
+        int width = getWidth() + getFrameSize() * 2 - 1;
+        int height = getHeight() + getFrameSize() * 2 - 1;
         highlightColor = faceColor + 0x303030;
         highlightColor.a = alpha;
         shadowColor = faceColor - 0x303030;
         shadowColor.a = alpha;
 
         unsigned int i;
-        for (i = 0; i < getBorderSize(); ++i)
+        for (i = 0; i < getFrameSize(); ++i)
         {
             graphics->setColor(shadowColor);
             graphics->drawLine(i,i, width - i, i);

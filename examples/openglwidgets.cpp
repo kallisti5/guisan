@@ -138,10 +138,10 @@ void initWidgets()
 	textBoxScrollArea = new gcn::ScrollArea(textBox);
 	textBoxScrollArea->setWidth(270);
 	textBoxScrollArea->setHeight(100);
-	textBoxScrollArea->setBorderSize(1);
+	textBoxScrollArea->setFrameSize(1);
 
 	listBox = new gcn::ListBox(&demoListModel);
-	listBox->setBorderSize(1);
+	listBox->setFrameSize(1);
 
 	dropDown = new gcn::DropDown(&demoListModel);
 
@@ -172,7 +172,7 @@ void initWidgets()
 
 	nestedScrollArea = new gcn::ScrollArea(nestedContainer);
 	nestedScrollArea->setSize(180, 90);
-	nestedScrollArea->setBorderSize(1);
+	nestedScrollArea->setFrameSize(1);
 
 	/*
 	 * Add them to the top container

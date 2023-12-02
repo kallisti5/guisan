@@ -247,8 +247,8 @@ namespace gcn
         Color faceColor = getBaseColor();
         Color highlightColor, shadowColor;
         int alpha = getBaseColor().a;
-        //int width = getWidth() + getBorderSize() * 2 - 1;
-        //int height = getHeight() + getBorderSize() * 2 - 1;
+        //int width = getWidth() + getFrameSize() * 2 - 1;
+        //int height = getHeight() + getFrameSize() * 2 - 1;
         highlightColor = faceColor + 0x303030;
         highlightColor.a = alpha;
         shadowColor = faceColor - 0x303030;
@@ -339,20 +339,20 @@ namespace gcn
         graphics->popClipArea();
     }
 
-    void MessageBox::drawBorder(Graphics* graphics)
+    void MessageBox::drawFrame(Graphics* graphics)
     {
         Color faceColor = getBaseColor();
         Color highlightColor, shadowColor;
         int alpha = getBaseColor().a;
-        int width = getWidth() + getBorderSize() * 2 - 1;
-        int height = getHeight() + getBorderSize() * 2 - 1;
+        int width = getWidth() + getFrameSize() * 2 - 1;
+        int height = getHeight() + getFrameSize() * 2 - 1;
         highlightColor = faceColor + 0x303030;
         highlightColor.a = alpha;
         shadowColor = faceColor - 0x303030;
         shadowColor.a = alpha;
 
         unsigned int i;
-        for (i = 0; i < getBorderSize(); ++i)
+        for (i = 0; i < getFrameSize(); ++i)
         {
             graphics->setColor(highlightColor);
             graphics->drawLine(i,i, width - i, i);

@@ -80,7 +80,7 @@ namespace gcn
         addMouseListener(this);
         addKeyListener(this);
         adjustSize();
-        setBorderSize(1);
+        setFrameSize(1);
         setText("");
     }
 
@@ -98,7 +98,7 @@ namespace gcn
         addMouseListener(this);
         addKeyListener(this);
         adjustSize();
-        setBorderSize(1);
+        setFrameSize(1);
     }
 
     void TextBox::setText(const std::string& text)
@@ -156,15 +156,15 @@ namespace gcn
         }
     }
 
-    void TextBox::drawBorder(Graphics* graphics)
+    void TextBox::drawFrame(Graphics* graphics)
     {
-        int width = getWidth() + getBorderSize() * 2 - 1;
-        int height = getHeight() + getBorderSize() * 2 - 1;
+        int width = getWidth() + getFrameSize() * 2 - 1;
+        int height = getHeight() + getFrameSize() * 2 - 1;
 
         graphics->setColor(getBackgroundColor());
 
         unsigned int i;
-        for (i = 0; i < getBorderSize(); ++i)
+        for (i = 0; i < getFrameSize(); ++i)
         {
             graphics->drawLine(i,i, width - i, i);
             graphics->drawLine(i,i + 1, i, height - i - 1);

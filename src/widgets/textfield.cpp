@@ -77,7 +77,7 @@ namespace gcn
         addMouseListener(this);
         addKeyListener(this);
         adjustHeight();
-        setBorderSize(1);
+        setFrameSize(1);
     }
 
     TextField::TextField(const std::string& text)
@@ -87,7 +87,7 @@ namespace gcn
 
         mText = text;
         adjustSize();
-        setBorderSize(1);
+        setFrameSize(1);
 
         setFocusable(true);
 
@@ -125,20 +125,20 @@ namespace gcn
         graphics->drawText(mText, 1 - mXScroll, 2);
     }
 
-    void TextField::drawBorder(Graphics* graphics)
+    void TextField::drawFrame(Graphics* graphics)
     {
         Color faceColor = getBaseColor();
         Color highlightColor, shadowColor;
         int alpha = getBaseColor().a;
-        int width = getWidth() + getBorderSize() * 2 - 1;
-        int height = getHeight() + getBorderSize() * 2 - 1;
+        int width = getWidth() + getFrameSize() * 2 - 1;
+        int height = getHeight() + getFrameSize() * 2 - 1;
         highlightColor = faceColor + 0x303030;
         highlightColor.a = alpha;
         shadowColor = faceColor - 0x303030;
         shadowColor.a = alpha;
 
         unsigned int i;
-        for (i = 0; i < getBorderSize(); ++i)
+        for (i = 0; i < getFrameSize(); ++i)
         {
             graphics->setColor(shadowColor);
             graphics->drawLine(i, i, width - i, i);

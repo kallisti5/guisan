@@ -249,7 +249,7 @@ namespace gcn
         }
 
         int value = getContent()->getWidth() - getChildrenArea().width +
-            2 * getContent()->getBorderSize();
+            2 * getContent()->getFrameSize();
 
         if (value < 0)
         {
@@ -271,7 +271,7 @@ namespace gcn
         int value;
 
         value = getContent()->getHeight() - getChildrenArea().height +
-            2 * getContent()->getBorderSize();
+            2 * getContent()->getFrameSize();
 
         if (value < 0)
         {
@@ -454,20 +454,20 @@ namespace gcn
         drawChildren(graphics);
     }
 
-    void ScrollArea::drawBorder(Graphics* graphics)
+    void ScrollArea::drawFrame(Graphics* graphics)
     {
         Color faceColor = getBaseColor();
         Color highlightColor, shadowColor;
         int alpha = getBaseColor().a;
-        int width = getWidth() + getBorderSize() * 2 - 1;
-        int height = getHeight() + getBorderSize() * 2 - 1;
+        int width = getWidth() + getFrameSize() * 2 - 1;
+        int height = getHeight() + getFrameSize() * 2 - 1;
         highlightColor = faceColor + 0x303030;
         highlightColor.a = alpha;
         shadowColor = faceColor - 0x303030;
         shadowColor.a = alpha;
 
         unsigned int i;
-        for (i = 0; i < getBorderSize(); ++i)
+        for (i = 0; i < getFrameSize(); ++i)
         {
             graphics->setColor(shadowColor);
             graphics->drawLine(i,i, width - i, i);
@@ -833,8 +833,8 @@ namespace gcn
 
         if (getContent() != NULL)
         {
-            getContent()->setPosition(-mHScroll + getContent()->getBorderSize(),
-                                      -mVScroll + getContent()->getBorderSize());
+            getContent()->setPosition(-mHScroll + getContent()->getFrameSize(),
+                                      -mVScroll + getContent()->getFrameSize());
             getContent()->logic();
         }
     }
@@ -1170,8 +1170,8 @@ namespace gcn
 
         BasicContainer::showWidgetPart(widget, area);
 
-        setHorizontalScrollAmount(getContent()->getBorderSize() - getContent()->getX());
-        setVerticalScrollAmount(getContent()->getBorderSize() - getContent()->getY());
+        setHorizontalScrollAmount(getContent()->getFrameSize() - getContent()->getX());
+        setVerticalScrollAmount(getContent()->getFrameSize() - getContent()->getY());
     }
 
     Widget *ScrollArea::getWidgetAt(int x, int y)

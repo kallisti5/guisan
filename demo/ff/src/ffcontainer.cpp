@@ -79,7 +79,7 @@ FFContainer::FFContainer()
     Container::setHeight(0);
     mSlideTarget = 0;
     mCurrentSlide = 0;
-    setBorderSize(0);
+    setFrameSize(0);
 }
 
 FFContainer::~FFContainer()

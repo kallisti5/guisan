@@ -74,7 +74,7 @@ namespace gcn
         mScaleEnd = scaleEnd;
 
         setFocusable(true);
-        setBorderSize(1);
+        setFrameSize(1);
         setOrientation(HORIZONTAL);
         setValue(0);
         setStepLength(scaleEnd / 10);
@@ -92,7 +92,7 @@ namespace gcn
         mScaleEnd = scaleEnd;
 
         setFocusable(true);
-        setBorderSize(1);
+        setFrameSize(1);
         setOrientation(HORIZONTAL);
         setValue(scaleStart);
         setStepLength((scaleEnd - scaleStart) / 10);
@@ -146,20 +146,20 @@ namespace gcn
         drawMarker(graphics);
     }
 
-    void Slider::drawBorder(gcn::Graphics* graphics)
+    void Slider::drawFrame(gcn::Graphics* graphics)
     {
         Color faceColor = getBaseColor();
         Color highlightColor, shadowColor;
         int alpha = getBaseColor().a;
-        int width = getWidth() + getBorderSize() * 2 - 1;
-        int height = getHeight() + getBorderSize() * 2 - 1;
+        int width = getWidth() + getFrameSize() * 2 - 1;
+        int height = getHeight() + getFrameSize() * 2 - 1;
         highlightColor = faceColor + 0x303030;
         highlightColor.a = alpha;
         shadowColor = faceColor - 0x303030;
         shadowColor.a = alpha;
 
         unsigned int i;
-        for (i = 0; i < getBorderSize(); ++i)
+        for (i = 0; i < getFrameSize(); ++i)
         {
             graphics->setColor(shadowColor);
             graphics->drawLine(i, i, width - i, i);

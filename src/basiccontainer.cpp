@@ -296,17 +296,17 @@ namespace gcn
         {
             if ((*iter)->isVisible())
             {
-                // If the widget has a border,
+                // If the widget has a frame,
                 // draw it before drawing the widget
-                if ((*iter)->getBorderSize() > 0)
+                if ((*iter)->getFrameSize() > 0)
                 {
                     Rectangle rec = (*iter)->getDimension();
-                    rec.x -= (*iter)->getBorderSize();
-                    rec.y -= (*iter)->getBorderSize();
-                    rec.width += 2 * (*iter)->getBorderSize();
-                    rec.height += 2 * (*iter)->getBorderSize();
+                    rec.x -= (*iter)->getFrameSize();
+                    rec.y -= (*iter)->getFrameSize();
+                    rec.width += 2 * (*iter)->getFrameSize();
+                    rec.height += 2 * (*iter)->getFrameSize();
                     graphics->pushClipArea(rec);
-                    (*iter)->drawBorder(graphics);
+                    (*iter)->drawFrame(graphics);
                     graphics->popClipArea();
                 }
 

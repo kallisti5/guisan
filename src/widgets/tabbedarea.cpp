@@ -75,7 +75,7 @@ namespace gcn
     TabbedArea::TabbedArea()
             :mSelectedTab(NULL)
     {
-        setBorderSize(1);
+        setFrameSize(1);
         setFocusable(true);
         addKeyListener(this);
         addMouseListener(this);
@@ -288,20 +288,20 @@ namespace gcn
         drawChildren(graphics);
     }
     
-    void TabbedArea::drawBorder(Graphics* graphics)
+    void TabbedArea::drawFrame(Graphics* graphics)
     {
         Color faceColor = getBaseColor();
         Color highlightColor, shadowColor;
         int alpha = getBaseColor().a;
-        int width = getWidth() + getBorderSize() * 2 - 1;
-        int height = getHeight() + getBorderSize() * 2 - 1;
+        int width = getWidth() + getFrameSize() * 2 - 1;
+        int height = getHeight() + getFrameSize() * 2 - 1;
         highlightColor = faceColor + 0x303030;
         highlightColor.a = alpha;
         shadowColor = faceColor - 0x303030;
         shadowColor.a = alpha;
 
         unsigned int i;
-        for (i = 0; i < getBorderSize(); ++i)
+        for (i = 0; i < getFrameSize(); ++i)
         {
             graphics->setColor(highlightColor);
             graphics->drawLine(i,i + mWidgetContainer->getY(), i, height - i - 1);
@@ -363,7 +363,7 @@ namespace gcn
 
             if (x == 0)
             {
-                x = tab->getBorderSize() + 2;
+                x = tab->getFrameSize() + 2;
             }
             
             tab->setX(x);
@@ -372,14 +372,14 @@ namespace gcn
             {
                 tab->setY(maxTabHeight
                           - tab->getHeight()
-                          + tab->getBorderSize());
+                          + tab->getFrameSize());
             }
             else
             {
-                tab->setY(mTabs[i].first->getBorderSize());
+                tab->setY(mTabs[i].first->getFrameSize());
             }
             
-            x += tab->getWidth() + tab->getBorderSize() * 2;
+            x += tab->getWidth() + tab->getFrameSize() * 2;
         }
     }
     

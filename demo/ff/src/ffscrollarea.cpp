@@ -50,7 +50,7 @@ FFScrollArea::FFScrollArea()
     setScrollPolicy(SHOW_NEVER, SHOW_NEVER);
     addKeyListener(this);
     setFocusable(false);
-    setBorderSize(0);
+    setFrameSize(0);
 }
 
 void FFScrollArea::draw(gcn::Graphics *graphics)
