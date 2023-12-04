@@ -89,7 +89,7 @@ namespace gcn
 
     bool Key::isPrintable() const
     {
-        return 0 < mValue && mValue < 1000;
+        return 32 <= mValue && mValue < 1000;
     }
 
     int Key::getValue() const
