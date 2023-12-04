@@ -125,7 +125,7 @@ namespace gcn
         // about the border.
         graphics->pushClipArea(Rectangle(1, 1, getWidth() - 2, getHeight() - 2));
 
-        graphics->setColor(Color(0xffffff));
+        graphics->setColor(getBackgroundColor());
         graphics->fillRectangle(Rectangle(0, 0, getWidth(), getHeight()));
 
         if (isFocused())
