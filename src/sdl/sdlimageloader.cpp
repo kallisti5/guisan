@@ -67,6 +67,9 @@
 
 namespace gcn
 {
+    SDLImageLoader::SDLImageLoader() : mRenderer(NULL)
+    {}
+
     Image* SDLImageLoader::load(const std::string& filename,
                                 bool convertToDisplayFormat)
     {
