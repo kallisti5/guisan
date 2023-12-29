@@ -149,7 +149,7 @@ namespace gcn
 
         for (i = 0; i < mSurface->w * mSurface->h; ++i)
         {
-            if (((unsigned int*)mSurface->pixels)[i] == SDL_MapRGB(mSurface->format,255,0,255))
+            if (static_cast<unsigned int*>(mSurface->pixels)[i] == SDL_MapRGB(mSurface->format, 255, 0, 255))
             {
                 hasPink = true;
                 break;
@@ -160,7 +160,7 @@ namespace gcn
         {
             Uint8 r, g, b, a;
 
-            SDL_GetRGBA(((unsigned int*)mSurface->pixels)[i], mSurface->format,
+            SDL_GetRGBA(static_cast<unsigned int*>(mSurface->pixels)[i], mSurface->format,
                         &r, &g, &b, &a);
 
             if (a != 255)

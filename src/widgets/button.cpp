@@ -177,13 +177,13 @@ namespace gcn
         switch (getAlignment())
         {
           case Graphics::LEFT:
-              textX = mSpacing;
+              textX = static_cast<int>(mSpacing);
               break;
           case Graphics::CENTER:
               textX = getWidth() / 2;
               break;
           case Graphics::RIGHT:
-              textX = getWidth() - mSpacing;
+              textX = getWidth() - static_cast<int>(mSpacing);
               break;
           default:
               throw GCN_EXCEPTION("Unknown alignment.");
@@ -212,8 +212,8 @@ namespace gcn
         Color faceColor = getBaseColor();
         Color highlightColor, shadowColor;
         int alpha = getBaseColor().a;
-        int width = getWidth() + getBorderSize() * 2 - 1;
-        int height = getHeight() + getBorderSize() * 2 - 1;
+        int width = getWidth() + static_cast<int>(getBorderSize()) * 2 - 1;
+        int height = getHeight() + static_cast<int>(getBorderSize()) * 2 - 1;
         highlightColor = faceColor + 0x303030;
         highlightColor.a = alpha;
         shadowColor = faceColor - 0x303030;
@@ -233,8 +233,8 @@ namespace gcn
 
     void Button::adjustSize()
     {
-        setWidth(getFont()->getWidth(mCaption) + 2*mSpacing);
-        setHeight(getFont()->getHeight() + 2*mSpacing);
+        setWidth(getFont()->getWidth(mCaption) + 2 * static_cast<int>(mSpacing));
+        setHeight(getFont()->getHeight() + 2 * static_cast<int>(mSpacing));
     }
 
     bool Button::isPressed() const
@@ -288,7 +288,7 @@ namespace gcn
 
     void Button::keyPressed(KeyEvent& keyEvent)
     {
-        Key key = keyEvent.getKey();
+        const Key key = keyEvent.getKey();
 
         if (key.getValue() == Key::ENTER
             || key.getValue() == Key::SPACE)
@@ -300,7 +300,7 @@ namespace gcn
 
     void Button::keyReleased(KeyEvent& keyEvent)
     {
-        Key key = keyEvent.getKey();
+        const Key key = keyEvent.getKey();
 
         if ((key.getValue() == Key::ENTER
              || key.getValue() == Key::SPACE)

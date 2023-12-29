@@ -93,8 +93,7 @@ namespace gcn
     }
 
     Window::~Window()
-    {
-    }
+    = default;
 
     void Window::setPadding(unsigned int padding)
     {
@@ -138,9 +137,9 @@ namespace gcn
 
     void Window::draw(Graphics* graphics)
     {
-        Color faceColor = getBaseColor();
+        const Color faceColor = getBaseColor();
         Color highlightColor, shadowColor;
-        int alpha = getBaseColor().a;
+        const int alpha = getBaseColor().a;
         //int width = getWidth() + getBorderSize() * 2 - 1;
         //int height = getHeight() + getBorderSize() * 2 - 1;
         highlightColor = faceColor + 0x303030;
@@ -207,9 +206,8 @@ namespace gcn
         drawChildren(graphics);
 
         int textX;
-        int textY;
 
-        textY = ((int)getTitleBarHeight() - getFont()->getHeight()) / 2;
+        const int textY = (static_cast<int>(getTitleBarHeight()) - getFont()->getHeight()) / 2;
 
         switch (getAlignment())
         {
@@ -228,7 +226,7 @@ namespace gcn
 
         graphics->setColor(getForegroundColor());
         graphics->setFont(getFont());
-        graphics->pushClipArea(Rectangle(0, 0, getWidth(), getTitleBarHeight() - 1));
+        graphics->pushClipArea(Rectangle(0, 0, getWidth(), static_cast<int>(getTitleBarHeight() - 1)));
         graphics->drawText(getCaption(), textX, textY, getAlignment());
         graphics->popClipArea();
     }
@@ -272,7 +270,7 @@ namespace gcn
         mDragOffsetX = mouseEvent.getX();
         mDragOffsetY = mouseEvent.getY();
 
-        mIsMoving = mouseEvent.getY() <= (int)mTitleBarHeight;
+        mIsMoving = mouseEvent.getY() <= static_cast<int>(mTitleBarHeight);
     }
 
     void Window::mouseReleased(MouseEvent& mouseEvent)
@@ -298,10 +296,10 @@ namespace gcn
 
     Rectangle Window::getChildrenArea()
     {
-        return Rectangle(getPadding(),
-            getTitleBarHeight(),
-            getWidth() - getPadding() * 2,
-            getHeight() - getPadding() - getTitleBarHeight());
+        return Rectangle(static_cast<int>(getPadding()),
+            static_cast<int>(getTitleBarHeight()),
+            static_cast<int>(getWidth() - getPadding() * 2),
+            static_cast<int>(getHeight() - getPadding() - getTitleBarHeight()));
     }
 
     void Window::setMovable(bool movable)
@@ -326,22 +324,20 @@ namespace gcn
 
     void Window::resizeToContent()
     {
-        WidgetListIterator it;
-
         int w = 0, h = 0;
-        for (it = mWidgets.begin(); it != mWidgets.end(); it++)
+        for (auto& mWidget : mWidgets)
         {
-            if ((*it)->getX() + (*it)->getWidth() > w)
+            if (mWidget->getX() + mWidget->getWidth() > w)
             {
-                w = (*it)->getX() + (*it)->getWidth();
+                w = mWidget->getX() + mWidget->getWidth();
             }
 
-            if ((*it)->getY() + (*it)->getHeight() > h)
+            if (mWidget->getY() + mWidget->getHeight() > h)
             {
-                h = (*it)->getY() + (*it)->getHeight();
+                h = mWidget->getY() + mWidget->getHeight();
             }
         }
 
-        setSize(w + 2 * getPadding(), h + getPadding() + getTitleBarHeight());
+        setSize(w + 2 * static_cast<int>(getPadding()), h + static_cast<int>(getPadding()) + static_cast<int>(getTitleBarHeight()));
     }
 }

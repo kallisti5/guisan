@@ -70,9 +70,7 @@ namespace gcn
     }
 
     ActionEvent::~ActionEvent()
-    {
-
-    }
+    = default;
 
     const std::string& ActionEvent::getId() const
     {

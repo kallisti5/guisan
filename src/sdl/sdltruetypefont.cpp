@@ -107,7 +107,7 @@ namespace gcn
 		}
 	
 		// This is needed for drawing the Glyph in the middle if we have spacing
-		int yoffset = getRowSpacing() / 2;
+		const int yoffset = getRowSpacing() / 2;
 	
 		Color col;
 		if (sdlGraphics)

@@ -83,9 +83,7 @@ namespace gcn
     }
 
     KeyEvent::~KeyEvent()
-    {
-
-    }
+    = default;
 
     unsigned int KeyEvent::getType() const
     {

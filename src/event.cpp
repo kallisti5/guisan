@@ -69,9 +69,7 @@ namespace gcn
     }
 
     Event::~Event()
-    {
-
-    }
+    = default;
 
     Widget* Event::getSource() const
     {

@@ -98,7 +98,7 @@ namespace gcn
         else
             graphics->setColor(Color(128, 128, 128));
 
-        int h = getHeight() + getHeight() / 2;
+        const int h = getHeight() + getHeight() / 2;
 
         graphics->drawText(getCaption(), h - 2, 0);
     }
@@ -108,8 +108,8 @@ namespace gcn
         Color faceColor = getBaseColor();
         Color highlightColor, shadowColor;
         int alpha = getBaseColor().a;
-        int width = getWidth() + getBorderSize() * 2 - 1;
-        int height = getHeight() + getBorderSize() * 2 - 1;
+        int width = getWidth() + static_cast<int>(getBorderSize()) * 2 - 1;
+        int height = getHeight() + static_cast<int>(getBorderSize()) * 2 - 1;
         highlightColor = faceColor + 0x303030;
         highlightColor.a = alpha;
         shadowColor = faceColor - 0x303030;
@@ -129,9 +129,8 @@ namespace gcn
 
     void CheckBox::drawBox(Graphics* graphics)
     {
-        int h = getHeight() - 2;
-
-        int alpha = getBaseColor().a;
+        const int h = getHeight() - 2;
+        const int alpha = getBaseColor().a;
         Color faceColor = getBaseColor();
         faceColor.a = alpha;
         Color highlightColor = faceColor + 0x303030;
@@ -192,7 +191,7 @@ namespace gcn
 
     void CheckBox::keyPressed(KeyEvent& keyEvent)
     {
-        Key key = keyEvent.getKey();
+        const Key key = keyEvent.getKey();
 
         if (key.getValue() == Key::ENTER ||
             key.getValue() == Key::SPACE)
@@ -217,7 +216,7 @@ namespace gcn
 
     void CheckBox::adjustSize()
     {
-        int height = getFont()->getHeight();
+        const int height = getFont()->getHeight() + 2;
 
         setHeight(height);
         setWidth(getFont()->getWidth(mCaption) + height + height / 2);

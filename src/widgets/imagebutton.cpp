@@ -110,7 +110,7 @@ namespace gcn
     {
         gcn::Color faceColor = getBaseColor();
         gcn::Color highlightColor, shadowColor;
-        int alpha = getBaseColor().a;
+        const int alpha = getBaseColor().a;
 
         if (isPressed())
         {
@@ -142,8 +142,8 @@ namespace gcn
 
         graphics->setColor(getForegroundColor());
 
-        int textX = getWidth() / 2 - mImage->getWidth() / 2;
-        int textY = getHeight() / 2 - mImage->getHeight() / 2;
+        const int textX = getWidth() / 2 - mImage->getWidth() / 2;
+        const int textY = getHeight() / 2 - mImage->getHeight() / 2;
 
         if (isPressed())
         {
@@ -155,10 +155,7 @@ namespace gcn
            
             if (isFocused())
             {
-                graphics->drawRectangle(Rectangle(2, 
-                                                  2, 
-                                                  getWidth() - 4,
-                                                  getHeight() - 4));
+                graphics->drawRectangle(Rectangle(2, 2,  getWidth() - 4, getHeight() - 4));
             }
         }
     }

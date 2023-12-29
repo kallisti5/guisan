@@ -199,8 +199,8 @@ namespace gcn
         Color faceColor = getBaseColor();
         Color highlightColor, shadowColor;
         int alpha = getBaseColor().a;
-        int width = getWidth() + getBorderSize() * 2 - 1;
-        int height = getHeight() + getBorderSize() * 2 - 1;
+        int width = getWidth() + static_cast<int>(getBorderSize()) * 2 - 1;
+        int height = getHeight() + static_cast<int>(getBorderSize()) * 2 - 1;
         highlightColor = faceColor + 0x303030;
         highlightColor.a = alpha;
         shadowColor = faceColor - 0x303030;
@@ -222,7 +222,7 @@ namespace gcn
     {
         Color faceColor, highlightColor, shadowColor;
         int offset;
-        int alpha = getBaseColor().a;
+        const int alpha = getBaseColor().a;
 
         if (mPushed)
         {
@@ -254,8 +254,8 @@ namespace gcn
         {
             h = getHeight();
         }
-        int x = getWidth() - h;
-        int y = 0;
+        const int x = getWidth() - h;
+        const int y = 0;
 
         graphics->setColor(faceColor);
         graphics->fillRectangle(Rectangle(x + 1, 
@@ -285,9 +285,9 @@ namespace gcn
         graphics->setColor(getForegroundColor());
 
         int i;
-        int hh = h / 3;
-        int hx = x + h / 2;
-        int hy = y + (h * 2) / 3;
+        const int hh = h / 3;
+        const int hx = x + h / 2;
+        const int hy = y + (h * 2) / 3;
         for (i = 0; i < hh; i++)
         {
             graphics->drawLine(hx - i + offset,
@@ -379,10 +379,10 @@ namespace gcn
         }
 
         // Released outside of widget. Can happen when we have modal input focus.
-        if (0 > mouseEvent.getY()
+        if ((0 > mouseEvent.getY()
             || mouseEvent.getY() >= getHeight()
             || mouseEvent.getX() < 0
-            || mouseEvent.getX() >= getWidth()
+            || mouseEvent.getX() >= getWidth())
             && mouseEvent.getButton() == MouseEvent::LEFT
             && hasModalMouseInputFocus())
         {
@@ -433,17 +433,17 @@ namespace gcn
     if (mListBox == NULL)
         throw GCN_EXCEPTION("List box has been deleted.");
 
-        int listBoxHeight = mListBox->getHeight();
-        int h2 = getFont()->getHeight();
+        const int listBoxHeight = mListBox->getHeight();
+        const int h2 = getFont()->getHeight() + 2;
 
         setHeight(h2);
 
-        // The addition/subtraction of 2 compensates for the seperation lines
-        // seperating the selected element view and the scroll area.
+        // The addition/subtraction of 2 compensates for the separation lines
+        // separating the selected element view and the scroll area.
 
         if (mDroppedDown && getParent())
         {
-            int h = getParent()->getChildrenArea().height - getY();
+            const int h = getParent()->getChildrenArea().height - getY();
 
             if (listBoxHeight > h - h2 - 2)
             {
@@ -636,12 +636,10 @@ namespace gcn
 
     void DropDown::distributeValueChangedEvent()
     {
-        SelectionListenerIterator iter;
-
-        for (iter = mSelectionListeners.begin(); iter != mSelectionListeners.end(); ++iter)
+        for (auto& mSelectionListener : mSelectionListeners)
         {
             SelectionEvent event(this);
-            (*iter)->valueChanged(event);
+            mSelectionListener->valueChanged(event);
         }
     }
 }

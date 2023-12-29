@@ -96,10 +96,9 @@ namespace gcn
         delete mTabContainer;
         delete mWidgetContainer;
 
-        unsigned int i;
-        for (i = 0; i < mTabsToCleanUp.size(); i++)
+        for (auto& i : mTabsToCleanUp)
         {
-            delete mTabsToCleanUp[i];
+            delete i;
         }
     }
 
@@ -119,7 +118,7 @@ namespace gcn
         tab->addActionListener(this);        
 
         mTabContainer->add(tab);        
-        mTabs.push_back(std::pair<Tab*, Widget*>(tab, widget));
+        mTabs.emplace_back(tab, widget);
 
 
         if (mSelectedTab == NULL)
@@ -149,12 +148,12 @@ namespace gcn
         {
             int index = getSelectedTabIndex();
             
-            if (index == (int)mTabs.size() - 1
+            if (index == static_cast<int>(mTabs.size()) - 1
                 && mTabs.size() >= 2)
             {
                 tabIndexToBeSelected = index--;
             }
-            else if (index == (int)mTabs.size() - 1
+            else if (index == static_cast<int>(mTabs.size()) - 1
                      && mTabs.size() == 1)
             {
                 tabIndexToBeSelected = -1;
@@ -165,8 +164,7 @@ namespace gcn
             }
         }
 
-        std::vector<std::pair<Tab*, Widget*> >::iterator iter;
-        for (iter = mTabs.begin(); iter != mTabs.end(); iter++)
+        for (auto iter = mTabs.begin(); iter != mTabs.end(); ++iter)
         {            
             if (iter->first == tab)
             {
@@ -176,8 +174,7 @@ namespace gcn
             }
         }
                 
-        std::vector<Tab*>::iterator iter2;
-        for (iter2 = mTabsToCleanUp.begin(); iter2 != mTabsToCleanUp.end(); iter2++)
+        for (auto iter2 = mTabsToCleanUp.begin(); iter2 != mTabsToCleanUp.end(); ++iter2)
         {
             if (*iter2 == tab)
             {
@@ -249,8 +246,7 @@ namespace gcn
 
     int TabbedArea::getSelectedTabIndex() const
     {
-        unsigned int i;
-        for (i = 0; i < mTabs.size(); i++)
+        for (auto i = 0; i < static_cast<int>(mTabs.size()); i++)
         {
             if (mTabs[i].first == mSelectedTab)
             {
@@ -319,12 +315,11 @@ namespace gcn
     void TabbedArea::adjustSize()
     {
         int maxTabHeight = 0;
-        unsigned int i;
-        for (i = 0; i < mTabs.size(); i++)
+        for (auto& mTab : mTabs)
         {
-            if (mTabs[i].first->getHeight() > maxTabHeight)
+            if (mTab.first->getHeight() > maxTabHeight)
             {
-                maxTabHeight = mTabs[i].first->getHeight();
+                maxTabHeight = mTab.first->getHeight();
             }
         }
         
@@ -371,11 +366,11 @@ namespace gcn
             {
                 tab->setY(maxTabHeight
                           - tab->getHeight()
-                          + tab->getBorderSize());
+                          + static_cast<int>(tab->getBorderSize()));
             }
             else
             {
-                tab->setY(mTabs[i].first->getBorderSize());
+                tab->setY(static_cast<int>(mTabs[i].first->getBorderSize()));
             }
             
             x += tab->getWidth() + tab->getBorderSize() * 2;
@@ -437,7 +432,7 @@ namespace gcn
             int index = getSelectedTabIndex();
             index++;
             
-            if (index >= (int)mTabs.size())
+            if (index >= static_cast<int>(mTabs.size()))
             {
                 return;
             }

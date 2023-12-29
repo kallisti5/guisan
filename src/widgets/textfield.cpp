@@ -107,7 +107,7 @@ namespace gcn
 
     void TextField::draw(Graphics* graphics)
     {
-        Color faceColor = getBackgroundColor();
+        const Color faceColor = getBackgroundColor();
         graphics->setColor(faceColor);
         graphics->fillRectangle(Rectangle(0, 0, getWidth(), getHeight()));
 
@@ -171,7 +171,7 @@ namespace gcn
 
     void TextField::keyPressed(KeyEvent& keyEvent)
     {
-        Key key = keyEvent.getKey();
+        const Key key = keyEvent.getKey();
 
         if (key.getValue() == Key::LEFT && mCaretPosition > 0)
         {
@@ -214,11 +214,11 @@ namespace gcn
         {
             if (keyEvent.isShiftPressed() && key.isLetter())
             {
-                mText.insert(mCaretPosition, std::string(1, (char)(key.getValue() - 32)));
+                mText.insert(mCaretPosition, std::string(1, static_cast<char>(key.getValue() - 32)));
             }
             else
             {
-                mText.insert(mCaretPosition, std::string(1, (char)key.getValue()));
+                mText.insert(mCaretPosition, std::string(1, static_cast<char>(key.getValue())));
             }
             ++mCaretPosition;
         }
@@ -248,7 +248,7 @@ namespace gcn
     {
         if (isFocused())
         {
-            int caretX = getFont()->getWidth(mText.substr(0, mCaretPosition));
+            const int caretX = getFont()->getWidth(mText.substr(0, mCaretPosition));
 
             if (caretX - mXScroll > getWidth() - 4)
             {

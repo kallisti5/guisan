@@ -100,7 +100,7 @@ namespace gcn
 	char Key::getChar() const
 	{
 		if(mValue == 9 || mValue == 13 || (mValue <= 122 && mValue >= 32))
-			return (char)mValue;
+			return static_cast<char>(mValue);
 		
 		return '\0';
 	}

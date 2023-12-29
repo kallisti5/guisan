@@ -68,12 +68,10 @@ namespace gcn
     ImageLoader* Image::mImageLoader = NULL;
 
     Image::Image()
-    {
-    }
+    = default;
 
     Image::~Image()
-    {
-    }
+    = default;
 
     void Image::setImageLoader(ImageLoader* imageLoader)
     {
