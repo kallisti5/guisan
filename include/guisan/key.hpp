@@ -99,7 +99,7 @@ namespace gcn
         /**
          * Checks whether a key is printable.
          *
-         * @return true if the key is a printable.
+         * @return true if the key is printable
          */
         bool isPrintable() const;
 

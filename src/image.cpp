@@ -65,7 +65,6 @@
 
 namespace gcn
 {
-
     ImageLoader* Image::mImageLoader = NULL;
 
     Image::Image()

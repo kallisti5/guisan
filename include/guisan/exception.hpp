@@ -81,7 +81,6 @@
 
 namespace gcn
 {
-
     /**
      * An exception containing a message, a file and a line number.
      * Guichan will only throw exceptions of this class. You can use

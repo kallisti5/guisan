@@ -57,8 +57,6 @@
 #ifndef GCN_FOCUSLISTENER_HPP
 #define GCN_FOCUSLISTENER_HPP
 
-#include <string>
-
 #include "guisan/event.hpp"
 #include "guisan/platform.hpp"
 
@@ -85,7 +83,7 @@ namespace gcn
         /**
          * Called when a widget gains focus. 
          *
-         * @param event discribes the event.
+         * @param event describes the event.
          */
         virtual void focusGained(const Event& event) { };
 

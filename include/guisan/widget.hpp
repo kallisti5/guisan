@@ -413,7 +413,7 @@ namespace gcn
          * Adds a DeathListener to the widget. When the widget dies
          * the death function in all the widget's DeathListeners will be called.
          *
-         * @param actionListener the DeathListener to add.
+         * @param deathListener the DeathListener to add.
          */
         void addDeathListener(DeathListener* deathListener);
 

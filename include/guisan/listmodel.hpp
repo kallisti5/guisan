@@ -71,7 +71,6 @@ namespace gcn
      */
     class GCN_CORE_DECLSPEC ListModel
     {
-
     public:
         /**
          * Destructor.

@@ -70,7 +70,6 @@ namespace gcn
     {
         mMouseDrag = false;
 
-
         mScaleStart = 0;
         mScaleEnd = scaleEnd;
 

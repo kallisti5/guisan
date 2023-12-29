@@ -150,7 +150,6 @@ namespace gcn
             ENTERED,
             EXITED,
             DRAGGED
-
         };
 
         /**

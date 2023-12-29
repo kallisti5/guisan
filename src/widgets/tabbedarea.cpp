@@ -282,7 +282,6 @@ namespace gcn
                                mTabContainer->getHeight(),
                                mSelectedTab->getX() + mSelectedTab->getWidth(),
                                mTabContainer->getHeight());
-
         }
 
         drawChildren(graphics);

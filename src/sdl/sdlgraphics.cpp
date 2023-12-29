@@ -74,7 +74,6 @@
 
 namespace gcn
 {
-
     SDLGraphics::SDLGraphics()
     {
         mAlpha = false;
@@ -209,7 +208,6 @@ namespace gcn
                 }
             }
             SDL_UnlockSurface(mTarget);
-
         }
         else
         {

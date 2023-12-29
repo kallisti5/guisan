@@ -221,8 +221,8 @@ namespace gcn
         virtual void keyPressed(KeyEvent& keyEvent);
 
         /**
-         * Draw orientations for the slider. It can be drawn verticaly or
-         * horizontaly.
+         * Draw orientations for the slider. It can be drawn vertically or
+         * horizontally.
          */
         enum
         {

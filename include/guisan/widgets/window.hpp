@@ -147,7 +147,7 @@ namespace gcn
         unsigned int getTitleBarHeight();
 
         /**
-         * Sets the Window to be moveble.
+         * Sets the Window to be moveable.
          *
          * @param movable true or false.
          */

@@ -76,7 +76,7 @@ namespace gcn
      * An implementation of a drop downable list from which an item can be selected.
      * The drop down consists of an internal ScrollArea and an internal ListBox. 
      * The drop down also uses an internal FocusHandler to handle the focus of the 
-     * internal ScollArea and the internal ListBox. The scroll area and the list box
+     * internal ScrollArea and the internal ListBox. The scroll area and the list box
      * can be passed to the drop down if a custom scroll area and or a custom list box
      * is preferable.
      *
@@ -98,7 +98,7 @@ namespace gcn
     {
     public:
         /**
-         * Contructor.
+         * Constructor.
          *
          * @param listModel the ListModel to use.
          * @param scrollArea the ScrollArea to use.
@@ -294,7 +294,6 @@ namespace gcn
          * Typedef.
          */
         typedef SelectionListenerList::iterator SelectionListenerIterator;
-
     };
 }
 

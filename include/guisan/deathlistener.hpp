@@ -57,8 +57,6 @@
 #ifndef GCN_DEATHLISTENER_HPP
 #define GCN_DEATHLISTENER_HPP
 
-#include <string>
-
 #include "guisan/event.hpp"
 #include "guisan/platform.hpp"
 
@@ -83,13 +81,12 @@ namespace gcn
         virtual ~DeathListener() { }
 
         /**
-         * Called when a widget dies. It is used to be able to recieve
+         * Called when a widget dies. It is used to be able to receive
          * a notification when a death of a widget occurs.
          *
          * @param event the event of the death.
          */
         virtual void death(const Event& event) = 0;
-
     };
 }
 

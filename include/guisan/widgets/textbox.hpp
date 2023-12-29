@@ -137,7 +137,7 @@ namespace gcn
         /**
          * Sets the position of the caret in the text.
          *
-         * @param position the positon of the caret.
+         * @param position the position of the caret.
          */
         void setCaretPosition(unsigned int position);
 

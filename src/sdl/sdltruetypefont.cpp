@@ -185,6 +185,4 @@ namespace gcn
 	{
 		return mAntiAlias;        
 	}    
-
 }
-
