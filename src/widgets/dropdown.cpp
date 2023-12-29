@@ -282,7 +282,11 @@ namespace gcn
                            y + h - 1, 
                            x + h - 2, 
                            y + h - 1);
-        graphics->setColor(getForegroundColor());
+		
+		if (isEnabled())
+                        graphics->setColor(getForegroundColor());
+		else
+			graphics->setColor(Color(128, 128, 128));
 
         int i;
         const int hh = h / 3;
@@ -302,7 +306,7 @@ namespace gcn
         return mListBox->getSelected();
     }
 
-    void DropDown::setSelected(int selected)
+    void DropDown::setSelected(int selected) const
     {
         if (selected >= 0)
         {
@@ -310,9 +314,17 @@ namespace gcn
         }
     }
 
+	void DropDown::clearSelected() const
+	{
+		mListBox->setSelected(-1);
+	}
+	
     void DropDown::keyPressed(KeyEvent& keyEvent)
     {
-        Key key = keyEvent.getKey();
+		if (keyEvent.isConsumed())
+			return;
+		
+        const Key key = keyEvent.getKey();
 
         if ((key.getValue() == Key::ENTER || key.getValue() == Key::SPACE)
             && !mDroppedDown)
@@ -480,6 +492,11 @@ namespace gcn
         mListBox->requestFocus();
     }
 
+	bool DropDown::isDroppedDown()
+	{
+		return mDroppedDown;
+	}
+	
     void DropDown::foldUp()
     {
         if (mDroppedDown)
