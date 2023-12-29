@@ -85,7 +85,7 @@ namespace gcn
         setCaption(caption);
         setBorderSize(1);
         setPadding(2);
-        setTitleBarHeight(16);
+        setTitleBarHeight(getFont()->getHeight() + 2);
         setAlignment(Graphics::CENTER);
         addMouseListener(this);
         setMovable(true);
