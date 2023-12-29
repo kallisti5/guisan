@@ -46,7 +46,7 @@
 #ifndef _MSC_VER
 #include <SDL2/SDL.h>
 #else
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #endif // !_MSC_
 
 int FFContainer::mInstances = 0;

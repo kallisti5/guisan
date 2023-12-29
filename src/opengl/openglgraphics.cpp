@@ -93,6 +93,7 @@ namespace gcn
 
 	OpenGLGraphics::~OpenGLGraphics()
 	{
+
 	}
 
 	void OpenGLGraphics::_beginDraw()
@@ -205,8 +206,7 @@ namespace gcn
 			throw GCN_EXCEPTION("Trying to draw an image of unknown format, must be an OpenGLImage.");
 		}
 
-		if (mClipStack.empty())
-		{
+		if (mClipStack.empty()) {
 			throw GCN_EXCEPTION("Clip stack is empty, perhaps you"
 				"called a draw funtion outside of _beginDraw() and _endDraw()?");
 		}
@@ -257,8 +257,7 @@ namespace gcn
 
 	void OpenGLGraphics::drawPoint(int x, int y)
 	{
-		if (mClipStack.empty())
-		{
+		if (mClipStack.empty()) {
 			throw GCN_EXCEPTION("Clip stack is empty, perhaps you"
 				"called a draw funtion outside of _beginDraw() and _endDraw()?");
 		}
@@ -274,8 +273,7 @@ namespace gcn
 
 	void OpenGLGraphics::drawLine(int x1, int y1, int x2, int y2)
 	{
-		if (mClipStack.empty())
-		{
+		if (mClipStack.empty()) {
 			throw GCN_EXCEPTION("Clip stack is empty, perhaps you"
 				"called a draw funtion outside of _beginDraw() and _endDraw()?");
 		}
@@ -302,8 +300,7 @@ namespace gcn
 
 	void OpenGLGraphics::drawRectangle(const Rectangle& rectangle)
 	{
-		if (mClipStack.empty())
-		{
+		if (mClipStack.empty()) {
 			throw GCN_EXCEPTION("Clip stack is empty, perhaps you"
 				"called a draw funtion outside of _beginDraw() and _endDraw()?");
 		}
@@ -322,8 +319,7 @@ namespace gcn
 
 	void OpenGLGraphics::fillRectangle(const Rectangle& rectangle)
 	{
-		if (mClipStack.empty())
-		{
+		if (mClipStack.empty()) {
 			throw GCN_EXCEPTION("Clip stack is empty, perhaps you"
 				"called a draw funtion outside of _beginDraw() and _endDraw()?");
 		}

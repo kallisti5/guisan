@@ -121,7 +121,6 @@
     <ClCompile>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
-    <Lib />
     <Lib>
       <AdditionalDependencies>
       </AdditionalDependencies>
