@@ -100,7 +100,7 @@ namespace gcn
 
         const int h = getHeight() + getHeight() / 2;
 
-        graphics->drawText(getCaption(), h - 2, 0);
+        graphics->drawText(getCaption(), h - 2, 1);
     }
 
     void CheckBox::drawBorder(Graphics* graphics)
