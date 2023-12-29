@@ -77,7 +77,7 @@ namespace gcn
         mAlignment = Graphics::LEFT;
 
         setWidth(getFont()->getWidth(caption));
-        setHeight(getFont()->getHeight());
+        setHeight(getFont()->getHeight() + 2);
     }
 
     const std::string &Label::getCaption() const
