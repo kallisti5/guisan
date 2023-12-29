@@ -64,9 +64,21 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <LibraryPath>$(VcpkgRoot)\installed\x86-windows\debug\lib\manual-link;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(VcpkgRoot)\installed\x86-windows\include\SDL2;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <LibraryPath>$(VcpkgRoot)\installed\x86-windows\lib\manual-link;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(VcpkgRoot)\installed\x86-windows\include\SDL2;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LibraryPath>$(VcpkgRoot)\installed\x64-windows\debug\lib\manual-link;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(VcpkgRoot)\installed\x64-windows\include\SDL2;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LibraryPath>$(VcpkgRoot)\installed\x64-windows\lib\manual-link;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(VcpkgRoot)\installed\x64-windows\include\SDL2;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
