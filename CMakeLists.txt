@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(guisan VERSION 1.0 DESCRIPTION "Guisan")
+
+find_package(SDL2 REQUIRED)
 add_library(guisan STATIC
         src/actionevent.cpp
         src/basiccontainer.cpp
@@ -58,6 +60,6 @@ add_library(guisan STATIC
         src/widgets/window.cpp)
 target_include_directories(guisan PRIVATE ${SDL2_INCLUDE_DIRS} ./include)
 
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${SDL2IMAGE_LIBRARIES})
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} PRIVATE SDL2)
 
 install(TARGETS guisan DESTINATION ./lib)
