@@ -4,3 +4,5 @@ config.log
 .vs
 demo/ff/x64
 x64
+cmake-build-debug
+cmake-build-debug-visual-studio
