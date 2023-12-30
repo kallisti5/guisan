@@ -116,7 +116,6 @@ namespace gcn
          * @since 0.8.0
          */
         virtual void widgetShown(const Event& event) { }
-
     };
 }
 

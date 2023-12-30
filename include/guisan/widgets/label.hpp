@@ -104,7 +104,7 @@ namespace gcn
          * Sets the alignment for the caption. The alignment is relative
          * to the center of the label.
          *
-         * @param alignemnt Graphics::LEFT, Graphics::CENTER or Graphics::RIGHT.
+         * @param alignment Graphics::LEFT, Graphics::CENTER or Graphics::RIGHT.
          * @see getAlignment, Graphics
          */
         void setAlignment(unsigned int alignment);

@@ -76,7 +76,7 @@ namespace gcn
      * An implementation of a drop downable list from which an item can be selected.
      * The drop down consists of an internal ScrollArea and an internal ListBox. 
      * The drop down also uses an internal FocusHandler to handle the focus of the 
-     * internal ScollArea and the internal ListBox. The scroll area and the list box
+     * internal ScrollArea and the internal ListBox. The scroll area and the list box
      * can be passed to the drop down if a custom scroll area and or a custom list box
      * is preferable.
      *
@@ -98,7 +98,7 @@ namespace gcn
     {
     public:
         /**
-         * Contructor.
+         * Constructor.
          *
          * @param listModel the ListModel to use.
          * @param scrollArea the ScrollArea to use.
@@ -129,7 +129,12 @@ namespace gcn
          * @param selected the selected item as an index from the list model.
          * @see getSelected
          */
-        void setSelected(int selected);
+        void setSelected(int selected) const;
+
+        /*
+         * Clears any selected item
+         */
+        void clearSelected(void) const;
 
         /**
          * Sets the list model to use when displaying the list.
@@ -172,6 +177,20 @@ namespace gcn
          */
         void removeSelectionListener(SelectionListener* selectionListener);
 
+        /*
+         * Returns the current Dropdown status
+         */
+        bool isDroppedDown();
+
+        /**
+         * Sets the DropDown Widget to dropped-down mode.
+         */
+        virtual void dropDown();
+
+        /**
+        * Sets the DropDown Widget to folded-up mode.
+        */
+        virtual void foldUp();
 
         // Inherited from Widget
 
@@ -241,16 +260,6 @@ namespace gcn
          */
         virtual void drawButton(Graphics *graphics);
 
-        /**
-         * Sets the DropDown Widget to dropped-down mode.
-         */
-        virtual void dropDown();
-
-        /**
-         * Sets the DropDown Widget to folded-up mode.
-         */
-        virtual void foldUp();
-
         bool mDroppedDown;
 
         /**
@@ -294,7 +303,6 @@ namespace gcn
          * Typedef.
          */
         typedef SelectionListenerList::iterator SelectionListenerIterator;
-
     };
 }
 

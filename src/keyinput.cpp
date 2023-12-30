@@ -144,4 +144,3 @@ namespace gcn
         mNumericPad = numpad;
     }
 }
-

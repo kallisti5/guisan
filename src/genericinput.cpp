@@ -65,9 +65,7 @@
 namespace gcn
 {
     GenericInput::GenericInput()
-    {
-
-    }
+    = default;
     
     void GenericInput::pushKeyPressed(int unicode)
     {
@@ -138,14 +136,12 @@ namespace gcn
 
     KeyInput GenericInput::dequeueKeyInput()
     {
-        KeyInput keyInput;
-
         if (mKeyInputQueue.empty())
         {
             throw GCN_EXCEPTION("The queue is empty.");
         }
 
-        keyInput = mKeyInputQueue.front();
+        const KeyInput keyInput = mKeyInputQueue.front();
         mKeyInputQueue.pop();
 
         return keyInput;
@@ -158,14 +154,12 @@ namespace gcn
 
     MouseInput GenericInput::dequeueMouseInput()
     {
-        MouseInput mouseInput;
-        
         if (mMouseInputQueue.empty())
         {
             throw GCN_EXCEPTION("The queue is empty.");
         }
         
-        mouseInput = mMouseInputQueue.front();
+        const MouseInput mouseInput = mMouseInputQueue.front();
         mMouseInputQueue.pop();
         
         return mouseInput;        

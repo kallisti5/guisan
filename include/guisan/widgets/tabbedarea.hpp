@@ -120,7 +120,7 @@ namespace gcn
         /**
          * Removes a tab from the tabbed area.
          *
-         * @param index The tab to remove.
+         * @param tab The tab to remove.
          */
         virtual void removeTab(Tab* tab);
 
@@ -135,7 +135,7 @@ namespace gcn
         /**
          * Checks whether a tab is selected or not.
          *
-         * @param index The tab to check.
+         * @param tab The tab to check.
          * @return True if the tab is selected, false otherwise.
          */
         virtual bool isTabSelected(Tab* tab);
@@ -150,14 +150,14 @@ namespace gcn
         /**
          * Sets a tab to be selected or not.
          *
-         * @param index The tab to be selected.
+         * @param tab The tab to be selected.
          */
         virtual void setSelectedTab(Tab* tab);
 
         /**
          * Gets the index of the selected tab.
          *
-         * @return The undex of the selected tab.
+         * @return The index of the selected tab.
          *         If no tab is selected -1 will be returned.
          */
         virtual int getSelectedTabIndex() const;
@@ -219,7 +219,6 @@ namespace gcn
         Container* mWidgetContainer;
         std::vector<Tab*> mTabsToCleanUp;
         std::vector<std::pair<Tab*, Widget*> > mTabs;
-        
     };
 }
 

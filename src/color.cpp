@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessï¿½n and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessï¿½n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -75,8 +75,8 @@ namespace gcn
     Color::Color(int color)
 	:
 	r((color >> 16) & 0xFF),
-	b((color >> 8) & 0xFF),
 	g((color >> 8) & 0xFF),
+	b((color >> 8) & 0xFF),
 	a(255)
     {
 
@@ -96,9 +96,9 @@ namespace gcn
     {
         Color result(r + color.r, g + color.g, b + color.b, 255);
 
-        result.r = (result.r>255?255:(result.r<0?0:result.r));
-        result.g = (result.g>255?255:(result.g<0?0:result.g));
-        result.b = (result.b>255?255:(result.b<0?0:result.b));
+        result.r = result.r > 255 ? 255 : (result.r < 0 ? 0 : result.r);
+        result.g = result.g > 255 ? 255 : (result.g < 0 ? 0 : result.g);
+        result.b = result.b > 255 ? 255 : (result.b < 0 ? 0 : result.b);
 
         return result;
     }
@@ -107,20 +107,20 @@ namespace gcn
     {
         Color result(r - color.r, g - color.g, b - color.b, 255);
 
-        result.r = (result.r>255?255:(result.r<0?0:result.r));
-        result.g = (result.g>255?255:(result.g<0?0:result.g));
-        result.b = (result.b>255?255:(result.b<0?0:result.b));
+        result.r = result.r > 255 ? 255 : (result.r < 0 ? 0 : result.r);
+        result.g = result.g > 255 ? 255 : (result.g < 0 ? 0 : result.g);
+        result.b = result.b > 255 ? 255 : (result.b < 0 ? 0 : result.b);
 
         return result;
     }
 
     Color Color::operator*(float value) const
     {
-        Color result((int)(r * value), (int)(g * value), (int)(b * value), a);
+        Color result(r * static_cast<int>(value), g * static_cast<int>(value), b * static_cast<int>(value), a);
 
-        result.r = (result.r>255?255:(result.r<0?0:result.r));
-        result.g = (result.g>255?255:(result.g<0?0:result.g));
-        result.b = (result.b>255?255:(result.b<0?0:result.b));
+        result.r = result.r > 255 ? 255 : (result.r < 0 ? 0 : result.r);
+        result.g = result.g > 255 ? 255 : (result.g < 0 ? 0 : result.g);
+        result.b = result.b > 255 ? 255 : (result.b < 0 ? 0 : result.b);
 
         return result;
     }

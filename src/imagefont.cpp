@@ -74,9 +74,9 @@ namespace gcn
         mFilename = filename;
         mImage = Image::load(filename, false);
 
-        Color separator = mImage->getPixel(0, 0);
-                
-        int i = 0;
+        const Color separator = mImage->getPixel(0, 0);
+        
+        int i;
         for (i = 0;
              i < mImage->getWidth() && separator == mImage->getPixel(i, 0);
              ++i)
@@ -88,7 +88,7 @@ namespace gcn
             throw GCN_EXCEPTION("Corrupt image.");
         }
 
-        int j = 0;
+        int j;
         for (j = 0; j < mImage->getHeight(); ++j)
         {
             if (separator == mImage->getPixel(i, j))
@@ -101,7 +101,7 @@ namespace gcn
         int x = 0, y = 0;
         unsigned char k;
 
-        for (i=0; i < (int)glyphs.size(); ++i)
+        for (i = 0; i < static_cast<int>(glyphs.size()); ++i)
         {
             k = glyphs.at(i);
             addGlyph(k, x, y, separator);
@@ -121,9 +121,9 @@ namespace gcn
         mFilename = filename;
         mImage = Image::load(filename, false);
 
-        Color separator = mImage->getPixel(0, 0);
+        const Color separator = mImage->getPixel(0, 0);
 
-        int i = 0;
+        int i;
         for (i=0; separator == mImage->getPixel(i, 0)
                  && i < mImage->getWidth(); ++i)
         {
@@ -134,7 +134,7 @@ namespace gcn
             throw GCN_EXCEPTION("Corrupt image.");
         }
 
-        int j = 0;
+        int j;
         for (j = 0; j < mImage->getHeight(); ++j)
         {
             if (separator == mImage->getPixel(i, j))
@@ -168,7 +168,7 @@ namespace gcn
     {
         if (mGlyph[glyph].width == 0)
         {
-            return mGlyph[(int)(' ')].width + mGlyphSpacing;
+            return mGlyph[static_cast<int>(' ')].width + mGlyphSpacing;
         }
 
         return mGlyph[glyph].width + mGlyphSpacing;
@@ -183,15 +183,15 @@ namespace gcn
                              int x, int y)
     {
         // This is needed for drawing the Glyph in the middle if we have spacing
-        int yoffset = getRowSpacing() >> 1;
+        const int yoffset = getRowSpacing() >> 1;
 
         if (mGlyph[glyph].width == 0)
         {
             graphics->drawRectangle(Rectangle(x, y + 1 + yoffset,
-                                              mGlyph[(int)(' ')].width - 1,
-                                              mGlyph[(int)(' ')].height - 2));
+                                              mGlyph[static_cast<int>(' ')].width - 1,
+                                              mGlyph[static_cast<int>(' ')].height - 2));
 
-            return mGlyph[(int)(' ')].width + mGlyphSpacing;
+            return mGlyph[static_cast<int>(' ')].width + mGlyphSpacing;
         }
 
         graphics->drawImage(mImage, mGlyph[glyph].x, mGlyph[glyph].y, x,
@@ -292,10 +292,9 @@ namespace gcn
 
     int ImageFont::getWidth(const std::string& text) const
     {
-        unsigned int i;
         int size = 0;
 
-        for (i = 0; i < text.size(); ++i)
+        for (unsigned int i = 0; i < text.size(); ++i)
         {
             size += getWidth(text.at(i));
         }
@@ -305,10 +304,9 @@ namespace gcn
 
     int ImageFont::getStringIndexAt(const std::string& text, int x)
     {
-        unsigned int i;
         int size = 0;
 
-        for (i = 0; i < text.size(); ++i)
+        for (unsigned int i = 0; i < text.size(); ++i)
         {
             size += getWidth(text.at(i));
 

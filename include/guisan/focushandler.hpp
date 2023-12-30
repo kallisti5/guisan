@@ -90,7 +90,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        virtual ~FocusHandler() { };
+        virtual ~FocusHandler() { }
 
         /**
          * Sets focus to a widget. A focus event will also be sent to the widget's
@@ -266,7 +266,7 @@ namespace gcn
         /**
          * Sets the last widget with modal mouse input focus.
          *
-         * @param lastMouseWithModalMouseInputFocus  the last widget with modal mouse input focus.
+         * @param lastWidgetWithModalMouseInputFocus  the last widget with modal mouse input focus.
          */
         virtual void setLastWidgetWithModalMouseInputFocus(Widget* lastWidgetWithModalMouseInputFocus);
 

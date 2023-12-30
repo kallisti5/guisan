@@ -101,12 +101,10 @@ namespace gcn
 
     Widget::~Widget()
     {
-        DeathListenerIterator iter;
-
-        for (iter = mDeathListeners.begin(); iter != mDeathListeners.end(); ++iter)
+        for (auto& mDeathListener : mDeathListeners)
         {
             Event event(this);
-            (*iter)->death(event);
+            mDeathListener->death(event);
         }
 
         _setFocusHandler(NULL);
@@ -187,7 +185,7 @@ namespace gcn
 
     void Widget::setDimension(const Rectangle& dimension)
     { 
-        Rectangle oldDimension = mDimension;
+        const Rectangle oldDimension = mDimension;
         mDimension = dimension;
 
         if (mDimension.width != oldDimension.width
@@ -235,7 +233,7 @@ namespace gcn
             return false;
         }
 
-        return (mFocusHandler->isFocused(this));
+        return mFocusHandler->isFocused(this);
     }
 
     void Widget::setFocusable(bool focusable)
@@ -307,10 +305,7 @@ namespace gcn
         {
             return mVisible;
         }
-        else
-        {
-            return mVisible && getParent()->isVisible();
-        }
+        return mVisible && getParent()->isVisible();
     }
 
     void Widget::setBaseColor(const Color& color)
@@ -454,11 +449,10 @@ namespace gcn
 
     void Widget::generateAction()
     {
-        ActionListenerIterator iter;
-        for (iter = mActionListeners.begin(); iter != mActionListeners.end(); ++iter)
+        for (auto& mActionListener : mActionListeners)
         {
             ActionEvent actionEvent(this, mActionEventId);
-            (*iter)->action(actionEvent);
+            mActionListener->action(actionEvent);
         }
     }
 
@@ -481,12 +475,11 @@ namespace gcn
     {
         mGlobalFont = font;
 
-        std::list<Widget*>::iterator iter;
-        for (iter = mWidgets.begin(); iter != mWidgets.end(); ++iter)
+        for (auto& mWidget : mWidgets)
         {
-            if ((*iter)->mCurrentFont == NULL)
+            if (mWidget->mCurrentFont == NULL)
             {
-                (*iter)->fontChanged();
+                mWidget->fontChanged();
             }
         }
     }
@@ -499,18 +492,15 @@ namespace gcn
 
     bool Widget::widgetExists(const Widget* widget)
     {
-        bool result = false;
-
-        std::list<Widget*>::iterator iter;
-        for (iter = mWidgets.begin(); iter != mWidgets.end(); ++iter)
+        for (auto& mWidget : mWidgets)
         {
-            if (*iter == widget)
+            if (mWidget == widget)
             {
                 return true;
             }
         }
 
-        return result;
+        return false;
     }
 
     bool Widget::isTabInEnabled() const
@@ -601,7 +591,7 @@ namespace gcn
 
         if (getParent() != NULL)
         {
-            return (mFocusHandler->getModalFocused() == this) || getParent()->hasModalFocus();
+            return mFocusHandler->getModalFocused() == this || getParent()->hasModalFocus();
         }
 
         return mFocusHandler->getModalFocused() == this;
@@ -616,7 +606,7 @@ namespace gcn
 
         if (getParent() != NULL)
         {
-            return (mFocusHandler->getModalMouseInputFocused() == this) || getParent()->hasModalMouseInputFocus();
+            return mFocusHandler->getModalMouseInputFocused() == this || getParent()->hasModalMouseInputFocus();
         }
 
         return mFocusHandler->getModalMouseInputFocused() == this;
@@ -669,45 +659,37 @@ namespace gcn
 
     void Widget::distributeResizedEvent()
     {
-        WidgetListenerIterator iter;
-
-        for (iter = mWidgetListeners.begin(); iter != mWidgetListeners.end(); ++iter)
+        for (auto& mWidgetListener : mWidgetListeners)
         {
             Event event(this);
-            (*iter)->widgetResized(event);
+            mWidgetListener->widgetResized(event);
         }
     }
 
     void Widget::distributeMovedEvent()
     {
-        WidgetListenerIterator iter;
-
-        for (iter = mWidgetListeners.begin(); iter != mWidgetListeners.end(); ++iter)
+        for (auto& mWidgetListener : mWidgetListeners)
         {
             Event event(this);
-            (*iter)->widgetMoved(event);
+            mWidgetListener->widgetMoved(event);
         }
     }
 
     void Widget::distributeHiddenEvent()
     {
-        WidgetListenerIterator iter;
-
-        for (iter = mWidgetListeners.begin(); iter != mWidgetListeners.end(); ++iter)
+        for (auto& mWidgetListener : mWidgetListeners)
         {
             Event event(this);
-            (*iter)->widgetHidden(event);
+            mWidgetListener->widgetHidden(event);
         }
     }
 
     void Widget::distributeShownEvent()
     {
-        WidgetListenerIterator iter;
-
-        for (iter = mWidgetListeners.begin(); iter != mWidgetListeners.end(); ++iter)
+        for (auto& mWidgetListener : mWidgetListeners)
         {
             Event event(this);
-            (*iter)->widgetShown(event);
+            mWidgetListener->widgetShown(event);
         }
     }
 }

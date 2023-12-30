@@ -57,8 +57,6 @@
 #ifndef GCN_SCROLLAREA_HPP
 #define GCN_SCROLLAREA_HPP
 
-#include <string>
-
 #include "guisan/basiccontainer.hpp"
 #include "guisan/mouselistener.hpp"
 #include "guisan/platform.hpp"
@@ -326,7 +324,7 @@ namespace gcn
          * The policies are:
          *
          * SHOW_ALWAYS - Always show the scrollbars no matter what.
-         * SHOW_NEVER  - Never show the scrollbars no matter waht.
+         * SHOW_NEVER  - Never show the scrollbars no matter what.
          * SHOW_AUTO   - Show the scrollbars only when needed. That is if the
          *               content grows larger then the ScrollArea.
          */

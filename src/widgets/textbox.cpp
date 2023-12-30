@@ -112,15 +112,15 @@ namespace gcn
         int length;
         do
         {
-            pos = text.find("\n", lastPos);
+            pos = text.find('\n', lastPos);
 
             if (pos != std::string::npos)
             {
-                length = pos - lastPos;
+                length = static_cast<int>(pos - lastPos);
             }
             else
             {
-                length = text.size() - lastPos;
+                length = static_cast<int>(text.size() - lastPos);
             }
             std::string sub = text.substr(lastPos, length);
             mTextRows.push_back(sub);
@@ -133,8 +133,6 @@ namespace gcn
 
     void TextBox::draw(Graphics* graphics)
     {
-        unsigned int i;
-
         if (mOpaque)
         {
             graphics->setColor(getBackgroundColor());
@@ -149,17 +147,17 @@ namespace gcn
         graphics->setColor(getForegroundColor());
         graphics->setFont(getFont());
 
-        for (i = 0; i < mTextRows.size(); i++)
+        for (unsigned int i = 0; i < mTextRows.size(); i++)
         {
             // Move the text one pixel so we can have a caret before a letter.
-            graphics->drawText(mTextRows[i], 1, i * getFont()->getHeight());
+            graphics->drawText(mTextRows[i], 2, i * (getFont()->getHeight() + 2));
         }
     }
 
     void TextBox::drawBorder(Graphics* graphics)
     {
-        int width = getWidth() + getBorderSize() * 2 - 1;
-        int height = getHeight() + getBorderSize() * 2 - 1;
+        const int width = getWidth() + static_cast<int>(getBorderSize()) * 2 - 1;
+        const int height = getHeight() + static_cast<int>(getBorderSize()) * 2 - 1;
 
         graphics->setColor(getBackgroundColor());
 
@@ -185,9 +183,9 @@ namespace gcn
         {
             mCaretRow = mouseEvent.getY() / getFont()->getHeight();
 
-            if (mCaretRow >= (int)mTextRows.size())
+            if (mCaretRow >= static_cast<int>(mTextRows.size()))
             {
-                mCaretRow = mTextRows.size() - 1;
+                mCaretRow = static_cast<int>(mTextRows.size()) - 1;
             }
 
             mCaretColumn = getFont()->getStringIndexAt(mTextRows[mCaretRow], mouseEvent.getX());
@@ -201,7 +199,7 @@ namespace gcn
 
     void TextBox::keyPressed(KeyEvent& keyEvent)
     {
-        Key key = keyEvent.getKey();
+        const Key key = keyEvent.getKey();
 
         if (key.getValue() == Key::LEFT)
         {
@@ -225,13 +223,13 @@ namespace gcn
         else if (key.getValue() == Key::RIGHT)
         {
             ++mCaretColumn;
-            if (mCaretColumn > (int)mTextRows[mCaretRow].size())
+            if (mCaretColumn > static_cast<int>(mTextRows[mCaretRow].size()))
             {
                 ++mCaretRow;
 
-                if (mCaretRow >= (int)mTextRows.size())
+                if (mCaretRow >= static_cast<int>(mTextRows.size()))
                 {
-                    mCaretRow = mTextRows.size() - 1;
+                    mCaretRow = static_cast<int>(mTextRows.size()) - 1;
                     if (mCaretRow < 0)
                     {
                         mCaretRow = 0;
@@ -295,15 +293,15 @@ namespace gcn
         }
 
         else if (key.getValue() == Key::DELETE
-                 && mCaretColumn < (int)mTextRows[mCaretRow].size()
+                 && mCaretColumn < static_cast<int>(mTextRows[mCaretRow].size())
                  && mEditable)
         {
             mTextRows[mCaretRow].erase(mCaretColumn, 1);
         }
 
         else if (key.getValue() == Key::DELETE
-                 && mCaretColumn == (int)mTextRows[mCaretRow].size()
-                 && mCaretRow < ((int)mTextRows.size() - 1)
+                 && mCaretColumn == static_cast<int>(mTextRows[mCaretRow].size())
+                 && mCaretRow < static_cast<int>(mTextRows.size()) - 1
                  && mEditable)
         {
             mTextRows[mCaretRow] += mTextRows[mCaretRow + 1];
@@ -316,7 +314,7 @@ namespace gcn
 
             if (par != NULL)
             {
-                int rowsPerPage = par->getChildrenArea().height / getFont()->getHeight();
+                const int rowsPerPage = par->getChildrenArea().height / getFont()->getHeight();
                 mCaretRow -= rowsPerPage;
 
                 if (mCaretRow < 0)
@@ -332,12 +330,12 @@ namespace gcn
 
             if (par != NULL)
             {
-                int rowsPerPage = par->getChildrenArea().height / getFont()->getHeight();
+                const int rowsPerPage = par->getChildrenArea().height / getFont()->getHeight();
                 mCaretRow += rowsPerPage;
 
-                if (mCaretRow >= (int)mTextRows.size())
+                if (mCaretRow >= static_cast<int>(mTextRows.size()))
                 {
-                    mCaretRow = mTextRows.size() - 1;
+                    mCaretRow = static_cast<int>(mTextRows.size()) - 1;
                 }
             }
         }
@@ -354,11 +352,11 @@ namespace gcn
         {
             if(keyEvent.isShiftPressed() && key.isLetter())
             {
-                mTextRows[mCaretRow].insert(mCaretColumn,std::string(1,(char)(key.getValue() - 32)));
+                mTextRows[mCaretRow].insert(mCaretColumn,std::string(1, static_cast<char>(key.getValue() - 32)));
             }
             else
             {
-                mTextRows[mCaretRow].insert(mCaretColumn,std::string(1,(char)key.getValue()));
+                mTextRows[mCaretRow].insert(mCaretColumn, std::string(1, static_cast<char>(key.getValue())));
             }
             ++mCaretColumn;
         }
@@ -371,11 +369,10 @@ namespace gcn
 
     void TextBox::adjustSize()
     {
-        unsigned int i;
         int width = 0;
-        for (i = 0; i < mTextRows.size(); ++i)
+        for (const auto& mTextRow : mTextRows)
         {
-            int w = getFont()->getWidth(mTextRows[i]);
+            const int w = getFont()->getWidth(mTextRow);
             if (width < w)
             {
                 width = w;
@@ -383,19 +380,17 @@ namespace gcn
         }
 
         setWidth(width + 1);
-        setHeight(getFont()->getHeight() * mTextRows.size());
+        setHeight((getFont()->getHeight() + 2) * static_cast<int>(mTextRows.size()));
     }
 
     void TextBox::setCaretPosition(unsigned int position)
     {
-        int row;
-
-        for (row = 0; row < (int)mTextRows.size(); row++)
+        for (int row = 0; row < static_cast<int>(mTextRows.size()); row++)
         {
             if (position <= mTextRows[row].size())
             {
                 mCaretRow = row;
-                mCaretColumn = position;
+                mCaretColumn = static_cast<int>(position);
                 return; // we are done
             }
             else
@@ -405,15 +400,15 @@ namespace gcn
         }
 
         // position beyond end of text
-        mCaretRow = mTextRows.size() - 1;
+        mCaretRow = static_cast<int>(mTextRows.size()) - 1;
         mCaretColumn = mTextRows[mCaretRow].size();
     }
 
     unsigned int TextBox::getCaretPosition() const
     {
-        int pos = 0, row;
+        int pos = 0;
 
-        for (row = 0; row < mCaretRow; row++)
+        for (int row = 0; row < mCaretRow; row++)
         {
             pos += mTextRows[row].size();
         }
@@ -431,9 +426,9 @@ namespace gcn
     {
         mCaretRow = row;
 
-        if (mCaretRow >= (int)mTextRows.size())
+        if (mCaretRow >= static_cast<int>(mTextRows.size()))
         {
-            mCaretRow = mTextRows.size() - 1;
+            mCaretRow = static_cast<int>(mTextRows.size()) - 1;
         }
 
         if (mCaretRow < 0)
@@ -453,7 +448,7 @@ namespace gcn
     {
         mCaretColumn = column;
 
-        if (mCaretColumn > (int)mTextRows[mCaretRow].size())
+        if (mCaretColumn > static_cast<int>(mTextRows[mCaretRow].size()))
         {
             mCaretColumn = mTextRows[mCaretRow].size();
         }
@@ -493,7 +488,7 @@ namespace gcn
 
     std::string TextBox::getText() const
     {
-        if (mTextRows.size() == 0)
+        if (mTextRows.empty())
         {
             return std::string("");
         }
@@ -501,12 +496,12 @@ namespace gcn
         int i;
         std::string text;
 
-        for (i = 0; i < (int)mTextRows.size() - 1; ++i)
+        for (i = 0; i < static_cast<int>(mTextRows.size()) - 1; ++i)
         {
-            text = text + mTextRows[i] + "\n";
+            text = text.append(mTextRows[i]).append("\n");
         }
 
-        text = text + mTextRows[i];
+        text += mTextRows[i];
 
         return text;
     }

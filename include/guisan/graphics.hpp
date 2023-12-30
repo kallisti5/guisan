@@ -255,6 +255,7 @@ namespace gcn
          */
         virtual void drawText(const std::string& text, int x, int y,
                               unsigned int alignment = LEFT);
+
         /**
          * Alignments for text drawing.
          */
@@ -278,4 +279,3 @@ namespace gcn
  * finalman - "skall jag skriva det?"
  * yakslem - "ja, varfor inte?"
  */
-

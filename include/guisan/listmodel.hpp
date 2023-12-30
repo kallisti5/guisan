@@ -71,7 +71,6 @@ namespace gcn
      */
     class GCN_CORE_DECLSPEC ListModel
     {
-
     public:
         /**
          * Destructor.
@@ -92,6 +91,12 @@ namespace gcn
          * @return an element as a string.
          */
         virtual std::string getElementAt(int i) = 0;
+
+		// Add a new element
+		virtual void add(std::string str) { }
+
+		// Clear all elements
+		virtual void clear_elements() { }
     };
 }
 

@@ -157,7 +157,6 @@ namespace gcn
 
             handleKeyInput();
             handleMouseInput();
- 
         } // end if
 
         mTop->logic();
@@ -186,10 +185,10 @@ namespace gcn
         if (mTop->getBorderSize() > 0)
         {
             Rectangle rec = mTop->getDimension();
-            rec.x -= mTop->getBorderSize();
-            rec.y -= mTop->getBorderSize();
-            rec.width += 2 * mTop->getBorderSize();
-            rec.height += 2 * mTop->getBorderSize();
+            rec.x -= static_cast<int>(mTop->getBorderSize());
+            rec.y -= static_cast<int>(mTop->getBorderSize());
+            rec.width += 2 * static_cast<int>(mTop->getBorderSize());
+            rec.height += 2 * static_cast<int>(mTop->getBorderSize());
             mGraphics->pushClipArea(rec);
             mTop->drawBorder(mGraphics);
             mGraphics->popClipArea();
@@ -335,8 +334,7 @@ namespace gcn
                 {
                     mFocusHandler->tabNext();
                 }
-            }                           
-                
+            }
         } // end while
     }
 
@@ -358,7 +356,7 @@ namespace gcn
                 {
                     distributeMouseEvent(widget,
                                          MouseEvent::EXITED,
-                                         mouseInput.getButton(),
+                                         static_cast<int>(mouseInput.getButton()),
                                          mouseInput.getX(),
                                          mouseInput.getX(),
                                          true,
@@ -380,7 +378,7 @@ namespace gcn
             std::deque<Widget*>::iterator iter;
             for (iter = mWidgetWithMouseQueue.begin();
                  iter != mWidgetWithMouseQueue.end();
-                 iter++)
+                 ++iter)
             {
                 Widget* widget = *iter;
                             
@@ -404,7 +402,7 @@ namespace gcn
                     {
                         distributeMouseEvent(widget,
                                              MouseEvent::EXITED,
-                                             mouseInput.getButton(),
+                                             static_cast<int>(mouseInput.getButton()),
                                              mouseInput.getX(),
                                              mouseInput.getX(),
                                              true,
@@ -430,7 +428,7 @@ namespace gcn
         Widget* widget = parent;
 
         // If a widget has modal mouse input focus then it will
-        // always be returned from getMouseEventSource, but we only wan't to send
+        // always be returned from getMouseEventSource, but we only want to send
         // mouse entered events if the mouse has actually entered the widget with
         // modal mouse input focus, hence we need to check if that's the case. If
         // it's not we should simply ignore to send any mouse entered events.
@@ -452,14 +450,14 @@ namespace gcn
 
         while (parent != NULL)
         {
-            parent = (Widget*)widget->getParent();
+            parent = static_cast<Widget*>(widget->getParent());
 
             // Check if the widget is present in the "widget with mouse" queue.
             bool widgetIsPresentInQueue = false;
             std::deque<Widget*>::iterator iter;
             for (iter = mWidgetWithMouseQueue.begin();
                  iter != mWidgetWithMouseQueue.end();
-                 iter++)
+                 ++iter)
             {
                 if (*iter == widget)
                 {
@@ -475,7 +473,7 @@ namespace gcn
             {
                 distributeMouseEvent(widget,
                                      MouseEvent::ENTERED,
-                                     mouseInput.getButton(),
+                                     static_cast<int>(mouseInput.getButton()),
                                      mouseInput.getX(),
                                      mouseInput.getY(),
                                      true,
@@ -485,7 +483,7 @@ namespace gcn
 
             Widget* swap = widget;
             widget = parent;
-            parent = (Widget*)swap->getParent();
+            parent = static_cast<Widget*>(swap->getParent());
         }
 
         if (mFocusHandler->getDraggedWidget() != NULL)
@@ -501,7 +499,7 @@ namespace gcn
             Widget* sourceWidget = getMouseEventSource(mouseInput.getX(), mouseInput.getY());
             distributeMouseEvent(sourceWidget,
                                  MouseEvent::MOVED,
-                                 mouseInput.getButton(),
+                                 static_cast<int>(mouseInput.getButton()),
                                  mouseInput.getX(),
                                  mouseInput.getY());
         }
@@ -521,7 +519,7 @@ namespace gcn
         
         distributeMouseEvent(sourceWidget,
                              MouseEvent::PRESSED,
-                             mouseInput.getButton(),
+                             static_cast<int>(mouseInput.getButton()),
                              mouseInput.getX(),
                              mouseInput.getY());
 
@@ -535,7 +533,7 @@ namespace gcn
         }
 
         mFocusHandler->setDraggedWidget(sourceWidget);
-        mLastMouseDragButton = mouseInput.getButton();
+        mLastMouseDragButton = static_cast<int>(mouseInput.getButton());
 
         if (mLastMousePressTimeStamp < 300
             && mLastMousePressButton == mouseInput.getButton())
@@ -565,7 +563,7 @@ namespace gcn
 
         distributeMouseEvent(sourceWidget,
                              MouseEvent::WHEEL_MOVED_DOWN,
-                             mouseInput.getButton(),
+                             static_cast<int>(mouseInput.getButton()),
                              mouseInput.getX(),
                              mouseInput.getY());
     }
@@ -584,7 +582,7 @@ namespace gcn
 
         distributeMouseEvent(sourceWidget,
                              MouseEvent::WHEEL_MOVED_UP,
-                             mouseInput.getButton(),
+                             static_cast<int>(mouseInput.getButton()),
                              mouseInput.getX(),
                              mouseInput.getY());
     }
@@ -608,7 +606,7 @@ namespace gcn
         
         distributeMouseEvent(sourceWidget,
                              MouseEvent::RELEASED,
-                             mouseInput.getButton(),
+                             static_cast<int>(mouseInput.getButton()),
                              mouseInput.getX(),
                              mouseInput.getY());
 
@@ -617,7 +615,7 @@ namespace gcn
         {
             distributeMouseEvent(sourceWidget,
                                  MouseEvent::CLICKED,
-                                 mouseInput.getButton(),
+                                 static_cast<int>(mouseInput.getButton()),
                                  mouseInput.getX(),
                                  mouseInput.getY());
             
@@ -724,7 +722,7 @@ namespace gcn
                 break;
             }
 
-            parent = (Widget*)widget->getParent();
+            parent = static_cast<Widget*>(widget->getParent());
 
             if (widget->isEnabled() || force)
             {
@@ -734,41 +732,39 @@ namespace gcn
                 mouseEvent.mX = x - widgetX;
                 mouseEvent.mY = y - widgetY;
                                       
-                std::list<MouseListener*> mouseListeners = widget->_getMouseListeners();
+                auto mouseListeners = widget->_getMouseListeners();
 
                 // Send the event to all mouse listeners of the widget.
-                for (std::list<MouseListener*>::iterator it = mouseListeners.begin();
-                     it != mouseListeners.end();
-                     ++it)
+                for (auto& mouseListener : mouseListeners)
                 {
                     switch (mouseEvent.getType())
                     {
                       case MouseEvent::ENTERED:
-                          (*it)->mouseEntered(mouseEvent);
+                          mouseListener->mouseEntered(mouseEvent);
                           break;
                       case MouseEvent::EXITED:
-                          (*it)->mouseExited(mouseEvent);
+                          mouseListener->mouseExited(mouseEvent);
                           break;
                       case MouseEvent::MOVED:
-                          (*it)->mouseMoved(mouseEvent);
+                          mouseListener->mouseMoved(mouseEvent);
                           break;
                       case MouseEvent::PRESSED:
-                          (*it)->mousePressed(mouseEvent);
+                          mouseListener->mousePressed(mouseEvent);
                           break;
                       case MouseEvent::RELEASED:
-                          (*it)->mouseReleased(mouseEvent);
+                          mouseListener->mouseReleased(mouseEvent);
                           break;
                       case MouseEvent::WHEEL_MOVED_UP:
-                          (*it)->mouseWheelMovedUp(mouseEvent);
+                          mouseListener->mouseWheelMovedUp(mouseEvent);
                           break;
                       case MouseEvent::WHEEL_MOVED_DOWN:
-                          (*it)->mouseWheelMovedDown(mouseEvent);
+                          mouseListener->mouseWheelMovedDown(mouseEvent);
                           break;
                       case MouseEvent::DRAGGED:
-                          (*it)->mouseDragged(mouseEvent);
+                          mouseListener->mouseDragged(mouseEvent);
                           break;
                       case MouseEvent::CLICKED:
-                          (*it)->mouseClicked(mouseEvent);
+                          mouseListener->mouseClicked(mouseEvent);
                           break;
                       default:
                           throw GCN_EXCEPTION("Unknown mouse event type.");
@@ -779,12 +775,11 @@ namespace gcn
                 {
                     break;
                 }
-
             }
 
             Widget* swap = widget;
             widget = parent;
-            parent = (Widget*)swap->getParent();
+            parent = static_cast<Widget*>(swap->getParent());
 
             // If a non modal focused widget has been reach
             // and we have modal focus cancel the distribution.
@@ -830,24 +825,22 @@ namespace gcn
                 break;
             }
 
-            parent = (Widget*)widget->getParent();
+            parent = static_cast<Widget*>(widget->getParent());
 
             if (widget->isEnabled())
             {
-                std::list<KeyListener*> keyListeners = widget->_getKeyListeners();
+                auto keyListeners = widget->_getKeyListeners();
             
                 // Send the event to all key listeners of the source widget.
-                for (std::list<KeyListener*>::iterator it = keyListeners.begin();
-                     it != keyListeners.end();
-                     ++it)
+                for (auto& keyListener : keyListeners)
                 {
                     switch (keyEvent.getType())
                     {
                       case KeyEvent::PRESSED:
-                          (*it)->keyPressed(keyEvent);
+                          keyListener->keyPressed(keyEvent);
                           break;
                       case KeyEvent::RELEASED:
-                          (*it)->keyReleased(keyEvent);
+                          keyListener->keyReleased(keyEvent);
                           break;
                       default:
                           throw GCN_EXCEPTION("Unknown key event type.");
@@ -857,7 +850,7 @@ namespace gcn
 
             Widget* swap = widget;
             widget = parent;
-            parent = (Widget*)swap->getParent();
+            parent = static_cast<Widget*>(swap->getParent());
 
             // If a non modal focused widget has been reach
             // and we have modal focus cancel the distribution.
@@ -871,17 +864,15 @@ namespace gcn
 
     void Gui::distributeKeyEventToGlobalKeyListeners(KeyEvent& keyEvent)
     {
-        KeyListenerListIterator it;
-
-        for (it = mKeyListeners.begin(); it != mKeyListeners.end(); it++)
+        for (auto& mKeyListener : mKeyListeners)
         {
             switch (keyEvent.getType())
             {
               case KeyEvent::PRESSED:
-                  (*it)->keyPressed(keyEvent);
+                  mKeyListener->keyPressed(keyEvent);
                   break;
               case KeyEvent::RELEASED:
-                  (*it)->keyReleased(keyEvent);
+                  mKeyListener->keyReleased(keyEvent);
                   break;
               default:
                   throw GCN_EXCEPTION("Unknown key event type.");
@@ -945,7 +936,7 @@ namespace gcn
             {
                 distributeMouseEvent(widget,
                                      MouseEvent::EXITED,
-                                     mLastMousePressButton,
+                                     static_cast<int>(mLastMousePressButton),
                                      mLastMouseX,
                                      mLastMouseY,
                                      true,
@@ -969,14 +960,14 @@ namespace gcn
 
         while (parent != NULL)
         {
-            parent = (Widget*)widget->getParent();
+            parent = static_cast<Widget*>(widget->getParent());
 
             // Check if the widget is present in the "widget with mouse" queue.
             bool widgetIsPresentInQueue = false;
             std::deque<Widget*>::iterator iter;
             for (iter = mWidgetWithMouseQueue.begin();
                  iter != mWidgetWithMouseQueue.end();
-                 iter++)
+                 ++iter)
             {
                 if (*iter == widget)
                 {
@@ -992,7 +983,7 @@ namespace gcn
             {
                 distributeMouseEvent(widget,
                                      MouseEvent::ENTERED,
-                                     mLastMousePressButton,
+                                      static_cast<int>(mLastMousePressButton),
                                      mLastMouseX,
                                      mLastMouseY,
                                      false,
@@ -1002,7 +993,7 @@ namespace gcn
 
             Widget* swap = widget;
             widget = parent;
-            parent = (Widget*)swap->getParent();
+            parent = static_cast<Widget*>(swap->getParent());
         }
     }
 }

@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessï¿½n and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessï¿½n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -74,7 +74,6 @@
 
 namespace gcn
 {
-
     SDLGraphics::SDLGraphics()
     {
         mAlpha = false;
@@ -108,7 +107,7 @@ namespace gcn
     bool SDLGraphics::pushClipArea(Rectangle area)
     {
         SDL_Rect rect;
-        bool result = Graphics::pushClipArea(area);
+        const bool result = Graphics::pushClipArea(area);
 
         const ClipRectangle& carea = mClipStack.top();
         rect.x = carea.x;
@@ -194,22 +193,20 @@ namespace gcn
 
         if (mAlpha)
         {
-            int x1 = area.x > top.x ? area.x : top.x;
-            int y1 = area.y > top.y ? area.y : top.y;
-            int x2 = area.x + area.width < top.x + top.width ? area.x + area.width : top.x + top.width;
-            int y2 = area.y + area.height < top.y + top.height ? area.y + area.height : top.y + top.height;
-            int x, y;
+            const int x1 = area.x > top.x ? area.x : top.x;
+            const int y1 = area.y > top.y ? area.y : top.y;
+            const int x2 = area.x + area.width < top.x + top.width ? area.x + area.width : top.x + top.width;
+            const int y2 = area.y + area.height < top.y + top.height ? area.y + area.height : top.y + top.height;
 
             SDL_LockSurface(mTarget);
-            for (y = y1; y < y2; y++)
+            for (int y = y1; y < y2; y++)
             {
-                for (x = x1; x < x2; x++)
+                for (int x = x1; x < x2; x++)
                 {
                     SDLputPixelAlpha(mTarget, x, y, mColor);
                 }
             }
             SDL_UnlockSurface(mTarget);
-
         }
         else
         {
@@ -219,7 +216,7 @@ namespace gcn
             rect.w = area.width;
             rect.h = area.height;
 
-            Uint32 color = SDL_MapRGBA(mTarget->format, mColor.r, mColor.g, mColor.b, mColor.a);
+            const Uint32 color = SDL_MapRGBA(mTarget->format, mColor.r, mColor.g, mColor.b, mColor.a);
             SDL_FillRect(mTarget, &rect, color);
         }
     }
@@ -289,11 +286,11 @@ namespace gcn
             x2 = top.x + top.width -1;
         }
 
-        int bpp = mTarget->format->BytesPerPixel;
+        const int bpp = mTarget->format->BytesPerPixel;
 
         SDL_LockSurface(mTarget);
 
-        Uint8 *p = (Uint8 *)mTarget->pixels + y * mTarget->pitch + x1 * bpp;
+        Uint8 *p = static_cast<Uint8*>(mTarget->pixels) + y * mTarget->pitch + x1 * bpp;
 
         Uint32 pixel = SDL_MapRGB(mTarget->format, mColor.r, mColor.g, mColor.b);
 
@@ -308,7 +305,7 @@ namespace gcn
 
           case 2:
           {
-              Uint16* q = (Uint16*)p;
+              Uint16* q = reinterpret_cast<Uint16*>(p);
               for (;x1 <= x2; ++x1)
               {
                   *(q++) = pixel;
@@ -340,7 +337,7 @@ namespace gcn
 
           case 4:
           {
-              Uint32* q = (Uint32*)p;
+              Uint32* q = reinterpret_cast<Uint32*>(p);
               for (;x1 <= x2; ++x1)
               {
                   if (mAlpha)
@@ -400,11 +397,11 @@ namespace gcn
             y2 = top.y + top.height - 1;
         }
 
-        int bpp = mTarget->format->BytesPerPixel;
+        const int bpp = mTarget->format->BytesPerPixel;
 
         SDL_LockSurface(mTarget);
 
-        Uint8 *p = (Uint8 *)mTarget->pixels + y1 * mTarget->pitch + x * bpp;
+        Uint8 *p = static_cast<Uint8*>(mTarget->pixels) + y1 * mTarget->pitch + x * bpp;
 
         Uint32 pixel = SDL_MapRGB(mTarget->format, mColor.r, mColor.g, mColor.b);
 
@@ -422,7 +419,7 @@ namespace gcn
           {
               for (;y1 <= y2; ++y1)
               {
-                  *(Uint16*)p = pixel;
+                  *reinterpret_cast<Uint16*>(p) = pixel;
                   p += mTarget->pitch;
               }
           } break;
@@ -456,11 +453,11 @@ namespace gcn
               {
                   if (mAlpha)
                   {
-                      *(Uint32*)p = SDLAlpha32(pixel,*(Uint32*)p,mColor.a);
+                      *reinterpret_cast<Uint32*>(p) = SDLAlpha32(pixel, *reinterpret_cast<Uint32*>(p), mColor.a);
                   }
                   else
                   {
-                      *(Uint32*)p = pixel;
+                      *reinterpret_cast<Uint32*>(p) = pixel;
                   }
                   p += mTarget->pitch;
               }
@@ -472,10 +469,10 @@ namespace gcn
 
     void SDLGraphics::drawRectangle(const Rectangle& rectangle)
     {
-        int x1 = rectangle.x;
-        int x2 = rectangle.x + rectangle.width - 1;
-        int y1 = rectangle.y;
-        int y2 = rectangle.y + rectangle.height - 1;
+        const int x1 = rectangle.x;
+        const int x2 = rectangle.x + rectangle.width - 1;
+        const int y1 = rectangle.y;
+        const int y2 = rectangle.y + rectangle.height - 1;
 
         drawHLine(x1, y1, x2);
         drawHLine(x1, y2, x2);
@@ -510,8 +507,8 @@ namespace gcn
 
         // Draw a line with Bresenham
 
-        int dx = ABS(x2 - x1);
-        int dy = ABS(y2 - y1);
+        const int dx = ABS(x2 - x1);
+        const int dy = ABS(y2 - y1);
 
         if (dx > dy)
         {

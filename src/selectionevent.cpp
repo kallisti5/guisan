@@ -69,8 +69,5 @@ namespace gcn
     }
 
     SelectionEvent::~SelectionEvent()
-    {
-
-    }
+    = default;
 }
-

@@ -168,4 +168,3 @@ namespace gcn
         mHasMouse = false;
     }
 }
-

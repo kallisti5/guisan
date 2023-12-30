@@ -252,7 +252,7 @@ namespace gcn
 
     void ListBox::keyPressed(KeyEvent& keyEvent)
     {
-        Key key = keyEvent.getKey();
+        const Key key = keyEvent.getKey();
 
         if (key.getValue() == Key::ENTER || key.getValue() == Key::SPACE)
         {
@@ -382,12 +382,10 @@ namespace gcn
 
     void ListBox::distributeValueChangedEvent()
     {
-        SelectionListenerIterator iter;
-
-        for (iter = mSelectionListeners.begin(); iter != mSelectionListeners.end(); ++iter)
+        for (auto& mSelectionListener : mSelectionListeners)
         {
             SelectionEvent event(this);
-            (*iter)->valueChanged(event);
+            mSelectionListener->valueChanged(event);
         }
     }
 }
