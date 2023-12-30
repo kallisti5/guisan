@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessï¿½n and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessï¿½n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -429,8 +429,8 @@ namespace gcn
               if(SDL_BYTEORDER == SDL_BIG_ENDIAN) {
                   for (;y1 <= y2; ++y1)
                   {
-                      p[0] = pixel >> 16 & 0xff;
-                      p[1] = pixel >> 8 & 0xff;
+                      p[0] = (pixel >> 16) & 0xff;
+                      p[1] = (pixel >> 8) & 0xff;
                       p[2] = pixel & 0xff;
                       p += mTarget->pitch;
                   }
@@ -440,8 +440,8 @@ namespace gcn
                   for (;y1 <= y2; ++y1)
                   {
                       p[0] = pixel & 0xff;
-                      p[1] = pixel >> 8 & 0xff;
-                      p[2] = pixel >> 16 & 0xff;
+                      p[1] = (pixel >> 8) & 0xff;
+                      p[2] = (pixel >> 16) & 0xff;
                       p += mTarget->pitch;
                   }
               }
