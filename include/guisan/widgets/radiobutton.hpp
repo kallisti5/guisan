@@ -68,7 +68,7 @@
 namespace gcn
 {
     /**
-     * Implementation of a radio button where a user can select or deselect
+     * An implementation of a radio button where a user can select or deselect
      * the radio button and where the status of the radio button is displayed to the user.
      * A radio button can belong to a group and when a radio button belongs to a
      * group only one radio button can be selected in the group. A radio button is
@@ -90,7 +90,8 @@ namespace gcn
         RadioButton();
 
         /**
-         * Constructor.
+         * Constructor. The radio button will be automatically resized
+         * to fit the caption.
          *
          * @param caption The caption of the radio button.
          * @param group The group the radio button should belong to.

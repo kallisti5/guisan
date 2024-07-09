@@ -67,7 +67,7 @@
 namespace gcn
 {
     /**
-     * A text field in which you can write or display a line of text.
+     * An implementation of a text field where a user can enter a line of text.
      */
     class GCN_CORE_DECLSPEC TextField:
         public Widget,
@@ -76,66 +76,59 @@ namespace gcn
     {
     public:
         /**
-         * Default constructor.
+         * Constructor.
          */
         TextField();
 
         /**
-         * Constructor. Initializes the textfield with a given string.
+         * Constructor. The text field will be automatically resized
+         * to fit the text.
          *
-         * @param text the initial text.
+         * @param text The default text of the text field.
          */
         TextField(const std::string& text);
 
         /**
-         * Sets the text.
+         * Sets the text of the text field.
          *
-         * @param text the new text in the TextField.
+         * @param text The text of the text field.
+         * @see getText
          */
         void setText(const std::string& text);
 
         /**
-         * Gets the text.
+         * Gets the text of the text field.
          *
-         * @return the text of the TextField.
+         * @return The text of the text field.
+         * @see setText
          */
         const std::string& getText() const;
 
         /**
-         * Draws the caret (the little marker in the text that shows where the
-         * letters you type will appear). Easily overloaded if you want to
-         * change the style of the caret.
-         *
-         * @param graphics the Graphics object to draw with.
-         * @param x the caret's x-position.
-         */
-        virtual void drawCaret(Graphics* graphics, int x);
-
-        /**
-         * Adjusts the size of the TextField to fit the font size. The
-         * constructor taking a string uses this function to initialize the
-         * size of the TextField.
+         * Adjusts the size of the text field to fit the text.
          */
         void adjustSize();
 
         /**
-         * Adjusts the height of the text field to fit the font size. The
-         * height of the TextField is initialized with this function by the
-         * constructors.
+         * Adjusts the height of the text field to fit caption.
          */
         void adjustHeight();
 
         /**
-         * Sets the caret position.
+         * Sets the caret position. As there is only one line of text
+         * in a text field the position is the caret's x coordinate.
          *
-         * @param position the caret position.
+         * @param position The caret position.
+         * @see getCaretPosition
          */
         void setCaretPosition(unsigned int position);
 
         /**
-         * Gets the caret position.
+         * Gets the caret position. As there is only one line of text
+         * in a text field the position is the caret's x coordinate.
          *
-         * @return the caret position.
+         * @return The caret position.
+         * @see setCaretPosition
          */
         unsigned int getCaretPosition() const;
 
@@ -162,12 +155,36 @@ namespace gcn
 
     protected:
         /**
+         * Draws the caret. Overloaded this method if you want to
+         * change the style of the caret.
+         *
+         * @param graphics the Graphics object to draw with.
+         * @param x the caret's x-position.
+         */
+        virtual void drawCaret(Graphics* graphics, int x);
+
+        /**
          * Scrolls the text horizontally so that the caret shows if needed.
+         * The method is used any time a user types in the text field so the
+         * caret always will be shown.
          */
         void fixScroll();
 
+        /**
+         * Holds the text of the text box.
+         */
         std::string mText;
+
+        /**
+         * Holds the caret position.
+         */
         unsigned int mCaretPosition;
+
+        /**
+         * Holds the amount scrolled in x. If a user types more characters than
+         * the text field can display, due to the text field being to small, the
+         * text needs to scroll in order to show the last type character.
+         */
         int mXScroll;
     };
 }
