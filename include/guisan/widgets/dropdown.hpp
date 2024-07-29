@@ -177,8 +177,6 @@ namespace gcn
 
         virtual void draw(Graphics* graphics);
 
-        virtual void drawBorder(Graphics* graphics);
-
         void setBaseColor(const Color& color);
 
         void setBackgroundColor(const Color& color);

@@ -181,17 +181,17 @@ namespace gcn
 
         mGraphics->_beginDraw();
 
-        // If top has a border,
+        // If top has a frame,
         // draw it before drawing top
-        if (mTop->getBorderSize() > 0)
+        if (mTop->getFrameSize() > 0)
         {
             Rectangle rec = mTop->getDimension();
-            rec.x -= mTop->getBorderSize();
-            rec.y -= mTop->getBorderSize();
-            rec.width += 2 * mTop->getBorderSize();
-            rec.height += 2 * mTop->getBorderSize();
+            rec.x -= mTop->getFrameSize();
+            rec.y -= mTop->getFrameSize();
+            rec.width += 2 * mTop->getFrameSize();
+            rec.height += 2 * mTop->getFrameSize();
             mGraphics->pushClipArea(rec);
-            mTop->drawBorder(mGraphics);
+            mTop->drawFrame(mGraphics);
             mGraphics->popClipArea();
         }
 

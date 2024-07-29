@@ -134,8 +134,6 @@ namespace gcn
 
         virtual void draw(Graphics *graphics);
 
-        virtual void drawBorder(Graphics* graphics);
-                
 
         // Inherited from MouseListener
 

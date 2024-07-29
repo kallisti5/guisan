@@ -96,7 +96,7 @@ FFDemo::FFDemo()
     mGoldFootsteps = new FFContainer();
     mGoldFootsteps->setDimension(gcn::Rectangle(210, 170, 110, 70));
     mGoldFootsteps->setOpaque(false);
-    mGoldFootsteps->setBorderSize(0);
+    mGoldFootsteps->setFrameSize(0);
     mTop->add(mGoldFootsteps);
 
     mTime = new FFContainer();
@@ -109,13 +109,13 @@ FFDemo::FFDemo()
     mGoldFootstepsInfo1->setOpaque(false);
     mGoldFootstepsInfo1->setEditable(false);
     mGoldFootstepsInfo1->setFocusable(false);
-    mGoldFootstepsInfo1->setBorderSize(0);
+    mGoldFootstepsInfo1->setFrameSize(0);
 		
     mGoldFootstepsInfo2 = new gcn::TextBox("\n    9119092\n\n    1009213");
     mGoldFootstepsInfo2->setOpaque(false);
     mGoldFootstepsInfo2->setEditable(false);
     mGoldFootstepsInfo2->setFocusable(false);
-    mGoldFootstepsInfo2->setBorderSize(0);
+    mGoldFootstepsInfo2->setFrameSize(0);
 	
     mTimeLabel1 = new gcn::Label("Time");
     mTimeLabel1->setFont(mFontCyan);
@@ -210,39 +210,39 @@ void FFDemo::initMain()
     mPerInfo1->setOpaque(false);
     mPerInfo1->setEditable(false);
     mPerInfo1->setFocusable(false);
-    mPerInfo1->setBorderSize(0);
+    mPerInfo1->setFrameSize(0);
 	
     mPerInfo2 = new gcn::TextBox("FINALMAN\n     13\n       12/ 336\n       33/  40");
     mPerInfo2->setOpaque(false);
     mPerInfo2->setEditable(false);
     mPerInfo2->setFocusable(false);
-    mPerInfo2->setBorderSize(0);
+    mPerInfo2->setFrameSize(0);
 		 
     mOlofInfo1 = new gcn::TextBox("\n  LV\n  HP\n  MP");
     mOlofInfo1->setFont(mFontCyan);
     mOlofInfo1->setOpaque(false);
     mOlofInfo1->setEditable(false);
     mOlofInfo1->setFocusable(false);
-    mOlofInfo1->setBorderSize(0);
+    mOlofInfo1->setFrameSize(0);
 	
     mOlofInfo2 = new gcn::TextBox("YAKSLEM\n     41\n     1304/2932\n      298/ 300");
     mOlofInfo2->setOpaque(false);
     mOlofInfo2->setEditable(false);
     mOlofInfo2->setFocusable(false);
-    mOlofInfo2->setBorderSize(0);
+    mOlofInfo2->setFrameSize(0);
 	
     mTomasInfo1 = new gcn::TextBox("\n  LV\n  HP\n  MP");
     mTomasInfo1->setFont(mFontCyan);
     mTomasInfo1->setOpaque(false);
     mTomasInfo1->setEditable(false);
     mTomasInfo1->setFocusable(false);
-    mTomasInfo1->setBorderSize(0);
+    mTomasInfo1->setFrameSize(0);
 	
     mTomasInfo2 = new gcn::TextBox("PEAK\n      6\n      101/ 101\n        0/   0");
     mTomasInfo2->setOpaque(false);
     mTomasInfo2->setEditable(false);
     mTomasInfo2->setFocusable(false);
-    mTomasInfo2->setBorderSize(0);
+    mTomasInfo2->setFrameSize(0);
 	
     int offset = 6;
     mMain->add(mPerIcon, 10, offset);
@@ -308,7 +308,7 @@ void FFDemo::initStatus()
     mPerStatus1->setEditable(false);
     mPerStatus1->setFocusable(false);
     mPerStatus1->setVisible(false);
-    mPerStatus1->setBorderSize(0);
+    mPerStatus1->setFrameSize(0);
 	
     mPerStatus2 = new gcn::TextBox("         32          12382\n"
                                    "         56          13872\n"
@@ -321,7 +321,7 @@ void FFDemo::initStatus()
     mPerStatus2->setEditable(false);
     mPerStatus2->setFocusable(false);
     mPerStatus2->setVisible(false);	
-    mPerStatus2->setBorderSize(0);
+    mPerStatus2->setFrameSize(0);
 	
     mOlofStatus1 = new gcn::TextBox("  STR           EXP\n"
                                     "  INT           NEXT\n"
@@ -332,7 +332,7 @@ void FFDemo::initStatus()
     mOlofStatus1->setEditable(false);
     mOlofStatus1->setFocusable(false);
     mOlofStatus1->setVisible(false);
-    mOlofStatus1->setBorderSize(0);
+    mOlofStatus1->setFrameSize(0);
 	
     mOlofStatus2 = new gcn::TextBox("          2          412382\n"
                                     "         72          513872\n"
@@ -345,7 +345,7 @@ void FFDemo::initStatus()
     mOlofStatus2->setEditable(false);
     mOlofStatus2->setFocusable(false);
     mOlofStatus2->setVisible(false);	
-    mOlofStatus2->setBorderSize(0);
+    mOlofStatus2->setFrameSize(0);
 	
     mTomasStatus1 = new gcn::TextBox("  STR           EXP\n"
                                      "  INT           NEXT\n"
@@ -356,7 +356,7 @@ void FFDemo::initStatus()
     mTomasStatus1->setEditable(false);
     mTomasStatus1->setFocusable(false);
     mTomasStatus1->setVisible(false);
-    mTomasStatus1->setBorderSize(0);
+    mTomasStatus1->setFrameSize(0);
 	
     mTomasStatus2 = new gcn::TextBox("          1          412382\n"
                                      "          3          513872\n"
@@ -369,7 +369,7 @@ void FFDemo::initStatus()
     mTomasStatus2->setEditable(false);
     mTomasStatus2->setFocusable(false);
     mTomasStatus2->setVisible(false);	
-    mTomasStatus2->setBorderSize(0);
+    mTomasStatus2->setFrameSize(0);
 	
     mStatus->add(mPerStatus2, 5, 10);
     mStatus->add(mPerStatus1, 5, 10);
@@ -509,7 +509,7 @@ void FFDemo::initItems()
     mItemsInfoInfo->setEditable(false);
     mItemsInfoInfo->setFocusable(false);
     mItemsInfoInfo->setDimension(gcn::Rectangle(5, 5, 310, 40));
-    mItemsInfoInfo->setBorderSize(0);
+    mItemsInfoInfo->setFrameSize(0);
     mItemsInfo->add(mItemsInfoInfo);
 	
     mItemsList = new FFListBox();
@@ -584,9 +584,9 @@ void FFDemo::initAbout()
     mAboutScrollArea->setContent(mAboutInfo);
     mAboutScrollArea->setFocusable(true);
     mAboutScrollArea->setDimension(gcn::Rectangle(5, 5, 310, 230));
-    mAboutScrollArea->setBorderSize(0);
+    mAboutScrollArea->setFrameSize(0);
     mAbout->add(mAboutScrollArea);
-    mAbout->setBorderSize(0);
+    mAbout->setFrameSize(0);
 }
 
 void FFDemo::cleanAbout()

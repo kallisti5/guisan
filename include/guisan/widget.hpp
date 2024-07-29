@@ -117,14 +117,57 @@ namespace gcn
         virtual void draw(Graphics* graphics) = 0;
 
         /**
-         * Draws the widget border. A border is drawn around a widget.
-         * The width and height of the border is therefore the widgets
-         * height+2*bordersize. Think of a painting that has a certain size,
-         * the border surrounds the painting.
+         * Called when a widget is given a chance to draw a frame around itself.
+         * The frame is not considered a part of the widget, it only allows a frame
+         * to be drawn around the widget, thus a frame will never be included when
+         * calculating if a widget should receive events from user input. Also
+         * a widget's frame will never be included when calculating a widget's
+         * position.
+         *
+         * The size of the frame is calculated using the widget's frame size.
+         * If a widget has a frame size of 10 pixels than the area the drawFrame
+         * function can draw to will be the size of the widget with an additional
+         * extension of 10 pixels in each direction.
          *
          * @param graphics a Graphics object to draw with.
+         * An example when drawFrame is a useful function is if a widget needs
+         * a glow around itself.
+         *
+         * @param graphics a graphics object to draw with.
+         * @see setFrameSize, getFrameSize
          */
-        virtual void drawBorder(Graphics* graphics) { }
+        virtual void drawFrame(Graphics* graphics);
+
+        /**
+         * Sets the size of the widget's frame. The frame is not considered a part of
+         * the widget, it only allows a frame to be drawn around the widget, thus a frame
+         * will never be included when calculating if a widget should receive events
+         * from user input. Also a widget's frame will never be included when calculating
+         * a widget's position.
+         *
+         * A frame size of 0 means that the widget has no frame. The default frame size
+         * is 0.
+         *
+         * @param frameSize The size of the widget's frame.
+         * @see getFrameSize, drawFrame
+         */
+        void setFrameSize(unsigned int frameSize);
+
+        /**
+         * Gets the size of the widget's frame. The frame is not considered a part of
+         * the widget, it only allows a frame to be drawn around the widget, thus a frame
+         * will never be included when calculating if a widget should receive events
+         * from user input. Also a widget's frame will never be included when calculating
+         * a widget's position.
+         *
+         * A frame size of 0 means that the widget has no frame. The default frame size
+         * is 0.
+         *
+         * @return The size of the widget's frame.
+         * @see setFrameSize, drawFrame
+         */
+        unsigned int getFrameSize() const;
+
 
         /**
          * Called for all widgets in the gui each time Gui::logic is called.
@@ -220,26 +263,6 @@ namespace gcn
          * @param dimension the widget dimension.
          */
         void setDimension(const Rectangle& dimension);
-
-        /**
-         * Sets the size of the border, or the width if you so like. The size
-         * is the number of pixels that the border extends outside the widget.
-         * Border size = 0 means no border.
-         *
-         * @param borderSize the size of the border.
-         * @see drawBorder
-         */
-        void setBorderSize(unsigned int borderSize);
-
-        /**
-         * Gets the size of the border, or the width if you so like. The size
-         * is the number of pixels that the border extends outside the widget.
-         * Border size = 0 means no border.
-         *
-         * @return the size of the border.
-         * @see drawBorder
-         */
-        unsigned int getBorderSize() const;
 
         /**
          * Gets the dimension of the widget. It is relative to its parent.

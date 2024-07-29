@@ -74,7 +74,7 @@ namespace gcn
         mEnd = 100;
         
         setHeight(getFont()->getHeight());
-        setBorderSize(1);
+        setFrameSize(1);
     }
     
     ProgressBar::ProgressBar(const unsigned int start,
@@ -103,7 +103,7 @@ namespace gcn
         }
 
         setHeight(getFont()->getHeight());
-        setBorderSize(1);
+        setFrameSize(1);
     }
 
     ProgressBar::ProgressBar(const std::string& caption) : Label(caption)
@@ -112,7 +112,7 @@ namespace gcn
         mAlignment = Graphics::CENTER;
 
         setHeight(getFont()->getHeight());
-        setBorderSize(1);
+        setFrameSize(1);
     }
 
     const std::string &ProgressBar::getCaption() const
@@ -189,30 +189,6 @@ namespace gcn
             color = color - 0x303030;
         graphics->setColor(color);
         graphics->drawText(getCaption(), textX, textY, getAlignment());
-    }
-
-    void ProgressBar::drawBorder(Graphics* graphics)
-    {
-        Color faceColor = getBaseColor();
-        Color highlightColor, shadowColor;
-        int alpha = getBaseColor().a;
-        int width = getWidth() + getBorderSize() * 2 - 1;
-        int height = getHeight() + getBorderSize() * 2 - 1;
-        highlightColor = faceColor + 0x303030;
-        highlightColor.a = alpha;
-        shadowColor = faceColor - 0x303030;
-        shadowColor.a = alpha;
-
-        unsigned int i;
-        for (i = 0; i < getBorderSize(); ++i)
-        {
-            graphics->setColor(shadowColor);
-            graphics->drawLine(i, i, width - i, i);
-            graphics->drawLine(i, i + 1, i, height - i - 1);
-            graphics->setColor(highlightColor);
-            graphics->drawLine(width - i, i + 1, width - i, height - i);
-            graphics->drawLine(i, height - i, width - i - 1, height - i);
-        }
     }
 
     void ProgressBar::adjustSize()

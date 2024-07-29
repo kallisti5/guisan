@@ -68,13 +68,12 @@
 
 namespace gcn
 {
-    Tab::Tab()
-            :mHasMouse(false)
+    Tab::Tab() : mTabbedArea(NULL), mHasMouse(false)
     {
         mLabel = new Label();
         mLabel->setPosition(4, 4);
         add(mLabel);
-        setBorderSize(1);
+        setFrameSize(1);
 
         addMouseListener(this);
     }
@@ -113,49 +112,58 @@ namespace gcn
         
     void Tab::draw(Graphics *graphics)
     {
-        if (mTabbedArea->isTabSelected(this) || mHasMouse)
-        {
-            graphics->setColor(getBaseColor());
-        }
-        else
-        {            
-            graphics->setColor(getBaseColor() - 0x151515);
-        }
-
-        graphics->fillRectangle(Rectangle(0, 0, getWidth(), getHeight()));
-        
-        drawChildren(graphics);
-
-        if (mTabbedArea->isFocused()
-            && mTabbedArea->isTabSelected(this))
-        {
-            graphics->setColor(Color(0x000000));
-            graphics->drawRectangle(Rectangle(2, 2, getWidth() - 4, getHeight() - 4));
-        }
-    }
-    
-    void Tab::drawBorder(Graphics* graphics)
-    {
         Color faceColor = getBaseColor();
         Color highlightColor, shadowColor;
         int alpha = getBaseColor().a;
-        int width = getWidth() + getBorderSize() * 2 - 1;
-        int height = getHeight() + getBorderSize() * 2 - 1;
         highlightColor = faceColor + 0x303030;
         highlightColor.a = alpha;
         shadowColor = faceColor - 0x303030;
         shadowColor.a = alpha;
 
-        unsigned int i;
-        for (i = 0; i < getBorderSize(); ++i)
+        Color borderColor;
+        Color baseColor;
+
+        if ((mTabbedArea != NULL && mTabbedArea->isTabSelected(this)) || mHasMouse)
         {
+            // Draw a border.
             graphics->setColor(highlightColor);
-            graphics->drawLine(i,i, width - i, i);
-            graphics->drawLine(i,i + 1, i, height - i - 1);
+            graphics->drawLine(0, 0, getWidth() - 1, 0);
+            graphics->drawLine(0, 1, 0, getHeight() - 1);
             graphics->setColor(shadowColor);
-            graphics->drawLine(width - i,i + 1, width - i, height - i);
-            graphics->drawLine(i,height - i, width - i - 1, height - i);
+            graphics->drawLine(getWidth() - 1, 1, getWidth() - 1, getHeight() - 1);
+
+            borderColor = highlightColor;
+            baseColor = getBaseColor();
         }
+        else
+        {
+            // Draw a border.
+            graphics->setColor(shadowColor);
+            graphics->drawLine(0, 0, getWidth() - 1, 0);
+            graphics->drawLine(0, 1, 0, getHeight() - 1);
+            graphics->drawLine(getWidth() - 1, 1, getWidth() - 1, getHeight() - 1);
+
+            baseColor = getBaseColor() - 0x151515;
+            baseColor.a = alpha;
+        }
+
+        // Push a clip area so the other drawings don't need to worry
+        // about the border.
+        graphics->pushClipArea(Rectangle(1, 1, getWidth() - 2, getHeight() - 1));
+        const Rectangle currentClipArea = graphics->getCurrentClipArea();
+
+        graphics->setColor(baseColor);
+        graphics->fillRectangle(Rectangle(0, 0, currentClipArea.width, currentClipArea.height));
+
+        drawChildren(graphics);
+
+        if (mTabbedArea != NULL && mTabbedArea->isFocused() && mTabbedArea->isTabSelected(this))
+        {
+            graphics->setColor(Color(0x000000));
+            graphics->drawRectangle(
+                Rectangle(2, 2, currentClipArea.width - 4, currentClipArea.height - 4));
+        }
+        graphics->popClipArea();
     }
     
     void Tab::mouseEntered(MouseEvent& mouseEvent)
