@@ -99,7 +99,7 @@ namespace gcn
          * @param convertToDisplayFormat true if the image should be converted
          *                               to display, false otherwise.
          */
-        OpenGLImage(unsigned int* pixels, int width, int height, bool convertToDisplayFormat = true);
+        OpenGLImage(const unsigned int* pixels, int width, int height, bool convertToDisplayFormat = true);
 
         /**
          * Constructor. Load an image from an OpenGL texture handle. The width
