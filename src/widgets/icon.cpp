@@ -66,7 +66,17 @@
 
 namespace gcn
 {
+    Icon::Icon()
+        : mImage(0)
+        , mInternalImage(false)
+    {
+        setWidth(0);
+        setHeight(0);
+    }
+
     Icon::Icon(const std::string& filename)
+        : mImage(0),
+          mInternalImage(false)
     {
         mImage = Image::load(filename);
         mInternalImage = true;
@@ -74,10 +84,10 @@ namespace gcn
         setWidth(mImage->getWidth());
     }
 
-    Icon::Icon(Image* image)
+    Icon::Icon(const Image* image)
+        : mImage(image),
+          mInternalImage(false)
     {
-        mImage = image;
-        mInternalImage = false;
         setHeight(mImage->getHeight());
         setWidth(mImage->getWidth());
     }
@@ -90,9 +100,30 @@ namespace gcn
         }
     }
 
+    void Icon::setImage(const Image* image)
+    {
+        if (mInternalImage)
+        {
+            delete mImage;
+        }
+
+        mImage = image;
+        mInternalImage = false;
+    }
+
+    const Image* Icon::getImage() const
+    {
+        return mImage;
+    }
+
     void Icon::draw(Graphics* graphics)
     {
-        graphics->drawImage(mImage, 0, 0);
+        if (mImage != NULL)
+        {
+            const int x = (getWidth() - mImage->getWidth()) / 2;
+            const int y = (getHeight() - mImage->getHeight()) / 2;
+            graphics->drawImage(mImage, x, y);
+        }
     }
 
 }
