@@ -1,3 +1,9 @@
+Version 1.1.0
+=============
+* Widget::hasModalFocus has been renamed to Widget::isModalFocused.
+* Widget::hasModalMouseInputFocus has been renamed to Widget::isModalMouseInputFocused.
+* Widget::generateAction has been renamed to Widget::distributeActionEvent.
+
 Version 1.0.0
 =============
 * Large number of fixes to widgets/drawing/sdl2 support

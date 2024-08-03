@@ -65,11 +65,9 @@
 namespace gcn
 {
     /**
-     * Listener of death events from Widgets. To be able to
-     * listen for deaths you must make a class which inherits
-     * from this class and implements the death function.
+     * Interface for listening for death events from widgets.
      *
-     * @see Widget::addDeathListener
+     * @see Widget::addDeathListener, Widget::removeDeathListener
      * @author Olof Naessén
      * @since 0.6.0
      */
@@ -86,7 +84,7 @@ namespace gcn
          * Called when a widget dies. It is used to be able to recieve
          * a notification when a death of a widget occurs.
          *
-         * @param event the event of the death.
+         * @param event The event of the death.
          */
         virtual void death(const Event& event) = 0;
 

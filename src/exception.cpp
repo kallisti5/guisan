@@ -83,7 +83,7 @@ namespace gcn
     Exception::Exception(const std::string& message,
                          const std::string& function,
                          const std::string& filename,
-                         int line)
+                         unsigned int line)
                          : mFunction(function),
                            mMessage(message),
                            mFilename(filename),
@@ -107,7 +107,7 @@ namespace gcn
         return mFilename;
     }
 
-    int Exception::getLine() const
+    unsigned int Exception::getLine() const
     {
         return mLine;
     }

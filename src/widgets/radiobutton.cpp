@@ -236,7 +236,7 @@ namespace gcn
             key.getValue() == Key::SPACE)
         {
             setSelected(true);
-            generateAction();
+            distributeActionEvent();
             keyEvent.consume();
         }
     }
@@ -246,7 +246,7 @@ namespace gcn
         if (mouseEvent.getButton() == MouseEvent::LEFT)
         {
             setSelected(true);
-            generateAction();
+            distributeActionEvent();
         }
     }
 

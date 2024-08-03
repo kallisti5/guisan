@@ -66,8 +66,9 @@
 namespace gcn
 {
     /**
-     * Implements basic container behaviour. Most container will suffice by
-     * inheriting from this class.
+     * A base class for containers. The class implements the most
+     * common things for a container. If you are implementing a 
+     * container, consider inheriting from this class.
      *
      * @see Container
      */
@@ -111,14 +112,14 @@ namespace gcn
         /**
          * Adds a widget to the basic container.
          *
-         * @param widget the widget to add.
+         * @param widget The widget to add.
          */
         void add(Widget* widget);
 
         /**
          * Removes a widget from the basic container.
          *
-         * @param widget the widget to remove.
+         * @param widget The widget to remove.
          */
         virtual void remove(Widget* widget);
 
@@ -128,22 +129,25 @@ namespace gcn
         virtual void clear();
         
         /**
-         * Draws children widgets.
+         * Draws the children widgets of the basic container.
          *
          * @param graphics a Graphics object to draw with.
          */
         virtual void drawChildren(Graphics* graphics);
 
         /**
-         * Calls logic for children widgets.
+         * Calls logic for the children widgets of the basic
+         * container.
          */
         virtual void logicChildren();
 
         /**
-         * Finds a widget given an id.
+         * Finds a widget given an id. This function can be useful
+         * when implementing a GUI generator for Guisan, such as
+         * the ability to create a Guisan GUI from an XML file.
          *
-         * @param id the id to find a widget by.
-         * @return the widget with the corrosponding id, 
+         * @param id The id to find a widget by.
+         * @return The widget with the corrosponding id, 
                    NULL of no widget is found.
          */
         virtual Widget* findWidgetById(const std::string& id);
@@ -152,6 +156,9 @@ namespace gcn
         typedef WidgetList::iterator WidgetListIterator;
         typedef WidgetList::reverse_iterator WidgetListReverseIterator;
 
+        /**
+         * Holds all widgets of the basic container.
+         */
         WidgetList mWidgets;
     };
 }

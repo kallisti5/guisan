@@ -219,7 +219,7 @@ namespace gcn
                 setValue(markerPositionToValue(getHeight() - mouseEvent.getY() - getMarkerLength() / 2));
             }
 
-            generateAction();
+            distributeActionEvent();
         }
     }
 
@@ -234,7 +234,7 @@ namespace gcn
             setValue(markerPositionToValue(getHeight() - mouseEvent.getY() - getMarkerLength() / 2));
         }
 
-        generateAction();
+        distributeActionEvent();
 
         mouseEvent.consume();
     }
@@ -280,13 +280,13 @@ namespace gcn
             if (key.getValue() == Key::RIGHT)
             {
                 setValue(getValue() + getStepLength());
-                generateAction();
+                distributeActionEvent();
                 keyEvent.consume();
             }
             else if (key.getValue() == Key::LEFT)
             {
                 setValue(getValue() - getStepLength());
-                generateAction();
+                distributeActionEvent();
                 keyEvent.consume();
             }
         }
@@ -295,13 +295,13 @@ namespace gcn
             if (key.getValue() == Key::UP)
             {
                 setValue(getValue() + getStepLength());
-                generateAction();
+                distributeActionEvent();
                 keyEvent.consume();
             }
             else if (key.getValue() == Key::DOWN)
             {
                 setValue(getValue() - getStepLength());
-                generateAction();
+                distributeActionEvent();
                 keyEvent.consume();
             }
         }
@@ -381,7 +381,7 @@ namespace gcn
     void Slider::mouseWheelMovedUp(MouseEvent& mouseEvent)
     {
         setValue(getValue() + getStepLength());
-        generateAction();
+        distributeActionEvent();
 
         mouseEvent.consume();
     }
@@ -389,7 +389,7 @@ namespace gcn
     void Slider::mouseWheelMovedDown(MouseEvent& mouseEvent)
     {
         setValue(getValue() - getStepLength());
-        generateAction();
+        distributeActionEvent();
 
         mouseEvent.consume();
     }

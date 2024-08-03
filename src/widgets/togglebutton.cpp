@@ -171,7 +171,7 @@ namespace gcn
         {
             mMousePressed = false;
             toggleSelected();
-            generateAction();
+            distributeActionEvent();
             mouseEvent.consume();
         }
         else if (mouseEvent.getButton() == MouseEvent::LEFT)
@@ -191,7 +191,7 @@ namespace gcn
         {
             mKeyPressed = false;
             toggleSelected();
-            generateAction();
+            distributeActionEvent();
             keyEvent.consume();
         }
     }

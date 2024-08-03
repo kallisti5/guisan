@@ -64,7 +64,8 @@ namespace gcn
     class Widget;
 
     /**
-     * Base class for all events.
+     * Base class for all events. All events in Guisan should
+     * inherit from this class.
      *
      * @author Olof Naessén
      * @since 0.6.0
@@ -76,7 +77,7 @@ namespace gcn
         /**
          * Constructor.
          *
-         * @param source the source widget of the event.
+         * @param source The source widget of the event.
          */
         Event(Widget* source);
 
@@ -86,16 +87,19 @@ namespace gcn
         virtual ~Event();
 
         /**
-         * Gets the source widget of the event.
+         * Gets the source widget of the event. The function
+         * is used to tell which widget fired an event.
          *
-         * @return the source widget of the event.
+         * @return The source widget of the event.
          */
         Widget* getSource() const;
 
 
     protected:
+        /**
+         * Holds the source widget of the event.
+         */
         Widget* mSource;
-        unsigned int mType;
     };
 }
 

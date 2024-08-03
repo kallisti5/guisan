@@ -69,10 +69,10 @@
 #endif
 
 /*
- * A macro to be used when throwing exceptions.
+ * A macro used to create a standard exception object.
  * What it basicly does is that it creates a new exception
  * and automatically sets the filename and line number where
- * the exception occured.
+ * the exception occured by using other compiler macros.
  */
 #define GCN_EXCEPTION(mess) gcn::Exception(mess,   \
                             __FUNCTION__,          \
@@ -83,9 +83,12 @@ namespace gcn
 {
 
     /**
-     * An exception containing a message, a file and a line number.
-     * Guichan will only throw exceptions of this class. You can use
-     * this class for your own exceptions. A nifty feature of the
+     * An exception containing a message, a file and a line number
+     * where the exception occured. Guisan will only throw exceptions 
+     * of this class. 
+     * 
+     * You can use this class for your own exceptions that has
+     * something to do with a GUI exception. A nifty feature of the
      * excpetion class is that it can tell you from which line and
      * file it was thrown. To make things easier when throwing
      * exceptions there exists a macro for creating exceptions
@@ -107,7 +110,7 @@ namespace gcn
         /**
          * Constructor.
          *
-         * @param message the error message.
+         * @param message The error message of the exception.
          */
         Exception(const std::string& message);
 
@@ -115,50 +118,69 @@ namespace gcn
          * Constructor.
          *
          * NOTE: Don't use this constructor. Use the GCN_EXCEPTION macro instead.
+         *       This constructor merely exists for the GCN_EXCEPTION macro to
+         *       use.
          *
-         * @param message the error message.
-         * @param function the function name.
-         * @param filename the name of the file.
-         * @param line the line number.
+         * @param message The error message of the exception.
+         * @param function The function name where the exception occured.
+         * @param filename The name of the file where the exception occured.
+         * @param line The line number in the source code where the exception
+         *             occured.
          */
         Exception(const std::string& message,
                   const std::string& function,
                   const std::string& filename,
-                  int line);
+                  unsigned int line);
 
         /**
-         * Gets the function name in which the exception was thrown.
+         * Gets the function name where the exception occured.
          *
-         * @return the function name in which the exception was thrown.
+         * @return The function name where the exception occured.
          */
         const std::string& getFunction() const;
 
         /**
          * Gets the error message of the exception.
          *
-         * @return the error message.
+         * @return The error message of the exception.
          */
         const std::string& getMessage() const;
 
         /**
-         * Gets the filename in which the exceptions was thrown.
+         * Gets the filename where the exception occured.
          *
-         * @return the filename in which the exception was thrown.
+         * @return The filename where the exception occured.
          */
         const std::string& getFilename() const;
 
         /**
-         * Gets the line number of the line where the exception was thrown.
+         * Gets the line number where the exception occured.
          *
-         * @return the line number of the line where the exception was thrown.
+         * @return The line number where the exception occured.
          */
-        int getLine() const;
+        unsigned int getLine() const;
 
     protected:
+        /**
+         * Holds the name of the function name where the
+         * exception occured.
+         */
         std::string mFunction;
+
+        /**
+         * Holds the error message of the exception.
+         */
         std::string mMessage;
+
+        /**
+         * Holds the filename where the exception occured.
+         */
         std::string mFilename;
-        int mLine;
+
+        /**
+         * Holds the line number where the exception occured.
+         */
+        unsigned int mLine;
     };
 }
 

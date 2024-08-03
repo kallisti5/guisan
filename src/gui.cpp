@@ -528,7 +528,7 @@ namespace gcn
         mFocusHandler->setLastWidgetPressed(sourceWidget);
         
         if (mFocusHandler->getModalFocused() != NULL
-            && sourceWidget->hasModalFocus()
+            && sourceWidget->isModalFocused()
             || mFocusHandler->getModalFocused() == NULL)
         {
             sourceWidget->requestFocus();
@@ -658,7 +658,7 @@ namespace gcn
         Widget* widget = getWidgetAt(x, y);
 
         if (mFocusHandler->getModalMouseInputFocused() != NULL
-            && !widget->hasModalMouseInputFocus())
+            && !widget->isModalMouseInputFocused())
         {
             return mFocusHandler->getModalMouseInputFocused();
         }
@@ -691,14 +691,14 @@ namespace gcn
         Widget* widget = source;
 
         if (mFocusHandler->getModalFocused() != NULL
-            && !widget->hasModalFocus()
+            && !widget->isModalFocused()
             && !force)
         {
             return;
         }
 
         if (mFocusHandler->getModalMouseInputFocused() != NULL
-            && !widget->hasModalMouseInputFocus()
+            && !widget->isModalMouseInputFocused()
             && !force)
         {
             return;
@@ -789,7 +789,7 @@ namespace gcn
             // If a non modal focused widget has been reach
             // and we have modal focus cancel the distribution.
             if (mFocusHandler->getModalFocused() != NULL
-                && !widget->hasModalFocus())
+                && !widget->isModalFocused())
             {
                 break;
             }
@@ -797,7 +797,7 @@ namespace gcn
             // If a non modal mouse input focused widget has been reach
             // and we have modal mouse input focus cancel the distribution.
             if (mFocusHandler->getModalMouseInputFocused() != NULL
-                && !widget->hasModalMouseInputFocus())
+                && !widget->isModalMouseInputFocused())
             {
                 break;
             }
@@ -810,13 +810,13 @@ namespace gcn
         Widget* widget = keyEvent.getSource();
 
         if (mFocusHandler->getModalFocused() != NULL
-            && !widget->hasModalFocus())
+            && !widget->isModalFocused())
         {
             return;
         }
 
         if (mFocusHandler->getModalMouseInputFocused() != NULL
-            && !widget->hasModalMouseInputFocus())
+            && !widget->isModalMouseInputFocused())
         {
             return;
         }
@@ -862,7 +862,7 @@ namespace gcn
             // If a non modal focused widget has been reach
             // and we have modal focus cancel the distribution.
             if (mFocusHandler->getModalFocused() != NULL
-                && !widget->hasModalFocus())
+                && !widget->isModalFocused())
             {
                 break;
             }

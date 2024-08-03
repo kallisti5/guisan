@@ -107,7 +107,7 @@ namespace gcn
          * Gets the ImageLoader used for loading Images.
          *
          * @return the ImageLoader used for loading Images.
-         * @see SDLImageLoader, AllegroImageLoader
+         * @see SDLImageLoader
          */
         static ImageLoader* getImageLoader();
 
@@ -118,7 +118,7 @@ namespace gcn
          *            images!
          *
          * @param imageLoader the ImageLoader to be used for loading images.
-         * @see SDLImageLoader, AllegroImageLoader
+         * @see SDLImageLoader
          */
         static void setImageLoader(ImageLoader* imageLoader);
 

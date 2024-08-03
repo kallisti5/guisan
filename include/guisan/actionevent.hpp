@@ -67,8 +67,24 @@ namespace gcn
     class Widget;
 
     /**
-     * Represents an action event.
+     * Represents an action event. An action event is an event
+     * that can be fired by a widget whenever an action has occured.
+     * What exactly an action is is up to the widget that fires
+     * the action event. An example is a Button which fires an action
+     * event as soon as the Button is clicked, another example is
+     * TextField which fires an action event as soon as the enter
+     * key is pressed.
      *
+     * Any object can listen for actions from widgets by implementing
+     * the ActionListener interface.
+     *
+     * If you have implement a widget of your own it's a good idea to 
+     * let the widget fire action events whenever you feel an action
+     * has occured so action listeners of the widget can be informed
+     * of the state of the widget.
+     *
+     * @see Widget::addActionListener, Widget::removeActionListener,
+     *      Widget::distributeActionEvent
      * @author Olof Naessén
      * @since 0.6.0
      */
@@ -79,8 +95,8 @@ namespace gcn
         /**
          * Constructor.
          *
-         * @param source the source widget of the event.
-         * @param id the identifier of the event.
+         * @param source The source widget of the event.
+         * @param id An identifier of the event.
          */
         ActionEvent(Widget* source, const std::string& id);
 
@@ -90,13 +106,19 @@ namespace gcn
         virtual ~ActionEvent();
 
         /**
-         * Gets the id of the event.
+         * Gets the identifier of the event. An identifier can
+         * be used to distinguish from two actions from the same
+         * widget or to let many widgets fire the same widgets
+         * that should be treated equally.
          *
-         * @return the id of the event.
+         * @return The identifier of the event.
          */
         const std::string& getId() const;
 
     protected:
+        /**
+         * Holds the identifier of the event.
+         */
         std::string mId;
     };
 }

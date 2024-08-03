@@ -67,16 +67,20 @@ namespace gcn
     class Widget;
 
     /**
-     * Used to keep track of widget focus. You will probably not have
-     * to use the FocusHandler directly to handle focus. Widget has
-     * functions for handling focus which uses a FocusHandler. Use them
-     * instead.
+     * Handles focus for widgets in a Gui. Each Gui has at least one
+     * focus handler. 
+     
+     * You will probably not use the focus handler directly as Widget 
+     * has functions that automatically uses the active focus handler.
      *
-     * @see Widget::isFocused
-     * @see Widget::requestFocus
-     * @see Widget::setFocusable
-     * @see Widget::isFocusable
-     * @see FocusListener
+     * @see Widget::hasFocus, Widget::hasModalFocus, 
+     *      Widget::hasModalMouseInputFocus, Widget::requestFocus,
+     *      Widget::requestModalFocus, Widget::requestModalMouseInputFocus,
+     *      Widget::releaseFocus, Widget::releaseModalFocus,
+     *      Widget::relaseModalMouseInputFocus, Widget::setFocusable, 
+     *      Widget::isFocusable, FocusListener
+     *
+     * @since 0.1.0
      */
     class GCN_CORE_DECLSPEC FocusHandler
     {
@@ -93,44 +97,53 @@ namespace gcn
         virtual ~FocusHandler() { };
 
         /**
-         * Sets focus to a widget. A focus event will also be sent to the widget's
-         * focus listeners.
+         * Requests focus for a widget. Focus will only be granted to a widget
+         * if it's focusable and if no other widget has modal focus.
+         * If a widget receives focus a focus event will be sent to the 
+         * focus listeners of the widget.
          *
-         * @param widget the widget to focus.
+         * @param widget The widget to request focus for.
          */
         virtual void requestFocus(Widget* widget);
 
         /**
-         * Sets modal focus to a widget.
+         * Requests modal focus for a widget. Focus will only be granted
+         * to a widget if it's focusable and if no other widget has modal 
+         * focus.
          *
-         * @param widget the Widget to focus modal.
+         * @param widget The widget to request modal focus for.
          * @throws Exception when another widget already has modal focus.
          */
         virtual void requestModalFocus(Widget* widget);
 
         /**
          * Releases modal focus if the widget has modal focus.
-         * Otherwise nothing will be done.
+         * If the widget doesn't have modal focus no relase will occur.
          *
-         * @param widget the Widget to release modal focus for.
+         * @param widget The widget to release modal focus for.
          */
         virtual void releaseModalFocus(Widget* widget);
 
         /**
-         * Sets modal mouse input focus to a widget. Modal mouse input focus means
-         * no other widget then the widget with modal mouse input focus will
-         * receive mouse input..
-         * The widget with modal mouse input focus will also receive mouse input no
-         * matter what the mouse input is or where the mouse input occurs.
+         * Requests modal mouse input focus for a widget. Focus will only 
+         * be granted to a widget if it's focusable and if no other widget 
+         * has modal mouse input focus.
          *
-         * @param widget the widget to focus for modal mouse input focus.
-         * @throws Exception when another widget already has modal mouse input focus.
+         * Modal mouse input focus means no other widget then the widget with 
+         * modal mouse input focus will receive mouse input. The widget with 
+         * modal mouse input focus will also receive mouse input no matter what 
+         * the mouse input is or where the mouse input occurs.
+         *
+         * @param widget The widget to focus for modal mouse input focus.
+         * @throws Exception when another widget already has modal mouse input 
+         *         focus.
          */
         virtual void requestModalMouseInputFocus(Widget* widget);
 
         /**
          * Releases modal mouse input focus if the widget has modal mouse input
-         * focus. Otherwise nothing will be done.
+         * focus. If the widget doesn't have modal mouse input focus no relase 
+         * will occur.
          *
          * @param widget the widget to release modal mouse input focus for.
          */
@@ -139,148 +152,155 @@ namespace gcn
         /**
          * Gets the widget with focus.
          *
-         * @return the Widget with focus. NULL will be returned if
-         *         no Widget has focus.
+         * @return The widget with focus. NULL if no widget has focus.
          */
         virtual Widget* getFocused() const;
 
         /**
          * Gets the widget with modal focus.
          *
-         * @return the Widget with modal focus. NULL will be returned
-         *         if no Widget has modal focus.
+         * @return The widget with modal focus. NULL if no widget has
+         *         modal focus.
          */
         virtual Widget* getModalFocused() const;
 
         /**
          * Gets the widget with modal mouse input focus.
          *
-         * @return the widget with modal mouse input focus. NULL will be returned
-         *         if no widget has modal mouse input focus.
+         * @return The widget with modal mouse input focus. NULL if
+         *         no widget has modal mouse input focus.
          */
         virtual Widget* getModalMouseInputFocused() const;
 
         /**
-         * Focuses the next Widget. If no Widget has focus the first
-         * Widget gets focus. The order in which the Widgets are focused
-         * depends on the order you add them to the GUI.
+         * Focuses the next widget added to a conainer. 
+         * If no widget has focus the first widget gets focus. The order 
+         * in which the widgets are focused is determined by the order
+         * they were added to a container.
          */
         virtual void focusNext();
 
         /**
-         * Focuses the previous Widget. If no Widget has focus the first
-         * Widget gets focus. The order in which the widgets are focused
-         * depends on the order you add them to the GUI.
+         * Focuses the previous widget added to a contaienr. 
+         * If no widget has focus the first widget gets focus. The order 
+         * in which the widgets are focused is determined by the order
+         * they were added to a container.
          */
         virtual void focusPrevious();
 
         /**
-         * Checks if a Widget is focused.
+         * Checks if a widget is focused.
          *
-         * @param widget widget to check if it is focused.
-         * @return true if the widget is focused.
+         * @param widget The widget to check.
+         * @return True if the widget is focused, false otherwise.
          */
         virtual bool isFocused(const Widget* widget) const;
 
         /**
-         * Adds a widget to the FocusHandler.
+         * Adds a widget to by handles by the focus handler.
          *
-         * @param widget the widget to add.
+         * @param widget The widget to add.
          */
         virtual void add(Widget* widget);
 
         /**
-         * Removes a widget from the FocusHandler.
+         * Removes a widget from the focus handler.
          *
-         * @param widget the widget to remove.
+         * @param widget The widget to remove.
          */
         virtual void remove(Widget* widget);
 
         /**
-         * Focuses nothing. A focus event will also be sent to the focused widget's
-         * focus listeners if a widget has focus.
+         * Focuses nothing. A focus event will also be sent to the 
+         * focused widget's focus listeners if a widget has focus.
          */
         virtual void focusNone();
 
         /**
-         * Focuses the next Widget which allows tab in unless current focused
-         * Widget disallows tab out.
+         * Focuses the next widget which allows tabbing in unless 
+         * the current focused Widget disallows tabbing out.
          */
         virtual void tabNext();
 
         /**
-         * Focuses the previous Widget which allows tab in unless current focused
-         * Widget disallows tab out.
+         * Focuses the previous widget which allows tabbing in unless 
+         * current focused widget disallows tabbing out.
          */
         virtual void tabPrevious();
 
         /**
-         * Gets the widget being dragged.
+         * Gets the widget being dragged. Used by the Gui class to 
+         * keep track of the dragged widget.
          * 
          * @return the widget being dragged.
          */
         virtual Widget* getDraggedWidget();
 
         /**
-         * Sets the widget being dragged.
+         * Sets the widget being dragged. Used by the Gui class to 
+         * keep track of the dragged widget.
          * 
-         * @param draggedWidget the widget being dragged.
+         * @param draggedWidget The widget being dragged.
          */
         virtual void setDraggedWidget(Widget* draggedWidget);
 
         /**
-         * Gets the last widget with the mouse.
+         * Gets the last widget with the mouse. Used by the Gui class 
+         * to keep track the last widget with the mouse.
          * 
-         * @return the last widget with the mouse.
+         * @return The last widget with the mouse.
          */ 
         virtual Widget* getLastWidgetWithMouse();
 
         /**
-         * Sets the last widget with the mouse.
+         * Sets the last widget with the mouse. Used by the Gui class 
+         * to keep track the last widget with the mouse.
          *
-         * @param lastWidgetWithMouse the last widget with the mouse.
+         * @param lastWidgetWithMouse The last widget with the mouse.
          */
         virtual void setLastWidgetWithMouse(Widget* lastWidgetWithMouse);
 
         /**
          * Gets the last widget with modal focus.
          * 
-         * @return the last widget with modal focus.
+         * @return The last widget with modal focus.
          */
         virtual Widget* getLastWidgetWithModalFocus();
 
         /**
          * Sets the last widget with modal focus.
          * 
-         * @param lastWidgetWithModalFocus the last widget with modal focus.
+         * @param lastWidgetWithModalFocus The last widget with modal focus.
          */
         virtual void setLastWidgetWithModalFocus(Widget* lastWidgetWithModalFocus);
 
         /**
          * Gets the last widget with modal mouse input focus.
          *
-         * @return the last widget with modal mouse input focus.
+         * @return The last widget with modal mouse input focus.
          */
         virtual Widget* getLastWidgetWithModalMouseInputFocus();
 
         /**
          * Sets the last widget with modal mouse input focus.
          *
-         * @param lastMouseWithModalMouseInputFocus  the last widget with modal mouse input focus.
+         * @param lastMouseWithModalMouseInputFocus The last widget with modal mouse input focus.
          */
         virtual void setLastWidgetWithModalMouseInputFocus(Widget* lastWidgetWithModalMouseInputFocus);
 
         /**
-         * Gets the last widget pressed.
+         * Gets the last widget pressed. Used by the Gui class to keep track
+         * of pressed widgets.
          *
-         * @return the last widget pressed. 
+         * @return The last widget pressed. 
          */
         virtual Widget* getLastWidgetPressed();
 
         /**
-         * Sets the last widget pressed.
+         * Sets the last widget pressed. Used by the Gui class to keep track
+         * of pressed widgets.
          *
-         * @param lastWidgetPressed the last widget pressed.
+         * @param lastWidgetPressed The last widget pressed.
          */
         virtual void setLastWidgetPressed(Widget* lastWidgetPressed);
 
@@ -289,7 +309,6 @@ namespace gcn
          * Distributes a focus lost event.
          *
          * @param focusEvent the event to distribute.
-         * @author Olof Naessén
          * @since 0.7.0
          */
         virtual void distributeFocusLostEvent(const Event& focusEvent);
@@ -298,23 +317,60 @@ namespace gcn
          * Distributes a focus gained event.
          *
          * @param focusEvent the event to distribute.
-         * @author Olof Naessén
          * @since 0.7.0
          */
         virtual void distributeFocusGainedEvent(const Event& focusEvent);
 
         typedef std::vector<Widget*> WidgetVector;
         typedef WidgetVector::iterator WidgetIterator;
+
+        /**
+         * Holds the widgets currently being handled by the
+         * focus handler.
+         */
         WidgetVector mWidgets;
 
+        /**
+         * Holds the focused widget. NULL if no widget has focus.
+         */
         Widget* mFocusedWidget;
+
+        /**
+         * Holds the modal focused widget. NULL if no widget has
+         * modal focused.
+         */
         Widget* mModalFocusedWidget;
+
+        /**
+         * Holds the modal mouse input focused widget. NULL if no widget 
+         * is being dragged.
+         */
         Widget* mModalMouseInputFocusedWidget;
 
+        /** 
+         * Holds the dragged widget. NULL if no widget is
+         * being dragged.
+         */
         Widget* mDraggedWidget;
+
+        /**
+         * Holds the last widget with the mouse.
+         */
         Widget* mLastWidgetWithMouse;
+
+        /**
+         * Holds the last widget with modal focus.
+         */
         Widget* mLastWidgetWithModalFocus;
+
+        /**
+         * Holds the last widget with modal mouse input focus.
+         */
         Widget* mLastWidgetWithModalMouseInputFocus;
+
+        /**
+         * Holds the last widget pressed.
+         */
         Widget* mLastWidgetPressed;
     };
 }

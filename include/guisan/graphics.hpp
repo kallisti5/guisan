@@ -71,32 +71,37 @@ namespace gcn
     class Image;
 
     /**
-     * Used for drawing graphics. It contains all vital functions for drawing.
-     * We include implemented Graphics classes for some common platforms like
-     * the Allegro library, the OpenGL library and the SDL library. To make
-     * Guichan usable under another platform, a Graphics class must be
-     * implemented.
+     * Abstract class for providing drawing primitve functions. 
+     * It contains all vital functions for drawing.
+     *
+     * Guisan contains implementations of Graphics for common 
+     * libraries like the OpenGL library and the SDL library. 
+     * To make Guisan usable with other libraries, a Graphics class
+     * must be implemented.
      *
      * In Graphics you can set clip areas to limit drawing to certain
-     * areas of the screen. Clip areas are put on a stack, which means that you
-     * can push smaller and smaller clip areas onto the stack. All coordinates
-     * will be relative to the topmost clip area. In most cases you won't have
-     * to worry about the clip areas, unless you want to implement some really
-     * complex widget. Pushing and poping of clip areas are handled
-     * automatically by container widgets when their child widgets are drawn.
+     * areas of the screen. Clip areas are put on a stack, which 
+     * means that you can push smaller and smaller clip areas onto the 
+     * stack. All coordinates will be relative to the top most clip area. 
+     * In most cases you won't have to worry about the clip areas, 
+     * unless you want to implement some really complex widget. 
+     * Pushing and poping of clip areas are handled automatically by 
+     * container widgets when their child widgets are drawn.
      *
      * IMPORTANT: Remember to pop each clip area that you pushed on the stack
      * after you are done with it.
      *
-     * If you feel that Graphics is to restrictive for your needs, there is
-     * no one stopping you from using your own code for drawing in Widgets.
-     * You could for instance use pure SDL in the drawing of Widgets bypassing
-     * Graphics. This might however hurt portability of your application.
+     * If you feel that Graphics is to restrictive for your needs, 
+     * there is no one stopping you from using your own code for drawing 
+     * in widgets. You could for instance use pure SDL in the drawing of 
+     * widgets bypassing Graphics. This might however hurt portability of 
+     * your application.
      *
-     * If you implement a Graphics class not present in Guichan we would be very
-     * happy to add it to Guichan.
+     * If you implement a Graphics class not present in Guisan we would 
+     * be very happy to add it to Guisan.
      *
-     * @see AllegroGraphics, OpenGLGraphics, SDLGraphics, Image
+     * @see OpenGLGraphics, SDLGraphics, Image
+     * @since 0.1.0
      */
     class GCN_CORE_DECLSPEC Graphics
     {
@@ -111,15 +116,21 @@ namespace gcn
             RIGHT
         };
 
+        /**
+         * Constructor.
+         */
         Graphics();
 
-        virtual ~Graphics() { }
+        /**
+         * Destructor.
+         */
+        virtual ~Graphics() {}
 
         /**
          * Initializes drawing. Called by the Gui when Gui::draw() is called.
          * It is needed by some implementations of Graphics to perform
          * preparations before drawing. An example of such an implementation
-         * would be OpenGLGraphics.
+         * is the OpenGLGraphics.
          *
          * NOTE: You will never need to call this function yourself, unless
          *       you use a Graphics object outside of Guisan.
@@ -141,19 +152,21 @@ namespace gcn
 
         /**
          * Pushes a clip area onto the stack. The x and y coordinates in the
-         * Rectangle will be relative to the last pushed clip area.
+         * rectangle is  relative to the last pushed clip area.
          * If the new area falls outside the current clip area, it will be
          * clipped as necessary.
          *
-         * @param area the clip area to be pushed onto the stack.
-         * @return false if the the new area lays totally outside the
-         *         current clip area. Note that an empty clip area
-         *         will be pused in this case.
+         * If a clip area is outside of the top clip area a clip area with
+         * zero width and height will be pushed.
+         *
+         * @param area The clip area to be pushed onto the stack.
+         * @return False if the the new area lays outside the current clip 
+         *         area.
          */
         virtual bool pushClipArea(Rectangle area);
 
         /**
-         * Removes the topmost clip area from the stack.
+         * Removes the top most clip area from the stack.
          *
          * @throws Exception if the stack is empty.
          */
@@ -163,16 +176,16 @@ namespace gcn
          * Gets the current clip area. Usefull if you want to do drawing
          * bypassing Graphics.
          *
-         * @return the current clip area.
+         * @return The current clip area.
          */
         virtual const ClipRectangle& getCurrentClipArea();
 
         /**
-         * Draws a part of an Image.
+         * Draws a part of an image.
          *
-         * NOTE: Width and height arguments will not scale the Image but
+         * NOTE: Width and height arguments will not scale the image but
          *       specifies the size of the part to be drawn. If you want
-         *       to draw the whole Image there is a simplified version of
+         *       to draw the whole image there is a simplified version of
          *       this function.
          *
          * EXAMPLE: @code drawImage(myImage, 10, 10, 20, 20, 40, 40); @endcode
@@ -181,13 +194,13 @@ namespace gcn
          *          The piece will be drawn with it's top left corner at
          *          coordinate (20, 20).
          *
-         * @param image the Image to draw.
-         * @param srcX source Image x coordinate.
-         * @param srcY source Image y coordinate.
-         * @param dstX destination x coordinate.
-         * @param dstY destination y coordinate.
-         * @param width the width of the piece.
-         * @param height the height of the piece.
+         * @param image The image to draw.
+         * @param srcX The source image x coordinate.
+         * @param srcY The source image y coordinate.
+         * @param dstX The destination x coordinate.
+         * @param dstY The destination y coordinate.
+         * @param width The width of the piece.
+         * @param height The height of the piece.
          */
         virtual void drawImage(const Image* image, int srcX, int srcY,
                                int dstX, int dstY, int width,
@@ -204,79 +217,79 @@ namespace gcn
         /**
          * Draws a single point/pixel.
          *
-         * @param x the x coordinate.
-         * @param y the y coordinate.
+         * @param x The x coordinate.
+         * @param y The y coordinate.
          */
         virtual void drawPoint(int x, int y) = 0;
 
         /**
-         * Ddraws a line.
+         * Draws a line.
          *
-         * @param x1 the first x coordinate.
-         * @param y1 the first y coordinate.
-         * @param x2 the second x coordinate.
-         * @param y2 the second y coordinate.
+         * @param x1 The first x coordinate.
+         * @param y1 The first y coordinate.
+         * @param x2 The second x coordinate.
+         * @param y2 The second y coordinate.
          */
         virtual void drawLine(int x1, int y1, int x2, int y2) = 0;
 
         /**
-         * Draws a simple, non-filled, Rectangle with one pixel width.
+         * Draws a simple, non-filled, rectangle with a one pixel width.
          *
-         * @param rectangle the Rectangle to draw.
+         * @param rectangle The rectangle to draw.
          */
         virtual void drawRectangle(const Rectangle& rectangle) = 0;
 
         /**
-         * Draws a filled Rectangle.
+         * Draws a filled rectangle.
          *
-         * @param rectangle the filled Rectangle to draw.
+         * @param rectangle The filled rectangle to draw.
          */
         virtual void fillRectangle(const Rectangle& rectangle) = 0;
 
         /**
-         * Sets the Color to use when drawing.
+         * Sets the color to use when drawing.
          *
-         * @param color a Color.
+         * @param color A color.
          */
         virtual void setColor(const Color& color) = 0;
 
         /**
-         * Gets the Color to use when drawing.
+         * Gets the color to use when drawing.
          *
-         * @return the Color used when drawing.
+         * @return The color used when drawing.
          */
         virtual const Color& getColor() = 0;
 
         /**
          * Sets the font to use when drawing text.
          *
-         * @param font the Font to use when drawing.
+         * @param font The font to use when drawing.
          */
         virtual void setFont(Font* font);
 
         /**
          * Draws text.
          *
-         * @param text the text to draw.
-         * @param x the x coordinate where to draw the text.
-         * @param y the y coordinate where to draw the text.
-         * @param alignment Graphics::LEFT, Graphics::CENTER or Graphics::RIGHT.
-         * @throws Exception when no Font is set.
+         * @param text The text to draw.
+         * @param x The x coordinate where to draw the text.
+         * @param y The y coordinate where to draw the text.
+         * @param alignment The alignemnt to use when drawing.
+         * @throws Exception when no font has been set.
          */
         virtual void drawText(const std::string& text, int x, int y,
                               Alignment alignment = LEFT);
 
     protected:
+        /**
+         * Holds the clip area stack.
+         */
         std::stack<ClipRectangle> mClipStack;
+
+        /**
+         * Holds the current font.
+         */
         Font* mFont;
     };
 }
 
 #endif // end GCN_GRAPHICS_HPP
-
-/*
- * yakslem - "little cake on cake, but that's the fall"
- * finalman - "skall jag skriva det?"
- * yakslem - "ja, varfor inte?"
- */
-

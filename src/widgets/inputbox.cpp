@@ -257,13 +257,13 @@ namespace gcn
             if(mouseEvent.getSource() == mButtonOK)
             {
                 mClickedButton = 0;
-                generateAction();
+                distributeActionEvent();
             }
             if(mouseEvent.getSource() == mButtonCancel)
             {
                 mClickedButton = 1;
                 setVisible(false);
-                generateAction();
+                distributeActionEvent();
             }
          
         }
