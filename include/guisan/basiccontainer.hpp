@@ -113,6 +113,7 @@ namespace gcn
          * Adds a widget to the basic container.
          *
          * @param widget The widget to add.
+         * @see remove, clear
          */
         void add(Widget* widget);
 
@@ -120,18 +121,21 @@ namespace gcn
          * Removes a widget from the basic container.
          *
          * @param widget The widget to remove.
+         * @see add, clear
          */
         virtual void remove(Widget* widget);
 
         /**
          * Clears the basic container from all widgets.
+         *
+         * @see remove, clear
          */
         virtual void clear();
         
         /**
          * Draws the children widgets of the basic container.
          *
-         * @param graphics a Graphics object to draw with.
+         * @param graphics A graphics object to draw with.
          */
         virtual void drawChildren(Graphics* graphics);
 

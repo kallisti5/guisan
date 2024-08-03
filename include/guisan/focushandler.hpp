@@ -73,13 +73,11 @@ namespace gcn
      * You will probably not use the focus handler directly as Widget 
      * has functions that automatically uses the active focus handler.
      *
-     * @see Widget::hasFocus, Widget::hasModalFocus, 
-     *      Widget::hasModalMouseInputFocus, Widget::requestFocus,
+     * @see Widget::isFocused, Widget::isModalFocused, 
+     *      Widget::isModalMouseInputFocused, Widget::requestFocus,
      *      Widget::requestModalFocus, Widget::requestModalMouseInputFocus,
-     *      Widget::releaseFocus, Widget::releaseModalFocus,
-     *      Widget::relaseModalMouseInputFocus, Widget::setFocusable, 
-     *      Widget::isFocusable, FocusListener
-     *
+     *      Widget::releaseModalFocus, Widget::relaseModalMouseInputFocus, 
+     *      Widget::setFocusable, Widget::isFocusable, FocusListener     *
      * @since 0.1.0
      */
     class GCN_CORE_DECLSPEC FocusHandler
@@ -103,6 +101,7 @@ namespace gcn
          * focus listeners of the widget.
          *
          * @param widget The widget to request focus for.
+         * @see isFocused, Widget::requestFocus
          */
         virtual void requestFocus(Widget* widget);
 
@@ -113,16 +112,9 @@ namespace gcn
          *
          * @param widget The widget to request modal focus for.
          * @throws Exception when another widget already has modal focus.
+         * @see releaseModalFocus, Widget::requestModalFocus
          */
         virtual void requestModalFocus(Widget* widget);
-
-        /**
-         * Releases modal focus if the widget has modal focus.
-         * If the widget doesn't have modal focus no relase will occur.
-         *
-         * @param widget The widget to release modal focus for.
-         */
-        virtual void releaseModalFocus(Widget* widget);
 
         /**
          * Requests modal mouse input focus for a widget. Focus will only 
@@ -137,8 +129,18 @@ namespace gcn
          * @param widget The widget to focus for modal mouse input focus.
          * @throws Exception when another widget already has modal mouse input 
          *         focus.
+         * @see releaseModalMouseInputFocus, Widget::requestModalMouseInputFocus
          */
         virtual void requestModalMouseInputFocus(Widget* widget);
+
+        /**
+         * Releases modal focus if the widget has modal focus.
+         * If the widget doesn't have modal focus no relase will occur.
+         *
+         * @param widget The widget to release modal focus for.
+         * @see requestModalFocus, Widget::releaseModalFocus
+         */
+        virtual void releaseModalFocus(Widget* widget);
 
         /**
          * Releases modal mouse input focus if the widget has modal mouse input
@@ -146,8 +148,18 @@ namespace gcn
          * will occur.
          *
          * @param widget the widget to release modal mouse input focus for.
+         * @see requestModalMouseInputFocus, Widget::releaseModalMouseInputFocus
          */
         virtual void releaseModalMouseInputFocus(Widget* widget);
+
+        /**
+         * Checks if a widget is focused.
+         *
+         * @param widget The widget to check.
+         * @return True if the widget is focused, false otherwise.
+         * @see Widget::isFocused
+         */
+        virtual bool isFocused(const Widget* widget) const;
 
         /**
          * Gets the widget with focus.
@@ -177,6 +189,8 @@ namespace gcn
          * If no widget has focus the first widget gets focus. The order 
          * in which the widgets are focused is determined by the order
          * they were added to a container.
+         *
+         * @see focusPrevious
          */
         virtual void focusNext();
 
@@ -185,21 +199,16 @@ namespace gcn
          * If no widget has focus the first widget gets focus. The order 
          * in which the widgets are focused is determined by the order
          * they were added to a container.
+         *
+         * @see focusNext
          */
         virtual void focusPrevious();
-
-        /**
-         * Checks if a widget is focused.
-         *
-         * @param widget The widget to check.
-         * @return True if the widget is focused, false otherwise.
-         */
-        virtual bool isFocused(const Widget* widget) const;
 
         /**
          * Adds a widget to by handles by the focus handler.
          *
          * @param widget The widget to add.
+         * @see remove
          */
         virtual void add(Widget* widget);
 
@@ -207,6 +216,7 @@ namespace gcn
          * Removes a widget from the focus handler.
          *
          * @param widget The widget to remove.
+         * @see add
          */
         virtual void remove(Widget* widget);
 
@@ -219,12 +229,16 @@ namespace gcn
         /**
          * Focuses the next widget which allows tabbing in unless 
          * the current focused Widget disallows tabbing out.
+         * 
+         * @see tabPrevious
          */
         virtual void tabNext();
 
         /**
          * Focuses the previous widget which allows tabbing in unless 
          * current focused widget disallows tabbing out.
+         * 
+         * @see tabNext
          */
         virtual void tabPrevious();
 
@@ -233,6 +247,7 @@ namespace gcn
          * keep track of the dragged widget.
          * 
          * @return the widget being dragged.
+         * @see setDraggedWidget
          */
         virtual Widget* getDraggedWidget();
 
@@ -241,6 +256,7 @@ namespace gcn
          * keep track of the dragged widget.
          * 
          * @param draggedWidget The widget being dragged.
+         * @see getDraggedWidget
          */
         virtual void setDraggedWidget(Widget* draggedWidget);
 
@@ -249,6 +265,7 @@ namespace gcn
          * to keep track the last widget with the mouse.
          * 
          * @return The last widget with the mouse.
+         * @see setLastWidgetWithMouse
          */ 
         virtual Widget* getLastWidgetWithMouse();
 
@@ -257,6 +274,7 @@ namespace gcn
          * to keep track the last widget with the mouse.
          *
          * @param lastWidgetWithMouse The last widget with the mouse.
+         * @see getLastWidgetWithMouse
          */
         virtual void setLastWidgetWithMouse(Widget* lastWidgetWithMouse);
 
@@ -264,6 +282,7 @@ namespace gcn
          * Gets the last widget with modal focus.
          * 
          * @return The last widget with modal focus.
+         * @see setLastWidgetWithModalFocus
          */
         virtual Widget* getLastWidgetWithModalFocus();
 
@@ -271,6 +290,7 @@ namespace gcn
          * Sets the last widget with modal focus.
          * 
          * @param lastWidgetWithModalFocus The last widget with modal focus.
+         * @see getLastWidgetWithModalFocus
          */
         virtual void setLastWidgetWithModalFocus(Widget* lastWidgetWithModalFocus);
 
@@ -278,13 +298,16 @@ namespace gcn
          * Gets the last widget with modal mouse input focus.
          *
          * @return The last widget with modal mouse input focus.
+         * @see setLastWidgetWithModalMouseInputFocus
          */
         virtual Widget* getLastWidgetWithModalMouseInputFocus();
 
         /**
          * Sets the last widget with modal mouse input focus.
          *
-         * @param lastMouseWithModalMouseInputFocus The last widget with modal mouse input focus.
+         * @param lastMouseWithModalMouseInputFocus The last widget with 
+         *                                          modal mouse input focus.
+         * @see getLastWidgetWithModalMouseInputFocus
          */
         virtual void setLastWidgetWithModalMouseInputFocus(Widget* lastWidgetWithModalMouseInputFocus);
 
@@ -293,6 +316,7 @@ namespace gcn
          * of pressed widgets.
          *
          * @return The last widget pressed. 
+         * @see setLastWidgetPressed
          */
         virtual Widget* getLastWidgetPressed();
 
@@ -301,6 +325,7 @@ namespace gcn
          * of pressed widgets.
          *
          * @param lastWidgetPressed The last widget pressed.
+         * @see getLastWidgetPressed
          */
         virtual void setLastWidgetPressed(Widget* lastWidgetPressed);
 
