@@ -104,6 +104,7 @@ namespace gcn
          * @param filename The file to load.
          * @param convertToDisplayFormat True if the image should be converted
          *                               to display, false otherwise.
+         * @since 0.5.0
          */
         static Image* load(const std::string& filename, bool convertToDisplayFormat = true);
 
@@ -112,6 +113,7 @@ namespace gcn
          *
          * @return The image loader used for loading images.
          * @see setImageLoader, OpenGLSDLImageLoader, SDLImageLoader
+         * @since 0.1.0
          */
         static ImageLoader* getImageLoader();
 
@@ -123,11 +125,14 @@ namespace gcn
          *
          * @param imageLoader The image loader to be used for loading images.
          * @see getImageLoader, OpenGLSDLImageLoader, SDLImageLoader
+         * @since 0.1.0
          */
         static void setImageLoader(ImageLoader* imageLoader);
 
         /**
          * Frees an image.
+         *
+         * @since 0.5.0
          */
         virtual void free() = 0;
 
@@ -135,6 +140,8 @@ namespace gcn
          * Gets the width of the image.
          *
          * @return The width of the image.
+         *
+         * @since 0.1.0
          */
         virtual int getWidth() const = 0;
 
@@ -142,6 +149,8 @@ namespace gcn
          * Gets the height of the image.
          *
          * @return The height of the image.
+         *
+         * @since 0.1.0
          */
         virtual int getHeight() const = 0;
 
@@ -154,6 +163,8 @@ namespace gcn
          * @param x The x coordinate.
          * @param y The y coordinate.
          * @return The color of the pixel.
+         *
+         * @since 0.5.0
          */
         virtual Color getPixel(int x, int y) = 0;
 
@@ -163,6 +174,8 @@ namespace gcn
          * @param x The x coordinate.
          * @param y The y coordinate.
          * @param color The color of the pixel to put.
+         *
+         * @since 0.5.0
          */
         virtual void putPixel(int x, int y, const Color& color) = 0;
 
@@ -171,6 +184,7 @@ namespace gcn
          *
          * IMPORTANT: Only guaranteed to work before the image has been
          *            converted to display format.
+         * @since 0.5.0
          */
         virtual void convertToDisplayFormat() = 0;
 

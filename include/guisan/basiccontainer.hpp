@@ -71,6 +71,7 @@ namespace gcn
      * container, consider inheriting from this class.
      *
      * @see Container
+     * @since 0.6.0
      */
     class GCN_CORE_DECLSPEC BasicContainer : public Widget, public DeathListener
     {
