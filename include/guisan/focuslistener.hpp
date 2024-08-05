@@ -93,6 +93,15 @@ namespace gcn
          * @param event Discribes the event.
          */
         virtual void focusLost(const Event& event) { };
+
+    protected:
+        /**
+         * Constructor.
+         *
+         * You should not be able to make an instance of FocusListener,
+         * therefore its constructor is protected.
+         */
+        FocusListener() {}
     };
 }
 

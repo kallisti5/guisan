@@ -91,6 +91,14 @@ namespace gcn
          */
         virtual void valueChanged(const SelectionEvent& event) { };
 
+    protected:
+        /**
+         * Constructor.
+         *
+         * You should not be able to make an instance of SelectionListener,
+         * therefore its constructor is protected.
+         */
+        SelectionListener() {}
     };
 }
 

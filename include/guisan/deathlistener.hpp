@@ -88,6 +88,14 @@ namespace gcn
          */
         virtual void death(const Event& event) = 0;
 
+    protected:
+        /**
+         * Constructor.
+         *
+         * You should not be able to make an instance of DeathListener,
+         * therefore its constructor is protected.
+         */
+        DeathListener() {}
     };
 }
 

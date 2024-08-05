@@ -103,9 +103,7 @@ namespace gcn
          * Constructor.
          *
          * You should not be able to make an instance of KeyListener,
-         * therefore its constructor is protected. To use KeyListener
-         * you must inherit from this class and implement it's
-         * functions.
+         * therefore its constructor is protected.
          */
         KeyListener() { }
     };

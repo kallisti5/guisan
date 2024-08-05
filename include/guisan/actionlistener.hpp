@@ -91,6 +91,14 @@ namespace gcn
          */
         virtual void action(const ActionEvent& actionEvent) = 0;
 
+    protected:
+        /**
+         * Constructor.
+         *
+         * You should not be able to make an instance of ActionListener,
+         * therefore its constructor is protected.
+         */
+        ActionListener() {}
     };
 }
 
