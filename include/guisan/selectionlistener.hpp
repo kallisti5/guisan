@@ -65,11 +65,12 @@
 namespace gcn
 {
     /**
-     * Listener of value change events from Widgets. To be able to
-     * listen for value changes you must make a class which inherits
-     * from this class and implements the valueChanged function.
+     * Interface for listening for selection events from widgets.
      *
-     * @see ListBox::addSelectionListener
+     * @see ListBox::addSelectionListener,
+     *      ListBox::removeSelectionListener,
+     *      DropDown:addSelectionListener,
+     *      DropDown::removeSelectionListener
      * @author Olof Naessén
      * @since 0.8.0
      */
@@ -86,7 +87,7 @@ namespace gcn
          * Called when a value has been changed in a Widget. It is used
          * to be able to recieve a notification that a value has been changed.
          *
-         * @param event the event of the value change.
+         * @param event The event of the value change.
          * @since 0.8.0
          */
         virtual void valueChanged(const SelectionEvent& event) { };

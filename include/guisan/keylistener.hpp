@@ -65,20 +65,16 @@ namespace gcn
     class Key;
 
     /**
-     * Key listeners base class. Inorder to use this class you must inherit
-     * from it and implements it's functions. KeyListeners listen for key
-     * events on a Widgets. When a Widget recives a key event, the
-     * corresponding function in all it's key listeners will be called.
-     * Only focused Widgets will generate key events.
+     * Interface for listening for key events from widgets.
      *
-     * @see Widget::addKeyListener
+     * @see Widget::addKeyListener, Widget::removeKeyListener
      */
     class GCN_CORE_DECLSPEC KeyListener
     {
     public:
 
         /**
-         * Destructor
+         * Destructor.
          */
         virtual ~KeyListener() { }
 
@@ -87,14 +83,14 @@ namespace gcn
          * If a key is held down the widget will generate multiple key
          * presses.
          *
-         * @param keyEvent discribes the event.
+         * @param keyEvent Discribes the event.
          */
         virtual void keyPressed(KeyEvent& keyEvent) { }
 
         /**
          * Called if a key is released when the widget has keyboard focus.
          *
-         * @param keyEvent discribes the event.
+         * @param keyEvent Discribes the event.
          */
         virtual void keyReleased(KeyEvent& keyEvent) { }
 

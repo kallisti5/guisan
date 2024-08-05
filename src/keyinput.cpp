@@ -62,7 +62,7 @@
 
 namespace gcn
 {
-    KeyInput::KeyInput(const Key& key, int type)
+    KeyInput::KeyInput(const Key& key, unsigned int type)
             :mKey(key),
              mType(type),
              mShiftPressed(false),
@@ -74,7 +74,7 @@ namespace gcn
 
     }
 
-    void KeyInput::setType(int type)
+    void KeyInput::setType(unsigned int type)
     {
         mType = type;
     }

@@ -65,12 +65,9 @@
 namespace gcn
 {
     /**
-     * Listener on events from a Widget. Whenever a widget changes it's
-     * size or position the listener of a widget will get notified. To be able to
-     * listen for events from a widget you must make a class which inherits
-     * from this class and implements it's functions.
+     * Interface for listening for selection events from widgets.
      *
-     * @see Widget::addWidgetListener
+     * @see Widget::addWidgetListener, Widget::removeWidgetListener
      * @author Olof Naessén
      * @since 0.8.0
      */
