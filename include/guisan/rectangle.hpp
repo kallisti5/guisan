@@ -107,7 +107,7 @@ namespace gcn
          * @return True if the rectangles intersect, false otherwise.
          * @since 1.1.0
          */
-        bool isIntersecting(const Rectangle& rectangle);
+        bool isIntersecting(const Rectangle& rectangle) const;
 
         /**
          * Checks if a point is inside the rectangle
