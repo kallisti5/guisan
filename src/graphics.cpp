@@ -81,11 +81,13 @@ namespace gcn
             carea.y = area.y;
             carea.width = area.width;
             carea.height = area.height;
+            carea.xOffset = area.x;
+            carea.yOffset = area.y;
             mClipStack.push(carea);
             return true;
         }
 
-        ClipRectangle top = mClipStack.top();
+        const ClipRectangle& top = mClipStack.top();
         ClipRectangle carea;
         carea = area;
         carea.xOffset = top.xOffset + carea.x;
@@ -106,14 +108,14 @@ namespace gcn
             carea.y = top.y;
         }
 
-        if (carea.x + carea.width > top.width)
+        if (carea.width > top.width)
         {
-            carea.width = top.width - carea.x;
+            carea.width = top.width;
         }
 
-        if (carea.y + carea.height > top.height)
+        if (carea.height > top.height)
         {
-            carea.height = top.height - carea.y;
+            carea.height = top.height;
         }
 
         bool result = carea.isIntersecting(top);
