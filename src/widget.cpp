@@ -477,16 +477,6 @@ namespace gcn
         y = parentY + mDimension.y + getParent()->getChildrenArea().y;
     }
 
-    void Widget::generateAction()
-    {
-        ActionListenerIterator iter;
-        for (iter = mActionListeners.begin(); iter != mActionListeners.end(); ++iter)
-        {
-            ActionEvent actionEvent(this, mActionEventId);
-            (*iter)->action(actionEvent);
-        }
-    }
-
     Font* Widget::getFont() const
     {
         if (mCurrentFont == NULL)
@@ -617,7 +607,7 @@ namespace gcn
         mFocusHandler->releaseModalMouseInputFocus(this);
     }
 
-    bool Widget::hasModalFocus() const
+    bool Widget::isModalFocused() const
     {
         if (mFocusHandler == NULL)
         {
@@ -626,13 +616,13 @@ namespace gcn
 
         if (getParent() != NULL)
         {
-            return (mFocusHandler->getModalFocused() == this) || getParent()->hasModalFocus();
+            return (mFocusHandler->getModalFocused() == this) || getParent()->isModalFocused();
         }
 
         return mFocusHandler->getModalFocused() == this;
     }
 
-    bool Widget::hasModalMouseInputFocus() const
+    bool Widget::isModalMouseInputFocused() const
     {
         if (mFocusHandler == NULL)
         {
@@ -641,7 +631,7 @@ namespace gcn
 
         if (getParent() != NULL)
         {
-            return (mFocusHandler->getModalMouseInputFocused() == this) || getParent()->hasModalMouseInputFocus();
+            return (mFocusHandler->getModalMouseInputFocused() == this) || getParent()->isModalMouseInputFocused();
         }
 
         return mFocusHandler->getModalMouseInputFocused() == this;
@@ -722,6 +712,16 @@ namespace gcn
         {
             Event event(this);
             (*iter)->widgetHidden(event);
+        }
+    }
+
+    void Widget::distributeActionEvent()
+    {
+        ActionListenerIterator iter;
+        for (iter = mActionListeners.begin(); iter != mActionListeners.end(); ++iter)
+        {
+            ActionEvent actionEvent(this, mActionEventId);
+            (*iter)->action(actionEvent);
         }
     }
 

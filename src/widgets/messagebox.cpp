@@ -366,7 +366,7 @@ namespace gcn
                 if(mouseEvent.getSource() == mButtons[i])
                 {
                     mClickedButton = i;
-                    generateAction();
+                    distributeActionEvent();
                     break;
                 }
             }

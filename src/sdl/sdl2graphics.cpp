@@ -218,7 +218,7 @@ namespace gcn
         area.x += top.xOffset;
         area.y += top.yOffset;
 
-        if(!area.intersect(top))
+        if(!area.isIntersecting(top))
         {
             return;
         }

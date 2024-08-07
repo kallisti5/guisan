@@ -86,7 +86,7 @@ namespace gcn
         this->height = height;
     }
 
-    bool Rectangle::intersect(const Rectangle& rectangle)
+    bool Rectangle::isIntersecting(const Rectangle& rectangle)
     {
         x -= rectangle.x;
         y -= rectangle.y;

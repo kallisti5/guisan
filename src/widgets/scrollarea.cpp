@@ -378,7 +378,7 @@ namespace gcn
         mIsHorizontalMarkerDragged = false;
         mIsVerticalMarkerDragged = false;
 
-	mouseEvent.consume();
+        mouseEvent.consume();
     }
 
     void ScrollArea::mouseDragged(MouseEvent& mouseEvent)

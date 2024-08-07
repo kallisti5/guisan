@@ -196,7 +196,7 @@ namespace gcn
 
         else if (key.getValue() == Key::ENTER)
         {
-            generateAction();
+            distributeActionEvent();
         }
 
         else if (key.getValue() == Key::HOME)

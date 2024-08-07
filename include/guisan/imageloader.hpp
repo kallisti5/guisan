@@ -66,10 +66,20 @@ namespace gcn
     class Image;
 
     /**
-     * ImageLoaders base class. Contains basic image loading functions every
-     * image loader should have. Image loaders should inherit from this
-     * class and impements it's functions.
-     */
+     * Abstract class for providing functions for loading images.
+     *
+     * Guisan contains implementation of ImageLoader for common
+     * libraries like the SDL library.
+     * To make Guisan usable with other libraries, an ImageLoader
+     * class must be implemented.
+     *
+     * To make Guisan use an image loader, the image loader needs
+     * to be passed to the Image class using the static method
+     * Image::setImageLoader.
+     *
+     * @see Image::setImageLoader, Image::getImageLoader,
+     *      OpenGLSDLImageLoader, SDLImageLoader
+     * @since 0.1.0     */
     class GCN_CORE_DECLSPEC ImageLoader
     {
     public:
@@ -80,13 +90,14 @@ namespace gcn
         virtual ~ImageLoader() { }
 
         /**
-         * Loads an image by calling the image's ImageLoader.
+         * Loads an image.
          *
-         * NOTE: The functions getPixel and putPixel in Image are only guaranteed to
-         *       work before an image has been converted to display format.
+         * NOTE: The functions Image::getPixel and Image::putPixel
+         *       are only guaranteed to work before an image has
+         *       been converted to display format.
          *
-         * @param filename the file to load.
-         * @param convertToDisplayFormat true if the image should be converted
+         * @param filename The filename of the image to load.
+         * @param convertToDisplayFormat True if the image should be converted
          *                               to display, false otherwise.
          */
         virtual Image* load(const std::string& filename, bool convertToDisplayFormat = true) = 0;

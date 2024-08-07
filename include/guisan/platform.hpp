@@ -64,7 +64,7 @@
 #define GCN_EXTENSION_DECLSPEC __declspec(dllexport)
 #define GCN_CORE_DECLSPEC __declspec(dllimport)
 
-#elif defined (__MINGW32__)
+#elif defined(__MINGW32__) && defined(GUICHAN_DLL_IMPORT)
 #define GCN_CORE_DECLSPEC __declspec(dllimport)
 #define GCN_EXTENSION_DECLSPEC __declspec(dllimport)
 

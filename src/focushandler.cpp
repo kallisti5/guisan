@@ -129,7 +129,7 @@ namespace gcn
 
         mModalFocusedWidget = widget;
 
-        if (mFocusedWidget != NULL && !mFocusedWidget->hasModalFocus())
+        if (mFocusedWidget != NULL && !mFocusedWidget->isModalFocused())
         {
             focusNone();
         }
@@ -419,7 +419,7 @@ namespace gcn
             if (mWidgets.at(focusedWidget)->isFocusable() &&
                 mWidgets.at(focusedWidget)->isTabInEnabled() &&
                 (mModalFocusedWidget == NULL ||
-                 mWidgets.at(focusedWidget)->hasModalFocus()))
+                 mWidgets.at(focusedWidget)->isModalFocused()))
             {
                 done = true;
             }
@@ -496,7 +496,7 @@ namespace gcn
             if (mWidgets.at(focusedWidget)->isFocusable() &&
                 mWidgets.at(focusedWidget)->isTabInEnabled() &&
                 (mModalFocusedWidget == NULL ||
-                 mWidgets.at(focusedWidget)->hasModalFocus()))
+                 mWidgets.at(focusedWidget)->isModalFocused()))
             {
                 done = true;
             }

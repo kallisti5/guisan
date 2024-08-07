@@ -64,7 +64,7 @@
 
 namespace gcn
 {
-    OpenGLImage::OpenGLImage(unsigned int* pixels, int width, int height,
+    OpenGLImage::OpenGLImage(const unsigned int* pixels, int width, int height,
                              bool convertToDisplayFormat)
     {
         mAutoFree = true;
