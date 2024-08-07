@@ -98,24 +98,34 @@ namespace gcn
         // Clamp the pushed clip rectangle.
         if (carea.x < top.x)
         {
-            carea.width += carea.x - top.x;
+            // carea.width += carea.x - top.x;
             carea.x = top.x;
         }
 
         if (carea.y < top.y)
         {
-            carea.height += carea.y - top.y;
+            // carea.height += carea.y - top.y;
             carea.y = top.y;
         }
 
-        if (carea.width > top.width)
+        if (carea.x + carea.width > top.x + top.width)
         {
-            carea.width = top.width;
+            carea.width = top.x + top.width - carea.x;
+
+            if (carea.width < 0)
+            {
+                carea.width = 0;
+            }
         }
 
-        if (carea.height > top.height)
+        if (carea.y + carea.height > top.y + top.height)
         {
-            carea.height = top.height;
+            carea.height = top.y + top.height - carea.y;
+
+            if (carea.height < 0)
+            {
+                carea.height = 0;
+            }
         }
 
         bool result = carea.isIntersecting(top);
