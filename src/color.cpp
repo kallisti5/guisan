@@ -134,4 +134,10 @@ namespace gcn
     {
         return !(r == color.r && g == color.g && b == color.b && a == color.a);
     }
+
+    std::ostream& operator<<(std::ostream& out, const Color& color)
+    {
+        return out << "Color [r = " << color.r << ", g = " << color.g << ", b = " << color.b
+                   << ", a = " << color.a << "]";
+    }
 }
