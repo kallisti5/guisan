@@ -109,6 +109,8 @@ namespace gcn
 
         mImage = image;
         mInternalImage = false;
+        setHeight(mImage->getHeight());
+        setWidth(mImage->getWidth());
     }
 
     const Image* Icon::getImage() const
