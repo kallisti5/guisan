@@ -517,18 +517,12 @@ namespace gcn
 
     void TextBox::scrollToCaret()
     {
-        Widget *par = getParent();
-        if (par == NULL)
-        {
-            return;
-        }
-
         Rectangle scroll;
         scroll.x = getFont()->getWidth(mTextRows[mCaretRow].substr(0, mCaretColumn));
         scroll.y = getFont()->getHeight() * mCaretRow;
         scroll.width = getFont()->getWidth(" ");
         scroll.height = getFont()->getHeight() + 2; // add 2 for some extra space
-        par->showWidgetPart(this,scroll);
+        showPart(scroll);
     }
 
     void TextBox::setEditable(bool editable)

@@ -81,8 +81,20 @@ namespace gcn
          */
         virtual ~BasicContainer();
 
-
         // Inherited from Widget
+
+        /**
+         * Shows a certain part of a widget in the basic container.
+         * Used when widgets want a specific part to be visible in
+         * its parent. An example is a TextArea that wants a specific
+         * part of its text to be visible when a TextArea is a child
+         * of a ScrollArea.
+         *
+         * @param widget The widget whom wants a specific part of
+         *               itself to be visible.
+         * @param rectangle The rectangle to be visible.
+         */
+        virtual void showWidgetPart(Widget* widget, Rectangle area);
 
         virtual void moveToTop(Widget* widget);
 
@@ -99,8 +111,6 @@ namespace gcn
         virtual void _setFocusHandler(FocusHandler* focusHandler);
 
         void setInternalFocusHandler(FocusHandler* focusHandler);
-
-        virtual void showWidgetPart(Widget* widget, Rectangle area);
 
         virtual Widget *getWidgetAt(int x, int y);
 

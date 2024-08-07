@@ -1,5 +1,9 @@
 Version 1.1.0
 =============
+* Widget::showPart has been added to be used when a specific
+  part of a widget should be visible. An example is when a text
+  area wants a specific text part to be visible in a scroll area.
+  This function uses BasicContainer::showWidgetPart.
 * Rectangle::intersect has been renamed to Rectangle::isIntersecting.
 * Widget::hasModalFocus has been renamed to Widget::isModalFocused.
 * Widget::hasModalMouseInputFocus has been renamed to Widget::isModalMouseInputFocused.
