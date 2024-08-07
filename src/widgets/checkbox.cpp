@@ -99,16 +99,15 @@ namespace gcn
         else
             graphics->setColor(Color(128, 128, 128));
 
-        int h = getHeight() + getHeight() / 2;
+        const int h = getHeight() + getHeight() / 2;
 
         graphics->drawText(getCaption(), h - 2, 0);
     }
 
     void CheckBox::drawBox(Graphics* graphics)
     {
-        int h = getHeight() - 2;
-
-        int alpha = getBaseColor().a;
+        const int h = getHeight() - 2;
+        const int alpha = getBaseColor().a;
         Color faceColor = getBaseColor();
         faceColor.a = alpha;
         Color highlightColor = faceColor + 0x303030;
