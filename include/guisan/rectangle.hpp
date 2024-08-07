@@ -59,6 +59,8 @@
 
 #include "guisan/platform.hpp"
 
+#include <iostream>
+
 namespace gcn
 {
     /**
@@ -116,6 +118,14 @@ namespace gcn
          * @since 0.1.0
          */
         bool isPointInRect(int x, int y) const;
+
+        /**
+         * Output operator for output.
+         *
+         * @param out The stream to output to.
+         * @param rectangle The rectangle to output.
+         */
+        friend std::ostream& operator<<(std::ostream& out, const Rectangle& rectangle);
 
         /**
          * Holds the x coordinate of the rectangle.

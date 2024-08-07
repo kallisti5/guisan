@@ -133,4 +133,10 @@ namespace gcn
                 && x < (this->x + this->width)
                 && y < (this->y + this->height));
     }
+
+    std::ostream& operator<<(std::ostream& out, const Rectangle& rectangle)
+    {
+        return out << "Rectangle [x = " << rectangle.x << ", y = " << rectangle.y
+                   << ", width = " << rectangle.width << ", height = " << rectangle.height << "]";
+    }
 }
