@@ -106,14 +106,14 @@ namespace gcn
             carea.y = top.y;
         }
 
-        if (carea.width > top.width)
+        if (carea.x + carea.width > top.width)
         {
-            carea.width = top.width;
+            carea.width = top.width - carea.x;
         }
 
-        if (carea.height > top.height)
+        if (carea.y + carea.height > top.height)
         {
-            carea.height = top.height;
+            carea.height = top.height - carea.y;
         }
 
         bool result = carea.isIntersecting(top);
