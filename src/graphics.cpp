@@ -98,13 +98,11 @@ namespace gcn
         // Clamp the pushed clip rectangle.
         if (carea.x < top.x)
         {
-            // carea.width += carea.x - top.x;
             carea.x = top.x;
         }
 
         if (carea.y < top.y)
         {
-            // carea.height += carea.y - top.y;
             carea.y = top.y;
         }
 
