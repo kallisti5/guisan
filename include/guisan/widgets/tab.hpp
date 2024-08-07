@@ -129,7 +129,6 @@ namespace gcn
          */
         const std::string& getCaption() const;
 
-                
         // Inherited from Widget
 
         virtual void draw(Graphics *graphics);
@@ -140,7 +139,7 @@ namespace gcn
         virtual void mouseEntered(MouseEvent& mouseEvent);
 
         virtual void mouseExited(MouseEvent& mouseEvent);
-        
+
     protected:
         /**
          * Holds the label of the tab.
@@ -151,11 +150,6 @@ namespace gcn
          * Holds the tabbed area the tab is a part of.
          */
         TabbedArea* mTabbedArea;
-
-        /**
-         * Holds the caption of the tab.
-         */
-        std::string mCaption;
 
         /**
          * True if the tab has the mouse, false otherwise.

@@ -77,15 +77,20 @@ namespace gcn
 
         addMouseListener(this);
     }
-    
+
     Tab::~Tab()
     {
         delete mLabel;
     }
-    
+
     void Tab::adjustSize()
     {
-        setHeight(mLabel->getHeight() + 8);
+        setSize(mLabel->getWidth() + 8, mLabel->getHeight() + 8);
+
+        if (mTabbedArea != NULL)
+        {
+            mTabbedArea->adjustTabPositions();
+        }
     }
 
     void Tab::setTabbedArea(TabbedArea* tabbedArea)
@@ -100,24 +105,23 @@ namespace gcn
 
     void Tab::setCaption(const std::string& caption)
     {
-        mCaption = caption;
         mLabel->setCaption(caption);
         mLabel->adjustSize();
+        adjustSize();
     }
-    
+
     const std::string& Tab::getCaption() const
     {
-        return mCaption;
+        return mLabel->getCaption();
     }
-        
+
     void Tab::draw(Graphics *graphics)
     {
-        Color faceColor = getBaseColor();
-        Color highlightColor, shadowColor;
-        int alpha = getBaseColor().a;
-        highlightColor = faceColor + 0x303030;
+        const Color& faceColor = getBaseColor();
+        const int alpha = getBaseColor().a;
+        Color highlightColor = faceColor + 0x303030;
         highlightColor.a = alpha;
-        shadowColor = faceColor - 0x303030;
+        Color shadowColor = faceColor - 0x303030;
         shadowColor.a = alpha;
 
         Color borderColor;
@@ -165,7 +169,7 @@ namespace gcn
         }
         graphics->popClipArea();
     }
-    
+
     void Tab::mouseEntered(MouseEvent& mouseEvent)
     {
         mHasMouse = true;
