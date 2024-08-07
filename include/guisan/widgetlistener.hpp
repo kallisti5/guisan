@@ -65,7 +65,9 @@
 namespace gcn
 {
     /**
-     * Interface for listening for selection events from widgets.
+     * Interface for listening for events from widgets. When a widget's size,
+     * location or visibility changes, the relevant method of the listener is
+     * invoked.
      *
      * @see Widget::addWidgetListener, Widget::removeWidgetListener
      * @author Olof Naessén
