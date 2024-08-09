@@ -86,44 +86,41 @@ namespace gcn
         this->height = height;
     }
 
-    bool Rectangle::isIntersecting(const Rectangle& rectangle)
+    bool Rectangle::isIntersecting(const Rectangle& rectangle) const
     {
-        x -= rectangle.x;
-        y -= rectangle.y;
+        int x_ = x;
+        int y_ = y;
+        int width_ = width;
+        int height_ = height;
 
-        if (x < 0)
+        x_ -= rectangle.x;
+        y_ -= rectangle.y;
+
+        if (x_ < 0)
         {
-            width += x;
-            x = 0;
+            width_ += x_;
+            x_ = 0;
+        }
+        else if (x_ + width_ > rectangle.width)
+        {
+            width_ = rectangle.width - x_;
         }
 
-        if (y < 0)
+        if (y_ < 0)
         {
-            height += y;
-            y = 0;
+            height_ += y_;
+            y_ = 0;
+        }
+        else if (y_ + height_ > rectangle.height)
+        {
+            height_ = rectangle.height - y_;
         }
 
-        if (x + width > rectangle.width)
+        if (width_ <= 0 || height_ <= 0)
         {
-            width = rectangle.width - x;
-        }
-
-        if (y + height > rectangle.height)
-        {
-            height = rectangle.height - y;
-        }
-
-        if (width <= 0 || height <= 0)
-        {
-            height = 0;
-            width = 0;
-            x += rectangle.x;
-            y += rectangle.y;
             return false;
         }
 
-        x += rectangle.x;
-        y += rectangle.y;
         return true;
     }
 
@@ -132,5 +129,11 @@ namespace gcn
         return ((x >= this->x) && (y >= this->y)
                 && x < (this->x + this->width)
                 && y < (this->y + this->height));
+    }
+
+    std::ostream& operator<<(std::ostream& out, const Rectangle& rectangle)
+    {
+        return out << "Rectangle [x = " << rectangle.x << ", y = " << rectangle.y
+                   << ", width = " << rectangle.width << ", height = " << rectangle.height << "]";
     }
 }

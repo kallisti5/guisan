@@ -735,4 +735,12 @@ namespace gcn
             (*iter)->widgetShown(event);
         }
     }
+
+    void Widget::showPart(Rectangle rectangle)
+    {
+        if (mParent != NULL)
+        {
+            mParent->showWidgetPart(this, rectangle);
+        }
+    }
 }

@@ -949,6 +949,18 @@ namespace gcn
          */
         const std::string& getId();
 
+        /**
+         * Shows a certain part of a widget in the widget's parent.
+         * Used when widgets want a specific part to be visible in
+         * its parent. An example is a TextArea that wants a specific
+         * part of its text to be visible when a TextArea is a child
+         * of a ScrollArea.
+         *
+         * @param rectangle The rectangle to be shown.
+         * @since 1.1.0
+         */
+        virtual void showPart(Rectangle rectangle);
+
     protected:
         /**
          * Distributes an action event to all action listeners
