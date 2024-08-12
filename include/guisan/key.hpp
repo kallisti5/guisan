@@ -122,6 +122,23 @@ namespace gcn
          */
         char getChar() const;
 
+
+        /**
+         * Compares to keys.
+         * 
+         * @param key The key to compare this key with.
+         * @return True if the keys are equal, false otherwise.
+         */
+        bool operator==(const Key& key) const;
+
+        /**
+         * Compares to keys.
+         * 
+         * @param key The key to compare this key with.
+         * @return True if the keys are not equal, false otherwise.
+         */
+        bool operator!=(const Key& key) const;
+
         /**
          * An enum with key values.
          */
