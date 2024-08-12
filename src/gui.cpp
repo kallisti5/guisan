@@ -360,7 +360,7 @@ namespace gcn
                                          MouseEvent::EXITED,
                                          mouseInput.getButton(),
                                          mouseInput.getX(),
-                                         mouseInput.getX(),
+                                         mouseInput.getY(),
                                          true,
                                          true);
                 }
@@ -406,9 +406,9 @@ namespace gcn
                                              MouseEvent::EXITED,
                                              mouseInput.getButton(),
                                              mouseInput.getX(),
-                                             mouseInput.getX(),
+                                             mouseInput.getY(),
                                              true,
-                                             true);                                       
+                                             true);
                         mClickCount = 1;
                         mLastMousePressTimeStamp = 0;
                         mWidgetWithMouseQueue.erase(iter);
@@ -599,7 +599,7 @@ namespace gcn
             {
                 mFocusHandler->setLastWidgetPressed(NULL);
             }
-            
+
             sourceWidget = mFocusHandler->getDraggedWidget();
         }
 
@@ -612,7 +612,7 @@ namespace gcn
                              mouseInput.getX(),
                              mouseInput.getY());
 
-        if (mouseInput.getButton() == mLastMousePressButton            
+        if (mouseInput.getButton() == mLastMousePressButton
             && mFocusHandler->getLastWidgetPressed() == sourceWidget)
         {
             distributeMouseEvent(sourceWidget,
@@ -620,7 +620,7 @@ namespace gcn
                                  mouseInput.getButton(),
                                  mouseInput.getX(),
                                  mouseInput.getY());
-            
+
             mFocusHandler->setLastWidgetPressed(NULL);
         }
         else
