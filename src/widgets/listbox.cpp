@@ -105,7 +105,7 @@ namespace gcn
         // Check the current clip area so we don't draw unnecessary items
         // that are not visible.
         const auto currentClipArea = graphics->getCurrentClipArea();
-        const int rowHeight = getFont()->getHeight();
+        const int rowHeight = getRowHeight();
 
         // Calculate the number of rows to draw by checking the clip area.
         // The addition of two makes covers a partial visible row at the top
@@ -205,10 +205,10 @@ namespace gcn
             }
             else
             {
-                scroll.y = getFont()->getHeight() * mSelected;
+                scroll.y = getRowHeight() * mSelected;
             }
 
-            scroll.height = getFont()->getHeight();
+            scroll.height = getRowHeight();
             showPart(scroll);
         }
 
@@ -272,7 +272,7 @@ namespace gcn
     {
         if (mouseEvent.getButton() == MouseEvent::LEFT)
         {
-            setSelected(mouseEvent.getY() / getFont()->getHeight());
+            setSelected(mouseEvent.getY() / getRowHeight());
             distributeActionEvent();
         }
     }
@@ -321,7 +321,7 @@ namespace gcn
     {
         if (mListModel != NULL)
         {
-            setHeight(getFont()->getHeight() * mListModel->getNumberOfElements());
+            setHeight(getRowHeight() * mListModel->getNumberOfElements());
         }
     }
 
@@ -334,12 +334,12 @@ namespace gcn
     {
         mWrappingEnabled = wrappingEnabled;
     }
-        
+
     void ListBox::addSelectionListener(SelectionListener* selectionListener)
     {
         mSelectionListeners.push_back(selectionListener);
     }
-   
+
     void ListBox::removeSelectionListener(SelectionListener* selectionListener)
     {
         mSelectionListeners.remove(selectionListener);
@@ -354,5 +354,10 @@ namespace gcn
             SelectionEvent event(this);
             (*iter)->valueChanged(event);
         }
+    }
+
+    unsigned int ListBox::getRowHeight() const
+    {
+        return getFont()->getHeight();
     }
 }
