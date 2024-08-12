@@ -96,12 +96,22 @@ namespace gcn
     {
         return mValue;
     }
-	
-	char Key::getChar() const
-	{
-		if(mValue == 9 || mValue == 13 || (mValue <= 122 && mValue >= 32))
-			return (char)mValue;
-		
-		return '\0';
-	}
+
+    char Key::getChar() const
+    {
+        if (mValue == 9 || mValue == 13 || (mValue <= 122 && mValue >= 32))
+            return (char) mValue;
+
+        return '\0';
+    }
+
+    bool Key::operator==(const Key& key) const
+    {
+        return mValue == key.mValue;
+    }
+
+    bool Key::operator!=(const Key& key) const
+    {
+        return (mValue != key.mValue);
+    }
 }
