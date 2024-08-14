@@ -111,6 +111,19 @@ pqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"); @endcode
         ImageFont(const std::string& filename, const std::string& glyphs);
 
         /**
+         * Constructor. Takes an image containing the font and
+         * a string containing the glyphs. The glyphs in the string should
+         * be in the same order as they appear in the font image.
+         * The image will be deleted in the destructor.
+         *
+         * @param image The image with font glyphs.
+         * @param glyphs The glyphs found in the image.
+         * @throws Exception when glyph list is incorrect or the font image is
+         *                   is missing.
+         */
+        ImageFont(Image* image, const std::string& glyphs);
+
+        /**
          * Constructor. Takes an image file containing the font and
          * two boundaries of ASCII values. The font image should include
          * all glyphs specified with the boundaries in increasing ASCII
