@@ -59,6 +59,13 @@
 
 #include "guisan/platform.hpp"
 
+// <windows.h> defines DELETE which breaks this file as we have a constant named
+// DELETE, hence we undefine DELETE if it is defined and hope people don't use
+// that windows define with Guisan.
+#if defined(_WIN32) && defined(DELETE)
+# undef DELETE
+#endif
+
 namespace gcn
 {
     /**
