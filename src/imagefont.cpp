@@ -75,14 +75,14 @@ namespace gcn
         mImage = Image::load(filename, false);
 
         Color separator = mImage->getPixel(0, 0);
-                
+
         int i = 0;
         for (i = 0;
              i < mImage->getWidth() && separator == mImage->getPixel(i, 0);
              ++i)
         {
         }
-        
+
         if (i >= mImage->getWidth())
         {
             throw GCN_EXCEPTION("Corrupt image.");
@@ -112,6 +112,53 @@ namespace gcn
 
         //int w = mImage->getWidth();
         //int h = mImage->getHeight();
+        mImage->convertToDisplayFormat();
+
+        mRowSpacing = 0;
+        mGlyphSpacing = 0;
+    }
+
+    ImageFont::ImageFont(Image* image, const std::string& glyphs)
+    {
+        mFilename = "Image*";
+        if (image == NULL)
+        {
+            throw GCN_EXCEPTION("Font image is NULL");
+        }
+        mImage = image;
+
+        const Color separator = mImage->getPixel(0, 0);
+
+        int i = 0;
+        for (i = 0; i < mImage->getWidth() && separator == mImage->getPixel(i, 0); ++i)
+        {}
+
+        if (i >= mImage->getWidth())
+        {
+            throw GCN_EXCEPTION("Corrupt image.");
+        }
+
+        int j = 0;
+        for (j = 0; j < mImage->getHeight(); ++j)
+        {
+            if (separator == mImage->getPixel(i, j))
+            {
+                break;
+            }
+        }
+
+        mHeight = j;
+        int x = 0, y = 0;
+
+        for (i = 0; i < (int) glyphs.size(); ++i)
+        {
+            const unsigned char k = glyphs.at(i);
+            mGlyph[k] = scanForGlyph(k, x, y, separator);
+            // Update x and y with new coordinates.
+            x = mGlyph[k].x + mGlyph[k].width;
+            y = mGlyph[k].y;
+        }
+
         mImage->convertToDisplayFormat();
 
         mRowSpacing = 0;
