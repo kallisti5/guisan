@@ -1,5 +1,7 @@
 Version 1.1.0
 =============
+* ScrollArea::isOpaque and ScrollArea::setOpaque have been added to
+  control if a scroll area should draw its background or not.
 * Widget::showPart has been added to be used when a specific
   part of a widget should be visible. An example is when a text
   area wants a specific text part to be visible in a scroll area.

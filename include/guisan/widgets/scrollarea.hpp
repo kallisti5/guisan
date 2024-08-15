@@ -292,6 +292,21 @@ namespace gcn
          */
         int getDownButtonScrollAmount() const;
 
+        /**
+         * Sets the scroll area to be opaque, that is sets the scoll area
+         * to display its background.
+         *
+         * @param opaque True if the scoll area should be opaque, false otherwise.
+         */
+        void setOpaque(bool opaque);
+
+        /**
+         * Checks if the scroll area is opaque, that is if the scroll area
+         * displays its background.
+         *
+         * @return True if the scroll area is opaque, false otherwise.
+         */
+        bool isOpaque() const;
 
         // Inherited from BasicContainer
 
@@ -548,6 +563,13 @@ namespace gcn
          * Holds the vertical markers drag offset.
          */
         int mVerticalMarkerDragOffset;
+
+        /**
+         * True if the scroll area should be opaque
+         * (that is display its background),
+         * false otherwise.
+         */
+        bool mOpaque;
     };
 }
 

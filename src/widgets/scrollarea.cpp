@@ -82,6 +82,7 @@ namespace gcn
         mRightButtonScrollAmount = 10;
         mIsVerticalMarkerDragged = false;
         mIsHorizontalMarkerDragged =false;
+        mOpaque = true;
 
         addMouseListener(this);
     }
@@ -103,6 +104,7 @@ namespace gcn
         mRightButtonScrollAmount = 10;
         mIsVerticalMarkerDragged = false;
         mIsHorizontalMarkerDragged =false;
+        mOpaque = true;
 
         setContent(content);
         addMouseListener(this);
@@ -125,6 +127,7 @@ namespace gcn
         mRightButtonScrollAmount = 10;
         mIsVerticalMarkerDragged = false;
         mIsHorizontalMarkerDragged =false;
+        mOpaque = true;
 
         setContent(content);
         addMouseListener(this);
@@ -498,8 +501,11 @@ namespace gcn
 
     void ScrollArea::drawBackground(Graphics *graphics)
     {
-        graphics->setColor(getBackgroundColor());
-        graphics->fillRectangle(getChildrenArea());
+        if (isOpaque())
+        {
+            graphics->setColor(getBackgroundColor());
+            graphics->fillRectangle(getChildrenArea());
+        }
     }
 
     void ScrollArea::drawUpButton(Graphics* graphics)
@@ -1240,6 +1246,16 @@ namespace gcn
     int ScrollArea::getDownButtonScrollAmount() const
     {
         return mDownButtonScrollAmount;
+    }
+
+    void ScrollArea::setOpaque(bool opaque)
+    {
+        mOpaque = opaque;
+    }
+
+    bool ScrollArea::isOpaque() const
+    {
+        return mOpaque;
     }
 }
 
