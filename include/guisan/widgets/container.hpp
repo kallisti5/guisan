@@ -107,7 +107,7 @@ namespace gcn
         /**
          * Checks if the container is opaque or not.
          *
-         * @return true if the container is opaque, false otherwise.
+         * @return True if the container is opaque, false otherwise.
          * @see setOpaque
          */
         bool isOpaque() const;
