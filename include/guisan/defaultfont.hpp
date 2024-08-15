@@ -101,7 +101,7 @@ namespace gcn
 
         virtual int getHeight() const;
 
-        virtual int getStringIndexAt(const std::string& text, int x);
+        virtual int getStringIndexAt(const std::string& text, int x) const;
     };
 }
 

@@ -214,7 +214,7 @@ pqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"); @endcode
 
         virtual int getHeight() const;
 
-        virtual int getStringIndexAt(const std::string& text, int x);
+        virtual int getStringIndexAt(const std::string& text, int x) const;
 
     protected:
         /**
