@@ -71,7 +71,7 @@ namespace gcn
 
     /**
      * A font using an image containing the font data. ImageFont can be used
-     * with any image supported by the current used ImageLoader.
+     * with any image supported by the currently used ImageLoader.
      *
      * These are two examples of an image containing a font.
      *  \image html imagefontexample.bmp
@@ -86,7 +86,7 @@ namespace gcn
      * @code gcn::ImageFont imageFont("fixedfont_big.bmp"," abcdefghijklmno\
 pqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"); @endcode
      *
-     * Note worthy is that the first glyph actually gives the width of space.
+     * Noteworthy is that the first glyph actually gives the width of space.
      * Glyphs can, as seen in the second image example above, be seperated with
      * horizontal lines making it possible to draw glyphs on more then one
      * line in the image. However, these horizontal lines must have a height of
