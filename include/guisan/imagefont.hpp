@@ -91,7 +91,7 @@ pqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"); @endcode
      * Note worthy is that the first glyph actually gives the width of space.
      * Glyphs can, as seen in the second image example above, be seperated with
      * horizontal lines making it possible to draw glyphs on more then one
-     * line in the image. However, these vertical lines must have a height of
+     * line in the image. However, these horizontal lines must have a height of
      * one pixel!
      */
     class GCN_CORE_DECLSPEC ImageFont: public Font
