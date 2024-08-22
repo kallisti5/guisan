@@ -57,12 +57,9 @@
 #ifndef GCN_OPENGLIMAGE_HPP
 #define GCN_OPENGLIMAGE_HPP
 
-#if defined (_WIN32)
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
-#if defined (DELETE)
-#undef DELETE
-#endif
+#if defined(_WIN32)
+# define WIN32_LEAN_AND_MEAN
+# include <windows.h>
 #endif
 
 #if defined (__APPLE__)
