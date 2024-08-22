@@ -72,8 +72,7 @@
 
 namespace gcn
 {
-    TabbedArea::TabbedArea()
-            :mSelectedTab(NULL)
+    TabbedArea::TabbedArea() : mSelectedTab(NULL), mOpaque(false)
     {
         setFrameSize(1);
         setFocusable(true);
@@ -96,8 +95,7 @@ namespace gcn
         delete mTabContainer;
         delete mWidgetContainer;
 
-        unsigned int i;
-        for (i = 0; i < mTabsToDelete.size(); i++)
+        for (unsigned int i = 0; i < mTabsToDelete.size(); i++)
         {
             delete mTabsToDelete[i];
         }
@@ -264,6 +262,15 @@ namespace gcn
         return mSelectedTab;
     }
 
+    void TabbedArea::setOpaque(bool opaque)
+    {
+        mOpaque = opaque;
+    }
+
+    bool TabbedArea::isOpaque() const
+    {
+        return mOpaque;
+    }
 
     void TabbedArea::draw(Graphics *graphics)
     {
@@ -282,8 +289,11 @@ namespace gcn
             getWidth() - 1, mTabContainer->getHeight() + 1, getWidth() - 1, getHeight() - 1);
         graphics->drawLine(1, getHeight() - 1, getWidth() - 1, getHeight() - 1);
 
-        graphics->setColor(getBaseColor());
-        graphics->fillRectangle(Rectangle(1, 1, getWidth() - 2, getHeight() - 2));
+        if (mOpaque)
+        {
+            graphics->setColor(getBaseColor());
+            graphics->fillRectangle(Rectangle(1, 1, getWidth() - 2, getHeight() - 2));
+        }
 
         // Draw a line underneath the tabs.
         graphics->setColor(highlightColor);
@@ -309,14 +319,12 @@ namespace gcn
 
     void TabbedArea::logic()
     {
-
     }
 
     void TabbedArea::adjustSize()
     {
         int maxTabHeight = 0;
-        unsigned int i;
-        for (i = 0; i < mTabs.size(); i++)
+        for (unsigned int i = 0; i < mTabs.size(); i++)
         {
             if (mTabs[i].first->getHeight() > maxTabHeight)
             {
@@ -367,16 +375,14 @@ namespace gcn
 
     void TabbedArea::setSize(int width, int height)
     {
-        setWidth(width);
-        setHeight(height);
+        Widget::setSize(width, height);
+        adjustSize();
     }
 
     void TabbedArea::setDimension(const Rectangle& dimension)
     {
-        setX(dimension.x);
-        setY(dimension.y);
-        setWidth(dimension.width);
-        setHeight(dimension.height);
+        Widget::setDimension(dimension);
+        adjustSize();
     }
 
     void TabbedArea::keyPressed(KeyEvent& keyEvent)

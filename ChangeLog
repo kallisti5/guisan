@@ -1,5 +1,7 @@
 Version 1.1.0
 =============
+* TabbedArea::isOpaque and TabbedArea::setOpaque have been added to
+  control if a tabbed area should draw its background or not.
 * ScrollArea::isOpaque and ScrollArea::setOpaque have been added to
   control if a scroll area should draw its background or not.
 * Widget::showPart has been added to be used when a specific
