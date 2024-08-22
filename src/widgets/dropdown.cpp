@@ -354,12 +354,9 @@ namespace gcn
         }
 
         // Released outside of widget. Can happen when we have modal input focus.
-        if (0 > mouseEvent.getY()
-            || mouseEvent.getY() >= getHeight()
-            || mouseEvent.getX() < 0
-            || mouseEvent.getX() >= getWidth()
-            && mouseEvent.getButton() == MouseEvent::LEFT
-            && isModalMouseInputFocused())
+        if ((0 > mouseEvent.getY() || mouseEvent.getY() >= getHeight() || mouseEvent.getX() < 0
+             || mouseEvent.getX() >= getWidth())
+            && mouseEvent.getButton() == MouseEvent::LEFT && isModalMouseInputFocused())
         {
             releaseModalMouseInputFocus();
 
