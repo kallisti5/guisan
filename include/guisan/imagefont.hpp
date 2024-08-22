@@ -71,17 +71,15 @@ namespace gcn
 
     /**
      * A font using an image containing the font data. ImageFont can be used
-     * with any supported by the current used ImageLoader.
+     * with any image supported by the current used ImageLoader.
      *
      * These are two examples of an image containing a font.
      *  \image html imagefontexample.bmp
      *  \image html imagefontexample2.bmp
      *
-     * The Image font format works like this: The first pixel, the pixal at
-     * coordinate (0,0), tells which color to look for when seperating glyphs.
-     * You create an image with your glyphs and simple separates them with
-     * the seperation color. When you create your image font you supply the
-     * constructor with the glyphs present in your image. 
+     * The first pixel at coordinate (0,0) tells which color the image font
+     * looks for when seperating glyphs. The glyphs in the image is provided
+     * to the image font's constructor in the order they appear in the image.
      *
      * To create an ImageFont from the first image example above the following
      * constructor call should be made:
