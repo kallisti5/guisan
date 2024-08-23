@@ -215,7 +215,7 @@ namespace gcn
          *
          * @param row The row to add.
          */
-        virtual void addRow(const std::string row);
+        virtual void addRow(const std::string& row);
 
         /**
          * Checks if the text box is opaque. An opaque text box will draw
