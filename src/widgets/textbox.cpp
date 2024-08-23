@@ -535,7 +535,7 @@ namespace gcn
         return mEditable;
     }
 
-    void TextBox::addRow(const std::string row)
+    void TextBox::addRow(const std::string& row)
     {
         mTextRows.push_back(row);
         adjustSize();
