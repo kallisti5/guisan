@@ -138,11 +138,9 @@ namespace gcn
 
     void Window::draw(Graphics* graphics)
     {
-        Color faceColor = getBaseColor();
+        const Color& faceColor = getBaseColor();
         Color highlightColor, shadowColor;
-        int alpha = getBaseColor().a;
-        //int width = getWidth() + getFrameSize() * 2 - 1;
-        //int height = getHeight() + getFrameSize() * 2 - 1;
+        const int alpha = getBaseColor().a;
         highlightColor = faceColor + 0x303030;
         highlightColor.a = alpha;
         shadowColor = faceColor - 0x303030;

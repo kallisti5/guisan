@@ -110,8 +110,6 @@ namespace gcn
             y = mGlyph[k].y;
         }
 
-        //int w = mImage->getWidth();
-        //int h = mImage->getHeight();
         mImage->convertToDisplayFormat();
 
         mRowSpacing = 0;
@@ -205,8 +203,6 @@ namespace gcn
             y = mGlyph[i].y;
         }
 
-        //int w = mImage->getWidth();
-        //int h = mImage->getHeight();
         mImage->convertToDisplayFormat();
 
         mRowSpacing = 0;
