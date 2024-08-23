@@ -61,12 +61,9 @@
 
 #include "guisan/platform.hpp"
 
-
-#ifdef _MSC_VER
-#if _MSC_VER <= 1200
-#define __FUNCTION__ "?"
-#endif
-#endif
+# ifndef __FUNCTION__
+#  define __FUNCTION__ "?"
+# endif
 
 /*
  * A macro used to create a standard exception object.
@@ -84,9 +81,9 @@ namespace gcn
 
     /**
      * An exception containing a message, a file and a line number
-     * where the exception occured. Guisan will only throw exceptions 
-     * of this class. 
-     * 
+     * where the exception occured. Guisan will only throw exceptions
+     * of this class.
+     *
      * You can use this class for your own exceptions that has
      * something to do with a GUI exception. A nifty feature of the
      * excpetion class is that it can tell you from which line and
