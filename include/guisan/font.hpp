@@ -65,8 +65,7 @@ namespace gcn
     class Graphics;
 
     /**
-     * Holder of a font. Fonts should inherit from this class and
-     * implements it's functions.
+     * Interface for a font.
      *
      * @see ImageFont
      */
@@ -83,15 +82,15 @@ namespace gcn
          * Gets the width of a string. The width of a string is not necesserily
          * the sum of all the widths of it's glyphs.
          *
-         * @param text the string to return the width of.
-         * @return the width of a string.
+         * @param text The string to return the width of.
+         * @return The width of a string.
          */
         virtual int getWidth(const std::string& text) const = 0;
 
         /**
          * Gets the height of the glyphs in the font.
          *
-         * @return the height of the glyphs int the font.
+         * @return The height of the glyphs int the font.
          */
         virtual int getHeight() const = 0;
 
@@ -102,9 +101,9 @@ namespace gcn
          * when a mouse clicks in a TextField and you want to know which
          * character was clicked.
          *
-         * @return a string index in a string providing an x coordinate.
+         * @return A string index in a string providing an x coordinate.
          */
-        virtual int getStringIndexAt(const std::string& text, int x);
+        virtual int getStringIndexAt(const std::string& text, int x) const;
 
         /**
          * Draws a string.
@@ -112,10 +111,10 @@ namespace gcn
          * NOTE: You normally won't use this function to draw text since
          *       Graphics contains better functions for drawing text.
          *
-         * @param graphics a Graphics object to use for drawing.
-         * @param text the string to draw.
-         * @param x the x coordinate where to draw the string.
-         * @param y the y coordinate where to draw the string.
+         * @param graphics A Graphics object to use for drawing.
+         * @param text The string to draw.
+         * @param x The x coordinate where to draw the string.
+         * @param y The y coordinate where to draw the string.
          */
         virtual void drawString(Graphics* graphics, const std::string& text,
                                 int x, int y) = 0;

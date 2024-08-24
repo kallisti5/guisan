@@ -92,12 +92,12 @@ namespace gcn
 
         /**
          * Sets the container to be opaque or not. If the container
-         * is opaque it's background will be drawn, if it's not opaque 
-         * it's background will not be drawn, and thus making the container
+         * is opaque its background will be drawn, if it's not opaque
+         * its background will not be drawn, and thus making the container
          * completely transparent.
          *
          * NOTE: This is not the same as to set visibility. A non visible
-         *       container will not itself nor will it draw it's content.
+         *       container will not itself nor will it draw its content.
          *
          * @param opaque True if the container should be opaque, false otherwise.
          * @see isOpaque
@@ -107,7 +107,7 @@ namespace gcn
         /**
          * Checks if the container is opaque or not.
          *
-         * @return true if the container is opaque, false otherwise.
+         * @return True if the container is opaque, false otherwise.
          * @see setOpaque
          */
         bool isOpaque() const;
@@ -164,7 +164,6 @@ namespace gcn
 
         virtual void draw(Graphics* graphics);
 
-        virtual void drawBorder(Graphics* graphics);
 
     protected:
         /**

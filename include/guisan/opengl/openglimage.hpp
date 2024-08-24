@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessï¿½n and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessï¿½n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -57,12 +57,9 @@
 #ifndef GCN_OPENGLIMAGE_HPP
 #define GCN_OPENGLIMAGE_HPP
 
-#if defined (_WIN32)
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
-#if defined (DELETE)
-#undef DELETE
-#endif
+#if defined(_WIN32)
+# define WIN32_LEAN_AND_MEAN
+# include <windows.h>
 #endif
 
 #if defined (__amigaos4__)
@@ -91,17 +88,17 @@ namespace gcn
 		 * Constructor. Loads an image from an array of pixels. The pixel array is
 		 * is copied in the constructor and should thus be freed after the constructor
 		 * has been called.
-		 *
-		 * NOTE: The functions getPixel and putPixel are only guaranteed to work
-		 *       before an image has been converted to display format.
-		 *
-		 * @param pixels to load from.
-		 * @param width the width of the image.
-		 * @param height the height of the image.
-		 * @param convertToDisplayFormat true if the image should be converted
-		 *                               to display, false otherwise.
-		 */
-		OpenGLImage(unsigned int* pixels, int width, int height, bool convertToDisplayFormat = true);
+         *
+         * NOTE: The functions getPixel and putPixel are only guaranteed to work
+         *       before an image has been converted to display format.
+         *
+         * @param pixels to load from.
+         * @param width the width of the image.
+         * @param height the height of the image.
+         * @param convertToDisplayFormat true if the image should be converted
+         *                               to display, false otherwise.
+         */
+        OpenGLImage(const unsigned int* pixels, int width, int height, bool convertToDisplayFormat = true);
 
 		/**
 		 * Constructor. Load an image from an OpenGL texture handle. The width

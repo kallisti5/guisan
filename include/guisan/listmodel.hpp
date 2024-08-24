@@ -64,10 +64,11 @@
 namespace gcn
 {
     /**
-     * Represents a list. It is used in certain Widgets, like the ListBox, to
-     * handle a list with string elements. If you want to use Widgets like
-     * ListBox, you should inherit from this class and implement it's
-     * functions.
+     * An interface for a model that represents a list. It is
+     * used in certain widgets, like the ListBox, to handle a
+     * lists with string elements. If you want to use widgets
+     * like ListBox, make a derived class from this class that
+     * represents your list.
      */
     class GCN_CORE_DECLSPEC ListModel
     {
@@ -78,17 +79,17 @@ namespace gcn
         virtual ~ListModel() { }
 
         /**
-         * Gets the number of elements in the ListModel.
+         * Gets the number of elements in the list.
          *
-         * @return the number of elements in the ListModel
+         * @return The number of elements in the list
          */
         virtual int getNumberOfElements() = 0;
 
         /**
          * Gets an element at a certain index in the list.
          *
-         * @param i an index in the list.
-         * @return an element as a string.
+         * @param i An index in the list.
+         * @return An element as a string at the a certain index.
          */
         virtual std::string getElementAt(int i) = 0;
 

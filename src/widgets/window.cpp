@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessï¿½n and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessï¿½n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -68,9 +68,9 @@
 namespace gcn
 {
     Window::Window()
-        :mIsMoving(false)
+        :mMoved(false)
     {
-        setBorderSize(1);
+        setFrameSize(1);
         setPadding(2);
         setTitleBarHeight(getFont()->getHeight() + 2);
         setAlignment(Graphics::CENTER);
@@ -80,10 +80,10 @@ namespace gcn
     }
 
     Window::Window(const std::string& caption)
-        :mIsMoving(false)
+        :mMoved(false)
     {
         setCaption(caption);
-        setBorderSize(1);
+        setFrameSize(1);
         setPadding(2);
         setTitleBarHeight(getFont()->getHeight() + 2);
         setAlignment(Graphics::CENTER);
@@ -125,23 +125,21 @@ namespace gcn
         return mCaption;
     }
 
-    void Window::setAlignment(unsigned int alignment)
+    void Window::setAlignment(Graphics::Alignment alignment)
     {
         mAlignment = alignment;
     }
 
-    unsigned int Window::getAlignment() const
+    Graphics::Alignment Window::getAlignment() const
     {
         return mAlignment;
     }
 
     void Window::draw(Graphics* graphics)
     {
-        const Color faceColor = getBaseColor();
+        const Color& faceColor = getBaseColor();
         Color highlightColor, shadowColor;
         const int alpha = getBaseColor().a;
-        //int width = getWidth() + getBorderSize() * 2 - 1;
-        //int height = getHeight() + getBorderSize() * 2 - 1;
         highlightColor = faceColor + 0x303030;
         highlightColor.a = alpha;
         shadowColor = faceColor - 0x303030;
@@ -231,30 +229,6 @@ namespace gcn
         graphics->popClipArea();
     }
 
-    void Window::drawBorder(Graphics* graphics)
-    {
-        Color faceColor = getBaseColor();
-        Color highlightColor, shadowColor;
-        int alpha = getBaseColor().a;
-        int width = getWidth() + getBorderSize() * 2 - 1;
-        int height = getHeight() + getBorderSize() * 2 - 1;
-        highlightColor = faceColor + 0x303030;
-        highlightColor.a = alpha;
-        shadowColor = faceColor - 0x303030;
-        shadowColor.a = alpha;
-
-        unsigned int i;
-        for (i = 0; i < getBorderSize(); ++i)
-        {
-            graphics->setColor(highlightColor);
-            graphics->drawLine(i, i, width - i, i);
-            graphics->drawLine(i, i + 1, i, height - i - 1);
-            graphics->setColor(shadowColor);
-            graphics->drawLine(width - i, i + 1, width - i, height - i);
-            graphics->drawLine(i, height - i, width - i - 1, height - i);
-        }
-    }
-
     void Window::mousePressed(MouseEvent& mouseEvent)
     {
         if (mouseEvent.getSource() != this)
@@ -270,12 +244,12 @@ namespace gcn
         mDragOffsetX = mouseEvent.getX();
         mDragOffsetY = mouseEvent.getY();
 
-        mIsMoving = mouseEvent.getY() <= static_cast<int>(mTitleBarHeight);
+        mMoved = mouseEvent.getY() <= (int)mTitleBarHeight;
     }
 
     void Window::mouseReleased(MouseEvent& mouseEvent)
     {
-        mIsMoving = false;
+        mMoved = false;
     }
 
     void Window::mouseDragged(MouseEvent& mouseEvent)
@@ -285,7 +259,7 @@ namespace gcn
             return;
         }
 
-        if (isMovable() && mIsMoving)
+        if (isMovable() && mMoved)
         {
             setPosition(mouseEvent.getX() - mDragOffsetX + getX(),
                 mouseEvent.getY() - mDragOffsetY + getY());

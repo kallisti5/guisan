@@ -166,7 +166,7 @@ namespace gcn
               mKeyInputQueue.push(keyInput);
               break;
           case SDL_KEYDOWN:
-              keyInput.setKey(Key(convertKeyCharacter(event)));
+              keyInput.setKey(convertSDLEventToGuichanKeyValue(event));
               keyInput.setType(KeyInput::PRESSED);
               keyInput.setShiftPressed(event.key.keysym.mod & KMOD_SHIFT);
               keyInput.setControlPressed(event.key.keysym.mod & KMOD_CTRL);
@@ -183,7 +183,7 @@ namespace gcn
               break;
 
           case SDL_KEYUP:
-              keyInput.setKey(Key(convertKeyCharacter(event)));
+              keyInput.setKey(convertSDLEventToGuichanKeyValue(event));
               keyInput.setType(KeyInput::RELEASED);
               keyInput.setShiftPressed(event.key.keysym.mod & KMOD_SHIFT);
               keyInput.setControlPressed(event.key.keysym.mod & KMOD_CTRL);
@@ -277,12 +277,11 @@ namespace gcn
         }
     }
 
-    int SDLInput::convertKeyCharacter(SDL_Event event)
+    Key SDLInput::convertSDLEventToGuichanKeyValue(SDL_Event event)
     {
-        SDL_Keysym keysym = event.key.keysym;
-        
-        int value = 0;
-        switch (keysym.sym)
+        int value = -1;
+
+        switch (event.key.keysym.sym)
         {
           case SDLK_TAB:
               value = Key::TAB;
@@ -421,13 +420,13 @@ namespace gcn
               break;
 
           default:
-              value = keysym.sym;
+              value = event.key.keysym.sym;
               break;
         }
 
-        if (!(keysym.mod & KMOD_NUM))
+        if (!(event.key.keysym.mod & KMOD_NUM))
         {
-            switch (keysym.sym)
+            switch (event.key.keysym.sym)
             {
               case SDLK_KP_0:
                   value = Key::INSERT;
@@ -465,7 +464,7 @@ namespace gcn
         }
         else
         {
-            switch (keysym.sym)
+            switch (event.key.keysym.sym)
             {
               case SDLK_KP_0:
                   value = SDLK_0;

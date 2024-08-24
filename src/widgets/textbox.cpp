@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessï¿½n and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessï¿½n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -80,7 +80,7 @@ namespace gcn
         addMouseListener(this);
         addKeyListener(this);
         adjustSize();
-        setBorderSize(1);
+        setFrameSize(1);
         setText("");
     }
 
@@ -98,7 +98,7 @@ namespace gcn
         addMouseListener(this);
         addKeyListener(this);
         adjustSize();
-        setBorderSize(1);
+        setFrameSize(1);
     }
 
     void TextBox::setText(const std::string& text)
@@ -133,6 +133,24 @@ namespace gcn
 
     void TextBox::draw(Graphics* graphics)
     {
+        /*
+        int width = getWidth() + getFrameSize() * 2 - 1;
+        int height = getHeight() + getFrameSize() * 2 - 1;
+
+        graphics->setColor(getBackgroundColor());
+
+        unsigned int i;
+        for (i = 0; i < getFrameSize(); ++i)
+        {
+            graphics->drawLine(i,i, width - i, i);
+            graphics->drawLine(i,i + 1, i, height - i - 1);
+            graphics->drawLine(width - i,i + 1, width - i, height - i);
+            graphics->drawLine(i,height - i, width - i - 1, height - i);
+        }
+        */
+
+        unsigned int i;
+
         if (mOpaque)
         {
             graphics->setColor(getBackgroundColor());
@@ -151,23 +169,6 @@ namespace gcn
         {
             // Move the text one pixel so we can have a caret before a letter.
             graphics->drawText(mTextRows[i], 2, i * (getFont()->getHeight() + 2));
-        }
-    }
-
-    void TextBox::drawBorder(Graphics* graphics)
-    {
-        const int width = getWidth() + static_cast<int>(getBorderSize()) * 2 - 1;
-        const int height = getHeight() + static_cast<int>(getBorderSize()) * 2 - 1;
-
-        graphics->setColor(getBackgroundColor());
-
-        unsigned int i;
-        for (i = 0; i < getBorderSize(); ++i)
-        {
-            graphics->drawLine(i,i, width - i, i);
-            graphics->drawLine(i,i + 1, i, height - i - 1);
-            graphics->drawLine(width - i,i + 1, width - i, height - i);
-            graphics->drawLine(i,height - i, width - i - 1, height - i);
         }
     }
 
@@ -513,18 +514,12 @@ namespace gcn
 
     void TextBox::scrollToCaret()
     {
-        Widget *par = getParent();
-        if (par == NULL)
-        {
-            return;
-        }
-
         Rectangle scroll;
         scroll.x = getFont()->getWidth(mTextRows[mCaretRow].substr(0, mCaretColumn));
         scroll.y = getFont()->getHeight() * mCaretRow;
         scroll.width = getFont()->getWidth(" ");
         scroll.height = getFont()->getHeight() + 2; // add 2 for some extra space
-        par->showWidgetPart(this,scroll);
+        showPart(scroll);
     }
 
     void TextBox::setEditable(bool editable)

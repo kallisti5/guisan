@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessï¿½n and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessï¿½n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -69,10 +69,7 @@
 namespace gcn
 {
     /**
-     * A TextBox in which you can write and/or display a lines of text.
-     *
-     * NOTE: A plain TextBox is really uggly and looks much better inside a
-     *       ScrollArea.
+     * An implementation of a text box where a user can enter text that contains many lines.
      */
     class GCN_CORE_DECLSPEC TextBox:
         public Widget,
@@ -88,132 +85,155 @@ namespace gcn
         /**
          * Constructor.
          *
-         * @param text the text of the TextBox.
+         * @param text The default text of the text box.
          */
         TextBox(const std::string& text);
 
         /**
-         * Sets the text.
+         * Sets the text of the text box.
          *
-         * @param text the text of the TextBox.
+         * @param text The text of the text box.
+         * @see getText
          */
         void setText(const std::string& text);
 
         /**
-         * Gets the text.
-         * @return the text of the TextBox.
+         * Gets the text of the text box.
+         *
+         * @return The text of the text box.
+         * @see setText
          */
         std::string getText() const;
 
         /**
-         * Gets the row of a text.
+         * Gets a certain row from the text.
          *
-         * @return the text of a certain row in the TextBox.
+         * @param row The number of the row to get from the text.
+         * @return A row from the text of the text box.
+         * @see setTextRow
          */
         const std::string& getTextRow(int row) const;
 
         /**
-         * Sets the text of a certain row in a TextBox.
+         * Sets the text of a certain row of the text.
          *
-         * @param row the row number.
-         * @param text the text of a certain row in the TextBox.
+         * @param row The number of the row to set in the text.
+         * @param text The text to set in the given row number.
+         * @see getTextRow
          */
         void setTextRow(int row, const std::string& text);
 
         /**
          * Gets the number of rows in the text.
          *
-         * @return the number of rows in the text.
+         * @return The number of rows in the text.
          */
         unsigned int getNumberOfRows() const;
 
         /**
          * Gets the caret position in the text.
          *
-         * @return the caret position in the text.
+         * @return The caret position in the text.
+         * @see setCaretPosition
          */
         unsigned int getCaretPosition() const;
 
         /**
          * Sets the position of the caret in the text.
          *
-         * @param position the position of the caret.
+         * @param position the positon of the caret.
+         * @see getCaretPosition
          */
         void setCaretPosition(unsigned int position);
 
         /**
-         * Gets the row the caret is in in the text.
+         * Gets the row number where the caret is currently located.
          *
-         * @return the row the caret is in in the text.
+         * @return The row number where the caret is currently located.
+         * @see setCaretRow
          */
         unsigned int getCaretRow() const;
 
         /**
-         * Sets the row the caret should be in in the text.
+         * Sets the row where the caret should be currently located.
          *
-         * @param row the row number.
+         * @param The row where the caret should be currently located.
+         * @see getCaretRow
          */
         void setCaretRow(int row);
 
         /**
-         * Gets the column the caret is in in the text.
+         * Gets the column where the caret is currently located.
          *
-         * @return the column the caret is in in the text.
+         * @return The column where the caret is currently located.
+         * @see setCaretColumn
          */
         unsigned int getCaretColumn() const;
 
         /**
-         * Sets the column the caret should be in in the text.
+         * Sets the column where the caret should be currently located.
          *
-         * @param column the column number.
+         * @param The column where the caret should be currently located.
+         * @see getCaretColumn
          */
         void setCaretColumn(int column);
 
         /**
-         * Sets the row and the column the caret should be in in the text.
+         * Sets the row and the column where the caret should be currently
+         * located.
          *
-         * @param row the row number.
-         * @param column the column number.
+         * @param row The row where the caret should be currently located.
+         * @param column The column where the caret should be currently located.
+         * @see getCaretRow, getCaretColumn
          */
         void setCaretRowColumn(int row, int column);
 
         /**
-         * Scrolls the text to the caret if the TextBox is in a ScrollArea.
+         * Scrolls the text to the caret if the text box is in a scroll area.
+         * 
+         * @see ScrollArea
          */
         virtual void scrollToCaret();
 
         /**
-         * Checks if the TextBox is editable.
+         * Checks if the text box is editable.
          *
-         * @return true it the TextBox is editable.
+         * @return True it the text box is editable, false otherwise.
+         * @see setEditable
          */
         bool isEditable() const;
 
         /**
-         * Sets if the TextBox should be editable or not.
+         * Sets the text box to be editable or not.
          *
-         * @param editable true if the TextBox should be editable.
+         * @param editable True if the text box should be editable, false otherwise.
          */
         void setEditable(bool editable);
 
         /**
-         * Adds a text row to the text.
+         * Adds a row of text to the end of the text.
          *
-         * @param row a row.
+         * @param row The row to add.
          */
         virtual void addRow(const std::string row);
 
         /**
-         * Checks if the TextBox is opaque
+         * Checks if the text box is opaque. An opaque text box will draw
+         * its background and its text. A non opaque text box only draw its
+         * text making it transparent.
          *
-         * @return true if the TextBox is opaque
+         * @return True if the text box is opaque, false otherwise.
+         * @see setOpaque
          */
         bool isOpaque();
 
         /**
-         * Sets the TextBox to be opaque.
+         * Sets the text box to be opaque or not. An opaque text box will draw
+         * its background and its text. A non opaque text box only draw its
+         * text making it transparent.
          *
-         * @param opaque true if the TextBox should be opaque.
+         * @param opaque True if the text box should be opaque, false otherwise.
+         * @see isOpaque
          */
         void setOpaque(bool opaque);
 
@@ -221,8 +241,6 @@ namespace gcn
         // Inherited from Widget
 
         virtual void draw(Graphics* graphics);
-
-        virtual void drawBorder(Graphics* graphics);
 
         virtual void fontChanged();
 
@@ -240,7 +258,8 @@ namespace gcn
 
     protected:
         /**
-         * Draws the caret.
+         * Draws the caret. Overloaded this method if you want to
+         * change the style of the caret.
          *
          * @param graphics a Graphics object to draw with.
          * @param x the x position.
@@ -249,14 +268,33 @@ namespace gcn
         virtual void drawCaret(Graphics* graphics, int x, int y);
 
         /**
-         * Adjusts the TextBox size to fit the font size.
+         * Adjusts the text box's size to fit the text.
          */
         virtual void adjustSize();
 
+        /**
+         * Holds all the rows of the text.
+         */
         std::vector<std::string> mTextRows;
+
+        /**
+         * Holds the current column of the caret.
+         */
         int mCaretColumn;
+
+        /**
+         * Holds the current row of the caret.
+         */
         int mCaretRow;
+
+        /**
+         * True if the text box is editable, false otherwise.
+         */
         bool mEditable;
+
+        /**
+         * True if the text box is editable, false otherwise.
+         */
         bool mOpaque;
     };
 }

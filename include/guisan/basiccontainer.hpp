@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessï¿½n and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessï¿½n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -66,10 +66,12 @@
 namespace gcn
 {
     /**
-     * Implements basic container behaviour. Most container will suffice by
-     * inheriting from this class.
+     * A base class for containers. The class implements the most
+     * common things for a container. If you are implementing a 
+     * container, consider inheriting from this class.
      *
      * @see Container
+     * @since 0.6.0
      */
     class GCN_CORE_DECLSPEC BasicContainer : public Widget, public DeathListener
     {
@@ -79,8 +81,20 @@ namespace gcn
          */
         virtual ~BasicContainer();
 
-
         // Inherited from Widget
+
+        /**
+         * Shows a certain part of a widget in the basic container.
+         * Used when widgets want a specific part to be visible in
+         * its parent. An example is a TextArea that wants a specific
+         * part of its text to be visible when a TextArea is a child
+         * of a ScrollArea.
+         *
+         * @param widget The widget whom wants a specific part of
+         *               itself to be visible.
+         * @param rectangle The rectangle to be visible.
+         */
+        virtual void showWidgetPart(Widget* widget, Rectangle area);
 
         virtual void moveToTop(Widget* widget);
 
@@ -98,8 +112,6 @@ namespace gcn
 
         void setInternalFocusHandler(FocusHandler* focusHandler);
 
-        virtual void showWidgetPart(Widget* widget, Rectangle area);
-
         virtual Widget *getWidgetAt(int x, int y);
 
 
@@ -111,39 +123,46 @@ namespace gcn
         /**
          * Adds a widget to the basic container.
          *
-         * @param widget the widget to add.
+         * @param widget The widget to add.
+         * @see remove, clear
          */
         void add(Widget* widget);
 
         /**
          * Removes a widget from the basic container.
          *
-         * @param widget the widget to remove.
+         * @param widget The widget to remove.
+         * @see add, clear
          */
         virtual void remove(Widget* widget);
 
         /**
          * Clears the basic container from all widgets.
+         *
+         * @see remove, clear
          */
         virtual void clear();
         
         /**
-         * Draws children widgets.
+         * Draws the children widgets of the basic container.
          *
-         * @param graphics a Graphics object to draw with.
+         * @param graphics A graphics object to draw with.
          */
         virtual void drawChildren(Graphics* graphics);
 
         /**
-         * Calls logic for children widgets.
+         * Calls logic for the children widgets of the basic
+         * container.
          */
         virtual void logicChildren();
 
         /**
-         * Finds a widget given an id.
+         * Finds a widget given an id. This function can be useful
+         * when implementing a GUI generator for Guisan, such as
+         * the ability to create a Guisan GUI from an XML file.
          *
-         * @param id the id to find a widget by.
-         * @return the widget with the corresponding id, 
+         * @param id The id to find a widget by.
+         * @return The widget with the corrosponding id, 
                    NULL of no widget is found.
          */
         virtual Widget* findWidgetById(const std::string& id);
@@ -152,6 +171,9 @@ namespace gcn
         typedef WidgetList::iterator WidgetListIterator;
         typedef WidgetList::reverse_iterator WidgetListReverseIterator;
 
+        /**
+         * Holds all widgets of the basic container.
+         */
         WidgetList mWidgets;
     };
 }

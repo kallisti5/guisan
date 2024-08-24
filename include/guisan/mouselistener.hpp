@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessï¿½n and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessï¿½n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -63,12 +63,10 @@
 namespace gcn
 {
     /**
-     * Mouse listeners base class. Inorder to use this class you must inherit
-     * from it and implements it's functions. MouseListeners listen for mouse
-     * events on a Widgets. When a Widget recives a mouse event, the
-     * corresponding function in all it's mouse listeners will be called.
+     * Interface for listening for mouse events from widgets.
      *
-     * @see Widget::addMouseListener
+     * @see Widget::addMouseListener, Widget::removeMouseListener
+     * @since 0.1.0
      */
     class GCN_CORE_DECLSPEC MouseListener
     {
@@ -82,7 +80,7 @@ namespace gcn
         /**
          * Called when the mouse has entered into the widget area.
          *
-         * @param mouseEvent describes the event.
+         * @param mouseEvent Describes the event.
          * @since 0.6.0
          */
         virtual void mouseEntered(MouseEvent& mouseEvent)
@@ -93,7 +91,8 @@ namespace gcn
         /**
          * Called when the mouse has exited the widget area.
          *
-         * @param mouseEvent describes the event.
+         * @param mouseEvent Describes the event.
+         * @since 0.6.0
          */
         virtual void mouseExited(MouseEvent& mouseEvent)
         {
@@ -106,7 +105,7 @@ namespace gcn
          * NOTE: A mouse press is NOT equal to a mouse click.
          *       Use mouseClickMessage to check for mouse clicks.
          *
-         * @param mouseEvent describes the event.
+         * @param mouseEvent Describes the event.
          * @since 0.6.0
          */
         virtual void mousePressed(MouseEvent& mouseEvent)
@@ -117,7 +116,8 @@ namespace gcn
         /**
          * Called when a mouse button has been released on the widget area.
          *
-         * @param mouseEvent describes the event.
+         * @param mouseEvent Describes the event.
+         * @since 0.6.0
          */
         virtual void mouseReleased(MouseEvent& mouseEvent)
         {
@@ -139,7 +139,7 @@ namespace gcn
         /**
          * Called when the mouse wheel has moved up on the widget area.
          *
-         * @param mouseEvent describes the event.
+         * @param mouseEvent Describes the event.
          * @since 0.6.0
          */
         virtual void mouseWheelMovedUp(MouseEvent& mouseEvent)
@@ -162,7 +162,7 @@ namespace gcn
          * Called when the mouse has moved in the widget area and no mouse button
          * has been pressed (i.e no widget is being dragged).
          *
-         * @param mouseEvent describes the event.
+         * @param mouseEvent Describes the event.
          * @since 0.6.0
          */
         virtual void mouseMoved(MouseEvent& mouseEvent)
@@ -174,7 +174,7 @@ namespace gcn
          * Called when the mouse has moved and the mouse has previously been
          * pressed on the widget.
          *
-         * @param mouseEvent describes the event.
+         * @param mouseEvent Describes the event.
          * @since 0.6.0
          */
         virtual void mouseDragged(MouseEvent& mouseEvent)
@@ -187,9 +187,7 @@ namespace gcn
          * Constructor.
          *
          * You should not be able to make an instance of MouseListener,
-         * therefore its constructor is protected. To use MouseListener
-         * you must inherit from this class and implement it's
-         * functions.
+         * therefore its constructor is protected.
          */
         MouseListener() { }
     };

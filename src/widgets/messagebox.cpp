@@ -209,17 +209,7 @@ namespace gcn
         return mCaption;
     }
 
-    void MessageBox::setAlignment(unsigned int alignment)
-    {
-        mAlignment = alignment;
-    }
-
-    unsigned int MessageBox::getAlignment() const
-    {
-        return mAlignment;
-    }
-    
-    void MessageBox::setButtonAlignment(unsigned int alignment)
+    void MessageBox::setButtonAlignment(Graphics::Alignment alignment)
     {
         mButtonAlignment = alignment;
         
@@ -246,8 +236,8 @@ namespace gcn
             }
         }
     }
-    
-    unsigned int MessageBox::getButtonAlignment() const
+
+    Graphics::Alignment MessageBox::getButtonAlignment() const
     {
         return mButtonAlignment;
     }
@@ -257,8 +247,8 @@ namespace gcn
         Color faceColor = getBaseColor();
         Color highlightColor, shadowColor;
         int alpha = getBaseColor().a;
-        //int width = getWidth() + getBorderSize() * 2 - 1;
-        //int height = getHeight() + getBorderSize() * 2 - 1;
+        //int width = getWidth() + getFrameSize() * 2 - 1;
+        //int height = getHeight() + getFrameSize() * 2 - 1;
         highlightColor = faceColor + 0x303030;
         highlightColor.a = alpha;
         shadowColor = faceColor - 0x303030;
@@ -349,30 +339,6 @@ namespace gcn
         graphics->popClipArea();
     }
 
-    void MessageBox::drawBorder(Graphics* graphics)
-    {
-        Color faceColor = getBaseColor();
-        Color highlightColor, shadowColor;
-        int alpha = getBaseColor().a;
-        int width = getWidth() + getBorderSize() * 2 - 1;
-        int height = getHeight() + getBorderSize() * 2 - 1;
-        highlightColor = faceColor + 0x303030;
-        highlightColor.a = alpha;
-        shadowColor = faceColor - 0x303030;
-        shadowColor.a = alpha;
-
-        unsigned int i;
-        for (i = 0; i < getBorderSize(); ++i)
-        {
-            graphics->setColor(highlightColor);
-            graphics->drawLine(i,i, width - i, i);
-            graphics->drawLine(i,i + 1, i, height - i - 1);
-            graphics->setColor(shadowColor);
-            graphics->drawLine(width - i,i + 1, width - i, height - i);
-            graphics->drawLine(i,height - i, width - i - 1, height - i);
-        }
-    }
-
     void MessageBox::mousePressed(MouseEvent& mouseEvent)
     {
         if (mouseEvent.getSource() != this)
@@ -387,8 +353,8 @@ namespace gcn
 
         mDragOffsetX = mouseEvent.getX();
         mDragOffsetY = mouseEvent.getY();
-        
-        mIsMoving = mouseEvent.getY() <= (int)mTitleBarHeight;
+
+        mMoved = mouseEvent.getY() <= (int)mTitleBarHeight;
     }
 
     void MessageBox::mouseReleased(MouseEvent& mouseEvent)
@@ -400,14 +366,14 @@ namespace gcn
                 if(mouseEvent.getSource() == mButtons[i])
                 {
                     mClickedButton = i;
-                    generateAction();
+                    distributeActionEvent();
                     break;
                 }
             }
         }
         else
         {
-            mIsMoving = false;
+            mMoved = false;
         }
     }
 
@@ -418,7 +384,7 @@ namespace gcn
             return;
         }
         
-        if (isMovable() && mIsMoving)
+        if (isMovable() && mMoved)
         {
             setPosition(mouseEvent.getX() - mDragOffsetX + getX(),
                         mouseEvent.getY() - mDragOffsetY + getY());

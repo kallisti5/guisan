@@ -61,7 +61,7 @@ FFListBox::FFListBox()
     }
 
     mInstances++;
-    setBorderSize(0);
+    setFrameSize(0);
     setWrappingEnabled(true);
 }
 

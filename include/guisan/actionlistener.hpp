@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessï¿½n and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessï¿½n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -63,12 +63,11 @@
 namespace gcn
 {
     /**
-     * Listener of action events from Widgets. To be able to
-     * listen for actions you must make a class which inherits
-     * from this class and implements the action function.
+     * Interface for listening for action events from widgets.
      *
-     * @see Widget::addActionListener
-     * @author Olof Naessén
+     * @see Widget::addActionListener, Widget::removeActionListener,
+     *      ActionEvent
+     * @author Olof Naessï¿½n
      * @author Per Larsson
      */
     class GCN_CORE_DECLSPEC ActionListener
@@ -81,15 +80,23 @@ namespace gcn
         virtual ~ActionListener() { }
 
         /**
-         * Called when an action is received from a Widget. It is used
-         * to be able to receive a notification that an action has
+         * Called when an action is recieved from a widget. It is used
+         * to be able to recieve a notification that an action has
          * occured.
          *
-         * @param actionEvent the event of the action.
+         * @param actionEvent The event of the action.
          * @since 0.6.0
          */
         virtual void action(const ActionEvent& actionEvent) = 0;
 
+    protected:
+        /**
+         * Constructor.
+         *
+         * You should not be able to make an instance of ActionListener,
+         * therefore its constructor is protected.
+         */
+        ActionListener() {}
     };
 }
 

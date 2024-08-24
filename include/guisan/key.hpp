@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessï¿½n and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessï¿½n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -59,6 +59,13 @@
 
 #include "guisan/platform.hpp"
 
+// <windows.h> defines DELETE which breaks this file as we have a constant named
+// DELETE, hence we undefine DELETE if it is defined and hope people don't use
+// that windows define with Guisan.
+#if defined(_WIN32) && defined(DELETE)
+# undef DELETE
+#endif
+
 namespace gcn
 {
     /**
@@ -71,52 +78,73 @@ namespace gcn
         /**
          * Constructor.
          *
-         * @param value the ascii or enum value for the key.
+         * @param value The ascii or enum value for the key.
          */
         Key(int value = 0);
 
         /**
-         * Checks whether a key is a character.
+         * Checks if a key is a character.
          *
-         * @return true if the key is a letter, number or whitespace.
+         * @return True if the key is a letter, number or whitespace,
+         *         false otherwise.
          */
         bool isCharacter() const;
 
         /**
-         * Checks whether a key is a number.
+         * Checks if a key is a number.
          *
-         * @return true if the key is a number (0-9).
+         * @return True if the key is a number (0-9),
+         *         false otherwise.
          */
         bool isNumber() const;
 
         /**
-         * Checks whether a key is a letter.
+         * Checks if a key is a letter.
          *
-         * @return true if the key is a letter (a-z,A-Z).
+         * @return True if the key is a letter (a-z,A-Z),
+         *         false otherwise.
          */
         bool isLetter() const;
 
         /**
-         * Checks whether a key is printable.
+         * Checks if a key is printable.
          *
-         * @return true if the key is printable
+         * @return True if the key is a printable,
+         *         false otherwise.
          */
         bool isPrintable() const;
 
         /**
-         * Gets the value of the key. If an ascii value exists it will be
-         * returned. Otherwise an enum value will be returned.
+         * Gets the value of the key. If an ascii value exists it
+         * will be returned. Otherwise an enum value will be returned.
          *
-         * @return the value of the key.
+         * @return The value of the key.
          */
         int getValue() const;
 
         /**
          *  Gets the char value of the key if available.
-         *  
-         *  @return the char value of the key, the null character otherwise
+         *
+         *  @return The char value of the key, the null character otherwise
          */
         char getChar() const;
+
+
+        /**
+         * Compares to keys.
+         * 
+         * @param key The key to compare this key with.
+         * @return True if the keys are equal, false otherwise.
+         */
+        bool operator==(const Key& key) const;
+
+        /**
+         * Compares to keys.
+         * 
+         * @param key The key to compare this key with.
+         * @return True if the keys are not equal, false otherwise.
+         */
+        bool operator!=(const Key& key) const;
 
         /**
          * An enum with key values.
@@ -172,6 +200,10 @@ namespace gcn
         };
 
     protected:
+        /**
+         * Holds the value of the key. It may be an ascii value
+         * or an enum value.
+         */
         int mValue;
     };
 }

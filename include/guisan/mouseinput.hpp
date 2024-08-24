@@ -63,13 +63,13 @@ namespace gcn
 {
 
     /**
-     * Internal class representing mouse input. Generally you won't have to
-     * bother using this class as it will get translated into a MouseEvent.
-     * The class should be seen as a bridge between the low layer backends
-     * providing input and the higher lever parts of the Gui (such as widgets).
+     * Internal class that represents mouse input. Generally you won't have to
+     * bother using this class unless you implement an Input class for
+     * a back end.
      *
      * @author Olof Naessén
      * @author Per Larsson
+     * @since 0.1.0
      */
     class GCN_CORE_DECLSPEC MouseInput
     {
@@ -83,11 +83,12 @@ namespace gcn
         /**
          * Constructor.
          *
-         * @param button the button pressed.
-         * @param type the type of input.
-         * @param x the mouse x coordinate.
-         * @param y the mouse y coordinate.
-         * @param timeStamp the mouse inputs time stamp.
+         * @param button The button pressed.
+         * @param type The type of mouse input.
+         * @param x The mouse x coordinate.
+         * @param y The mouse y coordinate.
+         * @param timeStamp The timestamp of the mouse input. Used to
+         *                  check for double clicks.
          */
         MouseInput(unsigned int button,
                    unsigned int type,
@@ -96,73 +97,97 @@ namespace gcn
                    int timeStamp);
 
         /**
-         * Sets the input type.
+         * Sets the type of the mouse input.
          *
-         * @param type the type of input.
+         * @param type The type of the mouse input. Should be a value from the
+         *             mouse event type enum
+         * @see getType
+         * @since 0.1.0
          */
         void setType(unsigned int type);
 
         /**
-         * Gets the input type.
+         * Gets the type of the mouse input.
          *
-         * @return the input type.
+         * @return The type of the mouse input. A value from the mouse event
+         *         type enum.
+         * @see setType
+         * @since 0.1.0
          */
         unsigned int getType() const;
 
         /**
          * Sets the button pressed.
          *
-         * @param button the button pressed.
+         * @param button The button pressed. Should be one of the values
+         *               in the mouse event button enum.
+         * @see getButton.
+         * @since 0.1.0
          */
         void setButton(unsigned int button);
 
         /**
          * Gets the button pressed.
          *
-         * @return the button pressed.
+         * @return The button pressed. A value from the mouse event
+         *         button enum.
+         * @see setButton
+         * @since 0.1.0
          */
         unsigned int getButton() const;
 
         /**
-         * Sets the timestamp for the input.
+         * Sets the timestamp for the mouse input.
+         * Used to check for double clicks.
          *
-         * @param timeStamp the timestamp of the input.
+         * @param timeStamp The timestamp of the mouse input.
+         * @see getTimeStamp
+         * @since 0.1.0
          */
         void setTimeStamp(int timeStamp);
 
         /**
          * Gets the time stamp of the input.
+         * Used to check for double clicks.
          *
-         * @return the time stamp of the input.
+         * @return The time stamp of the mouse input.
+         * @see setTimeStamp
+         * @since 0.1.0
          */
         int getTimeStamp() const;
 
         /**
-         * Sets the x coordinate of the input.
+         * Sets the x coordinate of the mouse input.
          *
-         * @param x the x coordinate of the input.
+         * @param x The x coordinate of the mouse input.
+         * @see getX
          * @since 0.6.0
          */
         void setX(int x);
 
         /**
-         * Gets the x coordinate of the input.
+         * Gets the x coordinate of the mouse input.
          *
-         * @return the x coordinate of the input.
+         * @return The x coordinate of the mouse input.
+         * @see setX
          * @since 0.6.0
          */
         int getX() const;
 
         /**
-         * Sets the y coordinate of the input.
+         * Sets the y coordinate of the mouse input.
          *
-         * @param y the y coordinate of the input.
+         * @param y The y coordinate of the mouse input.
+         * @see getY
          * @since 0.6.0
          */
         void setY(int y);
 
         /**
-         * Gets the y coordinate of the input.
+         * Gets the y coordinate of the mouse input.
+         *
+         * @return The y coordinate of the mouse input.
+         * @see setY
          * @since 0.6.0
          */
         int getY() const;
@@ -192,10 +217,30 @@ namespace gcn
         };
 
     protected:
+        /**
+         * Holds the type of the mouse input.
+         */
         unsigned int mType;
+
+        /**
+         * Holds the button of the mouse input.
+         */
         unsigned int mButton;
+
+        /** 
+         * Holds the timestamp of the mouse input. Used to 
+         * check for double clicks.
+         */
         int mTimeStamp;
+
+        /** 
+         * Holds the x coordinate of the mouse input.
+         */
         int mX;
+
+        /** 
+         * Holds the y coordinate of the mouse input.
+         */
         int mY;
     };
 }

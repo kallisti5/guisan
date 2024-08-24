@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessï¿½n and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessï¿½n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -71,10 +71,12 @@ namespace gcn
 {
     class Container;
     class Tab;
-    
+
     /**
-     * With the tabbed area widget several widgets can share the same
-     * space. The widget to view is selected by the user by using tabs.
+     * An implementation of a tabbed area where a user can display a widget by
+     * selecting a tab.
+     *
+     * @since 0.8.0
      */
     class GCN_CORE_DECLSPEC TabbedArea:
         public ActionListener,
@@ -82,6 +84,8 @@ namespace gcn
         public KeyListener,
         public MouseListener
     {
+        friend class Tab;
+
     public:
 
         /**
@@ -95,18 +99,46 @@ namespace gcn
         virtual ~TabbedArea();
 
         /**
-         * Adds a tab to the tabbed area.
+         * Sets the tabbed area to be opaque or not. If the tabbed area is
+         * opaque its background will be drawn, if it's not opaque its
+         * background will not be drawn. By default, a tabbed area is not
+         * opaque.
          *
-         * @param caption The caption of the tab.
-         * @param widget The widget to view when the tab is selected.         
+         * The tabbed area's background is normally only visible behind the
+         * tabs, since the container holding the tab contents is opaque by
+         * default.
+         *
+         * @param opaque True if the tabbed area should be opaque, false
+         *               otherwise.
+         * @see isOpaque
+         */
+        void setOpaque(bool opaque);
+
+        /**
+         * Checks if the tabbed area is opaque or not.
+         *
+         * @return true if the tabbed area is opaque, false otherwise.
+         * @see setOpaque
+         */
+        bool isOpaque() const;
+
+        /**
+         * Adds a tab to the tabbed area. The newly created tab will be
+         * automatically deleted by the tabbed area when it is removed.
+         *
+         * @param caption The caption of the tab to add.
+         * @param widget The widget to view when the tab is selected.
+         * @see removeTab, removeTabWithIndex
          */
         virtual void addTab(const std::string& caption, Widget* widget);
 
         /**
-         * Adds a tab to the tabbed area.
+         * Adds a tab to the tabbed area. The tab will not be deleted by the
+         * tabbed area when it is removed.
          *
          * @param tab The tab widget for the tab.
-         * @param widget The widget to view when the tab is selected.         
+         * @param widget The widget to view when the tab is selected.
+         * @see removeTab, removeTabWithIndex
          */
         virtual void addTab(Tab* tab, Widget* widget);
 
@@ -114,29 +146,33 @@ namespace gcn
          * Removes a tab from the tabbed area.
          *
          * @param index The index of the tab to remove.
+         * @see addTab
          */
         virtual void removeTabWithIndex(unsigned int index);
-        
+
         /**
          * Removes a tab from the tabbed area.
          *
-         * @param tab The tab to remove.
+         * @param index The tab to remove.
+         * @see addTab
          */
         virtual void removeTab(Tab* tab);
 
         /**
-         * Checks whether a tab given an index is selected.
+         * Checks if a tab given an index is selected or not.
          *
          * @param index The index of the tab to check.
          * @return True if the tab is selected, false otherwise.
+         * @see setSelectedTab
          */
         virtual bool isTabSelected(unsigned int index) const;
-        
+
         /**
-         * Checks whether a tab is selected or not.
+         * Checks if a tab is selected or not.
          *
          * @param tab The tab to check.
          * @return True if the tab is selected, false otherwise.
+         * @see setSelectedTab
          */
         virtual bool isTabSelected(Tab* tab);
 
@@ -144,13 +180,15 @@ namespace gcn
          * Sets a tab given an index to be selected.
          *
          * @param index The index of the tab to be selected.
+         * @see isTabSelected, getSelectedTab
          */
-        virtual void setSelectedTabWithIndex(unsigned int index);
+        virtual void setSelectedTab(unsigned int index);
 
         /**
          * Sets a tab to be selected or not.
          *
-         * @param tab The tab to be selected.
+         * @param index The tab to be selected.
+         * @see isTabSelected, getSelectedTab
          */
         virtual void setSelectedTab(Tab* tab);
 
@@ -159,13 +197,15 @@ namespace gcn
          *
          * @return The index of the selected tab.
          *         If no tab is selected -1 will be returned.
+         * @see isTabSelected, setSelectedTab
          */
         virtual int getSelectedTabIndex() const;
-        
+
         /**
          * Gets the selected tab.
          *
          * @return The selected tab.
+         * @see isTabSelected, setSelectedTab
          */
         Tab* getSelectedTab();
 
@@ -173,8 +213,6 @@ namespace gcn
         // Inherited from Widget
 
         virtual void draw(Graphics *graphics);
-
-        virtual void drawBorder(Graphics* graphics);
 
         virtual void logic();
 
@@ -186,11 +224,9 @@ namespace gcn
 
         void setDimension(const Rectangle& dimension);
 
-        
         // Inherited from ActionListener
 
         void action(const ActionEvent& actionEvent);
-        
 
         // Inherited from DeathListener
 
@@ -209,16 +245,47 @@ namespace gcn
         
     protected:
         /**
-         * Adjusts the size of the tabbed area.
+         * Adjusts the size of the tab container and the widget container.
          */
         void adjustSize();
+
+        /**
+         * Adjusts the positions of the tabs.
+         */
         void adjustTabPositions();
-        
+
+        /**
+         * Holds the selected tab.
+         */
         Tab* mSelectedTab;
+
+        /**
+         * Holds the container for the tabs.
+         */
         Container* mTabContainer;
+
+        /**
+         * Holds the container for the widgets.
+         */
         Container* mWidgetContainer;
-        std::vector<Tab*> mTabsToCleanUp;
+
+        /**
+         * Holds a vector of tabs to delete in the destructor.
+         * A tab that is to be deleted is a tab that has been
+         * internally created by the tabbed area.
+         */
+        std::vector<Tab*> mTabsToDelete;
+
+        /**
+         * A map between a tab and a widget to display when the
+         * tab is selected.
+         */
         std::vector<std::pair<Tab*, Widget*> > mTabs;
+
+        /**
+         * True if the tabbed area is opaque, false otherwise.
+         */
+        bool mOpaque;
     };
 }
 

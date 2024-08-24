@@ -69,7 +69,8 @@ namespace gcn
     class Key;
     
     /**
-     * Generic input which can be used with any backend.
+     * Implementation of a generic input which can be used with any 
+     * back end.
      */
     class GCN_CORE_DECLSPEC GenericInput: public Input
     {
@@ -88,7 +89,7 @@ namespace gcn
          *       in the enum in Key should be pushed as the
          *       unicode value.
          *
-         * @param unicode the unicode value of the key. 
+         * @param unicode The unicode value of the key. 
          */
         void pushKeyPressed(int unicode);
 
@@ -100,49 +101,49 @@ namespace gcn
          *       in the enum in Key should be pushed as the
          *       unicode value.
          *
-         * @param unicode the unicode value of the key. 
+         * @param unicode The unicode value of the key. 
          */
         void pushKeyReleased(int unicode);
         
         /**
          * Pushes a mouse button pressed event.
          *
-         * @param x the x coordinate of the mouse event.
-         * @param y the y coordinate of the mouse event.
-         * @param button the button of the mouse event.
+         * @param x The x coordinate of the mouse event.
+         * @param y The y coordinate of the mouse event.
+         * @param button The button of the mouse event.
          */
         void pushMouseButtonPressed(int x, int y, int button);
 
         /**
          * Pushes a mouse button released event.
          *
-         * @param x the x coordinate of the mouse event.
-         * @param y the y coordinate of the mouse event.
-         * @param button the button of the mouse event.
+         * @param x The x coordinate of the mouse event.
+         * @param y The y coordinate of the mouse event.
+         * @param button The button of the mouse event.
          */
         void pushMouseButtonReleased(int x, int y, int button);
         
         /**
          * Pushes a mouse wheel moved up event.
          *
-         * @param x the x coordinate of the mouse event.
-         * @param y the y coordinate of the mouse event.
+         * @param x The x coordinate of the mouse event.
+         * @param y The y coordinate of the mouse event.
          */
         void pushMouseWheelMovedUp(int x, int y);
         
         /**
          * Pushes a mouse wheel moved down event.
          *
-         * @param x the x coordinate of the mouse event.
-         * @param y the y coordinate of the mouse event.
+         * @param x The x coordinate of the mouse event.
+         * @param y The y coordinate of the mouse event.
          */
         void pushMouseWheelMovedDown(int x, int y);
 
         /**
          * Pushes a mouse moved event.
          *
-         * @param x the x coordinate of the mouse event.
-         * @param y the y coordinate of the mouse event.
+         * @param x The x coordinate of the mouse event.
+         * @param y The y coordinate of the mouse event.
          */
         void pushMouseMoved(int x, int y);
 
@@ -160,7 +161,14 @@ namespace gcn
         virtual void _pollInput();
 
     protected:
+        /**
+         * Holds the key input queue.
+         */
         std::queue<KeyInput> mKeyInputQueue;
+
+        /**
+         * Holds the mouse input queue.
+         */
         std::queue<MouseInput> mMouseInputQueue;
     };
 }

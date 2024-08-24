@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessï¿½n and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessï¿½n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -63,12 +63,10 @@
 namespace gcn
 {
     /**
-     * Listener of focus events from Widgets. To be able to listen for 
-     * focus events you must make a class which inherits from this class 
-     * and implements it's functions.
+     * Interface for listening for focus events from widgets.
      *
-     * @see Widget::addFocusListener
-     * @author Olof Naessén
+     * @see Widget::addFocusListener, Widget::removeFocusListener
+     * @author Olof Naessï¿½n
      * @since 0.7.0
      */
     class GCN_CORE_DECLSPEC FocusListener
@@ -90,9 +88,18 @@ namespace gcn
         /**
          * Called when a widget loses focus. 
          *
-         * @param event discribes the event.
+         * @param event Discribes the event.
          */
         virtual void focusLost(const Event& event) { };
+
+    protected:
+        /**
+         * Constructor.
+         *
+         * You should not be able to make an instance of FocusListener,
+         * therefore its constructor is protected.
+         */
+        FocusListener() {}
     };
 }
 

@@ -125,8 +125,10 @@ namespace gcn
         rect.y = carea.y;
         rect.w = carea.width;
         rect.h = carea.height;
-
-        SDL_RenderSetClipRect(mRenderTarget, &rect);
+        if (result)
+        {
+            SDL_RenderSetClipRect(mRenderTarget, &rect);
+        }
 
         return result;
     }
@@ -215,7 +217,7 @@ namespace gcn
         area.x += top.xOffset;
         area.y += top.yOffset;
 
-        if(!area.intersect(top))
+        if(!area.isIntersecting(top))
         {
             return;
         }

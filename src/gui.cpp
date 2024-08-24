@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessï¿½n and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessï¿½n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -180,17 +180,17 @@ namespace gcn
 
         mGraphics->_beginDraw();
 
-        // If top has a border,
+        // If top has a frame,
         // draw it before drawing top
-        if (mTop->getBorderSize() > 0)
+        if (mTop->getFrameSize() > 0)
         {
             Rectangle rec = mTop->getDimension();
-            rec.x -= static_cast<int>(mTop->getBorderSize());
-            rec.y -= static_cast<int>(mTop->getBorderSize());
-            rec.width += 2 * static_cast<int>(mTop->getBorderSize());
-            rec.height += 2 * static_cast<int>(mTop->getBorderSize());
+            rec.x -= mTop->getFrameSize();
+            rec.y -= mTop->getFrameSize();
+            rec.width += 2 * mTop->getFrameSize();
+            rec.height += 2 * mTop->getFrameSize();
             mGraphics->pushClipArea(rec);
-            mTop->drawBorder(mGraphics);
+            mTop->drawFrame(mGraphics);
             mGraphics->popClipArea();
         }
 
@@ -358,7 +358,7 @@ namespace gcn
                                          MouseEvent::EXITED,
                                          static_cast<int>(mouseInput.getButton()),
                                          mouseInput.getX(),
-                                         mouseInput.getX(),
+                                         mouseInput.getY(),
                                          true,
                                          true);
                 }
@@ -404,9 +404,9 @@ namespace gcn
                                              MouseEvent::EXITED,
                                              static_cast<int>(mouseInput.getButton()),
                                              mouseInput.getX(),
-                                             mouseInput.getX(),
+                                             mouseInput.getY(),
                                              true,
-                                             true);                                       
+                                             true);
                         mClickCount = 1;
                         mLastMousePressTimeStamp = 0;
                         mWidgetWithMouseQueue.erase(iter);
@@ -516,7 +516,13 @@ namespace gcn
 
         int sourceWidgetX, sourceWidgetY;
         sourceWidget->getAbsolutePosition(sourceWidgetX, sourceWidgetY);
-        
+
+        if ((mFocusHandler->getModalFocused() != NULL && sourceWidget->isModalFocused())
+            || mFocusHandler->getModalFocused() == NULL)
+        {
+            sourceWidget->requestFocus();
+        }
+
         distributeMouseEvent(sourceWidget,
                              MouseEvent::PRESSED,
                              static_cast<int>(mouseInput.getButton()),
@@ -524,13 +530,6 @@ namespace gcn
                              mouseInput.getY());
 
         mFocusHandler->setLastWidgetPressed(sourceWidget);
-        
-        if (mFocusHandler->getModalFocused() != NULL
-            && sourceWidget->hasModalFocus()
-            || mFocusHandler->getModalFocused() == NULL)
-        {
-            sourceWidget->requestFocus();
-        }
 
         mFocusHandler->setDraggedWidget(sourceWidget);
         mLastMouseDragButton = static_cast<int>(mouseInput.getButton());
@@ -597,7 +596,7 @@ namespace gcn
             {
                 mFocusHandler->setLastWidgetPressed(NULL);
             }
-            
+
             sourceWidget = mFocusHandler->getDraggedWidget();
         }
 
@@ -610,7 +609,7 @@ namespace gcn
                              mouseInput.getX(),
                              mouseInput.getY());
 
-        if (mouseInput.getButton() == mLastMousePressButton            
+        if (mouseInput.getButton() == mLastMousePressButton
             && mFocusHandler->getLastWidgetPressed() == sourceWidget)
         {
             distributeMouseEvent(sourceWidget,
@@ -618,7 +617,7 @@ namespace gcn
                                  static_cast<int>(mouseInput.getButton()),
                                  mouseInput.getX(),
                                  mouseInput.getY());
-            
+
             mFocusHandler->setLastWidgetPressed(NULL);
         }
         else
@@ -656,7 +655,7 @@ namespace gcn
         Widget* widget = getWidgetAt(x, y);
 
         if (mFocusHandler->getModalMouseInputFocused() != NULL
-            && !widget->hasModalMouseInputFocus())
+            && !widget->isModalMouseInputFocused())
         {
             return mFocusHandler->getModalMouseInputFocused();
         }
@@ -689,14 +688,14 @@ namespace gcn
         Widget* widget = source;
 
         if (mFocusHandler->getModalFocused() != NULL
-            && !widget->hasModalFocus()
+            && !widget->isModalFocused()
             && !force)
         {
             return;
         }
 
         if (mFocusHandler->getModalMouseInputFocused() != NULL
-            && !widget->hasModalMouseInputFocus()
+            && !widget->isModalMouseInputFocused()
             && !force)
         {
             return;
@@ -784,7 +783,7 @@ namespace gcn
             // If a non modal focused widget has been reach
             // and we have modal focus cancel the distribution.
             if (mFocusHandler->getModalFocused() != NULL
-                && !widget->hasModalFocus())
+                && !widget->isModalFocused())
             {
                 break;
             }
@@ -792,7 +791,7 @@ namespace gcn
             // If a non modal mouse input focused widget has been reach
             // and we have modal mouse input focus cancel the distribution.
             if (mFocusHandler->getModalMouseInputFocused() != NULL
-                && !widget->hasModalMouseInputFocus())
+                && !widget->isModalMouseInputFocused())
             {
                 break;
             }
@@ -805,13 +804,13 @@ namespace gcn
         Widget* widget = keyEvent.getSource();
 
         if (mFocusHandler->getModalFocused() != NULL
-            && !widget->hasModalFocus())
+            && !widget->isModalFocused())
         {
             return;
         }
 
         if (mFocusHandler->getModalMouseInputFocused() != NULL
-            && !widget->hasModalMouseInputFocus())
+            && !widget->isModalMouseInputFocused())
         {
             return;
         }
@@ -855,7 +854,7 @@ namespace gcn
             // If a non modal focused widget has been reach
             // and we have modal focus cancel the distribution.
             if (mFocusHandler->getModalFocused() != NULL
-                && !widget->hasModalFocus())
+                && !widget->isModalFocused())
             {
                 break;
             }

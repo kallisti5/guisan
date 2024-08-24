@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessï¿½n and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessï¿½n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -65,12 +65,13 @@
 namespace gcn
 {
     /**
-     * Listener of value change events from Widgets. To be able to
-     * listen for value changes you must make a class which inherits
-     * from this class and implements the valueChanged function.
+     * Interface for listening for selection events from widgets.
      *
-     * @see ListBox::addSelectionListener
-     * @author Olof Naessén
+     * @see ListBox::addSelectionListener,
+     *      ListBox::removeSelectionListener,
+     *      DropDown::addSelectionListener,
+     *      DropDown::removeSelectionListener
+     * @author Olof Naessï¿½n
      * @since 0.8.0
      */
     class GCN_CORE_DECLSPEC SelectionListener
@@ -83,13 +84,23 @@ namespace gcn
         virtual ~SelectionListener() { }
 
         /**
-         * Called when a value has been changed in a Widget. It is used
-         * to be able to recieve a notification that a value has been changed.
+         * Called when the value of a selection has been changed in a Widget.
+         * It is used to be able to receive a notification that a value has
+         * been changed.
          *
-         * @param event the event of the value change.
+         * @param event The event of the value change.
          * @since 0.8.0
          */
-        virtual void valueChanged(const SelectionEvent& event) { }
+        virtual void valueChanged(const SelectionEvent& event) { };
+
+    protected:
+        /**
+         * Constructor.
+         *
+         * You should not be able to make an instance of SelectionListener,
+         * therefore its constructor is protected.
+         */
+        SelectionListener() {}
     };
 }
 

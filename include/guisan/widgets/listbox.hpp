@@ -137,7 +137,7 @@ namespace gcn
         ListModel *getListModel();
 
         /**
-         * Adjusts the size of the list box to fit it's list model.
+         * Adjusts the size of the list box to fit its list model.
          */
         void adjustSize();
 
@@ -184,12 +184,18 @@ namespace gcn
          */
         void removeSelectionListener(SelectionListener* selectionListener);
 
+        /**
+         * Gets the height of a row. Should be overridden if another row
+         * height than the font height is preferred.
+         *
+         * @return The height of a row.
+         * @since 1.1.0
+         */
+        virtual unsigned int getRowHeight() const;
 
         // Inherited from Widget
 
         virtual void draw(Graphics* graphics);
-
-        virtual void drawBorder(Graphics* graphics);
 
         virtual void logic();
 

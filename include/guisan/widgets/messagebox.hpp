@@ -59,6 +59,7 @@
 
 #include <string>
 
+#include "guisan/graphics.hpp"
 #include "guisan/mouselistener.hpp"
 #include "guisan/platform.hpp"
 #include "guisan/widgets/window.hpp"
@@ -121,32 +122,18 @@ namespace gcn
         const std::string& getCaption() const;
 
         /**
-         * Sets the alignment for the caption.
-         *
-         * @param alignment Graphics::LEFT, Graphics::CENTER or Graphics::RIGHT.
-         */
-        void setAlignment(unsigned int alignment);
-
-        /**
-         * Gets the alignment for the caption.
-         *
-         * @return alignment of caption.
-         */
-        unsigned int getAlignment() const;
-        
-        /**
          * Sets the position for the button(s) in the MessageBox.
          *
-         * @param alignment Graphics::LEFT, Graphics::CENTER or Graphics::RIGHT.
+         * @param alignment The alignment of the button(s).
          */
-        void setButtonAlignment(unsigned int alignment);
+        void setButtonAlignment(Graphics::Alignment alignment);
 
         /**
          * Gets the position for the button(s) in the MessageBox.
          *
          * @return alignment of buttons.
          */
-        unsigned int getButtonAlignment() const;
+        Graphics::Alignment getButtonAlignment() const;
 
         /**
          * Sets the padding of the window which is the distance between the
@@ -222,8 +209,6 @@ namespace gcn
 
         virtual void draw(Graphics* graphics);
 
-        virtual void drawBorder(Graphics* graphics);
-
 
         // Inherited from MouseListener
 
@@ -236,7 +221,7 @@ namespace gcn
     protected:
         std::string mMessage;
         int mNbButtons;
-        unsigned int mButtonAlignment;
+        Graphics::Alignment mButtonAlignment;
         int mClickedButton;
         
         Button **mButtons;

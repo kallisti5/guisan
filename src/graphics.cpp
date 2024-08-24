@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessï¿½n and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessï¿½n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -81,11 +81,13 @@ namespace gcn
             carea.y = area.y;
             carea.width = area.width;
             carea.height = area.height;
+            carea.xOffset = area.x;
+            carea.yOffset = area.y;
             mClipStack.push(carea);
             return true;
         }
 
-        const ClipRectangle top = mClipStack.top();
+        const ClipRectangle& top = mClipStack.top();
         ClipRectangle carea;
         carea = area;
         carea.xOffset = top.xOffset + carea.x;
@@ -96,25 +98,35 @@ namespace gcn
         // Clamp the pushed clip rectangle.
         if (carea.x < top.x)
         {
-            carea.x = top.x; 
-        }
-        
-        if (carea.y < top.y)
-        {
-            carea.y = top.y;            
-        }
-                
-        if (carea.width > top.width)
-        {
-            carea.width = top.width;                
-        }
-        
-        if (carea.height > top.height)
-        {
-            carea.height = top.height;             
+            carea.x = top.x;
         }
 
-        const bool result = carea.intersect(top);
+        if (carea.y < top.y)
+        {
+            carea.y = top.y;
+        }
+
+        if (carea.x + carea.width > top.x + top.width)
+        {
+            carea.width = top.x + top.width - carea.x;
+
+            if (carea.width < 0)
+            {
+                carea.width = 0;
+            }
+        }
+
+        if (carea.y + carea.height > top.y + top.height)
+        {
+            carea.height = top.y + top.height - carea.y;
+
+            if (carea.height < 0)
+            {
+                carea.height = 0;
+            }
+        }
+
+        bool result = carea.isIntersecting(top);
 
         mClipStack.push(carea);
 
@@ -153,7 +165,7 @@ namespace gcn
     }
 
     void Graphics::drawText(const std::string& text, int x, int y,
-                            unsigned int alignment)
+                            Alignment alignment)
     {
         if (mFont == NULL)
         {

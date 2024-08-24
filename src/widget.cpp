@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessï¿½n and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessï¿½n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -68,6 +68,7 @@
 #include "guisan/event.hpp"
 #include "guisan/exception.hpp"
 #include "guisan/focushandler.hpp"
+#include "guisan/graphics.hpp"
 #include "guisan/keyinput.hpp"
 #include "guisan/keylistener.hpp"
 #include "guisan/mouseinput.hpp"
@@ -110,6 +111,30 @@ namespace gcn
         _setFocusHandler(NULL);
 
         mWidgets.remove(this);
+    }
+
+    void Widget::drawFrame(Graphics* graphics)
+    {
+        Color faceColor = getBaseColor();
+        Color highlightColor, shadowColor;
+        int alpha = getBaseColor().a;
+        int width = getWidth() + getFrameSize() * 2 - 1;
+        int height = getHeight() + getFrameSize() * 2 - 1;
+        highlightColor = faceColor + 0x303030;
+        highlightColor.a = alpha;
+        shadowColor = faceColor - 0x303030;
+        shadowColor.a = alpha;
+
+        unsigned int i;
+        for (i = 0; i < getFrameSize(); ++i)
+        {
+            graphics->setColor(shadowColor);
+            graphics->drawLine(i,i, width - i, i);
+            graphics->drawLine(i,i + 1, i, height - i - 1);
+            graphics->setColor(highlightColor);
+            graphics->drawLine(width - i,i + 1, width - i, height - i);
+            graphics->drawLine(i,height - i, width - i - 1, height - i);
+        }
     }
 
     void Widget::_setParent(Widget* parent)
@@ -201,12 +226,12 @@ namespace gcn
         }
     }
 
-    void Widget::setBorderSize(unsigned int borderSize)
+    void Widget::setFrameSize(unsigned int borderSize)
     {
         mBorderSize = borderSize;
     }
 
-    unsigned int Widget::getBorderSize() const
+    unsigned int Widget::getFrameSize() const
     {
         return mBorderSize;
     }
@@ -447,15 +472,6 @@ namespace gcn
         y = parentY + mDimension.y + getParent()->getChildrenArea().y;
     }
 
-    void Widget::generateAction()
-    {
-        for (auto& mActionListener : mActionListeners)
-        {
-            ActionEvent actionEvent(this, mActionEventId);
-            mActionListener->action(actionEvent);
-        }
-    }
-
     Font* Widget::getFont() const
     {
         if (mCurrentFont == NULL)
@@ -582,7 +598,7 @@ namespace gcn
         mFocusHandler->releaseModalMouseInputFocus(this);
     }
 
-    bool Widget::hasModalFocus() const
+    bool Widget::isModalFocused() const
     {
         if (mFocusHandler == NULL)
         {
@@ -591,13 +607,13 @@ namespace gcn
 
         if (getParent() != NULL)
         {
-            return mFocusHandler->getModalFocused() == this || getParent()->hasModalFocus();
+            return (mFocusHandler->getModalFocused() == this) || getParent()->isModalFocused();
         }
 
         return mFocusHandler->getModalFocused() == this;
     }
 
-    bool Widget::hasModalMouseInputFocus() const
+    bool Widget::isModalMouseInputFocused() const
     {
         if (mFocusHandler == NULL)
         {
@@ -606,7 +622,7 @@ namespace gcn
 
         if (getParent() != NULL)
         {
-            return mFocusHandler->getModalMouseInputFocused() == this || getParent()->hasModalMouseInputFocus();
+            return (mFocusHandler->getModalMouseInputFocused() == this) || getParent()->isModalMouseInputFocused();
         }
 
         return mFocusHandler->getModalMouseInputFocused() == this;
@@ -684,12 +700,30 @@ namespace gcn
         }
     }
 
+    void Widget::distributeActionEvent()
+    {
+        ActionListenerIterator iter;
+        for (iter = mActionListeners.begin(); iter != mActionListeners.end(); ++iter)
+        {
+            ActionEvent actionEvent(this, mActionEventId);
+            (*iter)->action(actionEvent);
+        }
+    }
+
     void Widget::distributeShownEvent()
     {
         for (auto& mWidgetListener : mWidgetListeners)
         {
             Event event(this);
             mWidgetListener->widgetShown(event);
+        }
+    }
+
+    void Widget::showPart(Rectangle rectangle)
+    {
+        if (mParent != NULL)
+        {
+            mParent->showWidgetPart(this, rectangle);
         }
     }
 }
