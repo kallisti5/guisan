@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof Naess�n and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof Naess�n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -86,7 +86,7 @@ namespace gcn
      * NOTE: Functions begining with underscore "_" should not
      *       be overloaded unless you know what you are doing
      *
-     * @author Olof Naess�n
+     * @author Olof Naessén
      * @author Per Larsson.
      * @since 0.1.0
      */
@@ -988,7 +988,7 @@ namespace gcn
          * Distributes hidden events to all of the widget's listeners.
          *
          * @since 0.8.0
-         * @author Olof Naess�n
+         * @author Olof Naessén
          */
         void distributeHiddenEvent();
 
@@ -996,7 +996,7 @@ namespace gcn
          * Distributes shown events to all of the widget's listeners.
          *
          * @since 0.8.0
-         * @author Olof Naess�n
+         * @author Olof Naessén
          */
         void distributeShownEvent();
 

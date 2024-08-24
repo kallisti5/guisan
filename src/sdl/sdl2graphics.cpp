@@ -228,7 +228,7 @@ namespace gcn
             const int y1 = area.y > top.y ? area.y : top.y;
             const int x2 = area.x + area.width < top.x + top.width ? area.x + area.width : top.x + top.width;
             const int y2 = area.y + area.height < top.y + top.height ? area.y + area.height : top.y + top.height;
-			
+
             SDL_Rect rect;
             rect.x = x1;
             rect.y = y1;
@@ -382,7 +382,7 @@ namespace gcn
         const int x1 = rectangle.x;
         const int x2 = rectangle.x + rectangle.width - 1;
         const int y1 = rectangle.y;
-        const int y2 = rectangle.y + rectangle.height - 1;
+	const int y2 = rectangle.y + rectangle.height - 1;
 
         drawHLine(x1, y1, x2);
         drawHLine(x1, y2, x2);

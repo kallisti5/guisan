@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof Naess�n and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof Naess�n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -472,7 +472,7 @@ namespace gcn
         const int x1 = rectangle.x;
         const int x2 = rectangle.x + rectangle.width - 1;
         const int y1 = rectangle.y;
-        const int y2 = rectangle.y + rectangle.height - 1;
+	const int y2 = rectangle.y + rectangle.height - 1;
 
         drawHLine(x1, y1, x2);
         drawHLine(x1, y2, x2);
@@ -508,7 +508,7 @@ namespace gcn
         // Draw a line with Bresenham
 
         const int dx = ABS(x2 - x1);
-        const int dy = ABS(y2 - y1);
+	const int dy = ABS(y2 - y1);
 
         if (dx > dy)
         {
