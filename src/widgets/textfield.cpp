@@ -67,7 +67,7 @@
 
 namespace gcn
 {
-    TextField::TextField()
+    TextField::TextField() : mEditable(true)
     {
         mCaretPosition = 0;
         mXScroll = 0;
@@ -79,7 +79,7 @@ namespace gcn
         adjustHeight();
     }
 
-    TextField::TextField(const std::string& text)
+    TextField::TextField(const std::string& text) : mEditable(true)
     {
         mCaretPosition = 0;
         mXScroll = 0;
@@ -128,7 +128,7 @@ namespace gcn
         graphics->setColor(getBackgroundColor());
         graphics->fillRectangle(Rectangle(0, 0, getWidth(), getHeight()));
 
-        if (isFocused())
+        if (isFocused() && isEditable())
         {
             drawCaret(graphics, getFont()->getWidth(mText.substr(0, mCaretPosition)) - mXScroll);
         }
@@ -183,12 +183,12 @@ namespace gcn
             ++mCaretPosition;
         }
 
-        else if (key.getValue() == Key::DELETE && mCaretPosition < mText.size())
+        else if (key.getValue() == Key::DELETE && mCaretPosition < mText.size() && mEditable)
         {
             mText.erase(mCaretPosition, 1);
         }
 
-        else if (key.getValue() == Key::BACKSPACE && mCaretPosition > 0)
+        else if (key.getValue() == Key::BACKSPACE && mCaretPosition > 0 && mEditable)
         {
             mText.erase(mCaretPosition - 1, 1);
             --mCaretPosition;
@@ -210,7 +210,7 @@ namespace gcn
         }
 
         else if (key.isCharacter() && key.getValue() != Key::TAB && !keyEvent.isAltPressed()
-                 && !keyEvent.isControlPressed())
+                 && !keyEvent.isControlPressed() && mEditable)
         {
             if (keyEvent.isShiftPressed() && key.isLetter())
             {
