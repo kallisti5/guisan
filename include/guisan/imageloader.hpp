@@ -57,9 +57,9 @@
 #ifndef GCN_IMAGELOADER_HPP
 #define GCN_IMAGELOADER_HPP
 
-#include <iosfwd>
-
 #include "guisan/platform.hpp"
+
+#include <string>
 
 namespace gcn
 {
