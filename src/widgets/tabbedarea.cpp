@@ -428,8 +428,7 @@ namespace gcn
 
     void TabbedArea::mousePressed(MouseEvent& mouseEvent)
     {
-        if (mouseEvent.isConsumed()
-            && mouseEvent.getSource()->isFocusable())
+        if (mouseEvent.isConsumed())
         {
             return;
         }
@@ -445,7 +444,13 @@ namespace gcn
             }
         }
 
-        requestFocus();
+        // Request focus only if the source of the event is not focusable.
+        // If the source of the event is focused
+        // we don't want to steal the focus.
+        if (!mouseEvent.getSource()->isFocusable())
+        {
+            requestFocus();
+        }
     }
 
     void TabbedArea::death(const Event& event)
