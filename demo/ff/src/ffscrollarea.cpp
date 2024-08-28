@@ -47,7 +47,7 @@
 
 FFScrollArea::FFScrollArea()
 {
-    setScrollPolicy(SHOW_NEVER, SHOW_NEVER);
+    setScrollPolicy(ShowNever, ShowNever);
     addKeyListener(this);
     setFocusable(false);
     setFrameSize(0);
