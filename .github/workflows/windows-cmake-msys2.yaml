@@ -1,0 +1,36 @@
+name: Windows-cmake-msys2
+on: [push, pull_request]
+jobs:
+  Build-Guisan:
+    runs-on: windows-latest
+    steps:
+    - uses: msys2/setup-msys2@v2
+      with:
+        msystem: clang64
+        update: true
+        install: >-
+          mingw-w64-clang-x86_64-cmake
+          mingw-w64-clang-x86_64-make
+          mingw-w64-clang-x86_64-clang
+          mingw-w64-clang-x86_64-SDL2
+          mingw-w64-clang-x86_64-SDL2_image
+          mingw-w64-clang-x86_64-SDL2_ttf
+
+    - name: Check out repository code
+      uses: actions/checkout@v4
+
+    - name: Build
+      shell: msys2 {0}
+      run: |
+        mkdir build
+        cd build
+        cmake ..
+        cmake --build .
+
+    - name: artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: guisan-msys2
+        path: |
+          build/**.dll
+          build/**.a
