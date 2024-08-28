@@ -76,13 +76,13 @@ namespace gcn
         setMovable(false);
         
         mLabel = new Label(message);
-        mLabel->setAlignment(Graphics::LEFT);
+        mLabel->setAlignment(Graphics::Left);
         mLabel->adjustSize();
         
         mNbButtons = 1;
         mButtons = new Button*[1];
         mButtons[0] = new Button("OK");
-        mButtons[0]->setAlignment(Graphics::CENTER);
+        mButtons[0]->setAlignment(Graphics::Center);
         mButtons[0]->addMouseListener(this);
         
         setHeight((int)getTitleBarHeight() + mLabel->getHeight() + 4*mPadding + mButtons[0]->getHeight());
@@ -114,7 +114,7 @@ namespace gcn
         setMovable(false);
         
         mLabel = new Label(message);
-        mLabel->setAlignment(Graphics::LEFT);
+        mLabel->setAlignment(Graphics::Left);
         mLabel->adjustSize();
 		setWidth(mLabel->getWidth() + 4*mPadding);
         
@@ -128,7 +128,7 @@ namespace gcn
             for(int i = 0 ; i < size ; i++)
             {
                 mButtons[i] = new Button(*(buttons+i));
-                mButtons[i]->setAlignment(Graphics::CENTER);
+                mButtons[i]->setAlignment(Graphics::Center);
                 mButtons[i]->addMouseListener(this);
                 maxBtnWidth = maxBtnWidth > mButtons[i]->getWidth() ? maxBtnWidth : mButtons[i]->getWidth();
             }
@@ -218,13 +218,13 @@ namespace gcn
         {
             switch (alignment)
             {
-              case Graphics::LEFT:
+              case Graphics::Left:
                   // Nothing to do
                   break;
-              case Graphics::CENTER:
+              case Graphics::Center:
                   leftPadding += (getWidth() - (mButtons[0]->getWidth()*mNbButtons + 2*mPadding + mPadding*(mNbButtons-1)))/2;
                   break;
-              case Graphics::RIGHT:
+              case Graphics::Right:
                   leftPadding += (getWidth() - (mButtons[0]->getWidth()*mNbButtons + 2*mPadding + mPadding*(mNbButtons-1)));
                   break;
               default:
@@ -319,13 +319,13 @@ namespace gcn
 
         switch (getAlignment())
         {
-          case Graphics::LEFT:
+          case Graphics::Left:
               textX = 4;
               break;
-          case Graphics::CENTER:
+          case Graphics::Center:
               textX = getWidth() / 2;
               break;
-          case Graphics::RIGHT:
+          case Graphics::Right:
               textX = getWidth() - 4;
               break;
           default:

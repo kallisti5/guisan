@@ -73,7 +73,7 @@ namespace gcn
         setFrameSize(1);
         setPadding(2);
         setTitleBarHeight(getFont()->getHeight() + 2);
-        setAlignment(Graphics::CENTER);
+        setAlignment(Graphics::Center);
         addMouseListener(this);
         setMovable(true);
         setOpaque(true);
@@ -86,7 +86,7 @@ namespace gcn
         setFrameSize(1);
         setPadding(2);
         setTitleBarHeight(16);
-        setAlignment(Graphics::CENTER);
+        setAlignment(Graphics::Center);
         addMouseListener(this);
         setMovable(true);
         setOpaque(true);
@@ -211,13 +211,13 @@ namespace gcn
 
         switch (getAlignment())
         {
-        case Graphics::LEFT:
+        case Graphics::Left:
             textX = 4;
             break;
-        case Graphics::CENTER:
+        case Graphics::Center:
             textX = getWidth() / 2;
             break;
-        case Graphics::RIGHT:
+        case Graphics::Right:
             textX = getWidth() - 4;
             break;
         default:

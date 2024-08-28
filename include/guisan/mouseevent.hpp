@@ -148,15 +148,15 @@ namespace gcn
          */
         enum
         {
-            MOVED = 0,
-            PRESSED,
-            RELEASED,
-            WHEEL_MOVED_DOWN,
-            WHEEL_MOVED_UP,
-            CLICKED,
-            ENTERED,
-            EXITED,
-            DRAGGED
+            Moved = 0,
+            Pressed,
+            Released,
+            WheelMovedDown,
+            WheelMovedUp,
+            Clicked,
+            Entered,
+            Exited,
+            Dragged
 
         };
 
@@ -165,10 +165,10 @@ namespace gcn
          */
         enum
         {
-            EMPTY = 0,
-            LEFT,
-            RIGHT,
-            MIDDLE
+            Empty = 0,
+            Left,
+            Right,
+            Middle
         };
 
     protected:

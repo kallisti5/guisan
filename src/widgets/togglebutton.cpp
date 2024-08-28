@@ -122,13 +122,13 @@ namespace gcn
 
         switch (getAlignment())
         {
-          case Graphics::LEFT:
+          case Graphics::Left:
               textX = mSpacing;
               break;
-          case Graphics::CENTER:
+          case Graphics::Center:
               textX = getWidth() / 2;
               break;
-          case Graphics::RIGHT:
+          case Graphics::Right:
               textX = getWidth() - mSpacing;
               break;
           default:
@@ -165,7 +165,7 @@ namespace gcn
 
     void ToggleButton::mouseReleased(MouseEvent& mouseEvent)
     {
-        if (mouseEvent.getButton() == MouseEvent::LEFT
+        if (mouseEvent.getButton() == MouseEvent::Left
             && mMousePressed
             && mHasMouse)
         {
@@ -174,7 +174,7 @@ namespace gcn
             distributeActionEvent();
             mouseEvent.consume();
         }
-        else if (mouseEvent.getButton() == MouseEvent::LEFT)
+        else if (mouseEvent.getButton() == MouseEvent::Left)
         {
             mMousePressed = false;
             mouseEvent.consume();
@@ -185,8 +185,8 @@ namespace gcn
     {
         Key key = keyEvent.getKey();
 
-        if ((key.getValue() == Key::ENTER
-             || key.getValue() == Key::SPACE)
+        if ((key.getValue() == Key::Enter
+             || key.getValue() == Key::Space)
             && mKeyPressed)
         {
             mKeyPressed = false;

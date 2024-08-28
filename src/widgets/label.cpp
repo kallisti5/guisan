@@ -68,13 +68,13 @@ namespace gcn
 {
     Label::Label()
     {
-        mAlignment = Graphics::LEFT;
+        mAlignment = Graphics::Left;
     }
 
     Label::Label(const std::string& caption)
     {
         mCaption = caption;
-        mAlignment = Graphics::LEFT;
+        mAlignment = Graphics::Left;
 
         setWidth(getFont()->getWidth(caption));
         setHeight(getFont()->getHeight());
@@ -107,13 +107,13 @@ namespace gcn
 
         switch (getAlignment())
         {
-        case Graphics::LEFT:
+        case Graphics::Left:
             textX = 0;
             break;
-        case Graphics::CENTER:
+        case Graphics::Center:
             textX = getWidth() / 2;
             break;
-        case Graphics::RIGHT:
+        case Graphics::Right:
             textX = getWidth();
             break;
         default:
