@@ -74,6 +74,14 @@ namespace gcn
 
     bool Graphics::pushClipArea(Rectangle area)
     {
+        // Ignore area with a negative width or height
+        // by simple pushing an empty clip area to the stack.
+        if (area.width < 0 || area.height < 0)
+        {
+            ClipRectangle carea;
+            mClipStack.push(carea);
+            return true;
+        }
         if (mClipStack.empty())
         {
             ClipRectangle carea;
