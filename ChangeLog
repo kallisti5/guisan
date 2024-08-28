@@ -12,9 +12,10 @@ Version 1.1.0
 * Widget::hasModalFocus has been renamed to Widget::isModalFocused.
 * Widget::hasModalMouseInputFocus has been renamed to Widget::isModalMouseInputFocused.
 * Widget::generateAction has been renamed to Widget::distributeActionEvent.
-* DELETE is now undefined in Key.hpp if present. It should hopefully
-  take care of some problems with windows.h defining delete which
-  sometimes breaks Key.hpp.
+* All enum constants have been renamed to avoid clashes with defines
+  present in other libraries (read windows.h). Enum constants are now named
+  the same ways as classes are. For example, the Key constant LEFT_SHIFT is 
+  now named LeftShift.
 
 Version 1.0.0
 =============
