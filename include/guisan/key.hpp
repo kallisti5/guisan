@@ -59,13 +59,6 @@
 
 #include "guisan/platform.hpp"
 
-// <windows.h> defines DELETE which breaks this file as we have a constant named
-// DELETE, hence we undefine DELETE if it is defined and hope people don't use
-// that windows define with Guisan.
-#if defined(_WIN32) && defined(DELETE)
-# undef DELETE
-#endif
-
 namespace gcn
 {
     /**
@@ -151,28 +144,28 @@ namespace gcn
          */
         enum
         {
-            SPACE              = ' ',
-            TAB                = '\t',
-            ENTER              = '\n',
-            LEFT_ALT           = 1000,
-            RIGHT_ALT,
-            LEFT_SHIFT,
-            RIGHT_SHIFT,
-            LEFT_CONTROL,
-            RIGHT_CONTROL,
-            LEFT_META,
-            RIGHT_META,
-            LEFT_SUPER,
-            RIGHT_SUPER,
-            INSERT,
-            HOME,
-            PAGE_UP,
-            DELETE,
-            END,
-            PAGE_DOWN,
-            ESCAPE,
-            CAPS_LOCK,
-            BACKSPACE,
+            Space              = ' ',
+            Tab                = '\t',
+            Enter              = '\n',
+            LeftAlt           = 1000,
+            RightAlt,
+            LeftShift,
+            RightShift,
+            LeftControl,
+            RightControl,
+            LeftMeta,
+            RightMeta,
+            LeftSuper,
+            RightSuper,
+            Insert,
+            Home,
+            PageUp,
+            Delete,
+            End,
+            PageDown,
+            Escape,
+            CapsLock,
+            Backspace,
             F1,
             F2,
             F3,
@@ -188,15 +181,15 @@ namespace gcn
             F13,
             F14,
             F15,
-            PRINT_SCREEN,
-            SCROLL_LOCK,
-            PAUSE,
-            NUM_LOCK,
-            ALT_GR,
-            LEFT,
-            RIGHT,
-            UP,
-            DOWN
+            PrintScreen,
+            ScrollLock,
+            Pause,
+            NumLock,
+            AltGr,
+            Left,
+            Right,
+            Up,
+            Down
         };
 
     protected:
