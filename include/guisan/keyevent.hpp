@@ -84,6 +84,7 @@ namespace gcn
          * Constructor.
          *
          * @param source The source widget of the event.
+         * @param distributer The distributer of the event.
          * @param isShiftPressed True if shift is pressed, false otherwise.
          * @param isControlPressed True if control is pressed, false otherwise.
          * @param isAltPressed True if alt is pressed, false otherwise.
@@ -94,6 +95,7 @@ namespace gcn
          * @param key The key of the event.
          */
         KeyEvent(Widget* source,
+                 Widget* distributer,
                  bool isShiftPressed,
                  bool isControlPressed,
                  bool isAltPressed,

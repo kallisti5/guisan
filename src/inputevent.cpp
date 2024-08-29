@@ -63,18 +63,19 @@
 namespace gcn
 {
     InputEvent::InputEvent(Widget* source,
+                           Widget* distributer,
                            bool isShiftPressed,
                            bool isControlPressed,
                            bool isAltPressed,
-                           bool isMetaPressed)
-            :Event(source),
-             mShiftPressed(isShiftPressed),
-             mControlPressed(isControlPressed),
-             mAltPressed(isAltPressed),
-             mMetaPressed(isMetaPressed),
-             mIsConsumed(false)
+                           bool isMetaPressed) :
+        Event(source),
+        mShiftPressed(isShiftPressed),
+        mControlPressed(isControlPressed),
+        mAltPressed(isAltPressed),
+        mMetaPressed(isMetaPressed),
+        mIsConsumed(false),
+        mDistributer(distributer)
     {
-
     }
 
     bool InputEvent::isShiftPressed() const
@@ -106,4 +107,9 @@ namespace gcn
     {
         return mIsConsumed;
     }
-}
+
+    Widget* InputEvent::getDistributer() const
+    {
+        return mDistributer;
+    }
+} // namespace gcn

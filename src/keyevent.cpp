@@ -63,24 +63,20 @@
 namespace gcn
 {
     KeyEvent::KeyEvent(Widget* source,
+                       Widget* distributer,
                        bool isShiftPressed,
                        bool isControlPressed,
                        bool isAltPressed,
                        bool isMetaPressed,
                        unsigned int type,
                        bool isNumericPad,
-                       const Key& key)
-            :InputEvent(source,
-                        isShiftPressed,
-                        isControlPressed,
-                        isAltPressed,
-                        isMetaPressed),
-             mType(type),
-             mIsNumericPad(isNumericPad),
-             mKey(key)
-    {
-
-    }
+                       const Key& key) :
+        InputEvent(
+            source, distributer, isShiftPressed, isControlPressed, isAltPressed, isMetaPressed),
+        mType(type),
+        mIsNumericPad(isNumericPad),
+        mKey(key)
+    {}
 
     KeyEvent::~KeyEvent()
     {
