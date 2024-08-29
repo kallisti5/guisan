@@ -80,32 +80,45 @@ namespace gcn
 
         /**
          * Constructor.
-		 *
-		 * @param width the width of the logical drawing surface. Should be the
+         *
+         * @param width the width of the logical drawing surface. Should be the
          *              same as the screen resolution.
-		 *
-		 * @param height the height ot the logical drawing surface. Should be
-		 *               the same as the screen resolution.
-		 */
+         *
+         * @param height the height ot the logical drawing surface. Should be
+         *               the same as the screen resolution.
+         */
         OpenGLGraphics(int width, int height);
 
-		/**
-		 * Destructor.
-		 */
+        /**
+         * Destructor.
+         */
         virtual ~OpenGLGraphics();
 
         /**
          * Sets the target plane on where to draw.
-		 *
-		 * @param width the width of the logical drawing surface. Should be the
-		 *              same as the screen resolution.
-		 * @param height the height ot the logical drawing surface. Should be
-		 *               the same as the screen resolution.
+         *
+         * @param width the width of the logical drawing surface. Should be the
+         *              same as the screen resolution.
+         * @param height the height ot the logical drawing surface. Should be
+         *               the same as the screen resolution.
          */
         virtual void setTargetPlane(int width, int height);
 
+        /**
+         * Gets the target plane width.
+         *
+         * @return The target plane width.
+         */
+        virtual int getTargetPlaneWidth() const;
 
-		// Inherited from Graphics
+        /**
+         * Gets the target plane height.
+         *
+         * @return The target plane height.
+         */
+        virtual int getTargetPlaneHeight() const;
+
+        // Inherited from Graphics
 
         virtual void _beginDraw();
 
@@ -129,11 +142,11 @@ namespace gcn
 
         virtual void setColor(const Color& color);
 
-		virtual const Color& getColor();
+        virtual const Color& getColor();
 
     protected:
         int mWidth, mHeight;
-		bool mAlpha;
+        bool mAlpha;
         Color mColor;
     };
 }
