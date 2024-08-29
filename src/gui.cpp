@@ -275,6 +275,7 @@ namespace gcn
             mAltPressed = keyInput.isAltPressed();
 
             KeyEvent keyEventToGlobalKeyListeners(NULL,
+                                                  NULL,
                                                   mShiftPressed,
                                                   mControlPressed,
                                                   mAltPressed,
@@ -297,7 +298,9 @@ namespace gcn
             // Send key inputs to the focused widgets
             if (mFocusHandler->getFocused() != NULL)
             {
-                KeyEvent keyEvent(getKeyEventSource(),
+                Widget* source = getKeyEventSource();
+                KeyEvent keyEvent(source,
+                                  source,
                                   mShiftPressed,
                                   mControlPressed,
                                   mAltPressed,
@@ -704,6 +707,7 @@ namespace gcn
         }
 
         MouseEvent mouseEvent(source,
+                              source,
                               mShiftPressed,
                               mControlPressed,
                               mAltPressed,
@@ -732,7 +736,7 @@ namespace gcn
 
                 mouseEvent.mX = x - widgetX;
                 mouseEvent.mY = y - widgetY;
-                                      
+                mouseEvent.mDistributor = widget;
                 std::list<MouseListener*> mouseListeners = widget->_getMouseListeners();
 
                 // Send the event to all mouse listeners of the widget.
@@ -788,6 +792,7 @@ namespace gcn
             // If a non modal focused widget has been reach
             // and we have modal focus cancel the distribution.
             if (mFocusHandler->getModalFocused() != NULL
+                && widget != NULL
                 && !widget->isModalFocused())
             {
                 break;
@@ -796,6 +801,7 @@ namespace gcn
             // If a non modal mouse input focused widget has been reach
             // and we have modal mouse input focus cancel the distribution.
             if (mFocusHandler->getModalMouseInputFocused() != NULL
+                && widget != NULL
                 && !widget->isModalMouseInputFocused())
             {
                 break;
@@ -833,8 +839,9 @@ namespace gcn
 
             if (widget->isEnabled())
             {
+                keyEvent.mDistributor = widget;
                 std::list<KeyListener*> keyListeners = widget->_getKeyListeners();
-            
+
                 // Send the event to all key listeners of the source widget.
                 for (std::list<KeyListener*>::iterator it = keyListeners.begin();
                      it != keyListeners.end();
