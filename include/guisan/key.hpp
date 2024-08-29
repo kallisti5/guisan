@@ -124,7 +124,7 @@ namespace gcn
 
 
         /**
-         * Compares to keys.
+         * Compares two keys.
          * 
          * @param key The key to compare this key with.
          * @return True if the keys are equal, false otherwise.
@@ -132,7 +132,7 @@ namespace gcn
         bool operator==(const Key& key) const;
 
         /**
-         * Compares to keys.
+         * Compares two keys.
          * 
          * @param key The key to compare this key with.
          * @return True if the keys are not equal, false otherwise.
