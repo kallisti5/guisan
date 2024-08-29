@@ -736,7 +736,7 @@ namespace gcn
 
                 mouseEvent.mX = x - widgetX;
                 mouseEvent.mY = y - widgetY;
-                mouseEvent.mDistributer = widget;
+                mouseEvent.mDistributor = widget;
                 std::list<MouseListener*> mouseListeners = widget->_getMouseListeners();
 
                 // Send the event to all mouse listeners of the widget.
@@ -839,7 +839,7 @@ namespace gcn
 
             if (widget->isEnabled())
             {
-                keyEvent.mDistributer = widget;
+                keyEvent.mDistributor = widget;
                 std::list<KeyListener*> keyListeners = widget->_getKeyListeners();
 
                 // Send the event to all key listeners of the source widget.
