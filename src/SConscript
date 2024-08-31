@@ -9,6 +9,7 @@ main_sources = [
 	'basiccontainer.cpp',
 	'cliprectangle.cpp',
 	'color.cpp',
+	'containerevent.cpp',
 	'defaultfont.cpp',
 	'event.cpp',
 	'exception.cpp',
