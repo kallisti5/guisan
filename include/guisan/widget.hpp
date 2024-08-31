@@ -189,6 +189,16 @@ namespace gcn
         virtual Widget* getParent() const;
 
         /**
+         * Gets the top widget, or top parent, of this widget.
+         *
+         * @return The top widget, or top parent, of this widget.
+         *         NULL if no top widget exists
+         *         (that is this widget doesn't have a parent).
+         * @since 1.1.0
+         */
+        virtual Widget* getTop() const;
+
+        /**
          * Sets the width of the widget.
          *
          * @param width The width of the widget.
@@ -883,21 +893,25 @@ namespace gcn
          * Moves a widget to the top of this widget. The moved widget will be
          * drawn above all other widgets in this widget.
          *
+         * This method is safe to call at any times.
+         *
          * @param widget The widget to move to the top.
          * @see moveToBottom
          * @since 0.1.0
          */
-        virtual void moveToTop(Widget* widget) { };
+        virtual void moveToTop(Widget* widget) {}
 
         /**
          * Moves a widget in this widget to the bottom of this widget.
          * The moved widget will be drawn below all other widgets in this widget.
          *
+         * This method is safe to call at any times.
+         *
          * @param widget The widget to move to the bottom.
          * @see moveToTop
          * @since 0.1.0
          */
-        virtual void moveToBottom(Widget* widget) { };
+        virtual void moveToBottom(Widget* widget) {}
 
         /**
          * Focuses the next widget in the widget.
@@ -905,7 +919,7 @@ namespace gcn
          * @see moveToBottom
          * @since 0.1.0
          */
-        virtual void focusNext() { };
+        virtual void focusNext() {}
 
         /**
          * Focuses the previous widget in the widget.
@@ -913,7 +927,7 @@ namespace gcn
          * @see moveToBottom
          * @since 0.1.0
          */
-        virtual void focusPrevious() { };
+        virtual void focusPrevious() {}
 
         /**
          * Tries to show a specific part of a widget by moving it. Used if the
@@ -923,7 +937,7 @@ namespace gcn
          * @param area The area to show.
          * @since 0.1.0
          */
-        virtual void showWidgetPart(Widget* widget, Rectangle area) { };
+        virtual void showWidgetPart(Widget* widget, Rectangle area) {}
 
         /**
          * Sets an id of a widget. An id can be useful if a widget needs to be
