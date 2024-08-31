@@ -986,10 +986,15 @@ namespace gcn
 
     Rectangle ScrollArea::getChildrenArea()
     {
-        return Rectangle(0,
-                         0,
-                         getWidth() - (mVBarVisible ? mScrollbarWidth : 0),
-                         getHeight() - (mHBarVisible ? mScrollbarWidth : 0));
+        Rectangle area = Rectangle(0,
+                                   0,
+                                   getWidth() - (mVBarVisible ? mScrollbarWidth : 0),
+                                   getHeight() - (mHBarVisible ? mScrollbarWidth : 0));
+        if (area.width < 0 || area.height < 0)
+        {
+            return Rectangle();
+        }
+        return area;
     }
 
     Rectangle ScrollArea::getVerticalBarDimension()
