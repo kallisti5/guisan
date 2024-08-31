@@ -63,6 +63,8 @@ common_headers = [
     'include/guisan/basiccontainer.hpp',
     'include/guisan/cliprectangle.hpp',
     'include/guisan/color.hpp',
+    'include/guisan/containerevent.hpp',
+    'include/guisan/containerlistener.hpp',
     'include/guisan/deathlistener.hpp',
     'include/guisan/defaultfont.hpp',
     'include/guisan/event.hpp',

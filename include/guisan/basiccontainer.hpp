@@ -130,7 +130,7 @@ namespace gcn
          * Widget::moveToTop instead.
          *
          * THIS METHOD IS NOT SAFE TO CALL INSIDE A WIDGETS LOGIC FUNCTION
-         * INSIDE ANY LISTER FUNCTIONS!
+         * INSIDE ANY LISTENER FUNCTIONS!
          *
          * @param widget The widget to move to the top.
          * @since 1.1.0
@@ -142,7 +142,7 @@ namespace gcn
          * Widget::moveToBottom instead.
          *
          * THIS METHOD IS NOT SAFE TO CALL INSIDE A WIDGETS LOGIC FUNCTION
-         * INSIDE ANY LISTER FUNCTIONS!
+         * INSIDE ANY LISTENER FUNCTIONS!
          *
          * @param The widget to move to the bottom.
          * @since 1.1.0
@@ -153,7 +153,7 @@ namespace gcn
          * Adds a widget to the basic container.
          *
          * THIS METHOD IS NOT SAFE TO CALL INSIDE A WIDGETS LOGIC FUNCTION
-         * INSIDE ANY LISTER FUNCTIONS!
+         * INSIDE ANY LISTENER FUNCTIONS!
          *
          * @param widget The widget to add.
          * @see remove, clear
@@ -164,7 +164,7 @@ namespace gcn
          * Removes a widget from the basic container.
          *
          * THIS METHOD IS NOT SAFE TO CALL INSIDE A WIDGETS LOGIC FUNCTION
-         * INSIDE ANY LISTER FUNCTIONS!
+         * INSIDE ANY LISTENER FUNCTIONS!
          *
          * @param widget The widget to remove.
          * @see add, clear
@@ -175,7 +175,7 @@ namespace gcn
          * Clears the basic container from all widgets.
          *
          * THIS METHOD IS NOT SAFE TO CALL INSIDE A WIDGETS LOGIC FUNCTION
-         * INSIDE ANY LISTER FUNCTIONS!
+         * INSIDE ANY LISTENER FUNCTIONS!
          *
          * @see remove, clear
          */
