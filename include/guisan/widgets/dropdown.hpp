@@ -73,20 +73,20 @@
 namespace gcn
 {
     /**
-     * An implementation of a drop downable list from which an item can be selected.
-     * The drop down consists of an internal ScrollArea and an internal ListBox. 
-     * The drop down also uses an internal FocusHandler to handle the focus of the 
-     * internal ScollArea and the internal ListBox. The scroll area and the list box
-     * can be passed to the drop down if a custom scroll area and or a custom list box
-     * is preferable.
+     * An implementation of a drop downable list from which an item can be
+     * selected. The drop down consists of an internal ScrollArea and an
+     * internal ListBox. The drop down also uses an internal FocusHandler to
+     * handle the focus of the internal ScollArea and the internal ListBox.
+     * The scroll area and the list box can be passed to the drop down
+     * if a custom scroll area and/or a custom list box is preferable.
      *
-     * To be able display a list the drop down uses a user provided list model. 
-     * A list model can be any class that implements the ListModel interface. 
+     * To be able display a list the drop down uses a user provided list model.
+     * A list model can be any class that implements the ListModel interface.
      *
-     * If an item is selected in the drop down a select event will be sent to all selection 
-     * listeners of the drop down. If an item is selected by using a mouse click or by using 
-     * the enter or space key an action event will be sent to all action listeners of the 
-     * drop down.
+     * If an item is selected in the drop down a select event will be sent to
+     * all selection listeners of the drop down. If an item is selected by
+     * using a mouse click or by using the enter or space key an action event
+     * will be sent to all action listeners of the drop down.
      */
     class GCN_CORE_DECLSPEC DropDown :
         public ActionListener,
@@ -158,6 +158,9 @@ namespace gcn
          * Adds a selection listener to the drop down. When the selection
          * changes an event will be sent to all selection listeners of the
          * drop down.
+         *
+         * If you delete your selection listener, be sure to also remove it
+         * using removeSelectionListener().
          *
          * @param selectionListener the selection listener to add.
          * @since 0.8.0
@@ -259,40 +262,58 @@ namespace gcn
          */
         void distributeValueChangedEvent();
 
+        /**
+         * True if the drop down has been pushed with the mouse, false
+         * otherwise.
+         */
         bool mPushed;
 
         /**
-         * Holds what the height is if the drop down is folded up. Used when
-         * checking if the list of the drop down was clicked or if the upper part
-         * of the drop down was clicked on a mouse click
+         * Holds what the height is if the drop down is folded up.
+         * Used when checking if the list of the drop down was clicked
+         * or if the upper part of the drop down was clicked on a mouse click.
          */
         int mFoldedUpHeight;
-        
+
         /**
          * The scroll area used.
          */
         ScrollArea* mScrollArea;
         ListBox* mListBox;
-        FocusHandler mInternalFocusHandler;
-        bool mInternalScrollArea;
-        bool mInternalListBox;
-        bool mIsDragged;
 
         /**
-         * Typedef.
+         * The internal focus handler used to keep track of focus for the
+         * internal list box.
          */
+        FocusHandler mInternalFocusHandler;
+
+        /**
+         * True if an internal scroll area is used, false if a scroll area
+         * has been passed to the drop down which the drop down should not
+         * deleted in it's destructor.
+         */
+        bool mInternalScrollArea;
+
+        /**
+         * True if an internal list box is used, false if a list box
+         * has been passed to the drop down which the drop down should not
+         * deleted in it's destructor.
+         */
+        bool mInternalListBox;
+
+        /**
+         * True if the drop down is dragged.
+         */
+        bool mIsDragged;
+
         typedef std::list<SelectionListener*> SelectionListenerList;
-        
+
         /**
          * The selection listener's of the drop down.
          */
         SelectionListenerList mSelectionListeners;
-        
-        /**
-         * Typedef.
-         */
-        typedef SelectionListenerList::iterator SelectionListenerIterator;
 
+        typedef SelectionListenerList::iterator SelectionListenerIterator;
     };
 }
 
