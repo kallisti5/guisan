@@ -528,6 +528,16 @@ namespace gcn
             sourceWidget->requestFocus();
         }
 
+        if (mouseInput.getTimeStamp() - mLastMousePressTimeStamp < 250
+            && mLastMousePressButton == mouseInput.getButton())
+        {
+            mClickCount++;
+        }
+        else
+        {
+            mClickCount = 1;
+        }
+
         distributeMouseEvent(sourceWidget,
                              MouseEvent::Pressed,
                              mouseInput.getButton(),
@@ -538,16 +548,6 @@ namespace gcn
 
         mFocusHandler->setDraggedWidget(sourceWidget);
         mLastMouseDragButton = mouseInput.getButton();
-
-        if (mLastMousePressTimeStamp < 300
-            && mLastMousePressButton == mouseInput.getButton())
-        {
-            mClickCount++;
-        }
-        else
-        {
-            mClickCount = 1;
-        }
 
         mLastMousePressButton = mouseInput.getButton();
         mLastMousePressTimeStamp = mouseInput.getTimeStamp();
