@@ -128,6 +128,13 @@ namespace gcn
         graphics->setColor(getBackgroundColor());
         graphics->fillRectangle(Rectangle(0, 0, getWidth(), getHeight()));
 
+        if (isFocused())
+        {
+            graphics->setColor(getSelectionColor());
+            graphics->drawRectangle(Rectangle(0, 0, getWidth() - 2, getHeight() - 2));
+            graphics->drawRectangle(Rectangle(1, 1, getWidth() - 4, getHeight() - 4));
+        }
+
         if (isFocused() && isEditable())
         {
             drawCaret(graphics, getFont()->getWidth(mText.substr(0, mCaretPosition)) - mXScroll);
@@ -233,7 +240,7 @@ namespace gcn
 
     void TextField::adjustSize()
     {
-        setWidth(getFont()->getWidth(mText) + 4);
+        setWidth(getFont()->getWidth(mText) + 7);
         adjustHeight();
 
         fixScroll();
