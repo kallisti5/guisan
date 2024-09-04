@@ -169,20 +169,6 @@ namespace gcn
     void ListBox::logic()
     {
         adjustSize();
-
-        Rectangle scroll;
-
-        if (mSelected < 0)
-        {
-            scroll.y = 0;
-        }
-        else
-        {
-            scroll.y = getRowHeight() * mSelected;
-        }
-
-        scroll.height = getRowHeight();
-        showPart(scroll);
     }
 
     int ListBox::getSelected() const
@@ -211,6 +197,19 @@ namespace gcn
                 mSelected = selected;
             }
         }
+        Rectangle scroll;
+
+        if (mSelected < 0)
+        {
+            scroll.y = 0;
+        }
+        else
+        {
+            scroll.y = getRowHeight() * mSelected;
+        }
+
+        scroll.height = getRowHeight();
+        showPart(scroll);
 
         distributeValueChangedEvent();
     }
