@@ -320,9 +320,9 @@ namespace gcn
         int maxTabHeight = 0;
         for (unsigned int i = 0; i < mTabs.size(); i++)
         {
-            if (mTab.first->getHeight() > maxTabHeight)
+            if (mTabs[i].first->getHeight() > maxTabHeight)
             {
-                maxTabHeight = mTab.first->getHeight();
+                maxTabHeight = mTabs[i].first->getHeight();
             }
         }
 

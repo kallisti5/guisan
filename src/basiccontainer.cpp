@@ -313,15 +313,15 @@ namespace gcn
             {
                 // If the widget has a frame,
                 // draw it before drawing the widget
-                if ((*iter)->getFrameSize() > 0)
+                if (mWidget->getFrameSize() > 0)
                 {
-                    Rectangle rec = (*iter)->getDimension();
-                    rec.x -= (*iter)->getFrameSize();
-                    rec.y -= (*iter)->getFrameSize();
-                    rec.width += 2 * (*iter)->getFrameSize();
-                    rec.height += 2 * (*iter)->getFrameSize();
+                    Rectangle rec = mWidget->getDimension();
+                    rec.x -= mWidget->getFrameSize();
+                    rec.y -= mWidget->getFrameSize();
+                    rec.width += 2 * mWidget->getFrameSize();
+                    rec.height += 2 * mWidget->getFrameSize();
                     graphics->pushClipArea(rec);
-                    (*iter)->drawFrame(graphics);
+                    mWidget->drawFrame(graphics);
                     graphics->popClipArea();
                 }
 
