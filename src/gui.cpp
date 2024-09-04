@@ -744,31 +744,31 @@ namespace gcn
                     switch (mouseEvent.getType())
                     {
                       case MouseEvent::Entered:
-                          (*it)->mouseEntered(mouseEvent);
+                          mouseListener->mouseEntered(mouseEvent);
                           break;
                       case MouseEvent::Exited:
-                          (*it)->mouseExited(mouseEvent);
+                          mouseListener->mouseExited(mouseEvent);
                           break;
                       case MouseEvent::Moved:
-                          (*it)->mouseMoved(mouseEvent);
+                          mouseListener->mouseMoved(mouseEvent);
                           break;
                       case MouseEvent::Pressed:
-                          (*it)->mousePressed(mouseEvent);
+                          mouseListener->mousePressed(mouseEvent);
                           break;
                       case MouseEvent::Released:
-                          (*it)->mouseReleased(mouseEvent);
+                          mouseListener->mouseReleased(mouseEvent);
                           break;
                       case MouseEvent::WheelMovedUp:
-                          (*it)->mouseWheelMovedUp(mouseEvent);
+                          mouseListener->mouseWheelMovedUp(mouseEvent);
                           break;
                       case MouseEvent::WheelMovedDown:
-                          (*it)->mouseWheelMovedDown(mouseEvent);
+                          mouseListener->mouseWheelMovedDown(mouseEvent);
                           break;
                       case MouseEvent::Dragged:
-                          (*it)->mouseDragged(mouseEvent);
+                          mouseListener->mouseDragged(mouseEvent);
                           break;
                       case MouseEvent::Clicked:
-                          (*it)->mouseClicked(mouseEvent);
+                          mouseListener->mouseClicked(mouseEvent);
                           break;
                       default:
                           throw GCN_EXCEPTION("Unknown mouse event type.");
@@ -844,10 +844,10 @@ namespace gcn
                     switch (keyEvent.getType())
                     {
                       case KeyEvent::Pressed:
-                          (*it)->keyPressed(keyEvent);
+                          keyListener->keyPressed(keyEvent);
                           break;
                       case KeyEvent::Released:
-                          (*it)->keyReleased(keyEvent);
+                          keyListener->keyReleased(keyEvent);
                           break;
                       default:
                           throw GCN_EXCEPTION("Unknown key event type.");
@@ -876,10 +876,10 @@ namespace gcn
             switch (keyEvent.getType())
             {
               case KeyEvent::Pressed:
-                  (*it)->keyPressed(keyEvent);
+                  mKeyListener->keyPressed(keyEvent);
                   break;
               case KeyEvent::Released:
-                  (*it)->keyReleased(keyEvent);
+                  mKeyListener->keyReleased(keyEvent);
                   break;
               default:
                   throw GCN_EXCEPTION("Unknown key event type.");
