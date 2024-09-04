@@ -69,8 +69,8 @@ namespace gcn
     {
         mVScroll = 0;
         mHScroll = 0;
-        mHPolicy = SHOW_AUTO;
-        mVPolicy = SHOW_AUTO;
+        mHPolicy = ShowAuto;
+        mVPolicy = ShowAuto;
         mScrollbarWidth = 12;
         mUpButtonPressed = false;
         mDownButtonPressed = false;
@@ -91,8 +91,8 @@ namespace gcn
     {
         mVScroll = 0;
         mHScroll = 0;
-        mHPolicy = SHOW_AUTO;
-        mVPolicy = SHOW_AUTO;
+        mHPolicy = ShowAuto;
+        mVPolicy = ShowAuto;
         mScrollbarWidth = 12;
         mUpButtonPressed = false;
         mDownButtonPressed = false;
@@ -828,13 +828,13 @@ namespace gcn
 
         if (!getContent())
         {
-            mHBarVisible = mHPolicy == SHOW_ALWAYS;
-            mVBarVisible = mVPolicy == SHOW_ALWAYS;
+            mHBarVisible = (mHPolicy == ShowAlways);
+            mVBarVisible = (mVPolicy == ShowAlways);
             return;
         }
 
-        if (mHPolicy == SHOW_AUTO &&
-            mVPolicy == SHOW_AUTO)
+        if (mHPolicy == ShowAuto &&
+            mVPolicy == ShowAuto)
         {
             if (getContent()->getWidth() <= w
                 && getContent()->getHeight() <= h)
@@ -864,20 +864,20 @@ namespace gcn
 
         switch (mHPolicy)
         {
-          case SHOW_NEVER:
+          case ShowNever:
               mHBarVisible = false;
               break;
 
-          case SHOW_ALWAYS:
+          case ShowAlways:
               mHBarVisible = true;
               break;
 
-          case SHOW_AUTO:
-              if (mVPolicy == SHOW_NEVER)
+          case ShowAuto:
+              if (mVPolicy == ShowNever)
               {
                   mHBarVisible = getContent()->getWidth() > w;
               }
-              else // (mVPolicy == SHOW_ALWAYS)
+              else // (mVPolicy == ShowAlways)
               {
                   mHBarVisible = getContent()->getWidth() > w - mScrollbarWidth;
               }
@@ -889,20 +889,20 @@ namespace gcn
 
         switch (mVPolicy)
         {
-          case SHOW_NEVER:
+          case ShowNever:
               mVBarVisible = false;
               break;
 
-          case SHOW_ALWAYS:
+          case ShowAlways:
               mVBarVisible = true;
               break;
 
-          case SHOW_AUTO:
-              if (mHPolicy == SHOW_NEVER)
+          case ShowAuto:
+              if (mHPolicy == ShowNever)
               {
                   mVBarVisible = getContent()->getHeight() > h;
               }
-              else // (mHPolicy == SHOW_ALWAYS)
+              else // (mHPolicy == ShowAlways)
               {
                   mVBarVisible = getContent()->getHeight() > h - mScrollbarWidth;
               }
@@ -982,10 +982,15 @@ namespace gcn
 
     Rectangle ScrollArea::getChildrenArea()
     {
-        return Rectangle(0,
-                         0,
-                         getWidth() - (mVBarVisible ? mScrollbarWidth : 0),
-                         getHeight() - (mHBarVisible ? mScrollbarWidth : 0));
+        Rectangle area = Rectangle(0,
+                                   0,
+                                   getWidth() - (mVBarVisible ? mScrollbarWidth : 0),
+                                   getHeight() - (mHBarVisible ? mScrollbarWidth : 0));
+        if (area.width < 0 || area.height < 0)
+        {
+            return Rectangle();
+        }
+        return area;
     }
 
     Rectangle ScrollArea::getVerticalBarDimension()

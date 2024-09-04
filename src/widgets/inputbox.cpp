@@ -76,18 +76,18 @@ namespace gcn
         setMovable(false);
         
         mLabel = new Label(message);
-        mLabel->setAlignment(Graphics::LEFT);
+        mLabel->setAlignment(Graphics::Left);
         mLabel->adjustSize();
 
         mText = new TextField();
         
         mButtonOK = new Button(ok);
-        mButtonOK->setAlignment(Graphics::CENTER);
+        mButtonOK->setAlignment(Graphics::Center);
         mButtonOK->addMouseListener(this);
         mButtonOK->adjustSize();
 
         mButtonCancel = new Button(cancel);
-        mButtonCancel->setAlignment(Graphics::CENTER);
+        mButtonCancel->setAlignment(Graphics::Center);
         mButtonCancel->addMouseListener(this);
         mButtonCancel->adjustSize();
         
@@ -212,13 +212,13 @@ namespace gcn
 
         switch (getAlignment())
         {
-          case Graphics::LEFT:
+          case Graphics::Left:
               textX = 4;
               break;
-          case Graphics::CENTER:
+          case Graphics::Center:
               textX = getWidth() / 2;
               break;
-          case Graphics::RIGHT:
+          case Graphics::Right:
               textX = getWidth() - 4;
               break;
           default:

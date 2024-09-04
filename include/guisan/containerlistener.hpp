@@ -41,69 +41,55 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "ffcharacterchooser.hpp"
+#ifndef GCN_CONTAINERLISTENER_HPP
+#define GCN_CONTAINERLISTENER_HPP
 
-FFCharacterChooser::FFCharacterChooser()
-{
-    setWidth(20);
-    setHeight(240);
-    mSelected = 0;
-    mDistance = 76;
-    mHand = gcn::Image::load("images/hand.png");
-    setFocusable(true);
-    addKeyListener(this);
-    setFrameSize(0);
-}
+#include "guisan/containerevent.hpp"
+#include "guisan/platform.hpp"
 
-FFCharacterChooser::~FFCharacterChooser()
+namespace gcn
 {
-    delete mHand;
-}
-
-void FFCharacterChooser::draw(gcn::Graphics* graphics)
-{
-    if (isFocused())
+    /**
+     * Interface for listening for action from a container, such as BasicContainer.
+     *
+     * @see BasicContainer::addContainerListener, BasicContainer::removeContainerListener,
+     *      ContainerEvent
+     * @author Olof Naessén
+     * @since 1.1.0
+     */
+    class GCN_CORE_DECLSPEC ContainerListener
     {
-        graphics->drawImage(mHand, 0, mDistance*mSelected);
-    }
-}
+    public:
+        /**
+         * Destructor.
+         */
+        virtual ~ContainerListener() {}
 
-int FFCharacterChooser::getSelected()
-{
-    return mSelected;
-}
+        /**
+         * Called when a widget is added to a container.
+         *
+         * @param containerEvent The event of the action.
+         * @since 1.1.0
+         */
+        virtual void widgetAdded(const ContainerEvent& containerEvent) = 0;
 
-void FFCharacterChooser::setSelected(int selected)
-{
-    mSelected = selected;
-}
+        /**
+         * Called when a widget is removed from a container.
+         *
+         * @param containerEvent The event of the action.
+         * @since 1.1.0
+         */
+        virtual void widgetRemoved(const ContainerEvent& containerEvent) = 0;
 
-void FFCharacterChooser::setDistance(int distance)
-{
-    mDistance = distance;
-}
+    protected:
+        /**
+         * Constructor.
+         *
+         * You should not be able to make an instance of ContainerListener,
+         * therefore its constructor is protected.
+         */
+        ContainerListener() {}
+    };
+} // namespace gcn
 
-void FFCharacterChooser::keyPressed(gcn::KeyEvent& keyEvent)
-{
-    if (keyEvent.getKey().getValue() == gcn::Key::Up)
-    {
-        mSelected--;
-        if (mSelected < 0)
-        {
-            mSelected = 0;
-        }
-    }
-    else if (keyEvent.getKey().getValue() == gcn::Key::Down)
-    {
-        mSelected++;
-        if (mSelected > 2)
-        {
-            mSelected = 2;
-        }
-    }
-    else if (keyEvent.getKey().getValue() == gcn::Key::Enter)
-    {
-		// TODO: fix this
-        //distributeActionEvent();
-    }
-}
+#endif // end GCN_ACTIONLISTENER_HPP

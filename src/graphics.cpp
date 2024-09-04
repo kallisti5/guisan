@@ -182,13 +182,13 @@ namespace gcn
 
         switch (alignment)
         {
-          case LEFT:
+          case Left:
               mFont->drawString(this, text, x, y);
               break;
-          case CENTER:
+          case Center:
               mFont->drawString(this, text, x - mFont->getWidth(text) / 2, y);
               break;
-          case RIGHT:
+          case Right:
               mFont->drawString(this, text, x - mFont->getWidth(text), y);
               break;
           default:

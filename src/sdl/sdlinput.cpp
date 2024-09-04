@@ -156,7 +156,7 @@ namespace gcn
         {
           case SDL_TEXTINPUT:
               keyInput.setKey(utf8ToUnicode(event.text.text));
-              keyInput.setType(KeyInput::PRESSED);
+              keyInput.setType(KeyInput::Pressed);
               keyInput.setShiftPressed(false);
               keyInput.setControlPressed(false);
               keyInput.setAltPressed(false);
@@ -167,7 +167,7 @@ namespace gcn
               break;
           case SDL_KEYDOWN:
               keyInput.setKey(convertSDLEventToGuichanKeyValue(event));
-              keyInput.setType(KeyInput::PRESSED);
+              keyInput.setType(KeyInput::Pressed);
               keyInput.setShiftPressed(event.key.keysym.mod & KMOD_SHIFT);
               keyInput.setControlPressed(event.key.keysym.mod & KMOD_CTRL);
               keyInput.setAltPressed(event.key.keysym.mod & KMOD_ALT);
@@ -184,7 +184,7 @@ namespace gcn
 
           case SDL_KEYUP:
               keyInput.setKey(convertSDLEventToGuichanKeyValue(event));
-              keyInput.setType(KeyInput::RELEASED);
+              keyInput.setType(KeyInput::Released);
               keyInput.setShiftPressed(event.key.keysym.mod & KMOD_SHIFT);
               keyInput.setControlPressed(event.key.keysym.mod & KMOD_CTRL);
               keyInput.setAltPressed(event.key.keysym.mod & KMOD_ALT);
@@ -200,7 +200,7 @@ namespace gcn
               mouseInput.setX(event.button.x);
               mouseInput.setY(event.button.y);
               mouseInput.setButton(convertMouseButton(event.button.button));
-              mouseInput.setType(MouseInput::PRESSED);
+              mouseInput.setType(MouseInput::Pressed);
               mouseInput.setTimeStamp(SDL_GetTicks());
               mMouseInputQueue.push(mouseInput);
               break;
@@ -210,7 +210,7 @@ namespace gcn
               mouseInput.setX(event.button.x);
               mouseInput.setY(event.button.y);
               mouseInput.setButton(convertMouseButton(event.button.button));
-              mouseInput.setType(MouseInput::RELEASED);
+              mouseInput.setType(MouseInput::Released);
               mouseInput.setTimeStamp(SDL_GetTicks());
               mMouseInputQueue.push(mouseInput);
               break;
@@ -218,17 +218,17 @@ namespace gcn
           case SDL_MOUSEMOTION:
               mouseInput.setX(event.button.x);
               mouseInput.setY(event.button.y);
-              mouseInput.setButton(MouseInput::EMPTY);
-              mouseInput.setType(MouseInput::MOVED);
+              mouseInput.setButton(MouseInput::Empty);
+              mouseInput.setType(MouseInput::Moved);
               mouseInput.setTimeStamp(SDL_GetTicks());
               mMouseInputQueue.push(mouseInput);
               break;
 
           case SDL_MOUSEWHEEL:
               if (event.wheel.y > 0)
-                  mouseInput.setType(MouseInput::WHEEL_MOVED_UP);
+                  mouseInput.setType(MouseInput::WheelMovedUp);
               else
-                  mouseInput.setType(MouseInput::WHEEL_MOVED_DOWN);
+                  mouseInput.setType(MouseInput::WheelMovedDown);
               break;
 
           case SDL_WINDOWEVENT:
@@ -244,8 +244,8 @@ namespace gcn
                   {
                       mouseInput.setX(-1);
                       mouseInput.setY(-1);
-                      mouseInput.setButton(MouseInput::EMPTY);
-                      mouseInput.setType(MouseInput::MOVED);
+                      mouseInput.setButton(MouseInput::Empty);
+                      mouseInput.setType(MouseInput::Moved);
                       mMouseInputQueue.push(mouseInput);
                   }
               }
@@ -263,13 +263,13 @@ namespace gcn
         switch (button)
         {
           case SDL_BUTTON_LEFT:
-              return MouseInput::LEFT;
+              return MouseInput::Left;
               break;
           case SDL_BUTTON_RIGHT:
-              return MouseInput::RIGHT;
+              return MouseInput::Right;
               break;
           case SDL_BUTTON_MIDDLE:
-              return MouseInput::MIDDLE;
+              return MouseInput::Middle;
               break;
           default:
               // We have an unknown mouse type which is ignored.
@@ -284,58 +284,58 @@ namespace gcn
         switch (event.key.keysym.sym)
         {
           case SDLK_TAB:
-              value = Key::TAB;
+              value = Key::Tab;
               break;
           case SDLK_LALT:
-              value = Key::LEFT_ALT;
+              value = Key::LeftAlt;
               break;
           case SDLK_RALT:
-              value = Key::RIGHT_ALT;
+              value = Key::RightAlt;
               break;
           case SDLK_LSHIFT:
-              value = Key::LEFT_SHIFT;
+              value = Key::LeftShift;
               break;
           case SDLK_RSHIFT:
-              value = Key::RIGHT_SHIFT;
+              value = Key::RightShift;
               break;
           case SDLK_LCTRL:
-              value = Key::LEFT_CONTROL;
+              value = Key::LeftControl;
               break;
           case SDLK_RCTRL:
-              value = Key::RIGHT_CONTROL;
+              value = Key::RightControl;
               break;
           case SDLK_BACKSPACE:
-              value = Key::BACKSPACE;
+              value = Key::Backspace;
               break;
           case SDLK_PAUSE:
-              value = Key::PAUSE;
+              value = Key::Pause;
               break;
           case SDLK_SPACE:
-              value = Key::SPACE;
+              value = Key::Space;
               break;
           case SDLK_ESCAPE:
-              value = Key::ESCAPE;
+              value = Key::Escape;
               break;
           case SDLK_DELETE:
-              value = Key::DELETE;
+              value = Key::Delete;
               break;
           case SDLK_INSERT:
-              value = Key::INSERT;
+              value = Key::Insert;
               break;
           case SDLK_HOME:
-              value = Key::HOME;
+              value = Key::Home;
               break;
           case SDLK_END:
-              value = Key::END;
+              value = Key::End;
               break;
           case SDLK_PAGEUP:
-              value = Key::PAGE_UP;
+              value = Key::PageUp;
               break;
           case SDLK_PRINTSCREEN:
-              value = Key::PRINT_SCREEN;
+              value = Key::PrintScreen;
               break;
           case SDLK_PAGEDOWN:
-              value = Key::PAGE_DOWN;
+              value = Key::PageDown;
               break;
           case SDLK_F1:
               value = Key::F1;
@@ -383,40 +383,40 @@ namespace gcn
               value = Key::F15;
               break;
           case SDLK_NUMLOCKCLEAR:
-              value = Key::NUM_LOCK;
+              value = Key::NumLock;
               break;
           case SDLK_CAPSLOCK:
-              value = Key::CAPS_LOCK;
+              value = Key::CapsLock;
               break;
           case SDLK_SCROLLLOCK:
-              value = Key::SCROLL_LOCK;
+              value = Key::ScrollLock;
               break;
           case SDLK_RGUI:
-              value = Key::RIGHT_META;
+              value = Key::RightMeta;
               break;
           case SDLK_LGUI:
-              value = Key::LEFT_META;
+              value = Key::LeftMeta;
               break;
           case SDLK_MODE:
-              value = Key::ALT_GR;
+              value = Key::AltGr;
               break;
           case SDLK_UP:
-              value = Key::UP;
+              value = Key::Up;
               break;
           case SDLK_DOWN:
-              value = Key::DOWN;
+              value = Key::Down;
               break;
           case SDLK_LEFT:
-              value = Key::LEFT;
+              value = Key::Left;
               break;
           case SDLK_RIGHT:
-              value = Key::RIGHT;
+              value = Key::Right;
               break;
           case SDLK_RETURN:
-              value = Key::ENTER;
+              value = Key::Enter;
               break;
           case SDLK_KP_ENTER:
-              value = Key::ENTER;
+              value = Key::Enter;
               break;
 
           default:
@@ -429,34 +429,34 @@ namespace gcn
             switch (event.key.keysym.sym)
             {
               case SDLK_KP_0:
-                  value = Key::INSERT;
+                  value = Key::Insert;
                   break;
               case SDLK_KP_1:
-                  value = Key::END;
+                  value = Key::End;
                   break;
               case SDLK_KP_2:
-                  value = Key::DOWN;
+                  value = Key::Down;
                   break;
               case SDLK_KP_3:
-                  value = Key::PAGE_DOWN;
+                  value = Key::PageDown;
                   break;
               case SDLK_KP_4:
-                  value = Key::LEFT;
+                  value = Key::Left;
                   break;
               case SDLK_KP_5:
                   value = 0;
                   break;
               case SDLK_KP_6:
-                  value = Key::RIGHT;
+                  value = Key::Right;
                   break;
               case SDLK_KP_7:
-                  value = Key::HOME;
+                  value = Key::Home;
                   break;
               case SDLK_KP_8:
-                  value = Key::UP;
+                  value = Key::Up;
                   break;
               case SDLK_KP_9:
-                  value = Key::PAGE_UP;
+                  value = Key::PageUp;
                   break;
               default:
                   break;

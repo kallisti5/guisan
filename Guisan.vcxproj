@@ -154,6 +154,7 @@
     <ClCompile Include="src\basiccontainer.cpp" />
     <ClCompile Include="src\cliprectangle.cpp" />
     <ClCompile Include="src\color.cpp" />
+    <ClCompile Include="src\containerevent.cpp" />
     <ClCompile Include="src\defaultfont.cpp" />
     <ClCompile Include="src\event.cpp" />
     <ClCompile Include="src\exception.cpp" />
@@ -215,6 +216,8 @@
     <ClInclude Include="include\guisan\basiccontainer.hpp" />
     <ClInclude Include="include\guisan\cliprectangle.hpp" />
     <ClInclude Include="include\guisan\color.hpp" />
+    <ClInclude Include="include\guisan\containerevent.hpp" />
+    <ClInclude Include="include\guisan\containerlistener.hpp" />
     <ClInclude Include="include\guisan\deathlistener.hpp" />
     <ClInclude Include="include\guisan\defaultfont.hpp" />
     <ClInclude Include="include\guisan\event.hpp" />

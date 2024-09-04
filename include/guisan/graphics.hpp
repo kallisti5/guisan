@@ -111,9 +111,9 @@ namespace gcn
          */
         enum Alignment
         {
-            LEFT = 0,
-            CENTER,
-            RIGHT
+            Left = 0,
+            Center,
+            Right
         };
 
         /**
@@ -279,7 +279,7 @@ namespace gcn
          * @throws Exception when no font has been set.
          */
         virtual void drawText(const std::string& text, int x, int y,
-                              Alignment alignment = LEFT);
+                              Alignment alignment = Left);
 
     protected:
         /**

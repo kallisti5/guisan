@@ -69,6 +69,12 @@
 
 namespace gcn
 {
+    BasicContainer::BasicContainer() :
+        mWidgetToBeMovedToTheTop(NULL),
+        mWidgetToBeMovedToTheBottom(NULL),
+        mLogicIsProcessing(false)
+    {}
+
     BasicContainer::~BasicContainer()
     {
         clear();
@@ -76,29 +82,31 @@ namespace gcn
 
     void BasicContainer::moveToTop(Widget* widget)
     {
-        for (auto iter = mWidgets.begin(); iter != mWidgets.end(); ++iter)
-        {
-            if (*iter == widget)
-            {
-                mWidgets.erase(iter);
-                mWidgets.push_back(widget);
-                return;
-            }
-        }
-
-        throw GCN_EXCEPTION("There is no such widget in this container.");
-    }
-
-    void BasicContainer::moveToBottom(Widget* widget)
-    {
-        const auto iter = find(mWidgets.begin(), mWidgets.end(), widget);
+        WidgetListIterator iter = std::find(mWidgets.begin(), mWidgets.end(), widget);
 
         if (iter == mWidgets.end())
         {
             throw GCN_EXCEPTION("There is no such widget in this container.");
         }
-        mWidgets.erase(iter);
-        mWidgets.push_front(widget);
+
+        if (mLogicIsProcessing)
+            mWidgetToBeMovedToTheTop = widget;
+        else
+            _moveToTopWithNoChecks(widget);
+    }
+
+    void BasicContainer::moveToBottom(Widget* widget)
+    {
+        WidgetListIterator iter = find(mWidgets.begin(), mWidgets.end(), widget);
+
+        if (iter == mWidgets.end())
+        {
+            throw GCN_EXCEPTION("There is no such widget in this container.");
+        }
+        if (mLogicIsProcessing)
+            mWidgetToBeMovedToTheBottom = widget;
+        else
+            _moveToBottomWithNoChecks(widget);
     }
 
     void BasicContainer::death(const Event& event)
@@ -215,7 +223,23 @@ namespace gcn
 
     void BasicContainer::logic()
     {
+        mLogicIsProcessing = true;
+        mWidgetToBeMovedToTheTop = NULL;
+        mWidgetToBeMovedToTheBottom = NULL;
         logicChildren();
+        mLogicIsProcessing = false;
+
+        if (mWidgetToBeMovedToTheTop != NULL)
+        {
+            _moveToTopWithNoChecks(mWidgetToBeMovedToTheTop);
+            mWidgetToBeMovedToTheTop = NULL;
+        }
+
+        if (mWidgetToBeMovedToTheBottom != NULL)
+        {
+            _moveToTopWithNoChecks(mWidgetToBeMovedToTheBottom);
+            mWidgetToBeMovedToTheBottom = NULL;
+        }
     }
 
     void BasicContainer::_setFocusHandler(FocusHandler* focusHandler)
@@ -386,5 +410,17 @@ namespace gcn
         }
 
         return NULL;
+    }
+
+    void BasicContainer::_moveToTopWithNoChecks(Widget* widget)
+    {
+        mWidgets.remove(widget);
+        mWidgets.push_back(widget);
+    }
+
+    void BasicContainer::_moveToBottomWithNoChecks(Widget* widget)
+    {
+        mWidgets.remove(widget);
+        mWidgets.push_front(widget);
     }
 }

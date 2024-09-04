@@ -214,8 +214,6 @@ namespace gcn
 
         virtual void draw(Graphics *graphics);
 
-        virtual void logic();
-
         void setWidth(int width);
 
         void setHeight(int height);
@@ -223,6 +221,8 @@ namespace gcn
         void setSize(int width, int height);
 
         void setDimension(const Rectangle& dimension);
+
+        void setBaseColor(const Color& color);
 
         // Inherited from ActionListener
 

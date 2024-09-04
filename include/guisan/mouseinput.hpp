@@ -198,11 +198,11 @@ namespace gcn
          */
         enum
         {
-            MOVED = 0,
-            PRESSED,
-            RELEASED,
-            WHEEL_MOVED_DOWN,
-            WHEEL_MOVED_UP
+            Moved = 0,
+            Pressed,
+            Released,
+            WheelMovedDown,
+            WheelMovedUp
         };
 
         /**
@@ -210,10 +210,10 @@ namespace gcn
          */
         enum
         {
-            EMPTY = 0,
-            LEFT,
-            RIGHT,
-            MIDDLE
+            Empty = 0,
+            Left,
+            Right,
+            Middle
         };
 
     protected:

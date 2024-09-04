@@ -726,4 +726,20 @@ namespace gcn
             mParent->showWidgetPart(this, rectangle);
         }
     }
+
+    Widget* Widget::getTop() const
+    {
+        if (getParent() == NULL) return NULL;
+
+        Widget* widget = getParent();
+        Widget* parent = getParent()->getParent();
+
+        while (parent != NULL)
+        {
+            widget = parent;
+            parent = parent->getParent();
+        }
+
+        return widget;
+    }
 }

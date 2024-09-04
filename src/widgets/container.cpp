@@ -99,17 +99,20 @@ namespace gcn
     void Container::add(Widget* widget)
     {
         BasicContainer::add(widget);
+        distributeWidgetAddedEvent(widget);
     }
 
     void Container::add(Widget* widget, int x, int y)
     {
         widget->setPosition(x, y);
         BasicContainer::add(widget);
+        distributeWidgetAddedEvent(widget);
     }
 
     void Container::remove(Widget* widget)
     {
         BasicContainer::remove(widget);
+        distributeWidgetRemovedEvent(widget);
     }
 
     void Container::clear()
@@ -121,4 +124,40 @@ namespace gcn
     {
         return BasicContainer::findWidgetById(id);
     }
-}
+    void Container::addContainerListener(ContainerListener* containerListener)
+    {
+        mContainerListeners.push_back(containerListener);
+    }
+
+    void Container::removeContainerListener(ContainerListener* containerListener)
+    {
+        mContainerListeners.remove(containerListener);
+    }
+
+    void Container::distributeWidgetAddedEvent(Widget* source)
+    {
+        ContainerListenerIterator iter;
+
+        for (iter = mContainerListeners.begin(); iter != mContainerListeners.end(); ++iter)
+        {
+            ContainerEvent event(source, this);
+            (*iter)->widgetAdded(event);
+        }
+    }
+
+    void Container::distributeWidgetRemovedEvent(Widget* source)
+    {
+        ContainerListenerIterator iter;
+
+        for (iter = mContainerListeners.begin(); iter != mContainerListeners.end(); ++iter)
+        {
+            ContainerEvent event(source, this);
+            (*iter)->widgetRemoved(event);
+        }
+    }
+
+    const std::list<Widget*>& Container::getChildren() const
+    {
+        return mWidgets;
+    }
+} // namespace gcn

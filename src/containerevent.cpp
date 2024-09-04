@@ -41,69 +41,24 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "ffcharacterchooser.hpp"
+/*
+ * For comments regarding functions please see the header file.
+ */
 
-FFCharacterChooser::FFCharacterChooser()
-{
-    setWidth(20);
-    setHeight(240);
-    mSelected = 0;
-    mDistance = 76;
-    mHand = gcn::Image::load("images/hand.png");
-    setFocusable(true);
-    addKeyListener(this);
-    setFrameSize(0);
-}
+#include "guisan/containerevent.hpp"
 
-FFCharacterChooser::~FFCharacterChooser()
+namespace gcn
 {
-    delete mHand;
-}
+    ContainerEvent::ContainerEvent(Widget* source, Container* container) :
+        Event(source),
+        mContainer(container)
+    {}
 
-void FFCharacterChooser::draw(gcn::Graphics* graphics)
-{
-    if (isFocused())
+    ContainerEvent::~ContainerEvent()
+    {}
+
+    Container* ContainerEvent::getContainer() const
     {
-        graphics->drawImage(mHand, 0, mDistance*mSelected);
+        return mContainer;
     }
-}
-
-int FFCharacterChooser::getSelected()
-{
-    return mSelected;
-}
-
-void FFCharacterChooser::setSelected(int selected)
-{
-    mSelected = selected;
-}
-
-void FFCharacterChooser::setDistance(int distance)
-{
-    mDistance = distance;
-}
-
-void FFCharacterChooser::keyPressed(gcn::KeyEvent& keyEvent)
-{
-    if (keyEvent.getKey().getValue() == gcn::Key::Up)
-    {
-        mSelected--;
-        if (mSelected < 0)
-        {
-            mSelected = 0;
-        }
-    }
-    else if (keyEvent.getKey().getValue() == gcn::Key::Down)
-    {
-        mSelected++;
-        if (mSelected > 2)
-        {
-            mSelected = 2;
-        }
-    }
-    else if (keyEvent.getKey().getValue() == gcn::Key::Enter)
-    {
-		// TODO: fix this
-        //distributeActionEvent();
-    }
-}
+} // namespace gcn

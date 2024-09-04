@@ -81,16 +81,16 @@ namespace gcn
          * Scrollpolicies for the horizontal and vertical scrollbar.
          * The policies are:
          *
-         * SHOW_ALWAYS - Always show the scrollbars no matter what.
-         * SHOW_NEVER  - Never show the scrollbars no matter waht.
-         * SHOW_AUTO   - Show the scrollbars only when needed. That is if the
-         *               content grows larger then the ScrollArea.
+         * ShowAlways - Always show the scrollbars no matter what.
+         * ShowNever  - Never show the scrollbars no matter waht.
+         * ShowAuto   - Show the scrollbars only when needed. That is if the
+         *              content grows larger then the ScrollArea.
          */
         enum ScrollPolicy
         {
-            SHOW_ALWAYS = 0,
-            SHOW_NEVER,
-            SHOW_AUTO
+            ShowAlways = 0,
+            ShowNever,
+            ShowAuto
         };
 
         /**

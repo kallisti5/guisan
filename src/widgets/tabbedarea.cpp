@@ -315,10 +315,6 @@ namespace gcn
         drawChildren(graphics);
     }
 
-    void TabbedArea::logic()
-    {
-    }
-
     void TabbedArea::adjustSize()
     {
         int maxTabHeight = 0;
@@ -361,26 +357,51 @@ namespace gcn
 
     void TabbedArea::setWidth(int width)
     {
-        Widget::setWidth(width);
+        // This may seem odd, but we want the TabbedArea to adjust
+        // its size properly before we call Widget::setWidth as
+        // Widget::setWidth might distribute a resize event.
+        gcn::Rectangle dim = mDimension;
+        mDimension.width = width;
         adjustSize();
+        mDimension = dim;
+        Widget::setWidth(width);
     }
 
     void TabbedArea::setHeight(int height)
     {
-        Widget::setHeight(height);
+        // This may seem odd, but we want the TabbedArea to adjust
+        // its size properly before we call Widget::setHeight as
+        // Widget::setHeight might distribute a resize event.
+        gcn::Rectangle dim = mDimension;
+        mDimension.height = height;
         adjustSize();
+        mDimension = dim;
+        Widget::setHeight(height);
     }
 
     void TabbedArea::setSize(int width, int height)
     {
-        Widget::setSize(width, height);
+        // This may seem odd, but we want the TabbedArea to adjust
+        // its size properly before we call Widget::setSize as
+        // Widget::setSize might distribute a resize event.
+        gcn::Rectangle dim = mDimension;
+        mDimension.width = width;
+        mDimension.height = height;
         adjustSize();
+        mDimension = dim;
+        Widget::setSize(width, height);
     }
 
     void TabbedArea::setDimension(const Rectangle& dimension)
     {
-        Widget::setDimension(dimension);
+        // This may seem odd, but we want the TabbedArea to adjust
+        // it's size properly before we call Widget::setDimension as
+        // Widget::setDimension might distribute a resize event.
+        gcn::Rectangle dim = mDimension;
+        mDimension = dimension;
         adjustSize();
+        mDimension = dim;
+        Widget::setDimension(dimension);
     }
 
     void TabbedArea::keyPressed(KeyEvent& keyEvent)
@@ -390,7 +411,7 @@ namespace gcn
             return;
         }
 
-        if (keyEvent.getKey().getValue() == Key::LEFT)
+        if (keyEvent.getKey().getValue() == Key::Left)
         {
             int index = getSelectedTabIndex();
             index--;
@@ -406,7 +427,7 @@ namespace gcn
 
             keyEvent.consume();
         }
-        else if (keyEvent.getKey().getValue() == Key::RIGHT)
+        else if (keyEvent.getKey().getValue() == Key::Right)
         {
             int index = getSelectedTabIndex();
             index++;
@@ -431,7 +452,7 @@ namespace gcn
             return;
         }
 
-        if (mouseEvent.getButton() == MouseEvent::LEFT)
+        if (mouseEvent.getButton() == MouseEvent::Left)
         {
             Widget* widget = mTabContainer->getWidgetAt(mouseEvent.getX(), mouseEvent.getY());
             Tab* tab = dynamic_cast<Tab*>(widget);
@@ -478,4 +499,11 @@ namespace gcn
 
         setSelectedTab(tab);
     }
-}
+
+    void TabbedArea::setBaseColor(const Color& color)
+    {
+        Widget::setBaseColor(color);
+        mWidgetContainer->setBaseColor(color);
+        mTabContainer->setBaseColor(color);
+    }
+} // namespace gcn

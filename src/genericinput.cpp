@@ -83,7 +83,7 @@ namespace gcn
         mouseInput.setX(x);
         mouseInput.setY(y);
         mouseInput.setButton(button);
-        mouseInput.setType(MouseInput::PRESSED);
+        mouseInput.setType(MouseInput::Pressed);
 
         mMouseInputQueue.push(mouseInput);
     }
@@ -94,7 +94,7 @@ namespace gcn
         mouseInput.setX(x);
         mouseInput.setY(y);
         mouseInput.setButton(button);
-        mouseInput.setType(MouseInput::RELEASED);
+        mouseInput.setType(MouseInput::Released);
 
         mMouseInputQueue.push(mouseInput);
     }
@@ -104,7 +104,7 @@ namespace gcn
         MouseInput mouseInput;
         mouseInput.setX(x);
         mouseInput.setY(y);
-        mouseInput.setType(MouseInput::WHEEL_MOVED_UP);
+        mouseInput.setType(MouseInput::WheelMovedUp);
 
         mMouseInputQueue.push(mouseInput);
     }
@@ -114,7 +114,7 @@ namespace gcn
         MouseInput mouseInput;
         mouseInput.setX(x);
         mouseInput.setY(y);
-        mouseInput.setType(MouseInput::WHEEL_MOVED_DOWN);
+        mouseInput.setType(MouseInput::WheelMovedDown);
 
         mMouseInputQueue.push(mouseInput);
     }
@@ -124,7 +124,7 @@ namespace gcn
         MouseInput mouseInput;
         mouseInput.setX(x);
         mouseInput.setY(y);
-        mouseInput.setType(MouseInput::MOVED);
+        mouseInput.setType(MouseInput::Moved);
 
         mMouseInputQueue.push(mouseInput);
     }

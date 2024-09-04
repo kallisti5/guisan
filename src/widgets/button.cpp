@@ -73,7 +73,7 @@ namespace gcn
         : mHasMouse(false),
           mKeyPressed(false),
           mMousePressed(false),
-          mAlignment(Graphics::CENTER),
+          mAlignment(Graphics::Center),
           mSpacing(4)
     {
         setFocusable(true);
@@ -90,7 +90,7 @@ namespace gcn
               mHasMouse(false),
               mKeyPressed(false),
               mMousePressed(false),
-              mAlignment(Graphics::CENTER),
+              mAlignment(Graphics::Center),
               mSpacing(4)
     {
         setFocusable(true);
@@ -176,14 +176,14 @@ namespace gcn
 
         switch (getAlignment())
         {
-          case Graphics::LEFT:
-              textX = static_cast<int>(mSpacing);
+          case Graphics::Left:
+              textX = mSpacing;
               break;
-          case Graphics::CENTER:
+          case Graphics::Center:
               textX = getWidth() / 2;
               break;
-          case Graphics::RIGHT:
-              textX = getWidth() - static_cast<int>(mSpacing);
+          case Graphics::Right:
+              textX = getWidth() - mSpacing;
               break;
           default:
               throw GCN_EXCEPTION("Unknown alignment.");
@@ -224,7 +224,7 @@ namespace gcn
 
     void Button::mousePressed(MouseEvent& mouseEvent)
     {
-        if (mouseEvent.getButton() == MouseEvent::LEFT)
+        if (mouseEvent.getButton() == MouseEvent::Left)
         {
             mMousePressed = true;
             mouseEvent.consume();
@@ -243,14 +243,14 @@ namespace gcn
 
     void Button::mouseReleased(MouseEvent& mouseEvent)
     {
-        if (mouseEvent.getButton() == MouseEvent::LEFT
+        if (mouseEvent.getButton() == MouseEvent::Left
             && mMousePressed)
         {
             mMousePressed = false;
             distributeActionEvent();
             mouseEvent.consume();
         }
-        else if (mouseEvent.getButton() == MouseEvent::LEFT)
+        else if (mouseEvent.getButton() == MouseEvent::Left)
         {
             mMousePressed = false;
             mouseEvent.consume();
@@ -266,8 +266,8 @@ namespace gcn
     {
         const Key key = keyEvent.getKey();
 
-        if (key.getValue() == Key::ENTER
-            || key.getValue() == Key::SPACE)
+        if (key.getValue() == Key::Enter
+            || key.getValue() == Key::Space)
         {
             mKeyPressed = true;
             keyEvent.consume();
@@ -278,8 +278,8 @@ namespace gcn
     {
         const Key key = keyEvent.getKey();
 
-        if ((key.getValue() == Key::ENTER
-             || key.getValue() == Key::SPACE)
+        if ((key.getValue() == Key::Enter
+             || key.getValue() == Key::Space)
             && mKeyPressed)
         {
             mKeyPressed = false;

@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessï¿½n and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessï¿½n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -78,48 +78,47 @@ namespace gcn
 		 */
 		OpenGLGraphics();
 
-		/**
-		 * Constructor.
-		 *
-		 * @param width the width of the logical drawing surface. Should be the
-		 *              same as the screen resolution.
-		 *
-		 * @param height the height ot the logical drawing surface. Should be
-		 *               the same as the screen resolution.
-		 */
-		OpenGLGraphics(int width, int height);
+        /**
+         * Constructor.
+         *
+         * @param width the width of the logical drawing surface. Should be the
+         *              same as the screen resolution.
+         *
+         * @param height the height ot the logical drawing surface. Should be
+         *               the same as the screen resolution.
+         */
+        OpenGLGraphics(int width, int height);
 
-		/**
-		 * Destructor.
-		 */
-		virtual ~OpenGLGraphics();
+        /**
+         * Destructor.
+         */
+        virtual ~OpenGLGraphics();
 
-		/**
-		 * Sets the target plane on where to draw.
-		 *
-		 * @param width the width of the logical drawing surface. Should be the
-		 *              same as the screen resolution.
-		 * @param height the height ot the logical drawing surface. Should be
-		 *               the same as the screen resolution.
-		 */
-		virtual void setTargetPlane(int width, int height);
+        /**
+         * Sets the target plane on where to draw.
+         *
+         * @param width the width of the logical drawing surface. Should be the
+         *              same as the screen resolution.
+         * @param height the height ot the logical drawing surface. Should be
+         *               the same as the screen resolution.
+         */
+        virtual void setTargetPlane(int width, int height);
 
-		/**
-		* Gets the target plane width.
-		*
-		* @return The target plane width.
-		*/
-		virtual int getTargetPlaneWidth() const;
+        /**
+         * Gets the target plane width.
+         *
+         * @return The target plane width.
+         */
+        virtual int getTargetPlaneWidth() const;
 
-		/**
-		 * Gets the target plane height.
-		 *
-		 * @return The target plane height.
-		 */
-		virtual int getTargetPlaneHeight() const;
+        /**
+         * Gets the target plane height.
+         *
+         * @return The target plane height.
+         */
+        virtual int getTargetPlaneHeight() const;
 
-
-		// Inherited from Graphics
+        // Inherited from Graphics
 
 		virtual void _beginDraw();
 
@@ -143,13 +142,13 @@ namespace gcn
 
 		virtual void setColor(const Color& color);
 
-		virtual const Color& getColor();
+        virtual const Color& getColor();
 
-	protected:
-		int mWidth, mHeight;
-		bool mAlpha;
-		Color mColor;
-	};
+    protected:
+        int mWidth, mHeight;
+        bool mAlpha;
+        Color mColor;
+    };
 }
 
 #endif // end GCN_OPENGLGRAPHICS_HPP

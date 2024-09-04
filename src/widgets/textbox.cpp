@@ -163,7 +163,7 @@ namespace gcn
 
     void TextBox::mousePressed(MouseEvent& mouseEvent)
     {
-        if (mouseEvent.getButton() == MouseEvent::LEFT)
+        if (mouseEvent.getButton() == MouseEvent::Left)
         {
             mCaretRow = mouseEvent.getY() / getFont()->getHeight();
 
@@ -185,7 +185,7 @@ namespace gcn
     {
         const Key key = keyEvent.getKey();
 
-        if (key.getValue() == Key::LEFT)
+        if (key.getValue() == Key::Left)
         {
             --mCaretColumn;
             if (mCaretColumn < 0)
@@ -204,7 +204,7 @@ namespace gcn
             }
         }
 
-        else if (key.getValue() == Key::RIGHT)
+        else if (key.getValue() == Key::Right)
         {
             ++mCaretColumn;
             if (mCaretColumn > static_cast<int>(mTextRows[mCaretRow].size()))
@@ -228,27 +228,27 @@ namespace gcn
             }
         }
 
-        else if (key.getValue() == Key::DOWN)
+        else if (key.getValue() == Key::Down)
         {
             setCaretRow(mCaretRow + 1);
         }
 
-        else if (key.getValue() == Key::UP)
+        else if (key.getValue() == Key::Up)
         {
             setCaretRow(mCaretRow - 1);
         }
 
-        else if (key.getValue() == Key::HOME)
+        else if (key.getValue() == Key::Home)
         {
             mCaretColumn = 0;
         }
 
-        else if (key.getValue() == Key::END)
+        else if (key.getValue() == Key::End)
         {
             mCaretColumn = mTextRows[mCaretRow].size();
         }
 
-        else if (key.getValue() == Key::ENTER && mEditable)
+        else if (key.getValue() == Key::Enter && mEditable)
         {
             mTextRows.insert(mTextRows.begin() + mCaretRow + 1,
                              mTextRows[mCaretRow].substr(mCaretColumn, mTextRows[mCaretRow].size() - mCaretColumn));
@@ -257,7 +257,7 @@ namespace gcn
             mCaretColumn = 0;
         }
 
-        else if (key.getValue() == Key::BACKSPACE
+        else if (key.getValue() == Key::Backspace
                  && mCaretColumn != 0
                  && mEditable)
         {
@@ -265,7 +265,7 @@ namespace gcn
             --mCaretColumn;
         }
 
-        else if (key.getValue() == Key::BACKSPACE
+        else if (key.getValue() == Key::Backspace
                  && mCaretColumn == 0
                  && mCaretRow != 0
                  && mEditable)
@@ -276,23 +276,23 @@ namespace gcn
             --mCaretRow;
         }
 
-        else if (key.getValue() == Key::DELETE
-                 && mCaretColumn < static_cast<int>(mTextRows[mCaretRow].size())
+        else if (key.getValue() == Key::Delete
+                 && mCaretColumn < (int)mTextRows[mCaretRow].size()
                  && mEditable)
         {
             mTextRows[mCaretRow].erase(mCaretColumn, 1);
         }
 
-        else if (key.getValue() == Key::DELETE
-                 && mCaretColumn == static_cast<int>(mTextRows[mCaretRow].size())
-                 && mCaretRow < static_cast<int>(mTextRows.size()) - 1
+        else if (key.getValue() == Key::Delete
+                 && mCaretColumn == (int)mTextRows[mCaretRow].size()
+                 && mCaretRow < ((int)mTextRows.size() - 1)
                  && mEditable)
         {
             mTextRows[mCaretRow] += mTextRows[mCaretRow + 1];
             mTextRows.erase(mTextRows.begin() + mCaretRow + 1);
         }
 
-        else if(key.getValue() == Key::PAGE_UP)
+        else if(key.getValue() == Key::PageUp)
         {
             Widget* par = getParent();
 
@@ -308,7 +308,7 @@ namespace gcn
             }
         }
 
-        else if(key.getValue() == Key::PAGE_DOWN)
+        else if(key.getValue() == Key::PageDown)
         {
             Widget* par = getParent();
 
@@ -324,7 +324,7 @@ namespace gcn
             }
         }
 
-        else if(key.getValue() == Key::TAB
+        else if(key.getValue() == Key::Tab
                 && mEditable)
         {
             mTextRows[mCaretRow].insert(mCaretColumn,std::string("    "));

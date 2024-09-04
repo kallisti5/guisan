@@ -41,69 +41,59 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "ffcharacterchooser.hpp"
+#ifndef GCN_CONTAINEREVENT_HPP
+#define GCN_CONTAINEREVENT_HPP
 
-FFCharacterChooser::FFCharacterChooser()
-{
-    setWidth(20);
-    setHeight(240);
-    mSelected = 0;
-    mDistance = 76;
-    mHand = gcn::Image::load("images/hand.png");
-    setFocusable(true);
-    addKeyListener(this);
-    setFrameSize(0);
-}
+#include "guisan/event.hpp"
+#include "guisan/platform.hpp"
 
-FFCharacterChooser::~FFCharacterChooser()
+namespace gcn
 {
-    delete mHand;
-}
+    class Container;
+    class Widget;
 
-void FFCharacterChooser::draw(gcn::Graphics* graphics)
-{
-    if (isFocused())
+    /**
+     * Represents a container event. A container event is an event
+     * that can be fired by a container whenever a widget is added
+     * or removed.
+     *
+     * Any object can listen for actions from a container by implementing
+     * the ContainerListener interface.
+     *
+     * @see Container::addContainerListener, Container::removeContainerListener,
+     *      Container::distributeContainerEvent
+     * @author Olof Naessén
+     * @since 1.1.0
+     */
+    class GCN_CORE_DECLSPEC ContainerEvent : public Event
     {
-        graphics->drawImage(mHand, 0, mDistance*mSelected);
-    }
-}
+    public:
+        /**
+         * Constructor.
+         *
+         * @param source The source widget of the event.
+         * @param container The container the event concerns.
+         */
+        ContainerEvent(Widget* source, Container* container);
 
-int FFCharacterChooser::getSelected()
-{
-    return mSelected;
-}
+        /**
+         * Destructor.
+         */
+        virtual ~ContainerEvent();
 
-void FFCharacterChooser::setSelected(int selected)
-{
-    mSelected = selected;
-}
+        /**
+         * Gets the container the event concerns.
+         * 
+         * @return The container the event concerns.
+         */
+        Container* getContainer() const;
 
-void FFCharacterChooser::setDistance(int distance)
-{
-    mDistance = distance;
-}
+    protected:
+        /**
+         * Holds the container the event concerns.
+         */
+        Container* mContainer;
+    };
+} // namespace gcn
 
-void FFCharacterChooser::keyPressed(gcn::KeyEvent& keyEvent)
-{
-    if (keyEvent.getKey().getValue() == gcn::Key::Up)
-    {
-        mSelected--;
-        if (mSelected < 0)
-        {
-            mSelected = 0;
-        }
-    }
-    else if (keyEvent.getKey().getValue() == gcn::Key::Down)
-    {
-        mSelected++;
-        if (mSelected > 2)
-        {
-            mSelected = 2;
-        }
-    }
-    else if (keyEvent.getKey().getValue() == gcn::Key::Enter)
-    {
-		// TODO: fix this
-        //distributeActionEvent();
-    }
-}
+#endif // GCN_ACTIONEVENT_HPP

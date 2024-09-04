@@ -169,8 +169,8 @@ namespace gcn
     {
         const Key key = keyEvent.getKey();
 
-        if (key.getValue() == Key::ENTER ||
-            key.getValue() == Key::SPACE)
+        if (key.getValue() == Key::Enter ||
+            key.getValue() == Key::Space)
         {
             toggleSelected();
             keyEvent.consume();
@@ -179,7 +179,7 @@ namespace gcn
 
     void CheckBox::mouseClicked(MouseEvent& mouseEvent)
     {
-        if (mouseEvent.getButton() == MouseEvent::LEFT)
+        if (mouseEvent.getButton() == MouseEvent::Left)
         {
             toggleSelected();
         }

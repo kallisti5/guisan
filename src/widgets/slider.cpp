@@ -75,7 +75,7 @@ namespace gcn
 
         setFocusable(true);
         setFrameSize(1);
-        setOrientation(HORIZONTAL);
+        setOrientation(Horizontal);
         setValue(0);
         setStepLength(scaleEnd / 10);
         setMarkerLength(10);
@@ -93,7 +93,7 @@ namespace gcn
 
         setFocusable(true);
         setFrameSize(1);
-        setOrientation(HORIZONTAL);
+        setOrientation(Horizontal);
         setValue(scaleStart);
         setStepLength((scaleEnd - scaleStart) / 10);
         setMarkerLength(10);
@@ -166,7 +166,7 @@ namespace gcn
 
         graphics->setColor(faceColor);
 
-        if (getOrientation() == HORIZONTAL)
+        if (getOrientation() == Horizontal)
         {
             const int v = getMarkerPosition();
             graphics->fillRectangle(gcn::Rectangle(v + 1, 1, getMarkerLength() - 2, getHeight() - 2));
@@ -204,13 +204,13 @@ namespace gcn
 
     void Slider::mousePressed(MouseEvent& mouseEvent)
     {
-        if (mouseEvent.getButton() == gcn::MouseEvent::LEFT
+        if (mouseEvent.getButton() == gcn::MouseEvent::Left
             && mouseEvent.getX() >= 0
             && mouseEvent.getX() <= getWidth()
             && mouseEvent.getY() >= 0
             && mouseEvent.getY() <= getHeight())
         {
-            if (getOrientation() == HORIZONTAL)
+            if (getOrientation() == Horizontal)
             {
                 setValue(markerPositionToValue(mouseEvent.getX() - getMarkerLength() / 2));
             }
@@ -225,7 +225,7 @@ namespace gcn
 
     void Slider::mouseDragged(MouseEvent& mouseEvent)
     {
-        if (getOrientation() == HORIZONTAL)
+        if (getOrientation() == Horizontal)
         {
             setValue(markerPositionToValue(mouseEvent.getX() - getMarkerLength() / 2));
         }
@@ -275,15 +275,15 @@ namespace gcn
     {
         const Key key = keyEvent.getKey();
 
-        if (getOrientation() == HORIZONTAL)
+        if (getOrientation() == Horizontal)
         {
-            if (key.getValue() == Key::RIGHT)
+            if (key.getValue() == Key::Right)
             {
                 setValue(getValue() + getStepLength());
                 distributeActionEvent();
                 keyEvent.consume();
             }
-            else if (key.getValue() == Key::LEFT)
+            else if (key.getValue() == Key::Left)
             {
                 setValue(getValue() - getStepLength());
                 distributeActionEvent();
@@ -292,13 +292,13 @@ namespace gcn
         }
         else
         {
-            if (key.getValue() == Key::UP)
+            if (key.getValue() == Key::Up)
             {
                 setValue(getValue() + getStepLength());
                 distributeActionEvent();
                 keyEvent.consume();
             }
-            else if (key.getValue() == Key::DOWN)
+            else if (key.getValue() == Key::Down)
             {
                 setValue(getValue() - getStepLength());
                 distributeActionEvent();
@@ -320,7 +320,7 @@ namespace gcn
     double Slider::markerPositionToValue(int v) const
     {
         int w;
-        if (getOrientation() == HORIZONTAL)
+        if (getOrientation() == Horizontal)
         {
             w = getWidth();
         }
@@ -336,7 +336,7 @@ namespace gcn
     int Slider::valueToMarkerPosition(double value) const
     {
         int v;
-        if (getOrientation() == HORIZONTAL)
+        if (getOrientation() == Horizontal)
         {
             v = getWidth();
         }
