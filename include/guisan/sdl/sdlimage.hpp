@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof NaessÃ©n and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof NaessÃ©n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -67,63 +67,63 @@
 
 namespace gcn
 {
-    /**
-     * SDL implementation of Image.
-     */
-    class GCN_EXTENSION_DECLSPEC SDLImage : public Image
-    {
-    public:
-        /**
-         * Constructor. Load an image from an SDL surface.
-         *
-         * NOTE: The functions getPixel and putPixel are only guaranteed to work
-         *       before an image has been converted to display format.
-         *
-         * @param surface the surface from which to load.
-         * @param autoFree true if the surface should automatically be deleted.
-         * @param renderer renderer object to create the texture (last parameter to avoid breaking stuff)
-         */
-        SDLImage(SDL_Surface* surface, bool autoFree, SDL_Renderer* renderer = NULL);
+	/**
+	 * SDL implementation of Image.
+	 */
+	class GCN_EXTENSION_DECLSPEC SDLImage : public Image
+	{
+	public:
+		/**
+		 * Constructor. Load an image from an SDL surface.
+		 *
+		 * NOTE: The functions getPixel and putPixel are only guaranteed to work
+		 *       before an image has been converted to display format.
+		 *
+		 * @param surface the surface from which to load.
+		 * @param autoFree true if the surface should automatically be deleted.
+		 * @param renderer renderer object to create the texture (last parameter to avoid breaking stuff)
+		 */
+		SDLImage(SDL_Surface* surface, bool autoFree, SDL_Renderer* renderer = NULL);
 
-        /**
-         * Destructor.
-         */
-        virtual ~SDLImage();
+		/**
+		 * Destructor.
+		 */
+		virtual ~SDLImage();
 
-        /**
-         * Gets the SDL surface for the image.
-         *
-         * @return the SDL surface for the image.
-         */
-        virtual SDL_Surface* getSurface() const;
-		
+		/**
+		 * Gets the SDL surface for the image.
+		 *
+		 * @return the SDL surface for the image.
+		 */
+		virtual SDL_Surface* getSurface() const;
+
 		/**
 		 * Gets the SDL texture for the image.
-         *
-         * @return the SDL texture for the image.
+		 *
+		 * @return the SDL texture for the image.
 		 */
 		virtual SDL_Texture* getTexture() const;
 
-        // Inherited from Image
+		// Inherited from Image
 
-        virtual void free();
+		virtual void free();
 
-        virtual int getWidth() const;
+		virtual int getWidth() const;
 
-        virtual int getHeight() const;
+		virtual int getHeight() const;
 
-        virtual Color getPixel(int x, int y);
+		virtual Color getPixel(int x, int y);
 
-        virtual void putPixel(int x, int y, const Color& color);
+		virtual void putPixel(int x, int y, const Color& color);
 
-        virtual void convertToDisplayFormat();
+		virtual void convertToDisplayFormat();
 
-    protected:
-        SDL_Surface* mSurface;
-        SDL_Texture* mTexture = NULL;
-        SDL_Renderer* mRenderer = NULL;
-        bool mAutoFree;
-    };
+	protected:
+		SDL_Surface* mSurface;
+		SDL_Texture* mTexture = NULL;
+		SDL_Renderer* mRenderer = NULL;
+		bool mAutoFree;
+	};
 }
 
 #endif // end GCN_SDLIMAGE_HPP

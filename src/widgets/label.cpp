@@ -125,7 +125,7 @@ namespace gcn
         if (!isEnabled())
             color = Color(128, 128, 128);
         graphics->setColor(color);
-        graphics->drawText(getCaption(), textX, textY, getAlignment());
+        graphics->drawText(getCaption(), textX, textY, getAlignment(), isEnabled());
     }
 
     void Label::adjustSize()

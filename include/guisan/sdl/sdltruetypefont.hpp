@@ -48,6 +48,7 @@
 #include <string>
 
 #include "SDL_ttf.h"
+#include "guisan/color.hpp"
 
 #include "guisan/font.hpp"
 #include "guisan/platform.hpp"
@@ -77,7 +78,7 @@ namespace gcn
 		 * @param filename the filename of the True Type Font.
 		 * @param size the size the font should be in.
 		 */
-		SDLTrueTypeFont (const std::string& filename, int size);
+		SDLTrueTypeFont(const std::string& filename, int size);
 
 		/**
 		 * Destructor.
@@ -90,7 +91,7 @@ namespace gcn
 		 *
 		 * @param spacing the spacing in pixels.
 		 */
-		virtual void setRowSpacing (int spacing);
+		virtual void setRowSpacing(int spacing);
 
 		/**
 		 * Gets the spacing between rows in pixels.
@@ -117,7 +118,7 @@ namespace gcn
 		/**
 		 * Sets the use of anti aliasing..
 		 *
-		 * @param antiAlias true for use of antialiasing.
+		 * @param antiAlias true for use of anti-aliasing.
 		 */
 		virtual void setAntiAlias(bool antiAlias);
 
@@ -128,6 +129,12 @@ namespace gcn
 		 */
 		virtual bool isAntiAlias();
 
+		/**
+		 * Set the color of the font.
+		 *
+		 * @param color the color of the font.
+		 */
+		virtual void setColor(const Color& color);
 
 		// Inherited from Font
 
@@ -135,7 +142,7 @@ namespace gcn
 
 		virtual int getHeight() const;
 
-		virtual void drawString(Graphics* graphics, const std::string& text, int x, int y);
+		virtual void drawString(Graphics* graphics, const std::string& text, int x, int y, bool enabled);
 
 	protected:
 		TTF_Font *mFont;
@@ -146,8 +153,8 @@ namespace gcn
 
 		std::string mFilename;
 		bool mAntiAlias;
+		Color mColor;
 	};
 }
 
 #endif
-

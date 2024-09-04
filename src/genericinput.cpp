@@ -64,109 +64,109 @@
 
 namespace gcn
 {
-    GenericInput::GenericInput()
-    = default;
-    
-    void GenericInput::pushKeyPressed(int unicode)
-    {
-        // TODO
-    }
-    
-    void GenericInput::pushKeyReleased(int unicode)
-    {
-        // TODO
-    }
-        
-    void GenericInput::pushMouseButtonPressed(int x, int y, int button)
-    {
-        MouseInput mouseInput;
-        mouseInput.setX(x);
-        mouseInput.setY(y);
-        mouseInput.setButton(button);
-        mouseInput.setType(MouseInput::Pressed);
+	GenericInput::GenericInput()
+	= default;
 
-        mMouseInputQueue.push(mouseInput);
-    }
-    
-    void GenericInput::pushMouseButtonReleased(int x, int y, int button)
-    {
-        MouseInput mouseInput;
-        mouseInput.setX(x);
-        mouseInput.setY(y);
-        mouseInput.setButton(button);
-        mouseInput.setType(MouseInput::Released);
+	void GenericInput::pushKeyPressed(int unicode)
+	{
+		// TODO
+	}
 
-        mMouseInputQueue.push(mouseInput);
-    }
-    
-    void GenericInput::pushMouseWheelMovedUp(int x, int y)
-    {
-        MouseInput mouseInput;
-        mouseInput.setX(x);
-        mouseInput.setY(y);
-        mouseInput.setType(MouseInput::WheelMovedUp);
+	void GenericInput::pushKeyReleased(int unicode)
+	{
+		// TODO
+	}
 
-        mMouseInputQueue.push(mouseInput);
-    }
-    
-    void GenericInput::pushMouseWheelMovedDown(int x, int y)
-    {
-        MouseInput mouseInput;
-        mouseInput.setX(x);
-        mouseInput.setY(y);
-        mouseInput.setType(MouseInput::WheelMovedDown);
+	void GenericInput::pushMouseButtonPressed(int x, int y, int button)
+	{
+		MouseInput mouseInput;
+		mouseInput.setX(x);
+		mouseInput.setY(y);
+		mouseInput.setButton(button);
+		mouseInput.setType(MouseInput::Pressed);
 
-        mMouseInputQueue.push(mouseInput);
-    }
-    
-    void GenericInput::pushMouseMoved(int x, int y)
-    {
-        MouseInput mouseInput;
-        mouseInput.setX(x);
-        mouseInput.setY(y);
-        mouseInput.setType(MouseInput::Moved);
+		mMouseInputQueue.push(mouseInput);
+	}
 
-        mMouseInputQueue.push(mouseInput);
-    }
+	void GenericInput::pushMouseButtonReleased(int x, int y, int button)
+	{
+		MouseInput mouseInput;
+		mouseInput.setX(x);
+		mouseInput.setY(y);
+		mouseInput.setButton(button);
+		mouseInput.setType(MouseInput::Released);
 
-    bool GenericInput::isKeyQueueEmpty()
-    {
-        return mKeyInputQueue.empty();
-    }
+		mMouseInputQueue.push(mouseInput);
+	}
 
-    KeyInput GenericInput::dequeueKeyInput()
-    {
-        if (mKeyInputQueue.empty())
-        {
-            throw GCN_EXCEPTION("The queue is empty.");
-        }
+	void GenericInput::pushMouseWheelMovedUp(int x, int y)
+	{
+		MouseInput mouseInput;
+		mouseInput.setX(x);
+		mouseInput.setY(y);
+		mouseInput.setType(MouseInput::WheelMovedUp);
 
-        const KeyInput keyInput = mKeyInputQueue.front();
-        mKeyInputQueue.pop();
+		mMouseInputQueue.push(mouseInput);
+	}
 
-        return keyInput;
-    }
-    
-    bool GenericInput::isMouseQueueEmpty()
-    {
-        return mMouseInputQueue.empty();
-    }
+	void GenericInput::pushMouseWheelMovedDown(int x, int y)
+	{
+		MouseInput mouseInput;
+		mouseInput.setX(x);
+		mouseInput.setY(y);
+		mouseInput.setType(MouseInput::WheelMovedDown);
 
-    MouseInput GenericInput::dequeueMouseInput()
-    {
-        if (mMouseInputQueue.empty())
-        {
-            throw GCN_EXCEPTION("The queue is empty.");
-        }
-        
-        const MouseInput mouseInput = mMouseInputQueue.front();
-        mMouseInputQueue.pop();
-        
-        return mouseInput;        
-    }
-    
-    void GenericInput::_pollInput()
-    {
-        // Does nothing.
-    }
+		mMouseInputQueue.push(mouseInput);
+	}
+
+	void GenericInput::pushMouseMoved(int x, int y)
+	{
+		MouseInput mouseInput;
+		mouseInput.setX(x);
+		mouseInput.setY(y);
+		mouseInput.setType(MouseInput::Moved);
+
+		mMouseInputQueue.push(mouseInput);
+	}
+
+	bool GenericInput::isKeyQueueEmpty()
+	{
+		return mKeyInputQueue.empty();
+	}
+
+	KeyInput GenericInput::dequeueKeyInput()
+	{
+		if (mKeyInputQueue.empty())
+		{
+			throw GCN_EXCEPTION("The queue is empty.");
+		}
+
+		const KeyInput keyInput = mKeyInputQueue.front();
+		mKeyInputQueue.pop();
+
+		return keyInput;
+	}
+
+	bool GenericInput::isMouseQueueEmpty()
+	{
+		return mMouseInputQueue.empty();
+	}
+
+	MouseInput GenericInput::dequeueMouseInput()
+	{
+		if (mMouseInputQueue.empty())
+		{
+			throw GCN_EXCEPTION("The queue is empty.");
+		}
+
+		const MouseInput mouseInput = mMouseInputQueue.front();
+		mMouseInputQueue.pop();
+
+		return mouseInput;
+	}
+
+	void GenericInput::_pollInput()
+	{
+		// Does nothing.
+	}
 }
