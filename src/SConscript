@@ -28,6 +28,7 @@ main_sources = [
 	'mouseevent.cpp',
 	'mouseinput.cpp',
 	'rectangle.cpp',
+	'text.cpp',
 	'selectionevent.cpp',
 	'widget.cpp'
 ]
