@@ -1,5 +1,11 @@
 Version 1.1.0
 =============
+* A new helper class has been added called Text for manipulating
+  text in widgets. It's utilised by both TextBox and TextField which
+  has reduced the complexity of those widgets significantly.
+* BasicContainer and Container now hos the ability to resize themselves
+  to fit their content with BasicContainer::resizeToContent and 
+  Container::resizeToContent.
 * TabbedArea::isOpaque and TabbedArea::setOpaque have been added to
   control if a tabbed area should draw its background or not.
 * ScrollArea::isOpaque and ScrollArea::setOpaque have been added to
