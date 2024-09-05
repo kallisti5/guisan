@@ -75,6 +75,8 @@ namespace gcn
         mEditable = true;
         mOpaque = true;
 
+        setText("");
+
         setFocusable(true);
 
         addMouseListener(this);
