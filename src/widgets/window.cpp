@@ -300,22 +300,7 @@ namespace gcn
 
     void Window::resizeToContent()
     {
-        WidgetListIterator it;
-
-        int w = 0, h = 0;
-        for (it = mWidgets.begin(); it != mWidgets.end(); it++)
-        {
-            if ((*it)->getX() + (*it)->getWidth() > w)
-            {
-                w = (*it)->getX() + (*it)->getWidth();
-            }
-
-            if ((*it)->getY() + (*it)->getHeight() > h)
-            {
-                h = (*it)->getY() + (*it)->getHeight();
-            }
-        }
-
-        setSize(w + 2 * getPadding(), h + getPadding() + getTitleBarHeight());
+        BasicContainer::resizeToContent();
+        setSize(getWidth() + 2 * getPadding(), getHeight() + getPadding() + getTitleBarHeight());
     }
 }
