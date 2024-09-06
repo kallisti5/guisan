@@ -759,4 +759,9 @@ namespace gcn
 
         return widget;
     }
+
+    std::list<Widget*> Widget::getWidgetsIn(const Rectangle& area, Widget* ignore)
+    {
+        return std::list<Widget*>();
+    }
 }
