@@ -120,6 +120,15 @@ namespace gcn
         bool isPointInRect(int x, int y) const;
 
         /**
+         * Checks whether the rectangle is empty or not. A rectangle
+         * is considered empty when it's width or height is either
+         * zero or negative.
+         *
+         * @return True if the rectangle is empty, false otherwise.
+         */
+        bool isEmpty() const;
+
+        /**
          * Output operator for output.
          *
          * @param out The stream to output to.

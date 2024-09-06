@@ -76,7 +76,7 @@ namespace gcn
     {
         // Ignore area with a negative width or height
         // by simple pushing an empty clip area to the stack.
-        if (area.width < 0 || area.height < 0)
+        if (area.isEmpty())
         {
             ClipRectangle carea;
             mClipStack.push(carea);
