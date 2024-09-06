@@ -453,4 +453,18 @@ namespace gcn
 
         setSize(w, h);
     }
+
+    std::list<Widget*> BasicContainer::getWidgetsIn(const Rectangle& area, Widget* ignore)
+    {
+        std::list<Widget*> result;
+
+        for (std::list<Widget*>::const_iterator iter = mWidgets.begin(); iter != mWidgets.end(); iter++)
+        {
+            Widget* widget = (*iter);
+            if (ignore != widget && widget->getDimension().isIntersecting(area))
+                result.push_back(widget);
+        }
+
+        return result;
+    }
 }

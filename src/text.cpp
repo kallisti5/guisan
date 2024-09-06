@@ -239,7 +239,7 @@ namespace gcn
         unsigned int total = 0;
         for (unsigned int i = 0; i < mRows.size(); i++)
         {
-            if (position <= total + (int) mRows[i].size())
+            if (position <= (int) (total + mRows[i].size()))
             {
                 mCaretRow = i;
                 mCaretColumn = position - total;
@@ -281,7 +281,7 @@ namespace gcn
     {
         if (mRows.empty() || column < 0)
             mCaretColumn = 0;
-        else if (column > mRows[mCaretRow].size())
+        else if (column > (int) mRows[mCaretRow].size())
             mCaretColumn = mRows[mCaretRow].size();
         else
             mCaretColumn = column;
@@ -293,7 +293,7 @@ namespace gcn
     {
         if (mRows.empty() || row < 0)
             mCaretRow = 0;
-        else if (row >= mRows.size())
+        else if (row >= (int) mRows.size())
             mCaretRow = mRows.size() - 1;
         else
             mCaretRow = row;
