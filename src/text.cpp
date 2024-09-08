@@ -53,7 +53,9 @@
 namespace gcn
 {
     Text::Text() : mCaretPosition(0), mCaretColumn(0), mCaretRow(0)
-    {}
+    {
+        mRows.emplace_back();
+    }
 
     Text::Text(const std::string& content) : mCaretPosition(0), mCaretColumn(0), mCaretRow(0)
     {
