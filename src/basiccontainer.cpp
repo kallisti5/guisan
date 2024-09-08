@@ -403,25 +403,43 @@ namespace gcn
 			{
 				Widget* widget = basicContainer->findWidgetById(id);
 
-				if (widget != nullptr)
-				{
-					return widget;
-				}
-			}
-		}
+    void BasicContainer::_moveToBottomWithNoChecks(Widget* widget)
+    {
+        mWidgets.remove(widget);
+        mWidgets.push_front(widget);
+    }
 
-		return nullptr;
-	}
+    void BasicContainer::resizeToContent()
+    {
+        int w = 0, h = 0;
 
-	void BasicContainer::_moveToTopWithNoChecks(Widget* widget)
-	{
-		mWidgets.remove(widget);
-		mWidgets.push_back(widget);
-	}
+        for (WidgetListIterator it = mWidgets.begin(); it != mWidgets.end(); it++)
+        {
+            if ((*it)->getX() + (*it)->getWidth() > w)
+            {
+                w = (*it)->getX() + (*it)->getWidth();
+            }
 
-	void BasicContainer::_moveToBottomWithNoChecks(Widget* widget)
-	{
-		mWidgets.remove(widget);
-		mWidgets.push_front(widget);
-	}
+            if ((*it)->getY() + (*it)->getHeight() > h)
+            {
+                h = (*it)->getY() + (*it)->getHeight();
+            }
+        }
+
+        setSize(w, h);
+    }
+
+    std::list<Widget*> BasicContainer::getWidgetsIn(const Rectangle& area, Widget* ignore)
+    {
+        std::list<Widget*> result;
+
+        for (std::list<Widget*>::const_iterator iter = mWidgets.begin(); iter != mWidgets.end(); iter++)
+        {
+            Widget* widget = (*iter);
+            if (ignore != widget && widget->getDimension().isIntersecting(area))
+                result.push_back(widget);
+        }
+
+        return result;
+    }
 }
