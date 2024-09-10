@@ -88,6 +88,7 @@ namespace gcn
 
     bool Rectangle::isIntersecting(const Rectangle& rectangle) const
     {
+        if (isEmpty() || rectangle.isEmpty()) return false;
         int x_ = x;
         int y_ = y;
         int width_ = width;
@@ -126,6 +127,7 @@ namespace gcn
 
     bool Rectangle::isContaining(int x, int y) const
     {
+        if (isEmpty()) return false;
         return ((x >= this->x) && (y >= this->y)
                 && x < (this->x + this->width)
                 && y < (this->y + this->height));
@@ -133,6 +135,7 @@ namespace gcn
 
     bool Rectangle::isContaining(const Rectangle& other) const
     {
+        if (isEmpty() || other.isEmpty()) return false;
         return other.x >= x && other.y >= y && other.x + other.width <= x + width
             && other.y + other.height <= y + height;
     }
@@ -144,6 +147,8 @@ namespace gcn
 
     Rectangle Rectangle::operator+(const Rectangle& rh) const
     {
+        if (isEmpty()) return rh;
+        if (rh.isEmpty()) return *this;
         const int nx = x < rh.x ? x : rh.x;
         const int ny = y < rh.y ? y : rh.y;
         const int nx2 = x + width > rh.x + rh.width ? x + width : rh.x + rh.width;
@@ -153,6 +158,8 @@ namespace gcn
 
     const Rectangle& Rectangle::operator+=(const Rectangle& rh)
     {
+        if (rh.isEmpty()) return *this;
+        if (isEmpty()) return *this = rh;
         x = x < rh.x ? x : rh.x;
         y = y < rh.y ? y : rh.y;
         const int x2 = x + width > rh.x + rh.width ? x + width : rh.x + rh.width;
@@ -164,6 +171,7 @@ namespace gcn
 
     Rectangle Rectangle::intersection(const Rectangle& rh) const
     {
+        if (isEmpty() || rh.isEmpty()) return Rectangle();
         const int nx = x > rh.x ? x : rh.x;
         const int ny = y > rh.y ? y : rh.y;
         const int nx2 = x + width < rh.x + rh.width ? x + width : rh.x + rh.width;

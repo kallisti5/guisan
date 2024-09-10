@@ -102,42 +102,11 @@ namespace gcn
         carea.x += top.xOffset;
         carea.y += top.yOffset;
 
-        // Clamp the pushed clip rectangle.
-        if (carea.x < top.x)
-        {
-            carea.x = top.x;
-        }
-
-        if (carea.y < top.y)
-        {
-            carea.y = top.y;
-        }
-
-        if (carea.x + carea.width > top.x + top.width)
-        {
-            carea.width = top.x + top.width - carea.x;
-
-            if (carea.width < 0)
-            {
-                carea.width = 0;
-            }
-        }
-
-        if (carea.y + carea.height > top.y + top.height)
-        {
-            carea.height = top.y + top.height - carea.y;
-
-            if (carea.height < 0)
-            {
-                carea.height = 0;
-            }
-        }
-
-        bool result = carea.isIntersecting(top);
+        carea = top.intersection(carea);
 
         mClipStack.push(carea);
 
-        return result;
+        return !carea.isEmpty();
     }
 
     void Graphics::popClipArea()
