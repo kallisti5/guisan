@@ -1,5 +1,9 @@
 Version 1.1.0
 =============
+* Rectangle has been enhanced with methods for adding rectangles,
+  getting the intersection between rectangles and checking if
+  a rectangle contains another rectangle.
+* Rectangle::isPointInRect has been renamed to Rectangle::isContaining.
 * A new helper class has been added called Text for manipulating
   text in widgets. It's utilised by both TextBox and TextField which
   has reduced the complexity of those widgets significantly.

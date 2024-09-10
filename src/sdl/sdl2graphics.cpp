@@ -266,7 +266,7 @@ namespace gcn
         x += top.xOffset;
         y += top.yOffset;
 
-        if(!top.isPointInRect(x,y))
+        if(!top.isContaining(x,y))
             return;
 
         saveRenderColor();

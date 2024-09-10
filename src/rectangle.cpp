@@ -124,16 +124,51 @@ namespace gcn
         return true;
     }
 
-    bool Rectangle::isPointInRect(int x, int y) const
+    bool Rectangle::isContaining(int x, int y) const
     {
         return ((x >= this->x) && (y >= this->y)
                 && x < (this->x + this->width)
                 && y < (this->y + this->height));
     }
 
+    bool Rectangle::isContaining(const Rectangle& other) const
+    {
+        return other.x >= x && other.y >= y && other.x + other.width <= x + width
+            && other.y + other.height <= y + height;
+    }
+
     bool Rectangle::isEmpty() const
     {
         return width < 0 || height < 0;
+    }
+
+    Rectangle Rectangle::operator+(const Rectangle& rh) const
+    {
+        const int nx = x < rh.x ? x : rh.x;
+        const int ny = y < rh.y ? y : rh.y;
+        const int nx2 = x + width > rh.x + rh.width ? x + width : rh.x + rh.width;
+        const int ny2 = y + height > rh.y + rh.height ? y + height : rh.y + rh.height;
+        return Rectangle(nx, ny, nx2 - nx, ny2 - ny);
+    }
+
+    const Rectangle& Rectangle::operator+=(const Rectangle& rh)
+    {
+        x = x < rh.x ? x : rh.x;
+        y = y < rh.y ? y : rh.y;
+        const int x2 = x + width > rh.x + rh.width ? x + width : rh.x + rh.width;
+        const int y2 = y + height > rh.y + rh.height ? y + height : rh.y + rh.height;
+        width = x2 - x;
+        height = y2 - y;
+        return *(this);
+    }
+
+    Rectangle Rectangle::intersection(const Rectangle& rh) const
+    {
+        const int nx = x > rh.x ? x : rh.x;
+        const int ny = y > rh.y ? y : rh.y;
+        const int nx2 = x + width < rh.x + rh.width ? x + width : rh.x + rh.width;
+        const int ny2 = y + height < rh.y + rh.height ? y + height : rh.y + rh.height;
+        return Rectangle(nx, ny, nx2 - nx, ny2 - ny);
     }
 
     std::ostream& operator<<(std::ostream& out, const Rectangle& rectangle)
