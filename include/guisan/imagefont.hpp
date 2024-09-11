@@ -208,7 +208,7 @@ pqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"); @endcode
         virtual int getWidth(const std::string& text) const;
 
         virtual void drawString(Graphics* graphics, const std::string& text,
-                                int x, int y);
+                                int x, int y, bool enabled);
 
         virtual int getHeight() const;
 

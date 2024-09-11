@@ -170,10 +170,7 @@ namespace gcn
 
             if (isFocused())
             {
-                graphics->drawRectangle(Rectangle(2, 
-                                                  2, 
-                                                  getWidth() - 4,
-                                                  getHeight() - 4));
+                graphics->drawRectangle(Rectangle(2, 2,  getWidth() - 4, getHeight() - 4));
             }
         }
     }

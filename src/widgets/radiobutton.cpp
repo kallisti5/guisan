@@ -199,7 +199,7 @@ namespace gcn
 
     void RadioButton::setSelected(bool selected)
     {
-        if (selected && mGroup != "")
+        if (selected && !mGroup.empty())
         {
             GroupIterator iter, iterEnd;
             iterEnd = mGroupMap.upper_bound(mGroup);
@@ -257,7 +257,7 @@ namespace gcn
 
     void RadioButton::setGroup(const std::string& group)
     {
-        if (mGroup != "")
+        if (!mGroup.empty())
         {
             GroupIterator iter, iterEnd;
             iterEnd = mGroupMap.upper_bound(mGroup);
@@ -274,7 +274,7 @@ namespace gcn
             }
         }
 
-        if (group != "")
+        if (!group.empty())
         {
             mGroupMap.insert(
                 std::pair<std::string, RadioButton*>(group, this));

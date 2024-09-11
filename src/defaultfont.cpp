@@ -84,7 +84,7 @@ namespace gcn
         return 8;
     }
 
-    void DefaultFont::drawString(Graphics* graphics, const std::string& text, int x, int y)
+    void DefaultFont::drawString(Graphics* graphics, const std::string& text, int x, int y, bool enabled)
     {
         unsigned int i;
 

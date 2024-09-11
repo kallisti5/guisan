@@ -48,6 +48,7 @@
 #include <string>
 
 #include "SDL_ttf.h"
+#include "guisan/color.hpp"
 
 #include "guisan/font.hpp"
 #include "guisan/platform.hpp"
@@ -127,27 +128,33 @@ namespace gcn
 		 * @return true if anti aliasing is used.
 		 */
 		virtual bool isAntiAlias();
-  
-	
+
+		/**
+		 * Set the color of the font.
+		 *
+		 * @param color the color of the font.
+		 */
+		virtual void setColor(const Color& color);
+
 		// Inherited from Font
-  
+
 		virtual int getWidth(const std::string& text) const;
-  
-		virtual int getHeight() const;        
-  
-		virtual void drawString(Graphics* graphics, const std::string& text, int x, int y);
-  
+
+		virtual int getHeight() const;
+
+		virtual void drawString(Graphics* graphics, const std::string& text, int x, int y, bool enabled);
+
 	protected:
 		TTF_Font *mFont;
-  
+
 		int mHeight;
 		int mGlyphSpacing;
 		int mRowSpacing;
-  
+
 		std::string mFilename;
-		bool mAntiAlias;      
-	}; 
+		bool mAntiAlias;
+		Color mColor;
+	};
 }
 
 #endif
-

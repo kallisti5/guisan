@@ -101,7 +101,7 @@ namespace gcn
 
         const int h = getHeight() + getHeight() / 2;
 
-        graphics->drawText(getCaption(), h - 2, 0);
+        graphics->drawText(getCaption(), h - 2, 1, Graphics::Left, isEnabled());
     }
 
     void CheckBox::drawBox(Graphics* graphics)
@@ -130,6 +130,11 @@ namespace gcn
         graphics->fillRectangle(Rectangle(2, 2, h - 2, h - 2));
 
         graphics->setColor(getForegroundColor());
+
+        if (isEnabled())
+            graphics->setColor(getForegroundColor());
+        else
+            graphics->setColor(Color(128, 128, 128));
 
         if (isFocused())
         {
