@@ -104,7 +104,7 @@ namespace gcn
          * @return The text of the text field.
          * @see setText
          */
-        const std::string& getText() const;
+        std::string getText() const;
 
         /**
          * Adjusts the size of the text field to fit the text.

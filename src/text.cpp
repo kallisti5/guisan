@@ -53,7 +53,9 @@
 namespace gcn
 {
     Text::Text() : mCaretPosition(0), mCaretColumn(0), mCaretRow(0)
-    {}
+    {
+        mRows.emplace_back();
+    }
 
     Text::Text(const std::string& content) : mCaretPosition(0), mCaretColumn(0), mCaretRow(0)
     {
@@ -79,6 +81,7 @@ namespace gcn
 
     void Text::setContent(const std::string& content)
     {
+        mRows.clear();
         std::string::size_type pos, lastPos = 0;
         int length;
         do
@@ -113,6 +116,8 @@ namespace gcn
     void Text::setRow(unsigned int row, const std::string& content)
     {
         if (row >= mRows.size()) throw GCN_EXCEPTION("Row out of bounds!");
+
+        mRows[row] = content;
     }
 
     void Text::addRow(const std::string& row)
