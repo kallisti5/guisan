@@ -150,7 +150,7 @@ namespace gcn
         /**
          * Called when the mouse wheel has moved down on the widget area.
          *
-         * @param mousEvent Describes the event.
+         * @param mouseEvent describes the event.
          * @since 0.6.0
          */
         virtual void mouseWheelMovedDown(MouseEvent& mouseEvent)

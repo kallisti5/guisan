@@ -122,8 +122,8 @@ namespace gcn
         virtual void add(Widget* widget);
 
         /**
-         * Adds a widget to the container and also specifices the widget's
-         * postion in the container. The position is relative to the container
+         * Adds a widget to the container and also specifies the widget's
+         * position in the container. The position is relative to the container
          * and not relative to the screen.
          *
          * @param widget The widget to add.

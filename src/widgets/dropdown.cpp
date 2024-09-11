@@ -411,8 +411,8 @@ namespace gcn
 
         setHeight(h2);
 
-        // The addition/subtraction of 2 compensates for the seperation lines
-        // seperating the selected element view and the scroll area.
+        // The addition/subtraction of 2 compensates for the separation lines
+        // separating the selected element view and the scroll area.
 
         if (mDroppedDown && getParent())
         {
