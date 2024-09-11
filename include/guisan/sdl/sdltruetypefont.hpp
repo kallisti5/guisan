@@ -48,7 +48,6 @@
 #include <string>
 
 #include "SDL_ttf.h"
-#include "guisan/color.hpp"
 
 #include "guisan/font.hpp"
 #include "guisan/platform.hpp"
@@ -56,7 +55,7 @@
 namespace gcn
 {
 	class Graphics;
-
+	
 	/**
 	 * SDL True Type Font implementation of Font. It uses the SDL_ttf library
 	 * to display True Type Fonts with SDL.
@@ -78,28 +77,28 @@ namespace gcn
 		 * @param filename the filename of the True Type Font.
 		 * @param size the size the font should be in.
 		 */
-		SDLTrueTypeFont(const std::string& filename, int size);
+		SDLTrueTypeFont (const std::string& filename, int size);
 
 		/**
 		 * Destructor.
 		 */
 		virtual ~SDLTrueTypeFont();
-
+  
 		/**
 		 * Sets the spacing between rows in pixels. Default is 0 pixels.
 		 * The spacing can be negative.
 		 *
 		 * @param spacing the spacing in pixels.
 		 */
-		virtual void setRowSpacing(int spacing);
-
+		virtual void setRowSpacing (int spacing);
+  
 		/**
 		 * Gets the spacing between rows in pixels.
 		 *
 		 * @return the spacing.
 		 */
 		virtual int getRowSpacing();
-
+  
 		/**
 		 * Sets the spacing between letters in pixels. Default is 0 pixels.
 		 * The spacing can be negative.
@@ -114,47 +113,41 @@ namespace gcn
 		 * @return the spacing.
 		 */
 		virtual int getGlyphSpacing();
-
+  
 		/**
 		 * Sets the use of anti aliasing..
 		 *
-		 * @param antiAlias true for use of anti-aliasing.
+		 * @param antaAlias true for use of antialiasing.
 		 */
 		virtual void setAntiAlias(bool antiAlias);
-
+  
 		/**
 		 * Checks if anti aliasing is used.
 		 *
 		 * @return true if anti aliasing is used.
 		 */
 		virtual bool isAntiAlias();
-
-		/**
-		 * Set the color of the font.
-		 *
-		 * @param color the color of the font.
-		 */
-		virtual void setColor(const Color& color);
-
+  
+	
 		// Inherited from Font
-
+  
 		virtual int getWidth(const std::string& text) const;
-
-		virtual int getHeight() const;
-
-		virtual void drawString(Graphics* graphics, const std::string& text, int x, int y, bool enabled);
-
+  
+		virtual int getHeight() const;        
+  
+		virtual void drawString(Graphics* graphics, const std::string& text, int x, int y);
+  
 	protected:
 		TTF_Font *mFont;
-
+  
 		int mHeight;
 		int mGlyphSpacing;
 		int mRowSpacing;
-
+  
 		std::string mFilename;
-		bool mAntiAlias;
-		Color mColor;
-	};
+		bool mAntiAlias;      
+	}; 
 }
 
 #endif
+

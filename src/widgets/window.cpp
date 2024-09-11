@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof NaessÃ©n and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof NaessÃ©n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -85,7 +85,7 @@ namespace gcn
         setCaption(caption);
         setFrameSize(1);
         setPadding(2);
-        setTitleBarHeight(getFont()->getHeight() + 2);
+        setTitleBarHeight(16);
         setAlignment(Graphics::Center);
         addMouseListener(this);
         setMovable(true);
@@ -93,7 +93,8 @@ namespace gcn
     }
 
     Window::~Window()
-    = default;
+    {
+    }
 
     void Window::setPadding(unsigned int padding)
     {
@@ -204,8 +205,9 @@ namespace gcn
         drawChildren(graphics);
 
         int textX;
+        int textY;
 
-        const int textY = (static_cast<int>(getTitleBarHeight()) - getFont()->getHeight()) / 2;
+        textY = ((int)getTitleBarHeight() - getFont()->getHeight()) / 2;
 
         switch (getAlignment())
         {
@@ -224,33 +226,9 @@ namespace gcn
 
         graphics->setColor(getForegroundColor());
         graphics->setFont(getFont());
-        graphics->pushClipArea(Rectangle(0, 0, getWidth(), static_cast<int>(getTitleBarHeight() - 1)));
-        graphics->drawText(getCaption(), textX, textY, getAlignment(), isEnabled());
+        graphics->pushClipArea(Rectangle(0, 0, getWidth(), getTitleBarHeight() - 1));
+        graphics->drawText(getCaption(), textX, textY, getAlignment());
         graphics->popClipArea();
-    }
-
-    void Window::drawFrame(Graphics* graphics)
-    {
-        Color faceColor = getBaseColor();
-        Color highlightColor, shadowColor;
-        int alpha = getBaseColor().a;
-        int width = getWidth() + getFrameSize() * 2 - 1;
-        int height = getHeight() + getFrameSize() * 2 - 1;
-        highlightColor = faceColor + 0x303030;
-        highlightColor.a = alpha;
-        shadowColor = faceColor - 0x303030;
-        shadowColor.a = alpha;
-
-        unsigned int i;
-        for (i = 0; i < getFrameSize(); ++i)
-        {
-            graphics->setColor(highlightColor);
-            graphics->drawLine(i, i, width - i, i);
-            graphics->drawLine(i, i + 1, i, height - i - 1);
-            graphics->setColor(shadowColor);
-            graphics->drawLine(width - i, i + 1, width - i, height - i);
-            graphics->drawLine(i, height - i, width - i - 1, height - i);
-        }
     }
 
     void Window::mousePressed(MouseEvent& mouseEvent)
@@ -294,10 +272,10 @@ namespace gcn
 
     Rectangle Window::getChildrenArea()
     {
-        return Rectangle(static_cast<int>(getPadding()),
-            static_cast<int>(getTitleBarHeight()),
-            static_cast<int>(getWidth() - getPadding() * 2),
-            static_cast<int>(getHeight() - getPadding() - getTitleBarHeight()));
+        return Rectangle(getPadding(),
+            getTitleBarHeight(),
+            getWidth() - getPadding() * 2,
+            getHeight() - getPadding() - getTitleBarHeight());
     }
 
     void Window::setMovable(bool movable)

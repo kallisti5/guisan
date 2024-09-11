@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof NaessÃ©n and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof NaessÃ©n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -67,6 +67,7 @@
 
 namespace gcn
 {
+
     CheckBox::CheckBox()
     {
         setSelected(false);
@@ -100,7 +101,7 @@ namespace gcn
 
         const int h = getHeight() + getHeight() / 2;
 
-        graphics->drawText(getCaption(), h - 2, 1);
+        graphics->drawText(getCaption(), h - 2, 0);
     }
 
     void CheckBox::drawBox(Graphics* graphics)
@@ -129,11 +130,6 @@ namespace gcn
         graphics->fillRectangle(Rectangle(2, 2, h - 2, h - 2));
 
         graphics->setColor(getForegroundColor());
-
-        if (isEnabled())
-            graphics->setColor(getForegroundColor());
-        else
-            graphics->setColor(Color(128, 128, 128));
 
         if (isFocused())
         {
@@ -172,7 +168,7 @@ namespace gcn
 
     void CheckBox::keyPressed(KeyEvent& keyEvent)
     {
-        const Key key = keyEvent.getKey();
+        Key key = keyEvent.getKey();
 
         if (key.getValue() == Key::Enter ||
             key.getValue() == Key::Space)
@@ -197,7 +193,7 @@ namespace gcn
 
     void CheckBox::adjustSize()
     {
-        const int height = getFont()->getHeight() + 2;
+        int height = getFont()->getHeight();
 
         setHeight(height);
         setWidth(getFont()->getWidth(mCaption) + height + height / 2);
@@ -209,3 +205,4 @@ namespace gcn
         distributeActionEvent();
     }
 }
+

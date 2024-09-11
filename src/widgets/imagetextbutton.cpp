@@ -200,12 +200,12 @@ namespace gcn
         if (isPressed())
         {
             graphics->drawImage(mImage, imageX + 1, imageY + 1);
-            graphics->drawText(mCaption, textX + 1, textY + 1, Graphics::Left, isEnabled());
+            graphics->drawText(mCaption, textX + 1, textY + 1, Graphics::Left);
         }
         else
         {
             graphics->drawImage(mImage, imageX, imageY);
-            graphics->drawText(mCaption, textX, textY, Graphics::Left, isEnabled());
+            graphics->drawText(mCaption, textX, textY, Graphics::Left);
            
             if (isFocused())
             {

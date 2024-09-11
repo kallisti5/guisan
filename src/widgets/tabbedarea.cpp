@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof NaessÃ©n and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof NaessÃ©n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -150,7 +150,7 @@ namespace gcn
             {
                 tabIndexToBeSelected = index--;
             }
-            else if (index == static_cast<int>(mTabs.size()) - 1
+            else if (index == (int)mTabs.size() - 1
                      && mTabs.size() == 1)
             {
                 tabIndexToBeSelected = -1;
@@ -245,7 +245,8 @@ namespace gcn
 
     int TabbedArea::getSelectedTabIndex() const
     {
-        for (auto i = 0; i < static_cast<int>(mTabs.size()); i++)
+        unsigned int i;
+        for (i = 0; i < mTabs.size(); i++)
         {
             if (mTabs[i].first == mSelectedTab)
             {
@@ -310,6 +311,7 @@ namespace gcn
                                mTabContainer->getHeight(),
                                mSelectedTab->getX() + mSelectedTab->getWidth() - 2,
                                mTabContainer->getHeight());
+
         }
 
         drawChildren(graphics);
@@ -432,7 +434,7 @@ namespace gcn
             int index = getSelectedTabIndex();
             index++;
             
-            if (index >= static_cast<int>(mTabs.size()))
+            if (index >= (int)mTabs.size())
             {
                 return;
             }

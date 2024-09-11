@@ -62,78 +62,78 @@
 
 namespace gcn
 {
-	Rectangle::Rectangle()
-	{
-		x = 0;
-		y = 0;
-		width = 0;
-		height = 0;
-	}
+    Rectangle::Rectangle()
+    {
+        x = 0;
+        y = 0;
+        width = 0;
+        height = 0;
+    }
 
-	Rectangle::Rectangle(int x, int y, int width, int height)
-	{
-		this->x = x;
-		this->y = y;
-		this->width = width;
-		this->height = height;
-	}
+    Rectangle::Rectangle(int x, int y, int width, int height)
+    {
+        this->x = x;
+        this->y = y;
+        this->width = width;
+        this->height = height;
+    }
 
-	void Rectangle::setAll(int x, int y, int width, int height)
-	{
-		this->x = x;
-		this->y = y;
-		this->width = width;
-		this->height = height;
-	}
+    void Rectangle::setAll(int x, int y, int width, int height)
+    {
+        this->x = x;
+        this->y = y;
+        this->width = width;
+        this->height = height;
+    }
 
-	bool Rectangle::isIntersecting(const Rectangle& rectangle) const
-	{
-		int x_ = x;
-		int y_ = y;
-		int width_ = width;
-		int height_ = height;
+    bool Rectangle::isIntersecting(const Rectangle& rectangle) const
+    {
+        int x_ = x;
+        int y_ = y;
+        int width_ = width;
+        int height_ = height;
 
-		x_ -= rectangle.x;
-		y_ -= rectangle.y;
+        x_ -= rectangle.x;
+        y_ -= rectangle.y;
 
-		if (x_ < 0)
-		{
-			width_ += x_;
-			x_ = 0;
-		}
-		else if (x_ + width_ > rectangle.width)
-		{
-			width_ = rectangle.width - x_;
-		}
+        if (x_ < 0)
+        {
+            width_ += x_;
+            x_ = 0;
+        }
+        else if (x_ + width_ > rectangle.width)
+        {
+            width_ = rectangle.width - x_;
+        }
 
-		if (y_ < 0)
-		{
-			height_ += y_;
-			y_ = 0;
-		}
-		else if (y_ + height_ > rectangle.height)
-		{
-			height_ = rectangle.height - y_;
-		}
+        if (y_ < 0)
+        {
+            height_ += y_;
+            y_ = 0;
+        }
+        else if (y_ + height_ > rectangle.height)
+        {
+            height_ = rectangle.height - y_;
+        }
 
-		if (width_ <= 0 || height_ <= 0)
-		{
-			return false;
-		}
+        if (width_ <= 0 || height_ <= 0)
+        {
+            return false;
+        }
 
-		return true;
-	}
+        return true;
+    }
 
-	bool Rectangle::isPointInRect(int x, int y) const
-	{
-		return ((x >= this->x) && (y >= this->y)
-			&& x < (this->x + this->width)
-			&& y < (this->y + this->height));
-	}
+    bool Rectangle::isPointInRect(int x, int y) const
+    {
+        return ((x >= this->x) && (y >= this->y)
+                && x < (this->x + this->width)
+                && y < (this->y + this->height));
+    }
 
-	std::ostream& operator<<(std::ostream& out, const Rectangle& rectangle)
-	{
-		return out << "Rectangle [x = " << rectangle.x << ", y = " << rectangle.y
-			<< ", width = " << rectangle.width << ", height = " << rectangle.height << "]";
-	}
+    std::ostream& operator<<(std::ostream& out, const Rectangle& rectangle)
+    {
+        return out << "Rectangle [x = " << rectangle.x << ", y = " << rectangle.y
+                   << ", width = " << rectangle.width << ", height = " << rectangle.height << "]";
+    }
 }

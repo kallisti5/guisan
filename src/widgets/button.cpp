@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof NaessÃ©n and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof NaessÃ©n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -85,8 +85,8 @@ namespace gcn
         addFocusListener(this);
     }
 
-    Button::Button(std::string caption)
-            : mCaption(std::move(caption)),
+    Button::Button(const std::string& caption)
+            : mCaption(caption),
               mHasMouse(false),
               mKeyPressed(false),
               mMousePressed(false),
@@ -193,11 +193,11 @@ namespace gcn
 
         if (isPressed())
         {
-            graphics->drawText(getCaption(), textX + 1, textY + 1, getAlignment(), isEnabled());
+            graphics->drawText(getCaption(), textX + 1, textY + 1, getAlignment());
         }
         else
         {
-            graphics->drawText(getCaption(), textX, textY, getAlignment(), isEnabled());
+            graphics->drawText(getCaption(), textX, textY, getAlignment());
 
             if (isFocused())
             {
@@ -209,8 +209,8 @@ namespace gcn
 
     void Button::adjustSize()
     {
-        setWidth(getFont()->getWidth(mCaption) + 2 * static_cast<int>(mSpacing));
-        setHeight(getFont()->getHeight() + 2 * static_cast<int>(mSpacing));
+        setWidth(getFont()->getWidth(mCaption) + 2*mSpacing);
+        setHeight(getFont()->getHeight() + 2*mSpacing);
     }
 
     bool Button::isPressed() const
@@ -264,7 +264,7 @@ namespace gcn
 
     void Button::keyPressed(KeyEvent& keyEvent)
     {
-        const Key key = keyEvent.getKey();
+        Key key = keyEvent.getKey();
 
         if (key.getValue() == Key::Enter
             || key.getValue() == Key::Space)
@@ -276,7 +276,7 @@ namespace gcn
 
     void Button::keyReleased(KeyEvent& keyEvent)
     {
-        const Key key = keyEvent.getKey();
+        Key key = keyEvent.getKey();
 
         if ((key.getValue() == Key::Enter
              || key.getValue() == Key::Space)

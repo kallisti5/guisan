@@ -123,7 +123,7 @@ namespace gcn
     {
         gcn::Color faceColor = getBaseColor();
         gcn::Color highlightColor, shadowColor;
-        const int alpha = getBaseColor().a;
+        int alpha = getBaseColor().a;
 
         if (isPressed())
         {
@@ -170,7 +170,10 @@ namespace gcn
 
             if (isFocused())
             {
-                graphics->drawRectangle(Rectangle(2, 2,  getWidth() - 4, getHeight() - 4));
+                graphics->drawRectangle(Rectangle(2, 
+                                                  2, 
+                                                  getWidth() - 4,
+                                                  getHeight() - 4));
             }
         }
     }

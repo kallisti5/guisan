@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof NaessÃ©n and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof NaessÃ©n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -98,7 +98,7 @@ namespace gcn
     {
     public:
         /**
-         * Constructor.
+         * Contructor.
          *
          * @param listModel the ListModel to use.
          * @param scrollArea the ScrollArea to use.
@@ -129,12 +129,7 @@ namespace gcn
          * @param selected the selected item as an index from the list model.
          * @see getSelected
          */
-        void setSelected(int selected) const;
-
-        /*
-         * Clears any selected item
-         */
-        void clearSelected(void) const;
+        void setSelected(int selected);
 
         /**
          * Sets the list model to use when displaying the list.
@@ -180,20 +175,6 @@ namespace gcn
          */
         void removeSelectionListener(SelectionListener* selectionListener);
 
-        /*
-         * Returns the current Dropdown status
-         */
-        bool isDroppedDown();
-
-        /**
-         * Sets the DropDown Widget to dropped-down mode.
-         */
-        virtual void dropDown();
-
-        /**
-        * Sets the DropDown Widget to folded-up mode.
-        */
-        virtual void foldUp();
 
         // Inherited from Widget
 
@@ -260,6 +241,16 @@ namespace gcn
          * @param graphics a Graphics object to draw with.
          */
         virtual void drawButton(Graphics *graphics);
+
+        /**
+         * Sets the DropDown Widget to dropped-down mode.
+         */
+        virtual void dropDown();
+
+        /**
+         * Sets the DropDown Widget to folded-up mode.
+         */
+        virtual void foldUp();
 
         bool mDroppedDown;
 

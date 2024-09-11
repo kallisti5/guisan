@@ -65,21 +65,9 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>$(VcpkgRoot)\installed\x86-windows\debug\lib\manual-link;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(VcpkgRoot)\installed\x86-windows\include\SDL2;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>$(VcpkgRoot)\installed\x86-windows\lib\manual-link;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(VcpkgRoot)\installed\x86-windows\include\SDL2;$(IncludePath)</IncludePath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LibraryPath>$(VcpkgRoot)\installed\x64-windows\debug\lib\manual-link;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(VcpkgRoot)\installed\x64-windows\include\SDL2;$(IncludePath)</IncludePath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LibraryPath>$(VcpkgRoot)\installed\x64-windows\lib\manual-link;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(VcpkgRoot)\installed\x64-windows\include\SDL2;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -126,7 +114,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Gwilherm\SDL\SDL2_ttf-2.0.14\include;C:\Users\Gwilherm\SDL\SDL2_image-2.0.3\include;C:\Users\Gwilherm\SDL\SDL2-2.0.8\include;.\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -134,19 +122,17 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Lib>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Gwilherm\SDL\SDL2_ttf-2.0.14\lib\x64;C:\Users\Gwilherm\SDL\SDL2_image-2.0.3\lib\x64;C:\Users\Gwilherm\SDL\SDL2-2.0.8\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Gwilherm\SDL\SDL2_ttf-2.0.14\include;C:\Users\Gwilherm\SDL\SDL2_image-2.0.3\include;C:\Users\Gwilherm\SDL\SDL2-2.0.8\include;.\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Lib>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Gwilherm\SDL\SDL2_ttf-2.0.14\lib\x64;C:\Users\Gwilherm\SDL\SDL2_image-2.0.3\lib\x64;C:\Users\Gwilherm\SDL\SDL2-2.0.8\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -172,9 +158,6 @@
     <ClCompile Include="src\keyinput.cpp" />
     <ClCompile Include="src\mouseevent.cpp" />
     <ClCompile Include="src\mouseinput.cpp" />
-    <ClCompile Include="src\opengl3\opengl3.cpp" />
-    <ClCompile Include="src\opengl3\opengl3graphics.cpp" />
-    <ClCompile Include="src\opengl3\opengl3image.cpp" />
     <ClCompile Include="src\opengl\opengl.cpp" />
     <ClCompile Include="src\opengl\openglgraphics.cpp" />
     <ClCompile Include="src\opengl\openglimage.cpp" />
@@ -243,9 +226,6 @@
     <ClInclude Include="include\guisan\mouseinput.hpp" />
     <ClInclude Include="include\guisan\mouselistener.hpp" />
     <ClInclude Include="include\guisan\opengl.hpp" />
-    <ClInclude Include="include\guisan\opengl3\opengl3.hpp" />
-    <ClInclude Include="include\guisan\opengl3\opengl3graphics.hpp" />
-    <ClInclude Include="include\guisan\opengl3\opengl3image.hpp" />
     <ClInclude Include="include\guisan\opengl\openglgraphics.hpp" />
     <ClInclude Include="include\guisan\opengl\openglimage.hpp" />
     <ClInclude Include="include\guisan\opengl\openglsdlimageloader.hpp" />

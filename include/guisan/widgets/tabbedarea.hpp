@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof NaessÃ©n and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof NaessÃ©n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -170,7 +170,7 @@ namespace gcn
         /**
          * Checks if a tab is selected or not.
          *
-         * @param tab The tab to check.
+         * @param index The tab to check.
          * @return True if the tab is selected, false otherwise.
          * @see setSelectedTab
          */
@@ -195,7 +195,7 @@ namespace gcn
         /**
          * Gets the index of the selected tab.
          *
-         * @return The index of the selected tab.
+         * @return The undex of the selected tab.
          *         If no tab is selected -1 will be returned.
          * @see isTabSelected, setSelectedTab
          */

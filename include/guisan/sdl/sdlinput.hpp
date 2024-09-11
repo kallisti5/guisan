@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof NaessÃ©n and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof NaessÃ©n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -68,71 +68,71 @@
 
 namespace gcn
 {
-	class Key;
+    class Key;
 
-	/**
-	 * SDL implementation of Input.
-	 */
-	class GCN_EXTENSION_DECLSPEC SDLInput : public Input
-	{
-	public:
+    /**
+     * SDL implementation of Input.
+     */
+    class GCN_EXTENSION_DECLSPEC SDLInput : public Input
+    {
+    public:
 
-		/**
-		 * Constructor.
-		 */
-		SDLInput();
+        /**
+         * Constructor.
+         */
+        SDLInput();
 
-		/**
-		 * Pushes an SDL event. It should be called at least once per frame to
-		 * update input with user input.
-		 *
-		 * @param event an event from SDL.
-		 */
-		virtual void pushInput(SDL_Event event);
+        /**
+         * Pushes an SDL event. It should be called at least once per frame to
+         * update input with user input.
+         *
+         * @param event an event from SDL.
+         */
+        virtual void pushInput(SDL_Event event);
 
-		/**
-		 * Polls all input. It exists for input driver compatibility. If you
-		 * only use SDL and plan sticking with SDL you can safely ignore this
-		 * function as it in the SDL case does nothing.
-		 */
-		virtual void _pollInput() { }
+        /**
+         * Polls all input. It exists for input driver compatibility. If you
+         * only use SDL and plan sticking with SDL you can safely ignore this
+         * function as it in the SDL case does nothing.
+         */
+        virtual void _pollInput() { }
 
 
-		// Inherited from Input
+        // Inherited from Input
 
-		virtual bool isKeyQueueEmpty();
+        virtual bool isKeyQueueEmpty();
 
-		virtual KeyInput dequeueKeyInput();
+        virtual KeyInput dequeueKeyInput();
 
-		virtual bool isMouseQueueEmpty();
+        virtual bool isMouseQueueEmpty();
 
-		virtual MouseInput dequeueMouseInput();
+        virtual MouseInput dequeueMouseInput();
 
-	protected:
-		/**
-		 * Converts a mouse button from SDL to a Guisan mouse button
-		 * representation.
-		 *
-		 * @param button an SDL mouse button.
-		 * @return a Guisan mouse button.
-		 */
-		int convertMouseButton(int button);
+    protected:
+        /**
+         * Converts a mouse button from SDL to a Guisan mouse button
+         * representation.
+         *
+         * @param button an SDL mouse button.
+         * @return a Guisan mouse button.
+         */
+        int convertMouseButton(int button);
 
-		/**
-		 * Converts an SDL event to a Guisan key value.
-		 *
-		 * @param event The SDL event to convert.
-		 * @return A Guisan key value.
-		 * @see Key
-		 */
-		Key convertSDLEventToGuichanKeyValue(SDL_Event event);
+        /**
+         * Converts an SDL event to a Guisan key value.
+         *
+         * @param event The SDL event to convert.
+         * @return A Guisan key value.
+         * @see Key
+         */
+        Key convertSDLEventToGuichanKeyValue(SDL_Event event);
 
-		std::queue<KeyInput> mKeyInputQueue;
-		std::queue<MouseInput> mMouseInputQueue;
+        std::queue<KeyInput> mKeyInputQueue;
+        std::queue<MouseInput> mMouseInputQueue;
 
-		bool mMouseDown;
-		bool mMouseInWindow;
-	};
+        bool mMouseDown;
+        bool mMouseInWindow;
+    };
 }
 
 #endif // end GCN_SDLINPUT_HPP

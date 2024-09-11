@@ -149,7 +149,7 @@ namespace gcn
         {
             // Infinite scrollbar
             progressWidth = getWidth() / 5;
-            int barX = getWidth() * static_cast<int>(mValue) / 100;
+            int barX = getWidth() * mValue / 100;
 
             if (barX + progressWidth > getWidth())
             {
@@ -164,7 +164,7 @@ namespace gcn
         else
         {
             // Standard scrollbar
-            progressWidth = getWidth() * static_cast<int>(mValue) / static_cast<int>(mEnd - mStart);
+            progressWidth = getWidth() * mValue / (mEnd - mStart);
             graphics->fillRectangle(Rectangle(0, 0, progressWidth, getHeight()));
         }
 
@@ -188,7 +188,7 @@ namespace gcn
         if (!isEnabled())
             color = color - 0x303030;
         graphics->setColor(color);
-        graphics->drawText(getCaption(), textX, textY, getAlignment(), isEnabled());
+        graphics->drawText(getCaption(), textX, textY, getAlignment());
     }
 
     void ProgressBar::adjustSize()

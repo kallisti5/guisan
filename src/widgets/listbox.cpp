@@ -216,7 +216,7 @@ namespace gcn
 
     void ListBox::keyPressed(KeyEvent& keyEvent)
     {
-        const Key key = keyEvent.getKey();
+        Key key = keyEvent.getKey();
 
         if (key.getValue() == Key::Enter || key.getValue() == Key::Space)
         {
@@ -320,17 +320,6 @@ namespace gcn
     {
         if (mListModel != NULL)
         {
-			int maxElementLength = getWidth();
-            for (int i = 0; i < mListModel->getNumberOfElements(); i++)
-            {
-				const auto elementLength =  getFont()->getWidth(mListModel->getElementAt(i));
-                if (elementLength > maxElementLength)
-                {
-                    maxElementLength = elementLength;
-                }
-            }
-            if (maxElementLength > getWidth())
-                setWidth(maxElementLength + 4);
             setHeight(getRowHeight() * mListModel->getNumberOfElements());
         }
     }
@@ -357,10 +346,12 @@ namespace gcn
 
     void ListBox::distributeValueChangedEvent()
     {
-        for (auto& mSelectionListener : mSelectionListeners)
+        SelectionListenerIterator iter;
+
+        for (iter = mSelectionListeners.begin(); iter != mSelectionListeners.end(); ++iter)
         {
             SelectionEvent event(this);
-            mSelectionListener->valueChanged(event);
+            (*iter)->valueChanged(event);
         }
     }
 

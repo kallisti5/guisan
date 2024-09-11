@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof NaessÃ©n and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
  * Copyright (c) 2020 Gwilherm Baudic
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof NaessÃ©n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -85,7 +85,7 @@ namespace gcn
     {
         Color faceColor = getBaseColor();
         Color highlightColor, shadowColor;
-        const int alpha = getBaseColor().a;
+        int alpha = getBaseColor().a;
 
         if (isPressed() || isSelected())
         {
@@ -118,7 +118,7 @@ namespace gcn
         graphics->setColor(getForegroundColor());
 
         int textX;
-        const int textY = getHeight() / 2 - getFont()->getHeight() / 2;
+        int textY = getHeight() / 2 - getFont()->getHeight() / 2;
 
         switch (getAlignment())
         {
@@ -139,11 +139,11 @@ namespace gcn
 
         if (isPressed() || isSelected())
         {
-            graphics->drawText(getCaption(), textX + 1, textY + 1, getAlignment(), isEnabled());
+            graphics->drawText(getCaption(), textX + 1, textY + 1, getAlignment());
         }
         else
         {
-            graphics->drawText(getCaption(), textX, textY, getAlignment(), isEnabled());
+            graphics->drawText(getCaption(), textX, textY, getAlignment());
 
             if (isFocused())
             {
@@ -183,7 +183,7 @@ namespace gcn
 
     void ToggleButton::keyReleased(KeyEvent& keyEvent)
     {
-        const Key key = keyEvent.getKey();
+        Key key = keyEvent.getKey();
 
         if ((key.getValue() == Key::Enter
              || key.getValue() == Key::Space)

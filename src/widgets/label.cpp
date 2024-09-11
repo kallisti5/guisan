@@ -77,7 +77,7 @@ namespace gcn
         mAlignment = Graphics::Left;
 
         setWidth(getFont()->getWidth(caption));
-        setHeight(getFont()->getHeight() + 2);
+        setHeight(getFont()->getHeight());
     }
 
     const std::string &Label::getCaption() const
@@ -125,7 +125,7 @@ namespace gcn
         if (!isEnabled())
             color = Color(128, 128, 128);
         graphics->setColor(color);
-        graphics->drawText(getCaption(), textX, textY, getAlignment(), isEnabled());
+        graphics->drawText(getCaption(), textX, textY, getAlignment());
     }
 
     void Label::adjustSize()

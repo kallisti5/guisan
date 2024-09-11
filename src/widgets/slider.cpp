@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof NaessÃ©n and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof NaessÃ©n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -148,9 +148,9 @@ namespace gcn
 
     void Slider::drawMarker(gcn::Graphics* graphics)
     {
-        const gcn::Color faceColor = getBaseColor();
+        gcn::Color faceColor = getBaseColor();
         Color highlightColor, shadowColor;
-        const int alpha = getBaseColor().a;
+        int alpha = getBaseColor().a;
         if (isEnabled())
         {
             highlightColor = faceColor + 0x303030;
@@ -168,7 +168,7 @@ namespace gcn
 
         if (getOrientation() == Horizontal)
         {
-            const int v = getMarkerPosition();
+            int v = getMarkerPosition();
             graphics->fillRectangle(gcn::Rectangle(v + 1, 1, getMarkerLength() - 2, getHeight() - 2));
             graphics->setColor(highlightColor);
             graphics->drawLine(v, 0, v + getMarkerLength() - 1, 0);
@@ -185,7 +185,7 @@ namespace gcn
         }
         else
         {
-            const int v = (getHeight() - getMarkerLength()) - getMarkerPosition();
+            int v = (getHeight() - getMarkerLength()) - getMarkerPosition();
             graphics->fillRectangle(gcn::Rectangle(1, v + 1, getWidth() - 2, getMarkerLength() - 2));
             graphics->setColor(highlightColor);
             graphics->drawLine(0, v, 0, v + getMarkerLength() - 1);
@@ -273,7 +273,7 @@ namespace gcn
 
     void Slider::keyPressed(KeyEvent& keyEvent)
     {
-        const Key key = keyEvent.getKey();
+        Key key = keyEvent.getKey();
 
         if (getOrientation() == Horizontal)
         {
@@ -329,8 +329,9 @@ namespace gcn
             w = getHeight();
         }
 
-        const double pos = v / (static_cast<double>(w) - getMarkerLength());
+        double pos = v / ((double)w - getMarkerLength());
         return (1.0 - pos) * getScaleStart() + pos * getScaleEnd();
+
     }
 
     int Slider::valueToMarkerPosition(double value) const
@@ -345,7 +346,7 @@ namespace gcn
             v = getHeight();
         }
 
-        const int w = static_cast<int>((v - getMarkerLength())
+        int w = (int)((v - getMarkerLength())
             * (value - getScaleStart())
             / (getScaleEnd() - getScaleStart()));
 

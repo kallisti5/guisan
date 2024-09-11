@@ -208,7 +208,7 @@ pqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"); @endcode
         virtual int getWidth(const std::string& text) const;
 
         virtual void drawString(Graphics* graphics, const std::string& text,
-                                int x, int y, bool enabled);
+                                int x, int y);
 
         virtual int getHeight() const;
 
@@ -230,7 +230,7 @@ pqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"); @endcode
          *         with the font.
          * @throws Exception when no glyph is found.
          */
-        Rectangle scanForGlyph(unsigned char glyph, int x, int y, const Color& separator) const;
+        Rectangle scanForGlyph(unsigned char glyph, int x, int y, const Color& separator);
 
         /**
          * Holds the glyphs areas in the image.

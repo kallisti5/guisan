@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof NaessÃ©n and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof NaessÃ©n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -219,7 +219,7 @@ namespace gcn
     {
         Color faceColor, highlightColor, shadowColor;
         int offset;
-        const int alpha = getBaseColor().a;
+        int alpha = getBaseColor().a;
 
         if (mPushed)
         {
@@ -273,17 +273,12 @@ namespace gcn
         return mListBox->getSelected();
     }
 
-    void DropDown::setSelected(int selected) const
+    void DropDown::setSelected(int selected)
     {
         if (selected >= 0)
         {
             mListBox->setSelected(selected);
         }
-    }
-
-    void DropDown::clearSelected() const
-    {
-        mListBox->setSelected(-1);
     }
 
     void DropDown::keyPressed(KeyEvent& keyEvent)
@@ -416,12 +411,12 @@ namespace gcn
 
         setHeight(h2);
 
-        // The addition/subtraction of 2 compensates for the separation lines
-        // separating the selected element view and the scroll area.
+        // The addition/subtraction of 2 compensates for the seperation lines
+        // seperating the selected element view and the scroll area.
 
         if (mDroppedDown && getParent())
         {
-            const int h = getParent()->getChildrenArea().height - getY();
+            int h = getParent()->getChildrenArea().height - getY();
 
             if (listBoxHeight > h - h2 - 2)
             {
@@ -456,11 +451,6 @@ namespace gcn
         }
 
         mListBox->requestFocus();
-    }
-
-    bool DropDown::isDroppedDown()
-    {
-        return mDroppedDown;
     }
 
     void DropDown::foldUp()
@@ -618,10 +608,13 @@ namespace gcn
 
     void DropDown::distributeValueChangedEvent()
     {
-        for (auto& mSelectionListener : mSelectionListeners)
+        SelectionListenerIterator iter;
+
+        for (iter = mSelectionListeners.begin(); iter != mSelectionListeners.end(); ++iter)
         {
             SelectionEvent event(this);
-            mSelectionListener->valueChanged(event);
+            (*iter)->valueChanged(event);
         }
     }
 }
+

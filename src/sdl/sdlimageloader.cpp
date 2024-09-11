@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof NaessÃ©n and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof NaessÃ©n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -90,23 +90,14 @@ namespace gcn
                     std::string("Not enough memory to load: ") + filename);
         }
 
-        mImage = new SDLImage(surface, true, mRenderer);
+        Image *image = new SDLImage(surface, true, mRenderer);
 
         if (convertToDisplayFormat)
         {
-            mImage->convertToDisplayFormat();
+            image->convertToDisplayFormat();
         }
 
-        return mImage;
-    }
-
-    void SDLImageLoader::free()
-    {
-        if (mImage != nullptr)
-        {
-            delete mImage;
-            mImage = nullptr;
-        }
+        return image;
     }
     
     void SDLImageLoader::setRenderer(SDL_Renderer* renderer)

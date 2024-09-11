@@ -69,7 +69,7 @@
 extern "C"
 {
     /**
-     * Exists to be able to check for Guisan SDL with autotools.
+     * Exists to be able to check for Guichan SDL with autotools.
      */
     GCN_EXTENSION_DECLSPEC extern void gcnSDL();
 }

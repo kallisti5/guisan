@@ -180,3 +180,4 @@ namespace gcn
         mHasMouse = false;
     }
 }
+
