@@ -85,7 +85,7 @@ namespace gcn
         setCaption(caption);
         setFrameSize(1);
         setPadding(2);
-        setTitleBarHeight(16);
+        setTitleBarHeight(getFont()->getHeight() + 2);
         setAlignment(Graphics::Center);
         addMouseListener(this);
         setMovable(true);
@@ -229,6 +229,30 @@ namespace gcn
         graphics->pushClipArea(Rectangle(0, 0, getWidth(), getTitleBarHeight() - 1));
         graphics->drawText(getCaption(), textX, textY, getAlignment());
         graphics->popClipArea();
+    }
+
+    void Window::drawFrame(Graphics* graphics)
+    {
+        Color faceColor = getBaseColor();
+        Color highlightColor, shadowColor;
+        int alpha = getBaseColor().a;
+        int width = getWidth() + getFrameSize() * 2 - 1;
+        int height = getHeight() + getFrameSize() * 2 - 1;
+        highlightColor = faceColor + 0x303030;
+        highlightColor.a = alpha;
+        shadowColor = faceColor - 0x303030;
+        shadowColor.a = alpha;
+
+        unsigned int i;
+        for (i = 0; i < getFrameSize(); ++i)
+        {
+            graphics->setColor(highlightColor);
+            graphics->drawLine(i, i, width - i, i);
+            graphics->drawLine(i, i + 1, i, height - i - 1);
+            graphics->setColor(shadowColor);
+            graphics->drawLine(width - i, i + 1, width - i, height - i);
+            graphics->drawLine(i, height - i, width - i - 1, height - i);
+        }
     }
 
     void Window::mousePressed(MouseEvent& mouseEvent)
