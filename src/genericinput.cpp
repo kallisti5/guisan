@@ -143,7 +143,7 @@ namespace gcn
             throw GCN_EXCEPTION("The queue is empty.");
         }
 
-        const KeyInputkeyInput = mKeyInputQueue.front();
+        const KeyInput keyInput = mKeyInputQueue.front();
         mKeyInputQueue.pop();
 
         return keyInput;
@@ -164,7 +164,7 @@ namespace gcn
         const MouseInput mouseInput = mMouseInputQueue.front();
         mMouseInputQueue.pop();
         
-        return mouseInput;        
+        return mouseInput;
     }
     
     void GenericInput::_pollInput()
