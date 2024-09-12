@@ -66,7 +66,6 @@
 
 namespace gcn
 {
-
     Graphics::Graphics()
     {
         mFont = NULL;
@@ -143,7 +142,6 @@ namespace gcn
 
     void Graphics::popClipArea()
     {
-
         if (mClipStack.empty())
         {
             throw GCN_EXCEPTION("Tried to pop clip area from empty stack.");

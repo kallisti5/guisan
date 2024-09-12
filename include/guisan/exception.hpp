@@ -78,7 +78,6 @@
 
 namespace gcn
 {
-
     /**
      * An exception containing a message, a file and a line number
      * where the exception occured. Guisan will only throw exceptions
