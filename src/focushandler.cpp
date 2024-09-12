@@ -100,7 +100,7 @@ namespace gcn
         
         if (toBeFocusedIndex < 0)
         {
-            throw GCN_EXCEPTION("Trying to focus a none existing widget.");
+            throw GCN_EXCEPTION("Trying to focus a non-existing widget.");
         }
         
         Widget *oldFocused = mFocusedWidget;
