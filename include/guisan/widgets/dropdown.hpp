@@ -164,9 +164,6 @@ namespace gcn
          * changes an event will be sent to all selection listeners of the
          * drop down.
          *
-         * If you delete your selection listener, be sure to also remove it
-         * using removeSelectionListener().
-         *
          * @param selectionListener the selection listener to add.
          * @since 0.8.0
          */

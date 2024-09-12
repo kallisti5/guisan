@@ -156,7 +156,7 @@ namespace gcn
 
     const std::list<Widget*>& Container::getChildren() const
     {
-        return mWidgets;
+        return Widget::getChildren();
     }
 
     void Container::resizeToContent()
