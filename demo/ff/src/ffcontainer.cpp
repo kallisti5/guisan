@@ -110,13 +110,9 @@ void FFContainer::draw(gcn::Graphics* graphics)
         {
             graphics->setColor(c * (1.0 - i / 18.0));
             graphics->fillRectangle(gcn::Rectangle(4, (i * height + 4),
-		getWidth()-8, (i * height ) + height));
+            getWidth()-8, (i * height ) + height));
         }
     }
-
-    graphics->pushClipArea(gcn::Rectangle(0, mCurrentSlide, getWidth(), getHeight()));
-    drawChildren(graphics);
-    graphics->popClipArea();
 
     for (i = 5; i < getHeight()-10; i+=5)
     {

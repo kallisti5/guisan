@@ -60,7 +60,6 @@ SConscript('examples/SConscript')
 common_headers = [
     'include/guisan/actionevent.hpp',
     'include/guisan/actionlistener.hpp',
-    'include/guisan/basiccontainer.hpp',
     'include/guisan/cliprectangle.hpp',
     'include/guisan/color.hpp',
     'include/guisan/containerevent.hpp',

@@ -137,7 +137,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\actionevent.cpp" />
-    <ClCompile Include="src\basiccontainer.cpp" />
     <ClCompile Include="src\cliprectangle.cpp" />
     <ClCompile Include="src\color.cpp" />
     <ClCompile Include="src\containerevent.cpp" />
@@ -196,7 +195,6 @@
     <ClInclude Include="include\guisan.hpp" />
     <ClInclude Include="include\guisan\actionevent.hpp" />
     <ClInclude Include="include\guisan\actionlistener.hpp" />
-    <ClInclude Include="include\guisan\basiccontainer.hpp" />
     <ClInclude Include="include\guisan\cliprectangle.hpp" />
     <ClInclude Include="include\guisan\color.hpp" />
     <ClInclude Include="include\guisan\containerevent.hpp" />

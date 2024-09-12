@@ -324,7 +324,7 @@ namespace gcn
 
     void Window::resizeToContent()
     {
-        resizeToContent();
+        Container::resizeToContent();
         setSize(getWidth() + 2 * getPadding(), getHeight() + getPadding() + getTitleBarHeight());
     }
 }
