@@ -62,7 +62,6 @@
 
 #include "guisan/actionevent.hpp"
 #include "guisan/actionlistener.hpp"
-#include "guisan/basiccontainer.hpp"
 #include "guisan/deathlistener.hpp"
 #include "guisan/defaultfont.hpp"
 #include "guisan/event.hpp"

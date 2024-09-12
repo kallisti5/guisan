@@ -60,7 +60,6 @@
 
 #include "guisan/widgets/listbox.hpp"
 
-#include "guisan/basiccontainer.hpp"
 #include "guisan/font.hpp"
 #include "guisan/graphics.hpp"
 #include "guisan/key.hpp"
