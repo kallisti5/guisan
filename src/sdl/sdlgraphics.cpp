@@ -200,9 +200,9 @@ namespace gcn
             const int y2 = area.y + area.height < top.y + top.height ? area.y + area.height : top.y + top.height;
 
             SDL_LockSurface(mTarget);
-            for (y = y1; y < y2; y++)
+            for (int y = y1; y < y2; y++)
             {
-                for (x = x1; x < x2; x++)
+                for (int x = x1; x < x2; x++)
                 {
                     SDLputPixelAlpha(mTarget, x, y, mColor);
                 }
