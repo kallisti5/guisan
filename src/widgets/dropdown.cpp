@@ -219,7 +219,7 @@ namespace gcn
     {
         Color faceColor, highlightColor, shadowColor;
         int offset;
-        int alpha = getBaseColor().a;
+        const int alpha = getBaseColor().a;
 
         if (mPushed)
         {
@@ -276,7 +276,7 @@ namespace gcn
         return mListBox->getSelected();
     }
 
-    void DropDown::setSelected(int selected)
+    void DropDown::setSelected(int selected) const
     {
         if (selected >= 0)
         {
@@ -419,7 +419,7 @@ namespace gcn
 
         if (mDroppedDown && getParent())
         {
-            int h = getParent()->getChildrenArea().height - getY();
+            const int h = getParent()->getChildrenArea().height - getY();
 
             if (listBoxHeight > h - h2 - 2)
             {

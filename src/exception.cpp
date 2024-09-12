@@ -71,22 +71,21 @@ namespace gcn
 
     }
 
-    Exception::Exception(const std::string& message)
+    Exception::Exception(std::string message)
         : mFunction("?"),
-          mMessage(message),
+          mMessage(std::move(message)),
           mFilename("?"),
           mLine(0)
     {
-
     }
 
-    Exception::Exception(const std::string& message,
-                         const std::string& function,
-                         const std::string& filename,
+    Exception::Exception(std::string message,
+                         std::string function,
+                         std::string filename,
                          unsigned int line)
-                         : mFunction(function),
-                           mMessage(message),
-                           mFilename(filename),
+                         : mFunction(std::move(function)),
+                           mMessage(std::move(message)),
+                           mFilename(std::move(filename)),
                            mLine(line)
     {
 

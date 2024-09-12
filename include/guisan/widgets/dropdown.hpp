@@ -129,7 +129,7 @@ namespace gcn
          * @param selected the selected item as an index from the list model.
          * @see getSelected
          */
-        void setSelected(int selected);
+        void setSelected(int selected) const;
 
         /**
          * Sets the list model to use when displaying the list.

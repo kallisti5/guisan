@@ -145,7 +145,7 @@ namespace gcn
 
     void TextBox::keyPressed(KeyEvent& keyEvent)
     {
-        Key key = keyEvent.getKey();
+        const Key key = keyEvent.getKey();
 
         if (key.getValue() == Key::Left)
         {

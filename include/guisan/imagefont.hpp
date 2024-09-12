@@ -230,7 +230,7 @@ pqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"); @endcode
          *         with the font.
          * @throws Exception when no glyph is found.
          */
-        Rectangle scanForGlyph(unsigned char glyph, int x, int y, const Color& separator);
+        Rectangle scanForGlyph(unsigned char glyph, int x, int y, const Color& separator) const;
 
         /**
          * Holds the glyphs areas in the image.

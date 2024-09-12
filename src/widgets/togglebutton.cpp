@@ -85,7 +85,7 @@ namespace gcn
     {
         Color faceColor = getBaseColor();
         Color highlightColor, shadowColor;
-        int alpha = getBaseColor().a;
+        const int alpha = getBaseColor().a;
 
         if (isPressed() || isSelected())
         {
@@ -118,7 +118,7 @@ namespace gcn
         graphics->setColor(getForegroundColor());
 
         int textX;
-        int textY = getHeight() / 2 - getFont()->getHeight() / 2;
+        const int textY = getHeight() / 2 - getFont()->getHeight() / 2;
 
         switch (getAlignment())
         {
@@ -183,7 +183,7 @@ namespace gcn
 
     void ToggleButton::keyReleased(KeyEvent& keyEvent)
     {
-        Key key = keyEvent.getKey();
+        const Key key = keyEvent.getKey();
 
         if ((key.getValue() == Key::Enter
              || key.getValue() == Key::Space)

@@ -170,7 +170,7 @@ namespace gcn
         mFilename = filename;
         mImage = Image::load(filename, false);
 
-        Color separator = mImage->getPixel(0, 0);
+        const Color separator = mImage->getPixel(0, 0);
 
         int i = 0;
         for (i=0; separator == mImage->getPixel(i, 0)
@@ -284,7 +284,7 @@ namespace gcn
         return mGlyphSpacing;
     }
 
-    Rectangle ImageFont::scanForGlyph(unsigned char glyph, int x, int y, const Color& separator)
+    Rectangle ImageFont::scanForGlyph(unsigned char glyph, int x, int y, const Color& separator) const
     {
         Color color;
         do

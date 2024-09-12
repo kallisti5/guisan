@@ -146,9 +146,9 @@ namespace gcn
 
     void Slider::drawMarker(gcn::Graphics* graphics)
     {
-        gcn::Color faceColor = getBaseColor();
+        const gcn::Color faceColor = getBaseColor();
         Color highlightColor, shadowColor;
-        int alpha = getBaseColor().a;
+        const int alpha = getBaseColor().a;
         if (isEnabled())
         {
             highlightColor = faceColor + 0x303030;
@@ -166,7 +166,7 @@ namespace gcn
 
         if (getOrientation() == Horizontal)
         {
-            int v = getMarkerPosition();
+            const int v = getMarkerPosition();
             graphics->fillRectangle(gcn::Rectangle(v + 1, 1, getMarkerLength() - 2, getHeight() - 2));
             graphics->setColor(highlightColor);
             graphics->drawLine(v, 0, v + getMarkerLength() - 1, 0);
@@ -183,7 +183,7 @@ namespace gcn
         }
         else
         {
-            int v = (getHeight() - getMarkerLength()) - getMarkerPosition();
+            const int v = (getHeight() - getMarkerLength()) - getMarkerPosition();
             graphics->fillRectangle(gcn::Rectangle(1, v + 1, getWidth() - 2, getMarkerLength() - 2));
             graphics->setColor(highlightColor);
             graphics->drawLine(0, v, 0, v + getMarkerLength() - 1);
@@ -271,7 +271,7 @@ namespace gcn
 
     void Slider::keyPressed(KeyEvent& keyEvent)
     {
-        Key key = keyEvent.getKey();
+        const Key key = keyEvent.getKey();
 
         if (getOrientation() == Horizontal)
         {
@@ -327,7 +327,7 @@ namespace gcn
             w = getHeight();
         }
 
-        double pos = v / ((double)w - getMarkerLength());
+        const double pos = v / ((double)w - getMarkerLength());
         return (1.0 - pos) * getScaleStart() + pos * getScaleEnd();
     }
 
@@ -343,7 +343,7 @@ namespace gcn
             v = getHeight();
         }
 
-        int w = (int)((v - getMarkerLength())
+        const int w = (int)((v - getMarkerLength())
             * (value - getScaleStart())
             / (getScaleEnd() - getScaleStart()));
 
