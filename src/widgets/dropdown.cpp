@@ -461,7 +461,7 @@ namespace gcn
         mListBox->requestFocus();
     }
 
-    bool DropDown::isDroppedDown()
+    bool DropDown::isDroppedDown() const
     {
         return mDroppedDown;
     }
