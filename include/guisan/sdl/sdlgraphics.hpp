@@ -82,12 +82,12 @@ namespace gcn
          * Constructor.
          */
         SDLGraphics();
-		
-		/**
-		 * Destructor.
-		 */
-		~SDLGraphics();
-		
+
+        /**
+         * Destructor.
+         */
+        ~SDLGraphics();
+
         /**
          * Sets the target SDL_Surface to draw to. The target can be any
          * SDL_Surface. This function also pushes a clip areas corresponding to
@@ -126,8 +126,8 @@ namespace gcn
         virtual void popClipArea();
 
         virtual void drawImage(const Image* image, int srcX, int srcY,
-                               int dstX, int dstY, int width,
-                               int height);
+                       int dstX, int dstY, int width,
+                       int height);
 
         virtual void drawPoint(int x, int y);
 

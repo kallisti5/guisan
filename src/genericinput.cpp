@@ -73,12 +73,12 @@ namespace gcn
     {
         // TODO
     }
-    
+
     void GenericInput::pushKeyReleased(int unicode)
     {
         // TODO
     }
-        
+
     void GenericInput::pushMouseButtonPressed(int x, int y, int button)
     {
         MouseInput mouseInput;
@@ -89,7 +89,7 @@ namespace gcn
 
         mMouseInputQueue.push(mouseInput);
     }
-    
+
     void GenericInput::pushMouseButtonReleased(int x, int y, int button)
     {
         MouseInput mouseInput;
@@ -100,7 +100,7 @@ namespace gcn
 
         mMouseInputQueue.push(mouseInput);
     }
-    
+
     void GenericInput::pushMouseWheelMovedUp(int x, int y)
     {
         MouseInput mouseInput;
@@ -110,7 +110,7 @@ namespace gcn
 
         mMouseInputQueue.push(mouseInput);
     }
-    
+
     void GenericInput::pushMouseWheelMovedDown(int x, int y)
     {
         MouseInput mouseInput;
@@ -120,7 +120,7 @@ namespace gcn
 
         mMouseInputQueue.push(mouseInput);
     }
-    
+
     void GenericInput::pushMouseMoved(int x, int y)
     {
         MouseInput mouseInput;
@@ -148,7 +148,7 @@ namespace gcn
 
         return keyInput;
     }
-    
+
     bool GenericInput::isMouseQueueEmpty()
     {
         return mMouseInputQueue.empty();
@@ -160,13 +160,13 @@ namespace gcn
         {
             throw GCN_EXCEPTION("The queue is empty.");
         }
-        
+
         const MouseInput mouseInput = mMouseInputQueue.front();
         mMouseInputQueue.pop();
-        
+
         return mouseInput;
     }
-    
+
     void GenericInput::_pollInput()
     {
         // Does nothing.

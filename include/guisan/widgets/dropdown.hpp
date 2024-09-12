@@ -248,7 +248,7 @@ namespace gcn
         virtual void mouseDragged(MouseEvent& mouseEvent);
 
 
-	// Inherited from SelectionListener
+        // Inherited from SelectionListener
 
         virtual void valueChanged(const SelectionEvent& event);
 

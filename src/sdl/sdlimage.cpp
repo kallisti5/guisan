@@ -69,12 +69,12 @@ namespace gcn
     {
         mAutoFree = autoFree;
         mSurface = surface;
-		mRenderer = renderer;
-		if (renderer)
-		{
-			mTexture = SDL_CreateTextureFromSurface(renderer, surface);
-			SDL_SetTextureBlendMode(mTexture, SDL_BLENDMODE_BLEND);
-		}       
+        mRenderer = renderer;
+        if (renderer)
+        {
+            mTexture = SDL_CreateTextureFromSurface(renderer, surface);
+            SDL_SetTextureBlendMode(mTexture, SDL_BLENDMODE_BLEND);
+        }       
     }
 
     SDLImage::~SDLImage()
@@ -92,8 +92,8 @@ namespace gcn
     
     SDL_Texture* SDLImage::getTexture() const
     {
-		return mTexture;
-	}
+        return mTexture;
+    }
 
     int SDLImage::getWidth() const
     {
@@ -149,7 +149,7 @@ namespace gcn
 
         for (i = 0; i < mSurface->w * mSurface->h; ++i)
         {
-            if (((unsigned int*)mSurface->pixels)[i] == SDL_MapRGB(mSurface->format,255,0,255))
+            if (((unsigned int*)mSurface->pixels)[i] == SDL_MapRGB(mSurface->format, 255, 0, 255))
             {
                 hasPink = true;
                 break;
@@ -185,13 +185,13 @@ namespace gcn
 
         mSurface = tmp;
 
-		if (mRenderer)
-		{
-			SDL_Texture *tmpTexture = SDL_CreateTextureFromSurface(mRenderer, tmp);
-			SDL_SetTextureBlendMode(tmpTexture, SDL_BLENDMODE_BLEND);
-			SDL_DestroyTexture(mTexture);
-			mTexture = tmpTexture;
-		}	
+        if (mRenderer)
+        {
+            SDL_Texture *tmpTexture = SDL_CreateTextureFromSurface(mRenderer, tmp);
+            SDL_SetTextureBlendMode(tmpTexture, SDL_BLENDMODE_BLEND);
+            SDL_DestroyTexture(mTexture);
+            mTexture = tmpTexture;
+        }	
     }
 
     void SDLImage::free()
