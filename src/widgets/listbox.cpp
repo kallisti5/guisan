@@ -216,7 +216,7 @@ namespace gcn
 
     void ListBox::keyPressed(KeyEvent& keyEvent)
     {
-        Key key = keyEvent.getKey();
+        const Key key = keyEvent.getKey();
 
         if (key.getValue() == Key::Enter || key.getValue() == Key::Space)
         {

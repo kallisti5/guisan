@@ -117,7 +117,7 @@ namespace gcn
             graphics->drawRectangle(Rectangle(0, 0, getWidth(), getHeight()));
         }
 
-        int h = getHeight() + getHeight() / 2;
+        const int h = getHeight() + getHeight() / 2;
 
         graphics->drawText(getCaption(), h - 2, 0);
     }
@@ -135,7 +135,7 @@ namespace gcn
             h = getHeight() - 3;
         }
 
-        int alpha = getBaseColor().a;
+        const int alpha = getBaseColor().a;
         Color faceColor = getBaseColor();
         faceColor.a = alpha;
         Color highlightColor = faceColor + 0x303030;
@@ -149,7 +149,7 @@ namespace gcn
         graphics->setColor(backCol);
 
         int i;
-        int hh = (h + 1) / 2;
+        const int hh = (h + 1) / 2;
 
         for (i = 1; i <= hh; ++i)
         {
@@ -177,7 +177,7 @@ namespace gcn
 
         graphics->setColor(getForegroundColor());
 
-        int hhh = hh - 3;
+        const int hhh = hh - 3;
         if (mSelected)
         {
             for (i = 0; i < hhh; ++i)
@@ -229,7 +229,7 @@ namespace gcn
 
     void RadioButton::keyPressed(KeyEvent& keyEvent)
     {
-        Key key = keyEvent.getKey();
+        const Key key = keyEvent.getKey();
 
         if (key.getValue() == Key::Enter ||
             key.getValue() == Key::Space)
@@ -289,7 +289,7 @@ namespace gcn
 
     void RadioButton::adjustSize()
     {
-        int height = getFont()->getHeight();
+        const int height = getFont()->getHeight();
 
         setHeight(height);
         setWidth(getFont()->getWidth(getCaption()) + height + height / 2);

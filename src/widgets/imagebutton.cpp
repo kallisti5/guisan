@@ -123,7 +123,7 @@ namespace gcn
     {
         gcn::Color faceColor = getBaseColor();
         gcn::Color highlightColor, shadowColor;
-        int alpha = getBaseColor().a;
+        const int alpha = getBaseColor().a;
 
         if (isPressed())
         {
