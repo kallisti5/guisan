@@ -62,9 +62,9 @@
 
 namespace gcn
 {
-    ActionEvent::ActionEvent(Widget* source, const std::string& id)
+    ActionEvent::ActionEvent(Widget* source, std::string id)
             :Event(source),
-             mId(id)
+             mId(std::move(id))
     {
 
     }
