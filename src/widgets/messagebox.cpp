@@ -418,7 +418,7 @@ namespace gcn
 
     void MessageBox::resizeToContent()
     {
-        WidgetListIterator it;
+        std::list<Widget*>::const_iterator it;
 
         int w = 0, h = 0;
         for (it = mWidgets.begin(); it != mWidgets.end(); it++)

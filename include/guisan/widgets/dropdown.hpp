@@ -58,20 +58,20 @@
 #define GCN_DROPDOWN_HPP
 
 #include "guisan/actionlistener.hpp"
-#include "guisan/basiccontainer.hpp"
-#include "guisan/deathlistener.hpp"
 #include "guisan/focushandler.hpp"
 #include "guisan/focuslistener.hpp"
 #include "guisan/keylistener.hpp"
-#include "guisan/listmodel.hpp"
 #include "guisan/mouselistener.hpp"
 #include "guisan/platform.hpp"
 #include "guisan/selectionlistener.hpp"
-#include "guisan/widgets/listbox.hpp"
-#include "guisan/widgets/scrollarea.hpp"
+#include "guisan/widget.hpp"
 
 namespace gcn
 {
+    class ListBox;
+    class ListModel;
+    class ScrollArea;
+
     /**
      * An implementation of a drop downable list from which an item can be
      * selected. The drop down consists of an internal ScrollArea and an
@@ -90,11 +90,11 @@ namespace gcn
      */
     class GCN_CORE_DECLSPEC DropDown :
         public ActionListener,
-        public BasicContainer,
         public KeyListener,
         public MouseListener,
         public FocusListener,
-        public SelectionListener
+        public SelectionListener,
+        public Widget
     {
     public:
         /**

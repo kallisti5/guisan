@@ -159,8 +159,6 @@ namespace gcn
         graphics->setColor(baseColor);
         graphics->fillRectangle(Rectangle(0, 0, currentClipArea.width, currentClipArea.height));
 
-        drawChildren(graphics);
-
         if (mTabbedArea != NULL && mTabbedArea->isFocused() && mTabbedArea->isTabSelected(this))
         {
             graphics->setColor(Color(0x000000));

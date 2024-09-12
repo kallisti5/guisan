@@ -61,13 +61,12 @@
 #include <string>
 
 #include "guisan/color.hpp"
+#include "guisan/deathlistener.hpp"
 #include "guisan/rectangle.hpp"
 
 namespace gcn
 {
     class ActionListener;
-    class BasicContainer;
-    class DeathListener;
     class DefaultFont;
     class FocusHandler;
     class FocusListener;
@@ -90,7 +89,7 @@ namespace gcn
      * @author Per Larsson.
      * @since 0.1.0
      */
-    class GCN_CORE_DECLSPEC Widget
+    class GCN_CORE_DECLSPEC Widget : public DeathListener
     {
     public:
         /**
@@ -106,13 +105,21 @@ namespace gcn
         virtual ~Widget();
 
         /**
-         * Draws the widget. It is called by the parent widget when it is time
-         * for the widget to draw itself. The graphics object is set up so
-         * that all drawing is relative to the widget, i.e coordinate (0,0) is
-         * the top left corner of the widget. It is not possible to draw
-         * outside of a widget's dimension.
+         * Draws the widget.
+         * The call to draw is initiated by the widget's parent.
+         * The graphics object is set up so that all drawing is relative
+         * to the widget, i.e coordinate (0,0) is the top left corner of the widget.
+         * It is not possible to draw outside of a widget's dimension.
+         * If a widget has children, the parent's draw function will always
+         * be called before the children's draw functions are called.
+         *
+         * NOTE: A widget with children won't draw its children unless
+         *       the children area given by Widget::getChildrenArea returns a
+         *       non-empty rectangle inside the widgets dimension. The children
+         *       area is considered relative to the widget's position.
          *
          * @param graphics A graphics object to draw with.
+         * @see getChildrenArea
          * @since 0.1.0
          */
         virtual void draw(Graphics* graphics) = 0;
@@ -191,7 +198,7 @@ namespace gcn
         /**
          * Gets the top widget, or top parent, of this widget.
          *
-         * @return The top widget, or top parent, of this widget.
+         * @return The top widget, or top parent, for this widget.
          *         NULL if no top widget exists
          *         (that is this widget doesn't have a parent).
          * @since 1.1.0
@@ -461,18 +468,47 @@ namespace gcn
         /**
          * Requests focus for the widget. A widget will only recieve focus
          * if it is focusable.
+         *
+         * @since 0.1.0
          */
         virtual void requestFocus();
 
         /**
          * Requests a move to the top in the parent widget.
+         *
+         * @since 0.1.0
          */
         virtual void requestMoveToTop();
 
         /**
          * Requests a move to the bottom in the parent widget.
+         *
+         * @since 0.1.0
          */
         virtual void requestMoveToBottom();
+
+        /**
+         * Called whenever a widget should draw itself. The function will
+         * set up clip areas and call the draw function for this widget
+         * and for all its children.
+         *
+         * WARNING: This function is used internally and should not
+         *          be called or overloaded unless you know what you
+         *          are doing.
+         * @since 1.1.0
+         */
+        virtual void _draw(Graphics* graphics);
+
+        /**
+         * Called whenever a widget should perform logic. The function will
+         * call the logic function for this widget and for all its children.
+         *
+         * WARNING: This function is used internally and should not
+         *          be called or overloaded unless you know what you
+         *          are doing.
+         * @since 1.1.0
+         */
+        virtual void _logic();
 
         /**
          * Sets the focus handler to be used.
@@ -881,6 +917,11 @@ namespace gcn
          * method is used when drawing children of a widget when computing
          * clip rectangles for the children.
          *
+         * NOTE: The returned rectangle should be relative to the widget,
+         *       i.e a rectangle with x and y coordinate (0,0) and with
+         *       width and height the same as the widget will let the
+         *       children draw themselves in the whole widget.
+         *
          * An example of a widget that overloads this method is ScrollArea.
          * A ScrollArea has a view of its contant and that view is the
          * children area. The size of a ScrollArea's children area might
@@ -888,10 +929,7 @@ namespace gcn
          * or not.
          *
          * @return The area of the widget occupied by the widget's children.
-         * @see BasicContainer
-         * @see BasicContainer::getChildrenArea
-         * @see BasicContainer::drawChildren
-         * @since 0.1.0
+         * @since 0.5.0
          */
         virtual Rectangle getChildrenArea();
 
@@ -920,25 +958,25 @@ namespace gcn
          * Moves a widget to the top of this widget. The moved widget will be
          * drawn above all other widgets in this widget.
          *
-         * This method is safe to call at any times.
+         * This method is safe to call at any time.
          *
          * @param widget The widget to move to the top.
          * @see moveToBottom
          * @since 0.1.0
          */
-        virtual void moveToTop(Widget* widget) {}
+        virtual void moveToTop(Widget* widget);
 
         /**
          * Moves a widget in this widget to the bottom of this widget.
          * The moved widget will be drawn below all other widgets in this widget.
          *
-         * This method is safe to call at any times.
+         * This method is safe to call at any time.
          *
          * @param widget The widget to move to the bottom.
          * @see moveToTop
          * @since 0.1.0
          */
-        virtual void moveToBottom(Widget* widget) {}
+        virtual void moveToBottom(Widget* widget);
 
         /**
          * Focuses the next widget in the widget.
@@ -946,7 +984,7 @@ namespace gcn
          * @see moveToBottom
          * @since 0.1.0
          */
-        virtual void focusNext() {}
+        virtual void focusNext();
 
         /**
          * Focuses the previous widget in the widget.
@@ -954,7 +992,7 @@ namespace gcn
          * @see moveToBottom
          * @since 0.1.0
          */
-        virtual void focusPrevious() {}
+        virtual void focusPrevious();
 
         /**
          * Tries to show a specific part of a widget by moving it. Used if the
@@ -964,7 +1002,7 @@ namespace gcn
          * @param area The area to show.
          * @since 0.1.0
          */
-        virtual void showWidgetPart(Widget* widget, Rectangle area) {}
+        virtual void showWidgetPart(Widget* widget, Rectangle area);
 
         /**
          * Sets an id of a widget. An id can be useful if a widget needs to be
@@ -1002,6 +1040,10 @@ namespace gcn
          */
         virtual void showPart(Rectangle rectangle);
 
+        // Inherited from DeathListener
+
+        void death(const Event& event);
+
     protected:
         /**
          * Distributes an action event to all action listeners
@@ -1029,7 +1071,6 @@ namespace gcn
          * Distributes hidden events to all of the widget's listeners.
          *
          * @since 0.8.0
-         * @author Olof Naessén
          */
         void distributeHiddenEvent();
 
@@ -1037,51 +1078,93 @@ namespace gcn
          * Distributes shown events to all of the widget's listeners.
          *
          * @since 0.8.0
-         * @author Olof Naessén
          */
         void distributeShownEvent();
 
-        typedef std::list<MouseListener*> MouseListenerList;
-        typedef MouseListenerList::iterator MouseListenerIterator;
+        /**
+         * Adds a child to the widget.
+         *
+         * THIS METHOD IS NOT SAFE TO CALL INSIDE A WIDGETS LOGIC FUNCTION
+         * INSIDE ANY LISTER FUNCTIONS!
+         *
+         * @param widget The widget to add.
+         * @see remove, clear
+         * @since 1.1.0
+         */
+        void add(Widget* widget);
+
+        /**
+         * Removes a child from the widget.
+         *
+         * THIS METHOD IS NOT SAFE TO CALL INSIDE A WIDGETS LOGIC FUNCTION
+         * INSIDE ANY LISTER FUNCTIONS!
+         *
+         * @param widget The widget to remove.
+         * @see add, clear
+         * @since 1.1.0
+         */
+        virtual void remove(Widget* widget);
+
+        /**
+         * Clears the widget from all its children.
+         *
+         * THIS METHOD IS NOT SAFE TO CALL INSIDE A WIDGETS LOGIC FUNCTION
+         * INSIDE ANY LISTER FUNCTIONS!
+         *
+         * @see remove, clear
+         * @since 1.1.0
+         */
+        virtual void clear();
+
+        /**
+         * Finds a widget given an id. This function can be useful
+         * when implementing a GUI generator for Guichan, such as
+         * the ability to create a Guichan GUI from an XML file.
+         *
+         * @param id The id to find a widget by.
+         * @return The widget with the corrosponding id, 
+         *         NULL of no widget is found.
+         *
+         * @since 1.1.0
+         */
+        virtual Widget* findWidgetById(const std::string& id);
+
+        /**
+         * Resizes the widget to fit it's children exactly.
+         *
+         * @since 1.1.0
+         */
+        void resizeToChildren();
+
         /**
          * Holds the mouse listeners of the widget.
          */
-        MouseListenerList mMouseListeners;
+        std::list<MouseListener*> mMouseListeners;
 
-        typedef std::list<KeyListener*> KeyListenerList;
         /**
          * Holds the key listeners of the widget.
          */
-        KeyListenerList mKeyListeners;
-        typedef KeyListenerList::iterator KeyListenerIterator;
+        std::list<KeyListener*> mKeyListeners;
 
-        typedef std::list<ActionListener*> ActionListenerList;
         /** 
          * Holds the action listeners of the widget.
          */
-        ActionListenerList mActionListeners;
-        typedef ActionListenerList::iterator ActionListenerIterator;
+        std::list<ActionListener*> mActionListeners;
 
-        typedef std::list<DeathListener*> DeathListenerList;
         /**
          * Holds the death listeners of the widget.
          */
-        DeathListenerList mDeathListeners;
-        typedef DeathListenerList::iterator DeathListenerIterator;
+        std::list<DeathListener*> mDeathListeners;
 
-        typedef std::list<FocusListener*> FocusListenerList;
         /**
          * Holds the focus listeners of the widget.
          */
-        FocusListenerList mFocusListeners;
-        typedef FocusListenerList::iterator FocusListenerIterator;
+        std::list<FocusListener*> mFocusListeners;
 
-        typedef std::list<WidgetListener*> WidgetListenerList;
         /**
          * Holds the widget listeners of the widget.
          */
-        WidgetListenerList mWidgetListeners;
-        typedef WidgetListenerList::iterator WidgetListenerIterator;
+        std::list<WidgetListener*> mWidgetListeners;
 
         /**
          * Holds the foreground color of the widget.
@@ -1169,6 +1252,11 @@ namespace gcn
          * Holds the font used by the widget.
          */
         Font* mCurrentFont;
+
+        /**
+         * Holds all children of the widget.
+         */
+        std::list<Widget*> mChildren;
 
         /**
          * Holds the default font used by the widget.

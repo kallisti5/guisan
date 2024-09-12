@@ -60,9 +60,9 @@
 #include <map>
 #include <string>
 
-#include "guisan/basiccontainer.hpp"
 #include "guisan/mouselistener.hpp"
 #include "guisan/platform.hpp"
+#include "guisan/widget.hpp"
 
 namespace gcn
 {
@@ -76,8 +76,8 @@ namespace gcn
      * @since 0.8.0
      */
     class GCN_CORE_DECLSPEC Tab:
-        public BasicContainer,
-        public MouseListener
+        public MouseListener,
+        public Widget
     {
     public:
 

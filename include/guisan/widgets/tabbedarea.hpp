@@ -62,10 +62,10 @@
 #include <vector>
 
 #include "guisan/actionlistener.hpp"
-#include "guisan/basiccontainer.hpp"
 #include "guisan/keylistener.hpp"
 #include "guisan/mouselistener.hpp"
 #include "guisan/platform.hpp"
+#include "guisan/widget.hpp"
 
 namespace gcn
 {
@@ -80,9 +80,9 @@ namespace gcn
      */
     class GCN_CORE_DECLSPEC TabbedArea:
         public ActionListener,
-        public BasicContainer,
         public KeyListener,
-        public MouseListener
+        public MouseListener,
+        public Widget
     {
         friend class Tab;
 
