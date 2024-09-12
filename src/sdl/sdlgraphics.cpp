@@ -233,7 +233,7 @@ namespace gcn
         x += top.xOffset;
         y += top.yOffset;
 
-        if(!top.isPointInRect(x,y))
+        if(!top.isContaining(x,y))
             return;
 
         if (mAlpha)
@@ -532,7 +532,7 @@ namespace gcn
 
                 for (int x = x1; x <= x2; x++)
                 {
-                    if (top.isPointInRect(x, y))
+                    if (top.isContaining(x, y))
                     {
                         if (mAlpha)
                         {
@@ -560,7 +560,7 @@ namespace gcn
 
                 for (int x = x1; x <= x2; x++)
                 {
-                    if (top.isPointInRect(x, y))
+                    if (top.isContaining(x, y))
                     {
                         if (mAlpha)
                         {
@@ -604,7 +604,7 @@ namespace gcn
 
                 for (int y = y1; y <= y2; y++)
                 {
-                    if (top.isPointInRect(x, y))
+                    if (top.isContaining(x, y))
                     {
                         if (mAlpha)
                         {
@@ -632,7 +632,7 @@ namespace gcn
 
                 for (int y = y1; y <= y2; y++)
                 {
-                    if (top.isPointInRect(x, y))
+                    if (top.isContaining(x, y))
                     {
                         if (mAlpha)
                         {
