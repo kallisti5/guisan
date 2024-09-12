@@ -67,7 +67,6 @@
 
 namespace gcn
 {
-
     CheckBox::CheckBox()
     {
         setSelected(false);
@@ -173,7 +172,7 @@ namespace gcn
 
     void CheckBox::keyPressed(KeyEvent& keyEvent)
     {
-        Key key = keyEvent.getKey();
+        const Key key = keyEvent.getKey();
 
         if (key.getValue() == Key::Enter ||
             key.getValue() == Key::Space)
@@ -198,7 +197,7 @@ namespace gcn
 
     void CheckBox::adjustSize()
     {
-        int height = getFont()->getHeight();
+        const int height = getFont()->getHeight();
 
         setHeight(height);
         setWidth(getFont()->getWidth(mCaption) + height + height / 2);
@@ -210,4 +209,3 @@ namespace gcn
         distributeActionEvent();
     }
 }
-

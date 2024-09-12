@@ -74,7 +74,6 @@
 
 namespace gcn
 {
-
     SDL2Graphics::SDL2Graphics()
     {
         mAlpha = false;
@@ -191,7 +190,7 @@ namespace gcn
             throw GCN_EXCEPTION("Trying to draw an image of unknown format, must be an SDLImage.");
         }
         
-        if(srcImage->getTexture() == NULL)
+        if (srcImage->getTexture() == NULL)
         {
             SDL_FillRect(mTarget, &temp, SDL_MapRGBA(mTarget->format, 0xff, 0, 0xff, 0));
             SDL_BlitSurface(srcImage->getSurface(), &src, mTarget, &temp);
@@ -201,14 +200,13 @@ namespace gcn
         else 
         {
             SDL_RenderCopy(mRenderTarget, srcImage->getTexture(), &src, &dst);
-        }
-        
+        }    
     }
 
     void SDL2Graphics::fillRectangle(const Rectangle& rectangle)
     {
-    if (mClipStack.empty()) {
-        throw GCN_EXCEPTION("Clip stack is empty, perhaps you"
+        if (mClipStack.empty()) {
+            throw GCN_EXCEPTION("Clip stack is empty, perhaps you"
             "called a draw function outside of _beginDraw() and _endDraw()?");
     }
 
@@ -225,10 +223,11 @@ namespace gcn
 
         if (mAlpha)
         {
-            int x1 = area.x > top.x ? area.x : top.x;
-            int y1 = area.y > top.y ? area.y : top.y;
-            int x2 = area.x + area.width < top.x + top.width ? area.x + area.width : top.x + top.width;
-            int y2 = area.y + area.height < top.y + top.height ? area.y + area.height : top.y + top.height;
+            const int x1 = area.x > top.x ? area.x : top.x;
+            const int y1 = area.y > top.y ? area.y : top.y;
+            const int x2 = area.x + area.width < top.x + top.width ? area.x + area.width : top.x + top.width;
+            const int y2 = area.y + area.height < top.y + top.height ? area.y + area.height : top.y + top.height;
+
             SDL_Rect rect;
             rect.x = x1;
             rect.y = y1;
@@ -239,7 +238,6 @@ namespace gcn
             SDL_SetRenderDrawColor(mRenderTarget, mColor.r, mColor.g, mColor.b, mColor.a);
             SDL_RenderFillRect(mRenderTarget, &rect);
             restoreRenderColor();
-
         }
         else
         {
@@ -253,7 +251,6 @@ namespace gcn
             SDL_SetRenderDrawColor(mRenderTarget, mColor.r, mColor.g, mColor.b, mColor.a);
             SDL_RenderFillRect(mRenderTarget, &rect);
             restoreRenderColor();
-            
         }
     }
 
@@ -381,10 +378,10 @@ namespace gcn
         
     void SDL2Graphics::drawRectangle(const Rectangle& rectangle)
     {
-        int x1 = rectangle.x;
-        int x2 = rectangle.x + rectangle.width - 1;
-        int y1 = rectangle.y;
-        int y2 = rectangle.y + rectangle.height - 1;
+        const int x1 = rectangle.x;
+        const int x2 = rectangle.x + rectangle.width - 1;
+        const int y1 = rectangle.y;
+        const int y2 = rectangle.y + rectangle.height - 1;
 
         drawHLine(x1, y1, x2);
         drawHLine(x1, y2, x2);
@@ -395,7 +392,6 @@ namespace gcn
 
     void SDL2Graphics::drawLine(int x1, int y1, int x2, int y2)
     {
-        
         if (mClipStack.empty()) {
             throw GCN_EXCEPTION("Clip stack is empty, perhaps you"
                 "called a draw function outside of _beginDraw() and _endDraw()?");

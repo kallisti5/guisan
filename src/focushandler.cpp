@@ -76,7 +76,6 @@ namespace gcn
          mLastWidgetWithModalMouseInputFocus(NULL),
          mLastWidgetPressed(NULL)
     {
-
     }
 
     void FocusHandler::requestFocus(Widget* widget)
@@ -221,13 +220,13 @@ namespace gcn
         {
             mFocusedWidget = mWidgets.at(focusedWidget);
 
-            Event focusEvent(mFocusedWidget);
+            const Event focusEvent(mFocusedWidget);
             distributeFocusGainedEvent(focusEvent);
         }
 
         if (focused >= 0)
         {
-            Event focusEvent(mWidgets.at(focused));
+            const Event focusEvent(mWidgets.at(focused));
             distributeFocusLostEvent(focusEvent);
         }
     }
@@ -249,7 +248,7 @@ namespace gcn
                 focusedWidget = i;
             }
         }
-        int focused = focusedWidget;
+        const int focused = focusedWidget;
 
         // i is a counter that ensures that the following loop
         // won't get stuck in an infinite loop
@@ -281,13 +280,13 @@ namespace gcn
         if (focusedWidget >= 0)
         {
             mFocusedWidget = mWidgets.at(focusedWidget);
-            Event focusEvent(mFocusedWidget);
+            const Event focusEvent(mFocusedWidget);
             distributeFocusGainedEvent(focusEvent);
         }
 
         if (focused >= 0)
         {
-            Event focusEvent(mWidgets.at(focused));
+            const Event focusEvent(mWidgets.at(focused));
             distributeFocusLostEvent(focusEvent);
         }
     }
@@ -388,7 +387,7 @@ namespace gcn
                 focusedWidget = i;
             }
         }
-        int focused = focusedWidget;
+        const int focused = focusedWidget;
         bool done = false;
 
         // i is a counter that ensures that the following loop
@@ -429,13 +428,13 @@ namespace gcn
         if (focusedWidget >= 0)
         {
             mFocusedWidget = mWidgets.at(focusedWidget);
-            Event focusEvent(mFocusedWidget);
+            const Event focusEvent(mFocusedWidget);
             distributeFocusGainedEvent(focusEvent);
         }
 
         if (focused >= 0)
         {
-            Event focusEvent(mWidgets.at(focused));
+            const Event focusEvent(mWidgets.at(focused));
             distributeFocusLostEvent(focusEvent);
         }
     }
@@ -465,7 +464,7 @@ namespace gcn
                 focusedWidget = i;
             }
         }
-        int focused = focusedWidget;
+        const int focused = focusedWidget;
         bool done = false;
 
         // i is a counter that ensures that the following loop
@@ -506,13 +505,13 @@ namespace gcn
         if (focusedWidget >= 0)
         {
             mFocusedWidget = mWidgets.at(focusedWidget);
-            Event focusEvent(mFocusedWidget);
+            const Event focusEvent(mFocusedWidget);
             distributeFocusGainedEvent(focusEvent);
         }
 
         if (focused >= 0)
         {
-            Event focusEvent(mWidgets.at(focused));
+            const Event focusEvent(mWidgets.at(focused));
             distributeFocusLostEvent(focusEvent);
         }
     }

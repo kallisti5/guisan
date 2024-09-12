@@ -78,7 +78,6 @@
 
 namespace gcn
 {
-
     /**
      * An exception containing a message, a file and a line number
      * where the exception occured. Guisan will only throw exceptions
@@ -109,7 +108,7 @@ namespace gcn
          *
          * @param message The error message of the exception.
          */
-        Exception(const std::string& message);
+        Exception(std::string message);
 
         /**
          * Constructor.
@@ -124,9 +123,9 @@ namespace gcn
          * @param line The line number in the source code where the exception
          *             occured.
          */
-        Exception(const std::string& message,
-                  const std::string& function,
-                  const std::string& filename,
+        Exception(std::string message,
+                  std::string function,
+                  std::string filename,
                   unsigned int line);
 
         /**

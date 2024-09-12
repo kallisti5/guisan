@@ -74,7 +74,6 @@
 
 namespace gcn
 {
-
     SDLGraphics::SDLGraphics()
     {
         mAlpha = false;
@@ -108,7 +107,7 @@ namespace gcn
     bool SDLGraphics::pushClipArea(Rectangle area)
     {
         SDL_Rect rect;
-        bool result = Graphics::pushClipArea(area);
+        const bool result = Graphics::pushClipArea(area);
 
         const ClipRectangle& carea = mClipStack.top();
         rect.x = carea.x;
@@ -194,22 +193,20 @@ namespace gcn
 
         if (mAlpha)
         {
-            int x1 = area.x > top.x ? area.x : top.x;
-            int y1 = area.y > top.y ? area.y : top.y;
-            int x2 = area.x + area.width < top.x + top.width ? area.x + area.width : top.x + top.width;
-            int y2 = area.y + area.height < top.y + top.height ? area.y + area.height : top.y + top.height;
-            int x, y;
+            const int x1 = area.x > top.x ? area.x : top.x;
+            const int y1 = area.y > top.y ? area.y : top.y;
+            const int x2 = area.x + area.width < top.x + top.width ? area.x + area.width : top.x + top.width;
+            const int y2 = area.y + area.height < top.y + top.height ? area.y + area.height : top.y + top.height;
 
             SDL_LockSurface(mTarget);
-            for (y = y1; y < y2; y++)
+            for (int y = y1; y < y2; y++)
             {
-                for (x = x1; x < x2; x++)
+                for (int x = x1; x < x2; x++)
                 {
                     SDLputPixelAlpha(mTarget, x, y, mColor);
                 }
             }
             SDL_UnlockSurface(mTarget);
-
         }
         else
         {
@@ -219,7 +216,7 @@ namespace gcn
             rect.w = area.width;
             rect.h = area.height;
 
-            Uint32 color = SDL_MapRGBA(mTarget->format, mColor.r, mColor.g, mColor.b, mColor.a);
+            const Uint32 color = SDL_MapRGBA(mTarget->format, mColor.r, mColor.g, mColor.b, mColor.a);
             SDL_FillRect(mTarget, &rect, color);
         }
     }
@@ -289,7 +286,7 @@ namespace gcn
             x2 = top.x + top.width -1;
         }
 
-        int bpp = mTarget->format->BytesPerPixel;
+        const int bpp = mTarget->format->BytesPerPixel;
 
         SDL_LockSurface(mTarget);
 
@@ -400,7 +397,7 @@ namespace gcn
             y2 = top.y + top.height - 1;
         }
 
-        int bpp = mTarget->format->BytesPerPixel;
+        const int bpp = mTarget->format->BytesPerPixel;
 
         SDL_LockSurface(mTarget);
 
@@ -472,10 +469,10 @@ namespace gcn
 
     void SDLGraphics::drawRectangle(const Rectangle& rectangle)
     {
-        int x1 = rectangle.x;
-        int x2 = rectangle.x + rectangle.width - 1;
-        int y1 = rectangle.y;
-        int y2 = rectangle.y + rectangle.height - 1;
+        const int x1 = rectangle.x;
+        const int x2 = rectangle.x + rectangle.width - 1;
+        const int y1 = rectangle.y;
+        const int y2 = rectangle.y + rectangle.height - 1;
 
         drawHLine(x1, y1, x2);
         drawHLine(x1, y2, x2);
@@ -510,8 +507,8 @@ namespace gcn
 
         // Draw a line with Bresenham
 
-        int dx = ABS(x2 - x1);
-        int dy = ABS(y2 - y1);
+        const int dx = ABS(x2 - x1);
+        const int dy = ABS(y2 - y1);
 
         if (dx > dy)
         {

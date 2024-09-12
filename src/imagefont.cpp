@@ -88,7 +88,7 @@ namespace gcn
             throw GCN_EXCEPTION("Corrupt image.");
         }
 
-        int j = 0;
+        int j;
         for (j = 0; j < mImage->getHeight(); ++j)
         {
             if (separator == mImage->getPixel(i, j))
@@ -170,9 +170,9 @@ namespace gcn
         mFilename = filename;
         mImage = Image::load(filename, false);
 
-        Color separator = mImage->getPixel(0, 0);
+        const Color separator = mImage->getPixel(0, 0);
 
-        int i = 0;
+        int i;
         for (i=0; separator == mImage->getPixel(i, 0)
                  && i < mImage->getWidth(); ++i)
         {
@@ -183,7 +183,7 @@ namespace gcn
             throw GCN_EXCEPTION("Corrupt image.");
         }
 
-        int j = 0;
+        int j;
         for (j = 0; j < mImage->getHeight(); ++j)
         {
             if (separator == mImage->getPixel(i, j))
@@ -284,7 +284,7 @@ namespace gcn
         return mGlyphSpacing;
     }
 
-    Rectangle ImageFont::scanForGlyph(unsigned char glyph, int x, int y, const Color& separator)
+    Rectangle ImageFont::scanForGlyph(unsigned char glyph, int x, int y, const Color& separator) const
     {
         Color color;
         do

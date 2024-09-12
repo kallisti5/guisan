@@ -85,8 +85,8 @@ namespace gcn
         addFocusListener(this);
     }
 
-    Button::Button(const std::string& caption)
-            : mCaption(caption),
+    Button::Button(std::string caption)
+            : mCaption(std::move(caption)),
               mHasMouse(false),
               mKeyPressed(false),
               mMousePressed(false),
@@ -264,7 +264,7 @@ namespace gcn
 
     void Button::keyPressed(KeyEvent& keyEvent)
     {
-        Key key = keyEvent.getKey();
+        const Key key = keyEvent.getKey();
 
         if (key.getValue() == Key::Enter
             || key.getValue() == Key::Space)
@@ -276,7 +276,7 @@ namespace gcn
 
     void Button::keyReleased(KeyEvent& keyEvent)
     {
-        Key key = keyEvent.getKey();
+        const Key key = keyEvent.getKey();
 
         if ((key.getValue() == Key::Enter
              || key.getValue() == Key::Space)

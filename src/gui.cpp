@@ -159,7 +159,6 @@ namespace gcn
 
             handleKeyInput();
             handleMouseInput();
- 
         } // end if
 
         mTop->logic();
@@ -343,7 +342,6 @@ namespace gcn
                     mFocusHandler->tabNext();
                 }
             }
-
         } // end while
     }
 
@@ -806,7 +804,6 @@ namespace gcn
                 {
                     break;
                 }
-
             }
 
             Widget* swap = widget;

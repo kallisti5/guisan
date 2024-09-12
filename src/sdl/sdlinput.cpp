@@ -255,7 +255,6 @@ namespace gcn
                   mMouseInWindow = true;
               }
               break;
-
         } // end switch
     }
 
