@@ -67,7 +67,6 @@
 
 namespace gcn
 {
-
     CheckBox::CheckBox()
     {
         setSelected(false);
@@ -210,4 +209,3 @@ namespace gcn
         distributeActionEvent();
     }
 }
-

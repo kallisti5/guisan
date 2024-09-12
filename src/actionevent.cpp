@@ -79,4 +79,3 @@ namespace gcn
         return mId;
     }
 }
-

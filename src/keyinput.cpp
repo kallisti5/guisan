@@ -71,7 +71,6 @@ namespace gcn
              mMetaPressed(false),
              mNumericPad(false)
     {
-
     }
 
     void KeyInput::setType(unsigned int type)
@@ -144,4 +143,3 @@ namespace gcn
         mNumericPad = numpad;
     }
 }
-

@@ -188,7 +188,6 @@ namespace gcn
             {
                 graphics->drawLine(hh - i, h - 4 - i, hh + i, h - 4 - i);
             }
-
         }
     }
 

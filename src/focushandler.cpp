@@ -76,7 +76,6 @@ namespace gcn
          mLastWidgetWithModalMouseInputFocus(NULL),
          mLastWidgetPressed(NULL)
     {
-
     }
 
     void FocusHandler::requestFocus(Widget* widget)

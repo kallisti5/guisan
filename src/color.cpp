@@ -69,7 +69,6 @@ namespace gcn
 	b(0),
 	a(255)
     {
-
     }
 
     Color::Color(int color)
@@ -79,7 +78,6 @@ namespace gcn
 	g((color >> 8) & 0xFF),
 	a(255)
     {
-
     }
 
     Color::Color(int ar, int ag, int ab, int aa)
@@ -89,7 +87,6 @@ namespace gcn
 	b(ab),
 	a(aa)
     {
-
     }
 
     Color Color::operator+(const Color& color) const

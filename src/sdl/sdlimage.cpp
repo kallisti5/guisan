@@ -191,8 +191,7 @@ namespace gcn
 			SDL_SetTextureBlendMode(tmpTexture, SDL_BLENDMODE_BLEND);
 			SDL_DestroyTexture(mTexture);
 			mTexture = tmpTexture;
-		}
-		
+		}	
     }
 
     void SDLImage::free()
