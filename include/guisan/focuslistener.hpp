@@ -57,8 +57,6 @@
 #ifndef GCN_FOCUSLISTENER_HPP
 #define GCN_FOCUSLISTENER_HPP
 
-#include <string>
-
 #include "guisan/event.hpp"
 #include "guisan/platform.hpp"
 
