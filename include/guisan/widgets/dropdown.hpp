@@ -131,6 +131,11 @@ namespace gcn
          */
         void setSelected(int selected);
 
+        /*
+         * Clears any selected item
+         */
+        void clearSelected(void) const;
+
         /**
          * Sets the list model to use when displaying the list.
          *
@@ -175,6 +180,20 @@ namespace gcn
          */
         void removeSelectionListener(SelectionListener* selectionListener);
 
+        /*
+         * Returns the current Dropdown status
+         */
+        bool isDroppedDown();
+
+        /**
+         * Sets the DropDown Widget to dropped-down mode.
+         */
+        virtual void dropDown();
+
+        /**
+        * Sets the DropDown Widget to folded-up mode.
+        */
+        virtual void foldUp();
 
         // Inherited from Widget
 
@@ -241,16 +260,6 @@ namespace gcn
          * @param graphics a Graphics object to draw with.
          */
         virtual void drawButton(Graphics *graphics);
-
-        /**
-         * Sets the DropDown Widget to dropped-down mode.
-         */
-        virtual void dropDown();
-
-        /**
-         * Sets the DropDown Widget to folded-up mode.
-         */
-        virtual void foldUp();
 
         bool mDroppedDown;
 

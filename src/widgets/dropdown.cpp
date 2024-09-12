@@ -284,6 +284,11 @@ namespace gcn
         }
     }
 
+    void DropDown::clearSelected() const
+    {
+        mListBox->setSelected(-1);
+    }
+
     void DropDown::keyPressed(KeyEvent& keyEvent)
     {
         if (keyEvent.isConsumed())
@@ -456,6 +461,11 @@ namespace gcn
         mListBox->requestFocus();
     }
 
+    bool DropDown::isDroppedDown()
+    {
+        return mDroppedDown;
+    }
+
     void DropDown::foldUp()
     {
         if (mDroppedDown)
@@ -620,4 +630,3 @@ namespace gcn
         }
     }
 }
-
