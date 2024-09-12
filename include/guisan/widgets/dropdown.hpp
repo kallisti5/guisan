@@ -183,7 +183,7 @@ namespace gcn
         /*
          * Returns the current Dropdown status
          */
-        bool isDroppedDown();
+        bool isDroppedDown() const;
 
         /**
          * Sets the DropDown Widget to dropped-down mode.
