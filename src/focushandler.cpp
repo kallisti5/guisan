@@ -373,7 +373,7 @@ namespace gcn
             }
         }
 
-        if (mWidgets.size() == 0)
+        if (mWidgets.empty())
         {
             mFocusedWidget = NULL;
             return;
@@ -450,7 +450,7 @@ namespace gcn
             }
         }
 
-        if (mWidgets.size() == 0)
+        if (mWidgets.empty())
         {
             mFocusedWidget = NULL;
             return;
