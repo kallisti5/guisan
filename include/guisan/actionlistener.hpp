@@ -57,8 +57,6 @@
 #ifndef GCN_ACTIONLISTENER_HPP
 #define GCN_ACTIONLISTENER_HPP
 
-#include <string>
-
 #include "guisan/actionevent.hpp"
 #include "guisan/platform.hpp"
 

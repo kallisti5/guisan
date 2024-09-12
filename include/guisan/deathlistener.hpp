@@ -57,8 +57,6 @@
 #ifndef GCN_DEATHLISTENER_HPP
 #define GCN_DEATHLISTENER_HPP
 
-#include <string>
-
 #include "guisan/event.hpp"
 #include "guisan/platform.hpp"
 
