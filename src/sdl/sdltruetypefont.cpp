@@ -55,16 +55,16 @@
 
 namespace gcn
 {
-	SDLTrueTypeFont::SDLTrueTypeFont (const std::string& filename, int size)
+	SDLTrueTypeFont::SDLTrueTypeFont(const std::string& filename, int size)
 	{
 		mRowSpacing = 0;
 		mGlyphSpacing = 0;
-		mAntiAlias = true;        
+		mAntiAlias = true;
 		mFilename = filename;
 		mFont = NULL;
-	
+
 		mFont = TTF_OpenFont(filename.c_str(), size);
-	
+
 		if (mFont == NULL)
 		{
 			throw GCN_EXCEPTION("SDLTrueTypeFont::SDLTrueTypeFont. "+std::string(TTF_GetError()));
@@ -80,7 +80,7 @@ namespace gcn
 	{
 		int w, h;
 		TTF_SizeText(mFont, text.c_str(), &w, &h);
-	
+
 		return w;
 	}
 
@@ -89,9 +89,10 @@ namespace gcn
 		return TTF_FontHeight(mFont) + mRowSpacing;
 	}
 
-	void SDLTrueTypeFont::drawString(gcn::Graphics* graphics, const std::string& text, const int x, const int y)
+	void SDLTrueTypeFont::drawString(Graphics* graphics, const std::string& text, const int x, const int y,
+	                                 bool enabled)
 	{
-		if (text == "")
+		if (text.empty())
 		{
 			return;
 		}
@@ -105,24 +106,24 @@ namespace gcn
 			throw GCN_EXCEPTION("SDLTrueTypeFont::drawString. Graphics object not an SDL graphics object!");
 			return;
 		}
-	
+
 		// This is needed for drawing the Glyph in the middle if we have spacing
-		int yoffset = getRowSpacing() / 2;
-	
-		Color col;
-		if (sdlGraphics)
+		const int yoffset = getRowSpacing() / 2;
+
+		SDL_Color sdlCol;
+		if (enabled)
 		{
-			col = sdlGraphics->getColor();
+			sdlCol.r = mColor.r;
+			sdlCol.g = mColor.g;
+			sdlCol.b = mColor.b;
+			sdlCol.a = mColor.a;
 		}
 		else
 		{
-			col = sdl2Graphics->getColor();
+			sdlCol.r = 128;
+			sdlCol.g = 128;
+			sdlCol.b = 128;
 		}
-
-		SDL_Color sdlCol;
-		sdlCol.b = col.b;
-		sdlCol.r = col.r;
-		sdlCol.g = col.g;
 
 		SDL_Surface *textSurface;
 		if (mAntiAlias)
@@ -133,7 +134,7 @@ namespace gcn
 		{
 			textSurface = TTF_RenderText_Solid(mFont, text.c_str(), sdlCol);
 		}
-	
+
 		SDL_Rect dst, src;
 		dst.x = x;
 		dst.y = y + yoffset;
@@ -143,7 +144,7 @@ namespace gcn
 		src.y = 0;
 		dst.w = src.w;
 		dst.h = src.h;
-	
+
 		if (sdlGraphics)
 		{
 			sdlGraphics->drawSDLSurface(textSurface, src, dst);
@@ -152,8 +153,8 @@ namespace gcn
 		{
 			sdl2Graphics->drawSDLSurface(textSurface, src, dst);
 		}
-		
-		SDL_FreeSurface(textSurface);        
+
+		SDL_FreeSurface(textSurface);
 	}
 
 	void SDLTrueTypeFont::setRowSpacing(int spacing)
@@ -183,8 +184,11 @@ namespace gcn
 
 	bool SDLTrueTypeFont::isAntiAlias()
 	{
-		return mAntiAlias;        
-	}    
+		return mAntiAlias;
+	}
 
+	void SDLTrueTypeFont::setColor(const Color& color)
+	{
+		mColor = color;
+	}
 }
-

@@ -192,7 +192,7 @@ namespace gcn
         graphics->setFont(getFont());
 
         if (mListBox->getListModel() && mListBox->getSelected() >= 0)
-            graphics->drawText(mListBox->getListModel()->getElementAt(mListBox->getSelected()), 1, 0);
+            graphics->drawText(mListBox->getListModel()->getElementAt(mListBox->getSelected()), 1, 0, Graphics::Left, isEnabled());
 
         // Push a clip area before drawing the button.
         graphics->pushClipArea(Rectangle(currentClipArea.width - currentClipArea.height,
@@ -256,7 +256,10 @@ namespace gcn
         graphics->fillRectangle(
             Rectangle(1, 1, currentClipArea.width - 2, currentClipArea.height - 2));
 
-        graphics->setColor(getForegroundColor());
+        if (isEnabled())
+            graphics->setColor(getForegroundColor());
+        else
+            graphics->setColor(Color(128, 128, 128));
 
         int i;
         int n = currentClipArea.height / 3;
@@ -411,8 +414,8 @@ namespace gcn
 
         setHeight(h2);
 
-        // The addition/subtraction of 2 compensates for the seperation lines
-        // seperating the selected element view and the scroll area.
+        // The addition/subtraction of 2 compensates for the separation lines
+        // separating the selected element view and the scroll area.
 
         if (mDroppedDown && getParent())
         {

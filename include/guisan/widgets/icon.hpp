@@ -89,7 +89,7 @@ namespace gcn
         Icon(const Image* image);
 
         /**
-         * Descructor.
+         * Destructor.
          */
         virtual ~Icon();
 

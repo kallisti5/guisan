@@ -279,7 +279,7 @@ namespace gcn
          * @throws Exception when no font has been set.
          */
         virtual void drawText(const std::string& text, int x, int y,
-                              Alignment alignment = Left);
+                              Alignment alignment = Left, bool enabled = true);
 
     protected:
         /**

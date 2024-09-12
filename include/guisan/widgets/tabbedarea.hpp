@@ -170,7 +170,7 @@ namespace gcn
         /**
          * Checks if a tab is selected or not.
          *
-         * @param index The tab to check.
+         * @param tab The tab to check.
          * @return True if the tab is selected, false otherwise.
          * @see setSelectedTab
          */
@@ -195,7 +195,7 @@ namespace gcn
         /**
          * Gets the index of the selected tab.
          *
-         * @return The undex of the selected tab.
+         * @return The index of the selected tab.
          *         If no tab is selected -1 will be returned.
          * @see isTabSelected, setSelectedTab
          */

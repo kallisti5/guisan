@@ -156,7 +156,7 @@ namespace gcn
 
     Widget* ScrollArea::getContent()
     {
-        if (mWidgets.size() > 0)
+        if (!mWidgets.empty())
         {
             return *mWidgets.begin();
         }

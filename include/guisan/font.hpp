@@ -115,9 +115,10 @@ namespace gcn
          * @param text The string to draw.
          * @param x The x coordinate where to draw the string.
          * @param y The y coordinate where to draw the string.
+         * @param enabled True if the string should be drawn as enabled
          */
         virtual void drawString(Graphics* graphics, const std::string& text,
-                                int x, int y) = 0;
+                                int x, int y, bool enabled) = 0;
     };
 }
 

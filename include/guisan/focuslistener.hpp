@@ -83,7 +83,7 @@ namespace gcn
         /**
          * Called when a widget gains focus. 
          *
-         * @param event Discribes the event.
+         * @param event describes the event.
          */
         virtual void focusGained(const Event& event) { };
 

@@ -135,10 +135,8 @@ namespace gcn
         faceColor.a = alpha;
 
         auto backCol = getBackgroundColor();
-        if (isEnabled())
+        if (!isEnabled())
             backCol = backCol - 0x303030;
-        else
-            backCol = faceColor - 0x101010;
 
         graphics->setColor(backCol);
         graphics->fillRectangle(gcn::Rectangle(0, 0, getWidth(), getHeight()));
@@ -331,7 +329,6 @@ namespace gcn
 
         double pos = v / ((double)w - getMarkerLength());
         return (1.0 - pos) * getScaleStart() + pos * getScaleEnd();
-
     }
 
     int Slider::valueToMarkerPosition(double value) const

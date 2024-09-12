@@ -142,7 +142,8 @@ namespace gcn
         graphics->setFont(getFont());
 
         const Rectangle& dim = mText->getCaretDimension(getFont());
-        if (mText->getNumberOfRows() != 0) graphics->drawText(mText->getRow(0), 1 - mXScroll, 1);
+        if (mText->getNumberOfRows() != 0) 
+            graphics->drawText(mText->getRow(0), 1 - mXScroll, 2, Graphics::Left, isEnabled());
 
         graphics->popClipArea();
     }
@@ -279,7 +280,7 @@ namespace gcn
         return mText->getCaretPosition();
     }
 
-    const std::string& TextField::getText() const
+    std::string TextField::getText() const
     {
         return mText->getContent();
     }
