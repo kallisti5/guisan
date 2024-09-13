@@ -340,10 +340,9 @@ namespace gcn
 
     int ImageFont::getWidth(const std::string& text) const
     {
-        unsigned int i;
         int size = 0;
 
-        for (i = 0; i < text.size(); ++i)
+        for (unsigned int i = 0; i < text.size(); ++i)
         {
             size += getWidth(text.at(i));
         }
@@ -353,10 +352,9 @@ namespace gcn
 
     int ImageFont::getStringIndexAt(const std::string& text, int x) const
     {
-        unsigned int i;
         int size = 0;
 
-        for (i = 0; i < text.size(); ++i)
+        for (unsigned int i = 0; i < text.size(); ++i)
         {
             size += getWidth(text.at(i));
 
