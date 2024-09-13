@@ -96,27 +96,26 @@ namespace gcn
                 break;
             }
         }
-        
+
         if (toBeFocusedIndex < 0)
         {
             throw GCN_EXCEPTION("Trying to focus a non-existing widget.");
         }
-        
+
         Widget *oldFocused = mFocusedWidget;
-        
+
         if (oldFocused != widget)
         {
             mFocusedWidget = mWidgets.at(toBeFocusedIndex);
-            
+
             if (oldFocused != NULL)
             {
                 Event focusEvent(oldFocused);
                 distributeFocusLostEvent(focusEvent);
             }
-            
             Event focusEvent(mWidgets.at(toBeFocusedIndex));
             distributeFocusGainedEvent(focusEvent);
-        }        
+        }
     }
 
     void FocusHandler::requestModalFocus(Widget* widget)
@@ -196,7 +195,7 @@ namespace gcn
         {
             ++focusedWidget;
 
-            if (i==0)
+            if (i == 0)
             {
                 focusedWidget = -1;
                 break;
@@ -257,7 +256,7 @@ namespace gcn
         {
             --focusedWidget;
 
-            if (i==0)
+            if (i == 0)
             {
                 focusedWidget = -1;
                 break;
@@ -323,8 +322,8 @@ namespace gcn
         {
             mDraggedWidget = NULL;
             return;
-        }   
-        
+        }
+
         if (mLastWidgetWithMouse == widget)
         {
             mLastWidgetWithMouse = NULL;
@@ -397,7 +396,7 @@ namespace gcn
         {
             ++focusedWidget;
 
-            if (i==0)
+            if (i == 0)
             {
                 focusedWidget = -1;
                 break;
@@ -418,7 +417,7 @@ namespace gcn
             if (mWidgets.at(focusedWidget)->isFocusable() &&
                 mWidgets.at(focusedWidget)->isTabInEnabled() &&
                 (mModalFocusedWidget == NULL ||
-                 mWidgets.at(focusedWidget)->isModalFocused()))
+                    mWidgets.at(focusedWidget)->isModalFocused()))
             {
                 done = true;
             }
@@ -474,7 +473,7 @@ namespace gcn
         {
             --focusedWidget;
 
-            if (i==0)
+            if (i == 0)
             {
                 focusedWidget = -1;
                 break;
@@ -495,7 +494,7 @@ namespace gcn
             if (mWidgets.at(focusedWidget)->isFocusable() &&
                 mWidgets.at(focusedWidget)->isTabInEnabled() &&
                 (mModalFocusedWidget == NULL ||
-                 mWidgets.at(focusedWidget)->isModalFocused()))
+                    mWidgets.at(focusedWidget)->isModalFocused()))
             {
                 done = true;
             }

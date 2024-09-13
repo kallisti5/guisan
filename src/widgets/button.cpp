@@ -209,8 +209,8 @@ namespace gcn
 
     void Button::adjustSize()
     {
-        setWidth(getFont()->getWidth(mCaption) + 2*mSpacing);
-        setHeight(getFont()->getHeight() + 2*mSpacing);
+        setWidth(getFont()->getWidth(mCaption) + 2 * mSpacing);
+        setHeight(getFont()->getHeight() + 2 * mSpacing);
     }
 
     bool Button::isPressed() const

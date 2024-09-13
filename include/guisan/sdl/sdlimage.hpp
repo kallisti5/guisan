@@ -96,13 +96,13 @@ namespace gcn
          * @return the SDL surface for the image.
          */
         virtual SDL_Surface* getSurface() const;
-		
-		/**
-		 * Gets the SDL texture for the image.
+
+        /**
+         * Gets the SDL texture for the image.
          *
          * @return the SDL texture for the image.
-		 */
-		virtual SDL_Texture* getTexture() const;
+         */
+        virtual SDL_Texture* getTexture() const;
 
         // Inherited from Image
 

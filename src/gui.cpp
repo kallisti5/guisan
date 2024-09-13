@@ -297,7 +297,7 @@ namespace gcn
             }
 
             bool keyEventConsumed = false;
-            
+
             // Send key inputs to the focused widgets
             if (mFocusHandler->getFocused() != NULL)
             {
@@ -311,7 +311,7 @@ namespace gcn
                                   keyInput.getType(),
                                   keyInput.isNumericPad(),
                                   keyInput.getKey());
-                
+
 
                 if (!mFocusHandler->getFocused()->isFocusable())
                 {
@@ -438,7 +438,7 @@ namespace gcn
         Widget* widget = parent;
 
         // If a widget has modal mouse input focus then it will
-        // always be returned from getMouseEventSource, but we only wan't to send
+        // always be returned from getMouseEventSource, but we only want to send
         // mouse entered events if the mouse has actually entered the widget with
         // modal mouse input focus, hence we need to check if that's the case. If
         // it's not we should simply ignore to send any mouse entered events.
@@ -451,7 +451,7 @@ namespace gcn
 
             if (x > mouseInput.getX()
                 || y > mouseInput.getY()
-                || x + widget->getWidth() <= mouseInput.getX() 
+                || x + widget->getWidth() <= mouseInput.getX()
                 || y + widget->getHeight() <= mouseInput.getY())
             {
                 parent = NULL;
@@ -612,7 +612,7 @@ namespace gcn
 
         int sourceWidgetX, sourceWidgetY;
         sourceWidget->getAbsolutePosition(sourceWidgetX, sourceWidgetY);
-        
+
         distributeMouseEvent(sourceWidget,
                              MouseEvent::Released,
                              mouseInput.getButton(),
