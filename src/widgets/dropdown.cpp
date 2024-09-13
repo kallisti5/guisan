@@ -211,7 +211,7 @@ namespace gcn
             graphics->drawRectangle(
                 Rectangle(0, mFoldedUpHeight, getWidth(), getHeight() - mFoldedUpHeight));
 
-            drawChildren(graphics);
+            //drawChildren(graphics);
         }
     }
 
@@ -489,7 +489,6 @@ namespace gcn
         {
             mScrollArea = NULL;
         }
-        BasicContainer::death(event);
     }
 
     void DropDown::action(const ActionEvent& actionEvent)

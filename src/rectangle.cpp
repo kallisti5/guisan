@@ -142,7 +142,7 @@ namespace gcn
 
     bool Rectangle::isEmpty() const
     {
-        return width < 0 || height < 0;
+        return width <= 0 || height <= 0;
     }
 
     Rectangle Rectangle::operator+(const Rectangle& rh) const

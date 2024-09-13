@@ -57,9 +57,9 @@
 #ifndef GCN_SCROLLAREA_HPP
 #define GCN_SCROLLAREA_HPP
 
-#include "guisan/basiccontainer.hpp"
 #include "guisan/mouselistener.hpp"
 #include "guisan/platform.hpp"
+#include "guisan/widget.hpp"
 
 namespace gcn
 {
@@ -73,8 +73,8 @@ namespace gcn
      *       ScrollArea.
      */
     class GCN_CORE_DECLSPEC ScrollArea:
-        public BasicContainer,
-        public MouseListener
+        public MouseListener,
+        public Widget
     {
     public:
         /**

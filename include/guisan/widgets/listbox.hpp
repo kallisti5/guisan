@@ -173,9 +173,6 @@ namespace gcn
          * changes an event will be sent to all selection listeners of the
          * list box.
          *
-         * If you delete your selection listener, be sure to also remove it
-         * using removeSelectionListener().
-         *
          * @param selectionListener The selection listener to add.
          * @since 0.8.0
          */
@@ -204,11 +201,9 @@ namespace gcn
 
         virtual void logic();
 
-
         // Inherited from KeyListener
 
         virtual void keyPressed(KeyEvent& keyEvent);
-
 
         // Inherited from MouseListener
 

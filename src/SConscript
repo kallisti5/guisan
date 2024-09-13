@@ -6,7 +6,6 @@ Import("env")
 
 main_sources = [
 	'actionevent.cpp',
-	'basiccontainer.cpp',
 	'cliprectangle.cpp',
 	'color.cpp',
 	'containerevent.cpp',

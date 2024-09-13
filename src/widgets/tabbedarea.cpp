@@ -313,7 +313,7 @@ namespace gcn
                                mTabContainer->getHeight());
         }
 
-        drawChildren(graphics);
+        //drawChildren(graphics);
     }
 
     void TabbedArea::adjustSize()
@@ -484,7 +484,7 @@ namespace gcn
         }
         else
         {
-            BasicContainer::death(event);
+            //BasicContainer::death(event);
         }
     }
 

@@ -156,9 +156,9 @@ namespace gcn
 
     Widget* ScrollArea::getContent()
     {
-        if (!mWidgets.empty())
+        if (!mChildren.empty())
         {
-            return *mWidgets.begin();
+            return *mChildren.begin();
         }
 
         return NULL;
@@ -286,14 +286,11 @@ namespace gcn
 
     void ScrollArea::setScrollbarWidth(int width)
     {
-        if (width > 0)
-        {
-            mScrollbarWidth = width;
-        }
-        else
+        if (width <= 0)
         {
             throw GCN_EXCEPTION("Width should be greater then 0.");
         }
+        mScrollbarWidth = width;
     }
 
     int ScrollArea::getScrollbarWidth() const
@@ -453,8 +450,6 @@ namespace gcn
                                               mScrollbarWidth,
                                               mScrollbarWidth));
         }
-
-        drawChildren(graphics);
     }
 
     void ScrollArea::drawHBar(Graphics* graphics)
@@ -825,7 +820,6 @@ namespace gcn
         mHBarVisible = false;
         mVBarVisible = false;
 
-
         if (!getContent())
         {
             mHBarVisible = (mHPolicy == ShowAlways);
@@ -1138,7 +1132,7 @@ namespace gcn
             throw GCN_EXCEPTION("Widget not content widget");
         }
 
-        BasicContainer::showWidgetPart(widget, area);
+        Widget::showWidgetPart(widget, area);
 
         setHorizontalScrollAmount(getContent()->getFrameSize() - getContent()->getX());
         setVerticalScrollAmount(getContent()->getFrameSize() - getContent()->getY());

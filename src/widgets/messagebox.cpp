@@ -310,7 +310,7 @@ namespace gcn
                            d.x + d.width - 1,
                            d.y + d.height - 1);
 
-        drawChildren(graphics);
+        //drawChildren(graphics);
 
         int textX;
         int textY;
@@ -418,10 +418,10 @@ namespace gcn
 
     void MessageBox::resizeToContent()
     {
-        WidgetListIterator it;
+        std::list<Widget*>::const_iterator it;
 
         int w = 0, h = 0;
-        for (it = mWidgets.begin(); it != mWidgets.end(); it++)
+        for (it = mChildren.begin(); it != mChildren.end(); it++)
         {
             if ((*it)->getX() + (*it)->getWidth() > w)
             {

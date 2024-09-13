@@ -22,7 +22,6 @@ FILE(GLOB GUISAN_HEADER include/guisan.hpp)
 FILE(GLOB GUISAN_HEADERS
   include/guisan/actionevent.hpp
   include/guisan/actionlistener.hpp
-  include/guisan/basiccontainer.hpp
   include/guisan/cliprectangle.hpp
   include/guisan/color.hpp
   include/guisan/containerevent.hpp

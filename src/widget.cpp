@@ -62,7 +62,6 @@
 
 #include "guisan/actionevent.hpp"
 #include "guisan/actionlistener.hpp"
-#include "guisan/basiccontainer.hpp"
 #include "guisan/deathlistener.hpp"
 #include "guisan/defaultfont.hpp"
 #include "guisan/event.hpp"
@@ -75,11 +74,13 @@
 #include "guisan/mouselistener.hpp"
 #include "guisan/widgetlistener.hpp"
 
+#include <algorithm>
+
 namespace gcn
 {
     Font* Widget::mGlobalFont = NULL;
     DefaultFont Widget::mDefaultFont;
-    std::list<Widget*> Widget::mWidgets;
+    std::list<Widget*> Widget::mWidgetInstances;
 
     Widget::Widget()
             : mForegroundColor(0x000000),
@@ -97,22 +98,32 @@ namespace gcn
               mEnabled(true),
               mCurrentFont(NULL)
     {
-        mWidgets.push_back(this);
+        mWidgetInstances.push_back(this);
     }
 
     Widget::~Widget()
     {
-        DeathListenerIterator iter;
+        if (mParent != NULL)
+        {
+            mParent->remove(this);
+        }
 
-        for (iter = mDeathListeners.begin(); iter != mDeathListeners.end(); ++iter)
+        std::list<Widget*>::const_iterator childrenIter;
+        for (childrenIter = mChildren.begin(); childrenIter != mChildren.end(); childrenIter++)
+        {
+            (*childrenIter)->_setParent(NULL);
+        }
+
+        std::list<DeathListener*>::const_iterator deathIter;
+        for (deathIter = mDeathListeners.begin(); deathIter != mDeathListeners.end(); ++deathIter)
         {
             Event event(this);
-            (*iter)->death(event);
+            (*deathIter)->death(event);
         }
 
         _setFocusHandler(NULL);
 
-        mWidgets.remove(this);
+        mWidgetInstances.remove(this);
     }
 
     void Widget::drawFrame(Graphics* graphics)
@@ -392,6 +403,20 @@ namespace gcn
         }
 
         mFocusHandler = focusHandler;
+
+        if (mInternalFocusHandler != NULL)
+        {
+            return;
+        }
+
+        std::list<Widget*>::const_iterator iter;
+        for (iter = mChildren.begin(); iter != mChildren.end(); iter++)
+        {
+            if (widgetExists(*iter))
+            {
+                (*iter)->_setFocusHandler(focusHandler);
+            }
+        }
     }
 
     FocusHandler* Widget::_getFocusHandler()
@@ -497,7 +522,7 @@ namespace gcn
         mGlobalFont = font;
 
         std::list<Widget*>::iterator iter;
-        for (iter = mWidgets.begin(); iter != mWidgets.end(); ++iter)
+        for (iter = mWidgetInstances.begin(); iter != mWidgetInstances.end(); ++iter)
         {
             if ((*iter)->mCurrentFont == NULL)
             {
@@ -514,10 +539,8 @@ namespace gcn
 
     bool Widget::widgetExists(const Widget* widget)
     {
-        bool result = false;
-
-        std::list<Widget*>::iterator iter;
-        for (iter = mWidgets.begin(); iter != mWidgets.end(); ++iter)
+        std::list<Widget*>::const_iterator iter;
+        for (iter = mWidgetInstances.begin(); iter != mWidgetInstances.end(); ++iter)
         {
             if (*iter == widget)
             {
@@ -525,7 +548,7 @@ namespace gcn
             }
         }
 
-        return result;
+        return false;
     }
 
     bool Widget::isTabInEnabled() const
@@ -639,6 +662,25 @@ namespace gcn
 
     Widget *Widget::getWidgetAt(int x, int y)
     {
+        Rectangle r = getChildrenArea();
+
+        if (!r.isContaining(x, y))
+        {
+            return NULL;
+        }
+
+        x -= r.x;
+        y -= r.y;
+
+        std::list<Widget*>::const_reverse_iterator iter;
+        for (iter = mChildren.rbegin(); iter != mChildren.rend(); iter++)
+        {
+            Widget* widget = (*iter);
+            if (widget->isVisible() && widget->getDimension().isContaining(x, y))
+            {
+                return widget;
+            }
+        }
         return NULL;
     }
 
@@ -670,6 +712,19 @@ namespace gcn
     void Widget::setInternalFocusHandler(FocusHandler* focusHandler)
     {
         mInternalFocusHandler = focusHandler;
+
+        std::list<Widget*>::const_iterator iter;
+        for (iter = mChildren.begin(); iter != mChildren.end(); iter++)
+        {
+            if (mInternalFocusHandler == NULL)
+            {
+                (*iter)->_setFocusHandler(_getFocusHandler());
+            }
+            else
+            {
+                (*iter)->_setFocusHandler(mInternalFocusHandler);
+            }
+        }
     }
 
     void Widget::setId(const std::string& id)
@@ -684,7 +739,7 @@ namespace gcn
 
     void Widget::distributeResizedEvent()
     {
-        WidgetListenerIterator iter;
+        std::list<WidgetListener*>::const_iterator iter;
 
         for (iter = mWidgetListeners.begin(); iter != mWidgetListeners.end(); ++iter)
         {
@@ -695,7 +750,7 @@ namespace gcn
 
     void Widget::distributeMovedEvent()
     {
-        WidgetListenerIterator iter;
+        std::list<WidgetListener*>::const_iterator iter;
 
         for (iter = mWidgetListeners.begin(); iter != mWidgetListeners.end(); ++iter)
         {
@@ -706,7 +761,7 @@ namespace gcn
 
     void Widget::distributeHiddenEvent()
     {
-        WidgetListenerIterator iter;
+        std::list<WidgetListener*>::const_iterator iter;
 
         for (iter = mWidgetListeners.begin(); iter != mWidgetListeners.end(); ++iter)
         {
@@ -717,7 +772,7 @@ namespace gcn
 
     void Widget::distributeActionEvent()
     {
-        ActionListenerIterator iter;
+        std::list<ActionListener*>::const_iterator iter;
         for (iter = mActionListeners.begin(); iter != mActionListeners.end(); ++iter)
         {
             ActionEvent actionEvent(this, mActionEventId);
@@ -727,7 +782,7 @@ namespace gcn
 
     void Widget::distributeShownEvent()
     {
-        WidgetListenerIterator iter;
+        std::list<WidgetListener*>::const_iterator iter;
 
         for (iter = mWidgetListeners.begin(); iter != mWidgetListeners.end(); ++iter)
         {
@@ -762,6 +817,287 @@ namespace gcn
 
     std::list<Widget*> Widget::getWidgetsIn(const Rectangle& area, Widget* ignore)
     {
-        return std::list<Widget*>();
+        std::list<Widget*> result;
+
+        std::list<Widget*>::const_iterator iter;
+        for (iter = mChildren.begin(); iter != mChildren.end(); iter++)
+        {
+            Widget* widget = (*iter);
+            if (ignore != widget && widget->getDimension().isIntersecting(area))
+            {
+                result.push_back(widget);
+            }
+        }
+
+        return result;
+    }
+
+    void Widget::resizeToChildren()
+    {
+        int w = 0, h = 0;
+        std::list<Widget*>::const_iterator iter;
+        for (iter = mChildren.begin(); iter != mChildren.end(); iter++)
+        {
+            Widget* widget = (*iter);
+            if (widget->getX() + widget->getWidth() > w)
+            {
+                w = widget->getX() + widget->getWidth();
+            }
+
+            if (widget->getY() + widget->getHeight() > h)
+            {
+                h = widget->getY() + widget->getHeight();
+            }
+        }
+
+        setSize(w, h);
+    }
+
+    Widget* Widget::findWidgetById(const std::string& id)
+    {
+        std::list<Widget*>::const_iterator iter;
+        for (iter = mChildren.begin(); iter != mChildren.end(); iter++)
+        {
+            Widget* widget = (*iter);
+
+            if (widget->getId() == id)
+            {
+                return widget;
+            }
+
+            Widget* child = widget->findWidgetById(id);
+
+            if (child != NULL)
+            {
+                return child;
+            }
+        }
+
+        return NULL;
+    }
+
+    void Widget::showWidgetPart(Widget* widget, Rectangle area)
+    {
+        Rectangle widgetArea = getChildrenArea();
+
+        area.x += widget->getX();
+        area.y += widget->getY();
+
+        if (area.x + area.width > widgetArea.width)
+        {
+            widget->setX(widget->getX() - area.x - area.width + widgetArea.width);
+        }
+
+        if (area.y + area.height > widgetArea.height)
+        {
+            widget->setY(widget->getY() - area.y - area.height + widgetArea.height);
+        }
+
+        if (area.x < 0)
+        {
+            widget->setX(widget->getX() - area.x);
+        }
+
+        if (area.y < 0)
+        {
+            widget->setY(widget->getY() - area.y);
+        }
+    }
+
+    void Widget::clear()
+    {
+        std::list<Widget*>::const_iterator iter;
+        for (iter = mChildren.begin(); iter != mChildren.end(); iter++)
+        {
+            Widget* widget = (*iter);
+            widget->_setFocusHandler(NULL);
+            widget->_setParent(NULL);
+        }
+
+        mChildren.clear();
+    }
+
+    void Widget::remove(Widget* widget)
+    {
+        std::list<Widget*>::iterator iter;
+        for (iter = mChildren.begin(); iter != mChildren.end(); iter++)
+        {
+            if (*iter == widget)
+            {
+                mChildren.erase(iter);
+                widget->_setFocusHandler(NULL);
+                widget->_setParent(NULL);
+                return;
+            }
+        }
+
+        throw GCN_EXCEPTION("There is no such widget in this container.");
+    }
+
+    void Widget::add(Widget* widget)
+    {
+        mChildren.push_back(widget);
+
+        if (mInternalFocusHandler == NULL)
+        {
+            widget->_setFocusHandler(_getFocusHandler());
+        }
+        else
+        {
+            widget->_setFocusHandler(mInternalFocusHandler);
+        }
+
+        widget->_setParent(this);
+    }
+
+    void Widget::moveToTop(Widget* widget)
+    {
+        std::list<Widget*>::iterator iter;
+        iter = std::find(mChildren.begin(), mChildren.end(), widget);
+
+        if (iter == mChildren.end())
+        {
+            throw GCN_EXCEPTION("There is no such widget in this widget.");
+        }
+
+        mChildren.remove(widget);
+        mChildren.push_back(widget);
+    }
+
+    void Widget::moveToBottom(Widget* widget)
+    {
+        std::list<Widget*>::iterator iter;
+        iter = find(mChildren.begin(), mChildren.end(), widget);
+
+        if (iter == mChildren.end())
+        {
+            throw GCN_EXCEPTION("There is no such widget in this widget.");
+        }
+
+        mChildren.remove(widget);
+        mChildren.push_front(widget);
+    }
+
+    void Widget::focusNext()
+    {
+        std::list<Widget*>::const_iterator iter;
+
+        for (iter = mChildren.begin(); iter != mChildren.end(); iter++)
+        {
+            if ((*iter)->isFocused())
+            {
+                break;
+            }
+        }
+
+        std::list<Widget*>::const_iterator end = iter;
+
+        if (iter == mChildren.end())
+        {
+            iter = mChildren.begin();
+        }
+
+        iter++;
+
+        for (; iter != end; iter++)
+        {
+            if (iter == mChildren.end())
+            {
+                iter = mChildren.begin();
+            }
+
+            if ((*iter)->isFocusable())
+            {
+                (*iter)->requestFocus();
+                return;
+            }
+        }
+    }
+
+    void Widget::focusPrevious()
+    {
+        std::list<Widget*>::const_reverse_iterator iter;
+
+        for (iter = mChildren.rbegin(); iter != mChildren.rend(); iter++)
+        {
+            if ((*iter)->isFocused())
+            {
+                break;
+            }
+        }
+
+        std::list<Widget*>::const_reverse_iterator end = iter;
+        iter++;
+
+        if (iter == mChildren.rend())
+        {
+            iter = mChildren.rbegin();
+        }
+
+        for (; iter != end; iter++)
+        {
+            if (iter == mChildren.rend())
+            {
+                iter = mChildren.rbegin();
+            }
+
+            if ((*iter)->isFocusable())
+            {
+                (*iter)->requestFocus();
+                return;
+            }
+        }
+    }
+
+    void Widget::_draw(Graphics* graphics)
+    {
+        if (mBorderSize > 0)
+        {
+            Rectangle rec = mDimension;
+            rec.x -= mBorderSize;
+            rec.y -= mBorderSize;
+            rec.width += 2 * mBorderSize;
+            rec.height += 2 * mBorderSize;
+            graphics->pushClipArea(rec);
+            drawFrame(graphics);
+            graphics->popClipArea();
+        }
+
+        graphics->pushClipArea(mDimension);
+        draw(graphics);
+
+        const Rectangle& childrenArea = getChildrenArea();
+        graphics->pushClipArea(childrenArea);
+
+        std::list<Widget*>::const_iterator iter;
+        for (iter = mChildren.begin(); iter != mChildren.end(); iter++)
+        {
+            Widget* widget = (*iter);
+            // Only draw a widget if it's visible and if it visible
+            // inside the children area.
+            if (widget->isVisible() && childrenArea.isIntersecting(widget->getDimension()))
+            {
+                widget->_draw(graphics);
+            }
+        }
+
+        graphics->popClipArea();
+        graphics->popClipArea();
+    }
+
+    void Widget::_logic()
+    {
+        logic();
+
+        std::list<Widget*>::const_iterator iter;
+        for (iter = mChildren.begin(); iter != mChildren.end(); iter++)
+        {
+            (*iter)->_logic();
+        }
+    }
+
+    const std::list<Widget*>& Widget::getChildren() const
+    {
+        return mChildren;
     }
 }
