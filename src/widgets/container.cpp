@@ -84,7 +84,7 @@ namespace gcn
         }
     }
 
-    void Container::setOpaque(bool opaque)
+    void Container::setOpaque(const bool opaque)
     {
         mOpaque = opaque;
     }
@@ -100,7 +100,7 @@ namespace gcn
         distributeWidgetAddedEvent(widget);
     }
 
-    void Container::add(Widget* widget, int x, int y)
+    void Container::add(Widget* widget, const int x, const int y)
     {
         widget->setPosition(x, y);
         Widget::add(widget);

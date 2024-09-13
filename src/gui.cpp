@@ -189,7 +189,7 @@ namespace gcn
         mFocusHandler->focusNone();
     }
 
-    void Gui::setTabbingEnabled(bool tabbing)
+    void Gui::setTabbingEnabled(const bool tabbing)
     {
         mTabbing = tabbing;
     }
@@ -544,7 +544,7 @@ namespace gcn
         }
     }
 
-    Widget* Gui::getWidgetAt(int x, int y)
+    Widget* Gui::getWidgetAt(const int x, const int y)
     {
         // If the widget's parent has no child then we have found the widget..
         Widget* parent = mTop;
@@ -562,7 +562,7 @@ namespace gcn
         return parent;
     }
 
-    std::set<Widget*> Gui::getWidgetsAt(int x, int y)
+    std::set<Widget*> Gui::getWidgetsAt(const int x, const int y)
     {
         std::set<Widget*> result;
 
@@ -579,7 +579,7 @@ namespace gcn
         return result;
     }
 
-    Widget* Gui::getMouseEventSource(int x, int y)
+    Widget* Gui::getMouseEventSource(const int x, const int y)
     {
         Widget* widget = getWidgetAt(x, y);
 
@@ -606,12 +606,12 @@ namespace gcn
     }
 
     void Gui::distributeMouseEvent(Widget* source,
-                                   int type,
-                                   int button,
-                                   int x,
-                                   int y,
-                                   bool force,
-                                   bool toSourceOnly)
+                                   const int type,
+                                   const int button,
+                                   const int x,
+                                   const int y,
+                                   const bool force,
+                                   const bool toSourceOnly)
     {
         Widget* parent = source;
         Widget* widget = source;
@@ -826,7 +826,7 @@ namespace gcn
     void Gui::handleModalMouseInputFocus()
     {
         // Check if modal mouse input focus has been gained by a widget.
-        if ((mFocusHandler->getLastWidgetWithModalMouseInputFocus() 
+        if ((mFocusHandler->getLastWidgetWithModalMouseInputFocus()
                 != mFocusHandler->getModalMouseInputFocused())
              && (mFocusHandler->getLastWidgetWithModalMouseInputFocus() == NULL))
         {
@@ -843,10 +843,10 @@ namespace gcn
         }
     }
 
-     void Gui::handleModalFocus()
+    void Gui::handleModalFocus()
     {
         // Check if modal focus has been gained by a widget.
-        if ((mFocusHandler->getLastWidgetWithModalFocus() 
+        if ((mFocusHandler->getLastWidgetWithModalFocus()
                 != mFocusHandler->getModalFocused())
              && (mFocusHandler->getLastWidgetWithModalFocus() == NULL))
         {

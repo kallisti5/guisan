@@ -110,7 +110,7 @@ namespace gcn
         addMouseListener(this);
     }
 
-    ScrollArea::ScrollArea(Widget *content, ScrollPolicy hPolicy, ScrollPolicy vPolicy)
+    ScrollArea::ScrollArea(Widget *content, const ScrollPolicy hPolicy, const ScrollPolicy vPolicy)
     {
         mVScroll = 0;
         mHScroll = 0;
@@ -154,7 +154,7 @@ namespace gcn
         checkPolicies();
     }
 
-    Widget* ScrollArea::getContent()
+    Widget* ScrollArea::getContent() const
     {
         if (!mChildren.empty())
         {
@@ -164,7 +164,7 @@ namespace gcn
         return NULL;
     }
 
-    void ScrollArea::setHorizontalScrollPolicy(ScrollPolicy hPolicy)
+    void ScrollArea::setHorizontalScrollPolicy(const ScrollPolicy hPolicy)
     {
         mHPolicy = hPolicy;
         checkPolicies();
@@ -175,7 +175,7 @@ namespace gcn
         return mHPolicy;
     }
 
-    void ScrollArea::setVerticalScrollPolicy(ScrollPolicy vPolicy)
+    void ScrollArea::setVerticalScrollPolicy(const ScrollPolicy vPolicy)
     {
         mVPolicy = vPolicy;
         checkPolicies();
@@ -186,14 +186,14 @@ namespace gcn
         return mVPolicy;
     }
 
-    void ScrollArea::setScrollPolicy(ScrollPolicy hPolicy, ScrollPolicy vPolicy)
+    void ScrollArea::setScrollPolicy(const ScrollPolicy hPolicy, const ScrollPolicy vPolicy)
     {
         mHPolicy = hPolicy;
         mVPolicy = vPolicy;
         checkPolicies();
     }
 
-    void ScrollArea::setVerticalScrollAmount(int vScroll)
+    void ScrollArea::setVerticalScrollAmount(const int vScroll)
     {
         const int max = getVerticalMaxScroll();
 
@@ -215,7 +215,7 @@ namespace gcn
         return mVScroll;
     }
 
-    void ScrollArea::setHorizontalScrollAmount(int hScroll)
+    void ScrollArea::setHorizontalScrollAmount(const int hScroll)
     {
         const int max = getHorizontalMaxScroll();
 
@@ -236,7 +236,7 @@ namespace gcn
         return mHScroll;
     }
 
-    void ScrollArea::setScrollAmount(int hScroll, int vScroll)
+    void ScrollArea::setScrollAmount(const int hScroll, const int vScroll)
     {
         setHorizontalScrollAmount(hScroll);
         setVerticalScrollAmount(vScroll);
@@ -284,7 +284,7 @@ namespace gcn
         return value;
     }
 
-    void ScrollArea::setScrollbarWidth(int width)
+    void ScrollArea::setScrollbarWidth(const int width)
     {
         if (width <= 0)
         {
@@ -906,7 +906,7 @@ namespace gcn
         }
     }
 
-    Rectangle ScrollArea::getUpButtonDimension()
+    Rectangle ScrollArea::getUpButtonDimension() const
     {
         if (!mVBarVisible)
         {
@@ -919,7 +919,7 @@ namespace gcn
                          mScrollbarWidth);
     }
 
-    Rectangle ScrollArea::getDownButtonDimension()
+    Rectangle ScrollArea::getDownButtonDimension() const
     {
         if (!mVBarVisible)
         {
@@ -940,7 +940,7 @@ namespace gcn
                          mScrollbarWidth);
     }
 
-    Rectangle ScrollArea::getLeftButtonDimension()
+    Rectangle ScrollArea::getLeftButtonDimension() const
     {
         if (!mHBarVisible)
         {
@@ -953,7 +953,7 @@ namespace gcn
                          mScrollbarWidth);
     }
 
-    Rectangle ScrollArea::getRightButtonDimension()
+    Rectangle ScrollArea::getRightButtonDimension() const
     {
         if (!mHBarVisible)
         {
@@ -987,7 +987,7 @@ namespace gcn
         return area;
     }
 
-    Rectangle ScrollArea::getVerticalBarDimension()
+    Rectangle ScrollArea::getVerticalBarDimension() const
     {
         if (!mVBarVisible)
         {
@@ -1013,7 +1013,7 @@ namespace gcn
                          - getDownButtonDimension().height);
     }
 
-    Rectangle ScrollArea::getHorizontalBarDimension()
+    Rectangle ScrollArea::getHorizontalBarDimension() const
     {
         if (!mHBarVisible)
         {
@@ -1125,7 +1125,7 @@ namespace gcn
         return Rectangle(barDim.x + pos, barDim.y, length, mScrollbarWidth);
     }
 
-    void ScrollArea::showWidgetPart(Widget* widget, Rectangle area)
+    void ScrollArea::showWidgetPart(Widget* widget, const Rectangle area)
     {
         if (widget != getContent())
         {
@@ -1138,7 +1138,7 @@ namespace gcn
         setVerticalScrollAmount(getContent()->getFrameSize() - getContent()->getY());
     }
 
-    Widget *ScrollArea::getWidgetAt(int x, int y)
+    Widget *ScrollArea::getWidgetAt(const int x, const int y)
     {
         if (getChildrenArea().isContaining(x, y))
         {
@@ -1172,13 +1172,13 @@ namespace gcn
         mouseEvent.consume();
     }
 
-    void ScrollArea::setWidth(int width)
+    void ScrollArea::setWidth(const int width)
     {
         Widget::setWidth(width);
         checkPolicies();
     }
 
-    void ScrollArea::setHeight(int height)
+    void ScrollArea::setHeight(const int height)
     {
         Widget::setHeight(height);
         checkPolicies();
@@ -1190,22 +1190,22 @@ namespace gcn
         checkPolicies();
     }
 
-    void ScrollArea::setLeftButtonScrollAmount(int amount)
+    void ScrollArea::setLeftButtonScrollAmount(const int amount)
     {
         mLeftButtonScrollAmount = amount;
     }
 
-    void ScrollArea::setRightButtonScrollAmount(int amount)
+    void ScrollArea::setRightButtonScrollAmount(const int amount)
     {
         mRightButtonScrollAmount = amount;
     }
 
-    void ScrollArea::setUpButtonScrollAmount(int amount)
+    void ScrollArea::setUpButtonScrollAmount(const int amount)
     {
         mUpButtonScrollAmount = amount;
     }
 
-    void ScrollArea::setDownButtonScrollAmount(int amount)
+    void ScrollArea::setDownButtonScrollAmount(const int amount)
     {
         mDownButtonScrollAmount = amount;
     }
@@ -1230,7 +1230,7 @@ namespace gcn
         return mDownButtonScrollAmount;
     }
 
-    void ScrollArea::setOpaque(bool opaque)
+    void ScrollArea::setOpaque(const bool opaque)
     {
         mOpaque = opaque;
     }
