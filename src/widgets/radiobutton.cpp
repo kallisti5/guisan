@@ -203,9 +203,10 @@ namespace gcn
     {
         if (selected && !mGroup.empty())
         {
-            const GroupIterator iterEnd = mGroupMap.upper_bound(mGroup);
+            GroupIterator iter, iterEnd;
+            iterEnd = mGroupMap.upper_bound(mGroup);
 
-            for (GroupIterator iter = mGroupMap.lower_bound(mGroup);
+            for (iter = mGroupMap.lower_bound(mGroup);
                 iter != iterEnd;
                 iter++)
             {
@@ -260,9 +261,10 @@ namespace gcn
     {
         if (!mGroup.empty())
         {
-            const GroupIterator iterEnd = mGroupMap.upper_bound(mGroup);
+            GroupIterator iter, iterEnd;
+            iterEnd = mGroupMap.upper_bound(mGroup);
 
-            for (GroupIterator iter = mGroupMap.lower_bound(mGroup);
+            for (iter = mGroupMap.lower_bound(mGroup);
                 iter != iterEnd;
                 iter++)
             {

@@ -109,11 +109,10 @@ namespace gcn
 
             if (oldFocused != NULL)
             {
-                const Event focusEvent(oldFocused);
+                Event focusEvent(oldFocused);
                 distributeFocusLostEvent(focusEvent);
             }
-
-            const Event focusEvent(mWidgets.at(toBeFocusedIndex));
+            Event focusEvent(mWidgets.at(toBeFocusedIndex));
             distributeFocusGainedEvent(focusEvent);
         }
     }
@@ -186,7 +185,7 @@ namespace gcn
                 focusedWidget = i;
             }
         }
-        const int focused = focusedWidget;
+        int focused = focusedWidget;
 
         // i is a counter that ensures that the following loop
         // won't get stuck in an infinite loop
@@ -356,7 +355,7 @@ namespace gcn
             Widget* focused = mFocusedWidget;
             mFocusedWidget = NULL;
 
-            const Event focusEvent(focused);
+            Event focusEvent(focused);
             distributeFocusLostEvent(focusEvent);
         }
     }
