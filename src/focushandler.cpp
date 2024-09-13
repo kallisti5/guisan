@@ -85,10 +85,9 @@ namespace gcn
         {
             return;
         }
-        
-        unsigned int i = 0;
+
         int toBeFocusedIndex = -1;
-        for (i = 0; i < mWidgets.size(); ++i)
+        for (unsigned int i = 0; i < mWidgets.size(); ++i)
         {
             if (mWidgets[i] == widget)
             {
