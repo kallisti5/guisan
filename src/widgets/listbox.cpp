@@ -319,17 +319,17 @@ namespace gcn
     {
         if (mListModel != NULL)
         {
-            int maxElementLength = getWidth();
+            int maxElementWidth = getWidth();
             for (int i = 0; i < mListModel->getNumberOfElements(); i++)
             {
                 const auto elementLength = getFont()->getWidth(mListModel->getElementAt(i));
-                if (elementLength > maxElementLength)
+                if (elementLength > maxElementWidth)
                 {
-                    maxElementLength = elementLength;
+                    maxElementWidth = elementLength;
                 }
             }
-            if (maxElementLength > getWidth())
-                setWidth(maxElementLength + 4);
+            if (maxElementWidth > getWidth())
+                setWidth(maxElementWidth + 4);
             setHeight(getRowHeight() * mListModel->getNumberOfElements());
         }
     }
