@@ -672,8 +672,7 @@ namespace gcn
         x -= r.x;
         y -= r.y;
 
-        std::list<Widget*>::const_reverse_iterator iter;
-        for (iter = mChildren.rbegin(); iter != mChildren.rend(); iter++)
+        for (auto iter = mChildren.rbegin(); iter != mChildren.rend(); ++iter)
         {
             Widget* widget = (*iter);
             if (widget->isVisible() && widget->getDimension().isContaining(x, y))
@@ -1016,17 +1015,15 @@ namespace gcn
 
     void Widget::focusPrevious()
     {
-        std::list<Widget*>::const_reverse_iterator iter;
-
-        for (iter = mChildren.rbegin(); iter != mChildren.rend(); iter++)
+        auto iter = mChildren.rbegin();
+        for (; iter != mChildren.rend(); ++iter)
         {
             if ((*iter)->isFocused())
             {
                 break;
             }
         }
-
-        std::list<Widget*>::const_reverse_iterator end = iter;
+        const auto end = iter;
         iter++;
 
         if (iter == mChildren.rend())
