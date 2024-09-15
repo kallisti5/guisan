@@ -52,12 +52,12 @@
 
 namespace gcn
 {
-    Text::Text() : mCaretPosition(0), mCaretColumn(0), mCaretRow(0)
+    Text::Text()
     {
         mRows.emplace_back();
     }
 
-    Text::Text(const std::string& content) : mCaretPosition(0), mCaretColumn(0), mCaretRow(0)
+    Text::Text(const std::string& content)
     {
         std::string::size_type pos, lastPos = 0;
         int length;
