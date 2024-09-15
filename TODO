@@ -1,4 +1,4 @@
-* Continue rebasing from 873bf1de82075cac4c5fcd8c05f015e3fa107ba1
+* Continue rebasing from efa10744835f7314bfdb2ce42546ae4aaa08e169
 * Add a focus listener interface.
 * Make focus apply synchronously.
 * Graphics and input objects for DirectX.

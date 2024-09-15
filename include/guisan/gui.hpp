@@ -77,17 +77,23 @@ namespace gcn
     /**
      * @mainpage
      * @section Introduction
-     * This documentation is mostly intended as a reference to the API. If you want to get started with Guichan, we suggest you check out the programs in the examples directory of the Guichan release.
+     * This documentation is mostly intended as a reference to the API.
+     * If you want to get started with Guisan,
+     * we suggest you check out the programs
+     * in the examples directory of the Guisan release.
      * @n
      * @n
-     * This documentation is, and will always be, work in progress. If you find any errors, typos or inconsistencies, or if you feel something needs to be explained in more detail - don't hesitate to tell us.
+     * This documentation is, and will always be, work in progress.
+     * If you find any errors, typos or inconsistencies,
+     * or if you feel something needs to be explained in more detail,
+     * don't hesitate to tell us.
      */
 
     /**
      * Contains a Guisan GUI. This is the core class of Guisan to which
      * implementations of back ends are passed, to make Guisan work with
      * a specific library, and to where the top widget (root widget of GUI)
-     * is added. If you want to be able to have more then one widget in your 
+     * is added. If you want to be able to have more then one widget in your
      * GUI, the top widget should be a container.
      *
      * A Gui object cannot work properly without passing back end 
@@ -300,7 +306,7 @@ namespace gcn
         virtual void handleMouseReleased(const MouseInput& mouseInput);
 
         /**
-         * Handles modal focus. Modal focus needs to be checked at 
+         * Handles modal focus. Modal focus needs to be checked at
          * each logic iteration as it might be necessary to distribute
          * mouse entered or mouse exited events.
          *
@@ -309,8 +315,8 @@ namespace gcn
         virtual void handleModalFocus();
 
         /**
-         * Handles modal mouse input focus. Modal mouse input focus needs 
-         * to be checked at each logic iteration as it might be necessary to 
+         * Handles modal mouse input focus. Modal mouse input focus needs
+         * to be checked at each logic iteration as it might be necessary to
          * distribute mouse entered or mouse exited events.
          *
          * @since 0.8.0
@@ -318,7 +324,7 @@ namespace gcn
         virtual void handleModalMouseInputFocus();
 
         /**
-         * Handles modal focus gained. If modal focus has been gaind it might 
+         * Handles modal focus gained. If modal focus has been gained it might
          * be necessary to distribute mouse entered or mouse exited events.
          *
          * @since 0.8.0
@@ -326,7 +332,7 @@ namespace gcn
         virtual void handleModalFocusGained();
 
         /**
-         * Handles modal mouse input focus gained. If modal focus has been gaind 
+         * Handles modal mouse input focus gained. If modal focus has been gained
          * it might be necessary to distribute mouse entered or mouse exited events.
          *
          * @since 0.8.0
@@ -343,7 +349,7 @@ namespace gcn
          * @param fource indicates whether the distribution should be forced or not.
          *               A forced distribution distributes the event even if a widget
          *               is not enabled, not visible, another widget has modal
-         *               focus or another widget has modal mouse input focus. 
+         *               focus or another widget has modal mouse input focus.
          *               Default value is false.
          * @param toSourceOnly indicates whether the distribution should be to the
          *                     source widget only or to it's parent's mouse listeners
