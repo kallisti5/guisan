@@ -71,7 +71,7 @@ namespace gcn
     Tab::Tab() : mTabbedArea(NULL), mHasMouse(false)
     {
         mLabel = new Label();
-        mLabel->setPosition(4, 4);
+        mLabel->setPosition(6, 6);
         add(mLabel);
         setFrameSize(1);
 
@@ -85,7 +85,7 @@ namespace gcn
 
     void Tab::adjustSize()
     {
-        setSize(mLabel->getWidth() + 8, mLabel->getHeight() + 8);
+        setSize(mLabel->getWidth() + 12, mLabel->getHeight() + 12);
 
         if (mTabbedArea != NULL)
         {
@@ -159,13 +159,16 @@ namespace gcn
         graphics->setColor(baseColor);
         graphics->fillRectangle(Rectangle(0, 0, currentClipArea.width, currentClipArea.height));
 
-        if (mTabbedArea != NULL && mTabbedArea->isFocused() && mTabbedArea->isTabSelected(this))
+        if (mTabbedArea != NULL && mTabbedArea->isFocused() && mTabbedArea->isTabSelected(this)
+            //            && mHasMouse)
+            && mTabbedArea->isTabActive())
         {
             graphics->setColor(Color(0x000000));
             graphics->drawRectangle(
                 Rectangle(2, 2, currentClipArea.width - 4, currentClipArea.height - 4));
         }
-        mLabel->draw(graphics);
+        mLabel->setAlignment(Graphics::Center);
+        mLabel->_draw(graphics);
         graphics->popClipArea();
     }
 

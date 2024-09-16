@@ -277,6 +277,11 @@ namespace gcn
         return mOpaque;
     }
 
+    bool TabbedArea::isTabActive() const
+    {
+        return tabActive;
+    }
+
     void TabbedArea::draw(Graphics *graphics)
     {
         const Color& faceColor = getBaseColor();
@@ -318,14 +323,12 @@ namespace gcn
                                mTabContainer->getHeight());
         }
 
-        //drawChildren(graphics);
+        // Draw the widget from a select tab.
         for (const auto& p : mTabs)
         {
             p.first->_draw(graphics);
             if (p.first == mSelectedTab)
             {
-                //p.second->setX(20);
-                //p.second->setY(50);
                 p.second->_draw(graphics);
             }
         }
@@ -479,6 +482,17 @@ namespace gcn
             if (tab != NULL)
             {
                 setSelectedTab(tab);
+                tabActive = true;
+                mouseEvent.consume();
+            }
+            else
+            {
+                widget = mWidgetContainer->getWidgetAt(mouseEvent.getX(), mouseEvent.getY());
+                if (widget == NULL)
+                {
+                    mouseEvent.consume();
+                }
+                tabActive = false;
             }
         }
 
