@@ -1,5 +1,10 @@
 Version 1.1.0
 =============
+* SDLImage::convertToDisplayFormat now throws an exception if conversion fails.
+* Fixed text drawn outside of a TextField.
+* Fixed focus issues when having a TextField inside a Tab.
+* Fixed selecting with arrow keys when DropDown is open skipping items
+* Fixed DropDown inside a TabbedArea looking odd when dropped down.
 * BasicContainer and Widget has been merged making every Widget
   a possible container. The merge makes it a lot easier to
   implement container widgets. With the merge there is no need
