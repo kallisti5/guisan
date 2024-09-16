@@ -319,6 +319,16 @@ namespace gcn
         }
 
         //drawChildren(graphics);
+        for (const auto& p : mTabs)
+        {
+            p.first->_draw(graphics);
+            if (p.first == mSelectedTab)
+            {
+                //p.second->setX(20);
+                //p.second->setY(50);
+                p.second->_draw(graphics);
+            }
+        }
     }
 
     void TabbedArea::adjustSize()
@@ -356,8 +366,11 @@ namespace gcn
             Tab* tab = mTabs[i].first;
 
             tab->setPosition(x, maxTabHeight - tab->getHeight());
-
             x += tab->getWidth();
+
+            Widget* widget = mTabs[i].second;
+            widget->setX(mWidgetContainer->getX());
+            widget->setY(mWidgetContainer->getY());
         }
     }
 

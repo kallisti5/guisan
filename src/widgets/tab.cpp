@@ -165,6 +165,7 @@ namespace gcn
             graphics->drawRectangle(
                 Rectangle(2, 2, currentClipArea.width - 4, currentClipArea.height - 4));
         }
+        mLabel->draw(graphics);
         graphics->popClipArea();
     }
 
