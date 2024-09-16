@@ -174,6 +174,11 @@ namespace gcn
         SDL_FreeSurface(mSurface);
         mSurface = NULL;
 
+        if (tmp == NULL)
+        {
+            throw GCN_EXCEPTION("Unable to convert image to display format.");
+        }
+
         if (hasPink)
         {
             SDL_SetColorKey(tmp, SDL_TRUE,
@@ -191,7 +196,7 @@ namespace gcn
             SDL_SetTextureBlendMode(tmpTexture, SDL_BLENDMODE_BLEND);
             SDL_DestroyTexture(mTexture);
             mTexture = tmpTexture;
-        }	
+        }
     }
 
     void SDLImage::free()
