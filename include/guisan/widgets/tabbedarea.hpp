@@ -123,6 +123,13 @@ namespace gcn
         bool isOpaque() const;
 
         /**
+         * Checks if the tabbed area is active or not.
+         *
+         * @return true if the tabbed area is active, false otherwise.
+         */
+        bool isTabActive() const;
+
+        /**
          * Adds a tab to the tabbed area. The newly created tab will be
          * automatically deleted by the tabbed area when it is removed.
          *
@@ -157,6 +164,13 @@ namespace gcn
          * @see addTab
          */
         virtual void removeTab(Tab* tab);
+
+        /**
+         * Returns the number of tabs in this tabbed area.
+         *
+         * @since 1.1.0
+         */
+        int getNumberOfTabs() const;
 
         /**
          * Checks if a tab given an index is selected or not.
@@ -286,6 +300,11 @@ namespace gcn
          * True if the tabbed area is opaque, false otherwise.
          */
         bool mOpaque;
+
+        /**
+         * True if the tabbed area is active, false otherwise.
+         */
+        bool tabActive;
     };
 }
 

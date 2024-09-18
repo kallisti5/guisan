@@ -197,6 +197,11 @@ namespace gcn
         adjustTabPositions();
     }
 
+    int TabbedArea::getNumberOfTabs() const
+    {
+        return mTabs.size();
+    }
+
     bool TabbedArea::isTabSelected(unsigned int index) const
     {
         if (index >= mTabs.size())
@@ -272,6 +277,11 @@ namespace gcn
         return mOpaque;
     }
 
+    bool TabbedArea::isTabActive() const
+    {
+        return tabActive;
+    }
+
     void TabbedArea::draw(Graphics *graphics)
     {
         const Color& faceColor = getBaseColor();
@@ -313,7 +323,15 @@ namespace gcn
                                mTabContainer->getHeight());
         }
 
-        //drawChildren(graphics);
+        // Draw the widget from a select tab.
+        for (const auto& p : mTabs)
+        {
+            p.first->_draw(graphics);
+            if (p.first == mSelectedTab)
+            {
+                p.second->_draw(graphics);
+            }
+        }
     }
 
     void TabbedArea::adjustSize()
@@ -351,8 +369,11 @@ namespace gcn
             Tab* tab = mTabs[i].first;
 
             tab->setPosition(x, maxTabHeight - tab->getHeight());
-
             x += tab->getWidth();
+
+            Widget* widget = mTabs[i].second;
+            widget->setX(mWidgetContainer->getX());
+            widget->setY(mWidgetContainer->getY());
         }
     }
 
@@ -461,6 +482,17 @@ namespace gcn
             if (tab != NULL)
             {
                 setSelectedTab(tab);
+                tabActive = true;
+                mouseEvent.consume();
+            }
+            else
+            {
+                widget = mWidgetContainer->getWidgetAt(mouseEvent.getX(), mouseEvent.getY());
+                if (widget == NULL)
+                {
+                    mouseEvent.consume();
+                }
+                tabActive = false;
             }
         }
 
@@ -475,10 +507,7 @@ namespace gcn
 
     void TabbedArea::death(const Event& event)
     {
-        Widget* source = event.getSource();
-        Tab* tab = dynamic_cast<Tab*>(source);
-
-        if (tab != NULL)
+        if (Tab* tab = dynamic_cast<Tab*>(event.getSource()))
         {
             removeTab(tab);
         }
