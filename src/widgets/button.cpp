@@ -224,6 +224,10 @@ namespace gcn
 
     void Button::mousePressed(MouseEvent& mouseEvent)
     {
+        if (mouseEvent.isConsumed())
+        {
+            return;
+        }
         if (mouseEvent.getButton() == MouseEvent::Left)
         {
             mMousePressed = true;
