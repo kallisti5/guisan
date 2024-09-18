@@ -142,7 +142,7 @@ pqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"); @endcode
         /**
          * Destructor.
          */
-        virtual ~ImageFont();
+        ~ImageFont() override;
 
         /**
          * Draws a glyph.
@@ -205,14 +205,10 @@ pqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"); @endcode
 
         // Inherited from Font
 
-        virtual int getWidth(const std::string& text) const;
-
-        virtual void drawString(Graphics* graphics, const std::string& text,
-                                int x, int y, bool enabled);
-
-        virtual int getHeight() const;
-
-        virtual int getStringIndexAt(const std::string& text, int x) const;
+        int getWidth(const std::string& text) const override;
+        void drawString(Graphics* graphics, const std::string& text, int x, int y, bool enabled) override;
+        int getHeight() const override;
+        int getStringIndexAt(const std::string& text, int x) const override;
 
     protected:
         /**

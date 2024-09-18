@@ -78,7 +78,7 @@ namespace gcn
     public:
 
         /**
-         * Constructor. 
+         * Constructor.
          *
          * @param caption the InputBox caption.
          * @param message the message to display in the InputBox
@@ -90,8 +90,8 @@ namespace gcn
         /**
          * Destructor.
          */
-        virtual ~InputBox();
-        
+        ~InputBox() override;
+
         /**
          * Add this InputBox to a parent container, centered both horizontally and vertically
          * If instead, you want to place it somewhere else, use Container::add(). 
@@ -99,7 +99,7 @@ namespace gcn
          * @param container parent container
          */
         void addToContainer(Container* container);
-        
+
         /**
          * Get the text that was input by the user
          * Use in conjunction with getClickedButton() to tell an empty string from a cancel operation.
@@ -107,31 +107,27 @@ namespace gcn
          * @return the text which was typed by the user
          */
         std::string getText() const;
-        
+
         /**
          * Get the number of the button that was clicked
          * @return 0 for OK, 1 for Cancel
          */
         int getClickedButton() const;
 
-
         // Inherited from Widget
 
-        virtual void draw(Graphics* graphics);
-
+        void draw(Graphics* graphics) override;
 
         // Inherited from MouseListener
 
-        virtual void mousePressed(MouseEvent& mouseEvent);
-
-        virtual void mouseDragged(MouseEvent& mouseEvent);
-
-        virtual void mouseReleased(MouseEvent& mouseEvent);
+        void mousePressed(MouseEvent& mouseEvent) override;
+        void mouseDragged(MouseEvent& mouseEvent) override;
+        void mouseReleased(MouseEvent& mouseEvent) override;
 
     protected:
         std::string mMessage;
         int mClickedButton;
-        
+
         Button *mButtonOK;
         Button *mButtonCancel;
         Label *mLabel;

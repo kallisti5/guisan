@@ -79,7 +79,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        virtual ~ContainerEvent();
+        ~ContainerEvent() override;
 
         /**
          * Gets the container the event concerns.

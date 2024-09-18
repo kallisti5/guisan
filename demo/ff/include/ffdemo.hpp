@@ -59,10 +59,11 @@ class FFDemo : public gcn::ActionListener, public gcn::KeyListener
 {
 public:
     FFDemo();
-    ~FFDemo();
+    ~FFDemo() override;
+    void action(const gcn::ActionEvent& actionEvent) override;
+    void keyPressed(gcn::KeyEvent& keyEvent) override;
+
     void run();
-    void action(const gcn::ActionEvent& actionEvent);
-    void keyPressed(gcn::KeyEvent& keyEvent);
 
 private:
     void input();

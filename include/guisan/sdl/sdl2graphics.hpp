@@ -82,12 +82,12 @@ namespace gcn
          * Constructor.
          */
         SDL2Graphics();
-        
+
         /**
          * Destructor.
          */
-        ~SDL2Graphics();
-        
+        ~SDL2Graphics() override;
+
         /**
          *  Sets the target SDL_Renderer to use for drawing. Preferably done only once. 
          *  
@@ -96,7 +96,7 @@ namespace gcn
          *  @param height screen height
          */
         virtual void setTarget(SDL_Renderer* renderer, int width, int height);
-        
+
         /**
          * Gets the target SDL_Renderer.
          *
@@ -126,29 +126,27 @@ namespace gcn
 
         // Inherited from Graphics
 
-        virtual void _beginDraw();
+        void _beginDraw() override;
+        void _endDraw() override;
 
-        virtual void _endDraw();
+        bool pushClipArea(Rectangle area) override;
+        void popClipArea() override;
 
-        virtual bool pushClipArea(Rectangle area);
+        void drawImage(const Image* image,
+                       int srcX,
+                       int srcY,
+                       int dstX,
+                       int dstY,
+                       int width,
+                       int height) override;
+        void drawPoint(int x, int y) override;
+        void drawLine(int x1, int y1, int x2, int y2) override;
 
-        virtual void popClipArea();
+        void drawRectangle(const Rectangle& rectangle) override;
+        void fillRectangle(const Rectangle& rectangle) override;
 
-        virtual void drawImage(const Image* image, int srcX, int srcY,
-                               int dstX, int dstY, int width,
-                               int height);
-
-        virtual void drawPoint(int x, int y);
-
-        virtual void drawLine(int x1, int y1, int x2, int y2);
-
-        virtual void drawRectangle(const Rectangle& rectangle);
-
-        virtual void fillRectangle(const Rectangle& rectangle);
-
-        virtual void setColor(const Color& color);
-
-        virtual const Color& getColor();
+        void setColor(const Color& color) override;
+        const Color& getColor() override;
 
     protected:
         /**

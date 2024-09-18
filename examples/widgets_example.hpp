@@ -10,9 +10,9 @@ namespace WidgetsExample
     class DemoListModel : public gcn::ListModel
     {
     public:
-        virtual int getNumberOfElements() { return 5; }
+        int getNumberOfElements() override { return 5; }
 
-        virtual std::string getElementAt(int i)
+        std::string getElementAt(int i) override
         {
             switch (i)
             {

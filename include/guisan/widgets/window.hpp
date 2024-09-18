@@ -88,7 +88,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        virtual ~Window();
+        ~Window() override;
 
         /**
          * Sets the caption of the window.
@@ -194,25 +194,17 @@ namespace gcn
          */
         virtual void resizeToContent();
 
-
-        // Inherited from BasicContainer
-
-        virtual Rectangle getChildrenArea();
-
-
         // Inherited from Widget
 
-        virtual void draw(Graphics* graphics);
-
-        virtual void drawFrame(Graphics* graphics);
+        void draw(Graphics* graphics) override;
+        void drawFrame(Graphics* graphics) override;
+        Rectangle getChildrenArea() override;
 
         // Inherited from MouseListener
 
-        virtual void mousePressed(MouseEvent& mouseEvent);
-
-        virtual void mouseDragged(MouseEvent& mouseEvent);
-
-        virtual void mouseReleased(MouseEvent& mouseEvent);
+        void mousePressed(MouseEvent& mouseEvent) override;
+        void mouseDragged(MouseEvent& mouseEvent) override;
+        void mouseReleased(MouseEvent& mouseEvent) override;
 
     protected:
         /**

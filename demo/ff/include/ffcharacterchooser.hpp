@@ -50,12 +50,13 @@ class FFCharacterChooser : public gcn::Widget, gcn::KeyListener
 {
 public:
     FFCharacterChooser();
-    ~FFCharacterChooser();
-    void draw(gcn::Graphics* graphics);
+    ~FFCharacterChooser() override;
+    void draw(gcn::Graphics* graphics) override;
+    void keyPressed(gcn::KeyEvent& keyEvent) override;
+
     int getSelected();
     void setSelected(int selected);
     void setDistance(int distance);
-    void keyPressed(gcn::KeyEvent& keyEvent);
 
 private:
     int mSelected;

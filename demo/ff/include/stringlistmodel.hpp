@@ -52,15 +52,8 @@ class StringListModel : public gcn::ListModel
 public:
     StringListModel() {}
 
-    int getNumberOfElements()
-    {
-        return mStrings.size();
-    }
-
-    std::string getElementAt(int i)
-    {
-        return mStrings.at(i);
-    }
+    int getNumberOfElements() override { return mStrings.size(); }
+    std::string getElementAt(int i) override { return mStrings.at(i); }
 
     void add(std::string str)
     {

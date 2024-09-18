@@ -91,7 +91,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        virtual ~ImageTextButton();
+        ~ImageTextButton() override;
 
         /**
          * Adjusts the size of the image button to fit the image.
@@ -112,11 +112,10 @@ namespace gcn
          */
         Image* getImage();
 
-
         // Inherited from Widget
 
-        void draw(gcn::Graphics* graphics);
-        
+        void draw(gcn::Graphics* graphics) override;
+
         /**
          * Sets the alignment for the caption. The alignment is relative
          * to the center of the button.
@@ -132,7 +131,7 @@ namespace gcn
          * @return alignment of caption. ImageTextButton::TOP, ImageTextButton::RIGHT, ImageTextButton::BOTTOM or ImageTextButton::LEFT.
          */
         unsigned int getAlignment() const;
-        
+
         enum
         {
             TOP,
