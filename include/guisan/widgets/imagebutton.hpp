@@ -92,7 +92,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        virtual ~ImageButton();
+        ~ImageButton() override;
 
         /**
          * Adjusts the size of the image button to fit the image.
@@ -116,7 +116,7 @@ namespace gcn
 
         // Inherited from Widget
 
-        void draw(gcn::Graphics* graphics);
+        void draw(gcn::Graphics* graphics) override;
 
     protected:
         const Image* mImage;

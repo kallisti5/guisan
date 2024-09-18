@@ -114,7 +114,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        virtual ~OpenGLImage();
+        ~OpenGLImage() override;
 
         /**
          * Gets the OpenGL texture handle for the image.
@@ -138,20 +138,17 @@ namespace gcn
          */
         virtual int getTextureHeight() const;
 
-
         // Inherited from Image
 
-        virtual void free();
+        void free() override;
 
-        virtual int getWidth() const;
+        int getWidth() const override;
+        int getHeight() const override;
 
-        virtual int getHeight() const;
+        Color getPixel(int x, int y) override;
+        void putPixel(int x, int y, const Color& color) override;
 
-        virtual Color getPixel(int x, int y);
-
-        virtual void putPixel(int x, int y, const Color& color);
-
-        virtual void convertToDisplayFormat();
+        void convertToDisplayFormat() override;
 
     protected:
         GLuint mTextureHandle;
@@ -159,9 +156,8 @@ namespace gcn
         bool mAutoFree;
         int mWidth;
         int mHeight;
-		int mTextureWidth;
-		int mTextureHeight;
-
+        int mTextureWidth;
+        int mTextureHeight;
     };
 }
 

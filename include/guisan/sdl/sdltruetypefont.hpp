@@ -83,7 +83,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        virtual ~SDLTrueTypeFont();
+        ~SDLTrueTypeFont() override;
 
         /**
          * Sets the spacing between rows in pixels. Default is 0 pixels.
@@ -138,11 +138,11 @@ namespace gcn
 
         // Inherited from Font
 
-        virtual int getWidth(const std::string& text) const;
+        int getWidth(const std::string& text) const override;
+        int getHeight() const override;
 
-        virtual int getHeight() const;
-
-        virtual void drawString(Graphics* graphics, const std::string& text, int x, int y, bool enabled);
+        void drawString(
+            Graphics* graphics, const std::string& text, int x, int y, bool enabled) override;
 
     protected:
         TTF_Font *mFont;

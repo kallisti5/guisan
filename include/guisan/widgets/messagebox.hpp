@@ -98,8 +98,8 @@ namespace gcn
         /**
          * Destructor.
          */
-        virtual ~MessageBox();
-        
+        ~MessageBox() override;
+
         /**
          * Gets the index of the clicked button
          * 
@@ -194,36 +194,30 @@ namespace gcn
          */
         void addToContainer(Container* container);
 
+        // Inherit from Window
+
         /**
          * Resizes the container to fit the content exactly.
          */
-        virtual void resizeToContent();
-
-
-        // Inherited from BasicContainer
-
-        virtual Rectangle getChildrenArea();
-
+        void resizeToContent() override;
 
         // Inherited from Widget
 
-        virtual void draw(Graphics* graphics);
-
+        Rectangle getChildrenArea() override;
+        void draw(Graphics* graphics) override;
 
         // Inherited from MouseListener
 
-        virtual void mousePressed(MouseEvent& mouseEvent);
-
-        virtual void mouseDragged(MouseEvent& mouseEvent);
-
-        virtual void mouseReleased(MouseEvent& mouseEvent);
+        void mousePressed(MouseEvent& mouseEvent) override;
+        void mouseDragged(MouseEvent& mouseEvent) override;
+        void mouseReleased(MouseEvent& mouseEvent) override;
 
     protected:
         std::string mMessage;
         int mNbButtons;
         Graphics::Alignment mButtonAlignment;
         int mClickedButton;
-        
+
         Button **mButtons;
         Label *mLabel;
     };

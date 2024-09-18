@@ -151,23 +151,19 @@ namespace gcn
          */
         unsigned int getCaretPosition() const;
 
-
         // Inherited from Widget
 
-        virtual void fontChanged();
-
-        virtual void draw(Graphics* graphics);
-
+        void draw(Graphics* graphics) override;
+        void fontChanged() override;
 
         // Inherited from MouseListener
 
-        virtual void mousePressed(MouseEvent& mouseEvent);
-
-        virtual void mouseDragged(MouseEvent& mouseEvent);
+        void mousePressed(MouseEvent& mouseEvent) override;
+        void mouseDragged(MouseEvent& mouseEvent) override;
 
         // Inherited from KeyListener
 
-        virtual void keyPressed(KeyEvent& keyEvent);
+        void keyPressed(KeyEvent& keyEvent) override;
 
     protected:
         /**

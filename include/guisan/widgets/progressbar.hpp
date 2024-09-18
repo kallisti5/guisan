@@ -181,15 +181,13 @@ namespace gcn
         unsigned int getValue() const;
         
         /**
-         * Adjusts the size of the widget. 
+         * Adjusts the size of the widget.
          */
         void adjustSize();
 
-
         // Inherited from Widget
 
-        virtual void draw(Graphics* graphics);
-
+        void draw(Graphics* graphics) override;
 
     protected:
         /**

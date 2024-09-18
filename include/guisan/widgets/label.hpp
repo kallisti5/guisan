@@ -125,11 +125,9 @@ namespace gcn
          */
         void adjustSize();
 
-
         // Inherited from Widget
 
-        virtual void draw(Graphics* graphics);
-
+        void draw(Graphics* graphics) override;
 
     protected:
         /**

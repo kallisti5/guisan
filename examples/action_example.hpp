@@ -58,7 +58,7 @@ namespace ActionExample
             button2->addActionListener(this);
         }
 
-        ~MainContainer()
+        ~MainContainer() override
         {
             delete font;
 
@@ -74,7 +74,7 @@ namespace ActionExample
 
         // Implement the action function in ActionListener to receive actions
         // The eventId tells us which widget called the action function.
-        virtual void action(const gcn::ActionEvent& actionEvent)
+        void action(const gcn::ActionEvent& actionEvent) override
         {
             std::string str;
             std::ostringstream os(str);

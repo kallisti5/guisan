@@ -91,7 +91,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        virtual ~Icon();
+        ~Icon() override;
 
         /**
          * Sets the image to display. Existing image is freed automatically
@@ -108,11 +108,9 @@ namespace gcn
          */
         const Image* getImage() const;
 
-
         // Inherited from Widget
 
-        virtual void draw(Graphics* graphics);
-
+        void draw(Graphics* graphics) override;
 
     protected:
         /**

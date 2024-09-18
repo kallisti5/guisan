@@ -50,8 +50,9 @@ class FFListBox : public gcn::ListBox
 {
 public:
     FFListBox();
-    ~FFListBox();
-    void draw(gcn::Graphics* graphics);
+    ~FFListBox() override;
+    void draw(gcn::Graphics* graphics) override;
+
     void setSelected(int i);
 
 private:

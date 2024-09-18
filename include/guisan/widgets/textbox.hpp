@@ -239,24 +239,19 @@ namespace gcn
          */
         void setOpaque(bool opaque);
 
-
         // Inherited from Widget
 
-        virtual void draw(Graphics* graphics);
-
-        virtual void fontChanged();
-
+        void draw(Graphics* graphics) override;
+        void fontChanged() override;
 
         // Inherited from KeyListener
 
-        virtual void keyPressed(KeyEvent& keyEvent);
-
+        void keyPressed(KeyEvent& keyEvent) override;
 
         // Inherited from MouseListener
 
-        virtual void mousePressed(MouseEvent& mouseEvent);
-
-        virtual void mouseDragged(MouseEvent& mouseEvent);
+        void mousePressed(MouseEvent& mouseEvent) override;
+        void mouseDragged(MouseEvent& mouseEvent) override;
 
     protected:
         /**

@@ -119,7 +119,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        virtual ~ScrollArea();
+        ~ScrollArea() override;
 
         /**
          * Sets the content.
@@ -306,40 +306,28 @@ namespace gcn
          */
         bool isOpaque() const;
 
-        // Inherited from BasicContainer
-
-        virtual void showWidgetPart(Widget* widget, Rectangle area);
-
-        virtual Rectangle getChildrenArea();
-
-        virtual Widget *getWidgetAt(int x, int y);
-
-
-        // Inherited from Widget
-
-        virtual void draw(Graphics *graphics);
-
-        virtual void logic();
-
         void setWidth(int width);
 
         void setHeight(int height);
 
         void setDimension(const Rectangle& dimension);
 
+        // Inherited from Widget
+
+        void showWidgetPart(Widget* widget, Rectangle area) override;
+        Rectangle getChildrenArea() override;
+        Widget* getWidgetAt(int x, int y) override;
+
+        void draw(Graphics* graphics) override;
+        void logic() override;
 
         // Inherited from MouseListener
 
-        virtual void mousePressed(MouseEvent& mouseEvent);
-
-        virtual void mouseReleased(MouseEvent& mouseEvent);
-
-        virtual void mouseDragged(MouseEvent& mouseEvent);
-
-        virtual void mouseWheelMovedUp(MouseEvent& mouseEvent);
-
-        virtual void mouseWheelMovedDown(MouseEvent& mouseEvent);
-
+        void mousePressed(MouseEvent& mouseEvent) override;
+        void mouseReleased(MouseEvent& mouseEvent) override;
+        void mouseDragged(MouseEvent& mouseEvent) override;
+        void mouseWheelMovedUp(MouseEvent& mouseEvent) override;
+        void mouseWheelMovedDown(MouseEvent& mouseEvent) override;
 
     protected:
         /**

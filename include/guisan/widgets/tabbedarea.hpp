@@ -96,7 +96,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        virtual ~TabbedArea();
+        ~TabbedArea() override;
 
         /**
          * Sets the tabbed area to be opaque or not. If the tabbed area is
@@ -223,11 +223,6 @@ namespace gcn
          */
         Tab* getSelectedTab();
 
-
-        // Inherited from Widget
-
-        virtual void draw(Graphics *graphics);
-
         void setWidth(int width);
 
         void setHeight(int height);
@@ -238,25 +233,26 @@ namespace gcn
 
         void setBaseColor(const Color& color);
 
+        // Inherited from Widget
+
+        void draw(Graphics* graphics) override;
+
         // Inherited from ActionListener
 
-        void action(const ActionEvent& actionEvent);
+        void action(const ActionEvent& actionEvent) override;
 
         // Inherited from DeathListener
 
         virtual void death(const Event& event);
 
-
         // Inherited from KeyListener
 
-        virtual void keyPressed(KeyEvent& keyEvent);
-
+        void keyPressed(KeyEvent& keyEvent) override;
 
         // Inherited from MouseListener
-        
-        virtual void mousePressed(MouseEvent& mouseEvent);
 
-        
+        void mousePressed(MouseEvent& mouseEvent) override;
+
     protected:
         /**
          * Adjusts the size of the tab container and the widget container.
