@@ -65,10 +65,6 @@
 
 namespace gcn
 {
-    Container::Container()
-    {
-        mOpaque = true;
-    }
 
     Container::~Container()
     {

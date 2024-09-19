@@ -65,16 +65,16 @@
 
 namespace gcn
 {
-    SDLImage::SDLImage(SDL_Surface* surface, bool autoFree, SDL_Renderer* renderer)
+    SDLImage::SDLImage(SDL_Surface* surface, bool autoFree, SDL_Renderer* renderer) :
+        mSurface(surface),
+        mRenderer(renderer),
+        mAutoFree(autoFree)
     {
-        mAutoFree = autoFree;
-        mSurface = surface;
-        mRenderer = renderer;
         if (renderer)
         {
             mTexture = SDL_CreateTextureFromSurface(renderer, surface);
             SDL_SetTextureBlendMode(mTexture, SDL_BLENDMODE_BLEND);
-        }       
+        }
     }
 
     SDLImage::~SDLImage()

@@ -236,22 +236,22 @@ pqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"); @endcode
         /**
          * Holds the height of the image font.
          */
-        int mHeight;
+        int mHeight = 0;
 
         /**
          * Holds the glyph spacing of the image font.
          */
-        int mGlyphSpacing;
+        int mGlyphSpacing = 0;
 
         /**
          * Holds the row spacing of the image font.
          */
-        int mRowSpacing;
+        int mRowSpacing = 0;
 
         /**
          * Holds the image with the font data.
          */
-        Image* mImage;
+        Image* mImage = nullptr;
 
         /**
          * Holds the filename of the image with the font data.

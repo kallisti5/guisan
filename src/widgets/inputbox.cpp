@@ -68,19 +68,22 @@
 namespace gcn
 {
 
-    InputBox::InputBox(const std::string& caption, const std::string& message, const std::string &ok, const std::string &cancel)
-            :Window(caption),mMessage(message),mClickedButton(-1)
+    InputBox::InputBox(const std::string& caption,
+                       const std::string& message,
+                       const std::string& ok,
+                       const std::string& cancel) :
+        Window(caption),
+        mMessage(message)
     {
-        setCaption(caption);
         addMouseListener(this);
         setMovable(false);
-        
+
         mLabel = new Label(message);
         mLabel->setAlignment(Graphics::Left);
         mLabel->adjustSize();
 
         mText = new TextField();
-        
+
         mButtonOK = new Button(ok);
         mButtonOK->setAlignment(Graphics::Center);
         mButtonOK->addMouseListener(this);

@@ -66,17 +66,6 @@
 
 namespace gcn
 {
-    FocusHandler::FocusHandler()
-        :mFocusedWidget(NULL),
-         mModalFocusedWidget(NULL),
-         mModalMouseInputFocusedWidget(NULL),
-         mDraggedWidget(NULL),
-         mLastWidgetWithMouse(NULL),
-         mLastWidgetWithModalFocus(NULL),
-         mLastWidgetWithModalMouseInputFocus(NULL),
-         mLastWidgetPressed(NULL)
-    {
-    }
 
     void FocusHandler::requestFocus(Widget* widget)
     {

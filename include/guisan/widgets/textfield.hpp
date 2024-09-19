@@ -185,19 +185,19 @@ namespace gcn
         /**
          * True if the text field is editable, false otherwise.
          */
-        bool mEditable;
+        bool mEditable = true;
 
         /**
          * Holds the text of the text field.
          */
-        Text* mText;
+        Text* mText = nullptr;
 
         /**
          * Holds the amount scrolled in x. If a user types more characters than
          * the text field can display, due to the text field being to small, the
          * text needs to scroll in order to show the last type character.
          */
-        int mXScroll;
+        int mXScroll = 0;
     };
 }
 

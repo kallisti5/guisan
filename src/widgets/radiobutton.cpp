@@ -69,20 +69,12 @@ namespace gcn
 {
     RadioButton::GroupMap RadioButton::mGroupMap;
 
-    RadioButton::RadioButton()
-    {
-        setSelected(false);
+    RadioButton::RadioButton() : RadioButton("", "", false)
+    {}
 
-        setFocusable(true);
-        addMouseListener(this);
-        addKeyListener(this);
-    }
-
-    RadioButton::RadioButton(const std::string& caption,
-        const std::string& group,
-        bool selected)
+    RadioButton::RadioButton(const std::string& caption, const std::string& group, bool selected) :
+        mCaption(caption)
     {
-        setCaption(caption);
         setGroup(group);
         setSelected(selected);
 

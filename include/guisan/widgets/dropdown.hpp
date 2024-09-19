@@ -243,7 +243,7 @@ namespace gcn
          */
         virtual void drawButton(Graphics *graphics);
 
-        bool mDroppedDown;
+        bool mDroppedDown = false;
 
         /**
          * Distributes a value changed event to all selection listeners
@@ -257,20 +257,20 @@ namespace gcn
          * True if the drop down has been pushed with the mouse, false
          * otherwise.
          */
-        bool mPushed;
+        bool mPushed = false;
 
         /**
          * Holds what the height is if the drop down is folded up.
          * Used when checking if the list of the drop down was clicked
          * or if the upper part of the drop down was clicked on a mouse click.
          */
-        int mFoldedUpHeight;
+        int mFoldedUpHeight = 0;
 
         /**
          * The scroll area used.
          */
-        ScrollArea* mScrollArea;
-        ListBox* mListBox;
+        ScrollArea* mScrollArea = nullptr;
+        ListBox* mListBox = nullptr;
 
         /**
          * The internal focus handler used to keep track of focus for the
@@ -283,19 +283,19 @@ namespace gcn
          * has been passed to the drop down which the drop down should not
          * deleted in it's destructor.
          */
-        bool mInternalScrollArea;
+        bool mInternalScrollArea = false;
 
         /**
          * True if an internal list box is used, false if a list box
          * has been passed to the drop down which the drop down should not
          * deleted in it's destructor.
          */
-        bool mInternalListBox;
+        bool mInternalListBox = false;
 
         /**
          * True if the drop down is dragged.
          */
-        bool mIsDragged;
+        bool mIsDragged = false;
 
         typedef std::list<SelectionListener*> SelectionListenerList;
 

@@ -67,29 +67,14 @@
 
 namespace gcn
 {
-    Window::Window()
-        :mMoved(false)
-    {
-        setFrameSize(1);
-        setPadding(2);
-        setTitleBarHeight(getFont()->getHeight() + 2);
-        setAlignment(Graphics::Center);
-        addMouseListener(this);
-        setMovable(true);
-        setOpaque(true);
-    }
+    Window::Window() : Window("")
+    {}
 
     Window::Window(const std::string& caption)
-        :mMoved(false)
     {
         setCaption(caption);
-        setFrameSize(1);
-        setPadding(2);
         setTitleBarHeight(getFont()->getHeight() + 2);
-        setAlignment(Graphics::Center);
         addMouseListener(this);
-        setMovable(true);
-        setOpaque(true);
     }
 
     Window::~Window()

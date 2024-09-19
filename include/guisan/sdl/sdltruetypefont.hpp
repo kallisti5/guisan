@@ -145,14 +145,13 @@ namespace gcn
             Graphics* graphics, const std::string& text, int x, int y, bool enabled) override;
 
     protected:
-        TTF_Font *mFont;
-
-        int mHeight;
-        int mGlyphSpacing;
-        int mRowSpacing;
-
         std::string mFilename;
-        bool mAntiAlias;
+        TTF_Font *mFont = nullptr;
+
+        int mGlyphSpacing = 0;
+        int mRowSpacing = 0;
+
+        bool mAntiAlias = true;
         Color mColor;
     };
 }

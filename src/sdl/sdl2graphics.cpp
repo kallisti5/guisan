@@ -74,11 +74,7 @@
 
 namespace gcn
 {
-    SDL2Graphics::SDL2Graphics()
-    {
-        mAlpha = false;
-    }
-    
+
     SDL2Graphics::~SDL2Graphics()
     {
         if(mRenderTarget != NULL)

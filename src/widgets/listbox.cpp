@@ -69,16 +69,10 @@
 
 namespace gcn
 {
-    ListBox::ListBox() : mListModel(NULL), mSelected(-1), mWrappingEnabled(false)
-    {
-        setWidth(100);
-        setFocusable(true);
+    ListBox::ListBox() : ListBox(nullptr)
+    {}
 
-        addMouseListener(this);
-        addKeyListener(this);
-    }
-
-    ListBox::ListBox(ListModel *listModel) : mSelected(-1), mWrappingEnabled(false)
+    ListBox::ListBox(ListModel* listModel)
     {
         setWidth(100);
         setListModel(listModel);

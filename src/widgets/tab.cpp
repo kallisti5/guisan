@@ -68,9 +68,8 @@
 
 namespace gcn
 {
-    Tab::Tab() : mTabbedArea(NULL), mHasMouse(false)
+    Tab::Tab() : mLabel(new Label())
     {
-        mLabel = new Label();
         mLabel->setPosition(6, 6);
         add(mLabel);
         setFrameSize(1);

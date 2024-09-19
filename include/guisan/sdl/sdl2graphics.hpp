@@ -81,7 +81,7 @@ namespace gcn
         /**
          * Constructor.
          */
-        SDL2Graphics();
+        SDL2Graphics() = default;
 
         /**
          * Destructor.
@@ -178,12 +178,12 @@ namespace gcn
          */
         virtual void restoreRenderColor();
 
-        SDL_Surface* mTarget;
-        SDL_Renderer* mRenderTarget;
-        SDL_Texture* mTexture;
+        SDL_Surface* mTarget = nullptr;
+        SDL_Renderer* mRenderTarget = nullptr;
+        SDL_Texture* mTexture = nullptr;
         Color mColor;
-        Uint8 r, g, b, a; //! to store previous color from renderer
-        bool mAlpha;
+        Uint8 r = 0, g = 0, b = 0, a = 0; //! to store previous color from renderer
+        bool mAlpha = false;
     };
 }
 

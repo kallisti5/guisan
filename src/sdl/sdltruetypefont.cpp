@@ -55,16 +55,10 @@
 
 namespace gcn
 {
-    SDLTrueTypeFont::SDLTrueTypeFont(const std::string& filename, int size)
+    SDLTrueTypeFont::SDLTrueTypeFont(const std::string& filename, int size) :
+        mFilename(filename),
+        mFont(TTF_OpenFont(filename.c_str(), size))
     {
-        mRowSpacing = 0;
-        mGlyphSpacing = 0;
-        mAntiAlias = true;
-        mFilename = filename;
-        mFont = nullptr;
-
-        mFont = TTF_OpenFont(filename.c_str(), size);
-
         if (mFont == nullptr)
         {
             throw GCN_EXCEPTION("SDLTrueTypeFont::SDLTrueTypeFont. "+std::string(TTF_GetError()));

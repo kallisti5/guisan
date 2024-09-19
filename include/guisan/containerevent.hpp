@@ -92,7 +92,7 @@ namespace gcn
         /**
          * Holds the container the event concerns.
          */
-        Container* mContainer;
+        Container* mContainer = nullptr;
     };
 } // namespace gcn
 
