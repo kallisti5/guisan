@@ -62,21 +62,9 @@
 
 namespace gcn
 {
-    Exception::Exception()
-        : mFunction("?"),
-          mMessage(""),
-          mFilename("?"),
-          mLine(0)
-    {
-    }
 
-    Exception::Exception(std::string message)
-        : mFunction("?"),
-          mMessage(std::move(message)),
-          mFilename("?"),
-          mLine(0)
-    {
-    }
+    Exception::Exception(std::string message) : mMessage(std::move(message))
+    {}
 
     Exception::Exception(std::string message,
                          std::string function,

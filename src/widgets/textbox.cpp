@@ -68,22 +68,11 @@
 
 namespace gcn
 {
-    TextBox::TextBox() : mEditable(true), mOpaque(true)
+    TextBox::TextBox() : TextBox("")
+    {}
+
+    TextBox::TextBox(const std::string& text) : mText(new Text(text))
     {
-        mText = new Text();
-
-        setFocusable(true);
-
-        addMouseListener(this);
-        addKeyListener(this);
-        adjustSize();
-        setFrameSize(1);
-    }
-
-    TextBox::TextBox(const std::string& text) : mEditable(true), mOpaque(true)
-    {
-        mText = new Text(text);
-
         setFocusable(true);
 
         addMouseListener(this);

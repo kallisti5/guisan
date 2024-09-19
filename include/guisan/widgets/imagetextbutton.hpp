@@ -78,7 +78,7 @@ namespace gcn
          * @param filename The filename of the image to display.
          * @param caption The text to display. 
          */
-        ImageTextButton(const std::string& filename, std::string& caption);
+        ImageTextButton(const std::string& filename, const std::string& caption);
 
         /**
          * Constructor.
@@ -86,7 +86,7 @@ namespace gcn
          * @param image The image to display.
          * @param caption The text to display.
          */
-        ImageTextButton(Image* image, std::string& caption);
+        ImageTextButton(Image* image, const std::string& caption);
 
         /**
          * Destructor.
@@ -141,15 +141,15 @@ namespace gcn
         };
 
     protected:
-        gcn::Image* mImage;
+        gcn::Image* mImage = nullptr;
 
         /**
          * True if the image has been loaded internally, false otherwise.
          * An image not loaded internally should not be deleted in the
          * destructor.
          */
-        bool mInternalImage;
-        unsigned int mAlignment;
+        bool mInternalImage = false;
+        unsigned int mAlignment = ImageTextButton::BOTTOM;
     };
 }
 #endif

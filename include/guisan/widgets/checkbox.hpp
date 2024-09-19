@@ -167,14 +167,14 @@ namespace gcn
         virtual void toggleSelected();
 
         /**
-         * True if the check box is selected, false otherwise.
-         */
-        bool mSelected;
-
-        /**
          * Holds the caption of the check box.
          */
         std::string mCaption;
+
+        /**
+         * True if the check box is selected, false otherwise.
+         */
+        bool mSelected = false;
     };
 }
 

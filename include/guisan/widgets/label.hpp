@@ -74,7 +74,7 @@ namespace gcn
         /**
          * Constructor.
          */
-        Label();
+        Label() = default;
 
         /**
          * Constructor. The label will be automatically resized
@@ -138,7 +138,7 @@ namespace gcn
         /**
          * Holds the alignment of the caption.
          */
-        Graphics::Alignment mAlignment;
+        Graphics::Alignment mAlignment = Graphics::Alignment::Left;
     };
 }
 

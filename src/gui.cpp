@@ -74,24 +74,8 @@
 
 namespace gcn
 {
-    Gui::Gui()
-            :mTop(NULL),
-             mGraphics(NULL),
-             mInput(NULL),
-             mTabbing(true),
-             mShiftPressed(false),
-             mMetaPressed(false),
-             mControlPressed(false),
-             mAltPressed(false),
-             mLastMousePressButton(0),
-             mLastMousePressTimeStamp(0),
-             mLastMouseX(0),
-             mLastMouseY(0),
-             mClickCount(1),
-             mLastMouseDragButton(0)
-    {
-        mFocusHandler = new FocusHandler();
-    }
+    Gui::Gui() : mFocusHandler(new FocusHandler())
+    {}
 
     Gui::~Gui()
     {

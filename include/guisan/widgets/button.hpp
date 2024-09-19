@@ -182,27 +182,27 @@ namespace gcn
         /**
          * True if the mouse is ontop of the button, false otherwise.
          */
-        bool mHasMouse;
+        bool mHasMouse = false;
 
         /**
          * True if a key has been pressed, false otherwise.
          */
-        bool mKeyPressed;
+        bool mKeyPressed = false;
 
         /**
          * True if a mouse has been pressed, false otherwise.
          */
-        bool mMousePressed;
+        bool mMousePressed = false;
 
         /**
          * Holds the alignment of the caption.
          */
-        Graphics::Alignment mAlignment;
+        Graphics::Alignment mAlignment = Graphics::Alignment::Center;
 
         /**
          * Holds the spacing between the border and the caption.
          */
-        unsigned int mSpacing;
+        unsigned int mSpacing = 4;
     };
 }
 

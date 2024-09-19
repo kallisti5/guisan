@@ -64,14 +64,15 @@
 
 namespace gcn
 {
-    OpenGLImage::OpenGLImage(const unsigned int* pixels, int width, int height,
-                             bool convertToDisplayFormat)
+    OpenGLImage::OpenGLImage(const unsigned int* pixels,
+                             int width,
+                             int height,
+                             bool convertToDisplayFormat) :
+        mAutoFree(true),
+        mWidth(width),
+        mHeight(height)
     {
-        mAutoFree = true;
-
-        mWidth = width;
-        mHeight = height;
-		mTextureWidth = 1, mTextureHeight = 1;
+        mTextureWidth = 1, mTextureHeight = 1;
 
         while(mTextureWidth < mWidth)
         {
@@ -121,15 +122,13 @@ namespace gcn
         }
     }
 
-    OpenGLImage::OpenGLImage(GLuint textureHandle, int width, int height, bool autoFree)
+    OpenGLImage::OpenGLImage(GLuint textureHandle, int width, int height, bool autoFree) :
+        mTextureHandle(textureHandle),
+        mAutoFree(autoFree),
+        mWidth(width),
+        mHeight(height)
     {
-        mTextureHandle = textureHandle;
-        mAutoFree = autoFree;
-		mPixels = NULL;
-
-		mWidth = width;
-        mHeight = height;
-		mTextureWidth = 1, mTextureHeight = 1;
+        mTextureWidth = 1, mTextureHeight = 1;
 
         while(mTextureWidth < mWidth)
         {

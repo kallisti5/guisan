@@ -69,17 +69,9 @@
 
 namespace gcn
 {
-    ToggleButton::ToggleButton()
-        : Button(), mSelected(false)
-    {
-    
-    }
 
-    ToggleButton::ToggleButton(const std::string& caption)
-            : Button(caption), mSelected(false)
-    {
-    
-    }
+    ToggleButton::ToggleButton(const std::string& caption) : Button(caption)
+    {}
 
     void ToggleButton::draw(Graphics* graphics)
     {

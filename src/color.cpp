@@ -62,32 +62,15 @@
 
 namespace gcn
 {
-    Color::Color()
-        :
-        r(0),
-        g(0),
-        b(0),
-        a(255)
-    {
-    }
 
-    Color::Color(int color)
-        :
+    Color::Color(int color) :
         r((color >> 16) & 0xFF),
         g((color >> 8) & 0xFF),
-        b((color >> 8) & 0xFF),
-        a(255)
-    {
-    }
+        b((color >> 8) & 0xFF)
+    {}
 
-    Color::Color(int ar, int ag, int ab, int aa)
-        :
-        r(ar),
-        g(ag),
-        b(ab),
-        a(aa)
-    {
-    }
+    Color::Color(int r, int g, int b, int a) : r(r), g(g), b(b), a(a)
+    {}
 
     Color Color::operator+(const Color& color) const
     {

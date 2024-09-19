@@ -81,7 +81,7 @@ namespace gcn
         /**
          * Constructor.
          */
-        SDLGraphics();
+        SDLGraphics() = default;
 
         /**
          * Destructor.
@@ -157,9 +157,9 @@ namespace gcn
          */
         virtual void drawVLine(int x, int y1, int y2);
 
-        SDL_Surface* mTarget;
+        SDL_Surface* mTarget = nullptr;
         Color mColor;
-        bool mAlpha;
+        bool mAlpha = false;
     };
 }
 

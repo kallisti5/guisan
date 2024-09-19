@@ -66,22 +66,12 @@
 
 namespace gcn
 {
-    ProgressBar::ProgressBar() : Label()
-    {
-        mAlignment = Graphics::Center;
-        mStart = 0;
-        mValue = 0;
-        mEnd = 100;
-        
-        setHeight(getFont()->getHeight());
-        setFrameSize(1);
-    }
-    
+    ProgressBar::ProgressBar() : ProgressBar(0, 100, 0)
+    {}
+
     ProgressBar::ProgressBar(const unsigned int start,
         const unsigned int end, const unsigned int value) : Label()
     {
-        mAlignment = Graphics::Center;
-
         if (start > end)
         {
             mStart = end;
@@ -106,11 +96,8 @@ namespace gcn
         setFrameSize(1);
     }
 
-    ProgressBar::ProgressBar(const std::string& caption) : Label(caption)
+    ProgressBar::ProgressBar(const std::string& caption) : Label(caption), mCaption(caption)
     {
-        mCaption = caption;
-        mAlignment = Graphics::Center;
-
         setHeight(getFont()->getHeight());
         setFrameSize(1);
     }

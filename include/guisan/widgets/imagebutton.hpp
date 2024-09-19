@@ -119,14 +119,14 @@ namespace gcn
         void draw(gcn::Graphics* graphics) override;
 
     protected:
-        const Image* mImage;
+        const Image* mImage = nullptr;
 
         /**
          * True if the image has been loaded internally, false otherwise.
          * An image not loaded internally should not be deleted in the
          * destructor.
          */
-        bool mInternalImage;
+        bool mInternalImage = false;
     };
 }
 #endif

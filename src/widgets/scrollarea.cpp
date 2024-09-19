@@ -65,70 +65,17 @@
 
 namespace gcn
 {
-    ScrollArea::ScrollArea()
+    ScrollArea::ScrollArea() : ScrollArea(nullptr)
+    {}
+
+    ScrollArea::ScrollArea(Widget* content) :
+        ScrollArea(content, ScrollPolicy::ShowAuto, ScrollPolicy::ShowAuto)
+    {}
+
+    ScrollArea::ScrollArea(Widget* content, ScrollPolicy hPolicy, ScrollPolicy vPolicy) :
+        mHPolicy(hPolicy),
+        mVPolicy(vPolicy)
     {
-        mVScroll = 0;
-        mHScroll = 0;
-        mHPolicy = ShowAuto;
-        mVPolicy = ShowAuto;
-        mScrollbarWidth = 12;
-        mUpButtonPressed = false;
-        mDownButtonPressed = false;
-        mLeftButtonPressed = false;
-        mRightButtonPressed = false;
-        mUpButtonScrollAmount = 10;
-        mDownButtonScrollAmount = 10;
-        mLeftButtonScrollAmount = 10;
-        mRightButtonScrollAmount = 10;
-        mIsVerticalMarkerDragged = false;
-        mIsHorizontalMarkerDragged =false;
-        mOpaque = true;
-
-        addMouseListener(this);
-    }
-
-    ScrollArea::ScrollArea(Widget *content)
-    {
-        mVScroll = 0;
-        mHScroll = 0;
-        mHPolicy = ShowAuto;
-        mVPolicy = ShowAuto;
-        mScrollbarWidth = 12;
-        mUpButtonPressed = false;
-        mDownButtonPressed = false;
-        mLeftButtonPressed = false;
-        mRightButtonPressed = false;
-        mUpButtonScrollAmount = 10;
-        mDownButtonScrollAmount = 10;
-        mLeftButtonScrollAmount = 10;
-        mRightButtonScrollAmount = 10;
-        mIsVerticalMarkerDragged = false;
-        mIsHorizontalMarkerDragged =false;
-        mOpaque = true;
-
-        setContent(content);
-        addMouseListener(this);
-    }
-
-    ScrollArea::ScrollArea(Widget *content, ScrollPolicy hPolicy, ScrollPolicy vPolicy)
-    {
-        mVScroll = 0;
-        mHScroll = 0;
-        mHPolicy = hPolicy;
-        mVPolicy = vPolicy;
-        mScrollbarWidth = 12;
-        mUpButtonPressed = false;
-        mDownButtonPressed = false;
-        mLeftButtonPressed = false;
-        mRightButtonPressed = false;
-        mUpButtonScrollAmount = 10;
-        mDownButtonScrollAmount = 10;
-        mLeftButtonScrollAmount = 10;
-        mRightButtonScrollAmount = 10;
-        mIsVerticalMarkerDragged = false;
-        mIsHorizontalMarkerDragged =false;
-        mOpaque = true;
-
         setContent(content);
         addMouseListener(this);
     }

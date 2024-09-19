@@ -151,13 +151,13 @@ namespace gcn
         void convertToDisplayFormat() override;
 
     protected:
-        GLuint mTextureHandle;
-        unsigned int* mPixels;
-        bool mAutoFree;
-        int mWidth;
-        int mHeight;
-        int mTextureWidth;
-        int mTextureHeight;
+        GLuint mTextureHandle = 0;
+        unsigned int* mPixels = nullptr;
+        bool mAutoFree = false;
+        int mWidth = 0;
+        int mHeight = 0;
+        int mTextureWidth = 0;
+        int mTextureHeight = 0;
     };
 }
 

@@ -215,11 +215,11 @@ namespace gcn
     protected:
         std::string mMessage;
         int mNbButtons;
-        Graphics::Alignment mButtonAlignment;
-        int mClickedButton;
+        Graphics::Alignment mButtonAlignment = Graphics::Alignment::Left;
+        int mClickedButton = -1;
 
-        Button **mButtons;
-        Label *mLabel;
+        Button **mButtons = nullptr;
+        Label *mLabel = nullptr;
     };
 }
 

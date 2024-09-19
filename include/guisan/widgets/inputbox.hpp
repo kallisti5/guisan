@@ -126,12 +126,12 @@ namespace gcn
 
     protected:
         std::string mMessage;
-        int mClickedButton;
+        int mClickedButton = -1;
 
-        Button *mButtonOK;
-        Button *mButtonCancel;
-        Label *mLabel;
-        TextField *mText;
+        Button *mButtonOK = nullptr;
+        Button *mButtonCancel = nullptr;
+        Label *mLabel = nullptr;
+        TextField *mText = nullptr;
     };
 }
 

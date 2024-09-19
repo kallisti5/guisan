@@ -80,7 +80,7 @@ namespace gcn
         /**
          * Constructor.
          */
-        SDLInput();
+        SDLInput() = default;
 
         /**
          * Pushes an SDL event. It should be called at least once per frame to
@@ -130,8 +130,8 @@ namespace gcn
         std::queue<KeyInput> mKeyInputQueue;
         std::queue<MouseInput> mMouseInputQueue;
 
-        bool mMouseDown;
-        bool mMouseInWindow;
+        bool mMouseDown = false;
+        bool mMouseInWindow = true;
     };
 }
 

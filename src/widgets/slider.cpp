@@ -66,37 +66,18 @@
 
 namespace gcn
 {
-    Slider::Slider(double scaleEnd)
+    Slider::Slider(double scaleEnd) : Slider(0., scaleEnd)
+    {}
+
+    Slider::Slider(double scaleStart, double scaleEnd) :
+        mScaleStart(scaleStart),
+        mScaleEnd(scaleEnd),
+        mValue(scaleStart)
     {
-        mDragged = false;
-
-        mScaleStart = 0;
-        mScaleEnd = scaleEnd;
-
         setFocusable(true);
         setFrameSize(1);
-        setOrientation(Horizontal);
-        setValue(0);
-        setStepLength(scaleEnd / 10);
-        setMarkerLength(10);
 
-        addMouseListener(this);
-        addKeyListener(this);
-    }
-
-    Slider::Slider(double scaleStart, double scaleEnd)
-    {
-        mDragged = false;
-
-        mScaleStart = scaleStart;
-        mScaleEnd = scaleEnd;
-
-        setFocusable(true);
-        setFrameSize(1);
-        setOrientation(Horizontal);
-        setValue(scaleStart);
         setStepLength((scaleEnd - scaleStart) / 10);
-        setMarkerLength(10);
 
         addMouseListener(this);
         addKeyListener(this);

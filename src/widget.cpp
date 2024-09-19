@@ -78,25 +78,11 @@
 
 namespace gcn
 {
-    Font* Widget::mGlobalFont = NULL;
+    Font* Widget::mGlobalFont = nullptr;
     DefaultFont Widget::mDefaultFont;
     std::list<Widget*> Widget::mWidgetInstances;
 
     Widget::Widget()
-            : mForegroundColor(0x000000),
-              mBackgroundColor(0xffffff),
-              mBaseColor(0xDDDDE3),
-              mSelectionColor(0xc3d9ff),
-              mFocusHandler(NULL),
-              mInternalFocusHandler(NULL),
-              mParent(NULL),
-              mBorderSize(0),
-              mFocusable(false),
-              mVisible(true),
-              mTabIn(true),
-              mTabOut(true),
-              mEnabled(true),
-              mCurrentFont(NULL)
     {
         mWidgetInstances.push_back(this);
     }

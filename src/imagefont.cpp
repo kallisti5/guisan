@@ -111,9 +111,6 @@ namespace gcn
         }
 
         mImage->convertToDisplayFormat();
-
-        mRowSpacing = 0;
-        mGlyphSpacing = 0;
     }
 
     ImageFont::ImageFont(Image* image, const std::string& glyphs)
@@ -158,9 +155,6 @@ namespace gcn
         }
 
         mImage->convertToDisplayFormat();
-
-        mRowSpacing = 0;
-        mGlyphSpacing = 0;
     }
 
     ImageFont::ImageFont(const std::string& filename,

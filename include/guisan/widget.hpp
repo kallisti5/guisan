@@ -1173,39 +1173,39 @@ namespace gcn
         /**
          * Holds the foreground color of the widget.
          */
-        Color mForegroundColor;
+        Color mForegroundColor = 0x00'00'00;
 
         /**
          * Holds the background color of the widget.
          */
-        Color mBackgroundColor;
+        Color mBackgroundColor = 0xFF'FF'FF;
 
         /**
          * Holds the base color of the widget.
          */
-        Color mBaseColor;
+        Color mBaseColor = 0xDD'DD'E3;
 
         /**
          * Holds the selection color of the widget.
          */
-        Color mSelectionColor;
+        Color mSelectionColor = 0xC3'D9'FF;
 
         /**
          * Holds the focus handler used by the widget.
          */
-        FocusHandler* mFocusHandler;
+        FocusHandler* mFocusHandler = nullptr;
 
         /**
          * Holds the focus handler used by the widget. NULL
          * if no internal focus handler is used.
          */
-        FocusHandler* mInternalFocusHandler;
+        FocusHandler* mInternalFocusHandler = nullptr;
 
         /**
          * Holds the parent of the widget. NULL if the widget
          * has no parent.
          */
-        Widget* mParent;
+        Widget* mParent = nullptr;
 
         /**
          * Holds the dimension of the widget.
@@ -1215,7 +1215,7 @@ namespace gcn
         /**
          * Holds the border size of the widget.
          */
-        unsigned int mBorderSize;
+        unsigned int mBorderSize = 0;
 
         /**
          * Holds the action event of the widget.
@@ -1225,27 +1225,27 @@ namespace gcn
         /**
          * True if the widget focusable, false otherwise.
          */
-        bool mFocusable;
+        bool mFocusable = false;
 
         /**
          * True if the widget visible, false otherwise.
          */
-        bool mVisible;
+        bool mVisible = true;
 
         /**
          * True if the widget has tab in enabled, false otherwise.
          */
-        bool mTabIn;
+        bool mTabIn = true;
 
         /**
          * True if the widget has tab in enabled, false otherwise.
          */
-        bool mTabOut;
+        bool mTabOut = true;
 
         /**
          * True if the widget is enabled, false otherwise.
          */
-        bool mEnabled;
+        bool mEnabled = true;
 
         /**
          * Holds the id of the widget.
@@ -1255,7 +1255,7 @@ namespace gcn
         /**
          * Holds the font used by the widget.
          */
-        Font* mCurrentFont;
+        Font* mCurrentFont = nullptr;
 
         /**
          * Holds all children of the widget.

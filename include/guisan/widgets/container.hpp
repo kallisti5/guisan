@@ -79,12 +79,12 @@ namespace gcn
     public:
 
         /**
-         * Constructor. A container is opauqe as default, if you want a
-         * none opaque container call setQpaque(false).
+         * Constructor. A container is opaque as default, if you want a
+         * non-opaque container call setOpaque(false).
          *
          * @see setOpaque, isOpaque
          */
-        Container();
+        Container() = default;
 
         /**
          * Destructor.
@@ -217,7 +217,7 @@ namespace gcn
         /**
          * True if the container is opaque, false otherwise.
          */
-        bool mOpaque;
+        bool mOpaque = true;
 
         typedef std::list<ContainerListener*> ContainerListenerList;
 
