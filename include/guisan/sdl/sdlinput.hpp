@@ -100,13 +100,13 @@ namespace gcn
 
         // Inherited from Input
 
-        virtual bool isKeyQueueEmpty();
+        bool isKeyQueueEmpty() override;
 
-        virtual KeyInput dequeueKeyInput();
+        KeyInput dequeueKeyInput() override;
 
-        virtual bool isMouseQueueEmpty();
+        bool isMouseQueueEmpty() override;
 
-        virtual MouseInput dequeueMouseInput();
+        MouseInput dequeueMouseInput() override;
 
     protected:
         /**

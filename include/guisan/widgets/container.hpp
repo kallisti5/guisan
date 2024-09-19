@@ -89,7 +89,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        virtual ~Container();
+        ~Container() override;
 
         /**
          * Sets the container to be opaque or not. If the container
@@ -192,9 +192,8 @@ namespace gcn
 
         // Inherited from Widget
 
-        virtual void draw(Graphics* graphics);
-
-        virtual Rectangle getChildrenArea();
+        void draw(Graphics* graphics) override;
+        Rectangle getChildrenArea() override;
 
     protected:
         /**

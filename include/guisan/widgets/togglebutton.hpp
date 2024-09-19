@@ -106,20 +106,17 @@ namespace gcn
          */
         void setSelected(bool selected);
 
-
         //Inherited from Widget
 
-        virtual void draw(Graphics* graphics);
-
+        void draw(Graphics* graphics) override;
 
         // Inherited from MouseListener
 
-        virtual void mouseReleased(MouseEvent& mouseEvent);
-
+        void mouseReleased(MouseEvent& mouseEvent) override;
 
         // Inherited from KeyListener
 
-        virtual void keyReleased(KeyEvent& keyEvent);
+        void keyReleased(KeyEvent& keyEvent) override;
 
     protected:
         /**

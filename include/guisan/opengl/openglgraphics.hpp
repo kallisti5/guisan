@@ -92,7 +92,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        virtual ~OpenGLGraphics();
+        ~OpenGLGraphics() override;
 
         /**
          * Sets the target plane on where to draw.
@@ -120,29 +120,24 @@ namespace gcn
 
         // Inherited from Graphics
 
-        virtual void _beginDraw();
+        void _beginDraw() override;
+        void _endDraw() override;
 
-        virtual void _endDraw();
+        bool pushClipArea(Rectangle area) override;
+        void popClipArea() override;
 
-        virtual bool pushClipArea(Rectangle area);
-
-        virtual void popClipArea();
-
-        virtual void drawImage(const Image* image, int srcX, int srcY,
+        void drawImage(const Image* image, int srcX, int srcY,
                                int dstX, int dstY, int width,
-                               int height);
+                               int height) override;
 
-        virtual void drawPoint(int x, int y);
+        void drawPoint(int x, int y) override;
+        void drawLine(int x1, int y1, int x2, int y2) override;
 
-        virtual void drawLine(int x1, int y1, int x2, int y2);
+        void drawRectangle(const Rectangle& rectangle) override;
+        void fillRectangle(const Rectangle& rectangle) override;
 
-        virtual void drawRectangle(const Rectangle& rectangle);
-
-        virtual void fillRectangle(const Rectangle& rectangle);
-
-        virtual void setColor(const Color& color);
-
-        virtual const Color& getColor();
+        void setColor(const Color& color) override;
+        const Color& getColor() override;
 
     protected:
         int mWidth, mHeight;

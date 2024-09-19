@@ -112,7 +112,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        virtual ~DropDown();
+        ~DropDown() override;
 
         /**
          * Gets the selected item as an index in the list model.
@@ -192,10 +192,6 @@ namespace gcn
         */
         virtual void foldUp();
 
-        // Inherited from Widget
-
-        virtual void draw(Graphics* graphics);
-
         void setBaseColor(const Color& color);
 
         void setBackgroundColor(const Color& color);
@@ -206,49 +202,38 @@ namespace gcn
 
         void setSelectionColor(const Color& color);
 
+        // Inherited from Widget
 
-        // Inherited from BasicContainer
-
-        virtual Rectangle getChildrenArea();
-
+        void draw(Graphics* graphics) override;
+        Rectangle getChildrenArea() override;
 
         // Inherited from FocusListener
 
-        virtual void focusLost(const Event& event);
-
+        void focusLost(const Event& event) override;
 
         // Inherited from ActionListener
 
-        virtual void action(const ActionEvent& actionEvent);
-
+        void action(const ActionEvent& actionEvent) override;
 
         // Inherited from DeathListener
 
         virtual void death(const Event& event);
 
-
         // Inherited from KeyListener
 
-        virtual void keyPressed(KeyEvent& keyEvent);
-
+        void keyPressed(KeyEvent& keyEvent) override;
 
         // Inherited from MouseListener
 
-        virtual void mousePressed(MouseEvent& mouseEvent);
-
-        virtual void mouseReleased(MouseEvent& mouseEvent);
-
-        virtual void mouseWheelMovedUp(MouseEvent& mouseEvent);
-
-        virtual void mouseWheelMovedDown(MouseEvent& mouseEvent);
-
-        virtual void mouseDragged(MouseEvent& mouseEvent);
-
+        void mousePressed(MouseEvent& mouseEvent) override;
+        void mouseReleased(MouseEvent& mouseEvent) override;
+        void mouseWheelMovedUp(MouseEvent& mouseEvent) override;
+        void mouseWheelMovedDown(MouseEvent& mouseEvent) override;
+        void mouseDragged(MouseEvent& mouseEvent) override;
 
         // Inherited from SelectionListener
 
-        virtual void valueChanged(const SelectionEvent& event);
-
+        void valueChanged(const SelectionEvent& event) override;
 
     protected:
         /**

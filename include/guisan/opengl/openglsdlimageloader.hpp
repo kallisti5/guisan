@@ -75,8 +75,7 @@ namespace gcn
 
         // Inherited from ImageLoader
 
-        virtual Image* load(const std::string& filename,
-                            bool convertToDisplayFormat = true)
+        Image* load(const std::string& filename, bool convertToDisplayFormat = true) override
         {
             SDL_Surface *loadedSurface = loadSDLSurface(filename);
 

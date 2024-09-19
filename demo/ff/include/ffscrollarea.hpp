@@ -50,8 +50,8 @@ class FFScrollArea : public gcn::ScrollArea, public gcn::KeyListener
 {
 public:
     FFScrollArea();
-    void draw(gcn::Graphics *graphics);
-    void keyPressed(gcn::KeyEvent &keyEvent);
+    void draw(gcn::Graphics* graphics) override;
+    void keyPressed(gcn::KeyEvent& keyEvent) override;
 };
 
 #endif

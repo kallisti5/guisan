@@ -57,7 +57,7 @@ namespace RickRollExample
             button2->addActionListener(this);
         }
 
-        ~MainContainer()
+        ~MainContainer() override
         {
             delete font;
 
@@ -73,7 +73,7 @@ namespace RickRollExample
 
         // Implement the action function in ActionListener to receive actions
         // The eventId tells us which widget called the action function.
-        virtual void action(const gcn::ActionEvent& actionEvent)
+        void action(const gcn::ActionEvent& actionEvent) override
         {
             // Here we use the widget pointer to check which widget the action
             // originated from.

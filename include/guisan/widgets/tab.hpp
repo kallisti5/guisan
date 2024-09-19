@@ -89,7 +89,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        virtual ~Tab();
+        ~Tab() override;
 
         /**
          * Adjusts the size of the tab to fit the caption. If this tab was
@@ -133,14 +133,12 @@ namespace gcn
 
         // Inherited from Widget
 
-        virtual void draw(Graphics *graphics);
-
+        void draw(Graphics* graphics) override;
 
         // Inherited from MouseListener
 
-        virtual void mouseEntered(MouseEvent& mouseEvent);
-
-        virtual void mouseExited(MouseEvent& mouseEvent);
+        void mouseEntered(MouseEvent& mouseEvent) override;
+        void mouseExited(MouseEvent& mouseEvent) override;
 
     protected:
         /**
