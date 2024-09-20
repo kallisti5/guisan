@@ -1,4 +1,5 @@
 #include <guisan.hpp>
+#include <memory>
 #include <sstream>
 
 namespace ActionExample
@@ -13,41 +14,39 @@ namespace ActionExample
     class MainContainer : public gcn::ActionListener
     {
     public:
-        MainContainer(gcn::Gui& gui, int width = 680, int height = 480) :
-            clickCountButton1(0),
-            clickCountButton2(0)
+        MainContainer(gcn::Gui& gui, int width = 680, int height = 480)
         {
             // Load the image font.
-            font = new gcn::ImageFont(
+            font = std::make_unique<gcn::ImageFont>(
                 "fixedfont.bmp", " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
             // The global font is static and must be set.
-            gcn::Widget::setGlobalFont(font);
+            gcn::Widget::setGlobalFont(font.get());
 
-            top = new gcn::Container();
+            top = std::make_unique<gcn::Container>();
             // Set the dimension of the top container to match the screen.
             top->setDimension(gcn::Rectangle(0, 0, width, height));
             // Set the top container
-            gui.setTop(top);
+            gui.setTop(top.get());
 
             // Create buttons
-            button1 = new gcn::Button("Button 1");
-            button2 = new gcn::Button("Button 2");
+            button1 = std::make_unique<gcn::Button>("Button 1");
+            button2 = std::make_unique<gcn::Button>("Button 2");
             // Set the buttons position
             button1->setPosition(120, 230);
             button2->setPosition(420, 230);
             // Add the buttons to the top container
-            top->add(button1);
-            top->add(button2);
+            top->add(button1.get());
+            top->add(button2.get());
 
             // Create labels
-            label1 = new gcn::Label("Button1 clicks 0");
-            label2 = new gcn::Label("Button2 clicks 0");
+            label1 = std::make_unique<gcn::Label>("Button1 clicks 0");
+            label2 = std::make_unique<gcn::Label>("Button2 clicks 0");
             // Set the labels position
             label1->setPosition(100, 200);
             label2->setPosition(400, 200);
             // Add the labels to the top container
-            top->add(label1);
-            top->add(label2);
+            top->add(label1.get());
+            top->add(label2.get());
 
             // Set the buttons action event id's.
             button1->setActionEventId("button1");
@@ -58,19 +57,7 @@ namespace ActionExample
             button2->addActionListener(this);
         }
 
-        ~MainContainer() override
-        {
-            delete font;
-
-            /*
-             * Destroy Guichan stuff
-             */
-            delete label1;
-            delete label2;
-            delete button1;
-            delete button2;
-            delete top;
-        }
+        ~MainContainer() override = default;
 
         // Implement the action function in ActionListener to receive actions
         // The eventId tells us which widget called the action function.
@@ -81,7 +68,7 @@ namespace ActionExample
 
             // Here we use the widget pointer to check which widget the action
             // originated from.
-            if (actionEvent.getSource() == button1)
+            if (actionEvent.getSource() == button1.get())
             {
                 clickCountButton1++;
                 os << "Button1 clicks " << clickCountButton1;
@@ -103,19 +90,19 @@ namespace ActionExample
         }
 
     private:
-        gcn::ImageFont* font; // A font
+        std::unique_ptr<gcn::ImageFont> font; // A font
 
         /*
          * All of the widgets
          */
-        gcn::Container* top; // A top container
-        gcn::Button* button1; // A button for actionlistening
-        gcn::Button* button2; // Another button for actionlistening
-        gcn::Label* label1; // And a label for button1 click count display
-        gcn::Label* label2; // And another label for button2 click count display
+        std::unique_ptr<gcn::Container> top; // A top container
+        std::unique_ptr<gcn::Button> button1; // A button for actionlistening
+        std::unique_ptr<gcn::Button> button2; // Another button for actionlistening
+        std::unique_ptr<gcn::Label> label1; // And a label for button1 click count display
+        std::unique_ptr<gcn::Label> label2; // And another label for button2 click count display
 
-        int clickCountButton1; // Count clicks for button1
-        int clickCountButton2; // Count clicks for button2
+        int clickCountButton1 = 0; // Count clicks for button1
+        int clickCountButton2 = 0; // Count clicks for button2
     };
 
 } // namespace ActionExample

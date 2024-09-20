@@ -54,10 +54,6 @@ public:
     void draw(gcn::Graphics* graphics) override;
 
     void setSelected(int i);
-
-private:
-    static gcn::Image *mHand;
-    static int mInstances;
 };
 
 #endif
