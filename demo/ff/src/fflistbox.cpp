@@ -41,23 +41,29 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <guisan.hpp>
-#ifndef _MSC_VER
-#include <SDL2/SDL.h>
-#else
-#include <SDL.h>
-#endif
-
 #include "fflistbox.hpp"
 
-int FFListBox::mInstances = 0;
-gcn::Image *FFListBox::mHand = NULL;
+#include <guisan.hpp>
+#include <memory>
+
+#ifndef _MSC_VER
+# include <SDL2/SDL.h>
+#else
+# include <SDL.h>
+#endif
+
+namespace
+{
+    int mInstances = 0;
+    std::unique_ptr<gcn::Image> mHand;
+}
+
 
 FFListBox::FFListBox()
 {
     if (mInstances == 0)
     {
-        mHand = gcn::Image::load("images/hand.png");
+        mHand.reset(gcn::Image::load("images/hand.png"));
     }
 
     mInstances++;
@@ -71,7 +77,7 @@ FFListBox::~FFListBox()
 
     if (mInstances == 0)
     {
-        delete mHand;
+        mHand = nullptr;
     }
 }
 
@@ -101,11 +107,11 @@ void FFListBox::draw(gcn::Graphics* graphics)
         {
             if (isFocused())
             {
-                graphics->drawImage(mHand, 0, y);
+                graphics->drawImage(mHand.get(), 0, y);
             }
             else if ((SDL_GetTicks() / 100) & 1)
             {
-                graphics->drawImage(mHand, 0, y);
+                graphics->drawImage(mHand.get(), 0, y);
             }
         }
 

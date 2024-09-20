@@ -48,6 +48,7 @@
 #include <SDL_mixer.h>
 #include <guisan.hpp>
 #include <guisan/sdl.hpp>
+#include <memory>
 
 #include "ffcharacterchooser.hpp"
 #include "ffcontainer.hpp"
@@ -68,17 +69,12 @@ public:
 private:
     void input();
     void initMain();
-    void cleanMain();
     void initStatus();
-    void cleanStatus();
     void initMagicSkills();
-    void cleanMagicSkills();
     void initItems();
-    void cleanItems();
     void initAbout();
-    void cleanAbout();
 
-    bool mRunning;
+    bool mRunning = true;
 
     SDL_Surface* mScreen;
     SDL_Window* mWindow;
@@ -88,75 +84,75 @@ private:
     Mix_Chunk* mChooseSound;
     Mix_Chunk* mEscapeSound;
 
-    gcn::SDLGraphics* mSDLGraphics;
-    gcn::SDLInput* mSDLInput;
-    gcn::SDLImageLoader* mSDLImageLoader;
-    gcn::Gui* mGui;
+    std::unique_ptr<gcn::SDLGraphics> mSDLGraphics;
+    std::unique_ptr<gcn::SDLInput> mSDLInput;
+    std::unique_ptr<gcn::SDLImageLoader> mSDLImageLoader;
+    std::unique_ptr<gcn::Gui> mGui;
 
-    gcn::Container* mTop;
-    FFContainer* mMain;
-    FFContainer* mStatus;
-    FFContainer* mItems;
-    FFContainer* mMagicSkills;
-    FFContainer* mTime;
-    FFContainer* mGoldFootsteps;
-    FFContainer* mMenu;
-    FFContainer* mAbout;
-    FFContainer* mItemsInfo;
+    std::unique_ptr<gcn::Container> mTop;
+    std::unique_ptr<FFContainer> mMain;
+    std::unique_ptr<FFContainer> mStatus;
+    std::unique_ptr<FFContainer> mItems;
+    std::unique_ptr<FFContainer> mMagicSkills;
+    std::unique_ptr<FFContainer> mTime;
+    std::unique_ptr<FFContainer> mGoldFootsteps;
+    std::unique_ptr<FFContainer> mMenu;
+    std::unique_ptr<FFContainer> mAbout;
+    std::unique_ptr<FFContainer> mItemsInfo;
 
-    gcn::Icon* mPerIcon;
-    gcn::Icon* mOlofIcon;
-    gcn::Icon* mTomasIcon;
-    gcn::Image* mPerImage;
-    gcn::Image* mOlofImage;
-    gcn::Image* mTomasImage;
-    gcn::Image* mSplashImage;
-    gcn::Font* mFontWhite;
-    gcn::Font* mFontCyan;
+    std::unique_ptr<gcn::Icon> mPerIcon;
+    std::unique_ptr<gcn::Icon> mOlofIcon;
+    std::unique_ptr<gcn::Icon> mTomasIcon;
+    std::unique_ptr<gcn::Image> mPerImage;
+    std::unique_ptr<gcn::Image> mOlofImage;
+    std::unique_ptr<gcn::Image> mTomasImage;
+    std::unique_ptr<gcn::Image> mSplashImage;
+    std::unique_ptr<gcn::Font> mFontWhite;
+    std::unique_ptr<gcn::Font> mFontCyan;
 
-    FFListBox *mMenuList;
+    std::unique_ptr<FFListBox> mMenuList;
 
-    FFListBox *mMagicSkillsList;
-    FFScrollArea *mMagicSkillsScroll;
+    std::unique_ptr<FFListBox> mMagicSkillsList;
+    std::unique_ptr<FFScrollArea> mMagicSkillsScroll;
 
-    StringListModel *mPerSkills;
-    StringListModel *mPerMagic;
-    StringListModel *mOlofSkills;
-    StringListModel *mOlofMagic;
-    StringListModel *mTomasSkills;
-    StringListModel *mTomasMagic;
+    std::unique_ptr<StringListModel> mPerSkills;
+    std::unique_ptr<StringListModel> mPerMagic;
+    std::unique_ptr<StringListModel> mOlofSkills;
+    std::unique_ptr<StringListModel> mOlofMagic;
+    std::unique_ptr<StringListModel> mTomasSkills;
+    std::unique_ptr<StringListModel> mTomasMagic;
 
-    gcn::TextBox* mPerInfo1;
-    gcn::TextBox* mOlofInfo1;
-    gcn::TextBox* mTomasInfo1;
-    gcn::TextBox* mPerInfo2;
-    gcn::TextBox* mOlofInfo2;
-    gcn::TextBox* mTomasInfo2;
-    gcn::TextBox* mItemsInfoInfo;
-    gcn::TextBox* mOlofStatus1;
-    gcn::TextBox* mOlofStatus2;
-    gcn::TextBox* mPerStatus1;
-    gcn::TextBox* mPerStatus2;
-    gcn::TextBox* mTomasStatus1;
-    gcn::TextBox* mTomasStatus2;
+    std::unique_ptr<gcn::TextBox> mPerInfo1;
+    std::unique_ptr<gcn::TextBox> mOlofInfo1;
+    std::unique_ptr<gcn::TextBox> mTomasInfo1;
+    std::unique_ptr<gcn::TextBox> mPerInfo2;
+    std::unique_ptr<gcn::TextBox> mOlofInfo2;
+    std::unique_ptr<gcn::TextBox> mTomasInfo2;
+    std::unique_ptr<gcn::TextBox> mItemsInfoInfo;
+    std::unique_ptr<gcn::TextBox> mOlofStatus1;
+    std::unique_ptr<gcn::TextBox> mOlofStatus2;
+    std::unique_ptr<gcn::TextBox> mPerStatus1;
+    std::unique_ptr<gcn::TextBox> mPerStatus2;
+    std::unique_ptr<gcn::TextBox> mTomasStatus1;
+    std::unique_ptr<gcn::TextBox> mTomasStatus2;
 
-    gcn::TextBox* mGoldFootstepsInfo1;
-    gcn::TextBox* mGoldFootstepsInfo2;
-    gcn::Label* mTimeLabel1;
-    gcn::Label* mTimeLabel2;
+    std::unique_ptr<gcn::TextBox> mGoldFootstepsInfo1;
+    std::unique_ptr<gcn::TextBox> mGoldFootstepsInfo2;
+    std::unique_ptr<gcn::Label> mTimeLabel1;
+    std::unique_ptr<gcn::Label> mTimeLabel2;
 
-    gcn::Label* mNavigationLabel;
+    std::unique_ptr<gcn::Label> mNavigationLabel;
 
-    gcn::TextBox* mAboutInfo;
-    FFScrollArea *mAboutScrollArea;
+    std::unique_ptr<gcn::TextBox> mAboutInfo;
+    std::unique_ptr<FFScrollArea> mAboutScrollArea;
 
-    FFListBox *mItemsList;
-    FFScrollArea *mItemsScrollArea;
-    StringListModel *mItemsListModel;
-    StringListModel *mItemsInfoListModel;
-    StringListModel *mMenuListModel;
+    std::unique_ptr<FFListBox> mItemsList;
+    std::unique_ptr<FFScrollArea> mItemsScrollArea;
+    std::unique_ptr<StringListModel> mItemsListModel;
+    std::unique_ptr<StringListModel> mItemsInfoListModel;
+    std::unique_ptr<StringListModel> mMenuListModel;
 
-    FFCharacterChooser* mCharacterChooser;
+    std::unique_ptr<FFCharacterChooser> mCharacterChooser;
 };
 
 #endif
