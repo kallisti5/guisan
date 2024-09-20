@@ -78,11 +78,11 @@ namespace gcn
      *
      * @since 0.8.0
      */
-    class GCN_CORE_DECLSPEC TabbedArea:
+    class GCN_CORE_DECLSPEC TabbedArea :
+        public Widget,
         public ActionListener,
         public KeyListener,
-        public MouseListener,
-        public Widget
+        public MouseListener
     {
         friend class Tab;
 

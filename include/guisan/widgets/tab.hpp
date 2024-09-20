@@ -75,9 +75,9 @@ namespace gcn
      * @see TabbedArea
      * @since 0.8.0
      */
-    class GCN_CORE_DECLSPEC Tab:
-        public MouseListener,
-        public Widget
+    class GCN_CORE_DECLSPEC Tab :
+        public Widget,
+        public MouseListener
     {
     public:
 

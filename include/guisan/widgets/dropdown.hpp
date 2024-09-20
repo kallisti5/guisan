@@ -89,12 +89,12 @@ namespace gcn
      * will be sent to all action listeners of the drop down.
      */
     class GCN_CORE_DECLSPEC DropDown :
+        public Widget,
         public ActionListener,
         public KeyListener,
         public MouseListener,
         public FocusListener,
-        public SelectionListener,
-        public Widget
+        public SelectionListener
     {
     public:
         /**
