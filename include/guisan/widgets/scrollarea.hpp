@@ -73,8 +73,8 @@ namespace gcn
      *       ScrollArea.
      */
     class GCN_CORE_DECLSPEC ScrollArea:
-        public MouseListener,
-        public Widget
+        public Widget,
+        public MouseListener
     {
     public:
         /**
