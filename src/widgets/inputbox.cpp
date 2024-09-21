@@ -77,18 +77,18 @@ namespace gcn
         addMouseListener(this);
         setMovable(false);
 
-        mLabel = new Label(message);
+        mLabel = std::make_unique<Label>(message);
         mLabel->setAlignment(Graphics::Left);
         mLabel->adjustSize();
 
-        mText = new TextField();
+        mText = std::make_unique<TextField>();
 
-        mButtonOK = new Button(ok);
+        mButtonOK = std::make_unique<Button>(ok);
         mButtonOK->setAlignment(Graphics::Center);
         mButtonOK->addMouseListener(this);
         mButtonOK->adjustSize();
 
-        mButtonCancel = new Button(cancel);
+        mButtonCancel = std::make_unique<Button>(cancel);
         mButtonCancel->setAlignment(Graphics::Center);
         mButtonCancel->addMouseListener(this);
         mButtonCancel->adjustSize();
@@ -112,12 +112,12 @@ namespace gcn
         }
         mText->setWidth(getWidth() - 2 * getFrameSize() - 5 * mPadding);
 
-        this->add(mLabel, (getWidth() - mLabel->getWidth()) / 2 - mPadding, mPadding);
-        this->add(mText, 2 * mPadding, 2 * mPadding + mLabel->getHeight());
+        this->add(mLabel.get(), (getWidth() - mLabel->getWidth()) / 2 - mPadding, mPadding);
+        this->add(mText.get(), 2 * mPadding, 2 * mPadding + mLabel->getHeight());
         int yButtons = getHeight() - (int) getTitleBarHeight() - getFrameSize() - 2 * mPadding
                      - mButtonOK->getHeight();
-        this->add(mButtonOK, (getWidth() - 2 * mButtonOK->getWidth()) / 4, yButtons);
-        this->add(mButtonCancel,
+        this->add(mButtonOK.get(), (getWidth() - 2 * mButtonOK->getWidth()) / 4, yButtons);
+        this->add(mButtonCancel.get(),
                   getWidth() - 2 * getFrameSize() - mButtonOK->getWidth() - mPadding,
                   yButtons);
 
@@ -134,21 +134,16 @@ namespace gcn
     InputBox::~InputBox()
     {
         releaseModalFocus();
-
-        delete mLabel;
-        delete mButtonOK;
-        delete mButtonCancel;
-        delete mText;
     }
 
     void InputBox::mouseReleased(MouseEvent& mouseEvent)
     {
-        if (mouseEvent.getSource() == mButtonOK)
+        if (mouseEvent.getSource() == mButtonOK.get())
         {
             mClickedButton = 0;
             distributeActionEvent();
         }
-        else if (mouseEvent.getSource() == mButtonCancel)
+        else if (mouseEvent.getSource() == mButtonCancel.get())
         {
             mClickedButton = 1;
             setVisible(false);

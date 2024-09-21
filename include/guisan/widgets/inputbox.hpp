@@ -57,6 +57,7 @@
 #ifndef GCN_INPUTBOX_HPP
 #define GCN_INPUTBOX_HPP
 
+#include <memory>
 #include <string>
 
 #include "guisan/mouselistener.hpp"
@@ -124,10 +125,10 @@ namespace gcn
     protected:
         int mClickedButton = -1;
 
-        Button *mButtonOK = nullptr;
-        Button *mButtonCancel = nullptr;
-        Label *mLabel = nullptr;
-        TextField *mText = nullptr;
+        std::unique_ptr<Button> mButtonOK;
+        std::unique_ptr<Button> mButtonCancel;
+        std::unique_ptr<Label> mLabel;
+        std::unique_ptr<TextField> mText;
     };
 }
 
