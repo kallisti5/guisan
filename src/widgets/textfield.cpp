@@ -68,28 +68,24 @@
 
 namespace gcn
 {
-    TextField::TextField() : mEditable(true), mXScroll(0)
+    TextField::TextField() : mText(new Text())
     {
-        mText = new Text();
-        mXScroll = 0;
-
         setFocusable(true);
 
         addMouseListener(this);
         addKeyListener(this);
+
         adjustHeight();
     }
 
-    TextField::TextField(const std::string& text) : mEditable(true), mXScroll(0)
+    TextField::TextField(const std::string& text) : mText(new Text(text))
     {
-        mText = new Text(text);
-
-        adjustSize();
-
         setFocusable(true);
 
         addMouseListener(this);
         addKeyListener(this);
+
+        adjustSize();
     }
 
     void TextField::setText(const std::string& text)

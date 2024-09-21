@@ -272,17 +272,17 @@ namespace gcn
         /**
          * Holds the text of the text box.
          */
-        Text* mText;
+        Text* mText = nullptr;
 
         /**
          * True if the text box is editable, false otherwise.
          */
-        bool mEditable;
+        bool mEditable = true;
 
         /**
          * True if the text box is editable, false otherwise.
          */
-        bool mOpaque;
+        bool mOpaque = true;
     };
 }
 

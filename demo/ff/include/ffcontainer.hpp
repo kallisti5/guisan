@@ -62,20 +62,12 @@ public:
     void slideContentTo(int y);
 
 private:
-    int mRealWidth;
-    int mRealHeight;
-    int mSlideTarget;
-    int mCurrentSlide;
-    int mTime;
-    bool mShow;
-
-    static int mInstances;
-    static gcn::Image *mCornerUL;
-    static gcn::Image *mCornerUR;
-    static gcn::Image *mCornerDL;
-    static gcn::Image *mCornerDR;
-    static gcn::Image *mHorizontal;
-    static gcn::Image *mVertical;
+    int mRealWidth = 0;
+    int mRealHeight = 0;
+    int mSlideTarget = 0;
+    int mCurrentSlide = 0;
+    int mTime = -1;
+    bool mShow = true;
 };
 
 #endif

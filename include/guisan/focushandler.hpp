@@ -87,7 +87,7 @@ namespace gcn
         /**
          * Constructor.
          */
-        FocusHandler();
+        FocusHandler() = default;
 
         /**
          * Destructor.
@@ -358,45 +358,45 @@ namespace gcn
         /**
          * Holds the focused widget. NULL if no widget has focus.
          */
-        Widget* mFocusedWidget;
+        Widget* mFocusedWidget = nullptr;
 
         /**
          * Holds the modal focused widget. NULL if no widget has
          * modal focused.
          */
-        Widget* mModalFocusedWidget;
+        Widget* mModalFocusedWidget = nullptr;
 
         /**
          * Holds the modal mouse input focused widget. NULL if no widget 
          * is being dragged.
          */
-        Widget* mModalMouseInputFocusedWidget;
+        Widget* mModalMouseInputFocusedWidget = nullptr;
 
         /** 
          * Holds the dragged widget. NULL if no widget is
          * being dragged.
          */
-        Widget* mDraggedWidget;
+        Widget* mDraggedWidget = nullptr;
 
         /**
          * Holds the last widget with the mouse.
          */
-        Widget* mLastWidgetWithMouse;
+        Widget* mLastWidgetWithMouse = nullptr;
 
         /**
          * Holds the last widget with modal focus.
          */
-        Widget* mLastWidgetWithModalFocus;
+        Widget* mLastWidgetWithModalFocus = nullptr;
 
         /**
          * Holds the last widget with modal mouse input focus.
          */
-        Widget* mLastWidgetWithModalMouseInputFocus;
+        Widget* mLastWidgetWithModalMouseInputFocus = nullptr;
 
         /**
          * Holds the last widget pressed.
          */
-        Widget* mLastWidgetPressed;
+        Widget* mLastWidgetPressed = nullptr;
     };
 }
 

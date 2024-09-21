@@ -117,10 +117,10 @@ namespace gcn
         void convertToDisplayFormat() override;
 
     protected:
-        SDL_Surface* mSurface;
-        SDL_Texture* mTexture = NULL;
-        SDL_Renderer* mRenderer = NULL;
-        bool mAutoFree;
+        SDL_Surface* mSurface = nullptr;
+        SDL_Texture* mTexture = nullptr;
+        SDL_Renderer* mRenderer = nullptr;
+        bool mAutoFree = false;
     };
 }
 

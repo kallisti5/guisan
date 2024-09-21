@@ -81,7 +81,7 @@ namespace gcn
         /**
          * Constructor.
          */
-        ToggleButton();
+        ToggleButton() = default;
 
         /**
          * Constructor.
@@ -124,11 +124,11 @@ namespace gcn
          * not being selected.
          */
         virtual void toggleSelected();
-    
+
         /**
-         * True if the button is selected, false otherwise. 
+         * True if the button is selected, false otherwise.
          */
-        bool mSelected;
+        bool mSelected = false;
     };
 }
 

@@ -186,11 +186,6 @@ namespace gcn
         virtual void drawBox(Graphics *graphics);
 
         /**
-         * True if the radio button is selected, false otherwise.
-         */
-        bool mSelected;
-
-        /**
          * Holds the caption of the radio button.
          */ 
         std::string mCaption;
@@ -199,6 +194,11 @@ namespace gcn
          * Holds the group of the radio button.
          */
         std::string mGroup;
+
+        /**
+         * True if the radio button is selected, false otherwise.
+         */
+        bool mSelected = false;
 
         /**
          * Typdef.

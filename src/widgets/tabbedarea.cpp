@@ -72,16 +72,15 @@
 
 namespace gcn
 {
-    TabbedArea::TabbedArea() : mSelectedTab(NULL), mOpaque(false)
+    TabbedArea::TabbedArea() : mTabContainer(new Container()), mWidgetContainer(new Container())
     {
         setFrameSize(1);
         setFocusable(true);
+
         addKeyListener(this);
         addMouseListener(this);
 
-        mTabContainer = new Container();
         mTabContainer->setOpaque(false);
-        mWidgetContainer = new Container();
 
         add(mTabContainer);
         add(mWidgetContainer);

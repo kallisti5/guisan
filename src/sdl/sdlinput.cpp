@@ -101,12 +101,6 @@ namespace gcn
         }
     }
 
-    SDLInput::SDLInput()
-    {
-        mMouseInWindow = true;
-        mMouseDown = false;
-    }
-
     bool SDLInput::isKeyQueueEmpty()
     {
         return mKeyInputQueue.empty();

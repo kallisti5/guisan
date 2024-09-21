@@ -66,10 +66,6 @@
 
 namespace gcn
 {
-    Graphics::Graphics()
-    {
-        mFont = NULL;
-    }
 
     bool Graphics::pushClipArea(Rectangle area)
     {

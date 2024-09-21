@@ -75,9 +75,9 @@ namespace gcn
      * @see TabbedArea
      * @since 0.8.0
      */
-    class GCN_CORE_DECLSPEC Tab:
-        public MouseListener,
-        public Widget
+    class GCN_CORE_DECLSPEC Tab :
+        public Widget,
+        public MouseListener
     {
     public:
 
@@ -144,17 +144,17 @@ namespace gcn
         /**
          * Holds the label of the tab.
          */
-        Label* mLabel;
+        Label* mLabel = nullptr;
 
         /**
          * Holds the tabbed area the tab is a part of.
          */
-        TabbedArea* mTabbedArea;
+        TabbedArea* mTabbedArea = nullptr;
 
         /**
          * True if the tab has the mouse, false otherwise.
          */
-        bool mHasMouse;
+        bool mHasMouse = false;
     };
 }
 

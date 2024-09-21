@@ -73,8 +73,8 @@ namespace gcn
      *       ScrollArea.
      */
     class GCN_CORE_DECLSPEC ScrollArea:
-        public MouseListener,
-        public Widget
+        public Widget,
+        public MouseListener
     {
     public:
         /**
@@ -458,104 +458,104 @@ namespace gcn
         /**
          * Holds the vertical scroll amount.
          */
-        int mVScroll;
+        int mVScroll = 0;
 
         /**
          * Holds the horizontal scroll amount.
          */
-        int mHScroll;
+        int mHScroll = 0;
 
         /**
          * Holds the width of the scroll bars.
          */
-        int mScrollbarWidth;
+        int mScrollbarWidth = 12;
 
         /**
          * Holds the horizontal scroll bar policy.
          */
-        ScrollPolicy mHPolicy;
+        ScrollPolicy mHPolicy = ScrollPolicy::ShowAuto;
 
         /**
          * Holds the vertical scroll bar policy.
          */
-        ScrollPolicy mVPolicy;
+        ScrollPolicy mVPolicy = ScrollPolicy::ShowAuto;
 
         /**
          * True if the vertical scroll bar is visible, false otherwise.
          */
-        bool mVBarVisible;
+        bool mVBarVisible = false;
 
         /**
          * True if the horizontal scroll bar is visible, false otherwise.
          */
-        bool mHBarVisible;
+        bool mHBarVisible = false;
 
         /**
          * True if the up button is pressed, false otherwise.
          */
-        bool mUpButtonPressed;
+        bool mUpButtonPressed = false;
 
         /**
          * True if the down button is pressed, false otherwise.
          */
-        bool mDownButtonPressed;
+        bool mDownButtonPressed = false;
 
         /**
          * True if the left button is pressed, false otherwise.
          */
-        bool mLeftButtonPressed;
+        bool mLeftButtonPressed = false;
 
         /**
          * True if the right button is pressed, false otherwise.
          */
-        bool mRightButtonPressed;
+        bool mRightButtonPressed = false;
 
         /**
          * Holds the up button scroll amount.
          */
-        int mUpButtonScrollAmount;
+        int mUpButtonScrollAmount = 10;
 
         /**
          * Holds the down button scroll amount.
          */
-        int mDownButtonScrollAmount;
+        int mDownButtonScrollAmount = 10;
 
         /**
          * Holds the left button scroll amount.
          */
-        int mLeftButtonScrollAmount;
+        int mLeftButtonScrollAmount = 10;
 
         /**
          * Holds the right button scroll amount.
          */
-        int mRightButtonScrollAmount;
+        int mRightButtonScrollAmount = 10;
 
         /**
          * True if the vertical marked is dragged.
          */
-        bool mIsVerticalMarkerDragged;
+        bool mIsVerticalMarkerDragged = false;
 
         /**
          * True if the horizontal marked is dragged.
          */
-        bool mIsHorizontalMarkerDragged;
+        bool mIsHorizontalMarkerDragged = false;
 
         /**
          * Holds the horizontal markers drag offset.
          */
-        int mHorizontalMarkerDragOffset;
+        int mHorizontalMarkerDragOffset = 0;
 
         /**
          * Holds the vertical markers drag offset.
          */
-        int mVerticalMarkerDragOffset;
+        int mVerticalMarkerDragOffset = 0;
 
         /**
          * True if the scroll area should be opaque
          * (that is display its background),
          * false otherwise.
          */
-        bool mOpaque;
+        bool mOpaque = true;
     };
 }
 

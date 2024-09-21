@@ -42,43 +42,44 @@
  */
 
 #include "ffcontainer.hpp"
+
 #include <cmath>
+#include <memory>
+
 #ifndef _MSC_VER
 #include <SDL2/SDL.h>
 #else
 #include <SDL.h>
 #endif // !_MSC_
 
-int FFContainer::mInstances = 0;
-gcn::Image *FFContainer::mCornerUL = 0;
-gcn::Image *FFContainer::mCornerUR = 0;
-gcn::Image *FFContainer::mCornerDL = 0;
-gcn::Image *FFContainer::mCornerDR = 0;
-gcn::Image *FFContainer::mHorizontal = 0;
-gcn::Image *FFContainer::mVertical = 0;
+namespace
+{
+    int mInstances = 0;
+    std::unique_ptr<gcn::Image> mCornerUL;
+    std::unique_ptr<gcn::Image> mCornerUR;
+    std::unique_ptr<gcn::Image> mCornerDL;
+    std::unique_ptr<gcn::Image> mCornerDR;
+    std::unique_ptr<gcn::Image> mHorizontal;
+    std::unique_ptr<gcn::Image> mVertical;
+} // namespace
 
 FFContainer::FFContainer()
 {
     if (mInstances == 0)
     {
-        mCornerUL = gcn::Image::load("images/cornerul.png");
-        mCornerUR = gcn::Image::load("images/cornerur.png");
-        mCornerDL = gcn::Image::load("images/cornerdl.png");
-        mCornerDR = gcn::Image::load("images/cornerdr.png");
-        mHorizontal = gcn::Image::load("images/horizontal.png");
-        mVertical = gcn::Image::load("images/vertical.png");
+        mCornerUL.reset(gcn::Image::load("images/cornerul.png"));
+        mCornerUR.reset(gcn::Image::load("images/cornerur.png"));
+        mCornerDL.reset(gcn::Image::load("images/cornerdl.png"));
+        mCornerDR.reset(gcn::Image::load("images/cornerdr.png"));
+        mHorizontal.reset(gcn::Image::load("images/horizontal.png"));
+        mVertical.reset(gcn::Image::load("images/vertical.png"));
     }
 
     mInstances++;
 
-    mRealWidth = 0;
-    mRealHeight = 0;
-    mTime = -1;
-    mShow = true;
     Container::setWidth(0);
     Container::setHeight(0);
-    mSlideTarget = 0;
-    mCurrentSlide = 0;
+
     setFrameSize(0);
 }
 
@@ -88,12 +89,12 @@ FFContainer::~FFContainer()
 
     if (mInstances == 0)
     {
-        delete mCornerUL;
-        delete mCornerUR;
-        delete mCornerDL;
-        delete mCornerDR;
-        delete mHorizontal;
-        delete mVertical;
+        mCornerUL = nullptr;
+        mCornerUR = nullptr;
+        mCornerDL = nullptr;
+        mCornerDR = nullptr;
+        mHorizontal = nullptr;
+        mVertical = nullptr;
     }
 }
 
@@ -116,24 +117,24 @@ void FFContainer::draw(gcn::Graphics* graphics)
 
     for (i = 5; i < getHeight()-10; i+=5)
     {
-        graphics->drawImage(mVertical, 0, i);
-        graphics->drawImage(mVertical, getWidth()-4, i);
+        graphics->drawImage(mVertical.get(), 0, i);
+        graphics->drawImage(mVertical.get(), getWidth() - 4, i);
     }
-    graphics->drawImage(mVertical, 0, 0, 0, i, 4, getHeight()-5-i);
-    graphics->drawImage(mVertical, 0, 0, getWidth()-4, i, 4, getHeight()-5-i);
+    graphics->drawImage(mVertical.get(), 0, 0, 0, i, 4, getHeight() - 5 - i);
+    graphics->drawImage(mVertical.get(), 0, 0, getWidth() - 4, i, 4, getHeight() - 5 - i);
 
     for (i = 5; i < getWidth()-10; i+=5)
     {
-        graphics->drawImage(mHorizontal, i, 0);
-        graphics->drawImage(mHorizontal, i, getHeight()-4);
+        graphics->drawImage(mHorizontal.get(), i, 0);
+        graphics->drawImage(mHorizontal.get(), i, getHeight() - 4);
     }
-    graphics->drawImage(mHorizontal, 0, 0, i, 0, getWidth()-5-i, 4);
-    graphics->drawImage(mHorizontal, 0, 0, i, getHeight()-4, getWidth()-5-i, 4);
+    graphics->drawImage(mHorizontal.get(), 0, 0, i, 0, getWidth() - 5 - i, 4);
+    graphics->drawImage(mHorizontal.get(), 0, 0, i, getHeight() - 4, getWidth() - 5 - i, 4);
 
-    graphics->drawImage(mCornerUL, 0, 0);
-    graphics->drawImage(mCornerUR, getWidth()-5, 0);
-    graphics->drawImage(mCornerDL, 0, getHeight()-5);
-    graphics->drawImage(mCornerDR, getWidth()-5, getHeight()-5);
+    graphics->drawImage(mCornerUL.get(), 0, 0);
+    graphics->drawImage(mCornerUR.get(), getWidth() - 5, 0);
+    graphics->drawImage(mCornerDL.get(), 0, getHeight() - 5);
+    graphics->drawImage(mCornerDR.get(), getWidth() - 5, getHeight() - 5);
 }
 
 void FFContainer::logic()

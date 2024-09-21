@@ -45,23 +45,24 @@
 #define __FFCHARACTERCHOOSER_HPP
 
 #include <guisan.hpp>
+#include <memory>
 
 class FFCharacterChooser : public gcn::Widget, gcn::KeyListener
 {
 public:
     FFCharacterChooser();
-    ~FFCharacterChooser() override;
+    ~FFCharacterChooser() override = default;
     void draw(gcn::Graphics* graphics) override;
     void keyPressed(gcn::KeyEvent& keyEvent) override;
 
-    int getSelected();
+    int getSelected() const;
     void setSelected(int selected);
     void setDistance(int distance);
 
 private:
-    int mSelected;
-    int mDistance;
-    gcn::Image* mHand;
+    int mSelected = 0;
+    int mDistance = 76;
+    std::unique_ptr<gcn::Image> mHand;
 };
 
 #endif

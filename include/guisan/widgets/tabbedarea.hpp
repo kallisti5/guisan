@@ -78,11 +78,11 @@ namespace gcn
      *
      * @since 0.8.0
      */
-    class GCN_CORE_DECLSPEC TabbedArea:
+    class GCN_CORE_DECLSPEC TabbedArea :
+        public Widget,
         public ActionListener,
         public KeyListener,
-        public MouseListener,
-        public Widget
+        public MouseListener
     {
         friend class Tab;
 
@@ -267,17 +267,17 @@ namespace gcn
         /**
          * Holds the selected tab.
          */
-        Tab* mSelectedTab;
+        Tab* mSelectedTab = nullptr;
 
         /**
          * Holds the container for the tabs.
          */
-        Container* mTabContainer;
+        Container* mTabContainer = nullptr;
 
         /**
          * Holds the container for the widgets.
          */
-        Container* mWidgetContainer;
+        Container* mWidgetContainer = nullptr;
 
         /**
          * Holds a vector of tabs to delete in the destructor.
@@ -295,12 +295,12 @@ namespace gcn
         /**
          * True if the tabbed area is opaque, false otherwise.
          */
-        bool mOpaque;
+        bool mOpaque = false;
 
         /**
          * True if the tabbed area is active, false otherwise.
          */
-        bool tabActive;
+        bool tabActive = false;
     };
 }
 

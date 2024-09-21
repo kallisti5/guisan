@@ -43,32 +43,24 @@
 
 #include "ffcharacterchooser.hpp"
 
-FFCharacterChooser::FFCharacterChooser()
+FFCharacterChooser::FFCharacterChooser() : mHand(gcn::Image::load("images/hand.png"))
 {
     setWidth(20);
     setHeight(240);
-    mSelected = 0;
-    mDistance = 76;
-    mHand = gcn::Image::load("images/hand.png");
     setFocusable(true);
     addKeyListener(this);
     setFrameSize(0);
-}
-
-FFCharacterChooser::~FFCharacterChooser()
-{
-    delete mHand;
 }
 
 void FFCharacterChooser::draw(gcn::Graphics* graphics)
 {
     if (isFocused())
     {
-        graphics->drawImage(mHand, 0, mDistance*mSelected);
+        graphics->drawImage(mHand.get(), 0, mDistance * mSelected);
     }
 }
 
-int FFCharacterChooser::getSelected()
+int FFCharacterChooser::getSelected() const
 {
     return mSelected;
 }

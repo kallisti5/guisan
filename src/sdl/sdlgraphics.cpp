@@ -74,11 +74,7 @@
 
 namespace gcn
 {
-    SDLGraphics::SDLGraphics()
-    {
-        mAlpha = false;
-    }
-    
+
     SDLGraphics::~SDLGraphics()
     {
 

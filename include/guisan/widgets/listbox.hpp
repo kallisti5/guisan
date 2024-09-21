@@ -223,17 +223,17 @@ namespace gcn
         /**
          * The list model to use.
          */
-        ListModel *mListModel;
+        ListModel *mListModel = nullptr;
 
         /**
          * The selected item as an index in the list model.
          */
-        int mSelected;
+        int mSelected = -1;
 
         /**
          * True if wrapping is enabled, false otherwise.
          */
-        bool mWrappingEnabled;
+        bool mWrappingEnabled = false;
 
         typedef std::list<SelectionListener*> SelectionListenerList;
 

@@ -67,20 +67,13 @@
 
 namespace gcn
 {
-    CheckBox::CheckBox()
+    CheckBox::CheckBox() : CheckBox("", false)
+    {}
+
+    CheckBox::CheckBox(const std::string& caption, bool selected) :
+        mCaption(caption),
+        mSelected(selected)
     {
-        setSelected(false);
-
-        setFocusable(true);
-        addMouseListener(this);
-        addKeyListener(this);
-    }
-
-    CheckBox::CheckBox(const std::string &caption, bool selected)
-    {
-        setCaption(caption);
-        setSelected(selected);
-
         setFocusable(true);
         addMouseListener(this);
         addKeyListener(this);

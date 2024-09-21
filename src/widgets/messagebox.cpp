@@ -65,59 +65,31 @@
 #include "guisan/graphics.hpp"
 #include "guisan/mouseinput.hpp"
 
+#include <vector>
+
 namespace gcn
 {
 
-    MessageBox::MessageBox(const std::string& caption, const std::string& message)
-            :Window(caption),mMessage(message),mClickedButton(-1)
+    MessageBox::MessageBox(const std::string& caption, const std::string& message) :
+        MessageBox(caption, message, std::vector<std::string>{"OK"}.data(), 1)
     {
-        setCaption(caption);
-        addMouseListener(this);
-        setMovable(false);
-        
-        mLabel = new Label(message);
-        mLabel->setAlignment(Graphics::Left);
-        mLabel->adjustSize();
-        
-        mNbButtons = 1;
-        mButtons = new Button*[1];
-        mButtons[0] = new Button("OK");
-        mButtons[0]->setAlignment(Graphics::Center);
-        mButtons[0]->addMouseListener(this);
-        
-        setHeight((int)getTitleBarHeight() + mLabel->getHeight() + 4*mPadding + mButtons[0]->getHeight());
-        setWidth(mLabel->getWidth() + 4*mPadding);
-        if(mButtons[0]->getWidth() + 4*mPadding > getWidth()) 
-        {
-            setWidth(mButtons[0]->getWidth() + 4*mPadding);
-        }
-        
-        this->add(mLabel, (getWidth() - mLabel->getWidth())/2 - mPadding, mPadding);
-        this->add(mButtons[0], (getWidth() - mButtons[0]->getWidth())/2, getHeight() - (int)getTitleBarHeight() - mPadding - mButtons[0]->getHeight());
-        
-        try
-        {
-            requestModalFocus();
-        } 
-        catch (Exception e) 
-        {
-            // Not having modal focus is not critical
-        }
     }
-    
-    MessageBox::MessageBox(const std::string& caption, const std::string& message,
-            const std::string *buttons, int size)
-            :Window(caption),mMessage(message),mClickedButton(-1)
+
+    MessageBox::MessageBox(const std::string& caption,
+                           const std::string& message,
+                           const std::string* buttons,
+                           int size) :
+        Window(caption),
+        mMessage(message)
     {
-        setCaption(caption);
         addMouseListener(this);
         setMovable(false);
-        
+
         mLabel = new Label(message);
         mLabel->setAlignment(Graphics::Left);
         mLabel->adjustSize();
         setWidth(mLabel->getWidth() + 4*mPadding);
-        
+
         //Create buttons and label
         if(size > 0) 
         {
@@ -154,7 +126,7 @@ namespace gcn
             for(int i = 0 ; i < size ; i++)
             {
                 add(mButtons[i], padding + (maxBtnWidth + mPadding)*i, getHeight() - (int)getTitleBarHeight() - mPadding - mButtons[0]->getHeight());
-            }			
+            }
         }
         
         try
