@@ -104,8 +104,7 @@ namespace WidgetsExample
             std::vector<std::string> button_names{"0", "25", "50", "75", "100", "-1", "+1"};
             messageBox = std::make_unique<gcn::MessageBox>("Change progression",
                                                            "Set progression value",
-                                                           button_names.data(),
-                                                           button_names.size());
+                                                           button_names);
             messageBox->setMovable(true);
             messageBox->setFrameSize(1);
             messageBox->addActionListener(this);
