@@ -166,14 +166,14 @@ namespace gcn
 
     void OpenGLImage::free()
     {
-		if (mPixels == NULL)
+		if (mPixels == nullptr)
 		{
 			glDeleteTextures(1, &mTextureHandle);
 		}
 		else
 		{
 			delete[] mPixels;
-			mPixels = NULL;
+			mPixels = nullptr;
 		}
     }
 
@@ -189,7 +189,7 @@ namespace gcn
 
     Color OpenGLImage::getPixel(int x, int y)
     {
-		if (mPixels == NULL)
+		if (mPixels == nullptr)
 		{
 			throw GCN_EXCEPTION("Image has been converted to display format");
 		}
@@ -218,7 +218,7 @@ namespace gcn
 
     void OpenGLImage::putPixel(int x, int y, const Color& color)
     {
-        if (mPixels == NULL)
+        if (mPixels == nullptr)
 		{
 			throw GCN_EXCEPTION("Image has been converted to display format");
 		}
@@ -239,7 +239,7 @@ namespace gcn
 
     void OpenGLImage::convertToDisplayFormat()
     {
-		if (mPixels == NULL)
+		if (mPixels == nullptr)
 		{
 			throw GCN_EXCEPTION("Image has already been converted to display format");
 		}
@@ -261,7 +261,7 @@ namespace gcn
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
         delete[] mPixels;
-		mPixels = NULL;
+		mPixels = nullptr;
 
         GLenum error = glGetError();
         if (error)

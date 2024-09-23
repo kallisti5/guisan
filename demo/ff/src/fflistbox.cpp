@@ -83,7 +83,7 @@ FFListBox::~FFListBox()
 
 void FFListBox::draw(gcn::Graphics* graphics)
 {
-		if (mListModel == NULL)
+		if (mListModel == nullptr)
 		{
         return;
 		}

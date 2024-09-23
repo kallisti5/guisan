@@ -138,7 +138,7 @@ namespace gcn
     void Graphics::drawText(const std::string& text, int x, int y,
                             Alignment alignment, bool enabled)
     {
-        if (mFont == NULL)
+        if (mFont == nullptr)
         {
             throw GCN_EXCEPTION("No font set.");
         }

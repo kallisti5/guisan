@@ -154,7 +154,7 @@ namespace gcn
          * Finds a widget given an id.
          *
          * @param id The id to find a widget by.
-         * @return A widget with a corrosponding id, NULL if no widget 
+         * @return A widget with a corrosponding id, nullptr if no widget 
          *         is found.
          * @see Widget::setId
          */

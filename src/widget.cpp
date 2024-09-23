@@ -89,7 +89,7 @@ namespace gcn
 
     Widget::~Widget()
     {
-        if (mParent != NULL)
+        if (mParent != nullptr)
         {
             mParent->remove(this);
         }
@@ -97,7 +97,7 @@ namespace gcn
         std::list<Widget*>::const_iterator childrenIter;
         for (childrenIter = mChildren.begin(); childrenIter != mChildren.end(); childrenIter++)
         {
-            (*childrenIter)->_setParent(NULL);
+            (*childrenIter)->_setParent(nullptr);
         }
 
         std::list<DeathListener*>::const_iterator deathIter;
@@ -107,7 +107,7 @@ namespace gcn
             (*deathIter)->death(event);
         }
 
-        _setFocusHandler(NULL);
+        _setFocusHandler(nullptr);
 
         mWidgetInstances.remove(this);
     }
@@ -277,7 +277,7 @@ namespace gcn
 
     void Widget::requestFocus()
     {
-        if (mFocusHandler == NULL)
+        if (mFocusHandler == nullptr)
         {
             throw GCN_EXCEPTION("No focushandler set (did you add the widget to the gui?).");
         }
@@ -325,7 +325,7 @@ namespace gcn
 
     bool Widget::isVisible() const
     {
-        if (getParent() == NULL)
+        if (getParent() == nullptr)
         {
             return mVisible;
         }
@@ -390,7 +390,7 @@ namespace gcn
 
         mFocusHandler = focusHandler;
 
-        if (mInternalFocusHandler != NULL)
+        if (mInternalFocusHandler != nullptr)
         {
             return;
         }
@@ -472,7 +472,7 @@ namespace gcn
 
     void Widget::getAbsolutePosition(int& x, int& y) const
     {
-        if (getParent() == NULL)
+        if (getParent() == nullptr)
         {
             x = mDimension.x;
             y = mDimension.y;
@@ -490,9 +490,9 @@ namespace gcn
 
     Font* Widget::getFont() const
     {
-        if (mCurrentFont == NULL)
+        if (mCurrentFont == nullptr)
         {
-            if (mGlobalFont == NULL)
+            if (mGlobalFont == nullptr)
             {
                 return &mDefaultFont;
             }
@@ -510,7 +510,7 @@ namespace gcn
         std::list<Widget*>::iterator iter;
         for (iter = mWidgetInstances.begin(); iter != mWidgetInstances.end(); ++iter)
         {
-            if ((*iter)->mCurrentFont == NULL)
+            if ((*iter)->mCurrentFont == nullptr)
             {
                 (*iter)->fontChanged();
             }
@@ -578,7 +578,7 @@ namespace gcn
 
     void Widget::requestModalFocus()
     {
-        if (mFocusHandler == NULL)
+        if (mFocusHandler == nullptr)
         {
             throw GCN_EXCEPTION("No focushandler set (did you add the widget to the gui?).");
         }
@@ -588,7 +588,7 @@ namespace gcn
 
     void Widget::requestModalMouseInputFocus()
     {
-        if (mFocusHandler == NULL)
+        if (mFocusHandler == nullptr)
         {
             throw GCN_EXCEPTION("No focushandler set (did you add the widget to the gui?).");
         }
@@ -598,7 +598,7 @@ namespace gcn
 
     void Widget::releaseModalFocus()
     {
-        if (mFocusHandler == NULL)
+        if (mFocusHandler == nullptr)
         {
             return;
         }
@@ -608,7 +608,7 @@ namespace gcn
 
     void Widget::releaseModalMouseInputFocus()
     {
-        if (mFocusHandler == NULL)
+        if (mFocusHandler == nullptr)
         {
             return;
         }
@@ -618,12 +618,12 @@ namespace gcn
 
     bool Widget::isModalFocused() const
     {
-        if (mFocusHandler == NULL)
+        if (mFocusHandler == nullptr)
         {
             throw GCN_EXCEPTION("No focushandler set (did you add the widget to the gui?).");
         }
 
-        if (getParent() != NULL)
+        if (getParent() != nullptr)
         {
             return (mFocusHandler->getModalFocused() == this) || getParent()->isModalFocused();
         }
@@ -633,12 +633,12 @@ namespace gcn
 
     bool Widget::isModalMouseInputFocused() const
     {
-        if (mFocusHandler == NULL)
+        if (mFocusHandler == nullptr)
         {
             throw GCN_EXCEPTION("No focushandler set (did you add the widget to the gui?).");
         }
 
-        if (getParent() != NULL)
+        if (getParent() != nullptr)
         {
             return (mFocusHandler->getModalMouseInputFocused() == this) || getParent()->isModalMouseInputFocused();
         }
@@ -652,7 +652,7 @@ namespace gcn
 
         if (!r.isContaining(x, y))
         {
-            return NULL;
+            return nullptr;
         }
 
         x -= r.x;
@@ -666,7 +666,7 @@ namespace gcn
                 return widget;
             }
         }
-        return NULL;
+        return nullptr;
     }
 
     const std::list<MouseListener*>& Widget::_getMouseListeners()
@@ -701,7 +701,7 @@ namespace gcn
         std::list<Widget*>::const_iterator iter;
         for (iter = mChildren.begin(); iter != mChildren.end(); iter++)
         {
-            if (mInternalFocusHandler == NULL)
+            if (mInternalFocusHandler == nullptr)
             {
                 (*iter)->_setFocusHandler(_getFocusHandler());
             }
@@ -778,7 +778,7 @@ namespace gcn
 
     void Widget::showPart(Rectangle rectangle)
     {
-        if (mParent != NULL)
+        if (mParent != nullptr)
         {
             mParent->showWidgetPart(this, rectangle);
         }
@@ -786,12 +786,12 @@ namespace gcn
 
     Widget* Widget::getTop() const
     {
-        if (getParent() == NULL) return NULL;
+        if (getParent() == nullptr) return nullptr;
 
         Widget* widget = getParent();
         Widget* parent = getParent()->getParent();
 
-        while (parent != NULL)
+        while (parent != nullptr)
         {
             widget = parent;
             parent = parent->getParent();
@@ -852,13 +852,13 @@ namespace gcn
 
             Widget* child = widget->findWidgetById(id);
 
-            if (child != NULL)
+            if (child != nullptr)
             {
                 return child;
             }
         }
 
-        return NULL;
+        return nullptr;
     }
 
     void Widget::showWidgetPart(Widget* widget, Rectangle area)
@@ -895,8 +895,8 @@ namespace gcn
         for (iter = mChildren.begin(); iter != mChildren.end(); iter++)
         {
             Widget* widget = (*iter);
-            widget->_setFocusHandler(NULL);
-            widget->_setParent(NULL);
+            widget->_setFocusHandler(nullptr);
+            widget->_setParent(nullptr);
         }
 
         mChildren.clear();
@@ -910,8 +910,8 @@ namespace gcn
             if (*iter == widget)
             {
                 mChildren.erase(iter);
-                widget->_setFocusHandler(NULL);
-                widget->_setParent(NULL);
+                widget->_setFocusHandler(nullptr);
+                widget->_setParent(nullptr);
                 return;
             }
         }
@@ -923,7 +923,7 @@ namespace gcn
     {
         mChildren.push_back(widget);
 
-        if (mInternalFocusHandler == NULL)
+        if (mInternalFocusHandler == nullptr)
         {
             widget->_setFocusHandler(_getFocusHandler());
         }
