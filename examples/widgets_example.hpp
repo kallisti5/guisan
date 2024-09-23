@@ -101,6 +101,14 @@ namespace WidgetsExample
             progress->setCaption("Loading");
             progress->setWidth(100);
 
+            std::vector<std::string> button_names{"0", "25", "50", "75", "100", "-1", "+1"};
+            messageBox = std::make_unique<gcn::MessageBox>("Change progression",
+                                                           "Set progression value",
+                                                           button_names);
+            messageBox->setMovable(true);
+            messageBox->setFrameSize(1);
+            messageBox->addActionListener(this);
+
             guisanLogoImage.reset(gcn::Image::load("guisan-logo.png"));
             guisanLogoIcon = std::make_unique<gcn::Icon>(guisanLogoImage.get());
             window->add(guisanLogoIcon.get());
@@ -138,6 +146,7 @@ namespace WidgetsExample
             top->add(nestedScrollArea.get(), 440, 350);
 
             top->add(progress.get(), 580, 200);
+            top->add(messageBox.get(), 480, 220);
         }
 
         ~MainContainer() = default;
@@ -157,6 +166,20 @@ namespace WidgetsExample
                 {
                     label->setCaption(inputBox->getText());
                     label->adjustSize();
+                }
+            }
+            else if (actionEvent.getSource() == messageBox.get())
+            {
+                switch (messageBox->getClickedButton())
+                {
+                    default:
+                    case 0: progress->setValue(0); break;
+                    case 1: progress->setValue(25); break;
+                    case 2: progress->setValue(50); break;
+                    case 3: progress->setValue(75); break;
+                    case 4: progress->setValue(100); break;
+                    case 5: progress->setValue(progress->getValue() - 1); break;
+                    case 6: progress->setValue(progress->getValue() + 1); break;
                 }
             }
         }
@@ -186,6 +209,7 @@ namespace WidgetsExample
         std::unique_ptr<gcn::Slider> slider; // A slider
         std::unique_ptr<gcn::Image> image; // An image for the icon
         std::unique_ptr<gcn::Window> window;
+        std::unique_ptr<gcn::MessageBox> messageBox;
         std::unique_ptr<gcn::ProgressBar> progress;
         std::unique_ptr<gcn::Image> guisanLogoImage;
         std::unique_ptr<gcn::Icon> guisanLogoIcon;
