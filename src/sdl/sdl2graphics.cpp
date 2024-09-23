@@ -77,7 +77,7 @@ namespace gcn
 
     SDL2Graphics::~SDL2Graphics()
     {
-        if(mRenderTarget != NULL)
+        if(mRenderTarget != nullptr)
         {
             SDL_DestroyTexture(mTexture);
             SDL_FreeSurface(mTarget);
@@ -104,7 +104,7 @@ namespace gcn
         mRenderTarget = renderer;
         // An internal surface is still required to be able to handle surfaces and colorkeys
         mTarget = SDL_CreateRGBSurface(0, width, height, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
-        SDL_FillRect(mTarget, NULL, SDL_MapRGB(mTarget->format, 0xff, 0, 0xff));
+        SDL_FillRect(mTarget, nullptr, SDL_MapRGB(mTarget->format, 0xff, 0, 0xff));
         SDL_SetColorKey(mTarget, SDL_TRUE, SDL_MapRGB(mTarget->format, 0xff, 0, 0xff)); // magenta, Guisan default
         SDL_SetSurfaceBlendMode(mTarget, SDL_BLENDMODE_NONE); // needed to cleanup temp data properly
         mTexture = SDL_CreateTextureFromSurface(mRenderTarget, mTarget);
@@ -181,12 +181,12 @@ namespace gcn
 
         const SDLImage* srcImage = dynamic_cast<const SDLImage*>(image);
 
-        if (srcImage == NULL)
+        if (srcImage == nullptr)
         {
             throw GCN_EXCEPTION("Trying to draw an image of unknown format, must be an SDLImage.");
         }
         
-        if (srcImage->getTexture() == NULL)
+        if (srcImage->getTexture() == nullptr)
         {
             SDL_FillRect(mTarget, &temp, SDL_MapRGBA(mTarget->format, 0xff, 0, 0xff, 0));
             SDL_BlitSurface(srcImage->getSurface(), &src, mTarget, &temp);

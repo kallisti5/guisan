@@ -136,7 +136,7 @@ namespace gcn
          * Gets the top widget. The top widget is the root widget
          * of the GUI.
          *
-         * @return The top widget. NULL if no top widget has been set.
+         * @return The top widget. nullptr if no top widget has been set.
          * @since 0.1.0
          */
         virtual Widget* getTop() const;
@@ -153,7 +153,7 @@ namespace gcn
         /**
          * Gets the graphics object used for drawing.
          *
-         *  @return The graphics object used for drawing. NULL if no
+         *  @return The graphics object used for drawing. nullptr if no
          *          graphics object has been set.
          * @see setGraphics, OpenGLGraphics, SDLGraphics
          * @since 0.1.0
@@ -172,7 +172,7 @@ namespace gcn
         /**
          * Gets the input object being used for input handling.
          *
-         *  @return The input object used for handling input. NULL if no
+         *  @return The input object used for handling input. nullptr if no
          *          input object has been set.
          * @see setInput, SDLInput
          * @since 0.1.0

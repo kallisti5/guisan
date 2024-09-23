@@ -79,7 +79,7 @@ namespace gcn
         {
             SDL_Surface *loadedSurface = loadSDLSurface(filename);
 
-            if (loadedSurface == NULL)
+            if (loadedSurface == nullptr)
             {
                 throw GCN_EXCEPTION(
                         std::string("Unable to load image file: ") + filename);
@@ -88,7 +88,7 @@ namespace gcn
             SDL_Surface *surface = convertToStandardFormat(loadedSurface);
             SDL_FreeSurface(loadedSurface);
 
-            if (surface == NULL)
+            if (surface == nullptr)
             {
                 throw GCN_EXCEPTION(
                         std::string("Not enough memory to load: ") + filename);

@@ -86,7 +86,7 @@ namespace gcn
     {
         setSize(mLabel->getWidth() + 12, mLabel->getHeight() + 12);
 
-        if (mTabbedArea != NULL)
+        if (mTabbedArea != nullptr)
         {
             mTabbedArea->adjustTabPositions();
         }
@@ -126,7 +126,7 @@ namespace gcn
         Color borderColor;
         Color baseColor;
 
-        if ((mTabbedArea != NULL && mTabbedArea->isTabSelected(this)) || mHasMouse)
+        if ((mTabbedArea != nullptr && mTabbedArea->isTabSelected(this)) || mHasMouse)
         {
             // Draw a border.
             graphics->setColor(highlightColor);
@@ -158,7 +158,7 @@ namespace gcn
         graphics->setColor(baseColor);
         graphics->fillRectangle(Rectangle(0, 0, currentClipArea.width, currentClipArea.height));
 
-        if (mTabbedArea != NULL && mTabbedArea->isFocused() && mTabbedArea->isTabSelected(this)
+        if (mTabbedArea != nullptr && mTabbedArea->isFocused() && mTabbedArea->isTabSelected(this)
             //            && mHasMouse)
             && mTabbedArea->isTabActive())
         {

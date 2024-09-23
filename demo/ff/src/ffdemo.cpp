@@ -700,7 +700,7 @@ void FFDemo::input()
             {
                 Mix_PlayChannel(-1, mEscapeSound, 0);
 
-                action(gcn::ActionEvent(NULL, "escape"));
+                action(gcn::ActionEvent(nullptr, "escape"));
             }
             else if (mEvent.key.keysym.sym == SDLK_RETURN
                      || mEvent.key.keysym.sym == SDLK_UP
