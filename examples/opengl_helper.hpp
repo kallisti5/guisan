@@ -11,10 +11,10 @@
 
 #if defined(_WIN32)
 # include <windows.h>
-// Sometimes windows.h defines DELETE which causes a compilation
-// error in a Guichan header.
-# if defined(DELETE)
-#  undef DELETE
+// <windows.h> #defines MessageBox (as MessageBoxA or MessageBoxW)
+// which causes a compilation error in a Guichan header.
+# if defined(MessageBox)
+#  undef MessageBox
 # endif
 #endif
 
