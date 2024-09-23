@@ -57,6 +57,7 @@
 #ifndef GCN_INPUTBOX_HPP
 #define GCN_INPUTBOX_HPP
 
+#include <memory>
 #include <string>
 
 #include "guisan/mouselistener.hpp"
@@ -85,7 +86,10 @@ namespace gcn
          * @param ok the string corresponding to the "OK" button
          * @param cancel the string corresponding to the "Cancel" button
          */
-        InputBox(const std::string& caption, const std::string& message, const std::string &ok = "OK", const std::string &cancel = "Cancel");
+        InputBox(const std::string& caption,
+                 const std::string& message,
+                 const std::string& ok = "OK",
+                 const std::string& cancel = "Cancel");
 
         /**
          * Destructor.
@@ -103,7 +107,7 @@ namespace gcn
         /**
          * Get the text that was input by the user
          * Use in conjunction with getClickedButton() to tell an empty string from a cancel operation.
-         * 
+         *
          * @return the text which was typed by the user
          */
         std::string getText() const;
@@ -114,24 +118,17 @@ namespace gcn
          */
         int getClickedButton() const;
 
-        // Inherited from Widget
-
-        void draw(Graphics* graphics) override;
-
         // Inherited from MouseListener
 
-        void mousePressed(MouseEvent& mouseEvent) override;
-        void mouseDragged(MouseEvent& mouseEvent) override;
         void mouseReleased(MouseEvent& mouseEvent) override;
 
     protected:
-        std::string mMessage;
         int mClickedButton = -1;
 
-        Button *mButtonOK = nullptr;
-        Button *mButtonCancel = nullptr;
-        Label *mLabel = nullptr;
-        TextField *mText = nullptr;
+        std::unique_ptr<Button> mButtonOK;
+        std::unique_ptr<Button> mButtonCancel;
+        std::unique_ptr<Label> mLabel;
+        std::unique_ptr<TextField> mText;
     };
 }
 

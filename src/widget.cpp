@@ -1049,15 +1049,15 @@ namespace gcn
         graphics->pushClipArea(mDimension);
         draw(graphics);
 
-        const Rectangle& childrenArea = getChildrenArea();
+        Rectangle childrenArea = getChildrenArea();
         graphics->pushClipArea(childrenArea);
+        childrenArea.x = 0;
+        childrenArea.y = 0;
 
-        std::list<Widget*>::const_iterator iter;
-        for (iter = mChildren.begin(); iter != mChildren.end(); iter++)
+        for (auto* widget : mChildren)
         {
-            Widget* widget = (*iter);
-            // Only draw a widget if it's visible and if it visible
-            // inside the children area.
+            // Only draw a widget if it's visible
+            // and if it visible inside the children area.
             if (widget->isVisible() && childrenArea.isIntersecting(widget->getDimension()))
             {
                 widget->_draw(graphics);

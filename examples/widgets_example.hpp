@@ -28,7 +28,7 @@ namespace WidgetsExample
         }
     };
 
-    class MainContainer
+    class MainContainer : public gcn::ActionListener
     {
     public:
         MainContainer(gcn::Gui& gui, int width, int height)
@@ -53,6 +53,15 @@ namespace WidgetsExample
             icon = std::make_unique<gcn::Icon>(image.get());
 
             button = std::make_unique<gcn::Button>("Button");
+
+            button->addActionListener(this);
+
+            inputBox = std::make_unique<gcn::InputBox>("Change name", " Set name of label ");
+
+            inputBox->setVisible(false);
+            inputBox->setMovable(true);
+            inputBox->setFrameSize(1);
+            inputBox->addActionListener(this);
 
             textField = std::make_unique<gcn::TextField>("Text field");
 
@@ -116,6 +125,7 @@ namespace WidgetsExample
             top->add(button.get(), 325, 10);
             top->add(textField.get(), 375, 10);
             top->add(textBoxScrollArea.get(), 290, 50);
+            top->add(inputBox.get(), 270, 180);
             top->add(listBox.get(), 290, 200);
             top->add(dropDown.get(), 580, 10);
             top->add(checkBox1.get(), 580, 50);
@@ -132,6 +142,25 @@ namespace WidgetsExample
 
         ~MainContainer() = default;
 
+        // Implement the action function in ActionListener to receive actions
+        // The eventId tells us which widget called the action function.
+        void action(const gcn::ActionEvent& actionEvent) override {
+            if (actionEvent.getSource() == button.get())
+            {
+                inputBox->setVisible(true);
+                top->moveToTop(inputBox.get());
+            }
+            else if (actionEvent.getSource() == inputBox.get())
+            {
+                inputBox->setVisible(false);
+                if (inputBox->getClickedButton() == 0)
+                {
+                    label->setCaption(inputBox->getText());
+                    label->adjustSize();
+                }
+            }
+        }
+
     private:
         std::unique_ptr<gcn::ImageFont> font; // A font
 
@@ -143,6 +172,7 @@ namespace WidgetsExample
         std::unique_ptr<gcn::Label> label; // A label
         std::unique_ptr<gcn::Icon> icon; // An icon (image)
         std::unique_ptr<gcn::Button> button; // A button
+        std::unique_ptr<gcn::InputBox> inputBox; // An input box
         std::unique_ptr<gcn::TextField> textField; // One-line text field
         std::unique_ptr<gcn::TextBox> textBox; // Multi-line text box
         std::unique_ptr<gcn::ScrollArea> textBoxScrollArea; // Scroll area for the text box
