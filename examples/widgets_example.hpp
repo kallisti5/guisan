@@ -87,6 +87,8 @@ namespace WidgetsExample
             checkBox1 = std::make_unique<gcn::CheckBox>("Checkbox 1");
             checkBox2 = std::make_unique<gcn::CheckBox>("Checkbox 2");
 
+            toggleButton = std::make_unique<gcn::ToggleButton>("Toggle button");
+
             radioButton1 = std::make_unique<gcn::RadioButton>("Radio Button 1", "radiogroup", true);
             radioButton2 = std::make_unique<gcn::RadioButton>("Radio Button 2", "radiogroup");
             radioButton3 = std::make_unique<gcn::RadioButton>("Radio Button 3", "radiogroup");
@@ -138,10 +140,11 @@ namespace WidgetsExample
             top->add(dropDown.get(), 580, 10);
             top->add(checkBox1.get(), 580, 50);
             top->add(checkBox2.get(), 580, 70);
+            top->add(toggleButton.get(), 580, 90);
             top->add(radioButton1.get(), 580, 120);
             top->add(radioButton2.get(), 580, 140);
             top->add(radioButton3.get(), 580, 160);
-            top->add(slider.get(), 580, 200);
+            top->add(slider.get(), 580, 180);
             top->add(window.get(), 100, 350);
             top->add(nestedScrollArea.get(), 440, 350);
 
@@ -206,6 +209,7 @@ namespace WidgetsExample
         std::unique_ptr<gcn::RadioButton> radioButton1; // Three radio buttons
         std::unique_ptr<gcn::RadioButton> radioButton2;
         std::unique_ptr<gcn::RadioButton> radioButton3;
+        std::unique_ptr<gcn::ToggleButton> toggleButton;
         std::unique_ptr<gcn::Slider> slider; // A slider
         std::unique_ptr<gcn::Image> image; // An image for the icon
         std::unique_ptr<gcn::Window> window;
