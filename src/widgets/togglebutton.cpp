@@ -158,20 +158,12 @@ namespace gcn
         mSelected = selected;
     }
 
-    void ToggleButton::mouseReleased(MouseEvent& mouseEvent)
+    void ToggleButton::mouseClicked(MouseEvent& mouseEvent)
     {
-        if (mouseEvent.getButton() == MouseEvent::Left
-            && mMousePressed
-            && mHasMouse)
+        if (mouseEvent.getButton() == MouseEvent::Left)
         {
-            mMousePressed = false;
             toggleSelected();
             distributeActionEvent();
-            mouseEvent.consume();
-        }
-        else if (mouseEvent.getButton() == MouseEvent::Left)
-        {
-            mMousePressed = false;
             mouseEvent.consume();
         }
     }
