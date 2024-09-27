@@ -156,6 +156,7 @@ namespace gcn
 
         void mousePressed(MouseEvent& mouseEvent) override;
         void mouseReleased(MouseEvent& mouseEvent) override;
+        void mouseClicked(MouseEvent& mouseEvent) override;
         void mouseEntered(MouseEvent& mouseEvent) override;
         void mouseExited(MouseEvent& mouseEvent) override;
         void mouseDragged(MouseEvent& mouseEvent) override;

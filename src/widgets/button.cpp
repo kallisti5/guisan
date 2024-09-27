@@ -230,17 +230,18 @@ namespace gcn
 
     void Button::mouseReleased(MouseEvent& mouseEvent)
     {
-        if (mouseEvent.getButton() == MouseEvent::Left
-            && mMousePressed
-            && mHasMouse)
+        if (mouseEvent.getButton() == MouseEvent::Left)
         {
             mMousePressed = false;
-            distributeActionEvent();
             mouseEvent.consume();
         }
-        else if (mouseEvent.getButton() == MouseEvent::Left)
+    }
+
+    void Button::mouseClicked(MouseEvent& mouseEvent)
+    {
+        if (mouseEvent.getButton() == MouseEvent::Left)
         {
-            mMousePressed = false;
+            distributeActionEvent();
             mouseEvent.consume();
         }
     }
