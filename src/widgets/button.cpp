@@ -198,13 +198,15 @@ namespace gcn
     {
         if (mMousePressed)
         {
-            return true;
+            return mHasMouse;
         }
         return mKeyPressed;
     }
 
     void Button::mousePressed(MouseEvent& mouseEvent)
     {
+        mHasMouse = gcn::Rectangle(0, 0, getWidth(), getHeight())
+                        .isContaining(mouseEvent.getX(), mouseEvent.getY());
         if (mouseEvent.isConsumed())
         {
             return;
@@ -229,7 +231,8 @@ namespace gcn
     void Button::mouseReleased(MouseEvent& mouseEvent)
     {
         if (mouseEvent.getButton() == MouseEvent::Left
-            && mMousePressed)
+            && mMousePressed
+            && mHasMouse)
         {
             mMousePressed = false;
             distributeActionEvent();
