@@ -57,6 +57,7 @@
 #ifndef GCN_MESSAGEBOX_HPP
 #define GCN_MESSAGEBOX_HPP
 
+#include "guisan/actionlistener.hpp"
 #include "guisan/platform.hpp"
 #include "guisan/widgets/button.hpp"
 #include "guisan/widgets/label.hpp"
@@ -71,7 +72,7 @@ namespace gcn
     /**
      * A non-movable window to display a message with some buttons.
      */
-    class GCN_CORE_DECLSPEC MessageBox : public Window
+    class GCN_CORE_DECLSPEC MessageBox : public Window, public ActionListener
     {
     public:
         /**
@@ -142,9 +143,9 @@ namespace gcn
          */
         void addToContainer(Container* container);
 
-        // Inherited from MouseListener
+        // Inherited from ActionListener
 
-        void mouseReleased(MouseEvent& mouseEvent) override;
+        void action(const ActionEvent& keyEvent) override;
 
     protected:
         Graphics::Alignment mButtonAlignment = Graphics::Alignment::Left;

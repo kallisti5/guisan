@@ -74,7 +74,6 @@ namespace gcn
                        const std::string& cancel) :
         Window(caption)
     {
-        addMouseListener(this);
         setMovable(false);
 
         mLabel = std::make_unique<Label>(message);
@@ -85,12 +84,12 @@ namespace gcn
 
         mButtonOK = std::make_unique<Button>(ok);
         mButtonOK->setAlignment(Graphics::Center);
-        mButtonOK->addMouseListener(this);
+        mButtonOK->addActionListener(this);
         mButtonOK->adjustSize();
 
         mButtonCancel = std::make_unique<Button>(cancel);
         mButtonCancel->setAlignment(Graphics::Center);
-        mButtonCancel->addMouseListener(this);
+        mButtonCancel->addActionListener(this);
         mButtonCancel->adjustSize();
 
         // Look-and-feel: make both buttons the same width
@@ -136,20 +135,19 @@ namespace gcn
         releaseModalFocus();
     }
 
-    void InputBox::mouseReleased(MouseEvent& mouseEvent)
+    void InputBox::action(const ActionEvent& actionEvent)
     {
-        if (mouseEvent.getSource() == mButtonOK.get())
+        if (actionEvent.getSource() == mButtonOK.get())
         {
             mClickedButton = 0;
             distributeActionEvent();
         }
-        else if (mouseEvent.getSource() == mButtonCancel.get())
+        else if (actionEvent.getSource() == mButtonCancel.get())
         {
             mClickedButton = 1;
             setVisible(false);
             distributeActionEvent();
         }
-        Window::mouseReleased(mouseEvent);
     }
 
     int InputBox::getClickedButton() const
