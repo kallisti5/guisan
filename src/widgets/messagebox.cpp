@@ -86,7 +86,6 @@ namespace gcn
                            int size) :
         Window(caption)
     {
-        addMouseListener(this);
         setMovable(false);
 
         mLabel = std::make_unique<Label>(message);
@@ -102,7 +101,7 @@ namespace gcn
             mButtons.emplace_back(std::make_unique<Button>(button_captions[i]));
             auto& button = mButtons.back();
             button->setAlignment(Graphics::Center);
-            button->addMouseListener(this);
+            button->addActionListener(this);
             maxButtonWidth = std::max(maxButtonWidth, button->getWidth());
             maxButtonHeight = std::max(maxButtonHeight, button->getHeight());
         }
@@ -184,23 +183,16 @@ namespace gcn
         return mButtonAlignment;
     }
 
-    void MessageBox::mouseReleased(MouseEvent& mouseEvent)
+    void MessageBox::action(const ActionEvent& actionEvent)
     {
-        if (mouseEvent.getSource() != this)
+        for (std::size_t i = 0; i != mButtons.size(); ++i)
         {
-            for (std::size_t i = 0; i != mButtons.size(); ++i)
+            if (actionEvent.getSource() == mButtons[i].get())
             {
-                if (mouseEvent.getSource() == mButtons[i].get())
-                {
-                    mClickedButton = static_cast<int>(i);
-                    distributeActionEvent();
-                    break;
-                }
+                mClickedButton = static_cast<int>(i);
+                distributeActionEvent();
+                break;
             }
-        }
-        else
-        {
-            Window::mouseReleased(mouseEvent);
         }
     }
 

@@ -74,7 +74,7 @@ namespace gcn
     /**
      * A non-movable window to get a short string from the user.
      */
-    class GCN_CORE_DECLSPEC InputBox : public Window
+    class GCN_CORE_DECLSPEC InputBox : public Window, public ActionListener
     {
     public:
 
@@ -118,9 +118,9 @@ namespace gcn
          */
         int getClickedButton() const;
 
-        // Inherited from MouseListener
+        // Inherited from ActionListener
 
-        void mouseReleased(MouseEvent& mouseEvent) override;
+        void action(const ActionEvent& actionEvent) override;
 
     protected:
         int mClickedButton = -1;
