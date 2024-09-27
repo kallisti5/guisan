@@ -278,6 +278,11 @@ namespace gcn
                 keyEventConsumed = keyEvent.isConsumed();
             }
 
+            if (!keyEventConsumed)
+            {
+                mFocusHandler->checkHotKey(keyInput);
+            }
+
             // If the key event hasn't been consumed and
             // tabbing is enable check for tab press and
             // change focus.

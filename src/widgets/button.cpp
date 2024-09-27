@@ -200,7 +200,7 @@ namespace gcn
         {
             return mHasMouse;
         }
-        return mKeyPressed;
+        return mKeyPressed || mHotKeyPressed;
     }
 
     void Button::mousePressed(MouseEvent& mouseEvent)
@@ -261,6 +261,7 @@ namespace gcn
             mKeyPressed = true;
             keyEvent.consume();
         }
+        mHotKeyPressed = false;
     }
 
     void Button::keyReleased(KeyEvent& keyEvent)
@@ -274,6 +275,21 @@ namespace gcn
             mKeyPressed = false;
             distributeActionEvent();
             keyEvent.consume();
+        }
+    }
+
+    void Button::hotKeyPressed()
+    {
+        mHotKeyPressed = true;
+        mMousePressed = false;
+    }
+
+    void Button::hotKeyReleased()
+    {
+        if (mHotKeyPressed)
+        {
+            mHotKeyPressed = false;
+            distributeActionEvent();
         }
     }
 

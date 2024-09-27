@@ -147,6 +147,8 @@ namespace gcn
         //Inherited from Widget
 
         void draw(Graphics* graphics) override;
+        void hotKeyPressed() override;
+        void hotKeyReleased() override;
 
         // Inherited from FocusListener
 
@@ -194,6 +196,8 @@ namespace gcn
          * True if a mouse has been pressed, false otherwise.
          */
         bool mMousePressed = false;
+
+        bool mHotKeyPressed = false;
 
         /**
          * Holds the alignment of the caption.
