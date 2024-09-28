@@ -63,6 +63,13 @@ namespace WidgetsExample
             imageButton->setSize(220, 90);
             imageButton->addActionListener(this);
 
+            imageTextButton = std::make_unique<gcn::ImageTextButton>("guisan-logo.png", "Change color");
+            imageTextButton->setSize(220, 100);
+            imageTextButton->setAlignment(gcn::ImageTextButton::TOP);
+            imageTextButton->addActionListener(this);
+
+            imageButton->setSize(220, 90);
+            imageButton->addActionListener(this);
             inputBox = std::make_unique<gcn::InputBox>("Change name", " Set name of label ");
 
             inputBox->setVisible(false);
@@ -141,6 +148,7 @@ namespace WidgetsExample
             top->add(icon.get(), 10, 10);
             top->add(button.get(), 325, 10);
             top->add(imageButton.get(), 10, 290);
+            top->add(imageTextButton.get(), 10, 380);
             top->add(textField.get(), 375, 10);
             top->add(textBoxScrollArea.get(), 290, 50);
             top->add(inputBox.get(), 270, 180);
@@ -170,7 +178,8 @@ namespace WidgetsExample
                 inputBox->setVisible(true);
                 top->moveToTop(inputBox.get());
             }
-            else if (actionEvent.getSource() == imageButton.get())
+            else if (actionEvent.getSource() == imageButton.get()
+                     || actionEvent.getSource() == imageTextButton.get())
             {
                 const gcn::Color colours[] = {gcn::Color(212, 255, 150, 190),
                                               gcn::Color(212, 0, 0, 190),
@@ -216,6 +225,7 @@ namespace WidgetsExample
         std::unique_ptr<gcn::Icon> icon; // An icon (image)
         std::unique_ptr<gcn::Button> button; // A button
         std::unique_ptr<gcn::ImageButton> imageButton; // An image button
+        std::unique_ptr<gcn::ImageTextButton> imageTextButton; // An image text button
         std::unique_ptr<gcn::InputBox> inputBox; // An input box
         std::unique_ptr<gcn::TextField> textField; // One-line text field
         std::unique_ptr<gcn::TextBox> textBox; // Multi-line text box

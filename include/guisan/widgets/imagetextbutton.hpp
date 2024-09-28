@@ -91,26 +91,12 @@ namespace gcn
         /**
          * Destructor.
          */
-        ~ImageTextButton() override;
+        ~ImageTextButton() override = default;
 
         /**
          * Adjusts the size of the image button to fit the image.
          */
         void adjustSize();
-
-        /**
-         * Sets the image to display.
-         *
-         * @param image The image to display.
-         */
-        void setImage(Image* image);
-
-        /**
-         * Gets the image of the image button.
-         *
-         * @return The image of the image button.
-         */
-        Image* getImage();
 
         // Inherited from Widget
 
@@ -141,14 +127,6 @@ namespace gcn
         };
 
     protected:
-        gcn::Image* mImage = nullptr;
-
-        /**
-         * True if the image has been loaded internally, false otherwise.
-         * An image not loaded internally should not be deleted in the
-         * destructor.
-         */
-        bool mInternalImage = false;
         unsigned int mAlignment = ImageTextButton::BOTTOM;
     };
 }
