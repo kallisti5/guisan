@@ -1,4 +1,6 @@
 #include <guisan.hpp>
+
+#include <algorithm>
 #include <memory>
 
 namespace WidgetsExample
@@ -55,6 +57,11 @@ namespace WidgetsExample
             button = std::make_unique<gcn::Button>("Button");
 
             button->addActionListener(this);
+
+            imageButton = std::make_unique<gcn::ImageButton>("guisan-logo.png");
+
+            imageButton->setSize(220, 90);
+            imageButton->addActionListener(this);
 
             inputBox = std::make_unique<gcn::InputBox>("Change name", " Set name of label ");
 
@@ -133,6 +140,7 @@ namespace WidgetsExample
             top->add(label.get(), 290, 10);
             top->add(icon.get(), 10, 10);
             top->add(button.get(), 325, 10);
+            top->add(imageButton.get(), 10, 290);
             top->add(textField.get(), 375, 10);
             top->add(textBoxScrollArea.get(), 290, 50);
             top->add(inputBox.get(), 270, 180);
@@ -161,6 +169,15 @@ namespace WidgetsExample
             {
                 inputBox->setVisible(true);
                 top->moveToTop(inputBox.get());
+            }
+            else if (actionEvent.getSource() == imageButton.get())
+            {
+                const gcn::Color colours[] = {gcn::Color(212, 255, 150, 190),
+                                              gcn::Color(212, 0, 0, 190),
+                                              gcn::Color(0, 0, 150, 190)};
+                const auto it = std::find(std::begin(colours), std::end(colours), window->getBaseColor());
+                window->setBaseColor(
+                    colours[(std::distance(std::begin(colours), it) + 1) % std::size(colours)]);
             }
             else if (actionEvent.getSource() == inputBox.get())
             {
@@ -198,6 +215,7 @@ namespace WidgetsExample
         std::unique_ptr<gcn::Label> label; // A label
         std::unique_ptr<gcn::Icon> icon; // An icon (image)
         std::unique_ptr<gcn::Button> button; // A button
+        std::unique_ptr<gcn::ImageButton> imageButton; // An image button
         std::unique_ptr<gcn::InputBox> inputBox; // An input box
         std::unique_ptr<gcn::TextField> textField; // One-line text field
         std::unique_ptr<gcn::TextBox> textBox; // Multi-line text box
