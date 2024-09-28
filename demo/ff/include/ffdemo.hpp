@@ -103,9 +103,6 @@ private:
     std::unique_ptr<gcn::Icon> mPerIcon;
     std::unique_ptr<gcn::Icon> mOlofIcon;
     std::unique_ptr<gcn::Icon> mTomasIcon;
-    std::unique_ptr<gcn::Image> mPerImage;
-    std::unique_ptr<gcn::Image> mOlofImage;
-    std::unique_ptr<gcn::Image> mTomasImage;
     std::unique_ptr<gcn::Image> mSplashImage;
     std::unique_ptr<gcn::Font> mFontWhite;
     std::unique_ptr<gcn::Font> mFontCyan;
