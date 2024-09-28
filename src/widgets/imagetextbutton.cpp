@@ -81,12 +81,6 @@ namespace gcn
         setHeight(mImage->getHeight() + mImage->getHeight() / 2);
     }
 
-    ImageTextButton::~ImageTextButton()
-    {
-        if (mInternalImage)
-            delete mImage;
-    }
-    
     void ImageTextButton::adjustSize()
     {
         switch(getAlignment())
@@ -111,19 +105,6 @@ namespace gcn
             default:
               throw GCN_EXCEPTION("Unknown alignment.");
         }
-    }
-
-    void ImageTextButton::setImage(Image* image)
-    {
-        if (mInternalImage)
-            delete mImage;
-        mImage = image;
-        mInternalImage = false;
-    }
-
-    Image* ImageTextButton::getImage()
-    {
-        return mImage;
     }
 
     void ImageTextButton::draw(Graphics* graphics)
