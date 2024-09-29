@@ -68,8 +68,6 @@ namespace WidgetsExample
             imageTextButton->setAlignment(gcn::ImageTextButton::TOP);
             imageTextButton->addActionListener(this);
 
-            imageButton->setSize(220, 90);
-            imageButton->addActionListener(this);
             inputBox = std::make_unique<gcn::InputBox>("Change name", " Set name of label ");
 
             inputBox->setVisible(false);
