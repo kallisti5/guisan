@@ -599,12 +599,11 @@ namespace gcn
 
     void DropDown::distributeValueChangedEvent()
     {
-        SelectionListenerIterator iter;
+        const SelectionEvent event(this);
 
-        for (iter = mSelectionListeners.begin(); iter != mSelectionListeners.end(); ++iter)
+        for (SelectionListener* selectionListener : mSelectionListeners)
         {
-            SelectionEvent event(this);
-            (*iter)->valueChanged(event);
+            selectionListener->valueChanged(event);
         }
     }
 }

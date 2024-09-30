@@ -195,12 +195,9 @@ namespace gcn
     {
         if (selected && !mGroup.empty())
         {
-            GroupIterator iter, iterEnd;
-            iterEnd = mGroupMap.upper_bound(mGroup);
+            auto range = mGroupMap.equal_range(mGroup);
 
-            for (iter = mGroupMap.lower_bound(mGroup);
-                iter != iterEnd;
-                iter++)
+            for (auto iter = range.first; iter != range.second; iter++)
             {
                 if (iter->second->isSelected())
                 {
@@ -253,12 +250,9 @@ namespace gcn
     {
         if (!mGroup.empty())
         {
-            GroupIterator iter, iterEnd;
-            iterEnd = mGroupMap.upper_bound(mGroup);
+            auto range = mGroupMap.equal_range(mGroup);
 
-            for (iter = mGroupMap.lower_bound(mGroup);
-                iter != iterEnd;
-                iter++)
+            for (auto iter = range.first; iter != range.second; iter++)
             {
                 if (iter->second == this)
                 {
