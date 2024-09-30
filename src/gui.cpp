@@ -313,10 +313,9 @@ namespace gcn
         if (mouseInput.getX() < 0 || mouseInput.getY() < 0
             || !mTop->getDimension().isContaining(mouseInput.getX(), mouseInput.getY()))
         {
-            std::set<Widget*>::const_iterator iter;
-            for (iter = mLastWidgetsWithMouse.begin(); iter != mLastWidgetsWithMouse.end(); iter++)
+            for (Widget* w : mLastWidgetsWithMouse)
             {
-                distributeMouseEvent((*iter),
+                distributeMouseEvent(w,
                                      MouseEvent::Exited,
                                      mouseInput.getButton(),
                                      mouseInput.getX(),
@@ -348,11 +347,9 @@ namespace gcn
                 mLastWidgetsWithMouse.end(),
                 std::inserter(mWidgetsWithMouseEntered, mWidgetsWithMouseEntered.begin()));
 
-            std::set<Widget*>::const_iterator iter;
-            for (iter = mWidgetsWithMouseExited.begin(); iter != mWidgetsWithMouseExited.end();
-                 iter++)
+            for (Widget* w : mWidgetsWithMouseExited)
             {
-                distributeMouseEvent((*iter),
+                distributeMouseEvent(w,
                                      MouseEvent::Exited,
                                      mouseInput.getButton(),
                                      mouseInput.getX(),
@@ -366,10 +363,8 @@ namespace gcn
                 mLastMousePressTimeStamp = 0;
             }
 
-            for (iter = mWidgetsWithMouseEntered.begin(); iter != mWidgetsWithMouseEntered.end();
-                 iter++)
+            for (Widget* widget : mWidgetsWithMouseEntered)
             {
-                Widget* widget = (*iter);
                 // If a widget has modal mouse input focus we
                 // only want to send entered events to that widget
                 // and the widget's parents.
@@ -650,44 +645,26 @@ namespace gcn
                 mouseEvent.mX = x - widgetX;
                 mouseEvent.mY = y - widgetY;
                 mouseEvent.mDistributor = widget;
-                std::list<MouseListener*> mouseListeners = widget->_getMouseListeners();
 
                 // Send the event to all mouse listeners of the widget.
-                for (std::list<MouseListener*>::iterator it = mouseListeners.begin();
-                     it != mouseListeners.end();
-                     ++it)
+                for (MouseListener* mouseListener : widget->_getMouseListeners())
                 {
                     switch (mouseEvent.getType())
                     {
-                      case MouseEvent::Entered:
-                          (*it)->mouseEntered(mouseEvent);
-                          break;
-                      case MouseEvent::Exited:
-                          (*it)->mouseExited(mouseEvent);
-                          break;
-                      case MouseEvent::Moved:
-                          (*it)->mouseMoved(mouseEvent);
-                          break;
-                      case MouseEvent::Pressed:
-                          (*it)->mousePressed(mouseEvent);
-                          break;
-                      case MouseEvent::Released:
-                          (*it)->mouseReleased(mouseEvent);
-                          break;
-                      case MouseEvent::WheelMovedUp:
-                          (*it)->mouseWheelMovedUp(mouseEvent);
-                          break;
-                      case MouseEvent::WheelMovedDown:
-                          (*it)->mouseWheelMovedDown(mouseEvent);
-                          break;
-                      case MouseEvent::Dragged:
-                          (*it)->mouseDragged(mouseEvent);
-                          break;
-                      case MouseEvent::Clicked:
-                          (*it)->mouseClicked(mouseEvent);
-                          break;
-                      default:
-                          throw GCN_EXCEPTION("Unknown mouse event type.");
+                        case MouseEvent::Entered: mouseListener->mouseEntered(mouseEvent); break;
+                        case MouseEvent::Exited: mouseListener->mouseExited(mouseEvent); break;
+                        case MouseEvent::Moved: mouseListener->mouseMoved(mouseEvent); break;
+                        case MouseEvent::Pressed: mouseListener->mousePressed(mouseEvent); break;
+                        case MouseEvent::Released: mouseListener->mouseReleased(mouseEvent); break;
+                        case MouseEvent::WheelMovedUp:
+                            mouseListener->mouseWheelMovedUp(mouseEvent);
+                            break;
+                        case MouseEvent::WheelMovedDown:
+                            mouseListener->mouseWheelMovedDown(mouseEvent);
+                            break;
+                        case MouseEvent::Dragged: mouseListener->mouseDragged(mouseEvent); break;
+                        case MouseEvent::Clicked: mouseListener->mouseClicked(mouseEvent); break;
+                        default: throw GCN_EXCEPTION("Unknown mouse event type.");
                     }
                 }
 
@@ -752,23 +729,15 @@ namespace gcn
             if (widget->isEnabled())
             {
                 keyEvent.mDistributor = widget;
-                std::list<KeyListener*> keyListeners = widget->_getKeyListeners();
 
                 // Send the event to all key listeners of the source widget.
-                for (std::list<KeyListener*>::iterator it = keyListeners.begin();
-                     it != keyListeners.end();
-                     ++it)
+                for (KeyListener* keyListener : widget->_getKeyListeners())
                 {
                     switch (keyEvent.getType())
                     {
-                      case KeyEvent::Pressed:
-                          (*it)->keyPressed(keyEvent);
-                          break;
-                      case KeyEvent::Released:
-                          (*it)->keyReleased(keyEvent);
-                          break;
-                      default:
-                          throw GCN_EXCEPTION("Unknown key event type.");
+                        case KeyEvent::Pressed: keyListener->keyPressed(keyEvent); break;
+                        case KeyEvent::Released: keyListener->keyReleased(keyEvent); break;
+                        default: throw GCN_EXCEPTION("Unknown key event type.");
                     }
                 }
             }
@@ -789,20 +758,13 @@ namespace gcn
 
     void Gui::distributeKeyEventToGlobalKeyListeners(KeyEvent& keyEvent)
     {
-        KeyListenerListIterator it;
-
-        for (it = mKeyListeners.begin(); it != mKeyListeners.end(); it++)
+        for (KeyListener* keyListener : mKeyListeners)
         {
             switch (keyEvent.getType())
             {
-              case KeyEvent::Pressed:
-                  (*it)->keyPressed(keyEvent);
-                  break;
-              case KeyEvent::Released:
-                  (*it)->keyReleased(keyEvent);
-                  break;
-              default:
-                  throw GCN_EXCEPTION("Unknown key event type.");
+                case KeyEvent::Pressed: keyListener->keyPressed(keyEvent); break;
+                case KeyEvent::Released: keyListener->keyReleased(keyEvent); break;
+                default: throw GCN_EXCEPTION("Unknown key event type.");
             }
 
             if (keyEvent.isConsumed())
@@ -858,17 +820,10 @@ namespace gcn
         // and send them a mouse exited event.
         std::set<Widget*> mWidgetsWithMouse = getWidgetsAt(mLastMouseX, mLastMouseY);
 
-        for (std::set<Widget*>::const_iterator iter = mWidgetsWithMouse.begin();
-             iter != mWidgetsWithMouse.end();
-             iter++)
+        for (Widget* w : mWidgetsWithMouse)
         {
-            distributeMouseEvent((*iter),
-                                 MouseEvent::Exited,
-                                 mLastMousePressButton,
-                                 mLastMouseX,
-                                 mLastMouseY,
-                                 true,
-                                 true);
+            distributeMouseEvent(
+                w, MouseEvent::Exited, mLastMousePressButton, mLastMouseX, mLastMouseY, true, true);
         }
 
         mFocusHandler->setLastWidgetWithModalMouseInputFocus(mFocusHandler->getModalMouseInputFocused());
@@ -880,11 +835,9 @@ namespace gcn
         // and send them a mouse entered event.
         std::set<Widget*> mWidgetsWithMouse = getWidgetsAt(mLastMouseX, mLastMouseY);
 
-        for (std::set<Widget*>::const_iterator iter = mWidgetsWithMouse.begin();
-             iter != mWidgetsWithMouse.end();
-             ++iter)
+        for (Widget* w : mWidgetsWithMouse)
         {
-            distributeMouseEvent((*iter),
+            distributeMouseEvent(w,
                                  MouseEvent::Entered,
                                  mLastMousePressButton,
                                  mLastMouseX,

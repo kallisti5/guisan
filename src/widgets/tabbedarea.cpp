@@ -160,8 +160,7 @@ namespace gcn
             }
         }
 
-        std::vector<std::pair<Tab*, Widget*> >::iterator iter;
-        for (iter = mTabs.begin(); iter != mTabs.end(); iter++)
+        for (auto iter = mTabs.begin(); iter != mTabs.end(); ++iter)
         {
             if (iter->first == tab)
             {
@@ -171,8 +170,7 @@ namespace gcn
             }
         }
 
-        std::vector<Tab*>::iterator iter2;
-        for (iter2 = mTabsToDelete.begin(); iter2 != mTabsToDelete.end(); iter2++)
+        for (auto iter2 = mTabsToDelete.begin(); iter2 != mTabsToDelete.end(); ++iter2)
         {
             if (*iter2 == tab)
             {

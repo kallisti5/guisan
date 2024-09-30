@@ -65,6 +65,8 @@
 #include "guisan/keyinput.hpp"
 #include "guisan/widget.hpp"
 
+#include <algorithm>
+
 namespace gcn
 {
 
@@ -296,15 +298,10 @@ namespace gcn
             mFocusedWidget = nullptr;
         }
 
-        WidgetIterator iter;
-
-        for (iter = mWidgets.begin(); iter != mWidgets.end(); ++iter)
+        const auto iter = std::find(mWidgets.begin(), mWidgets.end(), widget);
+        if (iter != mWidgets.end())
         {
-            if ((*iter) == widget)
-            {
-                mWidgets.erase(iter);
-                break;
-            }
+            mWidgets.erase(iter);
         }
 
         if (mDraggedWidget == widget)
@@ -508,14 +505,10 @@ namespace gcn
     {
         Widget* sourceWidget = focusEvent.getSource();
 
-        std::list<FocusListener*> focusListeners = sourceWidget->_getFocusListeners();
-
         // Send the event to all focus listeners of the widget.
-        for (std::list<FocusListener*>::iterator it = focusListeners.begin();
-             it != focusListeners.end();
-             ++it)
+        for (auto* focusListener : sourceWidget->_getFocusListeners())
         {
-            (*it)->focusLost(focusEvent);
+            focusListener->focusLost(focusEvent);
         }
     }
 
@@ -523,14 +516,10 @@ namespace gcn
     {
         Widget* sourceWidget = focusEvent.getSource();
 
-        std::list<FocusListener*> focusListeners = sourceWidget->_getFocusListeners();
-
         // Send the event to all focus listeners of the widget.
-        for (std::list<FocusListener*>::iterator it = focusListeners.begin();
-             it != focusListeners.end();
-             ++it)
+        for (auto* focusListener : sourceWidget->_getFocusListeners())
         {
-            (*it)->focusGained(focusEvent);
+            focusListener->focusGained(focusEvent);
         }
     }
 

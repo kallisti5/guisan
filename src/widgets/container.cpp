@@ -130,23 +130,21 @@ namespace gcn
 
     void Container::distributeWidgetAddedEvent(Widget* source)
     {
-        ContainerListenerIterator iter;
+        const ContainerEvent event(source, this);
 
-        for (iter = mContainerListeners.begin(); iter != mContainerListeners.end(); ++iter)
+        for (ContainerListener* containerListener : mContainerListeners)
         {
-            ContainerEvent event(source, this);
-            (*iter)->widgetAdded(event);
+            containerListener->widgetAdded(event);
         }
     }
 
     void Container::distributeWidgetRemovedEvent(Widget* source)
     {
-        ContainerListenerIterator iter;
+        ContainerEvent event(source, this);
 
-        for (iter = mContainerListeners.begin(); iter != mContainerListeners.end(); ++iter)
+        for (ContainerListener* containerListener : mContainerListeners)
         {
-            ContainerEvent event(source, this);
-            (*iter)->widgetRemoved(event);
+            containerListener->widgetRemoved(event);
         }
     }
 
