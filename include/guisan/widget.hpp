@@ -1040,6 +1040,26 @@ namespace gcn
          */
         virtual void showPart(Rectangle rectangle);
 
+        /**
+         * Called when a Widget's hot key is pressed
+         */
+        virtual void hotKeyPressed() {}
+
+        /**
+         * Called when a Widget's hot key is released
+         */
+        virtual void hotKeyReleased() {}
+
+        /**
+         * Get the hot key
+         */
+        int getHotKey() const { return mHotKey; }
+
+        /**
+         * Set the hot key
+         */
+        void setHotKey(const int key) { mHotKey = key; }
+
     protected:
         /**
          * Distributes an action event to all action listeners
@@ -1261,6 +1281,8 @@ namespace gcn
          * Holds all children of the widget.
          */
         std::list<Widget*> mChildren;
+
+        int mHotKey = 0;
 
         /**
          * Holds the default font used by the widget.

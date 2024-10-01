@@ -64,6 +64,7 @@
 
 namespace gcn
 {
+    class KeyInput;
     class Widget;
 
     /**
@@ -329,6 +330,11 @@ namespace gcn
          */
         virtual void setLastWidgetPressed(Widget* lastWidgetPressed);
 
+        /**
+        * 
+        * @param keyInput
+        */
+        void checkHotKey(const KeyInput& keyInput);
     protected:
         /**
          * Distributes a focus lost event.

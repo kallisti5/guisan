@@ -62,6 +62,7 @@
 
 #include "guisan/focuslistener.hpp"
 #include "guisan/exception.hpp"
+#include "guisan/keyinput.hpp"
 #include "guisan/widget.hpp"
 
 namespace gcn
@@ -581,5 +582,38 @@ namespace gcn
     void FocusHandler::setLastWidgetPressed(Widget* lastWidgetPressed)
     {
         mLastWidgetPressed = lastWidgetPressed;
+    }
+
+    void FocusHandler::checkHotKey(const KeyInput& keyInput)
+    {
+        const int keyin = keyInput.getKey().getValue();
+
+        for (auto widget : mWidgets)
+        {
+            int hotKey = widget->getHotKey();
+
+            if (hotKey == 0)
+            {
+                continue;
+            }
+            hotKey = isascii(hotKey) ? tolower(hotKey) : hotKey;
+
+            if ((isascii(keyin) && tolower(keyin) == hotKey) || keyin == hotKey)
+            {
+                if (keyInput.getType() == KeyInput::Pressed)
+                {
+                    widget->hotKeyPressed();
+                    if (widget->isFocusable())
+                    {
+                        this->requestFocus(widget);
+                    }
+                }
+                else
+                {
+                    widget->hotKeyReleased();
+                }
+                break;
+            }
+        }
     }
 }

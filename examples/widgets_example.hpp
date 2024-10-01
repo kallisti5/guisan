@@ -56,11 +56,13 @@ namespace WidgetsExample
 
             button = std::make_unique<gcn::Button>("Button");
 
+            button->setHotKey('b');
             button->addActionListener(this);
 
             imageButton = std::make_unique<gcn::ImageButton>("guisan-logo.png");
 
             imageButton->setSize(220, 90);
+            imageButton->setHotKey('g');
             imageButton->addActionListener(this);
 
             imageTextButton = std::make_unique<gcn::ImageTextButton>("guisan-logo.png", "Change color");
