@@ -18,8 +18,8 @@ INCLUDE_DIRECTORIES("${PROJECT_SOURCE_DIR}/include")
 ADD_COMPILE_DEFINITIONS(GUICHAN_BUILD GUICHAN_EXTENSION_BUILD)
 
 # The Guisan core library
-FILE(GLOB GUISAN_HEADER include/guisan.hpp)
-FILE(GLOB GUISAN_HEADERS
+SET(GUISAN_HEADER include/guisan.hpp)
+SET(GUISAN_HEADERS
   include/guisan/actionevent.hpp
   include/guisan/actionlistener.hpp
   include/guisan/cliprectangle.hpp
@@ -53,7 +53,7 @@ FILE(GLOB GUISAN_HEADERS
   include/guisan/rectangle.hpp
   include/guisan/selectionevent.hpp
   include/guisan/selectionlistener.hpp
-  include/guisan.text.hpp
+  include/guisan/text.hpp
   include/guisan/widget.hpp
   include/guisan/widgetlistener.hpp
 )
@@ -76,11 +76,11 @@ ELSE(BUILD_GUISAN_SHARED)
 ENDIF(BUILD_GUISAN_SHARED)
 
 ADD_LIBRARY(${PROJECT_NAME} ${GUISAN_LIBRARY_TYPE}
-	${GUISAN_HEADER} 
-	${GUISAN_HEADERS} 
-	${GUISAN_WIDGET_HEADERS} 
+	${GUISAN_HEADER}
+	${GUISAN_HEADERS}
+	${GUISAN_WIDGET_HEADERS}
 	${GUISAN_CONTRIB_WIDGET_HEADERS}
-	${GUISAN_SRC} 
+	${GUISAN_SRC}
 	${GUISAN_WIDGET_SRC})
 
 ADD_CUSTOM_TARGET(lib DEPENDS ${PROJECT_NAME}) # Create symlink
