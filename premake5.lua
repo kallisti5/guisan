@@ -4,6 +4,13 @@ newoption {
 	description = "Set the output location for the generated files"
 }
 
+newoption {
+	trigger = "use-sdl_ttf",
+	value   = "bool",
+	description = "Use SDL_TTF (for font)",
+	default = true
+}
+
 if (_ACTION == nil) then
 	return
 end
@@ -13,14 +20,20 @@ local locationDir = _OPTIONS["to"] or path.join("solution", _ACTION, "stratagus"
 local nugetPackages = {
 	"sdl2.nuget:2.28.0", "sdl2.nuget.redist:2.28.0",
 	"sdl2_image.nuget:2.6.3", "sdl2_image.nuget.redist:2.6.3",
-	"sdl2_mixer.nuget:2.6.3", "sdl2_mixer.nuget.redist:2.6.3",
-	"sdl2_net.nuget:2.2.0", "sdl2_net.nuget.redist:2.2.0",
-	"sdl2_ttf.nuget:2.20.2", "sdl2_ttf.nuget.redist:2.20.2"
+	"sdl2_mixer.nuget:2.6.3", "sdl2_mixer.nuget.redist:2.6.3" -- Sound for demo
 }
+
+if _OPTIONS["use-sdl_ttf"] then
+	nugetPackages = table.join(nugetPackages, {"sdl2_ttf.nuget:2.20.2", "sdl2_ttf.nuget.redist:2.20.2"})
+end
 
 function useGuisan()
 	includedirs { "include/" }
 	links { "guisan" }
+
+	if _OPTIONS["use-sdl_ttf"] then
+		defines { "USE_SDL2_TTF" }
+	end
 end
 
 -- ----------------------------------------------------------------------------
@@ -81,6 +94,10 @@ project "guisan"
 	files { "src/SConscript" }
 	files { "*.*"}
 
+	if _OPTIONS["use-sdl_ttf"] then
+		defines { "USE_SDL2_TTF" }
+	end
+
 	includedirs { "include" }
 
 -- ----------------------------------------------------------------------------
@@ -92,9 +109,8 @@ project "opengl_helloworld"
 
 	files { "examples/openglhelloworld.cpp", "examples/opengl_helper.hpp", "examples/helloworld_example.hpp" }
 
-	includedirs { "include" }
-	links { "guisan" }
-	links {"opengl32"}
+	useGuisan()
+	links { "opengl32" }
 
 	debugdir "examples"
 
@@ -105,9 +121,8 @@ project "opengl_widgets"
 
 	files { "examples/openglwidgets.cpp", "examples/opengl_helper.hpp", "examples/widgets_example.hpp" }
 
-	includedirs { "include" }
-	links { "guisan" }
-	links {"opengl32"}
+	useGuisan()
+	links { "opengl32" }
 
 	debugdir "examples"
 
@@ -118,8 +133,7 @@ project "sdl_action"
 
 	files { "examples/sdlaction.cpp", "examples/sdl_helper.hpp", "examples/action_example.hpp" }
 
-	includedirs { "include" }
-	links { "guisan" }
+	useGuisan()
 
 	debugdir "examples"
 
@@ -130,8 +144,7 @@ project "sdl_hello"
 
 	files { "examples/sdlhelloworld.cpp", "examples/sdl_helper.hpp", "examples/helloworld_example.hpp" }
 
-	includedirs { "include" }
-	links { "guisan" }
+	useGuisan()
 
 	debugdir "examples"
 
@@ -142,8 +155,7 @@ project "sdl_rickroll"
 
 	files { "examples/sdlrickroll.cpp", "examples/sdl_helper.hpp", "examples/rickroll_example.hpp" }
 
-	includedirs { "include" }
-	links { "guisan" }
+	useGuisan()
 
 	debugdir "examples"
 
@@ -154,8 +166,7 @@ project "sdl_widgets"
 
 	files { "examples/sdlwidgets.cpp", "examples/sdl_helper.hpp", "examples/widgets_example.hpp" }
 
-	includedirs { "include" }
-	links { "guisan" }
+	useGuisan()
 
 	debugdir "examples"
 
@@ -166,8 +177,7 @@ project "sdl2_widgets"
 
 	files { "examples/sdl2widgets.cpp", "examples/sdl2_helper.hpp", "examples/widgets_example.hpp" }
 
-	includedirs { "include" }
-	links { "guisan" }
+	useGuisan()
 
 	debugdir "examples"
 
@@ -181,9 +191,7 @@ project "Demo_ff"
 	files { "Demo/ff/**.*" }
 	includedirs { "Demo/ff/include" }
 
-	includedirs { "include" }
-	links { "guisan" }
-
+	useGuisan()
 	links {"opengl32"}
 
 	debugdir "Demo/ff"

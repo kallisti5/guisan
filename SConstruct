@@ -32,14 +32,15 @@ if not conf.CheckPKGConfig('0.15.0'):
 
 env['HAVE_OPENGL'] = conf.CheckPKG('gl')
 env['HAVE_SDL2'] = conf.CheckPKG('sdl2')
+env['HAVE_SDL2_TTF'] = conf.CheckPKG('SDL2_ttf')
 
 if env['HAVE_SDL2']:
 	if not conf.CheckPKG('SDL2_image'):
 		print('SDL2_image not found. Disabling SDL2 support.')
 		env['HAVE_SDL2'] = 0
-	if not conf.CheckPKG('SDL2_ttf'):
-		print('SDL2_ttf not found. Disabling SDL2 support.')
-		env['HAVE_SDL2'] = 0
+
+if env['HAVE_SDL2_TTF']:
+	env.Append(CPPDEFINES = ['USE_SDL2_TTF'])
 
 env = conf.Finish()
 

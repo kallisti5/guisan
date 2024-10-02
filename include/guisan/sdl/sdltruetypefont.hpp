@@ -44,14 +44,17 @@
 #ifndef GCN_CONTRIB_SDLTRUETYPEFONT_HPP
 #define GCN_CONTRIB_SDLTRUETYPEFONT_HPP
 
-#include <map>
-#include <string>
+#if !USE_SDL2_TTF
+# error "USE_SDL2_TTF not activated"
+#endif
 
-#include "SDL_ttf.h"
 #include "guisan/color.hpp"
-
 #include "guisan/font.hpp"
 #include "guisan/platform.hpp"
+
+#include <SDL_ttf.h>
+#include <map>
+#include <string>
 
 namespace gcn
 {
