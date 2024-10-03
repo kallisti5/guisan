@@ -108,7 +108,7 @@ namespace gcn
 
     void Icon::draw(Graphics* graphics)
     {
-        if (mImage != NULL)
+        if (mImage != nullptr)
         {
             const int x = (getWidth() - mImage->getWidth()) / 2;
             const int y = (getHeight() - mImage->getHeight()) / 2;

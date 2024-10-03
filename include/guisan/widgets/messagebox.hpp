@@ -57,43 +57,56 @@
 #ifndef GCN_MESSAGEBOX_HPP
 #define GCN_MESSAGEBOX_HPP
 
-#include <string>
-
-#include "guisan/graphics.hpp"
-#include "guisan/mouselistener.hpp"
+#include "guisan/actionlistener.hpp"
 #include "guisan/platform.hpp"
-#include "guisan/widgets/window.hpp"
 #include "guisan/widgets/button.hpp"
 #include "guisan/widgets/label.hpp"
-#include "guisan/widgets/icon.hpp"
+#include "guisan/widgets/window.hpp"
+
+#include <memory>
+#include <string>
+#include <vector>
 
 namespace gcn
 {
     /**
      * A non-movable window to display a message with some buttons.
      */
-    class GCN_CORE_DECLSPEC MessageBox : public Window
+    class GCN_CORE_DECLSPEC MessageBox : public Window, public ActionListener
     {
     public:
-
         /**
          * Constructor.
-         * This version only has a single button labeled "OK". 
+         * This version only has a single button labeled "OK".
          *
          * @param caption the MessageBox caption.
          * @param message the message to display in the MessageBox
          */
         MessageBox(const std::string& caption, const std::string& message);
-        
+
         /**
          * Constructor.
          *
          * @param caption the MessageBox caption.
          * @param message the message to display in the MessageBox
-         * @param buttons strings to display as button captions
+         * @param button_captions strings to display as button captions
          * @param size length of the buttons array
          */
-        MessageBox(const std::string& caption, const std::string& message, const std::string *buttons, int size);
+        MessageBox(const std::string& caption,
+                   const std::string& message,
+                   const std::string* button_captions,
+                   int size);
+
+        /**
+         * Constructor.
+         *
+         * @param caption the MessageBox caption.
+         * @param message the message to display in the MessageBox
+         * @param button_captions strings to display as button captions
+         */
+        MessageBox(const std::string& caption,
+                   const std::string& message,
+                   const std::vector<std::string>& button_captions);
 
         /**
          * Destructor.
@@ -106,20 +119,6 @@ namespace gcn
          * @return index of clicked button, starting at 0. -1 if not set (i.e., no button clicked yet)
          */
         int getClickedButton() const;
-
-        /**
-         * Sets the MessageBox caption.
-         *
-         * @param caption the MessageBox caption.
-         */
-        void setCaption(const std::string& caption);
-
-        /**
-         * Gets the MessageBox caption.
-         *
-         * @return the MessageBox caption.
-         */
-        const std::string& getCaption() const;
 
         /**
          * Sets the position for the button(s) in the MessageBox.
@@ -136,91 +135,25 @@ namespace gcn
         Graphics::Alignment getButtonAlignment() const;
 
         /**
-         * Sets the padding of the window which is the distance between the
-         * window border and the content.
-         *
-         * @param padding the padding value.
-         */
-        void setPadding(unsigned int padding);
-
-        /**
-         * Gets the padding.
-         *
-         * @return the padding value.
-         */
-        unsigned int getPadding() const;
-
-        /**
-         * Sets the title bar height.
-         *
-         * @param height the title height value.
-         */
-        void setTitleBarHeight(unsigned int height);
-
-        /**
-         * Gets the title bar height.
-         *
-         * @return the title bar height.
-         */
-        unsigned int getTitleBarHeight();
-
-        /**
-         * Check if the window is movable.
-         *
-         * @return true or false.
-         */
-        bool isMovable() const;
-
-        /**
-         * Sets the MessageBox to be opaque. If it's not opaque, the content area
-         * will not be filled with a color.
-         *
-         * @param opaque true or false.
-         */
-        void setOpaque(bool opaque);
-
-        /**
-         * Checks if the MessageBox is opaque.
-         *
-         * @return true or false.
-         */
-        bool isOpaque();
-        
-        /**
-         * Add this MessageBox to a parent container, centered both horizontally and vertically
-         * If instead, you want to place it somewhere else, use Container::add(). 
+         * Add this MessageBox to a parent container,
+         * centered both horizontally and vertically.
+         * If instead, you want to place it somewhere else, use Container::add().
          *
          * @param container parent container
          */
         void addToContainer(Container* container);
 
-        // Inherit from Window
+        // Inherited from ActionListener
 
-        /**
-         * Resizes the container to fit the content exactly.
-         */
-        void resizeToContent() override;
-
-        // Inherited from Widget
-
-        Rectangle getChildrenArea() override;
-        void draw(Graphics* graphics) override;
-
-        // Inherited from MouseListener
-
-        void mousePressed(MouseEvent& mouseEvent) override;
-        void mouseDragged(MouseEvent& mouseEvent) override;
-        void mouseReleased(MouseEvent& mouseEvent) override;
+        void action(const ActionEvent& keyEvent) override;
 
     protected:
-        std::string mMessage;
-        int mNbButtons;
         Graphics::Alignment mButtonAlignment = Graphics::Alignment::Left;
         int mClickedButton = -1;
 
-        Button **mButtons = nullptr;
-        Label *mLabel = nullptr;
+        std::vector<std::unique_ptr<Button>> mButtons;
+        std::unique_ptr<Label> mLabel;
     };
-}
+} // namespace gcn
 
 #endif // end GCN_MESSAGEBOX_HPP

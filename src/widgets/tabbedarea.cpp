@@ -117,7 +117,7 @@ namespace gcn
         mTabContainer->add(tab);
         mTabs.push_back(std::pair<Tab*, Widget*>(tab, widget));
 
-        if (mSelectedTab == NULL)
+        if (mSelectedTab == nullptr)
         {
             setSelectedTab(tab);
         }
@@ -160,8 +160,7 @@ namespace gcn
             }
         }
 
-        std::vector<std::pair<Tab*, Widget*> >::iterator iter;
-        for (iter = mTabs.begin(); iter != mTabs.end(); iter++)
+        for (auto iter = mTabs.begin(); iter != mTabs.end(); ++iter)
         {
             if (iter->first == tab)
             {
@@ -171,8 +170,7 @@ namespace gcn
             }
         }
 
-        std::vector<Tab*>::iterator iter2;
-        for (iter2 = mTabsToDelete.begin(); iter2 != mTabsToDelete.end(); iter2++)
+        for (auto iter2 = mTabsToDelete.begin(); iter2 != mTabsToDelete.end(); ++iter2)
         {
             if (*iter2 == tab)
             {
@@ -184,7 +182,7 @@ namespace gcn
 
         if (tabIndexToBeSelected == -1)
         {
-            mSelectedTab = NULL;
+            mSelectedTab = nullptr;
             mWidgetContainer->clear();
         }
         else
@@ -313,7 +311,7 @@ namespace gcn
 
         // If a tab is selected,
         // remove the line right underneath the selected tab.
-        if (mSelectedTab != NULL)
+        if (mSelectedTab != nullptr)
         {
             graphics->setColor(getBaseColor());
             graphics->drawLine(mSelectedTab->getX() + 1,
@@ -478,7 +476,7 @@ namespace gcn
             Widget* widget = mTabContainer->getWidgetAt(mouseEvent.getX(), mouseEvent.getY());
             Tab* tab = dynamic_cast<Tab*>(widget);
 
-            if (tab != NULL)
+            if (tab != nullptr)
             {
                 setSelectedTab(tab);
                 tabActive = true;
@@ -487,7 +485,7 @@ namespace gcn
             else
             {
                 widget = mWidgetContainer->getWidgetAt(mouseEvent.getX(), mouseEvent.getY());
-                if (widget == NULL)
+                if (widget == nullptr)
                 {
                     mouseEvent.consume();
                 }
@@ -521,7 +519,7 @@ namespace gcn
         Widget* source = actionEvent.getSource();
         Tab* tab = dynamic_cast<Tab*>(source);
 
-        if (tab == NULL)
+        if (tab == nullptr)
         {
             throw GCN_EXCEPTION("Received an action from a widget that's not a tab!");
         }

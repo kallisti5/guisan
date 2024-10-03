@@ -110,7 +110,7 @@ namespace gcn
         if (mInternalListBox)
             delete mListBox;
 
-        setInternalFocusHandler(NULL);
+        setInternalFocusHandler(nullptr);
     }
 
     void DropDown::draw(Graphics* graphics)
@@ -386,10 +386,10 @@ namespace gcn
 
     void DropDown::adjustHeight()
     {
-        if (mScrollArea == NULL)
+        if (mScrollArea == nullptr)
             throw GCN_EXCEPTION("Scroll Area has been deleted.");
 
-    if (mListBox == NULL)
+    if (mListBox == nullptr)
         throw GCN_EXCEPTION("List box has been deleted.");
 
         int listBoxHeight = mListBox->getHeight();
@@ -466,7 +466,7 @@ namespace gcn
     {
         if (event.getSource() == mScrollArea)
         {
-            mScrollArea = NULL;
+            mScrollArea = nullptr;
         }
     }
 
@@ -599,12 +599,11 @@ namespace gcn
 
     void DropDown::distributeValueChangedEvent()
     {
-        SelectionListenerIterator iter;
+        const SelectionEvent event(this);
 
-        for (iter = mSelectionListeners.begin(); iter != mSelectionListeners.end(); ++iter)
+        for (SelectionListener* selectionListener : mSelectionListeners)
         {
-            SelectionEvent event(this);
-            (*iter)->valueChanged(event);
+            selectionListener->valueChanged(event);
         }
     }
 }

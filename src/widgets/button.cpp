@@ -198,13 +198,15 @@ namespace gcn
     {
         if (mMousePressed)
         {
-            return true;
+            return mHasMouse;
         }
-        return mKeyPressed;
+        return mKeyPressed || mHotKeyPressed;
     }
 
     void Button::mousePressed(MouseEvent& mouseEvent)
     {
+        mHasMouse = gcn::Rectangle(0, 0, getWidth(), getHeight())
+                        .isContaining(mouseEvent.getX(), mouseEvent.getY());
         if (mouseEvent.isConsumed())
         {
             return;
@@ -228,16 +230,18 @@ namespace gcn
 
     void Button::mouseReleased(MouseEvent& mouseEvent)
     {
-        if (mouseEvent.getButton() == MouseEvent::Left
-            && mMousePressed)
+        if (mouseEvent.getButton() == MouseEvent::Left)
         {
             mMousePressed = false;
-            distributeActionEvent();
             mouseEvent.consume();
         }
-        else if (mouseEvent.getButton() == MouseEvent::Left)
+    }
+
+    void Button::mouseClicked(MouseEvent& mouseEvent)
+    {
+        if (mouseEvent.getButton() == MouseEvent::Left)
         {
-            mMousePressed = false;
+            distributeActionEvent();
             mouseEvent.consume();
         }
     }
@@ -257,6 +261,7 @@ namespace gcn
             mKeyPressed = true;
             keyEvent.consume();
         }
+        mHotKeyPressed = false;
     }
 
     void Button::keyReleased(KeyEvent& keyEvent)
@@ -270,6 +275,21 @@ namespace gcn
             mKeyPressed = false;
             distributeActionEvent();
             keyEvent.consume();
+        }
+    }
+
+    void Button::hotKeyPressed()
+    {
+        mHotKeyPressed = true;
+        mMousePressed = false;
+    }
+
+    void Button::hotKeyReleased()
+    {
+        if (mHotKeyPressed)
+        {
+            mHotKeyPressed = false;
+            distributeActionEvent();
         }
     }
 

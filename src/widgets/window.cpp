@@ -247,7 +247,7 @@ namespace gcn
             return;
         }
 
-        if (getParent() != NULL)
+        if (getParent() != nullptr)
         {
             getParent()->moveToTop(this);
         }

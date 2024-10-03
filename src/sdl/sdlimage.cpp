@@ -97,7 +97,7 @@ namespace gcn
 
     int SDLImage::getWidth() const
     {
-        if (mSurface == NULL)
+        if (mSurface == nullptr)
         {
             throw GCN_EXCEPTION("Trying to get the width of a non loaded image.");
         }
@@ -107,7 +107,7 @@ namespace gcn
 
     int SDLImage::getHeight() const
     {
-        if (mSurface == NULL)
+        if (mSurface == nullptr)
         {
             throw GCN_EXCEPTION("Trying to get the height of a non loaded image.");
         }
@@ -117,7 +117,7 @@ namespace gcn
 
     Color SDLImage::getPixel(int x, int y)
     {
-        if (mSurface == NULL)
+        if (mSurface == nullptr)
         {
             throw GCN_EXCEPTION("Trying to get a pixel from a non loaded image.");
         }
@@ -127,7 +127,7 @@ namespace gcn
 
     void SDLImage::putPixel(int x, int y, const Color& color)
     {
-        if (mSurface == NULL)
+        if (mSurface == nullptr)
         {
             throw GCN_EXCEPTION("Trying to put a pixel in a non loaded image.");
         }
@@ -137,7 +137,7 @@ namespace gcn
 
     void SDLImage::convertToDisplayFormat()
     {
-        if (mSurface == NULL)
+        if (mSurface == nullptr)
         {
             throw GCN_EXCEPTION("Trying to convert a non loaded image to display format.");
         }
@@ -172,9 +172,9 @@ namespace gcn
 
         SDL_Surface* tmp = SDL_ConvertSurfaceFormat(mSurface, surfaceMask, 0);
         SDL_FreeSurface(mSurface);
-        mSurface = NULL;
+        mSurface = nullptr;
 
-        if (tmp == NULL)
+        if (tmp == nullptr)
         {
             throw GCN_EXCEPTION("Unable to convert image to display format.");
         }

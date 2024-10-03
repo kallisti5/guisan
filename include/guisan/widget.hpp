@@ -189,7 +189,7 @@ namespace gcn
         /**
          * Gets the widget's parent container.
          *
-         * @return The widget's parent container. NULL if the widget
+         * @return The widget's parent container. nullptr if the widget
          *         has no parent.
          * @since 0.1.0
          */
@@ -199,7 +199,7 @@ namespace gcn
          * Gets the top widget, or top parent, of this widget.
          *
          * @return The top widget, or top parent, for this widget.
-         *         NULL if no top widget exists
+         *         nullptr if no top widget exists
          *         (that is this widget doesn't have a parent).
          * @since 1.1.0
          */
@@ -722,7 +722,7 @@ namespace gcn
         static void setGlobalFont(Font* font);
 
         /**
-         * Sets the font for the widget. If NULL is passed, the global font 
+         * Sets the font for the widget. If nullptr is passed, the global font 
          * will be used.
          *
          * @param font The font to set for the widget.
@@ -861,12 +861,12 @@ namespace gcn
          * This function is used to decide which gets mouse input,
          * thus it can be overloaded to change that behaviour.
          *
-         * NOTE: This always returns NULL if the widget is not
+         * NOTE: This always returns nullptr if the widget is not
          *       a container.
          *
          * @param x The x coordinate of the widget to get.
          * @param y The y coordinate of the widget to get.
-         * @return The widget at the specified coodinate, NULL
+         * @return The widget at the specified coodinate, nullptr
          *         if no widget is found.
          * @since 0.6.0
          */
@@ -883,7 +883,7 @@ namespace gcn
          * @return A list of widgets. An empty list if no widgets was found.
          * @since 1.1.0
          */
-        virtual std::list<Widget*> getWidgetsIn(const Rectangle& area, Widget* ignore = NULL);
+        virtual std::list<Widget*> getWidgetsIn(const Rectangle& area, Widget* ignore = nullptr);
 
         /**
          * Gets the mouse listeners of the widget.
@@ -937,7 +937,7 @@ namespace gcn
          * Gets the internal focus handler used.
          *
          * @return the internalFocusHandler used. If no internal focus handler
-         *         is used, NULL will be returned.
+         *         is used, nullptr will be returned.
          * @see setInternalFocusHandler
          * @since 0.1.0
          */
@@ -1040,6 +1040,26 @@ namespace gcn
          */
         virtual void showPart(Rectangle rectangle);
 
+        /**
+         * Called when a Widget's hot key is pressed
+         */
+        virtual void hotKeyPressed() {}
+
+        /**
+         * Called when a Widget's hot key is released
+         */
+        virtual void hotKeyReleased() {}
+
+        /**
+         * Get the hot key
+         */
+        int getHotKey() const { return mHotKey; }
+
+        /**
+         * Set the hot key
+         */
+        void setHotKey(const int key) { mHotKey = key; }
+
     protected:
         /**
          * Distributes an action event to all action listeners
@@ -1119,7 +1139,7 @@ namespace gcn
          *
          * @param id The id to find a widget by.
          * @return The widget with the corrosponding id, 
-         *         NULL of no widget is found.
+         *         nullptr of no widget is found.
          *
          * @since 1.1.0
          */
@@ -1196,13 +1216,13 @@ namespace gcn
         FocusHandler* mFocusHandler = nullptr;
 
         /**
-         * Holds the focus handler used by the widget. NULL
+         * Holds the focus handler used by the widget. nullptr
          * if no internal focus handler is used.
          */
         FocusHandler* mInternalFocusHandler = nullptr;
 
         /**
-         * Holds the parent of the widget. NULL if the widget
+         * Holds the parent of the widget. nullptr if the widget
          * has no parent.
          */
         Widget* mParent = nullptr;
@@ -1261,6 +1281,8 @@ namespace gcn
          * Holds all children of the widget.
          */
         std::list<Widget*> mChildren;
+
+        int mHotKey = 0;
 
         /**
          * Holds the default font used by the widget.

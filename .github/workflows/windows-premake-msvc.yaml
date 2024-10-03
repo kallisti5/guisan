@@ -1,0 +1,30 @@
+name: Windows-premake-msvc
+on: [push, pull_request]
+jobs:
+  Build-Guisan:
+    runs-on: windows-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: install premake5
+      uses: Jarod42/install-premake5@v1
+
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v2
+
+    - name: run premake5
+      run: premake5.exe vs2022 --to=solution/vs2022
+
+    - name: build
+      run: |
+        cd solution/vs2022
+        nuget install packages.config -OutputDirectory packages
+        msbuild.exe /property:Configuration=Release Guisan.sln
+
+    - name: artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: guisan-msvc
+        path: |
+          solution/vs2022/bin/Release/**.*

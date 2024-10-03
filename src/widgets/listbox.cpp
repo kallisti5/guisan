@@ -87,7 +87,7 @@ namespace gcn
         graphics->setColor(getBackgroundColor());
         graphics->fillRectangle(Rectangle(0, 0, getWidth(), getHeight()));
 
-        if (mListModel == NULL)
+        if (mListModel == nullptr)
         {
             return;
         }
@@ -171,7 +171,7 @@ namespace gcn
 
     void ListBox::setSelected(int selected)
     {
-        if (mListModel == NULL)
+        if (mListModel == nullptr)
         {
             mSelected = -1;
         }
@@ -311,7 +311,7 @@ namespace gcn
 
     void ListBox::adjustSize()
     {
-        if (mListModel != NULL)
+        if (mListModel != nullptr)
         {
             int maxElementWidth = getWidth();
             for (int i = 0; i < mListModel->getNumberOfElements(); i++)
@@ -350,12 +350,11 @@ namespace gcn
 
     void ListBox::distributeValueChangedEvent()
     {
-        SelectionListenerIterator iter;
+        const SelectionEvent event(this);
 
-        for (iter = mSelectionListeners.begin(); iter != mSelectionListeners.end(); ++iter)
+        for (SelectionListener* selectionListener : mSelectionListeners)
         {
-            SelectionEvent event(this);
-            (*iter)->valueChanged(event);
+            selectionListener->valueChanged(event);
         }
     }
 

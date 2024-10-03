@@ -112,7 +112,7 @@ namespace gcn
 
         // Inherited from MouseListener
 
-        void mouseReleased(MouseEvent& mouseEvent) override;
+        void mouseClicked(MouseEvent& mouseEvent) override;
 
         // Inherited from KeyListener
 

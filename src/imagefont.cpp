@@ -116,9 +116,9 @@ namespace gcn
     ImageFont::ImageFont(Image* image, const std::string& glyphs)
     {
         mFilename = "Image*";
-        if (image == NULL)
+        if (image == nullptr)
         {
-            throw GCN_EXCEPTION("Font image is NULL");
+            throw GCN_EXCEPTION("Font image is nullptr");
         }
         mImage = image;
 

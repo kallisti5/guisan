@@ -66,7 +66,7 @@ namespace gcn
     Color::Color(int color) :
         r((color >> 16) & 0xFF),
         g((color >> 8) & 0xFF),
-        b((color >> 8) & 0xFF)
+        b((color >> 0) & 0xFF)
     {}
 
     Color::Color(int r, int g, int b, int a) : r(r), g(g), b(b), a(a)
