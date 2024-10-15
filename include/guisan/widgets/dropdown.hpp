@@ -66,6 +66,8 @@
 #include "guisan/selectionlistener.hpp"
 #include "guisan/widget.hpp"
 
+#include <memory>
+
 namespace gcn
 {
     class ListBox;
@@ -105,9 +107,21 @@ namespace gcn
          * @param listBox the listBox to use.
          * @see ListModel, ScrollArea, ListBox.
          */
-        DropDown(ListModel *listModel = nullptr,
-                 ScrollArea *scrollArea = nullptr,
-                 ListBox *listBox = nullptr);
+        DropDown(ListModel* listModel,
+                 ScrollArea* scrollArea,
+                 ListBox* listBox = nullptr);
+
+        /**
+         * Constructor.
+         *
+         * @param listModel the ListModel to use.
+         * @param scrollArea the ScrollArea to use.
+         * @param listBox the listBox to use.
+         * @see ListModel, ScrollArea, ListBox.
+         */
+        DropDown(ListModel* listModel = nullptr,
+                 std::shared_ptr<ScrollArea> scrollArea = nullptr,
+                 std::shared_ptr<ListBox> listBox = nullptr);
 
         /**
          * Destructor.
@@ -269,8 +283,8 @@ namespace gcn
         /**
          * The scroll area used.
          */
-        ScrollArea* mScrollArea = nullptr;
-        ListBox* mListBox = nullptr;
+        std::shared_ptr<ScrollArea> mScrollArea;
+        std::shared_ptr<ListBox> mListBox;
 
         /**
          * The internal focus handler used to keep track of focus for the
