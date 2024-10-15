@@ -57,15 +57,16 @@
 #ifndef GCN_TABBEDAREA_HPP
 #define GCN_TABBEDAREA_HPP
 
-#include <map>
-#include <string>
-#include <vector>
-
 #include "guisan/actionlistener.hpp"
 #include "guisan/keylistener.hpp"
 #include "guisan/mouselistener.hpp"
 #include "guisan/platform.hpp"
 #include "guisan/widget.hpp"
+
+#include <map>
+#include <memory>
+#include <string>
+#include <vector>
 
 namespace gcn
 {
@@ -272,19 +273,19 @@ namespace gcn
         /**
          * Holds the container for the tabs.
          */
-        Container* mTabContainer = nullptr;
+        std::unique_ptr<Container> mTabContainer;
 
         /**
          * Holds the container for the widgets.
          */
-        Container* mWidgetContainer = nullptr;
+        std::unique_ptr<Container> mWidgetContainer;
 
         /**
          * Holds a vector of tabs to delete in the destructor.
          * A tab that is to be deleted is a tab that has been
          * internally created by the tabbed area.
          */
-        std::vector<Tab*> mTabsToDelete;
+        std::vector<std::unique_ptr<Tab>> mTabsToDelete;
 
         /**
          * A map between a tab and a widget to display when the
