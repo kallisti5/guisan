@@ -62,6 +62,7 @@
 #include "guisan/platform.hpp"
 #include "guisan/widget.hpp"
 
+#include <memory>
 #include <string>
 
 namespace gcn
@@ -89,6 +90,11 @@ namespace gcn
          * @param text The default text of the text field.
          */
         TextField(const std::string& text);
+
+        /**
+         * Destructor.
+         */
+        ~TextField() override;
 
         /**
          * Sets the text of the text field.
@@ -190,7 +196,7 @@ namespace gcn
         /**
          * Holds the text of the text field.
          */
-        Text* mText = nullptr;
+        std::unique_ptr<Text> mText;
 
         /**
          * Holds the amount scrolled in x. If a user types more characters than
