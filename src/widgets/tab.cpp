@@ -68,19 +68,16 @@
 
 namespace gcn
 {
-    Tab::Tab() : mLabel(new Label())
+    Tab::Tab() : mLabel(std::make_unique<Label>())
     {
         mLabel->setPosition(6, 6);
-        add(mLabel);
+        add(mLabel.get());
         setFrameSize(1);
 
         addMouseListener(this);
     }
 
-    Tab::~Tab()
-    {
-        delete mLabel;
-    }
+    Tab::~Tab() = default;
 
     void Tab::adjustSize()
     {
