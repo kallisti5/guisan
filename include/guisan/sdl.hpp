@@ -57,12 +57,15 @@
 #ifndef GCN_SDL_HPP
 #define GCN_SDL_HPP
 
-#include <guisan/sdl/sdlgraphics.hpp>
 #include <guisan/sdl/sdl2graphics.hpp>
+#include <guisan/sdl/sdlgraphics.hpp>
 #include <guisan/sdl/sdlimage.hpp>
 #include <guisan/sdl/sdlimageloader.hpp>
 #include <guisan/sdl/sdlinput.hpp>
-#include <guisan/sdl/sdltruetypefont.hpp>
+
+#if USE_SDL2_TTF
+# include <guisan/sdl/sdltruetypefont.hpp>
+#endif
 
 #include "platform.hpp"
 
