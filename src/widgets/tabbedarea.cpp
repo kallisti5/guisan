@@ -72,7 +72,9 @@
 
 namespace gcn
 {
-    TabbedArea::TabbedArea() : mTabContainer(new Container()), mWidgetContainer(new Container())
+    TabbedArea::TabbedArea() :
+        mTabContainer(std::make_unique<Container>()),
+        mWidgetContainer(std::make_unique<Container>())
     {
         setFrameSize(1);
         setFocusable(true);
@@ -82,29 +84,21 @@ namespace gcn
 
         mTabContainer->setOpaque(false);
 
-        add(mTabContainer);
-        add(mWidgetContainer);
+        add(mTabContainer.get());
+        add(mWidgetContainer.get());
     }
 
     TabbedArea::~TabbedArea()
     {
-        remove(mTabContainer);
-        remove(mWidgetContainer);
-
-        delete mTabContainer;
-        delete mWidgetContainer;
-
-        for (unsigned int i = 0; i < mTabsToDelete.size(); i++)
-        {
-            delete mTabsToDelete[i];
-        }
+        remove(mTabContainer.get());
+        remove(mWidgetContainer.get());
     }
 
     void TabbedArea::addTab(const std::string& caption, Widget* widget)
     {
-        Tab* tab = new Tab();
+        mTabsToDelete.emplace_back(std::make_unique<Tab>());
+        auto tab = mTabsToDelete.back().get();
         tab->setCaption(caption);
-        mTabsToDelete.push_back(tab);
 
         addTab(tab, widget);
     }
@@ -170,14 +164,12 @@ namespace gcn
             }
         }
 
-        for (auto iter2 = mTabsToDelete.begin(); iter2 != mTabsToDelete.end(); ++iter2)
+        auto it2 = std::find_if(mTabsToDelete.begin(), mTabsToDelete.end(), [&](const auto& p) {
+            return p.get() == tab;
+        });
+        if (it2 != mTabsToDelete.end())
         {
-            if (*iter2 == tab)
-            {
-                mTabsToDelete.erase(iter2);
-                delete tab;
-                break;
-            }
+            mTabsToDelete.erase(it2);
         }
 
         if (tabIndexToBeSelected == -1)

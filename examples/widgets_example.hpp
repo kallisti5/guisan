@@ -41,18 +41,19 @@ namespace WidgetsExample
             // The global font is static and must be set.
             gcn::Widget::setGlobalFont(font.get());
 
-            top = std::make_unique < gcn::Container>();
+            top = std::make_unique<gcn::Container>();
             // Set the dimension of the top container to match the screen.
             top->setDimension(gcn::Rectangle(0, 0, width, height));
             // Set the top container
             gui.setTop(top.get());
+
+            guisanLogoImage.reset(gcn::Image::load("guisan-logo.png"));
             /*
              * Create all the widgets
              */
             label = std::make_unique<gcn::Label>("Label");
 
-            image.reset(gcn::Image::load("guisan.png"));
-            icon = std::make_unique<gcn::Icon>(image.get());
+            icon = std::make_unique<gcn::Icon>("guisan.png");
 
             button = std::make_unique<gcn::Button>("Button");
 
@@ -125,8 +126,7 @@ namespace WidgetsExample
             messageBox->setFrameSize(1);
             messageBox->addActionListener(this);
 
-            guisanLogoImage.reset(gcn::Image::load("guisan-logo.png"));
-            guisanLogoIcon = std::make_unique<gcn::Icon>(guisanLogoImage.get());
+            guisanLogoIcon = std::make_unique<gcn::Icon>(guisanLogoImage);
             window->add(guisanLogoIcon.get());
             window->resizeToContent();
 
@@ -239,11 +239,10 @@ namespace WidgetsExample
         std::unique_ptr<gcn::RadioButton> radioButton3;
         std::unique_ptr<gcn::ToggleButton> toggleButton;
         std::unique_ptr<gcn::Slider> slider; // A slider
-        std::unique_ptr<gcn::Image> image; // An image for the icon
         std::unique_ptr<gcn::Window> window;
         std::unique_ptr<gcn::MessageBox> messageBox;
         std::unique_ptr<gcn::ProgressBar> progress;
-        std::unique_ptr<gcn::Image> guisanLogoImage;
+        std::shared_ptr<gcn::Image> guisanLogoImage;
         std::unique_ptr<gcn::Icon> guisanLogoIcon;
         std::unique_ptr<gcn::ScrollArea> nestedScrollArea;
         std::unique_ptr<gcn::Container> nestedContainer;

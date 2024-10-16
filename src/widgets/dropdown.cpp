@@ -67,10 +67,17 @@
 
 namespace gcn
 {
-    DropDown::DropDown(ListModel *listModel,
-                       ScrollArea *scrollArea, ListBox* listBox) :
-        mScrollArea(scrollArea ? scrollArea : new ScrollArea()),
-        mListBox(listBox ? listBox : new ListBox()),
+    DropDown::DropDown(ListModel* listModel, ScrollArea* scrollArea, ListBox* listBox) :
+        DropDown(listModel,
+                 std::shared_ptr<ScrollArea>(scrollArea, [](ScrollArea*) {}),
+                 std::shared_ptr<ListBox>(listBox, [](ListBox*) {}))
+    {}
+
+    DropDown::DropDown(ListModel* listModel,
+                       std::shared_ptr<ScrollArea> scrollArea,
+                       std::shared_ptr<ListBox> listBox) :
+        mScrollArea(scrollArea ? scrollArea : std::make_shared<ScrollArea>()),
+        mListBox(listBox ? listBox : std::make_shared<ListBox>()),
         mInternalScrollArea(scrollArea == nullptr),
         mInternalListBox(listBox == nullptr)
     {
@@ -79,8 +86,8 @@ namespace gcn
 
         setInternalFocusHandler(&mInternalFocusHandler);
 
-        mScrollArea->setContent(mListBox);
-        add(mScrollArea);
+        mScrollArea->setContent(mListBox.get());
+        add(mScrollArea.get());
 
         mListBox->addActionListener(this);
         mListBox->addSelectionListener(this);
@@ -101,14 +108,8 @@ namespace gcn
 
     DropDown::~DropDown()
     {
-        if (widgetExists(mListBox))
+        if (widgetExists(mListBox.get()))
             mListBox->removeSelectionListener(this);
-
-        if (mInternalScrollArea)
-            delete mScrollArea;
-
-        if (mInternalListBox)
-            delete mListBox;
 
         setInternalFocusHandler(nullptr);
     }
@@ -464,7 +465,7 @@ namespace gcn
 
     void DropDown::death(const Event& event)
     {
-        if (event.getSource() == mScrollArea)
+        if (event.getSource() == mScrollArea.get())
         {
             mScrollArea = nullptr;
         }
@@ -491,6 +492,7 @@ namespace gcn
 
     void DropDown::setBaseColor(const Color& color)
     {
+
         if (mInternalScrollArea)
         {
             mScrollArea->setBaseColor(color);

@@ -86,7 +86,15 @@ namespace gcn
          * @param image The image to display.
          * @param caption The text to display.
          */
-        ImageTextButton(Image* image, const std::string& caption);
+        ImageTextButton(const Image* image, const std::string& caption);
+
+        /**
+         * Constructor.
+         *
+         * @param image The image to display.
+         * @param caption The text to display.
+         */
+        ImageTextButton(std::shared_ptr<const Image> image, const std::string& caption);
 
         /**
          * Destructor.

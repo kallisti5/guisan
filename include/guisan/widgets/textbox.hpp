@@ -57,14 +57,14 @@
 #ifndef GCN_TEXTBOX_HPP
 #define GCN_TEXTBOX_HPP
 
-#include <ctime>
-#include <string>
-#include <vector>
-
 #include "guisan/keylistener.hpp"
 #include "guisan/mouselistener.hpp"
 #include "guisan/platform.hpp"
 #include "guisan/widget.hpp"
+
+#include <memory>
+#include <string>
+#include <vector>
 
 namespace gcn
 {
@@ -90,6 +90,11 @@ namespace gcn
          * @param text The default text of the text box.
          */
         TextBox(const std::string& text);
+
+        /**
+         * Destructor.
+         */
+        ~TextBox() override;
 
         /**
          * Sets the text of the text box.
@@ -272,7 +277,7 @@ namespace gcn
         /**
          * Holds the text of the text box.
          */
-        Text* mText = nullptr;
+        std::unique_ptr<Text> mText;
 
         /**
          * True if the text box is editable, false otherwise.
