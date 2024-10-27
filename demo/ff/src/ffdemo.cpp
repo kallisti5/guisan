@@ -166,13 +166,9 @@ void FFDemo::initMain()
     mMain->setDimension(gcn::Rectangle(0, 0, 320, 240));
     mTop->add(mMain.get());
 
-    mPerImage.reset(gcn::Image::load("images/finalman.png"));
-    mOlofImage.reset(gcn::Image::load("images/yakslem.png"));
-    mTomasImage.reset(gcn::Image::load("images/peak.png"));
-
-    mPerIcon = std::make_unique<gcn::Icon>(mPerImage.get());
-    mOlofIcon = std::make_unique<gcn::Icon>(mOlofImage.get());
-    mTomasIcon = std::make_unique<gcn::Icon>(mTomasImage.get());
+    mPerIcon = std::make_unique<gcn::Icon>("images/finalman.png");
+    mOlofIcon = std::make_unique<gcn::Icon>("images/yakslem.png");
+    mTomasIcon = std::make_unique<gcn::Icon>("images/peak.png");
 
     mPerInfo1 = std::make_unique<gcn::TextBox>("\n  LV\n  HP\n  MP");
     mPerInfo1->setFont(mFontCyan.get());

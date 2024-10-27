@@ -68,7 +68,7 @@
 
 namespace gcn
 {
-    TextField::TextField() : mText(new Text())
+    TextField::TextField() : mText(std::make_unique<Text>())
     {
         setFocusable(true);
 
@@ -78,7 +78,7 @@ namespace gcn
         adjustHeight();
     }
 
-    TextField::TextField(const std::string& text) : mText(new Text(text))
+    TextField::TextField(const std::string& text) : mText(std::make_unique<Text>(text))
     {
         setFocusable(true);
 
@@ -87,6 +87,8 @@ namespace gcn
 
         adjustSize();
     }
+
+    TextField::~TextField() = default;
 
     void TextField::setText(const std::string& text)
     {

@@ -67,14 +67,21 @@
 
 namespace gcn
 {
-    ImageTextButton::ImageTextButton(const std::string& filename, const std::string& caption) : ImageButton(filename)
+    ImageTextButton::ImageTextButton(const std::string& filename, const std::string& caption) :
+        ImageButton(filename)
     {
         setCaption(caption);
         setWidth(mImage->getWidth() + mImage->getWidth() / 2);
         setHeight(mImage->getHeight() + mImage->getHeight() / 2);
     }
 
-    ImageTextButton::ImageTextButton(Image* image, const std::string& caption) : ImageButton(image)
+    ImageTextButton::ImageTextButton(const Image* image, const std::string& caption) :
+        ImageTextButton({image, [](const auto*) {}}, caption)
+    {}
+
+    ImageTextButton::ImageTextButton(std::shared_ptr<const Image> image,
+                                     const std::string& caption) :
+        ImageButton(std::move(image))
     {
         setCaption(caption);
         setWidth(mImage->getWidth() + mImage->getWidth() / 2);
@@ -181,12 +188,12 @@ namespace gcn
 
         if (isPressed())
         {
-            graphics->drawImage(mImage, imageX + 1, imageY + 1);
+            graphics->drawImage(mImage.get(), imageX + 1, imageY + 1);
             graphics->drawText(mCaption, textX + 1, textY + 1, Graphics::Left, isEnabled());
         }
         else
         {
-            graphics->drawImage(mImage, imageX, imageY);
+            graphics->drawImage(mImage.get(), imageX, imageY);
             graphics->drawText(mCaption, textX, textY, Graphics::Left, isEnabled());
            
             if (isFocused())
