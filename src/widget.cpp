@@ -513,6 +513,38 @@ namespace gcn
         }
     }
 
+    void Widget::setGlobalBaseColor(Color color)
+    {
+        for (Widget* w : mWidgetInstances)
+        {
+            w->setBaseColor(color);
+        }
+    }
+
+    void Widget::setGlobalForegroundColor(Color color)
+    {
+        for (Widget* w : mWidgetInstances)
+        {
+            w->setForegroundColor(color);
+        }
+    }
+
+    void Widget::setGlobalBackgroundColor(Color color)
+    {
+        for (Widget* w : mWidgetInstances)
+        {
+            w->setBackgroundColor(color);
+        }
+    }
+
+    void Widget::setGlobalSelectionColor(Color color)
+    {
+        for (Widget* w : mWidgetInstances)
+        {
+            w->setSelectionColor(color);
+        }
+    }
+
     void Widget::setFont(Font* font)
     {
         mCurrentFont = font;
