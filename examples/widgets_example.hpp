@@ -28,6 +28,16 @@ namespace WidgetsExample
                     return std::string("");
             }
         }
+
+        void add(const std::string &str) override
+        {
+            // Do nothing
+        }
+
+        void clear() override
+        {
+            // Do nothing
+        }
     };
 
     class MainContainer : public gcn::ActionListener
