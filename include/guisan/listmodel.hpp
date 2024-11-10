@@ -76,7 +76,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        virtual ~ListModel() = default;
+        virtual ~ListModel() { }
 
         /**
          * Gets the number of elements in the list.
@@ -92,12 +92,6 @@ namespace gcn
          * @return An element as a string at the a certain index.
          */
         virtual std::string getElementAt(int i) = 0;
-
-        // Add a new element
-        virtual void add(const std::string& str) = 0;
-
-        // Clear all elements
-        virtual void clear_elements() = 0;
     };
 }
 
