@@ -97,7 +97,7 @@ namespace gcn
         virtual void add(const std::string& str) = 0;
 
         // Clear all elements
-        virtual void clear_elements() = 0;
+        virtual void clear() = 0;
     };
 }
 
