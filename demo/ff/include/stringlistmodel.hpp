@@ -55,7 +55,7 @@ public:
     int getNumberOfElements() override { return mStrings.size(); }
     std::string getElementAt(int i) override { return mStrings.at(i); }
 
-    void add(std::string str) override
+    void add(const std::string &str) override
     {
         mStrings.push_back(str);
     }
