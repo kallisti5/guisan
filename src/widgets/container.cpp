@@ -67,9 +67,7 @@ namespace gcn
 {
 
     Container::~Container()
-    {
-
-    }
+    = default;
 
     void Container::draw(Graphics* graphics)
     {
@@ -78,6 +76,7 @@ namespace gcn
             graphics->setColor(getBaseColor());
             graphics->fillRectangle(Rectangle(0, 0, getWidth(), getHeight()));
         }
+        drawChildren(graphics);
     }
 
     void Container::setOpaque(bool opaque)
@@ -161,5 +160,35 @@ namespace gcn
     Rectangle Container::getChildrenArea()
     {
         return Rectangle(0, 0, getWidth(), getHeight());
+    }
+
+    void Container::drawChildren(Graphics* graphics)
+    {
+        graphics->pushClipArea(getChildrenArea());
+
+        std::list<Widget*> children = getChildren();
+        for (const auto& iter : children)
+        {
+            if (iter->isVisible())
+            {
+                // If the widget has a frame,
+                // draw it before drawing the widget
+                if (iter->getFrameSize() > 0)
+                {
+                    Rectangle rec = iter->getDimension();
+                    rec.x -= static_cast<int>(iter->getFrameSize());
+                    rec.y -= static_cast<int>(iter->getFrameSize());
+                    rec.width += static_cast<int>(2 * iter->getFrameSize());
+                    rec.height += static_cast<int>(2 * iter->getFrameSize());
+                    graphics->pushClipArea(rec);
+                    iter->drawFrame(graphics);
+                    graphics->popClipArea();
+                }
+                graphics->pushClipArea(iter->getDimension());
+                iter->draw(graphics);
+                graphics->popClipArea();
+            }
+        }
+        graphics->popClipArea();
     }
 } // namespace gcn
