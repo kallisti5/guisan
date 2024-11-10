@@ -6,34 +6,11 @@
 namespace WidgetsExample
 {
 
-    /*
-     * List boxes and dropdowns needs an instance of a listmodel
-     * to know what elements they have.
-     */
-    class DemoListModel : public gcn::ListModel
-    {
-    public:
-        int getNumberOfElements() override { return 5; }
-
-        std::string getElementAt(int i) override
-        {
-            switch (i)
-            {
-                case 0: return std::string("zero");
-                case 1: return std::string("one");
-                case 2: return std::string("two");
-                case 3: return std::string("three");
-                case 4: return std::string("four");
-                default: // Just to keep warnings away
-                    return std::string("");
-            }
-        }
-    };
-
     class MainContainer : public gcn::ActionListener
     {
     public:
-        MainContainer(gcn::Gui& gui, int width, int height)
+        MainContainer(gcn::Gui& gui, int width, int height) :
+            demoListModel{{"zero", "one", "two", "three", "four"}}
         {
             // Load the image font.
             font = std::make_unique<gcn::ImageFont>(
@@ -220,7 +197,7 @@ namespace WidgetsExample
          * All of the widgets
          */
         std::unique_ptr<gcn::Container> top; // A top container
-        DemoListModel demoListModel;
+        gcn::StringListModel demoListModel;
         std::unique_ptr<gcn::Label> label; // A label
         std::unique_ptr<gcn::Icon> icon; // An icon (image)
         std::unique_ptr<gcn::Button> button; // A button

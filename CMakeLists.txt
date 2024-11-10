@@ -53,6 +53,7 @@ SET(GUISAN_HEADERS
   include/guisan/rectangle.hpp
   include/guisan/selectionevent.hpp
   include/guisan/selectionlistener.hpp
+  include/guisan/stringlistmodel.hpp
   include/guisan/text.hpp
   include/guisan/widget.hpp
   include/guisan/widgetlistener.hpp

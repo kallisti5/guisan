@@ -6,7 +6,7 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
+ * Copyright (c) 2024 Olof Naessén and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
@@ -54,77 +54,36 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef GCN_GUISAN_HPP
-#define GCN_GUISAN_HPP
+#ifndef GCN_STRINGLISTMODEL_HPP
+#define GCN_STRINGLISTMODEL_HPP
 
-#include <guisan/actionevent.hpp>
-#include <guisan/actionlistener.hpp>
-#include <guisan/cliprectangle.hpp>
-#include <guisan/color.hpp>
-#include <guisan/containerevent.hpp>
-#include <guisan/containerlistener.hpp>
-#include <guisan/deathlistener.hpp>
-#include <guisan/event.hpp>
-#include <guisan/exception.hpp>
-#include <guisan/focushandler.hpp>
-#include <guisan/focuslistener.hpp>
-#include <guisan/font.hpp>
-#include <guisan/genericinput.hpp>
-#include <guisan/graphics.hpp>
-#include <guisan/gui.hpp>
-#include <guisan/image.hpp>
-#include <guisan/imagefont.hpp>
-#include <guisan/imageloader.hpp>
-#include <guisan/input.hpp>
-#include <guisan/inputevent.hpp>
-#include <guisan/key.hpp>
-#include <guisan/keyevent.hpp>
-#include <guisan/keyinput.hpp>
-#include <guisan/keylistener.hpp>
-#include <guisan/listmodel.hpp>
-#include <guisan/mouseevent.hpp>
-#include <guisan/mouseinput.hpp>
-#include <guisan/mouselistener.hpp>
-#include <guisan/rectangle.hpp>
-#include <guisan/selectionevent.hpp>
-#include <guisan/selectionlistener.hpp>
-#include <guisan/stringlistmodel.hpp>
-#include <guisan/widget.hpp>
-#include <guisan/widgetlistener.hpp>
+#include "guisan/listmodel.hpp"
 
-#include <guisan/widgets/button.hpp>
-#include <guisan/widgets/checkbox.hpp>
-#include <guisan/widgets/container.hpp>
-#include <guisan/widgets/dropdown.hpp>
-#include <guisan/widgets/icon.hpp>
-#include <guisan/widgets/imagebutton.hpp>
-#include <guisan/widgets/imagetextbutton.hpp>
-#include <guisan/widgets/inputbox.hpp>
-#include <guisan/widgets/label.hpp>
-#include <guisan/widgets/listbox.hpp>
-#include <guisan/widgets/messagebox.hpp>
-#include <guisan/widgets/progressbar.hpp>
-#include <guisan/widgets/scrollarea.hpp>
-#include <guisan/widgets/slider.hpp>
-#include <guisan/widgets/radiobutton.hpp>
-#include <guisan/widgets/tab.hpp>
-#include <guisan/widgets/tabbedarea.hpp>
-#include <guisan/widgets/textbox.hpp>
-#include <guisan/widgets/textfield.hpp>
-#include <guisan/widgets/togglebutton.hpp>
-#include <guisan/widgets/window.hpp>
+#include <vector>
 
-#include "guisan/platform.hpp"
-
-extern "C"
+namespace gcn
 {
     /**
-     * Gets the the version of Guisan. As it is a C function
-     * it can be used to check for Guisan with autotools.
-     *
-     * @return the version of Guisan.
+     * An simple implementation of ListModel using std::vector
      */
-    GCN_CORE_DECLSPEC extern const char* gcnGuisanVersion();
-}
+    class GCN_CORE_DECLSPEC StringListModel : public ListModel
+    {
+    public:
+        StringListModel() = default;
+        explicit StringListModel(std::vector<std::string> strings) : mStrings(std::move(strings)) {}
 
-#endif // end GCN_GUISAN_HPP
+        ~StringListModel() override = default;
+
+        const std::vector<std::string>& getElements() const { return mStrings; }
+        std::vector<std::string>& getElements() { return mStrings; }
+
+        // ListModel interface
+        int getNumberOfElements() override { return static_cast<int>(mStrings.size()); }
+        std::string getElementAt(int i) override { return mStrings[i]; }
+
+    private:
+        std::vector<std::string> mStrings;
+    };
+} // namespace gcn
+
+#endif // end GCN_STRINGLISTMODEL_HPP

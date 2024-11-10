@@ -54,7 +54,6 @@
 #include "ffcontainer.hpp"
 #include "fflistbox.hpp"
 #include "ffscrollarea.hpp"
-#include "stringlistmodel.hpp"
 
 class FFDemo : public gcn::ActionListener, public gcn::KeyListener
 {
@@ -112,12 +111,12 @@ private:
     std::unique_ptr<FFListBox> mMagicSkillsList;
     std::unique_ptr<FFScrollArea> mMagicSkillsScroll;
 
-    std::unique_ptr<StringListModel> mPerSkills;
-    std::unique_ptr<StringListModel> mPerMagic;
-    std::unique_ptr<StringListModel> mOlofSkills;
-    std::unique_ptr<StringListModel> mOlofMagic;
-    std::unique_ptr<StringListModel> mTomasSkills;
-    std::unique_ptr<StringListModel> mTomasMagic;
+    gcn::StringListModel mPerSkills;
+    gcn::StringListModel mPerMagic;
+    gcn::StringListModel mOlofSkills;
+    gcn::StringListModel mOlofMagic;
+    gcn::StringListModel mTomasSkills;
+    gcn::StringListModel mTomasMagic;
 
     std::unique_ptr<gcn::TextBox> mPerInfo1;
     std::unique_ptr<gcn::TextBox> mOlofInfo1;
@@ -145,9 +144,9 @@ private:
 
     std::unique_ptr<FFListBox> mItemsList;
     std::unique_ptr<FFScrollArea> mItemsScrollArea;
-    std::unique_ptr<StringListModel> mItemsListModel;
-    std::unique_ptr<StringListModel> mItemsInfoListModel;
-    std::unique_ptr<StringListModel> mMenuListModel;
+    gcn::StringListModel mItemsListModel;
+    gcn::StringListModel mItemsInfoListModel;
+    gcn::StringListModel mMenuListModel;
 
     std::unique_ptr<FFCharacterChooser> mCharacterChooser;
 };
