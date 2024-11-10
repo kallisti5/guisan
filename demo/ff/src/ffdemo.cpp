@@ -41,10 +41,10 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include "ffdemo.hpp"
+
 #include <iostream>
 #include <sstream>
-
-#include "ffdemo.hpp"
 
 FFDemo::FFDemo()
 {
@@ -52,8 +52,8 @@ FFDemo::FFDemo()
      * Here we initialize SDL as we would do with any SDL application.
      */
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
-    mWindow = SDL_CreateWindow("Guisan SDL2 FF demo",
-        SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 320, 240, 0);
+    mWindow = SDL_CreateWindow(
+        "Guisan SDL2 FF demo", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 320, 240, 0);
 
     mScreen = SDL_GetWindowSurface(mWindow);
 
@@ -118,7 +118,7 @@ FFDemo::FFDemo()
     mGoldFootstepsInfo2->setEditable(false);
     mGoldFootstepsInfo2->setFocusable(false);
     mGoldFootstepsInfo2->setFrameSize(0);
-	
+
     mTimeLabel1 = std::make_unique<gcn::Label>("Time");
     mTimeLabel1->setFont(mFontCyan.get());
     mTimeLabel2 = std::make_unique<gcn::Label>();
@@ -128,19 +128,12 @@ FFDemo::FFDemo()
     mGoldFootsteps->add(mGoldFootstepsInfo2.get(), 5, 0);
     mGoldFootsteps->add(mGoldFootstepsInfo1.get(), 5, 5);
 
-    mMenuListModel = std::make_unique<StringListModel>();
-    mMenuListModel->add("Items");
-    mMenuListModel->add("Status");
-    mMenuListModel->add("Skills");
-    mMenuListModel->add("Magic");
-    mMenuListModel->add("About");
-    mMenuListModel->add("");
-    mMenuListModel->add("Quit");
+    mMenuListModel.getElements() = {"Items", "Status", "Skills", "Magic", "About", "", "Quit"};
 
     mMenuList = std::make_unique<FFListBox>();
     mMenuList->setActionEventId("menu");
     mMenuList->addActionListener(this);
-    mMenuList->setListModel(mMenuListModel.get());
+    mMenuList->setListModel(&mMenuListModel);
     mMenu->add(mMenuList.get(), 5, 5);
     mMenuList->setSelected(0);
     mMenuList->requestFocus();
@@ -261,7 +254,7 @@ void FFDemo::initStatus()
     mPerStatus2->setOpaque(false);
     mPerStatus2->setEditable(false);
     mPerStatus2->setFocusable(false);
-    mPerStatus2->setVisible(false);	
+    mPerStatus2->setVisible(false);
     mPerStatus2->setFrameSize(0);
 
     mOlofStatus1 = std::make_unique<gcn::TextBox>("  STR           EXP\n"
@@ -335,87 +328,64 @@ void FFDemo::initMagicSkills()
     mMagicSkills->add(mMagicSkillsScroll.get());
     mTop->add(mMagicSkills.get());
 
-    mPerSkills = std::make_unique<StringListModel>();
-    mPerMagic = std::make_unique<StringListModel>();
-    mOlofSkills = std::make_unique<StringListModel>();
-    mOlofMagic = std::make_unique<StringListModel>();
-    mTomasSkills = std::make_unique<StringListModel>();
-    mTomasMagic = std::make_unique<StringListModel>();
-
-    mPerSkills->add("Use");
-    mPerSkills->add("Steal");
-    mPerSkills->add("Disassemble");
-    mPerSkills->add("Tech-Talk");
-    mPerSkills->add("Double Compile");
-
-    mPerMagic->add("Fire");
-    mPerMagic->add("Fire 2");
-    mPerMagic->add("Bio");
-    mPerMagic->add("Magic Missile");
-
-    mOlofSkills->add("Annoy");
-    mOlofSkills->add("Juggle");
-    mOlofSkills->add("Somersault");
-    mOlofSkills->add("Evil Laughter");
-    mOlofSkills->add("Meta-circular Evaluation");
-    mOlofSkills->add("Lisp");
-    mOlofSkills->add("Cursing PHP");
-    mOlofSkills->add("Paint");
-    mOlofSkills->add("Compose obscure music");
-
-    mOlofMagic->add("Ultima");
-    mOlofMagic->add("Sonic Blast");
-
-    mTomasSkills->add("Precision Throw");
-    mTomasSkills->add("Jump");
-    mTomasSkills->add("Dance");
-    mTomasSkills->add("Much talk and little factory");
-    mTomasSkills->add("Cheat");
-    mTomasSkills->add("Wear hotpants");
-    mTomasSkills->add("Programming Pong games");
-    mTomasSkills->add("Eat meat pie");
-
-    mTomasMagic->add("Slow");
-    mTomasMagic->add("Sleep");
-    mTomasMagic->add("Doom");
+    mPerSkills.getElements() = {"Use", "Steal", "Disassemble", "Tech-Talk", "Double Compile"};
+    mPerMagic.getElements() = {"Fire", "Fire 2", "Bio", "Magic Missile"};
+    mOlofSkills.getElements() = {"Annoy",
+                                 "Juggle",
+                                 "Somersault",
+                                 "Evil Laughter",
+                                 "Meta-circular Evaluation",
+                                 "Lisp",
+                                 "Cursing PHP",
+                                 "Paint",
+                                 "Compose obscure music"};
+    mOlofMagic.getElements() = {"Ultima", "Sonic Blast"};
+    mTomasSkills.getElements() = {"Precision Throw",
+                                  "Jump",
+                                  "Dance",
+                                  "Much talk and little factory",
+                                  "Cheat",
+                                  "Wear hotpants",
+                                  "Programming Pong games",
+                                  "Eat meat pie"};
+    mTomasMagic.getElements() = {"Slow", "Sleep", "Doom"};
 }
 
 void FFDemo::initItems()
 {
     mItems = std::make_unique<FFContainer>();
 
-    mItemsListModel = std::make_unique<StringListModel>();
-    mItemsInfoListModel = std::make_unique<StringListModel>();
-    mItemsListModel->add("23 x Potion");
-    mItemsInfoListModel->add("Restores 100 HP");
-    mItemsListModel->add("12 x Ether");
-    mItemsInfoListModel->add("Restores 50 MP");
-    mItemsListModel->add(" 8 x Elixir");
-    mItemsInfoListModel->add("Restores all HP/MP");
-    mItemsListModel->add("16 x Fenix Up");
-    mItemsInfoListModel->add("Kills a party member");
-    mItemsListModel->add(" 1 x Brass Key");
-    mItemsInfoListModel->add("No idea...");
-    mItemsListModel->add(" 1 x Atma Weapon");
-    mItemsInfoListModel->add("Grows with it's user");
-    mItemsListModel->add(" 1 x Converse Allstars");
-    mItemsInfoListModel->add("Yakslems red shoes");
-    mItemsListModel->add(" 1 x Oil Canister");
-    mItemsInfoListModel->add("Get greasy!");
-    mItemsListModel->add(" 1 x Geeky t-shirt");
-    mItemsInfoListModel->add("Belongs to finalman");
-    mItemsListModel->add(" 1 x Synthesizer");
-    mItemsInfoListModel->add("Yakslems mega cool Ensoniq EPS 16+");
-    mItemsListModel->add(" 1 x Graphic Pen");
-    mItemsInfoListModel->add("Someone left it here. Maybe\nNodajo?");
-    mItemsListModel->add(" 1 x Floppy Disk");
-    mItemsInfoListModel->add("Stores your important data");
-    mItemsListModel->add(" 1 x Gui-chan Plush Doll");
-    mItemsInfoListModel->add("Soooo cute and soooo plushy!!!");
-    mItemsListModel->add(" 1 x Fenix Blade");
-    mItemsInfoListModel->add("We are waiting for Demo3");
-    mItemsListModel->add(" 2 x Joy Division LP");
-    mItemsInfoListModel->add("Unknown Pleasures and Closer");
+    mItemsListModel.getElements() = {"23 x Potion",
+                                     "12 x Ether",
+                                     " 8 x Elixir",
+                                     "16 x Fenix Up",
+                                     " 1 x Brass Key",
+                                     " 1 x Atma Weapon",
+                                     " 1 x Converse Allstars",
+                                     " 1 x Oil Canister",
+                                     " 1 x Geeky t-shirt",
+                                     " 1 x Synthesizer",
+                                     " 1 x Graphic Pen",
+                                     " 1 x Floppy Disk",
+                                     " 1 x Gui-chan Plush Doll",
+                                     " 1 x Fenix Blade",
+                                     " 2 x Joy Division LP"};
+
+    mItemsInfoListModel.getElements() = {"Restores 100 HP",
+                                         "Restores 50 MP",
+                                         "Restores all HP/MP",
+                                         "Kills a party member",
+                                         "No idea...",
+                                         "Grows with it's user",
+                                         "Yakslems red shoes",
+                                         "Get greasy!",
+                                         "Belongs to finalman",
+                                         "Yakslems mega cool Ensoniq EPS 16+",
+                                         "Someone left it here. Maybe\nNodajo?",
+                                         "Stores your important data",
+                                         "Soooo cute and soooo plushy!!!",
+                                         "We are waiting for Demo3",
+                                         "Unknown Pleasures and Closer"};
 
     mItemsInfo = std::make_unique<FFContainer>();
     mItemsInfo->setDimension(gcn::Rectangle(0, 0, 320, 50));
@@ -433,7 +403,7 @@ void FFDemo::initItems()
     mItemsList->setActionEventId("items");
     mItemsList->addKeyListener(this);
     mItemsList->setWidth(300);
-    mItemsList->setListModel(mItemsListModel.get());
+    mItemsList->setListModel(&mItemsListModel);
     mItemsScrollArea = std::make_unique<FFScrollArea>();
     mItemsScrollArea->setContent(mItemsList.get());
     mItemsScrollArea->setDimension(gcn::Rectangle(5, 5, 310, 180));
@@ -485,8 +455,7 @@ void FFDemo::initAbout()
                         " - Olof Naessen (yakslem)\n"
                         "       code, character art\n\n"
                         " - Tomas Almgren (peak)\n"
-                        "       font\n\n"
-                        );
+                        "       font\n\n");
 
     mAboutScrollArea = std::make_unique<FFScrollArea>();
     mAboutScrollArea->setContent(mAboutInfo.get());
@@ -499,7 +468,7 @@ void FFDemo::initAbout()
 
 void FFDemo::run()
 {
-    while(mRunning)
+    while (mRunning)
     {
         input();
 
@@ -558,32 +527,30 @@ void FFDemo::action(const gcn::ActionEvent& actionEvent)
     {
         switch (mMenuList->getSelected())
         {
-          case 0:
-              mItems->setVisible(true);
-              mItemsList->setSelected(0);
-              mItemsList->requestFocus();
-              mItemsInfo->setVisible(true);
-              mItemsInfoInfo->setText(mItemsInfoListModel->getElementAt(mItemsList->getSelected()));
-              break;
+            case 0:
+                mItems->setVisible(true);
+                mItemsList->setSelected(0);
+                mItemsList->requestFocus();
+                mItemsInfo->setVisible(true);
+                mItemsInfoInfo->setText(
+                    mItemsInfoListModel.getElementAt(mItemsList->getSelected()));
+                break;
 
-          case 1:
-          case 2:
-          case 3:
-              mCharacterChooser->setSelected(0);
-              mCharacterChooser->requestFocus();
-              break;
-          case 4:
-              mAbout->setVisible(true);
-              mAboutScrollArea->setVerticalScrollAmount(0);
-              mAboutScrollArea->requestFocus();
-              break;
+            case 1:
+            case 2:
+            case 3:
+                mCharacterChooser->setSelected(0);
+                mCharacterChooser->requestFocus();
+                break;
+            case 4:
+                mAbout->setVisible(true);
+                mAboutScrollArea->setVerticalScrollAmount(0);
+                mAboutScrollArea->requestFocus();
+                break;
 
-          case 6:
-              mRunning = false;
-              break;
+            case 6: mRunning = false; break;
 
-          default:
-              break;
+            default: break;
         }
     }
 
@@ -610,7 +577,7 @@ void FFDemo::action(const gcn::ActionEvent& actionEvent)
 
     if (actionEvent.getId() == "character")
     {
-        mMain->slideContentTo(-76*mCharacterChooser->getSelected());
+        mMain->slideContentTo(-76 * mCharacterChooser->getSelected());
         mMenu->setVisible(false);
         mTime->setVisible(false);
         mGoldFootsteps->setVisible(false);
@@ -618,77 +585,77 @@ void FFDemo::action(const gcn::ActionEvent& actionEvent)
         mGui->focusNone();
 
         mNavigationLabel->setVisible(true);
-        mNavigationLabel->setY(mCharacterChooser->getSelected()*76 + 30);
+        mNavigationLabel->setY(mCharacterChooser->getSelected() * 76 + 30);
 
-        switch(mMenuList->getSelected())
+        switch (mMenuList->getSelected())
         {
-          case 1:
-              mNavigationLabel->setCaption("STATUS");
+            case 1:
+                mNavigationLabel->setCaption("STATUS");
 
-              if (mCharacterChooser->getSelected() == 0)
-              {
-                  mPerStatus1->setVisible(true);
-                  mPerStatus2->setVisible(true);
-              }
-              else if (mCharacterChooser->getSelected() == 1)
-              {
-                  mOlofStatus1->setVisible(true);
-                  mOlofStatus2->setVisible(true);
-              }
-              else if (mCharacterChooser->getSelected() == 2)
-              {
-                  mTomasStatus1->setVisible(true);
-                  mTomasStatus2->setVisible(true);
-              }
-              mStatus->setVisible(true);
-              break;
+                if (mCharacterChooser->getSelected() == 0)
+                {
+                    mPerStatus1->setVisible(true);
+                    mPerStatus2->setVisible(true);
+                }
+                else if (mCharacterChooser->getSelected() == 1)
+                {
+                    mOlofStatus1->setVisible(true);
+                    mOlofStatus2->setVisible(true);
+                }
+                else if (mCharacterChooser->getSelected() == 2)
+                {
+                    mTomasStatus1->setVisible(true);
+                    mTomasStatus2->setVisible(true);
+                }
+                mStatus->setVisible(true);
+                break;
 
-          case 2:
-              mNavigationLabel->setCaption("SKILLS");
+            case 2:
+                mNavigationLabel->setCaption("SKILLS");
 
-              if (mCharacterChooser->getSelected() == 0)
-              {
-                  mMagicSkillsList->setListModel(mPerSkills.get());
-              }
-              else if (mCharacterChooser->getSelected() == 1)
-              {
-                  mMagicSkillsList->setListModel(mOlofSkills.get());
-              }
-              else if (mCharacterChooser->getSelected() == 2)
-              {
-                  mMagicSkillsList->setListModel(mTomasSkills.get());
-              }
-              mMagicSkillsList->setSelected(0);
-              mMagicSkills->setVisible(true);
-              mMagicSkillsList->requestFocus();
-              break;
+                if (mCharacterChooser->getSelected() == 0)
+                {
+                    mMagicSkillsList->setListModel(&mPerSkills);
+                }
+                else if (mCharacterChooser->getSelected() == 1)
+                {
+                    mMagicSkillsList->setListModel(&mOlofSkills);
+                }
+                else if (mCharacterChooser->getSelected() == 2)
+                {
+                    mMagicSkillsList->setListModel(&mTomasSkills);
+                }
+                mMagicSkillsList->setSelected(0);
+                mMagicSkills->setVisible(true);
+                mMagicSkillsList->requestFocus();
+                break;
 
-          case 3:
-              mNavigationLabel->setCaption("MAGIC");
+            case 3:
+                mNavigationLabel->setCaption("MAGIC");
 
-              if (mCharacterChooser->getSelected() == 0)
-              {
-                  mMagicSkillsList->setListModel(mPerMagic.get());
-              }
-              else if (mCharacterChooser->getSelected() == 1)
-              {
-                  mMagicSkillsList->setListModel(mOlofMagic.get());
-              }
-              else if (mCharacterChooser->getSelected() == 2)
-              {
-                  mMagicSkillsList->setListModel(mTomasMagic.get());
-              }
-              mMagicSkillsList->setSelected(0);
-              mMagicSkills->setVisible(true);
-              mMagicSkillsList->requestFocus();
-              break;
+                if (mCharacterChooser->getSelected() == 0)
+                {
+                    mMagicSkillsList->setListModel(&mPerMagic);
+                }
+                else if (mCharacterChooser->getSelected() == 1)
+                {
+                    mMagicSkillsList->setListModel(&mOlofMagic);
+                }
+                else if (mCharacterChooser->getSelected() == 2)
+                {
+                    mMagicSkillsList->setListModel(&mTomasMagic);
+                }
+                mMagicSkillsList->setSelected(0);
+                mMagicSkills->setVisible(true);
+                mMagicSkillsList->requestFocus();
+                break;
         }
     }
 }
 
 void FFDemo::input()
 {
-    while(SDL_PollEvent(&mEvent))
+    while (SDL_PollEvent(&mEvent))
     {
         if (mEvent.type == SDL_KEYDOWN)
         {
@@ -698,8 +665,7 @@ void FFDemo::input()
 
                 action(gcn::ActionEvent(nullptr, "escape"));
             }
-            else if (mEvent.key.keysym.sym == SDLK_RETURN
-                     || mEvent.key.keysym.sym == SDLK_UP
+            else if (mEvent.key.keysym.sym == SDLK_RETURN || mEvent.key.keysym.sym == SDLK_UP
                      || mEvent.key.keysym.sym == SDLK_DOWN)
             {
                 Mix_PlayChannel(-1, mChooseSound, 0);
@@ -725,5 +691,5 @@ void FFDemo::input()
 
 void FFDemo::keyPressed(gcn::KeyEvent& keyEvent)
 {
-    mItemsInfoInfo->setText(mItemsInfoListModel->getElementAt(mItemsList->getSelected()));
+    mItemsInfoInfo->setText(mItemsInfoListModel.getElementAt(mItemsList->getSelected()));
 }
