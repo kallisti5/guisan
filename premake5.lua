@@ -54,6 +54,8 @@ workspace "Guisan"
 	warnings "Extra"
 	--flags { "FatalWarnings"}
 
+	vpaths {['*'] = '*'}
+
 	filter { "action:vs*" }
 		nuget(nugetPackages)
 		defines { "_CRT_SECURE_NO_WARNINGS" } -- 4996: '$func': This function or variable may be unsafe. Consider using $func2 instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
@@ -67,8 +69,6 @@ workspace "Guisan"
 		disablewarnings {
 			"4018", -- '<': signed/unsigned mismatch
 			"4100", -- '%var': unreferenced formal parameter
-			"4127", -- conditional expression is constant
-			"4189", -- '%var': local variable is initialized but not referenced
 			"4244", -- '=': conversion from '$type1' to '$type2', possible loss of data
 			"4458", -- declaration of '$var' hides class member
 		}
