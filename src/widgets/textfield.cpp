@@ -139,7 +139,6 @@ namespace gcn
 
         graphics->setFont(getFont());
 
-        const Rectangle& dim = mText->getCaretDimension(getFont());
         if (mText->getNumberOfRows() != 0) 
             graphics->drawText(mText->getRow(0), 1 - mXScroll, 2, Graphics::Left, isEnabled());
 
