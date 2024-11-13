@@ -112,6 +112,7 @@ widget_headers = [
     'include/guisan/widgets/label.hpp',
     'include/guisan/widgets/listbox.hpp',
     'include/guisan/widgets/messagebox.hpp',
+    'include/guisan/widgets/passwordfield.hpp',
     'include/guisan/widgets/progressbar.hpp',
     'include/guisan/widgets/radiobutton.hpp',
     'include/guisan/widgets/scrollarea.hpp',

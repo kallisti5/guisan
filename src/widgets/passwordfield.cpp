@@ -6,11 +6,11 @@
  * /______/ //______/ //_/ //_____/\ /_/ //_/ //_/ //_/ //_/ /|_/ /
  * \______\/ \______\/ \_\/ \_____\/ \_\/ \_\/ \_\/ \_\/ \_\/ \_\/
  *
- * Copyright (c) 2004, 2005, 2006, 2007 Olof NaessÃ©n and Per Larsson
+ * Copyright (c) 2004, 2005, 2006, 2007 Olof Naessén and Per Larsson
  *
  *                                                         Js_./
  * Per Larsson a.k.a finalman                          _RqZ{a<^_aa
- * Olof NaessÃ©n a.k.a jansem/yakslem                _asww7!uY`>  )\a//
+ * Olof Naessén a.k.a jansem/yakslem                _asww7!uY`>  )\a//
  *                                                 _Qhm`] _f "'c  1!5m
  * Visit: http://guichan.darkbits.org             )Qk<P ` _: :+' .'  "{[
  *                                               .)j(] .d_/ '-(  P .   S
@@ -54,77 +54,40 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef GCN_GUISAN_HPP
-#define GCN_GUISAN_HPP
+/*
+ * For comments regarding functions please see the header file.
+ */
 
-#include <guisan/actionevent.hpp>
-#include <guisan/actionlistener.hpp>
-#include <guisan/cliprectangle.hpp>
-#include <guisan/color.hpp>
-#include <guisan/containerevent.hpp>
-#include <guisan/containerlistener.hpp>
-#include <guisan/deathlistener.hpp>
-#include <guisan/event.hpp>
-#include <guisan/exception.hpp>
-#include <guisan/focushandler.hpp>
-#include <guisan/focuslistener.hpp>
-#include <guisan/font.hpp>
-#include <guisan/genericinput.hpp>
-#include <guisan/graphics.hpp>
-#include <guisan/gui.hpp>
-#include <guisan/image.hpp>
-#include <guisan/imagefont.hpp>
-#include <guisan/imageloader.hpp>
-#include <guisan/input.hpp>
-#include <guisan/inputevent.hpp>
-#include <guisan/key.hpp>
-#include <guisan/keyevent.hpp>
-#include <guisan/keyinput.hpp>
-#include <guisan/keylistener.hpp>
-#include <guisan/listmodel.hpp>
-#include <guisan/mouseevent.hpp>
-#include <guisan/mouseinput.hpp>
-#include <guisan/mouselistener.hpp>
-#include <guisan/rectangle.hpp>
-#include <guisan/selectionevent.hpp>
-#include <guisan/selectionlistener.hpp>
-#include <guisan/widget.hpp>
-#include <guisan/widgetlistener.hpp>
+#include "guisan/widgets/passwordfield.hpp"
 
-#include <guisan/widgets/button.hpp>
-#include <guisan/widgets/checkbox.hpp>
-#include <guisan/widgets/container.hpp>
-#include <guisan/widgets/dropdown.hpp>
-#include <guisan/widgets/icon.hpp>
-#include <guisan/widgets/imagebutton.hpp>
-#include <guisan/widgets/imagetextbutton.hpp>
-#include <guisan/widgets/inputbox.hpp>
-#include <guisan/widgets/label.hpp>
-#include <guisan/widgets/listbox.hpp>
-#include <guisan/widgets/messagebox.hpp>
-#include <guisan/widgets/passwordfield.hpp>
-#include <guisan/widgets/progressbar.hpp>
-#include <guisan/widgets/scrollarea.hpp>
-#include <guisan/widgets/slider.hpp>
-#include <guisan/widgets/radiobutton.hpp>
-#include <guisan/widgets/tab.hpp>
-#include <guisan/widgets/tabbedarea.hpp>
-#include <guisan/widgets/textbox.hpp>
-#include <guisan/widgets/textfield.hpp>
-#include <guisan/widgets/togglebutton.hpp>
-#include <guisan/widgets/window.hpp>
+#include "guisan/font.hpp"
+#include "guisan/graphics.hpp"
+#include "guisan/key.hpp"
+#include "guisan/mouseinput.hpp"
+#include "guisan/text.hpp"
 
-#include "guisan/platform.hpp"
-
-extern "C"
+namespace gcn
 {
-    /**
-     * Gets the the version of Guisan. As it is a C function
-     * it can be used to check for Guisan with autotools.
-     *
-     * @return the version of Guisan.
-     */
-    GCN_CORE_DECLSPEC extern const char* gcnGuisanVersion();
-}
+    PasswordField::PasswordField() : TextField()
+    {
 
-#endif // end GCN_GUISAN_HPP
+    }
+
+    PasswordField::PasswordField(const std::string& text) : TextField(text)
+    {
+
+    }
+
+
+    void PasswordField::draw(Graphics* graphics)
+    {
+        std::string encodedText(mText->getRow(0).size(), '*');
+        std::string realText(mText->getRow(0));
+        
+        // Switch replacement text before drawing it to hide it
+        mText->setRow(0, encodedText);
+        TextField::draw(graphics);
+        mText->setRow(0, realText);
+    }
+
+}
