@@ -78,12 +78,17 @@ namespace gcn
     void PasswordField::draw(Graphics* graphics)
     {
         const std::string realText(mText->getRow(0));
-        const std::string encodedText(realText.size(), '*');
+        const std::string encodedText(realText.size(), masking);
         
         // Switch replacement text before drawing it to hide it
         mText->setRow(0, encodedText);
         TextField::draw(graphics);
         mText->setRow(0, realText);
+    }
+    
+    void PasswordField::setMaskingChar(const char mask)
+    {
+        masking = mask;
     }
 
 }

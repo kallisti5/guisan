@@ -65,8 +65,8 @@ namespace gcn
 {
     /**
      * A text field in which you can write or display a line of text. 
-	 * Unlike a TextField the text will appear as '*' instead of the real content. 
-	 * If for some reason the Font you are using does not contain this character, the 
+	 * Unlike a TextField the text will appear as masked, instead of the real content. 
+	 * If for some reason the Font you are using does not contain the character, the 
 	 * PasswordField will be filled by spaces. 
      */
     class GCN_CORE_DECLSPEC PasswordField:
@@ -88,7 +88,16 @@ namespace gcn
         // Inherited from Widget
 
         void draw(Graphics* graphics) override;
-
+        
+        /**
+         * Set the masking character to hide the password
+         *
+         * @param mask the masking character
+         */
+        void setMaskingChar(const char mask);
+        
+    private:
+        char masking('*');
     };
 }
 
