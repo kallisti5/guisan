@@ -90,5 +90,10 @@ namespace gcn
     {
         masking = mask;
     }
+    
+    const char PasswordField::getMaskingChar() const
+    {
+        return masking;
+    }
 
 }

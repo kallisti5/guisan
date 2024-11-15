@@ -96,6 +96,13 @@ namespace gcn
          */
         void setMaskingChar(const char mask);
         
+        /**
+         * Get the masking character
+         * 
+         * @return the masking character
+         */
+        const char getMaskingChar() const;
+        
     private:
         char masking = '*';
     };
