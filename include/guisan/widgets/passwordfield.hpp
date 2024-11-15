@@ -97,7 +97,7 @@ namespace gcn
         void setMaskingChar(const char mask);
         
     private:
-        char masking('*');
+        char masking = '*';
     };
 }
 
