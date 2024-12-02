@@ -97,6 +97,11 @@ namespace gcn
 
     void TextField::draw(Graphics* graphics)
     {
+        // Switch replacement text before drawing it to possibly hide it
+        const std::string realText(mText->getRow(0));
+        const std::string encodedText = mPasswordMasking ? std::string(realText.size(), mPasswordMasking) : realText;
+        mText->setRow(0, encodedText);
+
         Color faceColor = getBaseColor();
         Color highlightColor, shadowColor;
         int alpha = getBaseColor().a;
@@ -143,6 +148,7 @@ namespace gcn
             graphics->drawText(mText->getRow(0), 1 - mXScroll, 2, Graphics::Left, isEnabled());
 
         graphics->popClipArea();
+        mText->setRow(0, realText);
     }
 
     void TextField::drawCaret(Graphics* graphics, int x)
@@ -285,5 +291,15 @@ namespace gcn
     void TextField::fontChanged()
     {
         fixScroll();
+    }
+
+    void TextField::setMaskingChar(char passwordMasking)
+    {
+        mPasswordMasking = passwordMasking;
+    }
+
+    char TextField::getMaskingChar() const
+    {
+        return mPasswordMasking;
     }
 }

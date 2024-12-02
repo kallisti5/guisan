@@ -57,7 +57,8 @@ namespace WidgetsExample
 
             textField = std::make_unique<gcn::TextField>("Text field");
 
-            passwordField = std::make_unique<gcn::PasswordField>("password");
+            passwordField = std::make_unique<gcn::TextField>("password");
+            passwordField->setMaskingChar('*');
 
             textBox = std::make_unique<gcn::TextBox>("Lorem ipsum dolor sit amet consectetur\n"
                                                      "adipiscing elit Integer vitae ultrices\n"
@@ -129,7 +130,7 @@ namespace WidgetsExample
             top->add(imageButton.get(), 10, 290);
             top->add(imageTextButton.get(), 10, 380);
             top->add(textField.get(), 375, 10);
-            top->add(passwordField.get(), 425, 10);
+            top->add(passwordField.get(), 375, 30);
             top->add(textBoxScrollArea.get(), 290, 50);
             top->add(inputBox.get(), 270, 180);
             top->add(listBox.get(), 290, 200);
@@ -208,7 +209,7 @@ namespace WidgetsExample
         std::unique_ptr<gcn::ImageTextButton> imageTextButton; // An image text button
         std::unique_ptr<gcn::InputBox> inputBox; // An input box
         std::unique_ptr<gcn::TextField> textField; // One-line text field
-        std::unique_ptr<gcn::PasswordField> passwordField; // One-line password field
+        std::unique_ptr<gcn::TextField> passwordField; // One-line password field
         std::unique_ptr<gcn::TextBox> textBox; // Multi-line text box
         std::unique_ptr<gcn::ScrollArea> textBoxScrollArea; // Scroll area for the text box
         std::unique_ptr<gcn::ListBox> listBox; // A list box
