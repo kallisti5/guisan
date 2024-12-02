@@ -157,6 +157,20 @@ namespace gcn
          */
         unsigned int getCaretPosition() const;
 
+        /**
+         * Set the masking character to hide the password, or '\0'
+         *
+         * @param passwordMasking the masking character
+         */
+        void setMaskingChar(char passwordMasking);
+
+        /**
+         * Get the masking character
+         *
+         * @return the masking character if any or '\0'
+         */
+        char getMaskingChar() const;
+
         // Inherited from Widget
 
         void draw(Graphics* graphics) override;
@@ -204,6 +218,11 @@ namespace gcn
          * text needs to scroll in order to show the last type character.
          */
         int mXScroll = 0;
+
+        /**
+         * Replacement character for password field, or '\0'.
+         */
+        char mPasswordMasking = '\0';
     };
 }
 
