@@ -513,6 +513,11 @@ namespace gcn
         }
     }
 
+    Font* Widget::getGlobalFont()
+    {
+        return mGlobalFont;
+    }
+
     void Widget::setWidgetsBaseColor(Color color)
     {
         for (Widget* w : mWidgetInstances)

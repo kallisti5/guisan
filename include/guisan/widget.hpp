@@ -722,6 +722,15 @@ namespace gcn
         static void setGlobalFont(Font* font);
 
         /**
+         * Gets the global font to be used by default for all widgets.
+         *
+         * @return font The global font.
+         * @see setGlobalFont
+         * @since 1.2.0
+         */
+        static Font* getGlobalFont();
+
+        /**
          * Set the base color for all widgets
          * 
          * @param color The color to use

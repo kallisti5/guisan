@@ -12,12 +12,21 @@ namespace WidgetsExample
         MainContainer(gcn::Gui& gui, int width, int height) :
             demoListModel{{"zero", "one", "two", "three", "four"}}
         {
-            // Load the image font.
-            font = std::make_unique<gcn::ImageFont>(
-                "fixedfont.bmp", " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
-            // The global font is static and must be set.
-            gcn::Widget::setGlobalFont(font.get());
+#if USE_SDL2_TTF
+            TTF_Init();
 
+            trueFont = std::make_unique<gcn::SDLTrueTypeFont>("dactylographe.ttf", 12);
+#endif
+            // Load the image font.
+            imageFont = std::make_unique<gcn::ImageFont>(
+                "fixedfont.bmp", " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
+
+            // The global font is static and must be set.
+#if USE_SDL2_TTF
+            gcn::Widget::setGlobalFont(trueFont.get());
+#else
+            gcn::Widget::setGlobalFont(imageFont.get());
+#endif
             top = std::make_unique<gcn::Container>();
             // Set the dimension of the top container to match the screen.
             top->setDimension(gcn::Rectangle(0, 0, width, height));
@@ -82,7 +91,8 @@ namespace WidgetsExample
             checkBox1 = std::make_unique<gcn::CheckBox>("Checkbox 1");
             checkBox2 = std::make_unique<gcn::CheckBox>("Checkbox 2");
 
-            toggleButton = std::make_unique<gcn::ToggleButton>("Toggle button");
+            toggleButton = std::make_unique<gcn::ToggleButton>("Toggle font");
+            toggleButton->addActionListener(this);
 
             radioButton1 = std::make_unique<gcn::RadioButton>("Radio Button 1", "radiogroup", true);
             radioButton2 = std::make_unique<gcn::RadioButton>("Radio Button 2", "radiogroup");
@@ -178,6 +188,19 @@ namespace WidgetsExample
                     label->adjustSize();
                 }
             }
+            else if (actionEvent.getSource() == toggleButton.get())
+            {
+                if (gcn::Widget::getGlobalFont() == imageFont.get())
+                {
+#if USE_SDL2_TTF
+                    gcn::Widget::setGlobalFont(trueFont.get());
+#endif
+                }
+                else
+                {
+                    gcn::Widget::setGlobalFont(imageFont.get());
+                }
+            }
             else if (actionEvent.getSource() == messageBox.get())
             {
                 switch (messageBox->getClickedButton())
@@ -195,8 +218,10 @@ namespace WidgetsExample
         }
 
     private:
-        std::unique_ptr<gcn::ImageFont> font; // A font
-
+        std::unique_ptr<gcn::Font> imageFont; // A font
+#if USE_SDL2_TTF
+        std::unique_ptr<gcn::Font> trueFont; // A font
+#endif
         /*
          * All of the widgets
          */
