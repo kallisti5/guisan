@@ -101,7 +101,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        ~ListBox() override {}
+        ~ListBox() override = default;
 
         /**
          * Gets the selected item as an index in the list model.

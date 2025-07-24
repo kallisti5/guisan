@@ -107,7 +107,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        ~KeyEvent() override;
+        ~KeyEvent() override = default;
 
         /**
          * Gets the type of the event.

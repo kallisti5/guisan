@@ -77,8 +77,6 @@ namespace gcn
         addMouseListener(this);
     }
 
-    Tab::~Tab() = default;
-
     void Tab::adjustSize()
     {
         setSize(mLabel->getWidth() + 12, mLabel->getHeight() + 12);

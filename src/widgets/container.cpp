@@ -65,10 +65,6 @@
 
 namespace gcn
 {
-
-    Container::~Container()
-    = default;
-
     void Container::draw(Graphics* graphics)
     {
         if (isOpaque())

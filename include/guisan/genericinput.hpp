@@ -79,7 +79,7 @@ namespace gcn
         /**
          * Constructor.
          */
-        GenericInput();
+        GenericInput() = default;
 
         /**
          * Pushes a key pressed event.

@@ -88,7 +88,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        ~Window() override;
+        ~Window() override = default;
 
         /**
          * Sets the caption of the window.

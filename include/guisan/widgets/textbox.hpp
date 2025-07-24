@@ -94,7 +94,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        ~TextBox() override;
+        ~TextBox() override = default;
 
         /**
          * Sets the text of the text box.

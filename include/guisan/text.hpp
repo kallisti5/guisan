@@ -82,7 +82,7 @@ namespace gcn
          * Destructor.
          * @since 1.1.0
          */
-        virtual ~Text();
+        virtual ~Text() = default;
 
         /**
          * Sets the content of the text. Will completely remove

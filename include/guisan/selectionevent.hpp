@@ -84,7 +84,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        ~SelectionEvent() override;
+        ~SelectionEvent() override = default;
     };
 }
 

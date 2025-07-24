@@ -86,7 +86,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        ~SDLGraphics() override;
+        ~SDLGraphics() override = default;
 
         /**
          * Sets the target SDL_Surface to draw to. The target can be any

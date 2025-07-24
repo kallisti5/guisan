@@ -89,7 +89,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        ~Container() override;
+        ~Container() override = default;
 
         /**
          * Sets the container to be opaque or not. If the container

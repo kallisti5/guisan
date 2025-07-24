@@ -81,8 +81,6 @@ namespace gcn
         setFrameSize(1);
     }
 
-    TextBox::~TextBox() = default;
-
     void TextBox::setText(const std::string& text)
     {
         mText->setContent(text);

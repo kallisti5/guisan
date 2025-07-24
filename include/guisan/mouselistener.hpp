@@ -75,7 +75,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        virtual ~MouseListener() { }
+        virtual ~MouseListener() = default;
 
         /**
          * Called when the mouse has entered into the widget area.
@@ -189,7 +189,7 @@ namespace gcn
          * You should not be able to make an instance of MouseListener,
          * therefore its constructor is protected.
          */
-        MouseListener() { }
+        MouseListener() = default;
     };
 }
 

@@ -93,7 +93,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        virtual ~FocusHandler() { }
+        virtual ~FocusHandler() = default;
 
         /**
          * Requests focus for a widget. Focus will only be granted to a widget

@@ -76,9 +76,6 @@ namespace gcn
         } while (pos != std::string::npos);
     }
 
-    Text::~Text()
-    {}
-
     void Text::setContent(const std::string& content)
     {
         mRows.clear();

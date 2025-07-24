@@ -60,6 +60,7 @@
 #include "guisan/keylistener.hpp"
 #include "guisan/mouselistener.hpp"
 #include "guisan/platform.hpp"
+#include "guisan/text.hpp"
 #include "guisan/widget.hpp"
 
 #include <memory>
@@ -67,8 +68,6 @@
 
 namespace gcn
 {
-    class Text;
-
     /**
      * An implementation of a text field where a user can enter a line of text.
      */
@@ -94,7 +93,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        ~TextField() override;
+        ~TextField() override = default;
 
         /**
          * Sets the text of the text field.
