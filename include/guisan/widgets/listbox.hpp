@@ -96,7 +96,7 @@ namespace gcn
          *
          * @param listModel the list model to use.
          */
-        ListBox(ListModel *listModel);
+        explicit ListBox(ListModel *listModel);
 
         /**
          * Destructor.

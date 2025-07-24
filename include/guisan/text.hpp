@@ -76,7 +76,7 @@ namespace gcn
          * @param content The content of the text.
          * @since 1.1.0
          */
-        Text(const std::string& content);
+        explicit Text(const std::string& content);
 
         /**
          * Destructor.

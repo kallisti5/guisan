@@ -89,7 +89,7 @@ namespace gcn
          *
          * @param text The default text of the text field.
          */
-        TextField(const std::string& text);
+        explicit TextField(const std::string& text);
 
         /**
          * Destructor.

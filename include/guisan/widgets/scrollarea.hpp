@@ -103,7 +103,7 @@ namespace gcn
          *
          * @param content the content of the ScrollArea.
          */
-        ScrollArea(Widget *content);
+        explicit ScrollArea(Widget *content);
 
         /**
          * Constructor.

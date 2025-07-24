@@ -83,7 +83,7 @@ namespace gcn
          *
          * @param caption the caption of the window.
          */
-        Window(const std::string& caption);
+        explicit Window(const std::string& caption);
 
         /**
          * Destructor.

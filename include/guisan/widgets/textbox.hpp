@@ -89,7 +89,7 @@ namespace gcn
          *
          * @param text The default text of the text box.
          */
-        TextBox(const std::string& text);
+        explicit TextBox(const std::string& text);
 
         /**
          * Destructor.
