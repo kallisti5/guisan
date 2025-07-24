@@ -352,8 +352,8 @@ namespace gcn
          */
         virtual void distributeFocusGainedEvent(const Event& focusEvent);
 
-        typedef std::vector<Widget*> WidgetVector;
-        typedef WidgetVector::iterator WidgetIterator;
+        using WidgetVector = std::vector<Widget*>;
+        using WidgetIterator = WidgetVector::iterator;
 
         /**
          * Holds the widgets currently being handled by the

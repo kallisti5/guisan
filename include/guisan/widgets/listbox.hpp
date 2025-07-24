@@ -235,14 +235,14 @@ namespace gcn
          */
         bool mWrappingEnabled = false;
 
-        typedef std::list<SelectionListener*> SelectionListenerList;
+        using SelectionListenerList = std::list<SelectionListener*>;
 
         /**
          * The selection listeners of the list box.
          */
         SelectionListenerList mSelectionListeners;
 
-        typedef SelectionListenerList::iterator SelectionListenerIterator;
+        using SelectionListenerIterator = SelectionListenerList::iterator;
     };
 }
 

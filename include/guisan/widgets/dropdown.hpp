@@ -311,14 +311,14 @@ namespace gcn
          */
         bool mIsDragged = false;
 
-        typedef std::list<SelectionListener*> SelectionListenerList;
+        using SelectionListenerList = std::list<SelectionListener*>;
 
         /**
          * The selection listener's of the drop down.
          */
         SelectionListenerList mSelectionListeners;
 
-        typedef SelectionListenerList::iterator SelectionListenerIterator;
+        using SelectionListenerIterator = SelectionListenerList::iterator;
     };
 }
 

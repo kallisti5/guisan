@@ -220,14 +220,14 @@ namespace gcn
          */
         bool mOpaque = true;
 
-        typedef std::list<ContainerListener*> ContainerListenerList;
+        using ContainerListenerList = std::list<ContainerListener*>;
 
         /**
          * The container listeners of the container.
          */
         ContainerListenerList mContainerListeners;
 
-        typedef ContainerListenerList::iterator ContainerListenerIterator;
+        using  ContainerListenerIterator = ContainerListenerList::iterator;
     };
 }
 
