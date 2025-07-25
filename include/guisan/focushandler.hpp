@@ -93,7 +93,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        virtual ~FocusHandler() { }
+        virtual ~FocusHandler() = default;
 
         /**
          * Requests focus for a widget. Focus will only be granted to a widget
@@ -352,8 +352,8 @@ namespace gcn
          */
         virtual void distributeFocusGainedEvent(const Event& focusEvent);
 
-        typedef std::vector<Widget*> WidgetVector;
-        typedef WidgetVector::iterator WidgetIterator;
+        using WidgetVector = std::vector<Widget*>;
+        using WidgetIterator = WidgetVector::iterator;
 
         /**
          * Holds the widgets currently being handled by the

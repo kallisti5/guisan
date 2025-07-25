@@ -59,15 +59,14 @@
 
 #include "guisan/mouselistener.hpp"
 #include "guisan/platform.hpp"
+#include "guisan/widgets/label.hpp"
 #include "guisan/widget.hpp"
 
-#include <map>
 #include <memory>
 #include <string>
 
 namespace gcn
 {
-    class Label;
     class TabbedArea;
 
     /**
@@ -90,7 +89,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        ~Tab() override;
+        ~Tab() override = default;
 
         /**
          * Adjusts the size of the tab to fit the caption. If this tab was

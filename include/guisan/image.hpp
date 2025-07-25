@@ -86,12 +86,12 @@ namespace gcn
         /**
          * Constructor.
          */
-        Image();
+        Image() = default;
 
         /**
          * Destructor.
          */
-        virtual ~Image();
+        virtual ~Image() = default;
 
         /**
          * Loads an image by using the class' image laoder. All image loaders implemented

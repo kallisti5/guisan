@@ -82,7 +82,7 @@ namespace gcn
          *
          * @param caption The caption of the label.
          */
-        Label(const std::string& caption);
+        explicit Label(const std::string& caption);
 
         /**
          * Gets the caption of the label.

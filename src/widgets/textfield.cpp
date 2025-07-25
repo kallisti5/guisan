@@ -88,8 +88,6 @@ namespace gcn
         adjustSize();
     }
 
-    TextField::~TextField() = default;
-
     void TextField::setText(const std::string& text)
     {
         mText->setRow(0, text);

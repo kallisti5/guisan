@@ -103,7 +103,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        ~ActionEvent() override;
+        ~ActionEvent() override = default;
 
         /**
          * Gets the identifier of the event. An identifier can

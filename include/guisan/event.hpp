@@ -79,12 +79,12 @@ namespace gcn
          *
          * @param source The source widget of the event.
          */
-        Event(Widget* source);
+        explicit Event(Widget* source);
 
         /**
          * Destructor.
          */
-        virtual ~Event();
+        virtual ~Event() = default;
 
         /**
          * Gets the source widget of the event. The function

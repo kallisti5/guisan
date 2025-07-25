@@ -68,14 +68,6 @@ namespace gcn
 
     ImageLoader* Image::mImageLoader = nullptr;
 
-    Image::Image()
-    {
-    }
-
-    Image::~Image()
-    {
-    }
-
     void Image::setImageLoader(ImageLoader* imageLoader)
     {
         mImageLoader = imageLoader;

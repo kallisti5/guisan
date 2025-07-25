@@ -76,7 +76,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        virtual ~FocusListener() { }
+        virtual ~FocusListener() = default;
 
         /**
          * Called when a widget gains focus. 
@@ -99,7 +99,7 @@ namespace gcn
          * You should not be able to make an instance of FocusListener,
          * therefore its constructor is protected.
          */
-        FocusListener() {}
+        FocusListener() = default;
     };
 }
 

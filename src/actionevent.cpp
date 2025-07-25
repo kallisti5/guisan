@@ -69,11 +69,6 @@ namespace gcn
 
     }
 
-    ActionEvent::~ActionEvent()
-    {
-
-    }
-
     const std::string& ActionEvent::getId() const
     {
         return mId;

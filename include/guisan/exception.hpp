@@ -108,7 +108,7 @@ namespace gcn
          *
          * @param message The error message of the exception.
          */
-        Exception(std::string message);
+        explicit Exception(std::string message);
 
         /**
          * Constructor.

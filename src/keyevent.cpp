@@ -78,11 +78,6 @@ namespace gcn
         mKey(key)
     {}
 
-    KeyEvent::~KeyEvent()
-    {
-
-    }
-
     unsigned int KeyEvent::getType() const
     {
         return mType;

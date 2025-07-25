@@ -88,8 +88,8 @@ namespace gcn
          *
          * @param caption the caption of the ToggleButton.
          */
-        ToggleButton(const std::string& caption);
-        
+        explicit ToggleButton(const std::string& caption);
+
         /**
          * Checks if the button is selected.
          *

@@ -88,11 +88,6 @@ namespace gcn
         setTargetPlane(width, height);
     }
 
-    OpenGLGraphics::~OpenGLGraphics()
-    {
-
-    }
-
     void OpenGLGraphics::_beginDraw()
     {
         glPushAttrib(

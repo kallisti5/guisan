@@ -96,7 +96,7 @@ namespace gcn
          *
          * @param caption The caption of the label.
          */
-        ProgressBar(const std::string& caption);
+        explicit ProgressBar(const std::string& caption);
 
         /**
          * Gets the caption of the label.

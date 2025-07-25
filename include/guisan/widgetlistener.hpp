@@ -80,7 +80,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        virtual ~WidgetListener() { }
+        virtual ~WidgetListener() = default;
 
         /**
          * Invoked when a widget changes its size.
@@ -123,7 +123,7 @@ namespace gcn
          * You should not be able to make an instance of WidgetListener,
          * therefore its constructor is protected.
          */
-        WidgetListener() {}
+        WidgetListener() = default;
     };
 }
 

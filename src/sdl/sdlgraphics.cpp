@@ -75,9 +75,6 @@
 namespace gcn
 {
 
-    SDLGraphics::~SDLGraphics()
-    {}
-
     void SDLGraphics::_beginDraw()
     {
         Rectangle area;

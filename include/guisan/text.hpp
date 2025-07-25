@@ -76,13 +76,13 @@ namespace gcn
          * @param content The content of the text.
          * @since 1.1.0
          */
-        Text(const std::string& content);
+        explicit Text(const std::string& content);
 
         /**
          * Destructor.
          * @since 1.1.0
          */
-        virtual ~Text();
+        virtual ~Text() = default;
 
         /**
          * Sets the content of the text. Will completely remove

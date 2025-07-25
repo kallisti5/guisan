@@ -54,9 +54,6 @@ namespace gcn
         mContainer(container)
     {}
 
-    ContainerEvent::~ContainerEvent()
-    {}
-
     Container* ContainerEvent::getContainer() const
     {
         return mContainer;

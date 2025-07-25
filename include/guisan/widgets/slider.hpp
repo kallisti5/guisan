@@ -105,7 +105,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        ~Slider() override {}
+        ~Slider() override = default;
 
         /**
          * Sets the scale of the slider.

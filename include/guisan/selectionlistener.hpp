@@ -81,7 +81,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        virtual ~SelectionListener() { }
+        virtual ~SelectionListener() = default;
 
         /**
          * Called when the value of a selection has been changed in a Widget.
@@ -100,7 +100,7 @@ namespace gcn
          * You should not be able to make an instance of SelectionListener,
          * therefore its constructor is protected.
          */
-        SelectionListener() {}
+        SelectionListener() = default;
     };
 }
 

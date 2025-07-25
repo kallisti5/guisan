@@ -77,7 +77,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        virtual ~ActionListener() { }
+        virtual ~ActionListener() = default;
 
         /**
          * Called when an action is recieved from a widget. It is used
@@ -96,7 +96,7 @@ namespace gcn
          * You should not be able to make an instance of ActionListener,
          * therefore its constructor is protected.
          */
-        ActionListener() {}
+        ActionListener() = default;
     };
 }
 

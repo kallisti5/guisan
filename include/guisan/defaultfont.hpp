@@ -74,7 +74,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        ~DefaultFont() override {}
+        ~DefaultFont() override = default;
 
         /**
          * Draws a glyph as a rectangle. The glyphs will always be drawn as
