@@ -98,7 +98,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        ~CheckBox() override {}
+        ~CheckBox() override = default;
 
         /**
          * Checks if the check box is selected.

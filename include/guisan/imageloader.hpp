@@ -87,7 +87,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        virtual ~ImageLoader() { }
+        virtual ~ImageLoader() = default;
 
         /**
          * Loads an image.

@@ -96,12 +96,12 @@ namespace gcn
          *
          * @param listModel the list model to use.
          */
-        ListBox(ListModel *listModel);
+        explicit ListBox(ListModel *listModel);
 
         /**
          * Destructor.
          */
-        ~ListBox() override {}
+        ~ListBox() override = default;
 
         /**
          * Gets the selected item as an index in the list model.
@@ -235,14 +235,14 @@ namespace gcn
          */
         bool mWrappingEnabled = false;
 
-        typedef std::list<SelectionListener*> SelectionListenerList;
+        using SelectionListenerList = std::list<SelectionListener*>;
 
         /**
          * The selection listeners of the list box.
          */
         SelectionListenerList mSelectionListeners;
 
-        typedef SelectionListenerList::iterator SelectionListenerIterator;
+        using SelectionListenerIterator = SelectionListenerList::iterator;
     };
 }
 

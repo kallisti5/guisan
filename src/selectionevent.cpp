@@ -67,9 +67,4 @@ namespace gcn
     {
 
     }
-
-    SelectionEvent::~SelectionEvent()
-    {
-
-    }
 }

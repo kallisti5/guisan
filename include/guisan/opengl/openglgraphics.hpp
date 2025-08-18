@@ -92,7 +92,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        ~OpenGLGraphics() override;
+        ~OpenGLGraphics() override = default;
 
         /**
          * Sets the target plane on where to draw.

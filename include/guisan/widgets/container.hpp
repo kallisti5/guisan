@@ -89,7 +89,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        ~Container() override;
+        ~Container() override = default;
 
         /**
          * Sets the container to be opaque or not. If the container
@@ -141,24 +141,24 @@ namespace gcn
          *                   container.
          * @see add, clear
          */
-        virtual void remove(Widget* widget);
+        void remove(Widget* widget) override;
 
         /**
          * Clears the container of all widgets.
          *
          * @see add, remove
          */
-        virtual void clear();
+        void clear() override;
 
         /**
          * Finds a widget given an id.
          *
          * @param id The id to find a widget by.
-         * @return A widget with a corrosponding id, nullptr if no widget 
+         * @return A widget with a corresponding id, nullptr if no widget
          *         is found.
          * @see Widget::setId
          */
-        virtual Widget* findWidgetById(const std::string &id);
+        Widget* findWidgetById(const std::string &id) override;
 
         /**
          * Adds a container listener to the container. When a widget is
@@ -220,14 +220,14 @@ namespace gcn
          */
         bool mOpaque = true;
 
-        typedef std::list<ContainerListener*> ContainerListenerList;
+        using ContainerListenerList = std::list<ContainerListener*>;
 
         /**
          * The container listeners of the container.
          */
         ContainerListenerList mContainerListeners;
 
-        typedef ContainerListenerList::iterator ContainerListenerIterator;
+        using  ContainerListenerIterator = ContainerListenerList::iterator;
     };
 }
 

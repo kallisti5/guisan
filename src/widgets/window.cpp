@@ -77,10 +77,6 @@ namespace gcn
         addMouseListener(this);
     }
 
-    Window::~Window()
-    {
-    }
-
     void Window::setPadding(unsigned int padding)
     {
         mPadding = padding;

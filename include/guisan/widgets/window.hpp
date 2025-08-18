@@ -83,12 +83,12 @@ namespace gcn
          *
          * @param caption the caption of the window.
          */
-        Window(const std::string& caption);
+        explicit Window(const std::string& caption);
 
         /**
          * Destructor.
          */
-        ~Window() override;
+        ~Window() override = default;
 
         /**
          * Sets the caption of the window.

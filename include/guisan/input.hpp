@@ -81,7 +81,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        virtual ~Input(){ }
+        virtual ~Input() = default;
 
         /**
          * Checks if the key queue is empty, or not.

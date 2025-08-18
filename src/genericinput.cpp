@@ -64,11 +64,6 @@
 
 namespace gcn
 {
-    GenericInput::GenericInput()
-    {
-
-    }
-    
     void GenericInput::pushKeyPressed(int unicode)
     {
         // TODO

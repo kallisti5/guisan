@@ -442,8 +442,8 @@ namespace gcn
          */
         bool mTabbing = true;
 
-        typedef std::list<KeyListener*> KeyListenerList;
-        typedef KeyListenerList::iterator KeyListenerListIterator;
+        using KeyListenerList = std::list<KeyListener*>;
+        using KeyListenerListIterator = KeyListenerList::iterator;
 
         /**
          * Holds the global key listeners of the Gui.

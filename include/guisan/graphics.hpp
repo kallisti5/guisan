@@ -124,7 +124,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        virtual ~Graphics() {}
+        virtual ~Graphics() = default;
 
         /**
          * Initializes drawing. Called by the Gui when Gui::draw() is called.

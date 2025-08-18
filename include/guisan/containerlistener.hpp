@@ -63,7 +63,7 @@ namespace gcn
         /**
          * Destructor.
          */
-        virtual ~ContainerListener() {}
+        virtual ~ContainerListener() = default;
 
         /**
          * Called when a widget is added to a container.
@@ -88,7 +88,7 @@ namespace gcn
          * You should not be able to make an instance of ContainerListener,
          * therefore its constructor is protected.
          */
-        ContainerListener() {}
+        ContainerListener() = default;
     };
 } // namespace gcn
 
