@@ -5,7 +5,7 @@ jobs:
     runs-on: windows-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: install premake5
       uses: Jarod42/install-premake5@v6
