@@ -16,14 +16,18 @@ Guisan was forked from Guichan to create a simple GUI construction toolkit that 
 
 ## Build requirements:
 
-* scons
+One of:
+
+* scons ![ubuntu-scon](https://github.com/kallisti5/guisan/actions/workflows/build.yaml/badge.svg)
+* CMake ![windows-cmake-msys2](https://github.com/kallisti5/guisan/actions/workflows/windows-cmake-msys2.yml/badge.svg)
+* premake ![windows-premake-msvc badge](https://github.com/kallisti5/guisan/actions/workflows/windows-premake-msvc.yaml/badge.svg)
 
 ## Runtime requirements:
 
 * SDL 2.0+
 * SDL2_image
-* SDL2_ttf
-* SDL2_mixer
+* SDL2_ttf (optional)
+* SDL2_mixer (For demo)
 
 ## Example
 
