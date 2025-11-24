@@ -17,7 +17,7 @@ jobs:
           mingw-w64-clang-x86_64-SDL2_ttf
 
     - name: Check out repository code
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
 
     - name: Build
       shell: msys2 {0}
