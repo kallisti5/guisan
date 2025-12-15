@@ -23,7 +23,7 @@ jobs:
         msbuild.exe /property:Configuration=Release Guisan.sln
 
     - name: artifact
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v6
       with:
         name: guisan-msvc
         path: |
