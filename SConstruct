@@ -73,7 +73,6 @@ common_headers = [
     'include/guisan/focuslistener.hpp',
     'include/guisan/font.hpp',
     'include/guisan/genericinput.hpp',
-    'include/guisan/glut.hpp',
     'include/guisan/graphics.hpp',
     'include/guisan/gui.hpp',
     'include/guisan/imagefont.hpp',
@@ -98,8 +97,7 @@ common_headers = [
     'include/guisan/stringlistmodel.hpp',
     'include/guisan/text.hpp',
     'include/guisan/widget.hpp',
-    'include/guisan/widgetlistener.hpp',
-    'include/guisan/x.hpp'
+    'include/guisan/widgetlistener.hpp'
 ]
 widget_headers = [
     'include/guisan/widgets/button.hpp',
