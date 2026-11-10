@@ -94,6 +94,7 @@ namespace gcn
             mRows.push_back(sub);
             lastPos = pos + 1;
         } while (pos != std::string::npos);
+        setCaretPosition(mCaretPosition);
     }
 
     std::string Text::getContent() const
@@ -115,6 +116,7 @@ namespace gcn
         if (row >= mRows.size()) throw GCN_EXCEPTION("Row out of bounds!");
 
         mRows[row] = content;
+        setCaretPosition(mCaretPosition);
     }
 
     void Text::addRow(const std::string& row)
